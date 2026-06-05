@@ -28,3 +28,4 @@ hf_cache/
 .env
 *.pem
 *.key
+marketing/

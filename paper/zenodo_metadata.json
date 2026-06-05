@@ -1,0 +1,46 @@
+{
+  "title": "Bragi-LLM: An 805 MB Hybrid Code-Generation System Reaches 92% MBPP via LLM-Symbolic Engine Routing",
+  "upload_type": "publication",
+  "publication_type": "preprint",
+  "publication_date": "2026-06-05",
+  "creators": [
+    {
+      "name": "Chen, Ho Yiing (norika)",
+      "affiliation": "Independent Researcher, Taiwan",
+      "orcid": "0009-0006-6816-9891"
+    }
+  ],
+  "description": "<p>Bragi-LLM is a sub-gigabyte (805 MB total) Python code-generation system that reaches 92% pass rate on the MBPP test split under 100-problem sustained evaluation (single-shot, greedy decoding, no retry).</p><p>It places within 2 absolute points of Qwen2.5-Coder-7B fp16 (94%, 14 GB, 17x the footprint), and 27 absolute points above the same 1.5B-Q3 backbone evaluated standalone (65%).</p><p>The system combines (i) a 786 MB Q3_K_M quantised Qwen2.5-Coder-1.5B-Instruct backbone with imatrix calibration, (ii) a 15 KB hand-engineered symbolic engine library of 50 unit-tested helpers covering rare formulas, and (iii) a 6 KB keyword-based intercept router that detects formula-class problems and routes them directly to the engine library, bypassing the LLM.</p><p>The dominant failure mode of the small backbone is rare-formula recall under quantisation noise, not reasoning capacity. Externalising this knowledge into a static library, then routing matched problems around the LLM, recovers the capability gap at near-zero deployment cost. The full stack runs on commodity CPU hardware with no API dependency and no recurring fees.</p><p>All artefacts under MIT License: <a href=\"https://github.com/norika1207-lab/Bragi-LLM\">Bragi-LLM</a> (backbone + library + router + harness), <a href=\"https://github.com/norika1207-lab/Demeter-CodeBuilder\">Demeter-CodeBuilder</a> (integration with the Code Tree IDE).</p>",
+  "license": "cc-by-4.0",
+  "access_right": "open",
+  "keywords": [
+    "small language models",
+    "code generation",
+    "MBPP",
+    "LLM quantisation",
+    "GGUF",
+    "llama.cpp",
+    "symbolic AI",
+    "hybrid systems",
+    "on-device inference",
+    "frugal LLM",
+    "intercept router",
+    "engine library",
+    "Qwen2.5-Coder"
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "https://github.com/norika1207-lab/Bragi-LLM",
+      "relation": "isSupplementTo",
+      "scheme": "url",
+      "resource_type": "software"
+    },
+    {
+      "identifier": "https://github.com/norika1207-lab/Demeter-CodeBuilder",
+      "relation": "isSupplementTo",
+      "scheme": "url",
+      "resource_type": "software"
+    }
+  ],
+  "communities": []
+}

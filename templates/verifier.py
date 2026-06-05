@@ -273,12 +273,42 @@ LANG_VERIFIERS = {
 
 
 def detect_lang(code: str, hint: str = '') -> str:
-    """Detect language from hint or code heuristics."""
+    """Detect language from hint or code heuristics. Defensive: if uncertain,
+    return empty rather than guess wrong (better to skip than to falsely fail)."""
     h = (hint or '').lower().strip()
     if h in LANG_VERIFIERS:
         return h
-    # heuristics
+    # hint says non-JS even if not in LANG_VERIFIERS — respect hint, return ''
+    if h in {'swift', 'kotlin', 'kt', 'dart', 'go', 'rust', 'rs', 'cpp', 'c', 'ino',
+             'java', 'rb', 'cs', 'sol', 'tf', 'hcl', 'lua', 'php'}:
+        return ''  # known unsupported, skip cleanly
+
+    # heuristics: language-specific markers first
+    # Swift: import Foundation/UIKit/SwiftUI/Combine/Compose
+    if re.search(r'^\s*import\s+(Foundation|UIKit|SwiftUI|Combine|SwiftData)\b', code, re.M):
+        return ''  # swift, skip
+    # Kotlin/Compose: import androidx.compose
+    if re.search(r'^\s*import\s+androidx\.', code, re.M) \
+            or 'fun ' in code and '@Composable' in code:
+        return ''  # kotlin, skip
+    # Dart/Flutter: import 'package:flutter/...
+    if re.search(r"^\s*import\s+['\"]package:", code, re.M):
+        return ''  # dart, skip
+    # Go: package main + func main
+    if re.search(r'^\s*package\s+\w+', code, re.M) and re.search(r'^func\s+', code, re.M):
+        return ''  # go, skip
+    # Rust: fn main() / use std::
+    if re.search(r'^\s*use\s+\w+::', code, re.M) or re.search(r'^fn\s+\w+\s*\(', code, re.M):
+        return ''  # rust, skip
+    # Arduino/C++: #include <Arduino.h> / WiFi.h
+    if re.search(r'^\s*#include\s*<', code, re.M):
+        return ''  # firmware/c++, skip
+
+    # then existing JS/Py/etc detection
     if re.search(r'^\s*(import|from|def|class)\s', code, re.M) and 'function ' not in code:
+        # Python: explicit `def ` or `from X import`
+        if re.search(r'^\s*(from\s+\S+\s+import|def\s+)', code, re.M):
+            return 'py'
         return 'py'
     if re.search(r'^\s*(import|export|const|let|function|class)\s', code, re.M):
         if re.search(r':\s*(string|number|boolean|React\.)', code):

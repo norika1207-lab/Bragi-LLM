@@ -1,0 +1,30 @@
+{
+  "id": "depth-system-cli-001-textual-tui-app",
+  "category": "system-cli/tui/textual",
+  "intents_zh": [
+    "用 textual 做終端機 app",
+    "Python TUI 框架範本",
+    "textual 互動介面",
+    "終端機儀表板 textual",
+    "textual 按鈕事件",
+    "TUI 主視窗 textual"
+  ],
+  "intents_en": [
+    "textual TUI app",
+    "python terminal UI",
+    "textual dashboard",
+    "interactive TUI textual",
+    "textual buttons",
+    "textual main screen"
+  ],
+  "slots": [
+    "app_title",
+    "button_label"
+  ],
+  "code": "from textual.app import App, ComposeResult\nfrom textual.widgets import Header, Footer, Button, Static\n\nclass {{app_title}}(App):\n    CSS = \"Button { margin: 1; }\"\n\n    def compose(self) -> ComposeResult:\n        yield Header()\n        yield Static(\"{{app_title}}\", id=\"title\")\n        yield Button(\"{{button_label}}\", id=\"go\")\n        yield Footer()\n\n    def on_button_pressed(self, event: Button.Pressed) -> None:\n        self.query_one(\"#title\", Static).update(f\"clicked {event.button.id}\")\n\nif __name__ == \"__main__\":\n    {{app_title}}().run()",
+  "language": "python",
+  "deps": [
+    "textual"
+  ],
+  "summary_zh": "textual 終端機 app 起手式含按鈕事件"
+}

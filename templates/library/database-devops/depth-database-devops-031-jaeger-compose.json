@@ -1,0 +1,21 @@
+{
+  "id": "depth-database-devops-031-jaeger-compose",
+  "category": "database-devops/observability/tracing",
+  "intents_zh": [
+    "Jaeger all-in-one",
+    "分散式追蹤本機",
+    "jaeger compose"
+  ],
+  "intents_en": [
+    "Jaeger all-in-one",
+    "local distributed tracing",
+    "jaeger compose"
+  ],
+  "slots": [],
+  "code": "services:\n  jaeger:\n    image: jaegertracing/all-in-one:1.57\n    environment:\n      COLLECTOR_OTLP_ENABLED: 'true'\n    ports:\n      - '16686:16686'   # UI\n      - '4317:4317'     # OTLP gRPC\n      - '4318:4318'     # OTLP HTTP\n      - '14268:14268'   # collector\n    restart: unless-stopped",
+  "language": "yaml",
+  "deps": [
+    "docker-compose"
+  ],
+  "summary_zh": "Jaeger all-in-one,開放 OTLP 4317/4318 + UI 16686"
+}

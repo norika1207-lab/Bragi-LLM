@@ -1,0 +1,22 @@
+{
+  "id": "system-cli-092-bash-completion",
+  "category": "system-cli/shell/completion",
+  "intents_zh": [
+    "bash 自動補全 script",
+    "my-tool bash completion",
+    "tab 補全"
+  ],
+  "intents_en": [
+    "bash completion script",
+    "tab completion for cli",
+    "custom bash autocomplete"
+  ],
+  "slots": [
+    "tool_name",
+    "subcmds"
+  ],
+  "code": "# /etc/bash_completion.d/{{tool_name}}\n_{{tool_name}}() {\n  local cur prev\n  COMPREPLY=()\n  cur=\"${COMP_WORDS[COMP_CWORD]}\"\n  prev=\"${COMP_WORDS[COMP_CWORD-1]}\"\n  local cmds=\"{{subcmds}}\"\n  if [[ $COMP_CWORD -eq 1 ]]; then\n    COMPREPLY=( $(compgen -W \"$cmds\" -- \"$cur\") )\n    return 0\n  fi\n}\ncomplete -F _{{tool_name}} {{tool_name}}",
+  "language": "sh",
+  "deps": [],
+  "summary_zh": "bash 子命令自動補全"
+}

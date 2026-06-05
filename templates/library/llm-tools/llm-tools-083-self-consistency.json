@@ -1,0 +1,34 @@
+{
+  "id": "llm-tools-083-self-consistency",
+  "category": "llm-tools/prompt/self-consistency",
+  "intents_zh": [
+    "self consistency 採樣",
+    "多次採樣投票",
+    "majority voting LLM",
+    "self-consistency CoT",
+    "採樣多次取多數",
+    "sc decoding",
+    "self-consistency 範例",
+    "多采樣選最常"
+  ],
+  "intents_en": [
+    "self-consistency sampling",
+    "majority vote llm",
+    "multiple sample voting",
+    "sc decoding",
+    "self consistency cot",
+    "sample multiple answers",
+    "vote answer",
+    "sc example"
+  ],
+  "slots": [
+    "model_name",
+    "n_samples"
+  ],
+  "code": "from openai import OpenAI\nfrom collections import Counter\n\nclient = OpenAI()\n\ndef sc(prompt: str) -> str:\n    answers = []\n    for _ in range({{n_samples}}):\n        r = client.chat.completions.create(\n            model=\"{{model_name}}\",\n            messages=[{\"role\": \"user\", \"content\": prompt}],\n            temperature=0.8,\n        )\n        answers.append(r.choices[0].message.content.strip())\n    return Counter(answers).most_common(1)[0][0]",
+  "language": "py",
+  "deps": [
+    "openai"
+  ],
+  "summary_zh": "self-consistency 多采樣多數投票"
+}

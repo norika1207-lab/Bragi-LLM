@@ -1,0 +1,33 @@
+{
+  "id": "llm-tools-088-grpc-vllm-health",
+  "category": "llm-tools/ops/health-check",
+  "intents_zh": [
+    "LLM 服務健康檢查",
+    "vllm health probe",
+    "openai-compatible /v1/models 檢查",
+    "probe llm endpoint",
+    "health check 腳本",
+    "檢查模型服務存活",
+    "liveness probe",
+    "ops 健康檢查"
+  ],
+  "intents_en": [
+    "llm health check",
+    "vllm health probe",
+    "check /v1/models",
+    "probe llm endpoint",
+    "liveness check",
+    "model server check",
+    "ops health probe",
+    "status check script"
+  ],
+  "slots": [
+    "base_url"
+  ],
+  "code": "import httpx, sys\n\ndef check(base: str = \"{{base_url}}\") -> bool:\n    try:\n        r = httpx.get(f\"{base}/v1/models\", timeout=5)\n        return r.status_code == 200\n    except httpx.HTTPError:\n        return False\n\nif __name__ == \"__main__\":\n    ok = check()\n    print(\"ok\" if ok else \"down\")\n    sys.exit(0 if ok else 1)",
+  "language": "py",
+  "deps": [
+    "httpx"
+  ],
+  "summary_zh": "OpenAI 相容 LLM endpoint 健康探測"
+}

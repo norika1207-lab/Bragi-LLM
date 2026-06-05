@@ -1,0 +1,26 @@
+{
+  "id": "depth-system-cli-012-loguru-setup",
+  "category": "system-cli/logging/loguru",
+  "intents_zh": [
+    "loguru 結構化 log",
+    "Python 漂亮 log",
+    "loguru rotation",
+    "loguru JSON 輸出"
+  ],
+  "intents_en": [
+    "loguru structured log",
+    "python pretty log",
+    "loguru rotation",
+    "loguru json sink"
+  ],
+  "slots": [
+    "log_file",
+    "rotation_size"
+  ],
+  "code": "from loguru import logger\nimport sys\n\nlogger.remove()\nlogger.add(sys.stderr, level=\"INFO\",\n           format=\"<green>{time:HH:mm:ss}</green> <level>{level: <8}</level> {message}\")\nlogger.add(\"{{log_file}}\",\n           rotation=\"{{rotation_size}}\",\n           retention=\"7 days\",\n           serialize=True,\n           level=\"DEBUG\")\n\nlogger.info(\"started\", extra={\"user_id\": 42})\nlogger.bind(request_id=\"abc\").warning(\"slow query\")\ntry:\n    1/0\nexcept Exception:\n    logger.exception(\"boom\")",
+  "language": "python",
+  "deps": [
+    "loguru"
+  ],
+  "summary_zh": "loguru stderr 彩色 file JSON 雙 sink"
+}

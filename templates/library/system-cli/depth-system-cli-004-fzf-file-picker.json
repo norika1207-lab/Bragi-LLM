@@ -1,0 +1,31 @@
+{
+  "id": "depth-system-cli-004-fzf-file-picker",
+  "category": "system-cli/selector/fzf",
+  "intents_zh": [
+    "fzf 檔案選擇",
+    "fzf 包裝腳本",
+    "互動選檔開編輯器",
+    "fzf preview 預覽",
+    "fzf 模糊搜尋",
+    "用 fzf 挑檔"
+  ],
+  "intents_en": [
+    "fzf file picker",
+    "fzf wrapper script",
+    "interactive file open",
+    "fzf preview",
+    "fzf fuzzy find",
+    "pick file with fzf"
+  ],
+  "slots": [
+    "root_dir",
+    "editor"
+  ],
+  "code": "#!/usr/bin/env bash\nset -euo pipefail\n\nfile=$(find \"{{root_dir}}\" -type f -not -path '*/.git/*' \\\n  | fzf --preview 'bat --color=always --style=numbers {} 2>/dev/null || cat {}' \\\n        --preview-window=right:60% \\\n        --height=80% --border)\n\n[ -n \"$file\" ] && {{editor}} \"$file\"",
+  "language": "bash",
+  "deps": [
+    "fzf",
+    "bat"
+  ],
+  "summary_zh": "fzf 檔案選擇器附 bat preview 開編輯器"
+}

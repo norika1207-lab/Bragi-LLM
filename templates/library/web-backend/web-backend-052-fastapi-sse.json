@@ -1,0 +1,27 @@
+{
+  "id": "web-backend-052-fastapi-sse",
+  "category": "web-backend/fastapi/streaming",
+  "intents_zh": [
+    "fastapi SSE",
+    "stream response fastapi",
+    "Server-Sent Events fastapi",
+    "event-stream fastapi",
+    "推送事件 fastapi"
+  ],
+  "intents_en": [
+    "fastapi sse stream",
+    "StreamingResponse sse",
+    "server-sent events fastapi",
+    "event stream fastapi",
+    "push updates fastapi"
+  ],
+  "slots": [
+    "interval_sec"
+  ],
+  "code": "from fastapi import FastAPI\nfrom fastapi.responses import StreamingResponse\nimport asyncio, json, time\n\napp = FastAPI()\n\nasync def event_gen():\n    while True:\n        yield f'data: {json.dumps({\"ts\": time.time()})}\\n\\n'\n        await asyncio.sleep({{interval_sec}})\n\n@app.get('/stream')\nasync def stream():\n    return StreamingResponse(event_gen(), media_type='text/event-stream')",
+  "language": "py",
+  "deps": [
+    "fastapi"
+  ],
+  "summary_zh": "FastAPI SSE 串流"
+}

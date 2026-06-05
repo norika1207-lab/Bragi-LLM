@@ -1,0 +1,22 @@
+{
+  "id": "database-devops-088-compose-traefik",
+  "category": "database-devops/docker/compose",
+  "intents_zh": [
+    "traefik 反向代理 compose",
+    "traefik 自動 SSL",
+    "compose 加 traefik"
+  ],
+  "intents_en": [
+    "traefik compose",
+    "traefik auto ssl",
+    "traefik reverse proxy"
+  ],
+  "slots": [
+    "email",
+    "domain"
+  ],
+  "code": "services:\n  traefik:\n    image: traefik:v3\n    command:\n      - --providers.docker=true\n      - --entrypoints.web.address=:80\n      - --entrypoints.websecure.address=:443\n      - --certificatesresolvers.le.acme.email={{email}}\n      - --certificatesresolvers.le.acme.storage=/letsencrypt/acme.json\n      - --certificatesresolvers.le.acme.tlschallenge=true\n    ports: [\"80:80\", \"443:443\"]\n    volumes:\n      - /var/run/docker.sock:/var/run/docker.sock:ro\n      - letsencrypt:/letsencrypt\n\n  app:\n    image: my-app\n    labels:\n      - traefik.enable=true\n      - traefik.http.routers.app.rule=Host(`{{domain}}`)\n      - traefik.http.routers.app.tls.certresolver=le\n\nvolumes:\n  letsencrypt:",
+  "language": "yaml",
+  "deps": [],
+  "summary_zh": "compose Traefik 自動 SSL 反代"
+}

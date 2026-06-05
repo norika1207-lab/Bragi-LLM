@@ -1,0 +1,30 @@
+{
+  "id": "mobile-027-rn-bridge",
+  "category": "mobile/rn/native",
+  "intents_zh": [
+    "RN 原生模組橋接",
+    "React Native native module",
+    "RN bridge 範例",
+    "原生方法呼叫 RN",
+    "TurboModule 範例",
+    "RN 寫 native 模組",
+    "iOS Swift bridge RN"
+  ],
+  "intents_en": [
+    "rn native module",
+    "react native bridge",
+    "call native code rn",
+    "turbo module example",
+    "native bridge swift rn",
+    "custom native module rn",
+    "rn ios native"
+  ],
+  "slots": [
+    "module_name",
+    "method_name"
+  ],
+  "code": "// ios/{{module_name}}.swift\nimport Foundation\n@objc({{module_name}})\nclass {{module_name}}: NSObject {\n  @objc(constantsToExport) func constantsToExport()->[String:Any]{return[\"v\":1]}\n  @objc({{method_name}}:resolver:rejecter:)\n  func {{method_name}}(_ input:String,resolver resolve:@escaping RCTPromiseResolveBlock,rejecter reject:@escaping RCTPromiseRejectBlock){\n    resolve(\"hello \" + input)\n  }\n  @objc static func requiresMainQueueSetup()->Bool{return false}\n}",
+  "language": "swift",
+  "deps": [],
+  "summary_zh": "RN iOS Swift native module 樣板"
+}

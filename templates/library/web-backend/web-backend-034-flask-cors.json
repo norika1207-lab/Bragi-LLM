@@ -1,0 +1,28 @@
+{
+  "id": "web-backend-034-flask-cors",
+  "category": "web-backend/flask/middleware",
+  "intents_zh": [
+    "flask CORS",
+    "flask-cors 設定",
+    "允許跨域 flask",
+    "CORS 白名單 flask",
+    "preflight flask"
+  ],
+  "intents_en": [
+    "flask cors setup",
+    "flask-cors example",
+    "enable cors flask",
+    "cors whitelist flask",
+    "cross origin flask"
+  ],
+  "slots": [
+    "allowed_origin"
+  ],
+  "code": "from flask import Flask\nfrom flask_cors import CORS\n\napp = Flask(__name__)\nCORS(app, resources={r'/api/*': {'origins': ['{{allowed_origin}}']}}, supports_credentials=True)",
+  "language": "py",
+  "deps": [
+    "flask",
+    "flask-cors"
+  ],
+  "summary_zh": "Flask CORS 白名單"
+}

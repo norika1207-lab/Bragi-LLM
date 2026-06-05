@@ -1,0 +1,39 @@
+{
+  "id": "patch-terraform-005-vpc-subnets-igw",
+  "category": "database-devops/terraform/aws-network",
+  "intents_zh": [
+    "terraform 開 VPC 加 public/private subnet 跟 IGW",
+    "tf 寫一個自訂 VPC 含網段切割",
+    "用 terraform 起 aws vpc 跟 internet gateway",
+    "VPC + subnets + route table 範本",
+    "幫我寫 tf 的網路基礎 module",
+    "Terraform 建 VPC 兩個 AZ 各一 public private",
+    "起 vpc 加路由表跟 igw"
+  ],
+  "intents_en": [
+    "terraform vpc with public private subnets and igw",
+    "tf custom vpc with route tables",
+    "provision aws vpc subnets terraform",
+    "aws network foundation module tf",
+    "create vpc with internet gateway in terraform",
+    "two-az vpc subnet split terraform",
+    "tf vpc bootstrap"
+  ],
+  "slots": [
+    "vpc_name",
+    "vpc_cidr",
+    "public_cidr_a",
+    "public_cidr_b",
+    "private_cidr_a",
+    "private_cidr_b",
+    "az_a",
+    "az_b"
+  ],
+  "code": "resource \"aws_vpc\" \"this\" {\n  cidr_block           = \"{{vpc_cidr}}\"\n  enable_dns_hostnames = true\n  enable_dns_support   = true\n  tags = { Name = \"{{vpc_name}}\" }\n}\n\nresource \"aws_internet_gateway\" \"this\" {\n  vpc_id = aws_vpc.this.id\n  tags   = { Name = \"{{vpc_name}}-igw\" }\n}\n\nresource \"aws_subnet\" \"public_a\" {\n  vpc_id                  = aws_vpc.this.id\n  cidr_block              = \"{{public_cidr_a}}\"\n  availability_zone       = \"{{az_a}}\"\n  map_public_ip_on_launch = true\n  tags = { Name = \"{{vpc_name}}-public-a\" }\n}\n\nresource \"aws_subnet\" \"public_b\" {\n  vpc_id                  = aws_vpc.this.id\n  cidr_block              = \"{{public_cidr_b}}\"\n  availability_zone       = \"{{az_b}}\"\n  map_public_ip_on_launch = true\n  tags = { Name = \"{{vpc_name}}-public-b\" }\n}\n\nresource \"aws_subnet\" \"private_a\" {\n  vpc_id            = aws_vpc.this.id\n  cidr_block        = \"{{private_cidr_a}}\"\n  availability_zone = \"{{az_a}}\"\n  tags = { Name = \"{{vpc_name}}-private-a\" }\n}\n\nresource \"aws_subnet\" \"private_b\" {\n  vpc_id            = aws_vpc.this.id\n  cidr_block        = \"{{private_cidr_b}}\"\n  availability_zone = \"{{az_b}}\"\n  tags = { Name = \"{{vpc_name}}-private-b\" }\n}\n\nresource \"aws_route_table\" \"public\" {\n  vpc_id = aws_vpc.this.id\n  route {\n    cidr_block = \"0.0.0.0/0\"\n    gateway_id = aws_internet_gateway.this.id\n  }\n}\n\nresource \"aws_route_table_association\" \"pub_a\" {\n  subnet_id      = aws_subnet.public_a.id\n  route_table_id = aws_route_table.public.id\n}\n\nresource \"aws_route_table_association\" \"pub_b\" {\n  subnet_id      = aws_subnet.public_b.id\n  route_table_id = aws_route_table.public.id\n}",
+  "language": "hcl",
+  "deps": [
+    "terraform",
+    "hashicorp/aws"
+  ],
+  "summary_zh": "Terraform 建立 VPC 含兩 AZ public/private subnet 與 IGW 路由表。"
+}

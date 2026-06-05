@@ -1,0 +1,25 @@
+{
+  "id": "firmware-004-arduino-analog-read",
+  "category": "firmware/arduino/adc",
+  "intents_zh": [
+    "讀類比訊號",
+    "Arduino 讀電位器",
+    "analogRead 範例",
+    "ADC 讀值",
+    "可變電阻讀取"
+  ],
+  "intents_en": [
+    "Arduino analog read",
+    "potentiometer reading",
+    "ADC sample",
+    "read voltage on Arduino",
+    "analog input example"
+  ],
+  "slots": [
+    "analog_pin"
+  ],
+  "code": "const int ANALOG_PIN = {{analog_pin}};\n\nvoid setup() {\n  Serial.begin(115200);\n}\n\nvoid loop() {\n  int v = analogRead(ANALOG_PIN);\n  float volts = v * (5.0 / 1023.0);\n  Serial.print(\"raw=\"); Serial.print(v);\n  Serial.print(\" V=\"); Serial.println(volts, 3);\n  delay(200);\n}",
+  "language": "ino",
+  "deps": [],
+  "summary_zh": "Arduino 讀類比輸入並轉電壓"
+}

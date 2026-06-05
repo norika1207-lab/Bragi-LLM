@@ -1,0 +1,26 @@
+{
+  "id": "web-backend-088-dockerfile-node",
+  "category": "web-backend/deploy",
+  "intents_zh": [
+    "node Dockerfile",
+    "express 打 docker",
+    "node multi-stage build",
+    "容器化 node app",
+    "Dockerfile node 範例"
+  ],
+  "intents_en": [
+    "node dockerfile",
+    "dockerize express",
+    "multi-stage node build",
+    "containerize node app",
+    "dockerfile example node"
+  ],
+  "slots": [
+    "node_version",
+    "port"
+  ],
+  "code": "FROM node:{{node_version}}-alpine AS deps\nWORKDIR /app\nCOPY package*.json ./\nRUN npm ci --omit=dev\n\nFROM node:{{node_version}}-alpine\nWORKDIR /app\nCOPY --from=deps /app/node_modules ./node_modules\nCOPY . .\nENV NODE_ENV=production\nEXPOSE {{port}}\nUSER node\nCMD [\"node\", \"server.js\"]",
+  "language": "dockerfile",
+  "deps": [],
+  "summary_zh": "Node multi-stage Dockerfile"
+}

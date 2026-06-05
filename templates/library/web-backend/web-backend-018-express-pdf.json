@@ -1,0 +1,29 @@
+{
+  "id": "web-backend-018-express-pdf",
+  "category": "web-backend/express/export",
+  "intents_zh": [
+    "產生 PDF 回傳",
+    "express PDF download",
+    "用 pdfkit 生 PDF",
+    "下載發票 PDF",
+    "stream pdf response"
+  ],
+  "intents_en": [
+    "pdf generation express",
+    "pdfkit example",
+    "download pdf endpoint",
+    "stream pdf to client",
+    "invoice pdf endpoint"
+  ],
+  "slots": [
+    "title",
+    "filename"
+  ],
+  "code": "const express = require('express');\nconst PDFDocument = require('pdfkit');\nconst router = express.Router();\n\nrouter.get('/pdf', (req, res) => {\n  const doc = new PDFDocument();\n  res.set({\n    'Content-Type': 'application/pdf',\n    'Content-Disposition': `attachment; filename=\"{{filename}}.pdf\"`\n  });\n  doc.pipe(res);\n  doc.fontSize(20).text('{{title}}', { align: 'center' });\n  doc.moveDown().fontSize(12).text('generated at ' + new Date().toISOString());\n  doc.end();\n});\n\nmodule.exports = router;",
+  "language": "js",
+  "deps": [
+    "express",
+    "pdfkit"
+  ],
+  "summary_zh": "Express PDFKit 文件生成"
+}

@@ -1,0 +1,36 @@
+{
+  "id": "llm-tools-130-async-stream-anthropic-fastapi",
+  "category": "llm-tools/server/anthropic-sse",
+  "intents_zh": [
+    "FastAPI + Claude SSE",
+    "串流 Claude 給前端",
+    "anthropic sse endpoint",
+    "Claude 前端串流",
+    "Claude SSE server",
+    "fastapi anthropic stream",
+    "claude web 串流",
+    "SSE proxy claude"
+  ],
+  "intents_en": [
+    "fastapi claude sse",
+    "stream claude to frontend",
+    "anthropic sse endpoint",
+    "claude web streaming",
+    "fastapi anthropic stream",
+    "sse proxy claude",
+    "claude sse server",
+    "stream claude http"
+  ],
+  "slots": [
+    "model_name",
+    "port"
+  ],
+  "code": "from fastapi import FastAPI\nfrom fastapi.responses import StreamingResponse\nfrom anthropic import Anthropic\nimport uvicorn\n\napp = FastAPI()\nclient = Anthropic()\n\ndef gen(prompt: str):\n    with client.messages.stream(\n        model=\"{{model_name}}\",\n        max_tokens=512,\n        messages=[{\"role\": \"user\", \"content\": prompt}],\n    ) as s:\n        for text in s.text_stream:\n            yield f\"data: {text}\\n\\n\"\n    yield \"data: [DONE]\\n\\n\"\n\n@app.get(\"/claude\")\ndef route(q: str):\n    return StreamingResponse(gen(q), media_type=\"text/event-stream\")\n\nif __name__ == \"__main__\":\n    uvicorn.run(app, host=\"0.0.0.0\", port={{port}})",
+  "language": "py",
+  "deps": [
+    "fastapi",
+    "uvicorn",
+    "anthropic"
+  ],
+  "summary_zh": "FastAPI SSE 串流 Claude 回應"
+}

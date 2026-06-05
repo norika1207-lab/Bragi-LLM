@@ -1,0 +1,28 @@
+{
+  "id": "firmware-089-arduino-ds18b20",
+  "category": "firmware/arduino/sensor",
+  "intents_zh": [
+    "DS18B20 溫度",
+    "OneWire 溫度",
+    "防水溫度感測",
+    "Arduino 溫度探針",
+    "DallasTemperature 範例"
+  ],
+  "intents_en": [
+    "Arduino DS18B20 OneWire",
+    "DallasTemperature library",
+    "waterproof temp probe",
+    "read DS18B20",
+    "OneWire temperature sensor"
+  ],
+  "slots": [
+    "onewire_pin"
+  ],
+  "code": "#include <OneWire.h>\n#include <DallasTemperature.h>\nOneWire ow({{onewire_pin}});\nDallasTemperature sensors(&ow);\n\nvoid setup() {\n  Serial.begin(115200);\n  sensors.begin();\n}\n\nvoid loop() {\n  sensors.requestTemperatures();\n  Serial.println(sensors.getTempCByIndex(0));\n  delay(1000);\n}",
+  "language": "ino",
+  "deps": [
+    "OneWire",
+    "DallasTemperature"
+  ],
+  "summary_zh": "Arduino DS18B20 OneWire 溫度讀取"
+}

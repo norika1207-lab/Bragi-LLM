@@ -1,0 +1,28 @@
+{
+  "id": "depth-web-backend-048-presigned-gcs",
+  "category": "web-backend/storage/gcs",
+  "intents_zh": [
+    "GCS 簽名 URL",
+    "Google Cloud Storage 預簽",
+    "getSignedUrl v4",
+    "限時上傳 GCS",
+    "gcs presigned"
+  ],
+  "intents_en": [
+    "gcs signed url",
+    "google cloud storage presign",
+    "getsignedurl v4",
+    "gcs time limited upload",
+    "gcs presigned"
+  ],
+  "slots": [
+    "bucket",
+    "key"
+  ],
+  "code": "import { Storage } from '@google-cloud/storage';\nconst storage = new Storage();\nconst [url] = await storage.bucket('{{bucket}}').file('{{key}}').getSignedUrl({\n  version: 'v4', action: 'write', expires: Date.now() + 15 * 60 * 1000,\n  contentType: 'application/octet-stream',\n});",
+  "language": "js",
+  "deps": [
+    "@google-cloud/storage"
+  ],
+  "summary_zh": "GCS v4 signed URL 上傳"
+}

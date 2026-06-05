@@ -1,0 +1,27 @@
+{
+  "id": "depth-web-backend-019-bullmq-worker",
+  "category": "web-backend/queue/bullmq",
+  "intents_zh": [
+    "BullMQ worker",
+    "消費 Redis 佇列",
+    "失敗 retry",
+    "background job 處理器",
+    "worker concurrency"
+  ],
+  "intents_en": [
+    "bullmq worker",
+    "consume redis queue",
+    "retry on failure",
+    "background job processor",
+    "worker concurrency"
+  ],
+  "slots": [
+    "queue_name"
+  ],
+  "code": "import { Worker } from 'bullmq';\nnew Worker('{{queue_name}}', async (job) => {\n  if (job.name === 'email') await sendEmail(job.data);\n}, { connection: { host: 'localhost', port: 6379 }, concurrency: 5 })\n  .on('failed', (job, err) => console.error('job failed', job?.id, err));",
+  "language": "js",
+  "deps": [
+    "bullmq"
+  ],
+  "summary_zh": "BullMQ worker + concurrency"
+}

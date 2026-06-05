@@ -1,0 +1,21 @@
+{
+  "id": "algorithm-misc-018",
+  "category": "algorithm/misc/serialize_tree",
+  "intents_zh": [
+    "序列化二元樹",
+    "serialize binary tree",
+    "給我 serialize tree"
+  ],
+  "intents_en": [
+    "serialize binary tree",
+    "deserialize tree",
+    "tree codec"
+  ],
+  "slots": [
+    "fn_prefix"
+  ],
+  "code": "def {{fn_prefix}}_serialize(root):\n    out = []\n    def dfs(n):\n        if not n: out.append('#'); return\n        out.append(str(n.val))\n        dfs(n.left); dfs(n.right)\n    dfs(root)\n    return ','.join(out)\n\ndef {{fn_prefix}}_deserialize(data, Node):\n    it = iter(data.split(','))\n    def build():\n        v = next(it)\n        if v == '#': return None\n        n = Node(int(v))\n        n.left = build()\n        n.right = build()\n        return n\n    return build()",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "DFS 前序序列化/反序列化二元樹"
+}

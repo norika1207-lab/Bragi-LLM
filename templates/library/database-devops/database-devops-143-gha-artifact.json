@@ -1,0 +1,22 @@
+{
+  "id": "database-devops-143-gha-artifact",
+  "category": "database-devops/cicd/github-actions",
+  "intents_zh": [
+    "GHA upload artifact",
+    "build 產物上傳",
+    "下載 artifact"
+  ],
+  "intents_en": [
+    "github actions upload artifact",
+    "upload build output",
+    "download artifact"
+  ],
+  "slots": [
+    "artifact_name",
+    "path"
+  ],
+  "code": "      - uses: actions/upload-artifact@v4\n        with:\n          name: {{artifact_name}}\n          path: {{path}}\n          retention-days: 7\n\n  # in another job\n  consume:\n    needs: build\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/download-artifact@v4\n        with: { name: {{artifact_name}}, path: ./out }",
+  "language": "yaml",
+  "deps": [],
+  "summary_zh": "GHA 上傳 / 下載 build artifact"
+}

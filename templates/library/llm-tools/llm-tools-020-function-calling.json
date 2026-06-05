@@ -1,0 +1,34 @@
+{
+  "id": "llm-tools-020-function-calling",
+  "category": "llm-tools/tools/function-calling",
+  "intents_zh": [
+    "openai function calling",
+    "tool calling 範例",
+    "讓 GPT 呼叫工具",
+    "function call 範本",
+    "定義 tool schema",
+    "gpt 工具呼叫",
+    "tools 參數",
+    "function calling minimal"
+  ],
+  "intents_en": [
+    "openai function calling",
+    "tool calling example",
+    "let gpt call functions",
+    "function call template",
+    "define tool schema",
+    "gpt tools",
+    "tool use minimal",
+    "function calling demo"
+  ],
+  "slots": [
+    "model_name",
+    "function_name"
+  ],
+  "code": "from openai import OpenAI\nimport json\n\nclient = OpenAI()\n\ntools = [{\n    \"type\": \"function\",\n    \"function\": {\n        \"name\": \"{{function_name}}\",\n        \"description\": \"do something\",\n        \"parameters\": {\"type\": \"object\", \"properties\": {\"x\": {\"type\": \"string\"}}, \"required\": [\"x\"]},\n    },\n}]\n\ndef run(prompt: str):\n    r = client.chat.completions.create(\n        model=\"{{model_name}}\",\n        messages=[{\"role\": \"user\", \"content\": prompt}],\n        tools=tools,\n    )\n    msg = r.choices[0].message\n    if msg.tool_calls:\n        return json.loads(msg.tool_calls[0].function.arguments)\n    return msg.content\n\nif __name__ == \"__main__\":\n    print(run(\"call {{function_name}} with x=hi\"))",
+  "language": "py",
+  "deps": [
+    "openai"
+  ],
+  "summary_zh": "OpenAI function calling 工具呼叫範例"
+}

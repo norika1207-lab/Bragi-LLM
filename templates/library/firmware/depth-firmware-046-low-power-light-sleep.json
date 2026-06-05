@@ -1,0 +1,27 @@
+{
+  "id": "depth-firmware-046-low-power-light-sleep",
+  "category": "firmware/power/light-sleep",
+  "intents_zh": [
+    "light sleep",
+    "ESP32 輕睡眠",
+    "保持 RAM 省電",
+    "UART 喚醒",
+    "short sleep"
+  ],
+  "intents_en": [
+    "light sleep",
+    "esp32 light sleep",
+    "retain ram low power",
+    "uart wake",
+    "short sleep mode"
+  ],
+  "slots": [
+    "sleep_ms"
+  ],
+  "code": "#include \"esp_sleep.h\"\nesp_sleep_enable_timer_wakeup((uint64_t){{sleep_ms}} * 1000ULL);\nesp_light_sleep_start();\n// execution continues here on wake",
+  "language": "c",
+  "deps": [
+    "esp-idf"
+  ],
+  "summary_zh": "進入 light sleep N 毫秒後從原處繼續執行"
+}

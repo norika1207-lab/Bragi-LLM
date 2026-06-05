@@ -1,0 +1,34 @@
+{
+  "id": "llm-tools-068-whisper-stt",
+  "category": "llm-tools/audio/whisper",
+  "intents_zh": [
+    "whisper 語音轉文字",
+    "openai stt",
+    "語音辨識",
+    "音檔轉文字",
+    "whisper api",
+    "speech to text",
+    "stt 範本",
+    "語音 transcribe"
+  ],
+  "intents_en": [
+    "whisper transcribe",
+    "openai stt",
+    "speech to text",
+    "audio to text",
+    "whisper api wrapper",
+    "stt example",
+    "transcribe audio file",
+    "minimal stt"
+  ],
+  "slots": [
+    "audio_path",
+    "model_name"
+  ],
+  "code": "from openai import OpenAI\n\nclient = OpenAI()\n\ndef transcribe(path: str = \"{{audio_path}}\") -> str:\n    with open(path, \"rb\") as f:\n        r = client.audio.transcriptions.create(model=\"{{model_name}}\", file=f)\n    return r.text\n\nif __name__ == \"__main__\":\n    print(transcribe())",
+  "language": "py",
+  "deps": [
+    "openai"
+  ],
+  "summary_zh": "OpenAI Whisper 音檔轉文字"
+}

@@ -1,0 +1,22 @@
+{
+  "id": "system-cli-053-line-filter-grep",
+  "category": "system-cli/text/grep",
+  "intents_zh": [
+    "python grep 工具",
+    "逐行過濾文字",
+    "正則過濾"
+  ],
+  "intents_en": [
+    "python grep tool",
+    "line filter by regex",
+    "custom grep script"
+  ],
+  "slots": [
+    "pattern",
+    "file_path"
+  ],
+  "code": "import re, sys\nfrom pathlib import Path\n\npat = re.compile(r'{{pattern}}')\nfor i, line in enumerate(Path('{{file_path}}').read_text().splitlines(), 1):\n    if pat.search(line):\n        print(f'{i}:{line}')",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "python 自製 grep"
+}

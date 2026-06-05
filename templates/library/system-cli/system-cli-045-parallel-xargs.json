@@ -1,0 +1,23 @@
+{
+  "id": "system-cli-045-parallel-xargs",
+  "category": "system-cli/parallel/xargs",
+  "intents_zh": [
+    "xargs 平行跑",
+    "批次平行任務 shell",
+    "xargs -P 範本"
+  ],
+  "intents_en": [
+    "xargs parallel jobs",
+    "run tasks in parallel shell",
+    "xargs -P template"
+  ],
+  "slots": [
+    "input_list",
+    "worker_cmd",
+    "jobs"
+  ],
+  "code": "#!/usr/bin/env bash\nset -euo pipefail\n\ncat \"{{input_list}}\" | xargs -n 1 -P {{jobs}} -I{} bash -c '\n  echo \"[start] {}\";\n  {{worker_cmd}} \"{}\";\n  echo \"[done] {}\"\n'",
+  "language": "sh",
+  "deps": [],
+  "summary_zh": "xargs -P 平行工作池"
+}

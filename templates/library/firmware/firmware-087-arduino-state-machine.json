@@ -1,0 +1,26 @@
+{
+  "id": "firmware-087-arduino-state-machine",
+  "category": "firmware/arduino/patterns",
+  "intents_zh": [
+    "Arduino 狀態機",
+    "state machine 範例",
+    "按鈕切狀態",
+    "FSM 寫法",
+    "狀態管理"
+  ],
+  "intents_en": [
+    "Arduino state machine",
+    "FSM example",
+    "button state transitions",
+    "finite state Arduino",
+    "switch case state"
+  ],
+  "slots": [
+    "button_pin",
+    "led_pin"
+  ],
+  "code": "enum State { OFF, SLOW, FAST };\nState s = OFF;\nconst int BTN = {{button_pin}};\nconst int LED = {{led_pin}};\nunsigned long last = 0;\nint lastBtn = HIGH;\n\nvoid setup() {\n  pinMode(BTN, INPUT_PULLUP);\n  pinMode(LED, OUTPUT);\n}\n\nvoid loop() {\n  int r = digitalRead(BTN);\n  if (lastBtn == HIGH && r == LOW) {\n    s = (State)((s + 1) % 3);\n    delay(150);\n  }\n  lastBtn = r;\n  unsigned long now = millis();\n  int period = (s == OFF) ? 0 : (s == SLOW ? 800 : 150);\n  if (period && now - last > period) { last = now; digitalWrite(LED, !digitalRead(LED)); }\n  if (!period) digitalWrite(LED, LOW);\n}",
+  "language": "ino",
+  "deps": [],
+  "summary_zh": "Arduino 按鈕切換狀態機 (off/slow/fast)"
+}

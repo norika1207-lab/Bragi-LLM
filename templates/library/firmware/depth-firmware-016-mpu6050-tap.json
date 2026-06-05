@@ -1,0 +1,28 @@
+{
+  "id": "depth-firmware-016-mpu6050-tap",
+  "category": "firmware/sensor/accel",
+  "intents_zh": [
+    "加速度計敲擊偵測",
+    "MPU6050 tap",
+    "震動偵測",
+    "accelerometer 敲一下",
+    "tap detect"
+  ],
+  "intents_en": [
+    "accelerometer tap detect",
+    "mpu6050 tap",
+    "vibration detect",
+    "double tap accel",
+    "motion tap"
+  ],
+  "slots": [
+    "threshold_g"
+  ],
+  "code": "#include <Wire.h>\n#include <MPU6050.h>\nMPU6050 mpu;\nfloat last_mag = 0;\nvoid loop() {\n    int16_t ax, ay, az;\n    mpu.getAcceleration(&ax, &ay, &az);\n    float mag = sqrt((float)ax*ax + (float)ay*ay + (float)az*az) / 16384.0f;\n    float delta = fabs(mag - last_mag);\n    if (delta > {{threshold_g}}) Serial.println(\"TAP\");\n    last_mag = mag;\n    delay(10);\n}",
+  "language": "cpp",
+  "deps": [
+    "MPU6050",
+    "Wire"
+  ],
+  "summary_zh": "以加速度向量變化量偵測敲擊事件"
+}

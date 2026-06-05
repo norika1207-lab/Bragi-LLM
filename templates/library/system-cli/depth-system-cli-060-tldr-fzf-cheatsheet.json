@@ -1,0 +1,24 @@
+{
+  "id": "depth-system-cli-060-tldr-fzf-cheatsheet",
+  "category": "system-cli/docs/cheatsheet",
+  "intents_zh": [
+    "tldr fzf 速查",
+    "互動 man cheatsheet",
+    "tealdeer fzf 包裝",
+    "查指令範例 fzf"
+  ],
+  "intents_en": [
+    "tldr fzf cheatsheet",
+    "interactive man cheats",
+    "tealdeer fzf wrapper",
+    "command example fzf"
+  ],
+  "slots": [],
+  "code": "#!/usr/bin/env bash\nset -euo pipefail\n\ncmd=$(tldr --list 2>/dev/null \\\n  | fzf --preview 'tldr --color always {}' \\\n        --preview-window=right:70% \\\n        --prompt=\"cheat> \" \\\n        --height=80%)\n\n[ -n \"$cmd\" ] && tldr \"$cmd\"",
+  "language": "bash",
+  "deps": [
+    "tldr",
+    "fzf"
+  ],
+  "summary_zh": "tldr + fzf 互動 cheatsheet 預覽"
+}

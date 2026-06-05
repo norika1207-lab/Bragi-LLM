@@ -1,0 +1,27 @@
+{
+  "id": "mobile-110-swiftui-form",
+  "category": "mobile/swiftui/form",
+  "intents_zh": [
+    "SwiftUI Form 表單",
+    "SwiftUI 輸入表單",
+    "Swift 多欄位表單",
+    "SwiftUI 註冊表單",
+    "SwiftUI Form 範例",
+    "SwiftUI 表單 ui",
+    "Swift form section"
+  ],
+  "intents_en": [
+    "swiftui Form",
+    "swift multi field form",
+    "signup form swiftui",
+    "swiftui form example",
+    "form sections swiftui",
+    "swiftui input form",
+    "registration form swiftui"
+  ],
+  "slots": [],
+  "code": "import SwiftUI\nstruct F:View{@State var name=\"\";@State var age=18;@State var agree=false\n  var body:some View{Form{Section(\"profile\"){TextField(\"name\",text:$name);Stepper(\"age \\(age)\",value:$age,in:0...120)};Section{Toggle(\"agree\",isOn:$agree);Button(\"Submit\"){}.disabled(!agree)}}}}",
+  "language": "swift",
+  "deps": [],
+  "summary_zh": "SwiftUI Form 多段表單"
+}

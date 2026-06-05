@@ -1,0 +1,24 @@
+{
+  "id": "algorithm-ml-017",
+  "category": "algorithm/ml/svm",
+  "intents_zh": [
+    "SVM",
+    "支援向量機",
+    "sklearn svm"
+  ],
+  "intents_en": [
+    "SVM",
+    "support vector machine",
+    "sklearn SVC"
+  ],
+  "slots": [
+    "X_train",
+    "y_train"
+  ],
+  "code": "from sklearn.svm import SVC\n\nclf = SVC(kernel='rbf', C=1.0, gamma='scale')\nclf.fit({{X_train}}, {{y_train}})\nprint('support vectors:', clf.n_support_)",
+  "language": "py",
+  "deps": [
+    "scikit-learn"
+  ],
+  "summary_zh": "sklearn RBF kernel SVM"
+}

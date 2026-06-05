@@ -1,0 +1,29 @@
+{
+  "id": "firmware-027-esp32-ota",
+  "category": "firmware/esp32/ota",
+  "intents_zh": [
+    "ESP32 OTA 更新",
+    "空中燒錄",
+    "ArduinoOTA 範例",
+    "遠端燒程式",
+    "OTA upload"
+  ],
+  "intents_en": [
+    "ESP32 OTA update",
+    "ArduinoOTA example",
+    "over the air firmware",
+    "wifi flash ESP32",
+    "remote firmware update"
+  ],
+  "slots": [
+    "ssid",
+    "password",
+    "hostname"
+  ],
+  "code": "#include <WiFi.h>\n#include <ArduinoOTA.h>\n\nvoid setup() {\n  Serial.begin(115200);\n  WiFi.begin(\"{{ssid}}\", \"{{password}}\");\n  while (WiFi.status() != WL_CONNECTED) delay(300);\n  ArduinoOTA.setHostname(\"{{hostname}}\");\n  ArduinoOTA.begin();\n  Serial.println(WiFi.localIP());\n}\n\nvoid loop() { ArduinoOTA.handle(); }",
+  "language": "ino",
+  "deps": [
+    "ArduinoOTA"
+  ],
+  "summary_zh": "ESP32 ArduinoOTA 空中更新"
+}

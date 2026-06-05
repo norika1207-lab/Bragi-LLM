@@ -1,0 +1,33 @@
+{
+  "id": "llm-tools-082-step-back-prompt",
+  "category": "llm-tools/prompt/step-back",
+  "intents_zh": [
+    "step-back prompting",
+    "退一步抽象",
+    "step-back 範例",
+    "抽象原理 prompt",
+    "step back 兩段式",
+    "抽象再解",
+    "step-back reasoning",
+    "prompt strategy"
+  ],
+  "intents_en": [
+    "step-back prompting",
+    "abstraction prompt",
+    "two-stage reason",
+    "step back example",
+    "step-back reasoning",
+    "abstract then answer",
+    "prompt strategy",
+    "stepback technique"
+  ],
+  "slots": [
+    "model_name"
+  ],
+  "code": "from openai import OpenAI\n\nclient = OpenAI()\n\ndef step_back(question: str) -> str:\n    high = client.chat.completions.create(\n        model=\"{{model_name}}\",\n        messages=[{\"role\": \"user\", \"content\": f\"What general principle helps answer: {question}\"}],\n    ).choices[0].message.content\n    final = client.chat.completions.create(\n        model=\"{{model_name}}\",\n        messages=[{\"role\": \"user\", \"content\": f\"Principle: {high}\\nNow answer: {question}\"}],\n    ).choices[0].message.content\n    return final",
+  "language": "py",
+  "deps": [
+    "openai"
+  ],
+  "summary_zh": "step-back 抽象原理兩段式提問"
+}

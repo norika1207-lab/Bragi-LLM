@@ -1,0 +1,25 @@
+{
+  "id": "depth-system-cli-028-aws-ec2-list-pretty",
+  "category": "system-cli/aws/ec2",
+  "intents_zh": [
+    "列出 EC2 漂亮表格",
+    "aws ec2 describe 美化",
+    "EC2 過濾 tag",
+    "ec2 簡表"
+  ],
+  "intents_en": [
+    "list ec2 pretty",
+    "aws ec2 describe table",
+    "filter ec2 tag",
+    "ec2 brief"
+  ],
+  "slots": [
+    "tag_filter"
+  ],
+  "code": "#!/usr/bin/env bash\nset -euo pipefail\n\naws ec2 describe-instances \\\n  --filters \"Name=tag:Environment,Values={{tag_filter}}\" \\\n  --query 'Reservations[].Instances[].[Tags[?Key==`Name`].Value|[0], InstanceId, InstanceType, State.Name, PrivateIpAddress, PublicIpAddress]' \\\n  --output table",
+  "language": "bash",
+  "deps": [
+    "awscli"
+  ],
+  "summary_zh": "EC2 列表依 tag 過濾並輸出表格"
+}

@@ -1,0 +1,25 @@
+{
+  "id": "web-backend-118-fastapi-error",
+  "category": "web-backend/fastapi/middleware",
+  "intents_zh": [
+    "fastapi 全域錯誤處理",
+    "exception handler fastapi",
+    "統一錯誤格式 fastapi",
+    "HTTPException handler",
+    "catch all error fastapi"
+  ],
+  "intents_en": [
+    "fastapi global error handler",
+    "exception handler fastapi",
+    "unified error response",
+    "HTTPException handler",
+    "catch all error fastapi"
+  ],
+  "slots": [],
+  "code": "from fastapi import FastAPI, Request\nfrom fastapi.responses import JSONResponse\nfrom fastapi.exceptions import HTTPException\n\napp = FastAPI()\n\n@app.exception_handler(HTTPException)\nasync def http_handler(req: Request, exc: HTTPException):\n    return JSONResponse({'error': exc.detail, 'code': exc.status_code}, status_code=exc.status_code)\n\n@app.exception_handler(Exception)\nasync def unhandled_handler(req: Request, exc: Exception):\n    return JSONResponse({'error': 'internal error', 'code': 'INTERNAL'}, status_code=500)",
+  "language": "py",
+  "deps": [
+    "fastapi"
+  ],
+  "summary_zh": "FastAPI 全域錯誤處理"
+}

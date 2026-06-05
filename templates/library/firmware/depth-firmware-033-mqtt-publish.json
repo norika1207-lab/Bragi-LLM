@@ -1,0 +1,30 @@
+{
+  "id": "depth-firmware-033-mqtt-publish",
+  "category": "firmware/network/mqtt",
+  "intents_zh": [
+    "MQTT 發佈",
+    "PubSubClient publish",
+    "上傳感測資料",
+    "MQTT topic",
+    "sensor to broker"
+  ],
+  "intents_en": [
+    "mqtt publish",
+    "pubsubclient publish",
+    "upload sensor data",
+    "mqtt topic",
+    "sensor to broker"
+  ],
+  "slots": [
+    "broker",
+    "topic",
+    "payload"
+  ],
+  "code": "#include <WiFi.h>\n#include <PubSubClient.h>\nWiFiClient w; PubSubClient mqtt(w);\nvoid setup() {\n    mqtt.setServer(\"{{broker}}\", 1883);\n    while (!mqtt.connect(\"dev\")) delay(500);\n}\nvoid loop() {\n    mqtt.publish(\"{{topic}}\", \"{{payload}}\");\n    mqtt.loop();\n    delay(5000);\n}",
+  "language": "cpp",
+  "deps": [
+    "PubSubClient",
+    "WiFi"
+  ],
+  "summary_zh": "連 MQTT broker 並週期發佈訊息"
+}

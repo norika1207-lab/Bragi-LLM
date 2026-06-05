@@ -1,0 +1,25 @@
+{
+  "id": "depth-database-devops-042-k8s-cronjob-pgdump",
+  "category": "database-devops/k8s/cron",
+  "intents_zh": [
+    "k8s cronjob 跑 pg_dump",
+    "定時備份到 S3",
+    "CronJob yaml"
+  ],
+  "intents_en": [
+    "k8s cronjob pg_dump",
+    "scheduled backup to S3",
+    "CronJob yaml"
+  ],
+  "slots": [
+    "schedule",
+    "dsn",
+    "s3_bucket"
+  ],
+  "code": "apiVersion: batch/v1\nkind: CronJob\nmetadata: { name: pgdump }\nspec:\n  schedule: '{{schedule}}'\n  jobTemplate:\n    spec:\n      template:\n        spec:\n          restartPolicy: OnFailure\n          containers:\n            - name: dump\n              image: postgres:16\n              env:\n                - { name: DSN, value: '{{dsn}}' }\n              command: ['/bin/sh','-c']\n              args:\n                - >\n                  pg_dump \"$DSN\" | gzip |\n                  aws s3 cp - s3://{{s3_bucket}}/pg-$(date +%F-%H%M).sql.gz",
+  "language": "yaml",
+  "deps": [
+    "kubernetes"
+  ],
+  "summary_zh": "k8s CronJob pg_dump 串流到 S3 並壓縮"
+}

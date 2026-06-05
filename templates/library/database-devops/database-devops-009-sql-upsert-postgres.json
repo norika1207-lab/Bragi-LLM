@@ -1,0 +1,28 @@
+{
+  "id": "database-devops-009-sql-upsert-postgres",
+  "category": "database-devops/sql/dml",
+  "intents_zh": [
+    "postgres upsert",
+    "ON CONFLICT 範本",
+    "insert 或 update",
+    "插入衝突就更新",
+    "postgres 主鍵衝突處理"
+  ],
+  "intents_en": [
+    "postgres upsert",
+    "on conflict do update",
+    "insert or update",
+    "upsert pattern",
+    "handle duplicate key"
+  ],
+  "slots": [
+    "table",
+    "col1",
+    "col2",
+    "conflict_col"
+  ],
+  "code": "INSERT INTO {{table}} ({{conflict_col}}, {{col1}}, {{col2}})\nVALUES ($1, $2, $3)\nON CONFLICT ({{conflict_col}})\nDO UPDATE SET\n  {{col1}} = EXCLUDED.{{col1}},\n  {{col2}} = EXCLUDED.{{col2}},\n  updated_at = NOW();",
+  "language": "sql",
+  "deps": [],
+  "summary_zh": "Postgres ON CONFLICT upsert"
+}

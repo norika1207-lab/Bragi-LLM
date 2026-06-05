@@ -1,0 +1,30 @@
+{
+  "id": "firmware-067-mpy-mqtt",
+  "category": "firmware/micropython/mqtt",
+  "intents_zh": [
+    "MicroPython MQTT",
+    "umqtt.simple 範例",
+    "mpy publish",
+    "ESP32 mpy MQTT",
+    "mpy 訊息上傳"
+  ],
+  "intents_en": [
+    "MicroPython umqtt simple",
+    "mpy MQTT publish",
+    "ESP32 micropython mqtt",
+    "umqtt example",
+    "publish mqtt micropython"
+  ],
+  "slots": [
+    "broker",
+    "client_id",
+    "topic",
+    "message"
+  ],
+  "code": "from umqtt.simple import MQTTClient\n\nc = MQTTClient(\"{{client_id}}\", \"{{broker}}\")\nc.connect()\nc.publish(\"{{topic}}\", \"{{message}}\")\nc.disconnect()",
+  "language": "py",
+  "deps": [
+    "umqtt.simple"
+  ],
+  "summary_zh": "MicroPython umqtt.simple publish"
+}

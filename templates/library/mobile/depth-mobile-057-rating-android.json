@@ -1,0 +1,25 @@
+{
+  "id": "depth-mobile-057-rating-android",
+  "category": "mobile/rating/android",
+  "intents_zh": [
+    "Android Play In-App Review",
+    "ReviewManagerFactory",
+    "requestReviewFlow",
+    "launchReviewFlow",
+    "評分提示"
+  ],
+  "intents_en": [
+    "Android Play In-App Review",
+    "ReviewManagerFactory",
+    "requestReviewFlow",
+    "launchReviewFlow",
+    "rating prompt"
+  ],
+  "slots": [],
+  "code": "val manager = ReviewManagerFactory.create(this)\nmanager.requestReviewFlow().addOnCompleteListener { req ->\n    if (req.isSuccessful) {\n        manager.launchReviewFlow(this, req.result).addOnCompleteListener { /* done */ }\n    }\n}",
+  "language": "kotlin",
+  "deps": [
+    "com.google.android.play:review-ktx"
+  ],
+  "summary_zh": "Android Play 內評分流程"
+}

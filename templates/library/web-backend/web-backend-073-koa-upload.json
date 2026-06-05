@@ -1,0 +1,30 @@
+{
+  "id": "web-backend-073-koa-upload",
+  "category": "web-backend/koa/upload",
+  "intents_zh": [
+    "koa 檔案上傳",
+    "@koa/multer 範例",
+    "koa multipart",
+    "儲存上傳檔案 koa",
+    "koa form-data"
+  ],
+  "intents_en": [
+    "koa file upload",
+    "@koa/multer example",
+    "multipart koa",
+    "save upload koa",
+    "koa form-data"
+  ],
+  "slots": [
+    "upload_dir",
+    "field_name"
+  ],
+  "code": "const Router = require('@koa/router');\nconst multer = require('@koa/multer');\nconst upload = multer({ dest: '{{upload_dir}}' });\nconst router = new Router();\n\nrouter.post('/upload', upload.single('{{field_name}}'), (ctx) => {\n  ctx.body = {\n    filename: ctx.file.filename,\n    size: ctx.file.size\n  };\n});\n\nmodule.exports = router;",
+  "language": "js",
+  "deps": [
+    "koa",
+    "@koa/router",
+    "@koa/multer"
+  ],
+  "summary_zh": "Koa multer 檔案上傳"
+}

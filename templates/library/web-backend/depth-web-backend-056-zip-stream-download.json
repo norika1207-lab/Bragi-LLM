@@ -1,0 +1,26 @@
+{
+  "id": "depth-web-backend-056-zip-stream-download",
+  "category": "web-backend/files/zip-stream",
+  "intents_zh": [
+    "即時打包 zip 下載",
+    "archiver 串流 zip",
+    "多檔案打包 response",
+    "邊壓邊下載",
+    "Express zip"
+  ],
+  "intents_en": [
+    "stream zip download",
+    "archiver stream zip",
+    "bundle files response",
+    "compress on the fly",
+    "express zip"
+  ],
+  "slots": [],
+  "code": "import archiver from 'archiver';\napp.get('/bundle.zip', (req, res) => {\n  res.attachment('bundle.zip');\n  const zip = archiver('zip', { zlib: { level: 9 } });\n  zip.on('error', (e) => res.status(500).end(e.message));\n  zip.pipe(res);\n  zip.file('/path/a.txt', { name: 'a.txt' });\n  zip.append('hello', { name: 'b.txt' });\n  zip.finalize();\n});",
+  "language": "js",
+  "deps": [
+    "express",
+    "archiver"
+  ],
+  "summary_zh": "archiver 串流即時 zip 下載"
+}

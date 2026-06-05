@@ -1,0 +1,26 @@
+{
+  "id": "depth-system-cli-052-kubectl-debug-image",
+  "category": "system-cli/kubectl/debug",
+  "intents_zh": [
+    "kubectl debug ephemeral container",
+    "臨時 sidecar 抓問題",
+    "k8s debug netshoot",
+    "kubectl debug 用法"
+  ],
+  "intents_en": [
+    "kubectl debug ephemeral",
+    "temp sidecar debug",
+    "k8s netshoot debug",
+    "kubectl debug usage"
+  ],
+  "slots": [
+    "target_pod",
+    "debug_image"
+  ],
+  "code": "#!/usr/bin/env bash\nset -euo pipefail\n\nPOD=\"{{target_pod}}\"\nIMG=\"{{debug_image}}\"\n\nkubectl debug -it \"$POD\" \\\n  --image=\"$IMG\" \\\n  --target=\"$(kubectl get pod $POD -o jsonpath='{.spec.containers[0].name}')\" \\\n  --share-processes \\\n  -- sh",
+  "language": "bash",
+  "deps": [
+    "kubectl"
+  ],
+  "summary_zh": "kubectl debug ephemeral 含目標容器共用 pid"
+}

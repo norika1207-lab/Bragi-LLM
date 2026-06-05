@@ -1,0 +1,28 @@
+{
+  "id": "firmware-061-stm32-i2c-scan",
+  "category": "firmware/stm32/i2c",
+  "intents_zh": [
+    "STM32 I2C 掃描",
+    "掃 I2C 位址",
+    "HAL_I2C_IsDeviceReady",
+    "stm32 找裝置",
+    "i2c scanner"
+  ],
+  "intents_en": [
+    "STM32 I2C scanner",
+    "find I2C address",
+    "HAL_I2C_IsDeviceReady",
+    "I2C bus scan",
+    "STM32 I2C device detect"
+  ],
+  "slots": [
+    "i2c_handle",
+    "uart_handle"
+  ],
+  "code": "#include \"main.h\"\n#include <stdio.h>\nextern I2C_HandleTypeDef {{i2c_handle}};\nextern UART_HandleTypeDef {{uart_handle}};\n\nvoid scan(void) {\n  char buf[40];\n  for (uint8_t a = 1; a < 128; a++) {\n    if (HAL_I2C_IsDeviceReady(&{{i2c_handle}}, a << 1, 2, 5) == HAL_OK) {\n      int n = snprintf(buf, sizeof buf, \"found 0x%02X\\r\\n\", a);\n      HAL_UART_Transmit(&{{uart_handle}}, (uint8_t*)buf, n, HAL_MAX_DELAY);\n    }\n  }\n}",
+  "language": "c",
+  "deps": [
+    "STM32 HAL"
+  ],
+  "summary_zh": "STM32 I2C 匯流排位址掃描"
+}

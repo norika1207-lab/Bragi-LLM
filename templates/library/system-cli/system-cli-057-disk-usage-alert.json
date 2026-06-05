@@ -1,0 +1,22 @@
+{
+  "id": "system-cli-057-disk-usage-alert",
+  "category": "system-cli/ops/disk",
+  "intents_zh": [
+    "磁碟使用率告警",
+    "硬碟超過 80% 提醒",
+    "disk full guard"
+  ],
+  "intents_en": [
+    "disk usage alert",
+    "warn when disk above threshold",
+    "df threshold script"
+  ],
+  "slots": [
+    "mount_point",
+    "threshold_pct"
+  ],
+  "code": "#!/usr/bin/env bash\nset -euo pipefail\nMP=\"{{mount_point}}\"\nLIMIT={{threshold_pct}}\nuse=$(df -P \"$MP\" | awk 'NR==2 {gsub(\"%\",\"\",$5); print $5}')\nif (( use >= LIMIT )); then\n  echo \"WARN: $MP at ${use}% (limit ${LIMIT}%)\" >&2\n  exit 2\nfi\necho \"ok ${use}%\"",
+  "language": "sh",
+  "deps": [],
+  "summary_zh": "磁碟用量門檻告警"
+}

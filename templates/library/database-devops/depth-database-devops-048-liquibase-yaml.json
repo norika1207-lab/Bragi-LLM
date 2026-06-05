@@ -1,0 +1,26 @@
+{
+  "id": "depth-database-devops-048-liquibase-yaml",
+  "category": "database-devops/db/migration",
+  "intents_zh": [
+    "liquibase changelog yaml",
+    "add column",
+    "schema 變更"
+  ],
+  "intents_en": [
+    "liquibase changelog yaml",
+    "add column",
+    "schema change"
+  ],
+  "slots": [
+    "author",
+    "change_id",
+    "table_name",
+    "col_name"
+  ],
+  "code": "databaseChangeLog:\n  - changeSet:\n      id: {{change_id}}\n      author: {{author}}\n      changes:\n        - addColumn:\n            tableName: {{table_name}}\n            columns:\n              - column:\n                  name: {{col_name}}\n                  type: TEXT\n      rollback:\n        - dropColumn:\n            tableName: {{table_name}}\n            columnName: {{col_name}}",
+  "language": "yaml",
+  "deps": [
+    "liquibase"
+  ],
+  "summary_zh": "liquibase yaml changeset 加欄位含 rollback"
+}

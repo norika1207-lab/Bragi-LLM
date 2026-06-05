@@ -1,0 +1,26 @@
+{
+  "id": "depth-mobile-050-keychain-ios",
+  "category": "mobile/secure-storage/keychain-ios",
+  "intents_zh": [
+    "iOS Keychain 存取",
+    "SecItemAdd",
+    "SecItemCopyMatching",
+    "kSecClassGenericPassword",
+    "安全儲存 token"
+  ],
+  "intents_en": [
+    "iOS Keychain access",
+    "SecItemAdd",
+    "SecItemCopyMatching",
+    "kSecClassGenericPassword",
+    "secure token storage"
+  ],
+  "slots": [
+    "service",
+    "account"
+  ],
+  "code": "func saveToken(_ token: String) {\n  let data = token.data(using: .utf8)!\n  let q: [String: Any] = [\n    kSecClass as String: kSecClassGenericPassword,\n    kSecAttrService as String: \"{{service}}\",\n    kSecAttrAccount as String: \"{{account}}\",\n    kSecValueData as String: data\n  ]\n  SecItemDelete(q as CFDictionary)\n  SecItemAdd(q as CFDictionary, nil)\n}",
+  "language": "swift",
+  "deps": [],
+  "summary_zh": "iOS Keychain 存 token"
+}

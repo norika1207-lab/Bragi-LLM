@@ -1,0 +1,23 @@
+{
+  "id": "database-devops-118-prisma-middleware-logging",
+  "category": "database-devops/orm/prisma",
+  "intents_zh": [
+    "prisma 查詢時間 log",
+    "prisma extension query log",
+    "slow query 偵測"
+  ],
+  "intents_en": [
+    "prisma query log",
+    "slow query detection",
+    "prisma extension log"
+  ],
+  "slots": [
+    "threshold_ms"
+  ],
+  "code": "import { PrismaClient } from '@prisma/client'\n\nexport const prisma = new PrismaClient().$extends({\n  query: {\n    $allModels: {\n      async $allOperations({ operation, model, args, query }) {\n        const start = performance.now()\n        const result = await query(args)\n        const dur = performance.now() - start\n        if (dur > {{threshold_ms}}) console.warn(`slow ${model}.${operation} ${dur.toFixed(1)}ms`)\n        return result\n      },\n    },\n  },\n})",
+  "language": "ts",
+  "deps": [
+    "@prisma/client"
+  ],
+  "summary_zh": "prisma extension 偵測慢查詢"
+}

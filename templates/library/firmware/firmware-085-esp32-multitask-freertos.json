@@ -1,0 +1,25 @@
+{
+  "id": "firmware-085-esp32-multitask-freertos",
+  "category": "firmware/esp32/rtos",
+  "intents_zh": [
+    "ESP32 雙核 task",
+    "xTaskCreate",
+    "FreeRTOS 範例",
+    "ESP32 多工",
+    "平行任務"
+  ],
+  "intents_en": [
+    "ESP32 FreeRTOS task",
+    "xTaskCreatePinnedToCore",
+    "multi-core ESP32",
+    "parallel tasks ESP32",
+    "FreeRTOS example"
+  ],
+  "slots": [
+    "led_pin"
+  ],
+  "code": "const int LED = {{led_pin}};\n\nvoid taskBlink(void* p) {\n  pinMode(LED, OUTPUT);\n  while (1) {\n    digitalWrite(LED, !digitalRead(LED));\n    vTaskDelay(pdMS_TO_TICKS(500));\n  }\n}\n\nvoid taskPrint(void* p) {\n  while (1) {\n    Serial.println(\"tick\");\n    vTaskDelay(pdMS_TO_TICKS(1000));\n  }\n}\n\nvoid setup() {\n  Serial.begin(115200);\n  xTaskCreatePinnedToCore(taskBlink, \"blink\", 2048, NULL, 1, NULL, 0);\n  xTaskCreatePinnedToCore(taskPrint, \"print\", 2048, NULL, 1, NULL, 1);\n}\n\nvoid loop() {}",
+  "language": "ino",
+  "deps": [],
+  "summary_zh": "ESP32 FreeRTOS 雙核並行任務"
+}

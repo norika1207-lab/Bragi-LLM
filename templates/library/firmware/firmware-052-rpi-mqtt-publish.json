@@ -1,0 +1,29 @@
+{
+  "id": "firmware-052-rpi-mqtt-publish",
+  "category": "firmware/rpi/mqtt",
+  "intents_zh": [
+    "樹莓派 MQTT",
+    "paho-mqtt 發布",
+    "Pi 傳 MQTT",
+    "Pi publish 範例",
+    "Pi 上傳資料"
+  ],
+  "intents_en": [
+    "Raspberry Pi MQTT publish",
+    "paho-mqtt example",
+    "Pi mqtt client",
+    "publish from Pi",
+    "mqtt sensor Pi"
+  ],
+  "slots": [
+    "broker",
+    "topic",
+    "message"
+  ],
+  "code": "import paho.mqtt.client as mqtt\n\nc = mqtt.Client()\nc.connect(\"{{broker}}\", 1883, 60)\nc.publish(\"{{topic}}\", \"{{message}}\")\nc.disconnect()",
+  "language": "py",
+  "deps": [
+    "paho-mqtt"
+  ],
+  "summary_zh": "Raspberry Pi paho-mqtt 發布訊息"
+}

@@ -1,0 +1,29 @@
+{
+  "id": "depth-algorithm-030-treap-implicit",
+  "category": "algorithm/balanced-bst/treap",
+  "intents_zh": [
+    "隱式 treap",
+    "implicit treap",
+    "平衡樹序列操作",
+    "treap 模板",
+    "隨機平衡 BST",
+    "區間反轉 treap",
+    "split merge treap"
+  ],
+  "intents_en": [
+    "implicit treap",
+    "balanced BST treap",
+    "randomized BST",
+    "treap template",
+    "split merge treap",
+    "sequence operations treap",
+    "cartesian tree implicit"
+  ],
+  "slots": [
+    "values"
+  ],
+  "code": "import random\n\nclass Node:\n    __slots__ = ('val', 'pri', 'size', 'l', 'r')\n    def __init__(self, v):\n        self.val = v; self.pri = random.random()\n        self.size = 1; self.l = self.r = None\n\ndef sz(n): return n.size if n else 0\ndef upd(n):\n    if n: n.size = 1 + sz(n.l) + sz(n.r)\ndef merge(a, b):\n    if not a or not b: return a or b\n    if a.pri > b.pri:\n        a.r = merge(a.r, b); upd(a); return a\n    b.l = merge(a, b.l); upd(b); return b\ndef split(t, k):\n    if not t: return None, None\n    if sz(t.l) < k:\n        a, b = split(t.r, k - sz(t.l) - 1)\n        t.r = a; upd(t); return t, b\n    a, b = split(t.l, k)\n    t.l = b; upd(t); return a, t\n\ndef build(vals={{values}}):\n    root = None\n    for v in vals: root = merge(root, Node(v))\n    return root",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "隱式 treap 支援 split/merge 序列操作"
+}

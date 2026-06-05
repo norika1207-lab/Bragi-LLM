@@ -1,0 +1,38 @@
+{
+  "id": "llm-tools-031-lora-finetune",
+  "category": "llm-tools/finetune/lora",
+  "intents_zh": [
+    "LoRA 微調腳手架",
+    "peft lora 範本",
+    "用 peft 做 fine-tune",
+    "lora 訓練 script",
+    "fine-tune scaffold",
+    "小參數微調",
+    "peft 範例",
+    "lora 設定"
+  ],
+  "intents_en": [
+    "lora finetune scaffold",
+    "peft lora template",
+    "lora training script",
+    "fine-tune with peft",
+    "parameter efficient finetune",
+    "lora config example",
+    "peft scaffold",
+    "lora setup"
+  ],
+  "slots": [
+    "base_model",
+    "output_dir",
+    "r_value"
+  ],
+  "code": "from peft import LoraConfig, get_peft_model\nfrom transformers import AutoModelForCausalLM, AutoTokenizer, TrainingArguments, Trainer\nfrom datasets import load_dataset\n\nmodel = AutoModelForCausalLM.from_pretrained(\"{{base_model}}\")\ntok = AutoTokenizer.from_pretrained(\"{{base_model}}\")\n\ncfg = LoraConfig(r={{r_value}}, lora_alpha=16, target_modules=[\"q_proj\", \"v_proj\"], task_type=\"CAUSAL_LM\")\nmodel = get_peft_model(model, cfg)\n\nds = load_dataset(\"json\", data_files=\"train.jsonl\")[\"train\"]\ndef tok_fn(x): return tok(x[\"text\"], truncation=True, max_length=512)\nds = ds.map(tok_fn)\n\nargs = TrainingArguments(output_dir=\"{{output_dir}}\", per_device_train_batch_size=2, num_train_epochs=1)\nTrainer(model=model, args=args, train_dataset=ds).train()",
+  "language": "py",
+  "deps": [
+    "transformers",
+    "peft",
+    "datasets",
+    "torch"
+  ],
+  "summary_zh": "PEFT LoRA 微調最小腳手架"
+}

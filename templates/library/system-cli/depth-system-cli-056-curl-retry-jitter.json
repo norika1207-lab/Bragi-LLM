@@ -1,0 +1,26 @@
+{
+  "id": "depth-system-cli-056-curl-retry-jitter",
+  "category": "system-cli/http/retry",
+  "intents_zh": [
+    "curl 指數退避重試",
+    "HTTP 含 jitter 重試",
+    "可靠 curl 包裝",
+    "下載失敗重試"
+  ],
+  "intents_en": [
+    "curl exp backoff retry",
+    "http retry with jitter",
+    "reliable curl wrapper",
+    "download retry"
+  ],
+  "slots": [
+    "url",
+    "max_attempts"
+  ],
+  "code": "#!/usr/bin/env bash\nset -euo pipefail\n\nURL=\"{{url}}\"\nMAX={{max_attempts}}\n\nfor i in $(seq 1 \"$MAX\"); do\n  if curl -fsSL --max-time 30 \"$URL\"; then\n    exit 0\n  fi\n  if [ \"$i\" -lt \"$MAX\" ]; then\n    sleep_s=$(awk -v i=\"$i\" 'BEGIN{srand(); print (2^i) + rand()*2}')\n    echo \"attempt $i failed, retry in ${sleep_s}s\" >&2\n    sleep \"$sleep_s\"\n  fi\ndone\n\necho \"all $MAX attempts failed\" >&2\nexit 1",
+  "language": "bash",
+  "deps": [
+    "curl"
+  ],
+  "summary_zh": "curl 指數退避+jitter 重試"
+}

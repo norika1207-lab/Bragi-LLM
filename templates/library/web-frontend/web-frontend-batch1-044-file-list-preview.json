@@ -1,0 +1,27 @@
+{
+  "id": "web-frontend-batch1-044-file-list-preview",
+  "category": "web-frontend/react/file-upload/file-list",
+  "intents_zh": [
+    "已選檔案列表",
+    "多檔預覽列表",
+    "file list 顯示",
+    "已選檔案 chip",
+    "upload queue 列表",
+    "已選擇檔案清單"
+  ],
+  "intents_en": [
+    "selected file list",
+    "multi file preview",
+    "file list display",
+    "upload queue list",
+    "selected files chips",
+    "react file list"
+  ],
+  "slots": [
+    "component_name"
+  ],
+  "code": "import { useState } from 'react';\n\nexport default function {{component_name}}() {\n  const [files, setFiles] = useState<File[]>([]);\n\n  return (\n    <div>\n      <input type=\"file\" multiple onChange={(e) => setFiles(Array.from(e.target.files ?? []))} />\n      <ul>\n        {files.map((f, i) => (\n          <li key={i} className=\"flex justify-between\">\n            <span>{f.name} ({Math.round(f.size / 1024)} KB)</span>\n            <button onClick={() => setFiles(files.filter((_, j) => j !== i))}>×</button>\n          </li>\n        ))}\n      </ul>\n    </div>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "多檔選擇 + 可移除的檔案列表"
+}

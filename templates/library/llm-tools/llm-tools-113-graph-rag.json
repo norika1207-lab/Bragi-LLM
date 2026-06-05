@@ -1,0 +1,34 @@
+{
+  "id": "llm-tools-113-graph-rag",
+  "category": "llm-tools/rag/graph",
+  "intents_zh": [
+    "graph RAG",
+    "知識圖譜 RAG",
+    "networkx + LLM",
+    "實體關聯 RAG",
+    "graph 檢索",
+    "knowledge graph rag",
+    "entity graph",
+    "graphRAG 範例"
+  ],
+  "intents_en": [
+    "graph rag",
+    "knowledge graph rag",
+    "networkx llm rag",
+    "entity-relation rag",
+    "graph retrieval",
+    "graphrag minimal",
+    "graph-based retrieval",
+    "kg rag"
+  ],
+  "slots": [
+    "model_name"
+  ],
+  "code": "import networkx as nx\nfrom openai import OpenAI\n\nclient = OpenAI()\nG = nx.Graph()\n\ndef add_edge(a: str, b: str, rel: str):\n    G.add_edge(a, b, rel=rel)\n\ndef neighbors_ctx(entity: str, hops: int = 2) -> str:\n    if entity not in G:\n        return \"\"\n    sub = nx.ego_graph(G, entity, radius=hops)\n    return \"\\n\".join(f\"{u} --{d['rel']}--> {v}\" for u, v, d in sub.edges(data=True))\n\ndef ask(entity: str, q: str) -> str:\n    ctx = neighbors_ctx(entity)\n    r = client.chat.completions.create(model=\"{{model_name}}\",\n        messages=[{\"role\": \"user\", \"content\": f\"KG:\\n{ctx}\\nQ: {q}\"}])\n    return r.choices[0].message.content",
+  "language": "py",
+  "deps": [
+    "networkx",
+    "openai"
+  ],
+  "summary_zh": "以 networkx 子圖當 context 的 Graph RAG"
+}

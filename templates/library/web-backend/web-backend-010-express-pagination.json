@@ -1,0 +1,29 @@
+{
+  "id": "web-backend-010-express-pagination",
+  "category": "web-backend/express/rest",
+  "intents_zh": [
+    "express 分頁 endpoint",
+    "加 pagination 參數",
+    "cursor 分頁範例",
+    "offset limit query",
+    "回傳分頁結果"
+  ],
+  "intents_en": [
+    "pagination endpoint express",
+    "offset limit query",
+    "paginated list api",
+    "express pagination helper",
+    "list with page param"
+  ],
+  "slots": [
+    "resource",
+    "default_limit"
+  ],
+  "code": "const express = require('express');\nconst router = express.Router();\n\nrouter.get('/{{resource}}', async (req, res) => {\n  const page = Math.max(1, parseInt(req.query.page) || 1);\n  const limit = Math.min(100, parseInt(req.query.limit) || {{default_limit}});\n  const offset = (page - 1) * limit;\n  const items = await db('{{resource}}').limit(limit).offset(offset);\n  const total = await db('{{resource}}').count('* as c').first();\n  res.json({\n    data: items,\n    page,\n    limit,\n    total: total.c,\n    pages: Math.ceil(total.c / limit)\n  });\n});\n\nmodule.exports = router;",
+  "language": "js",
+  "deps": [
+    "express",
+    "knex"
+  ],
+  "summary_zh": "Express offset/limit 分頁"
+}

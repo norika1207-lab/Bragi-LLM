@@ -1,0 +1,28 @@
+{
+  "id": "depth-web-frontend-059-tiptap-editor",
+  "category": "web-frontend/editors/tiptap",
+  "intents_zh": [
+    "Tiptap 富文本編輯器",
+    "ProseMirror react",
+    "WYSIWYG editor",
+    "部落格編輯器",
+    "tiptap starter"
+  ],
+  "intents_en": [
+    "tiptap editor react",
+    "prosemirror wysiwyg",
+    "rich text editor",
+    "blog editor",
+    "tiptap starter kit"
+  ],
+  "slots": [
+    "component_name"
+  ],
+  "code": "'use client';\nimport { useEditor, EditorContent } from '@tiptap/react';\nimport StarterKit from '@tiptap/starter-kit';\n\nexport function {{component_name}}({ initial = '<p>哈囉</p>' }: { initial?: string }) {\n  const editor = useEditor({ extensions: [StarterKit], content: initial });\n  if (!editor) return null;\n  return (\n    <div>\n      <div className=\"flex gap-1 mb-2\">\n        <button onClick={() => editor.chain().focus().toggleBold().run()}>B</button>\n        <button onClick={() => editor.chain().focus().toggleItalic().run()}>I</button>\n        <button onClick={() => editor.chain().focus().toggleBulletList().run()}>•</button>\n      </div>\n      <EditorContent editor={editor} />\n    </div>\n  );\n}",
+  "language": "tsx",
+  "deps": [
+    "@tiptap/react",
+    "@tiptap/starter-kit"
+  ],
+  "summary_zh": "Tiptap 富文本編輯器簡版"
+}

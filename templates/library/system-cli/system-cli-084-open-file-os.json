@@ -1,0 +1,21 @@
+{
+  "id": "system-cli-084-open-file-os",
+  "category": "system-cli/util/open",
+  "intents_zh": [
+    "跨平台用預設程式開檔",
+    "python open file",
+    "open Finder Explorer"
+  ],
+  "intents_en": [
+    "open file with default app",
+    "cross platform file open",
+    "python launch finder"
+  ],
+  "slots": [
+    "file_path"
+  ],
+  "code": "import os, sys, subprocess\n\ndef open_path(p):\n    if sys.platform == 'darwin':\n        subprocess.run(['open', p], check=True)\n    elif sys.platform.startswith('win'):\n        os.startfile(p)\n    else:\n        subprocess.run(['xdg-open', p], check=True)\n\nopen_path('{{file_path}}')",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "跨平台預設程式開檔"
+}

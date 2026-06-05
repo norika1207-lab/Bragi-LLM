@@ -1,0 +1,33 @@
+{
+  "id": "patch-terraform-006-iam-ec2-s3",
+  "category": "database-devops/terraform/aws-iam",
+  "intents_zh": [
+    "terraform 寫 EC2 讀寫 S3 的 IAM role",
+    "tf 給 ec2 一個 instance profile 存取 s3",
+    "建立 role 讓 ec2 access s3 bucket",
+    "幫我寫 iam role + policy + instance profile",
+    "Terraform EC2 to S3 權限範本",
+    "tf 設定 ec2 iam role 讀特定 bucket",
+    "iam role for ec2 to read write s3"
+  ],
+  "intents_en": [
+    "terraform iam role for ec2 to access s3",
+    "ec2 instance profile s3 read write tf",
+    "give ec2 permission to s3 bucket terraform",
+    "iam role policy instance profile module",
+    "tf grant ec2 access to specific s3 bucket",
+    "aws iam ec2 s3 terraform",
+    "least privilege ec2 s3 role"
+  ],
+  "slots": [
+    "role_name",
+    "bucket_arn"
+  ],
+  "code": "resource \"aws_iam_role\" \"ec2_s3\" {\n  name = \"{{role_name}}\"\n\n  assume_role_policy = jsonencode({\n    Version = \"2012-10-17\"\n    Statement = [{\n      Action    = \"sts:AssumeRole\"\n      Effect    = \"Allow\"\n      Principal = { Service = \"ec2.amazonaws.com\" }\n    }]\n  })\n}\n\nresource \"aws_iam_policy\" \"s3_access\" {\n  name = \"{{role_name}}-s3\"\n  policy = jsonencode({\n    Version = \"2012-10-17\"\n    Statement = [{\n      Effect = \"Allow\"\n      Action = [\n        \"s3:GetObject\",\n        \"s3:PutObject\",\n        \"s3:DeleteObject\",\n        \"s3:ListBucket\"\n      ]\n      Resource = [\n        \"{{bucket_arn}}\",\n        \"{{bucket_arn}}/*\"\n      ]\n    }]\n  })\n}\n\nresource \"aws_iam_role_policy_attachment\" \"attach\" {\n  role       = aws_iam_role.ec2_s3.name\n  policy_arn = aws_iam_policy.s3_access.arn\n}\n\nresource \"aws_iam_instance_profile\" \"this\" {\n  name = \"{{role_name}}-profile\"\n  role = aws_iam_role.ec2_s3.name\n}",
+  "language": "hcl",
+  "deps": [
+    "terraform",
+    "hashicorp/aws"
+  ],
+  "summary_zh": "Terraform 建立 EC2 instance profile 並授予指定 S3 bucket 讀寫權限。"
+}

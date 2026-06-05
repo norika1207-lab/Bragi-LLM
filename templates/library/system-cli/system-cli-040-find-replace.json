@@ -1,0 +1,24 @@
+{
+  "id": "system-cli-040-find-replace",
+  "category": "system-cli/file/sed",
+  "intents_zh": [
+    "批次取代字串",
+    "sed 整個資料夾找替換",
+    "find + sed"
+  ],
+  "intents_en": [
+    "batch find and replace",
+    "sed across directory",
+    "recursive string replace"
+  ],
+  "slots": [
+    "root_dir",
+    "from_str",
+    "to_str",
+    "file_glob"
+  ],
+  "code": "#!/usr/bin/env bash\nset -euo pipefail\nROOT=\"{{root_dir}}\"\nFROM='{{from_str}}'\nTO='{{to_str}}'\n\nfind \"$ROOT\" -type f -name '{{file_glob}}' -print0 | \\\n  xargs -0 grep -l \"$FROM\" 2>/dev/null | \\\n  xargs -I{} sed -i.bak \"s|$FROM|$TO|g\" {}\n\nfind \"$ROOT\" -name '*.bak' -delete\necho 'replace done'",
+  "language": "sh",
+  "deps": [],
+  "summary_zh": "find+sed 遞迴取代"
+}

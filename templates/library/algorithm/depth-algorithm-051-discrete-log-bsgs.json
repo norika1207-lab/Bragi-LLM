@@ -1,0 +1,31 @@
+{
+  "id": "depth-algorithm-051-discrete-log-bsgs",
+  "category": "algorithm/math/bsgs",
+  "intents_zh": [
+    "BSGS 大步小步",
+    "離散對數",
+    "baby step giant step",
+    "模意義對數",
+    "BSGS 模板",
+    "求 a^x = b mod p",
+    "離散 log"
+  ],
+  "intents_en": [
+    "baby step giant step",
+    "discrete logarithm",
+    "BSGS algorithm",
+    "modular discrete log",
+    "BSGS template",
+    "solve a^x=b mod p",
+    "discrete log algorithm"
+  ],
+  "slots": [
+    "a",
+    "b",
+    "m"
+  ],
+  "code": "import math\n\ndef bsgs(a={{a}}, b={{b}}, m={{m}}):\n    a %= m; b %= m; n = int(math.isqrt(m)) + 1\n    table = {}\n    cur = b\n    for j in range(n+1):\n        table[cur] = j\n        cur = cur * a % m\n    an = pow(a, n, m); cur = 1\n    for i in range(1, n+1):\n        cur = cur * an % m\n        if cur in table:\n            x = i*n - table[cur]\n            if x > 0: return x\n    return -1",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "BSGS 大步小步求離散對數"
+}

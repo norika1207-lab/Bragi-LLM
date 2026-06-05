@@ -1,0 +1,26 @@
+{
+  "id": "depth-llm-tools-015-citation-formatter",
+  "category": "llm-tools/retrieval/citation",
+  "intents_zh": [
+    "RAG 引用格式化",
+    "插入引用標記",
+    "footnote citation",
+    "來源編號",
+    "引用渲染"
+  ],
+  "intents_en": [
+    "RAG citation formatter",
+    "insert citation marks",
+    "footnote citation",
+    "source numbering",
+    "citation render"
+  ],
+  "slots": [
+    "answer",
+    "sources"
+  ],
+  "code": "def format_citations({{answer}}, {{sources}}):\n    text = {{answer}}\n    refs = []\n    for i, s in enumerate({{sources}}, 1):\n        marker = f\"[{i}]\"\n        text = text.replace(s[\"id\"], marker)\n        refs.append(f\"{marker} {s['title']} - {s['url']}\")\n    return text + \"\\n\\nReferences:\\n\" + \"\\n\".join(refs)",
+  "language": "python",
+  "deps": [],
+  "summary_zh": "把 source id 取代為 [n] 並附參考清單"
+}

@@ -1,0 +1,34 @@
+{
+  "id": "llm-tools-064-conversation-summarize",
+  "category": "llm-tools/chat/summarize-memory",
+  "intents_zh": [
+    "對話歷史摘要",
+    "壓縮 chat history",
+    "summary memory",
+    "超長對話壓縮",
+    "langchain summary memory",
+    "摘要記憶",
+    "conversation 壓縮",
+    "截斷+摘要"
+  ],
+  "intents_en": [
+    "conversation summarize memory",
+    "compress chat history",
+    "summary memory",
+    "long chat compression",
+    "summarize old turns",
+    "memory compaction",
+    "rolling summary",
+    "truncate and summarize"
+  ],
+  "slots": [
+    "model_name",
+    "max_turns"
+  ],
+  "code": "from openai import OpenAI\n\nclient = OpenAI()\n\ndef compress(history: list[dict]) -> list[dict]:\n    if len(history) <= {{max_turns}}:\n        return history\n    old, recent = history[:-{{max_turns}}], history[-{{max_turns}}:]\n    text = \"\\n\".join(f\"{m['role']}: {m['content']}\" for m in old)\n    r = client.chat.completions.create(\n        model=\"{{model_name}}\",\n        messages=[{\"role\": \"user\", \"content\": f\"Summarize this convo briefly:\\n{text}\"}],\n    )\n    return [{\"role\": \"system\", \"content\": f\"Earlier summary: {r.choices[0].message.content}\"}] + recent",
+  "language": "py",
+  "deps": [
+    "openai"
+  ],
+  "summary_zh": "對話歷史滾動摘要壓縮"
+}

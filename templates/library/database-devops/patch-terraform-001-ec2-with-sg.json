@@ -1,0 +1,38 @@
+{
+  "id": "patch-terraform-001-ec2-with-sg",
+  "category": "database-devops/terraform/aws-compute",
+  "intents_zh": [
+    "幫我寫一個 terraform 開 EC2 + security group",
+    "用 tf 開一台 ec2 然後綁 sg",
+    "terraform 起 ec2 並設定防火牆規則",
+    "我要 tf module 開 ubuntu ec2 配 security group",
+    "寫 terraform 跑 aws ec2 instance 加上 sg 開 22 跟 80",
+    "Terraform EC2 加 SG 範本",
+    "起一台 t3.micro 並開 ssh"
+  ],
+  "intents_en": [
+    "terraform ec2 instance with security group",
+    "spin up an aws ec2 in tf with sg",
+    "tf template for ec2 plus firewall rules",
+    "create ubuntu ec2 with security group terraform",
+    "provision ec2 with ssh and http open",
+    "aws ec2 terraform module with sg",
+    "terraform launch instance with inbound rules"
+  ],
+  "slots": [
+    "instance_name",
+    "ami_id",
+    "instance_type",
+    "sg_name",
+    "vpc_id",
+    "ssh_cidr",
+    "key_name"
+  ],
+  "code": "resource \"aws_security_group\" \"{{sg_name}}\" {\n  name        = \"{{sg_name}}\"\n  description = \"Allow SSH and HTTP\"\n  vpc_id      = \"{{vpc_id}}\"\n\n  ingress {\n    from_port   = 22\n    to_port     = 22\n    protocol    = \"tcp\"\n    cidr_blocks = [\"{{ssh_cidr}}\"]\n  }\n\n  ingress {\n    from_port   = 80\n    to_port     = 80\n    protocol    = \"tcp\"\n    cidr_blocks = [\"0.0.0.0/0\"]\n  }\n\n  egress {\n    from_port   = 0\n    to_port     = 0\n    protocol    = \"-1\"\n    cidr_blocks = [\"0.0.0.0/0\"]\n  }\n}\n\nresource \"aws_instance\" \"{{instance_name}}\" {\n  ami                    = \"{{ami_id}}\"\n  instance_type          = \"{{instance_type}}\"\n  key_name               = \"{{key_name}}\"\n  vpc_security_group_ids = [aws_security_group.{{sg_name}}.id]\n\n  tags = {\n    Name = \"{{instance_name}}\"\n  }\n}",
+  "language": "hcl",
+  "deps": [
+    "terraform",
+    "hashicorp/aws"
+  ],
+  "summary_zh": "Terraform 開 AWS EC2 並綁定 security group 開放 SSH 與 HTTP。"
+}

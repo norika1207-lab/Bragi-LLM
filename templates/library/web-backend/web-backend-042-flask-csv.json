@@ -1,0 +1,27 @@
+{
+  "id": "web-backend-042-flask-csv",
+  "category": "web-backend/flask/export",
+  "intents_zh": [
+    "flask CSV 匯出",
+    "下載 csv flask",
+    "stream csv flask",
+    "report csv flask",
+    "產生 csv 回傳"
+  ],
+  "intents_en": [
+    "flask csv export",
+    "download csv flask",
+    "stream csv response",
+    "csv report endpoint",
+    "generate csv flask"
+  ],
+  "slots": [
+    "filename"
+  ],
+  "code": "from flask import Response\nimport csv, io\n\ndef export_csv(rows, fields):\n    def gen():\n        buf = io.StringIO()\n        writer = csv.DictWriter(buf, fieldnames=fields)\n        writer.writeheader()\n        yield buf.getvalue(); buf.seek(0); buf.truncate(0)\n        for row in rows:\n            writer.writerow(row)\n            yield buf.getvalue(); buf.seek(0); buf.truncate(0)\n    return Response(gen(), mimetype='text/csv', headers={\n        'Content-Disposition': 'attachment; filename=\"{{filename}}.csv\"'\n    })",
+  "language": "py",
+  "deps": [
+    "flask"
+  ],
+  "summary_zh": "Flask CSV 串流匯出"
+}

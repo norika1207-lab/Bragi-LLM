@@ -1,0 +1,29 @@
+{
+  "id": "depth-algorithm-002-dsu-rollback",
+  "category": "algorithm/dsu/rollback",
+  "intents_zh": [
+    "可撤銷並查集",
+    "DSU rollback",
+    "離線時間倒流 DSU",
+    "支援回滾的 union find",
+    "按秩合併可撤銷",
+    "撤銷上一次 union",
+    "回退並查集"
+  ],
+  "intents_en": [
+    "rollback DSU",
+    "undoable union find",
+    "DSU with undo stack",
+    "reversible disjoint set",
+    "offline DSU rollback",
+    "union find with history",
+    "undo last union"
+  ],
+  "slots": [
+    "n"
+  ],
+  "code": "class RollbackDSU:\n    def __init__(self, n={{n}}):\n        self.p = list(range(n))\n        self.sz = [1]*n\n        self.hist = []\n    def find(self, x):\n        while self.p[x] != x: x = self.p[x]\n        return x\n    def union(self, a, b):\n        a, b = self.find(a), self.find(b)\n        if a == b:\n            self.hist.append(None); return False\n        if self.sz[a] < self.sz[b]: a, b = b, a\n        self.hist.append((b, self.sz[a]))\n        self.p[b] = a\n        self.sz[a] += self.sz[b]\n        return True\n    def undo(self):\n        h = self.hist.pop()\n        if h is None: return\n        b, sa = h\n        self.sz[self.p[b]] = sa\n        self.p[b] = b",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "支援撤銷的並查集，配合離線分治"
+}

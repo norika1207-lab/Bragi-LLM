@@ -1,0 +1,27 @@
+{
+  "id": "firmware-077-cpy-analog",
+  "category": "firmware/circuitpython/adc",
+  "intents_zh": [
+    "CircuitPython 類比輸入",
+    "cpy analogio",
+    "cpy 讀電位器",
+    "circuitpython adc",
+    "cpy 量電壓"
+  ],
+  "intents_en": [
+    "CircuitPython analog input",
+    "analogio example cpy",
+    "read potentiometer cpy",
+    "cpy ADC",
+    "circuitpython voltage read"
+  ],
+  "slots": [
+    "analog_name"
+  ],
+  "code": "import board\nimport analogio\nimport time\n\nadc = analogio.AnalogIn(board.{{analog_name}})\nwhile True:\n    print(adc.value, adc.value * 3.3 / 65535)\n    time.sleep(0.2)",
+  "language": "py",
+  "deps": [
+    "adafruit-circuitpython-board"
+  ],
+  "summary_zh": "CircuitPython 類比輸入讀取"
+}

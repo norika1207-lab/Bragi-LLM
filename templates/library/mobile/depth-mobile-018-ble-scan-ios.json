@@ -1,0 +1,25 @@
+{
+  "id": "depth-mobile-018-ble-scan-ios",
+  "category": "mobile/bluetooth/ios",
+  "intents_zh": [
+    "iOS BLE 掃描周邊",
+    "CBCentralManager",
+    "scanForPeripherals",
+    "didDiscover peripheral",
+    "CoreBluetooth"
+  ],
+  "intents_en": [
+    "iOS BLE peripheral scan",
+    "CBCentralManager",
+    "scanForPeripherals",
+    "didDiscover peripheral",
+    "CoreBluetooth"
+  ],
+  "slots": [
+    "service_uuid"
+  ],
+  "code": "import CoreBluetooth\nclass Scanner: NSObject, CBCentralManagerDelegate {\n  var central: CBCentralManager!\n  override init() { super.init(); central = CBCentralManager(delegate: self, queue: nil) }\n  func centralManagerDidUpdateState(_ c: CBCentralManager) {\n    if c.state == .poweredOn {\n      c.scanForPeripherals(withServices: [CBUUID(string: \"{{service_uuid}}\")])\n    }\n  }\n  func centralManager(_ c: CBCentralManager, didDiscover p: CBPeripheral, advertisementData: [String: Any], rssi RSSI: NSNumber) {\n    print(\"found\", p.name ?? \"?\", RSSI)\n  }\n}",
+  "language": "swift",
+  "deps": [],
+  "summary_zh": "iOS CoreBluetooth 掃描周邊"
+}

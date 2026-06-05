@@ -1,0 +1,31 @@
+{
+  "id": "depth-firmware-047-temperature-pid",
+  "category": "firmware/control/pid",
+  "intents_zh": [
+    "溫控 PID",
+    "加熱 PID",
+    "PID 控制器",
+    "setpoint 溫度",
+    "PID lib"
+  ],
+  "intents_en": [
+    "temperature pid",
+    "heater pid",
+    "pid controller",
+    "setpoint temp",
+    "pid lib"
+  ],
+  "slots": [
+    "setpoint",
+    "kp",
+    "ki",
+    "kd",
+    "heater_pin"
+  ],
+  "code": "#include <PID_v1.h>\ndouble input, output, sp = {{setpoint}};\nPID pid(&input, &output, &sp, {{kp}}, {{ki}}, {{kd}}, DIRECT);\nvoid setup() {\n    pinMode({{heater_pin}}, OUTPUT);\n    pid.SetMode(AUTOMATIC);\n    pid.SetOutputLimits(0, 255);\n}\nvoid loop() {\n    input = read_temp();\n    pid.Compute();\n    analogWrite({{heater_pin}}, (int)output);\n}",
+  "language": "cpp",
+  "deps": [
+    "PID"
+  ],
+  "summary_zh": "PID lib 控制加熱器到目標溫度"
+}

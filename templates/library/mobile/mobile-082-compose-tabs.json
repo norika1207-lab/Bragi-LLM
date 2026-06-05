@@ -1,0 +1,33 @@
+{
+  "id": "mobile-082-compose-tabs",
+  "category": "mobile/compose/nav",
+  "intents_zh": [
+    "Compose bottom tab",
+    "Compose NavigationBar",
+    "Compose 底部 tab",
+    "Compose 主導航",
+    "Android Compose tabs",
+    "Compose three tab",
+    "NavigationBar 範例 Compose"
+  ],
+  "intents_en": [
+    "compose NavigationBar",
+    "compose bottom tabs",
+    "compose three tabs",
+    "compose main nav",
+    "android compose tab bar",
+    "jetpack compose tabs",
+    "compose tab navigation"
+  ],
+  "slots": [
+    "tab1",
+    "tab2",
+    "tab3"
+  ],
+  "code": "import androidx.compose.material.icons.Icons\nimport androidx.compose.material.icons.filled.*\nimport androidx.compose.material3.*\nimport androidx.compose.runtime.*\n@Composable\nfun Root(){\n  var i by remember{mutableStateOf(0)}\n  val labels=listOf(\"{{tab1}}\",\"{{tab2}}\",\"{{tab3}}\")\n  val icons=listOf(Icons.Default.Home,Icons.Default.Search,Icons.Default.Person)\n  Scaffold(bottomBar={NavigationBar{labels.forEachIndexed{idx,l->NavigationBarItem(selected=i==idx,onClick={i=idx},icon={Icon(icons[idx],null)},label={Text(l)})}}}){p->Text(labels[i],modifier=androidx.compose.ui.Modifier.padding(p.calculateTopPadding()))}}",
+  "language": "kt",
+  "deps": [
+    "androidx.compose.material3"
+  ],
+  "summary_zh": "Compose NavigationBar 三 tab"
+}

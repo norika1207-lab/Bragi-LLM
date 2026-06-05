@@ -1,0 +1,27 @@
+{
+  "id": "depth-web-frontend-018-server-action-form",
+  "category": "web-frontend/server/server-actions",
+  "intents_zh": [
+    "Next server action 表單",
+    "action form",
+    "server function 提交",
+    "use server",
+    "Next.js 提交動作"
+  ],
+  "intents_en": [
+    "next server action form",
+    "use server function",
+    "server action submit",
+    "form action next",
+    "react server function"
+  ],
+  "slots": [
+    "action_name"
+  ],
+  "code": "// app/actions.ts\n'use server';\nimport { revalidatePath } from 'next/cache';\n\nexport async function {{action_name}}(formData: FormData) {\n  const title = String(formData.get('title') ?? '');\n  await db.todo.create({ data: { title } });\n  revalidatePath('/');\n}\n\n// page.tsx\n// <form action={ {{action_name}} }><input name=\"title\" /><button>add</button></form>",
+  "language": "tsx",
+  "deps": [
+    "next"
+  ],
+  "summary_zh": "Next.js server action 表單提交"
+}

@@ -1,0 +1,19 @@
+{
+  "id": "database-devops-117-sql-savepoint",
+  "category": "database-devops/sql/transaction",
+  "intents_zh": [
+    "SQL SAVEPOINT",
+    "部分回滾交易",
+    "巢狀交易"
+  ],
+  "intents_en": [
+    "sql savepoint",
+    "partial rollback",
+    "nested transaction"
+  ],
+  "slots": [],
+  "code": "BEGIN;\n  INSERT INTO accounts (name) VALUES ('a');\n  SAVEPOINT sp1;\n    INSERT INTO accounts (name) VALUES ('bad');\n  ROLLBACK TO SAVEPOINT sp1;\n  INSERT INTO accounts (name) VALUES ('c');\nCOMMIT;",
+  "language": "sql",
+  "deps": [],
+  "summary_zh": "SAVEPOINT 部份回滾"
+}

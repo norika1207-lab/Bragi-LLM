@@ -1,0 +1,24 @@
+{
+  "id": "depth-database-devops-023-caddy-autohttps",
+  "category": "database-devops/proxy/caddy",
+  "intents_zh": [
+    "Caddy 自動 HTTPS",
+    "caddyfile reverse proxy",
+    "零設定 SSL"
+  ],
+  "intents_en": [
+    "Caddy auto HTTPS",
+    "Caddyfile reverse proxy",
+    "zero-config SSL"
+  ],
+  "slots": [
+    "domain",
+    "upstream"
+  ],
+  "code": "{{domain}} {\n    encode zstd gzip\n    reverse_proxy {{upstream}} {\n        header_up X-Real-IP {remote_host}\n        header_up X-Forwarded-Proto {scheme}\n    }\n    log {\n        output file /var/log/caddy/{{domain}}.log\n        format json\n    }\n}",
+  "language": "caddyfile",
+  "deps": [
+    "caddy"
+  ],
+  "summary_zh": "Caddyfile 反代 + 自動 HTTPS + JSON log"
+}

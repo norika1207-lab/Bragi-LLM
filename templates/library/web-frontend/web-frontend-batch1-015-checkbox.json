@@ -1,0 +1,27 @@
+{
+  "id": "web-frontend-batch1-015-checkbox",
+  "category": "web-frontend/react/checkboxes/basic",
+  "intents_zh": [
+    "勾選框元件",
+    "checkbox 元件",
+    "React checkbox",
+    "帶 label 的 checkbox",
+    "可重用 checkbox",
+    "勾選元件"
+  ],
+  "intents_en": [
+    "checkbox component",
+    "react checkbox",
+    "labeled checkbox",
+    "reusable checkbox",
+    "tick box component",
+    "input checkbox react"
+  ],
+  "slots": [
+    "component_name"
+  ],
+  "code": "type Props = { label: string; checked: boolean; onChange: (v: boolean) => void };\n\nexport default function {{component_name}}({ label, checked, onChange }: Props) {\n  return (\n    <label className=\"inline-flex items-center gap-2 cursor-pointer\">\n      <input\n        type=\"checkbox\"\n        checked={checked}\n        onChange={(e) => onChange(e.target.checked)}\n        className=\"w-4 h-4\"\n      />\n      <span>{label}</span>\n    </label>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "帶 label 的 checkbox 元件"
+}

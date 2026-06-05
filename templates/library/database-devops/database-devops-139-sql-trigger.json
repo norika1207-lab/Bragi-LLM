@@ -1,0 +1,21 @@
+{
+  "id": "database-devops-139-sql-trigger",
+  "category": "database-devops/sql/postgres",
+  "intents_zh": [
+    "postgres trigger 更新時間",
+    "auto update_at trigger",
+    "INSERT/UPDATE trigger"
+  ],
+  "intents_en": [
+    "postgres trigger updated_at",
+    "auto updated_at",
+    "insert update trigger"
+  ],
+  "slots": [
+    "table"
+  ],
+  "code": "CREATE OR REPLACE FUNCTION set_updated_at() RETURNS trigger AS $$\nBEGIN\n  NEW.updated_at = NOW();\n  RETURN NEW;\nEND;\n$$ LANGUAGE plpgsql;\n\nCREATE TRIGGER trg_{{table}}_updated_at\nBEFORE UPDATE ON {{table}}\nFOR EACH ROW\nEXECUTE FUNCTION set_updated_at();",
+  "language": "sql",
+  "deps": [],
+  "summary_zh": "Postgres trigger 自動更新 updated_at"
+}

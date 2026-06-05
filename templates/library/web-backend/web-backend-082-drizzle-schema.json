@@ -1,0 +1,27 @@
+{
+  "id": "web-backend-082-drizzle-schema",
+  "category": "web-backend/db/schema",
+  "intents_zh": [
+    "drizzle schema",
+    "drizzle table 定義",
+    "typescript orm drizzle",
+    "建表 drizzle",
+    "drizzle 範例"
+  ],
+  "intents_en": [
+    "drizzle schema",
+    "drizzle table definition",
+    "typescript orm drizzle",
+    "define table drizzle",
+    "drizzle example"
+  ],
+  "slots": [
+    "table_name"
+  ],
+  "code": "import { pgTable, serial, text, varchar, timestamp } from 'drizzle-orm/pg-core';\n\nexport const {{table_name}} = pgTable('{{table_name}}', {\n  id: serial('id').primaryKey(),\n  name: varchar('name', { length: 120 }).notNull(),\n  description: text('description').default(''),\n  createdAt: timestamp('created_at').defaultNow(),\n  updatedAt: timestamp('updated_at').defaultNow()\n});",
+  "language": "ts",
+  "deps": [
+    "drizzle-orm"
+  ],
+  "summary_zh": "Drizzle pg table schema"
+}

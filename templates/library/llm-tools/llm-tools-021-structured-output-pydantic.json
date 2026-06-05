@@ -1,0 +1,35 @@
+{
+  "id": "llm-tools-021-structured-output-pydantic",
+  "category": "llm-tools/output/structured",
+  "intents_zh": [
+    "結構化輸出",
+    "pydantic schema 約束",
+    "openai 結構化回應",
+    "structured output 範例",
+    "強制 JSON schema",
+    "用 pydantic 收 LLM 輸出",
+    "response_format json",
+    "schema 約束輸出"
+  ],
+  "intents_en": [
+    "structured output pydantic",
+    "openai json schema",
+    "force structured response",
+    "response_format json",
+    "pydantic llm output",
+    "schema-constrained output",
+    "parse llm to pydantic",
+    "structured json"
+  ],
+  "slots": [
+    "model_name",
+    "class_name"
+  ],
+  "code": "from openai import OpenAI\nfrom pydantic import BaseModel\n\nclient = OpenAI()\n\nclass {{class_name}}(BaseModel):\n    title: str\n    score: int\n\ndef extract(text: str) -> {{class_name}}:\n    r = client.beta.chat.completions.parse(\n        model=\"{{model_name}}\",\n        messages=[{\"role\": \"user\", \"content\": text}],\n        response_format={{class_name}},\n    )\n    return r.choices[0].message.parsed\n\nif __name__ == \"__main__\":\n    print(extract(\"title=hello score=9\"))",
+  "language": "py",
+  "deps": [
+    "openai",
+    "pydantic"
+  ],
+  "summary_zh": "OpenAI structured output 配 pydantic schema"
+}

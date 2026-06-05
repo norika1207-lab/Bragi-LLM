@@ -1,0 +1,33 @@
+{
+  "id": "llm-tools-124-embedding-cache",
+  "category": "llm-tools/utils/embed-cache",
+  "intents_zh": [
+    "embedding 快取",
+    "embed 結果快取",
+    "避免重複算 embedding",
+    "hash cache embed",
+    "persistent embed cache",
+    "embed memoize",
+    "sqlite embed cache",
+    "embedding lookup"
+  ],
+  "intents_en": [
+    "embedding cache",
+    "cache embedding results",
+    "avoid recomputing embeddings",
+    "persistent embed cache",
+    "memoize embed",
+    "sqlite embed cache",
+    "embedding lookup cache",
+    "embed cache wrapper"
+  ],
+  "slots": [
+    "db_path"
+  ],
+  "code": "import sqlite3, hashlib, json\nfrom sentence_transformers import SentenceTransformer\n\nconn = sqlite3.connect(\"{{db_path}}\")\nconn.execute(\"CREATE TABLE IF NOT EXISTS emb(k TEXT PRIMARY KEY, v TEXT)\")\nmodel = SentenceTransformer(\"all-MiniLM-L6-v2\")\n\ndef embed(text: str) -> list[float]:\n    k = hashlib.sha256(text.encode()).hexdigest()\n    row = conn.execute(\"SELECT v FROM emb WHERE k=?\", (k,)).fetchone()\n    if row:\n        return json.loads(row[0])\n    v = model.encode(text, normalize_embeddings=True).tolist()\n    conn.execute(\"INSERT INTO emb(k,v) VALUES(?,?)\", (k, json.dumps(v)))\n    conn.commit()\n    return v",
+  "language": "py",
+  "deps": [
+    "sentence-transformers"
+  ],
+  "summary_zh": "SQLite 快取 embedding 結果"
+}

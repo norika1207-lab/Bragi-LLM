@@ -1,0 +1,29 @@
+{
+  "id": "depth-algorithm-046-digit-dp",
+  "category": "algorithm/dp/digit",
+  "intents_zh": [
+    "數位 DP",
+    "digit dp 模板",
+    "數字計數 DP",
+    "區間數位統計",
+    "tight flag 數位 DP",
+    "記憶化數位 DP",
+    "digit dp 計數"
+  ],
+  "intents_en": [
+    "digit DP",
+    "digit DP template",
+    "count numbers DP",
+    "tight flag digit DP",
+    "memoized digit DP",
+    "range digit DP",
+    "digit DP counting"
+  ],
+  "slots": [
+    "upper"
+  ],
+  "code": "from functools import lru_cache\n\ndef count_digit(upper={{upper}}):\n    s = str(upper)\n    @lru_cache(None)\n    def dp(pos, tight, started, sum_d):\n        if pos == len(s): return sum_d if started else 0\n        lim = int(s[pos]) if tight else 9\n        total = 0\n        for d in range(0, lim+1):\n            total += dp(pos+1, tight and d == lim, started or d > 0, sum_d + d)\n        return total\n    return dp(0, True, False, 0)",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "數位 DP 統計區間內數字位元和總和"
+}

@@ -1,0 +1,27 @@
+{
+  "id": "mobile-125-swiftui-location",
+  "category": "mobile/swiftui/location",
+  "intents_zh": [
+    "SwiftUI CoreLocation",
+    "Swift 取定位",
+    "SwiftUI 當前位置",
+    "CLLocationManager Swift",
+    "SwiftUI GPS 座標",
+    "iOS user location swift",
+    "SwiftUI lat lng"
+  ],
+  "intents_en": [
+    "swiftui CoreLocation",
+    "swift current location",
+    "CLLocationManager swift",
+    "swiftui gps coordinates",
+    "ios user location swift",
+    "swiftui lat lng",
+    "swift location example"
+  ],
+  "slots": [],
+  "code": "import CoreLocation\nclass Loc:NSObject,CLLocationManagerDelegate{\n  let m=CLLocationManager();var onFix:((CLLocation)->Void)?\n  override init(){super.init();m.delegate=self;m.desiredAccuracy=kCLLocationAccuracyBest}\n  func start(){m.requestWhenInUseAuthorization();m.startUpdatingLocation()}\n  func locationManager(_ mgr:CLLocationManager,didUpdateLocations locs:[CLLocation]){if let l=locs.last{onFix?(l);mgr.stopUpdatingLocation()}}}",
+  "language": "swift",
+  "deps": [],
+  "summary_zh": "Swift CLLocationManager 取一次定位"
+}

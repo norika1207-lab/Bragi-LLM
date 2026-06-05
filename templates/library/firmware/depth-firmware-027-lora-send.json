@@ -1,0 +1,28 @@
+{
+  "id": "depth-firmware-027-lora-send",
+  "category": "firmware/radio/lora",
+  "intents_zh": [
+    "LoRa 發送",
+    "SX1276 send",
+    "RYLR LoRa 傳訊",
+    "長距離無線傳",
+    "LoRa.beginPacket"
+  ],
+  "intents_en": [
+    "lora send",
+    "sx1276 transmit",
+    "long range wireless tx",
+    "lora beginpacket",
+    "rylr send"
+  ],
+  "slots": [
+    "freq_hz",
+    "payload"
+  ],
+  "code": "#include <LoRa.h>\nvoid setup() {\n    Serial.begin(115200);\n    LoRa.setPins(5, 14, 26);\n    LoRa.begin({{freq_hz}});\n}\nvoid loop() {\n    LoRa.beginPacket();\n    LoRa.print(\"{{payload}}\");\n    LoRa.endPacket();\n    delay(5000);\n}",
+  "language": "cpp",
+  "deps": [
+    "LoRa"
+  ],
+  "summary_zh": "用 LoRa lib 在指定頻率送出 payload"
+}

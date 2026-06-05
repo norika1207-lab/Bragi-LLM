@@ -1,0 +1,29 @@
+{
+  "id": "mobile-004-rn-imagepicker",
+  "category": "mobile/rn/media",
+  "intents_zh": [
+    "RN 選圖",
+    "React Native image picker",
+    "從相簿挑照片 RN",
+    "RN 開相簿",
+    "選照片上傳 RN",
+    "image picker 範例",
+    "RN gallery 選圖"
+  ],
+  "intents_en": [
+    "RN image picker",
+    "pick photo from gallery RN",
+    "react native gallery",
+    "choose image RN",
+    "image picker example",
+    "launch image library",
+    "rn pick image"
+  ],
+  "slots": [],
+  "code": "import React,{useState} from 'react';\nimport {View,Button,Image} from 'react-native';\nimport * as ImagePicker from 'expo-image-picker';\nexport default function Pick(){\n  const[u,setU]=useState<string|null>(null);\n  const go=async()=>{const p=await ImagePicker.requestMediaLibraryPermissionsAsync();if(!p.granted)return;\n    const r=await ImagePicker.launchImageLibraryAsync({mediaTypes:ImagePicker.MediaTypeOptions.Images,quality:0.8});\n    if(!r.canceled)setU(r.assets[0].uri);};\n  return(<View style={{padding:24}}><Button title='Pick' onPress={go}/>{u&&<Image source={{uri:u}} style={{width:200,height:200,marginTop:12}}/>}</View>);}",
+  "language": "tsx",
+  "deps": [
+    "expo-image-picker"
+  ],
+  "summary_zh": "Expo image picker 從相簿挑一張圖預覽"
+}

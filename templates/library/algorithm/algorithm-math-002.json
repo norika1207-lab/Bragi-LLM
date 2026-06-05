@@ -1,0 +1,21 @@
+{
+  "id": "algorithm-math-002",
+  "category": "algorithm/math/ext_gcd",
+  "intents_zh": [
+    "擴展 gcd",
+    "extended euclidean",
+    "解貝祖等式"
+  ],
+  "intents_en": [
+    "extended gcd",
+    "extended euclidean",
+    "bezout"
+  ],
+  "slots": [
+    "fn_name"
+  ],
+  "code": "def {{fn_name}}(a, b):\n    if b == 0: return a, 1, 0\n    g, x1, y1 = {{fn_name}}(b, a % b)\n    return g, y1, x1 - (a // b) * y1",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "擴展歐幾里得，回 g, x, y"
+}

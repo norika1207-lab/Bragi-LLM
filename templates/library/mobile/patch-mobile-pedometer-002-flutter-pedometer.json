@@ -1,0 +1,30 @@
+{
+  "id": "patch-mobile-pedometer-002-flutter-pedometer",
+  "category": "mobile/health/step-counter",
+  "intents_zh": [
+    "Flutter 計步器 widget",
+    "用 pedometer package 計步",
+    "Flutter 步數即時更新",
+    "做個 Flutter 步數畫面",
+    "Dart 計步元件",
+    "Flutter health 步數串接"
+  ],
+  "intents_en": [
+    "Flutter pedometer widget",
+    "step counting in Flutter with pedometer package",
+    "live step stream Flutter",
+    "Dart step counter screen",
+    "Flutter health step tracker"
+  ],
+  "slots": [
+    "widget_name",
+    "goal_steps"
+  ],
+  "code": "import 'package:flutter/material.dart';\nimport 'package:pedometer/pedometer.dart';\n\nclass {{widget_name}} extends StatefulWidget {\n  @override\n  State<{{widget_name}}> createState() => _{{widget_name}}State();\n}\n\nclass _{{widget_name}}State extends State<{{widget_name}}> {\n  int _steps = 0;\n  final int _goal = {{goal_steps}};\n\n  @override\n  void initState() {\n    super.initState();\n    Pedometer.stepCountStream.listen(\n      (e) => setState(() => _steps = e.steps),\n      onError: (_) => setState(() => _steps = 0),\n    );\n  }\n\n  @override\n  Widget build(BuildContext c) {\n    final pct = (_steps / _goal).clamp(0.0, 1.0);\n    return Column(mainAxisAlignment: MainAxisAlignment.center, children: [\n      Text('$_steps', style: const TextStyle(fontSize: 56, fontWeight: FontWeight.bold)),\n      Text('Goal: $_goal'),\n      LinearProgressIndicator(value: pct),\n    ]);\n  }\n}",
+  "language": "dart",
+  "deps": [
+    "pedometer",
+    "flutter"
+  ],
+  "summary_zh": "Flutter pedometer 套件即時步數 widget，含目標進度條"
+}

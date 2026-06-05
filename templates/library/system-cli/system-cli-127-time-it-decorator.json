@@ -1,0 +1,21 @@
+{
+  "id": "system-cli-127-time-it-decorator",
+  "category": "system-cli/python/perf",
+  "intents_zh": [
+    "函式計時 decorator",
+    "python timing wrapper",
+    "看跑多久"
+  ],
+  "intents_en": [
+    "timeit decorator python",
+    "wrap function with timing",
+    "measure function duration"
+  ],
+  "slots": [
+    "fn_name"
+  ],
+  "code": "import time, functools\n\ndef timed(fn):\n    @functools.wraps(fn)\n    def w(*a, **kw):\n        t0 = time.perf_counter()\n        try:\n            return fn(*a, **kw)\n        finally:\n            dt = (time.perf_counter() - t0) * 1000\n            print(f'[{fn.__name__}] {dt:.1f} ms')\n    return w\n\n@timed\ndef {{fn_name}}(n):\n    return sum(range(n))\n\n{{fn_name}}(1_000_000)",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "函式計時 decorator"
+}

@@ -1,0 +1,20 @@
+{
+  "id": "algorithm-misc-017",
+  "category": "algorithm/misc/next_greater",
+  "intents_zh": [
+    "下一個更大元素",
+    "next greater element",
+    "monotonic stack"
+  ],
+  "intents_en": [
+    "next greater element",
+    "monotonic stack NGE"
+  ],
+  "slots": [
+    "fn_name"
+  ],
+  "code": "def {{fn_name}}(arr):\n    res = [-1]*len(arr)\n    stack = []\n    for i, x in enumerate(arr):\n        while stack and arr[stack[-1]] < x:\n            res[stack.pop()] = x\n        stack.append(i)\n    return res",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "單調棧求下一個更大元素"
+}

@@ -1,0 +1,25 @@
+{
+  "id": "depth-mobile-053-biometric-ios",
+  "category": "mobile/biometric/ios",
+  "intents_zh": [
+    "iOS LocalAuthentication",
+    "Face ID Touch ID",
+    "evaluatePolicy",
+    "生物辨識",
+    "LAContext"
+  ],
+  "intents_en": [
+    "iOS LocalAuthentication",
+    "Face ID Touch ID",
+    "evaluatePolicy",
+    "biometric prompt",
+    "LAContext"
+  ],
+  "slots": [
+    "reason"
+  ],
+  "code": "import LocalAuthentication\nlet ctx = LAContext()\nvar err: NSError?\nif ctx.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &err) {\n  ctx.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: \"{{reason}}\") { ok, _ in\n    print(ok ? \"auth ok\" : \"auth failed\")\n  }\n}",
+  "language": "swift",
+  "deps": [],
+  "summary_zh": "iOS Face/Touch ID 驗證"
+}

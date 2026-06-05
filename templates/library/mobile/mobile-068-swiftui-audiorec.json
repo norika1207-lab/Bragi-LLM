@@ -1,0 +1,27 @@
+{
+  "id": "mobile-068-swiftui-audiorec",
+  "category": "mobile/swiftui/media",
+  "intents_zh": [
+    "Swift AVAudioRecorder",
+    "SwiftUI 錄音",
+    "Swift 麥克風錄音",
+    "iOS 錄音 Swift",
+    "錄音存檔 Swift",
+    "Swift voice memo",
+    "SwiftUI 錄音檔"
+  ],
+  "intents_en": [
+    "swift AVAudioRecorder",
+    "swiftui record audio",
+    "ios mic recording swift",
+    "record sound swift",
+    "swift voice memo",
+    "audio recorder swift",
+    "swiftui audio capture"
+  ],
+  "slots": [],
+  "code": "import AVFoundation\nclass Rec{\n  var r:AVAudioRecorder?;var url:URL?\n  func start()throws{let s=AVAudioSession.sharedInstance();try s.setCategory(.playAndRecord);try s.setActive(true)\n    let u=FileManager.default.temporaryDirectory.appendingPathComponent(\"r.m4a\");url=u\n    r=try AVAudioRecorder(url:u,settings:[AVFormatIDKey:Int(kAudioFormatMPEG4AAC),AVSampleRateKey:44100,AVNumberOfChannelsKey:1]);r?.record()}\n  func stop()->URL?{r?.stop();return url}}",
+  "language": "swift",
+  "deps": [],
+  "summary_zh": "Swift AVAudioRecorder 錄音存檔"
+}

@@ -1,0 +1,27 @@
+{
+  "id": "depth-system-cli-058-launchd-plist",
+  "category": "system-cli/macos/launchd",
+  "intents_zh": [
+    "macOS launchd plist",
+    "Mac 開機自啟服務",
+    "LaunchAgent 範本",
+    "launchctl load"
+  ],
+  "intents_en": [
+    "macos launchd plist",
+    "mac login daemon",
+    "launchagent template",
+    "launchctl load"
+  ],
+  "slots": [
+    "label",
+    "program_path",
+    "interval_seconds"
+  ],
+  "code": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n  <key>Label</key><string>{{label}}</string>\n  <key>ProgramArguments</key>\n  <array><string>{{program_path}}</string></array>\n  <key>StartInterval</key><integer>{{interval_seconds}}</integer>\n  <key>RunAtLoad</key><true/>\n  <key>StandardOutPath</key><string>/tmp/{{label}}.out</string>\n  <key>StandardErrorPath</key><string>/tmp/{{label}}.err</string>\n  <key>EnvironmentVariables</key>\n  <dict>\n    <key>PATH</key><string>/usr/local/bin:/usr/bin:/bin</string>\n  </dict>\n</dict>\n</plist>\n<!-- save as ~/Library/LaunchAgents/{{label}}.plist\n     launchctl load -w ~/Library/LaunchAgents/{{label}}.plist -->",
+  "language": "xml",
+  "deps": [
+    "launchd"
+  ],
+  "summary_zh": "macOS LaunchAgent plist 定時跑程式"
+}

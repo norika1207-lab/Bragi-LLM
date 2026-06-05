@@ -1,0 +1,29 @@
+{
+  "id": "mobile-105-compose-gesture",
+  "category": "mobile/compose/gesture",
+  "intents_zh": [
+    "Compose pointerInput drag",
+    "Compose 拖曳手勢",
+    "Compose detectDragGestures",
+    "Compose 拖元件",
+    "Compose drag box",
+    "Compose 手勢偵測",
+    "Compose offset drag"
+  ],
+  "intents_en": [
+    "compose pointerInput drag",
+    "compose detectDragGestures",
+    "compose drag widget",
+    "compose pan gesture",
+    "drag box compose",
+    "compose touch drag",
+    "jetpack compose gesture"
+  ],
+  "slots": [],
+  "code": "import androidx.compose.foundation.background\nimport androidx.compose.foundation.gestures.detectDragGestures\nimport androidx.compose.foundation.layout.*\nimport androidx.compose.runtime.*\nimport androidx.compose.ui.Modifier\nimport androidx.compose.ui.geometry.Offset\nimport androidx.compose.ui.graphics.Color\nimport androidx.compose.ui.input.pointer.pointerInput\nimport androidx.compose.ui.unit.IntOffset\nimport androidx.compose.ui.unit.dp\nimport kotlin.math.roundToInt\n@androidx.compose.runtime.Composable\nfun D(){var off by remember{mutableStateOf(Offset.Zero)};Box(Modifier.size(80.dp).offset{IntOffset(off.x.roundToInt(),off.y.roundToInt())}.background(Color.Blue).pointerInput(Unit){detectDragGestures{_,d->off+=d}})}",
+  "language": "kt",
+  "deps": [
+    "androidx.compose.foundation"
+  ],
+  "summary_zh": "Compose pointerInput 拖動方塊"
+}

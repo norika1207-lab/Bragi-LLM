@@ -1,0 +1,29 @@
+{
+  "id": "web-frontend-batch3-019-svelte-toast",
+  "category": "web-frontend/svelte/ui/toast",
+  "intents_zh": [
+    "Svelte toast",
+    "Svelte 通知元件",
+    "Svelte snackbar",
+    "Svelte 自動消失提示",
+    "Svelte store toast",
+    "Svelte 浮動訊息"
+  ],
+  "intents_en": [
+    "svelte toast",
+    "svelte notification",
+    "svelte snackbar",
+    "svelte auto dismiss toast",
+    "svelte store based toast",
+    "svelte alert popup"
+  ],
+  "slots": [
+    "duration_ms"
+  ],
+  "code": "<script context=\"module\">\n  import { writable } from 'svelte/store';\n  export const toasts = writable([]);\n  export function notify(msg, type = 'info') {\n    const id = Date.now() + Math.random();\n    toasts.update(t => [...t, { id, msg, type }]);\n    setTimeout(() => toasts.update(t => t.filter(x => x.id !== id)), {{duration_ms}});\n  }\n</script>\n<script>\n  import { toasts as store } from './Toast.svelte';\n</script>\n<div class=\"toasts\">\n  {#each $store as t (t.id)}\n    <div class=\"toast {t.type}\">{t.msg}</div>\n  {/each}\n</div>\n<style>\n  .toasts { position: fixed; top: 1rem; right: 1rem; display: flex; flex-direction: column; gap: .5rem; }\n  .toast { padding: .75rem 1rem; border-radius: 6px; background: #333; color: white; }\n</style>",
+  "language": "svelte",
+  "deps": [
+    "svelte"
+  ],
+  "summary_zh": "Svelte store 驅動的 toast 通知"
+}

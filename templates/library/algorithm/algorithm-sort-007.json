@@ -1,0 +1,20 @@
+{
+  "id": "algorithm-sort-007",
+  "category": "algorithm/sort/bucket",
+  "intents_zh": [
+    "桶排序",
+    "bucket sort",
+    "給我 bucket sort"
+  ],
+  "intents_en": [
+    "bucket sort",
+    "sort floats bucket"
+  ],
+  "slots": [
+    "fn_name"
+  ],
+  "code": "def {{fn_name}}(arr, bucket_count=10):\n    if not arr: return arr\n    lo, hi = min(arr), max(arr)\n    if lo == hi: return list(arr)\n    buckets = [[] for _ in range(bucket_count)]\n    for x in arr:\n        idx = min(bucket_count - 1, int((x - lo) / (hi - lo) * bucket_count))\n        buckets[idx].append(x)\n    out = []\n    for b in buckets:\n        out.extend(sorted(b))\n    return out",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "桶排序適合均勻分布資料"
+}

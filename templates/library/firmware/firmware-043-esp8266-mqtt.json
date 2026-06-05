@@ -1,0 +1,31 @@
+{
+  "id": "firmware-043-esp8266-mqtt",
+  "category": "firmware/esp8266/mqtt",
+  "intents_zh": [
+    "ESP8266 MQTT",
+    "NodeMCU MQTT 發布",
+    "8266 PubSubClient",
+    "上傳 MQTT",
+    "ESP8266 推資料"
+  ],
+  "intents_en": [
+    "ESP8266 MQTT publish",
+    "NodeMCU MQTT",
+    "PubSubClient ESP8266",
+    "mqtt sensor upload",
+    "8266 broker connect"
+  ],
+  "slots": [
+    "ssid",
+    "password",
+    "broker",
+    "topic"
+  ],
+  "code": "#include <ESP8266WiFi.h>\n#include <PubSubClient.h>\nWiFiClient net;\nPubSubClient client(net);\n\nvoid setup() {\n  Serial.begin(115200);\n  WiFi.begin(\"{{ssid}}\", \"{{password}}\");\n  while (WiFi.status() != WL_CONNECTED) delay(300);\n  client.setServer(\"{{broker}}\", 1883);\n  while (!client.connect(\"esp8266-client\")) delay(500);\n}\n\nvoid loop() {\n  client.loop();\n  client.publish(\"{{topic}}\", \"alive\");\n  delay(5000);\n}",
+  "language": "ino",
+  "deps": [
+    "PubSubClient",
+    "ESP8266WiFi"
+  ],
+  "summary_zh": "ESP8266 定時 MQTT publish"
+}

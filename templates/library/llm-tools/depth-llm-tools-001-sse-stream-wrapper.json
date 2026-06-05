@@ -1,0 +1,30 @@
+{
+  "id": "depth-llm-tools-001-sse-stream-wrapper",
+  "category": "llm-tools/streaming/sse",
+  "intents_zh": [
+    "包裝 SSE 串流回應",
+    "解析 OpenAI 相容串流",
+    "逐 token 接收輸出",
+    "SSE 事件迭代器",
+    "串流 chat completion"
+  ],
+  "intents_en": [
+    "wrap SSE streaming",
+    "parse OpenAI compatible stream",
+    "iterate tokens",
+    "SSE event iterator",
+    "stream chat completion"
+  ],
+  "slots": [
+    "base_url",
+    "api_key",
+    "model",
+    "prompt"
+  ],
+  "code": "import httpx, json\n\ndef stream_chat({{base_url}}, {{api_key}}, {{model}}, {{prompt}}):\n    headers = {\"Authorization\": f\"Bearer {{{api_key}}}\", \"Accept\": \"text/event-stream\"}\n    payload = {\"model\": {{model}}, \"messages\": [{\"role\": \"user\", \"content\": {{prompt}}}], \"stream\": True}\n    with httpx.stream(\"POST\", f\"{{{base_url}}}/v1/chat/completions\", json=payload, headers=headers, timeout=None) as r:\n        for line in r.iter_lines():\n            if not line or not line.startswith(\"data: \"): continue\n            data = line[6:]\n            if data == \"[DONE]\": break\n            chunk = json.loads(data)\n            delta = chunk[\"choices\"][0][\"delta\"].get(\"content\", \"\")\n            if delta: yield delta",
+  "language": "python",
+  "deps": [
+    "httpx"
+  ],
+  "summary_zh": "SSE 串流包裝，逐 token yield OpenAI 相容回應"
+}

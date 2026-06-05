@@ -1,0 +1,30 @@
+{
+  "id": "web-backend-133-express-graphql-sub",
+  "category": "web-backend/express/graphql",
+  "intents_zh": [
+    "graphql subscriptions ws",
+    "apollo subscriptions",
+    "graphql-ws 範例",
+    "訂閱 graphql",
+    "node graphql subscription"
+  ],
+  "intents_en": [
+    "graphql subscriptions ws",
+    "apollo subscriptions",
+    "graphql-ws example",
+    "subscription graphql",
+    "node graphql subscription"
+  ],
+  "slots": [
+    "ws_path"
+  ],
+  "code": "const { WebSocketServer } = require('ws');\nconst { useServer } = require('graphql-ws/lib/use/ws');\nconst { makeExecutableSchema } = require('@graphql-tools/schema');\n\nconst typeDefs = `type Query { _: Boolean } type Subscription { tick: Int! }`;\nconst resolvers = {\n  Subscription: {\n    tick: {\n      subscribe: async function* () {\n        let i = 0;\n        while (true) {\n          await new Promise(r => setTimeout(r, 1000));\n          yield { tick: i++ };\n        }\n      }\n    }\n  }\n};\n\nconst schema = makeExecutableSchema({ typeDefs, resolvers });\n\nmodule.exports = (httpServer) => {\n  const wss = new WebSocketServer({ server: httpServer, path: '{{ws_path}}' });\n  useServer({ schema }, wss);\n};",
+  "language": "js",
+  "deps": [
+    "graphql",
+    "graphql-ws",
+    "ws",
+    "@graphql-tools/schema"
+  ],
+  "summary_zh": "graphql-ws subscriptions"
+}

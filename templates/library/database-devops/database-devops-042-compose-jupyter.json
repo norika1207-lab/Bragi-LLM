@@ -1,0 +1,22 @@
+{
+  "id": "database-devops-042-compose-jupyter",
+  "category": "database-devops/docker/compose",
+  "intents_zh": [
+    "compose 起 jupyter",
+    "jupyterlab 容器",
+    "本地 ML notebook"
+  ],
+  "intents_en": [
+    "compose jupyter",
+    "jupyterlab container",
+    "local ml notebook"
+  ],
+  "slots": [
+    "port",
+    "token"
+  ],
+  "code": "services:\n  jupyter:\n    image: jupyter/scipy-notebook:latest\n    ports: [\"{{port}}:8888\"]\n    environment:\n      JUPYTER_TOKEN: {{token}}\n    volumes:\n      - ./notebooks:/home/jovyan/work\n    command: start-notebook.sh --NotebookApp.token='{{token}}'",
+  "language": "yaml",
+  "deps": [],
+  "summary_zh": "compose 起 JupyterLab"
+}

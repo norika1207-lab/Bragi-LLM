@@ -1,0 +1,21 @@
+{
+  "id": "database-devops-084-sql-deadlock-retry",
+  "category": "database-devops/sql/transaction",
+  "intents_zh": [
+    "deadlock 重試",
+    "SQL 重試交易",
+    "retry on deadlock"
+  ],
+  "intents_en": [
+    "deadlock retry",
+    "retry transaction",
+    "retry on serialization failure"
+  ],
+  "slots": [],
+  "code": "import asyncio, asyncpg\n\nasync def with_retry(pool, fn, retries=3):\n    for attempt in range(retries):\n        try:\n            async with pool.acquire() as conn:\n                async with conn.transaction():\n                    return await fn(conn)\n        except (asyncpg.DeadlockDetectedError, asyncpg.SerializationError):\n            if attempt == retries - 1:\n                raise\n            await asyncio.sleep(0.1 * (2 ** attempt))",
+  "language": "py",
+  "deps": [
+    "asyncpg"
+  ],
+  "summary_zh": "交易死鎖指數退避重試"
+}

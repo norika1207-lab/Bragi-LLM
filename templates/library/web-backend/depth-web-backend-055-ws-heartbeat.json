@@ -1,0 +1,25 @@
+{
+  "id": "depth-web-backend-055-ws-heartbeat",
+  "category": "web-backend/websocket/heartbeat",
+  "intents_zh": [
+    "ws ping/pong heartbeat",
+    "偵測斷線 client",
+    "interval terminate",
+    "WebSocket 健康檢查",
+    "清理殭屍連線"
+  ],
+  "intents_en": [
+    "ws ping pong heartbeat",
+    "detect dead clients",
+    "interval terminate",
+    "websocket health check",
+    "cleanup zombie connections"
+  ],
+  "slots": [],
+  "code": "function noop() {}\nwss.on('connection', (ws) => {\n  ws.isAlive = true;\n  ws.on('pong', () => { ws.isAlive = true; });\n});\nconst interval = setInterval(() => {\n  for (const ws of wss.clients) {\n    if (!ws.isAlive) { ws.terminate(); continue; }\n    ws.isAlive = false; ws.ping(noop);\n  }\n}, 30000);\nwss.on('close', () => clearInterval(interval));",
+  "language": "js",
+  "deps": [
+    "ws"
+  ],
+  "summary_zh": "ws heartbeat 偵測斷線"
+}

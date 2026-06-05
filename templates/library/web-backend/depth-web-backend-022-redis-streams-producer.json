@@ -1,0 +1,27 @@
+{
+  "id": "depth-web-backend-022-redis-streams-producer",
+  "category": "web-backend/queue/redis-streams",
+  "intents_zh": [
+    "Redis Streams XADD",
+    "事件流寫入",
+    "ioredis xadd",
+    "stream 加 entry",
+    "訊息流發布"
+  ],
+  "intents_en": [
+    "redis streams xadd",
+    "event stream write",
+    "ioredis xadd",
+    "add stream entry",
+    "stream produce"
+  ],
+  "slots": [
+    "stream"
+  ],
+  "code": "import Redis from 'ioredis';\nconst r = new Redis();\nawait r.xadd('{{stream}}', '*', 'event', 'order.created', 'data', JSON.stringify({ id: 1 }));",
+  "language": "js",
+  "deps": [
+    "ioredis"
+  ],
+  "summary_zh": "Redis Streams 寫入事件"
+}

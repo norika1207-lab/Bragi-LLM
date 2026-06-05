@@ -1,0 +1,19 @@
+{
+  "id": "algorithm-string-008",
+  "category": "algorithm/string/edit_distance_recursive",
+  "intents_zh": [
+    "編輯距離 記憶化",
+    "levenshtein 記憶化版"
+  ],
+  "intents_en": [
+    "edit distance memoized",
+    "levenshtein memo"
+  ],
+  "slots": [
+    "fn_name"
+  ],
+  "code": "from functools import lru_cache\n\ndef {{fn_name}}(a, b):\n    @lru_cache(maxsize=None)\n    def rec(i, j):\n        if i == len(a): return len(b) - j\n        if j == len(b): return len(a) - i\n        if a[i] == b[j]: return rec(i+1, j+1)\n        return 1 + min(rec(i+1, j), rec(i, j+1), rec(i+1, j+1))\n    return rec(0, 0)",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "記憶化遞迴 Levenshtein"
+}

@@ -1,0 +1,28 @@
+{
+  "id": "database-devops-023-prisma-client-query",
+  "category": "database-devops/orm/prisma",
+  "intents_zh": [
+    "Prisma 查詢範本",
+    "prisma findMany 加 include",
+    "prisma 撈資料",
+    "prisma client 用法"
+  ],
+  "intents_en": [
+    "prisma query example",
+    "findMany with include",
+    "prisma client usage",
+    "query with relations"
+  ],
+  "slots": [
+    "model_name",
+    "relation_field",
+    "filter_field",
+    "filter_value"
+  ],
+  "code": "import { PrismaClient } from '@prisma/client'\nconst prisma = new PrismaClient()\n\nexport async function list{{model_name}}() {\n  return prisma.{{model_name}}.findMany({\n    where: { {{filter_field}}: '{{filter_value}}' },\n    include: { {{relation_field}}: true },\n    orderBy: { createdAt: 'desc' },\n    take: 50,\n  })\n}",
+  "language": "ts",
+  "deps": [
+    "@prisma/client"
+  ],
+  "summary_zh": "Prisma findMany 帶 include"
+}

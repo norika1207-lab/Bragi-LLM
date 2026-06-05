@@ -1,0 +1,25 @@
+{
+  "id": "web-backend-030-express-healthcheck",
+  "category": "web-backend/express/ops",
+  "intents_zh": [
+    "健康檢查 endpoint",
+    "加 /healthz",
+    "liveness probe",
+    "readiness check",
+    "express health route"
+  ],
+  "intents_en": [
+    "healthcheck endpoint",
+    "liveness readiness express",
+    "health route express",
+    "/healthz route",
+    "app health probe"
+  ],
+  "slots": [],
+  "code": "const express = require('express');\nconst router = express.Router();\n\nrouter.get('/healthz', (req, res) => res.json({ status: 'ok', ts: Date.now() }));\n\nrouter.get('/readyz', async (req, res) => {\n  try {\n    // check db, redis, etc\n    res.json({ status: 'ready' });\n  } catch (e) {\n    res.status(503).json({ status: 'not ready', error: e.message });\n  }\n});\n\nmodule.exports = router;",
+  "language": "js",
+  "deps": [
+    "express"
+  ],
+  "summary_zh": "Express health/ready 探針"
+}

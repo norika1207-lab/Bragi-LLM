@@ -1,0 +1,29 @@
+{
+  "id": "depth-algorithm-010-line-sweep-intervals",
+  "category": "algorithm/sweep/intervals",
+  "intents_zh": [
+    "線掃描合併區間",
+    "掃描線區間覆蓋",
+    "interval merge sweep",
+    "事件點掃描",
+    "區間總長度",
+    "掃描線最大重疊",
+    "sweep line 模板"
+  ],
+  "intents_en": [
+    "line sweep merge intervals",
+    "interval merge sweep",
+    "sweep line max overlap",
+    "event sweep",
+    "total covered length",
+    "interval coverage sweep",
+    "sweep template"
+  ],
+  "slots": [
+    "intervals"
+  ],
+  "code": "def sweep_coverage(intervals={{intervals}}):\n    events = []\n    for l, r in intervals:\n        events.append((l, 1))\n        events.append((r, -1))\n    events.sort()\n    cover = 0; depth = 0; prev = None; max_overlap = 0\n    for x, d in events:\n        if depth > 0 and prev is not None:\n            cover += x - prev\n        depth += d\n        max_overlap = max(max_overlap, depth)\n        prev = x\n    return cover, max_overlap",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "事件掃描計算區間總覆蓋長度與最大重疊"
+}

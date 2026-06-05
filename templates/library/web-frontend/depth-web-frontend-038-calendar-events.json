@@ -1,0 +1,29 @@
+{
+  "id": "depth-web-frontend-038-calendar-events",
+  "category": "web-frontend/widgets/calendar",
+  "intents_zh": [
+    "事件日曆",
+    "FullCalendar 行事曆",
+    "月檢視 events",
+    "互動日曆",
+    "行事曆元件"
+  ],
+  "intents_en": [
+    "calendar with events",
+    "fullcalendar react",
+    "month view events",
+    "interactive calendar",
+    "calendar component"
+  ],
+  "slots": [
+    "component_name"
+  ],
+  "code": "'use client';\nimport FullCalendar from '@fullcalendar/react';\nimport dayGridPlugin from '@fullcalendar/daygrid';\nimport interactionPlugin from '@fullcalendar/interaction';\n\nexport function {{component_name}}({ events }: { events: { title:string; date:string }[] }) {\n  return (\n    <FullCalendar\n      plugins={[dayGridPlugin, interactionPlugin]}\n      initialView=\"dayGridMonth\"\n      events={events}\n      height={520}\n      dateClick={(arg) => console.log('click', arg.dateStr)}\n    />\n  );\n}",
+  "language": "tsx",
+  "deps": [
+    "@fullcalendar/react",
+    "@fullcalendar/daygrid",
+    "@fullcalendar/interaction"
+  ],
+  "summary_zh": "FullCalendar 月檢視事件日曆"
+}

@@ -1,0 +1,23 @@
+{
+  "id": "algorithm-bit-001",
+  "category": "algorithm/bit/popcount",
+  "intents_zh": [
+    "popcount",
+    "算 1 的個數",
+    "Brian Kernighan",
+    "給我 hamming weight"
+  ],
+  "intents_en": [
+    "popcount",
+    "count set bits",
+    "Brian Kernighan",
+    "hamming weight"
+  ],
+  "slots": [
+    "fn_name"
+  ],
+  "code": "def {{fn_name}}(x):\n    count = 0\n    while x:\n        x &= x - 1\n        count += 1\n    return count",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "Brian Kernighan 數 1 個數"
+}

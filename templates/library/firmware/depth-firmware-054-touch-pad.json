@@ -1,0 +1,28 @@
+{
+  "id": "depth-firmware-054-touch-pad",
+  "category": "firmware/input/touch",
+  "intents_zh": [
+    "電容觸控感測",
+    "touch pin ESP32",
+    "touchRead",
+    "觸碰喚醒",
+    "capacitive touch"
+  ],
+  "intents_en": [
+    "capacitive touch esp32",
+    "touch pin",
+    "touchread",
+    "touch wake",
+    "cap sense"
+  ],
+  "slots": [
+    "touch_pin",
+    "threshold"
+  ],
+  "code": "void setup() { Serial.begin(115200); }\nvoid loop() {\n    int v = touchRead({{touch_pin}});\n    if (v < {{threshold}}) Serial.println(\"touched\");\n    delay(100);\n}",
+  "language": "cpp",
+  "deps": [
+    "Arduino-ESP32"
+  ],
+  "summary_zh": "用 ESP32 touch pin 讀電容值偵測觸碰"
+}

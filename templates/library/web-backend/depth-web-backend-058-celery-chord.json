@@ -1,0 +1,26 @@
+{
+  "id": "depth-web-backend-058-celery-chord",
+  "category": "web-backend/queue/celery-chord",
+  "intents_zh": [
+    "Celery group + chord",
+    "平行 task 後彙整",
+    "callback after group",
+    "fan-out fan-in",
+    "Celery 工作流"
+  ],
+  "intents_en": [
+    "celery group chord",
+    "parallel tasks then aggregate",
+    "callback after group",
+    "fan out fan in",
+    "celery workflow"
+  ],
+  "slots": [],
+  "code": "from celery import group, chord\n\n@app.task\ndef fetch(url): return len(requests.get(url).content)\n\n@app.task\ndef summarize(sizes): return sum(sizes)\n\nresult = chord(group(fetch.s(u) for u in urls))(summarize.s())",
+  "language": "py",
+  "deps": [
+    "celery",
+    "requests"
+  ],
+  "summary_zh": "Celery chord fan-out fan-in"
+}

@@ -1,0 +1,26 @@
+{
+  "id": "patch-firmware-input-005-esp32-touch-capacitive",
+  "category": "firmware/input/touch",
+  "intents_zh": [
+    "ESP32 電容觸控按鈕",
+    "touchRead 讀觸控值",
+    "ESP32 觸摸感應門檻",
+    "做一個觸控開關",
+    "ESP32 cap touch 偵測"
+  ],
+  "intents_en": [
+    "ESP32 capacitive touch button",
+    "touchRead threshold",
+    "esp32 touch sensor",
+    "cap touch detect esp32",
+    "touch input pin"
+  ],
+  "slots": [
+    "touch_pin",
+    "threshold"
+  ],
+  "code": "const int touchPin = {{touch_pin}};\nconst int threshold = {{threshold}};\nbool wasTouched = false;\n\nvoid setup() {\n  Serial.begin(115200);\n}\n\nvoid loop() {\n  int value = touchRead(touchPin);\n  bool touched = value < threshold;\n  if (touched && !wasTouched) {\n    Serial.print(\"touch begin val=\");\n    Serial.println(value);\n  } else if (!touched && wasTouched) {\n    Serial.println(\"touch end\");\n  }\n  wasTouched = touched;\n  delay(30);\n}",
+  "language": "ino",
+  "deps": [],
+  "summary_zh": "ESP32 用 touchRead 加門檻判斷電容觸控按鈕的觸發與釋放"
+}

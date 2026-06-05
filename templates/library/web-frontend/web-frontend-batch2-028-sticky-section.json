@@ -1,0 +1,28 @@
+{
+  "id": "web-frontend-batch2-028-sticky-section",
+  "category": "web-frontend/react/layout/sticky-section",
+  "intents_zh": [
+    "sticky 區塊",
+    "黏性側欄",
+    "sticky aside",
+    "跟隨滾動側欄",
+    "固定側欄",
+    "sticky sidebar"
+  ],
+  "intents_en": [
+    "sticky section",
+    "sticky aside",
+    "sticky sidebar",
+    "scroll-following panel",
+    "pinned section",
+    "sticky column"
+  ],
+  "slots": [
+    "sticky_content",
+    "main_content"
+  ],
+  "code": "export function StickyLayout() {\n  return (\n    <div className=\"mx-auto grid max-w-6xl grid-cols-3 gap-8 p-6\">\n      <main className=\"col-span-2\">{{main_content}}</main>\n      <aside className=\"col-span-1\">\n        <div className=\"sticky top-6 rounded border bg-white p-4 shadow-sm\">{{sticky_content}}</div>\n      </aside>\n    </div>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "右側 sticky 側欄跟隨滾動"
+}

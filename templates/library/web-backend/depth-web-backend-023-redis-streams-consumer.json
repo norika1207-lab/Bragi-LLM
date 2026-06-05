@@ -1,0 +1,29 @@
+{
+  "id": "depth-web-backend-023-redis-streams-consumer",
+  "category": "web-backend/queue/redis-streams",
+  "intents_zh": [
+    "Redis Streams consumer group",
+    "XREADGROUP 消費",
+    "XACK 確認",
+    "stream 消費組",
+    "可靠消費"
+  ],
+  "intents_en": [
+    "redis streams consumer group",
+    "xreadgroup consume",
+    "xack acknowledge",
+    "stream consumer group",
+    "reliable consume"
+  ],
+  "slots": [
+    "stream",
+    "group",
+    "consumer"
+  ],
+  "code": "await r.xgroup('CREATE', '{{stream}}', '{{group}}', '$', 'MKSTREAM').catch(() => {});\nwhile (true) {\n  const res = await r.xreadgroup('GROUP', '{{group}}', '{{consumer}}', 'BLOCK', 5000, 'COUNT', 10, 'STREAMS', '{{stream}}', '>');\n  for (const [, entries] of res || []) {\n    for (const [id, fields] of entries) { await handle(fields); await r.xack('{{stream}}', '{{group}}', id); }\n  }\n}",
+  "language": "js",
+  "deps": [
+    "ioredis"
+  ],
+  "summary_zh": "Redis Streams consumer group 消費"
+}

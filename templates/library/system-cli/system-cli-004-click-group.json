@@ -1,0 +1,27 @@
+{
+  "id": "system-cli-004-click-group",
+  "category": "system-cli/python/click",
+  "intents_zh": [
+    "click group 多命令",
+    "click 寫子命令",
+    "click 樹狀 CLI",
+    "click 群組命令"
+  ],
+  "intents_en": [
+    "click command group",
+    "click multi subcommand",
+    "grouped click CLI",
+    "click subcommands"
+  ],
+  "slots": [
+    "group_name",
+    "sub_a",
+    "sub_b"
+  ],
+  "code": "import click\n\n@click.group()\ndef {{group_name}}():\n    \"\"\"{{group_name}} toolkit.\"\"\"\n    pass\n\n@{{group_name}}.command()\n@click.argument('name')\ndef {{sub_a}}(name):\n    click.echo(f'{{sub_a}} {name}')\n\n@{{group_name}}.command()\n@click.argument('name')\ndef {{sub_b}}(name):\n    click.echo(f'{{sub_b}} {name}')\n\nif __name__ == '__main__':\n    {{group_name}}()",
+  "language": "py",
+  "deps": [
+    "click"
+  ],
+  "summary_zh": "click group 多子命令"
+}

@@ -1,0 +1,28 @@
+{
+  "id": "web-backend-025-express-graphql",
+  "category": "web-backend/express/graphql",
+  "intents_zh": [
+    "graphql resolver",
+    "apollo server express",
+    "加 graphql endpoint",
+    "schema + resolver 範例",
+    "express graphql"
+  ],
+  "intents_en": [
+    "graphql resolver apollo",
+    "apollo server express",
+    "graphql endpoint",
+    "schema and resolver",
+    "express graphql api"
+  ],
+  "slots": [
+    "type_name"
+  ],
+  "code": "const { ApolloServer } = require('@apollo/server');\nconst { expressMiddleware } = require('@apollo/server/express4');\n\nconst typeDefs = `#graphql\n  type {{type_name}} { id: ID!, name: String! }\n  type Query { items: [{{type_name}}!]! }\n  type Mutation { add(name: String!): {{type_name}}! }\n`;\n\nconst items = [];\nconst resolvers = {\n  Query: { items: () => items },\n  Mutation: {\n    add: (_, { name }) => {\n      const item = { id: String(items.length + 1), name };\n      items.push(item);\n      return item;\n    }\n  }\n};\n\nasync function makeMiddleware() {\n  const server = new ApolloServer({ typeDefs, resolvers });\n  await server.start();\n  return expressMiddleware(server);\n}\n\nmodule.exports = { makeMiddleware };",
+  "language": "js",
+  "deps": [
+    "@apollo/server",
+    "graphql"
+  ],
+  "summary_zh": "Apollo GraphQL resolver + middleware"
+}

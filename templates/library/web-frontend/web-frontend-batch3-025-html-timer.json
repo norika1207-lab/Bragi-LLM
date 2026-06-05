@@ -1,0 +1,27 @@
+{
+  "id": "web-frontend-batch3-025-html-timer",
+  "category": "web-frontend/html/apps/timer",
+  "intents_zh": [
+    "純 HTML 倒數計時",
+    "vanilla JS timer",
+    "靜態 countdown",
+    "沒 framework 計時器",
+    "HTML+JS 計時",
+    "原生 timer"
+  ],
+  "intents_en": [
+    "plain html timer",
+    "vanilla js countdown",
+    "static timer",
+    "no framework timer",
+    "html js stopwatch",
+    "raw countdown"
+  ],
+  "slots": [
+    "initial_seconds"
+  ],
+  "code": "<!DOCTYPE html>\n<html><head><meta charset=\"utf-8\"><title>Timer</title></head>\n<body>\n  <h1 id=\"display\">00:00</h1>\n  <button id=\"start\">Start</button>\n  <button id=\"pause\">Pause</button>\n  <button id=\"reset\">Reset</button>\n  <script>\n    const INIT = {{initial_seconds}};\n    let left = INIT, id = null;\n    const display = document.getElementById('display');\n    function render() {\n      display.textContent = String(Math.floor(left/60)).padStart(2,'0') + ':' + String(left%60).padStart(2,'0');\n    }\n    document.getElementById('start').onclick = () => {\n      if (id) return;\n      id = setInterval(() => {\n        if (left > 0) { left--; render(); }\n        else { clearInterval(id); id = null; }\n      }, 1000);\n    };\n    document.getElementById('pause').onclick = () => { clearInterval(id); id = null; };\n    document.getElementById('reset').onclick = () => { clearInterval(id); id = null; left = INIT; render(); };\n    render();\n  </script>\n</body></html>",
+  "language": "html",
+  "deps": [],
+  "summary_zh": "純 HTML 倒數計時器"
+}

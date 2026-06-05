@@ -1,0 +1,27 @@
+{
+  "id": "mobile-077-swiftui-swipe",
+  "category": "mobile/swiftui/list",
+  "intents_zh": [
+    "SwiftUI 滑動刪除",
+    "SwiftUI swipeActions",
+    "List 左滑刪除 SwiftUI",
+    "SwiftUI list delete",
+    "swipe to delete SwiftUI",
+    "刪除一列 SwiftUI",
+    "SwiftUI list swipe"
+  ],
+  "intents_en": [
+    "swiftui swipeActions",
+    "swiftui list delete",
+    "swipe to delete swiftui",
+    "list swipe action swiftui",
+    "delete row swiftui",
+    "swiftui swipe row",
+    "swiftui list remove"
+  ],
+  "slots": [],
+  "code": "import SwiftUI\nstruct L:View{@State var items=[\"a\",\"b\",\"c\",\"d\"]\n  var body:some View{List{ForEach(items,id:\\.self){x in Text(x).swipeActions{Button(role:.destructive){items.removeAll{$0==x}}label:{Label(\"Del\",systemImage:\"trash\")}}}}}}",
+  "language": "swift",
+  "deps": [],
+  "summary_zh": "SwiftUI List swipeActions 刪除"
+}

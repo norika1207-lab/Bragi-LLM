@@ -1,0 +1,35 @@
+{
+  "id": "llm-tools-013-faiss-load-search",
+  "category": "llm-tools/vectordb/faiss-load",
+  "intents_zh": [
+    "載入 FAISS index 搜尋",
+    "讀 faiss 檔做查詢",
+    "faiss 載入範例",
+    "faiss search 範例",
+    "已有 index 怎麼查",
+    "load faiss",
+    "faiss query",
+    "查相近向量"
+  ],
+  "intents_en": [
+    "load faiss index",
+    "query existing faiss",
+    "faiss search example",
+    "read faiss file",
+    "reload faiss",
+    "faiss nearest neighbor",
+    "faiss restore",
+    "query faiss"
+  ],
+  "slots": [
+    "index_path",
+    "top_k"
+  ],
+  "code": "import faiss\nimport numpy as np\n\nindex = faiss.read_index(\"{{index_path}}\")\n\ndef search(query: np.ndarray):\n    D, I = index.search(query.astype(\"float32\"), {{top_k}})\n    return list(zip(I[0].tolist(), D[0].tolist()))\n\nif __name__ == \"__main__\":\n    q = np.random.rand(1, index.d)\n    print(search(q))",
+  "language": "py",
+  "deps": [
+    "faiss-cpu",
+    "numpy"
+  ],
+  "summary_zh": "載入既有 FAISS 索引並查詢 top-k"
+}

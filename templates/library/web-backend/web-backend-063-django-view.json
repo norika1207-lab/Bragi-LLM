@@ -1,0 +1,28 @@
+{
+  "id": "web-backend-063-django-view",
+  "category": "web-backend/django/basic",
+  "intents_zh": [
+    "django view 範例",
+    "function based view",
+    "django route + url",
+    "最簡 django 回應",
+    "django hello world"
+  ],
+  "intents_en": [
+    "django view example",
+    "function based view django",
+    "django url + view",
+    "minimal django response",
+    "django hello world"
+  ],
+  "slots": [
+    "app_name",
+    "message"
+  ],
+  "code": "# {{app_name}}/views.py\nfrom django.http import JsonResponse\n\ndef hello(request):\n    return JsonResponse({'message': '{{message}}'})\n\n# {{app_name}}/urls.py\nfrom django.urls import path\nfrom . import views\n\nurlpatterns = [\n    path('hello/', views.hello, name='hello'),\n]",
+  "language": "py",
+  "deps": [
+    "django"
+  ],
+  "summary_zh": "Django function view + url"
+}

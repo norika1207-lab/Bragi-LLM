@@ -1,0 +1,29 @@
+{
+  "id": "firmware-083-esp32-rgb-button-cycle",
+  "category": "firmware/esp32/led",
+  "intents_zh": [
+    "ESP32 按鈕切換顏色",
+    "RGB LED 按鈕循環",
+    "按一下換色",
+    "NeoPixel + button",
+    "mode switch button"
+  ],
+  "intents_en": [
+    "ESP32 button cycle colors",
+    "NeoPixel button mode",
+    "press to change color",
+    "RGB cycle button",
+    "color picker button"
+  ],
+  "slots": [
+    "button_pin",
+    "data_pin",
+    "num_pixels"
+  ],
+  "code": "#include <Adafruit_NeoPixel.h>\nAdafruit_NeoPixel strip({{num_pixels}}, {{data_pin}}, NEO_GRB + NEO_KHZ800);\nconst int BTN = {{button_pin}};\nuint32_t colors[] = {0xFF0000, 0x00FF00, 0x0000FF, 0xFFFFFF};\nint idx = 0;\nint last = HIGH;\n\nvoid setup() {\n  strip.begin();\n  pinMode(BTN, INPUT_PULLUP);\n}\n\nvoid loop() {\n  int r = digitalRead(BTN);\n  if (last == HIGH && r == LOW) {\n    idx = (idx + 1) % 4;\n    strip.fill(colors[idx]); strip.show();\n    delay(150);\n  }\n  last = r;\n}",
+  "language": "ino",
+  "deps": [
+    "Adafruit NeoPixel"
+  ],
+  "summary_zh": "ESP32 按鈕切換 NeoPixel 顏色"
+}

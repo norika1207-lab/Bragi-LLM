@@ -1,0 +1,27 @@
+{
+  "id": "mobile-059-swiftui-camera",
+  "category": "mobile/swiftui/media",
+  "intents_zh": [
+    "SwiftUI 相機",
+    "SwiftUI camera UIImagePickerController",
+    "SwiftUI 拍照",
+    "iOS 拍照 SwiftUI",
+    "camera SwiftUI 範例",
+    "SwiftUI take photo",
+    "拍照畫面 SwiftUI"
+  ],
+  "intents_en": [
+    "swiftui camera",
+    "camera in swiftui",
+    "take photo swiftui",
+    "UIImagePickerController swiftui",
+    "ios capture swiftui",
+    "camera picker swiftui",
+    "swiftui camera capture"
+  ],
+  "slots": [],
+  "code": "import SwiftUI\nimport UIKit\nstruct Cam:UIViewControllerRepresentable{\n  @Binding var img:UIImage?\n  func makeCoordinator()->C{C(self)}\n  func makeUIViewController(context:Context)->UIImagePickerController{let p=UIImagePickerController();p.sourceType = .camera;p.delegate=context.coordinator;return p}\n  func updateUIViewController(_:UIImagePickerController,context:Context){}\n  class C:NSObject,UIImagePickerControllerDelegate,UINavigationControllerDelegate{let p:Cam;init(_ p:Cam){self.p=p}\n    func imagePickerController(_ pc:UIImagePickerController,didFinishPickingMediaWithInfo info:[UIImagePickerController.InfoKey:Any]){p.img=info[.originalImage]as?UIImage;pc.dismiss(animated:true)}}}",
+  "language": "swift",
+  "deps": [],
+  "summary_zh": "SwiftUI 包 UIImagePickerController 相機"
+}

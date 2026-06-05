@@ -1,0 +1,29 @@
+{
+  "id": "mobile-096-compose-share",
+  "category": "mobile/compose/share",
+  "intents_zh": [
+    "Android Compose 系統分享",
+    "Kotlin ACTION_SEND",
+    "Compose share intent",
+    "分享文字 Compose",
+    "Compose share sheet",
+    "Android Kotlin share",
+    "Compose 分享 url"
+  ],
+  "intents_en": [
+    "android compose share intent",
+    "kotlin ACTION_SEND",
+    "compose share sheet",
+    "share text compose",
+    "compose share url",
+    "android share kotlin",
+    "compose system share"
+  ],
+  "slots": [
+    "title"
+  ],
+  "code": "import android.content.Context\nimport android.content.Intent\nfun share(ctx:Context,text:String){\n  val i=Intent(Intent.ACTION_SEND).apply{type=\"text/plain\";putExtra(Intent.EXTRA_TEXT,text)}\n  ctx.startActivity(Intent.createChooser(i,\"{{title}}\"))}",
+  "language": "kt",
+  "deps": [],
+  "summary_zh": "Android Kotlin ACTION_SEND 系統分享"
+}

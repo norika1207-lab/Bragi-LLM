@@ -1,0 +1,25 @@
+{
+  "id": "depth-mobile-029-vision-camera-filter",
+  "category": "mobile/camera/filter-rn",
+  "intents_zh": [
+    "RN vision-camera frame processor",
+    "跨平台相機濾鏡",
+    "useFrameProcessor",
+    "react-native-vision-camera",
+    "即時 frame"
+  ],
+  "intents_en": [
+    "RN vision-camera frame processor",
+    "cross platform filter",
+    "useFrameProcessor",
+    "react-native-vision-camera",
+    "live frame"
+  ],
+  "slots": [],
+  "code": "import { Camera, useCameraDevice, useFrameProcessor } from 'react-native-vision-camera';\nconst device = useCameraDevice('back');\nconst frameProcessor = useFrameProcessor((frame) => {\n  'worklet';\n  // run a custom plugin (e.g., grayscale) on `frame`\n}, []);\nreturn <Camera device={device!} isActive frameProcessor={frameProcessor} style={{flex:1}} />;",
+  "language": "tsx",
+  "deps": [
+    "react-native-vision-camera"
+  ],
+  "summary_zh": "vision-camera frame processor 骨架"
+}

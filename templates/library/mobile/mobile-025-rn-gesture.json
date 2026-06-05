@@ -1,0 +1,30 @@
+{
+  "id": "mobile-025-rn-gesture",
+  "category": "mobile/rn/gesture",
+  "intents_zh": [
+    "RN pan gesture",
+    "React Native 拖曳手勢",
+    "reanimated 拖元件",
+    "RN drag 元件",
+    "手勢拖動 RN",
+    "gesture handler RN 範例",
+    "拖曳方塊 RN"
+  ],
+  "intents_en": [
+    "rn pan gesture",
+    "drag element rn",
+    "reanimated pan rn",
+    "gesture handler example rn",
+    "draggable box rn",
+    "pan responder reanimated",
+    "rn move with finger"
+  ],
+  "slots": [],
+  "code": "import React from 'react';\nimport {GestureDetector,Gesture,GestureHandlerRootView} from 'react-native-gesture-handler';\nimport Animated,{useSharedValue,useAnimatedStyle} from 'react-native-reanimated';\nexport default function D(){\n  const x=useSharedValue(0);const y=useSharedValue(0);\n  const g=Gesture.Pan().onChange(e=>{x.value+=e.changeX;y.value+=e.changeY;});\n  const st=useAnimatedStyle(()=>({transform:[{translateX:x.value},{translateY:y.value}]}));\n  return(<GestureHandlerRootView style={{flex:1}}><GestureDetector gesture={g}><Animated.View style={[{width:80,height:80,backgroundColor:'#0a84ff',borderRadius:12},st]}/></GestureDetector></GestureHandlerRootView>);}",
+  "language": "tsx",
+  "deps": [
+    "react-native-gesture-handler",
+    "react-native-reanimated"
+  ],
+  "summary_zh": "RN reanimated + pan gesture 可拖動方塊"
+}

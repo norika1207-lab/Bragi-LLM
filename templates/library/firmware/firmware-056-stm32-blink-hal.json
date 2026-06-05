@@ -1,0 +1,29 @@
+{
+  "id": "firmware-056-stm32-blink-hal",
+  "category": "firmware/stm32/gpio",
+  "intents_zh": [
+    "STM32 閃 LED",
+    "HAL 庫 GPIO",
+    "STM32 blink",
+    "Nucleo 板閃燈",
+    "stm32 第一支程式"
+  ],
+  "intents_en": [
+    "STM32 HAL blink",
+    "Nucleo LED blink",
+    "STM32 GPIO toggle",
+    "STM32CubeMX blink",
+    "HAL_GPIO_TogglePin"
+  ],
+  "slots": [
+    "gpio_port",
+    "gpio_pin",
+    "delay_ms"
+  ],
+  "code": "#include \"main.h\"\n\nint main(void) {\n  HAL_Init();\n  SystemClock_Config();\n  MX_GPIO_Init();\n  while (1) {\n    HAL_GPIO_TogglePin({{gpio_port}}, {{gpio_pin}});\n    HAL_Delay({{delay_ms}});\n  }\n}",
+  "language": "c",
+  "deps": [
+    "STM32 HAL"
+  ],
+  "summary_zh": "STM32 HAL 庫 LED 閃爍"
+}

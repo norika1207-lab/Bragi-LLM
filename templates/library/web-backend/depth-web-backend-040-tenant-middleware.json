@@ -1,0 +1,25 @@
+{
+  "id": "depth-web-backend-040-tenant-middleware",
+  "category": "web-backend/multi-tenancy/middleware",
+  "intents_zh": [
+    "租戶解析中介層",
+    "subdomain 抓 tenant",
+    "header 帶 tenant",
+    "Express tenant context",
+    "AsyncLocalStorage 存 tenant"
+  ],
+  "intents_en": [
+    "tenant resolve middleware",
+    "subdomain pick tenant",
+    "header tenant",
+    "express tenant context",
+    "asynclocalstorage tenant"
+  ],
+  "slots": [],
+  "code": "import { AsyncLocalStorage } from 'node:async_hooks';\nexport const tenantStore = new AsyncLocalStorage();\nexport function tenantMiddleware(req, res, next) {\n  const tenant = req.headers['x-tenant'] || req.subdomains[0];\n  if (!tenant) return res.status(400).send('no tenant');\n  tenantStore.run({ tenantId: tenant }, () => next());\n}\nexport const currentTenant = () => tenantStore.getStore()?.tenantId;",
+  "language": "js",
+  "deps": [
+    "express"
+  ],
+  "summary_zh": "AsyncLocalStorage 存 tenant context"
+}

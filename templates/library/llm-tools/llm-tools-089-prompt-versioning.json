@@ -1,0 +1,33 @@
+{
+  "id": "llm-tools-089-prompt-versioning",
+  "category": "llm-tools/prompt/versioning",
+  "intents_zh": [
+    "prompt 版本管理",
+    "prompt registry",
+    "版本化 prompt",
+    "prompt 註冊表",
+    "版本控管 prompt",
+    "prompt 多版本",
+    "prompt yaml 載入",
+    "prompt versioning"
+  ],
+  "intents_en": [
+    "prompt versioning",
+    "prompt registry",
+    "version-controlled prompts",
+    "prompt store yaml",
+    "multiple prompt versions",
+    "prompt manager",
+    "load prompts yaml",
+    "prompt catalog"
+  ],
+  "slots": [
+    "yaml_path"
+  ],
+  "code": "import yaml\nfrom pathlib import Path\n\nclass PromptRegistry:\n    def __init__(self, path: str = \"{{yaml_path}}\"):\n        self.data = yaml.safe_load(Path(path).read_text())\n\n    def get(self, name: str, version: str = \"latest\") -> str:\n        entries = self.data[name]\n        if version == \"latest\":\n            version = max(entries.keys())\n        return entries[version]\n\n# yaml format:\n# greet:\n#   v1: \"Say hi to {name}\"\n#   v2: \"Greet {name} warmly\"\n\nif __name__ == \"__main__\":\n    r = PromptRegistry()\n    print(r.get(\"greet\"))",
+  "language": "py",
+  "deps": [
+    "pyyaml"
+  ],
+  "summary_zh": "YAML 版本化 prompt registry"
+}

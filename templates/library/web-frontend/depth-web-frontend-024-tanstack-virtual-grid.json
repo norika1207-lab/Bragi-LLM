@@ -1,0 +1,28 @@
+{
+  "id": "depth-web-frontend-024-tanstack-virtual-grid",
+  "category": "web-frontend/virtualization/tanstack-virtual",
+  "intents_zh": [
+    "虛擬化網格",
+    "virtual grid",
+    "二維 virtualizer",
+    "大量縮圖",
+    "網格 windowing"
+  ],
+  "intents_en": [
+    "virtual grid",
+    "tanstack virtual grid",
+    "2d virtualizer",
+    "thumbnails grid",
+    "windowed grid"
+  ],
+  "slots": [
+    "cols",
+    "cell_size"
+  ],
+  "code": "'use client';\nimport { useVirtualizer } from '@tanstack/react-virtual';\nimport { useRef } from 'react';\n\nexport function VirtualGrid({ items }: { items: any[] }) {\n  const parent = useRef<HTMLDivElement>(null);\n  const rowCount = Math.ceil(items.length / {{cols}});\n  const v = useVirtualizer({ count: rowCount, getScrollElement: () => parent.current, estimateSize: () => {{cell_size}} });\n  return (\n    <div ref={parent} style={{ height: 500, overflow: 'auto' }}>\n      <div style={{ height: v.getTotalSize(), position: 'relative' }}>\n        {v.getVirtualItems().map(r => (\n          <div key={r.key} style={{ position:'absolute', top:0, transform:`translateY(${r.start}px)`, display:'grid', gridTemplateColumns:`repeat({{cols}}, 1fr)`, width:'100%' }}>\n            {items.slice(r.index*{{cols}}, r.index*{{cols}}+{{cols}}).map((it,i) => <div key={i} style={{ height:{{cell_size}} }}>{it.label}</div>)}\n          </div>\n        ))}\n      </div>\n    </div>\n  );\n}",
+  "language": "tsx",
+  "deps": [
+    "@tanstack/react-virtual"
+  ],
+  "summary_zh": "tanstack-virtual 二維網格虛擬化"
+}

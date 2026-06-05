@@ -1,0 +1,34 @@
+{
+  "id": "llm-tools-091-mcp-prompt",
+  "category": "llm-tools/mcp/prompt",
+  "intents_zh": [
+    "MCP prompt 註冊",
+    "fastmcp prompt 範例",
+    "mcp 提供 prompt",
+    "prompt 端註冊 mcp",
+    "mcp prompt template",
+    "給 client 用的 prompt",
+    "mcp prompt handler",
+    "minimal mcp prompt"
+  ],
+  "intents_en": [
+    "mcp prompt registration",
+    "fastmcp prompt example",
+    "expose prompt via mcp",
+    "mcp prompt template",
+    "prompt for mcp client",
+    "mcp prompt handler",
+    "minimal mcp prompt",
+    "prompt endpoint mcp"
+  ],
+  "slots": [
+    "server_name",
+    "prompt_name"
+  ],
+  "code": "from mcp.server.fastmcp import FastMCP\n\nmcp = FastMCP(\"{{server_name}}\")\n\n@mcp.prompt()\ndef {{prompt_name}}(topic: str) -> str:\n    return f\"Write a short poem about {topic}.\"\n\nif __name__ == \"__main__\":\n    mcp.run()",
+  "language": "py",
+  "deps": [
+    "mcp"
+  ],
+  "summary_zh": "FastMCP prompt 模板註冊"
+}

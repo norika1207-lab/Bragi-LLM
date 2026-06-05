@@ -1,0 +1,29 @@
+{
+  "id": "mobile-121-swiftui-webview",
+  "category": "mobile/swiftui/web",
+  "intents_zh": [
+    "SwiftUI WKWebView",
+    "SwiftUI 內嵌網頁",
+    "SwiftUI UIViewRepresentable web",
+    "Swift 嵌瀏覽器",
+    "SwiftUI 顯示 url",
+    "SwiftUI WebView 包裝",
+    "Swift WKWebView 範例"
+  ],
+  "intents_en": [
+    "swiftui WKWebView",
+    "embed webview swiftui",
+    "UIViewRepresentable webview",
+    "swift in app browser",
+    "swiftui show url",
+    "swiftui webview wrapper",
+    "swift WKWebView example"
+  ],
+  "slots": [
+    "page_url"
+  ],
+  "code": "import SwiftUI\nimport WebKit\nstruct Web:UIViewRepresentable{let url:URL\n  func makeUIView(context:Context)->WKWebView{WKWebView()}\n  func updateUIView(_ v:WKWebView,context:Context){v.load(URLRequest(url:url))}}\nstruct V:View{var body:some View{Web(url:URL(string:\"{{page_url}}\")!)}}",
+  "language": "swift",
+  "deps": [],
+  "summary_zh": "SwiftUI 包 WKWebView 顯示網頁"
+}

@@ -1,0 +1,30 @@
+{
+  "id": "web-backend-015-express-oauth",
+  "category": "web-backend/express/auth",
+  "intents_zh": [
+    "Google OAuth login",
+    "加 OAuth 第三方登入",
+    "passport google strategy",
+    "OAuth callback handler",
+    "social login express"
+  ],
+  "intents_en": [
+    "google oauth express",
+    "passport google strategy",
+    "oauth callback handler",
+    "social login flow",
+    "third party login express"
+  ],
+  "slots": [
+    "client_id_env",
+    "client_secret_env",
+    "callback_url"
+  ],
+  "code": "const passport = require('passport');\nconst GoogleStrategy = require('passport-google-oauth20').Strategy;\n\npassport.use(new GoogleStrategy({\n  clientID: process.env.{{client_id_env}},\n  clientSecret: process.env.{{client_secret_env}},\n  callbackURL: '{{callback_url}}'\n}, (accessToken, refreshToken, profile, done) => {\n  // upsert user by profile.id then return\n  return done(null, { id: profile.id, email: profile.emails?.[0]?.value, name: profile.displayName });\n}));\n\npassport.serializeUser((u, cb) => cb(null, u));\npassport.deserializeUser((u, cb) => cb(null, u));\n\nmodule.exports = passport;",
+  "language": "js",
+  "deps": [
+    "passport",
+    "passport-google-oauth20"
+  ],
+  "summary_zh": "Passport Google OAuth 設定"
+}

@@ -1,0 +1,33 @@
+{
+  "id": "depth-algorithm-021-beam-search",
+  "category": "algorithm/search/beam",
+  "intents_zh": [
+    "束搜索",
+    "beam search",
+    "seq2seq 解碼束搜",
+    "top k 路徑搜索",
+    "NLP beam decode",
+    "beam width 解碼",
+    "束搜索模板"
+  ],
+  "intents_en": [
+    "beam search",
+    "seq2seq beam decode",
+    "top k path search",
+    "NLP decoding beam",
+    "beam width search",
+    "language model beam",
+    "beam search template"
+  ],
+  "slots": [
+    "start_state",
+    "expand_fn",
+    "score_fn",
+    "beam_width",
+    "max_steps"
+  ],
+  "code": "def beam_search(start={{start_state}}, expand={{expand_fn}}, score={{score_fn}}, k={{beam_width}}, steps={{max_steps}}):\n    beams = [(0.0, start)]\n    for _ in range(steps):\n        cands = []\n        for s, state in beams:\n            for next_state in expand(state):\n                cands.append((s + score(state, next_state), next_state))\n        if not cands: break\n        beams = sorted(cands, key=lambda x: -x[0])[:k]\n    return beams",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "通用束搜索保留 top-k 候選路徑"
+}

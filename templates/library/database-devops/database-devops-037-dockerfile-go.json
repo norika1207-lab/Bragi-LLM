@@ -1,0 +1,23 @@
+{
+  "id": "database-devops-037-dockerfile-go",
+  "category": "database-devops/docker/dockerfile",
+  "intents_zh": [
+    "Go Dockerfile",
+    "golang 多階段 build",
+    "go 容器最小化"
+  ],
+  "intents_en": [
+    "go dockerfile",
+    "golang multi-stage",
+    "minimal go container"
+  ],
+  "slots": [
+    "go_version",
+    "binary_name",
+    "port"
+  ],
+  "code": "FROM golang:{{go_version}}-alpine AS build\nWORKDIR /src\nCOPY go.mod go.sum ./\nRUN go mod download\nCOPY . .\nRUN CGO_ENABLED=0 GOOS=linux go build -ldflags=\"-s -w\" -o /out/{{binary_name}} ./cmd/{{binary_name}}\n\nFROM gcr.io/distroless/static-debian12\nCOPY --from=build /out/{{binary_name}} /{{binary_name}}\nEXPOSE {{port}}\nENTRYPOINT [\"/{{binary_name}}\"]",
+  "language": "dockerfile",
+  "deps": [],
+  "summary_zh": "Go distroless 多階段 Dockerfile"
+}

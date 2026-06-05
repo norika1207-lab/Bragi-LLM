@@ -1,0 +1,30 @@
+{
+  "id": "mobile-032-flutter-camera",
+  "category": "mobile/flutter/media",
+  "intents_zh": [
+    "Flutter 相機拍照",
+    "flutter camera 拍張",
+    "flutter 開相機 source",
+    "image_picker camera flutter",
+    "拍照 flutter",
+    "flutter take picture",
+    "camera capture flutter"
+  ],
+  "intents_en": [
+    "flutter camera capture",
+    "flutter take photo",
+    "image_picker camera",
+    "flutter open camera",
+    "capture image flutter",
+    "flutter shoot picture",
+    "take picture flutter"
+  ],
+  "slots": [],
+  "code": "import 'dart:io';\nimport 'package:flutter/material.dart';\nimport 'package:image_picker/image_picker.dart';\nclass Cam extends StatefulWidget{const Cam({super.key});@override State<Cam> createState()=>_C();}\nclass _C extends State<Cam>{File? f;\n  Future<void> shoot()async{final r=await ImagePicker().pickImage(source:ImageSource.camera,imageQuality:80);if(r!=null)setState(()=>f=File(r.path));}\n  @override Widget build(BuildContext c)=>Scaffold(body:Center(child:Column(mainAxisSize:MainAxisSize.min,children:[ElevatedButton(onPressed:shoot,child:const Text('Shoot')),if(f!=null)Image.file(f!,width:240)])));}",
+  "language": "dart",
+  "deps": [
+    "image_picker",
+    "flutter"
+  ],
+  "summary_zh": "Flutter 開相機拍一張照"
+}

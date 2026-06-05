@@ -1,0 +1,29 @@
+{
+  "id": "mobile-006-rn-push",
+  "category": "mobile/rn/push",
+  "intents_zh": [
+    "RN 推播註冊",
+    "React Native push notification",
+    "拿推播 token",
+    "expo notifications",
+    "RN 註冊推播",
+    "推播權限 RN",
+    "設定 push RN"
+  ],
+  "intents_en": [
+    "RN register push",
+    "expo push token",
+    "react native notifications",
+    "setup push rn",
+    "get push token",
+    "notifications permission rn",
+    "push notification rn"
+  ],
+  "slots": [],
+  "code": "import * as Notifications from 'expo-notifications';\nimport {useEffect,useState} from 'react';\nimport {Text,View} from 'react-native';\nNotifications.setNotificationHandler({handleNotification:async()=>({shouldShowAlert:true,shouldPlaySound:true,shouldSetBadge:false})});\nexport default function Push(){\n  const[t,setT]=useState('');\n  useEffect(()=>{(async()=>{const p=await Notifications.requestPermissionsAsync();if(!p.granted)return;\n    const x=await Notifications.getExpoPushTokenAsync();setT(x.data);})();},[]);\n  return(<View style={{padding:24}}><Text selectable>{t}</Text></View>);}",
+  "language": "tsx",
+  "deps": [
+    "expo-notifications"
+  ],
+  "summary_zh": "Expo 取得推播 token 並設置通知 handler"
+}

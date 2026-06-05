@@ -1,0 +1,36 @@
+{
+  "id": "llm-tools-108-quantize-bnb",
+  "category": "llm-tools/quantize/bnb",
+  "intents_zh": [
+    "bitsandbytes 量化載入",
+    "4bit 載入模型",
+    "bnb quantization",
+    "用 bnb 4bit",
+    "低顯存載入",
+    "NF4 量化",
+    "BitsAndBytesConfig",
+    "4-bit transformers"
+  ],
+  "intents_en": [
+    "bitsandbytes 4bit load",
+    "bnb quantization",
+    "load 4bit model",
+    "low vram load",
+    "nf4 quantize",
+    "bitsandbytesconfig",
+    "4-bit transformers",
+    "quantized model load"
+  ],
+  "slots": [
+    "model_id"
+  ],
+  "code": "from transformers import AutoModelForCausalLM, BitsAndBytesConfig, AutoTokenizer\nimport torch\n\nbnb = BitsAndBytesConfig(\n    load_in_4bit=True,\n    bnb_4bit_quant_type=\"nf4\",\n    bnb_4bit_compute_dtype=torch.bfloat16,\n)\nmodel = AutoModelForCausalLM.from_pretrained(\"{{model_id}}\", quantization_config=bnb, device_map=\"auto\")\ntok = AutoTokenizer.from_pretrained(\"{{model_id}}\")\n\nids = tok(\"hello\", return_tensors=\"pt\").to(model.device)\nprint(tok.decode(model.generate(**ids, max_new_tokens=20)[0]))",
+  "language": "py",
+  "deps": [
+    "transformers",
+    "bitsandbytes",
+    "torch",
+    "accelerate"
+  ],
+  "summary_zh": "bitsandbytes 4bit NF4 載入"
+}

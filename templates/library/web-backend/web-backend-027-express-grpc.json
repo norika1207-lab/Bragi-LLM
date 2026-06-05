@@ -1,0 +1,30 @@
+{
+  "id": "web-backend-027-express-grpc",
+  "category": "web-backend/express/rpc",
+  "intents_zh": [
+    "grpc node server",
+    "加 rpc server",
+    "node grpc 範例",
+    "proto + server",
+    "grpc unary rpc"
+  ],
+  "intents_en": [
+    "grpc node server",
+    "rpc server node",
+    "grpc unary example",
+    "proto loader server",
+    "node grpc service"
+  ],
+  "slots": [
+    "proto_path",
+    "service_name",
+    "grpc_port"
+  ],
+  "code": "const grpc = require('@grpc/grpc-js');\nconst protoLoader = require('@grpc/proto-loader');\n\nconst pkgDef = protoLoader.loadSync('{{proto_path}}');\nconst proto = grpc.loadPackageDefinition(pkgDef);\n\nconst server = new grpc.Server();\nserver.addService(proto.{{service_name}}.service, {\n  Echo: (call, cb) => cb(null, { message: 'echo: ' + call.request.message })\n});\n\nserver.bindAsync('0.0.0.0:{{grpc_port}}', grpc.ServerCredentials.createInsecure(), () => {\n  server.start();\n  console.log('grpc on {{grpc_port}}');\n});",
+  "language": "js",
+  "deps": [
+    "@grpc/grpc-js",
+    "@grpc/proto-loader"
+  ],
+  "summary_zh": "Node gRPC server"
+}

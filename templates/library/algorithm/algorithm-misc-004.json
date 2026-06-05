@@ -1,0 +1,21 @@
+{
+  "id": "algorithm-misc-004",
+  "category": "algorithm/misc/topk_heap",
+  "intents_zh": [
+    "Top K 元素",
+    "heap top k",
+    "給我 top k"
+  ],
+  "intents_en": [
+    "top k elements",
+    "heap top k",
+    "largest k"
+  ],
+  "slots": [
+    "fn_name"
+  ],
+  "code": "import heapq\n\ndef {{fn_name}}(arr, k):\n    return heapq.nlargest(k, arr)",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "heap 取前 k 大"
+}

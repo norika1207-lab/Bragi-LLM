@@ -1,0 +1,29 @@
+{
+  "id": "depth-web-frontend-025-rhf-zod-form",
+  "category": "web-frontend/forms/react-hook-form",
+  "intents_zh": [
+    "react-hook-form + zod",
+    "表單驗證",
+    "zodResolver",
+    "型別安全 form",
+    "RHF 範例"
+  ],
+  "intents_en": [
+    "react-hook-form zod",
+    "zodResolver form",
+    "typed form react",
+    "form validation zod",
+    "rhf example"
+  ],
+  "slots": [
+    "form_name"
+  ],
+  "code": "'use client';\nimport { useForm } from 'react-hook-form';\nimport { zodResolver } from '@hookform/resolvers/zod';\nimport { z } from 'zod';\n\nconst schema = z.object({\n  email: z.string().email(),\n  password: z.string().min(8),\n});\ntype Data = z.infer<typeof schema>;\n\nexport function {{form_name}}() {\n  const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<Data>({ resolver: zodResolver(schema) });\n  return (\n    <form onSubmit={handleSubmit(async (d) => { await fetch('/api/login', { method:'POST', body: JSON.stringify(d) }); })}>\n      <input {...register('email')} placeholder=\"email\" />\n      {errors.email && <p>{errors.email.message}</p>}\n      <input type=\"password\" {...register('password')} />\n      {errors.password && <p>{errors.password.message}</p>}\n      <button disabled={isSubmitting}>登入</button>\n    </form>\n  );\n}",
+  "language": "tsx",
+  "deps": [
+    "react-hook-form",
+    "zod",
+    "@hookform/resolvers"
+  ],
+  "summary_zh": "RHF + zod 型別安全登入表單"
+}

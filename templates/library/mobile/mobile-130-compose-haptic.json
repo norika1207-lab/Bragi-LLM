@@ -1,0 +1,29 @@
+{
+  "id": "mobile-130-compose-haptic",
+  "category": "mobile/compose/feedback",
+  "intents_zh": [
+    "Compose haptic",
+    "Compose 震動回饋",
+    "Compose LocalHapticFeedback",
+    "Android Compose vibrate",
+    "Compose 按鈕震動",
+    "Compose tap feedback",
+    "Kotlin haptic Compose"
+  ],
+  "intents_en": [
+    "compose haptic feedback",
+    "compose LocalHapticFeedback",
+    "android compose vibrate",
+    "compose button haptic",
+    "compose tap feedback",
+    "kotlin haptic compose",
+    "jetpack compose vibrate"
+  ],
+  "slots": [],
+  "code": "import androidx.compose.material3.Button\nimport androidx.compose.material3.Text\nimport androidx.compose.runtime.Composable\nimport androidx.compose.ui.hapticfeedback.HapticFeedbackType\nimport androidx.compose.ui.platform.LocalHapticFeedback\n@Composable\nfun H(){\n  val h=LocalHapticFeedback.current\n  Button(onClick={h.performHapticFeedback(HapticFeedbackType.LongPress)}){Text(\"Tap\")}}",
+  "language": "kt",
+  "deps": [
+    "androidx.compose.material3"
+  ],
+  "summary_zh": "Compose LocalHapticFeedback 震動回饋"
+}

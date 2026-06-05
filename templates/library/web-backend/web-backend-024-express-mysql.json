@@ -1,0 +1,29 @@
+{
+  "id": "web-backend-024-express-mysql",
+  "category": "web-backend/express/db",
+  "intents_zh": [
+    "接 mysql",
+    "mysql2 pool 範例",
+    "node 連 mysql",
+    "mysql 連線池",
+    "mysql query helper"
+  ],
+  "intents_en": [
+    "mysql connection node",
+    "mysql2 pool",
+    "connect mysql node",
+    "mysql query helper",
+    "node mysql client"
+  ],
+  "slots": [
+    "host",
+    "db_name",
+    "user"
+  ],
+  "code": "const mysql = require('mysql2/promise');\n\nconst pool = mysql.createPool({\n  host: '{{host}}',\n  user: '{{user}}',\n  password: process.env.DB_PASSWORD,\n  database: '{{db_name}}',\n  waitForConnections: true,\n  connectionLimit: 10,\n  queueLimit: 0\n});\n\nasync function query(sql, params) {\n  const [rows] = await pool.execute(sql, params);\n  return rows;\n}\n\nmodule.exports = { pool, query };",
+  "language": "js",
+  "deps": [
+    "mysql2"
+  ],
+  "summary_zh": "mysql2 連線池與查詢"
+}

@@ -1,0 +1,25 @@
+{
+  "id": "depth-llm-tools-032-model-router-by-task",
+  "category": "llm-tools/router/task",
+  "intents_zh": [
+    "任務類型路由模型",
+    "按任務分派 model",
+    "intent-based router",
+    "推理 vs 摘要分流",
+    "model routing rule"
+  ],
+  "intents_en": [
+    "task-type model routing",
+    "route by task intent",
+    "intent-based router",
+    "reasoning vs summarise split",
+    "model routing rule"
+  ],
+  "slots": [
+    "task_type"
+  ],
+  "code": "ROUTE = {\n    \"reasoning\": \"claude-3-5-sonnet\",\n    \"summarise\": \"gpt-4o-mini\",\n    \"classify\": \"gpt-4o-mini\",\n    \"code\": \"claude-3-5-sonnet\",\n    \"chat\": \"gpt-4o\",\n}\n\ndef route({{task_type}}):\n    return ROUTE.get({{task_type}}, \"gpt-4o-mini\")",
+  "language": "python",
+  "deps": [],
+  "summary_zh": "任務類型查表決定 model id"
+}

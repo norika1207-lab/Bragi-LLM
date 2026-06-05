@@ -1,0 +1,28 @@
+{
+  "id": "web-backend-061-fastapi-pdf",
+  "category": "web-backend/fastapi/export",
+  "intents_zh": [
+    "fastapi 產 PDF",
+    "reportlab fastapi",
+    "下載 pdf fastapi",
+    "PDF endpoint fastapi",
+    "fastapi 生報表"
+  ],
+  "intents_en": [
+    "fastapi pdf reportlab",
+    "generate pdf fastapi",
+    "download pdf fastapi",
+    "pdf endpoint fastapi",
+    "report pdf fastapi"
+  ],
+  "slots": [
+    "title"
+  ],
+  "code": "from fastapi import APIRouter\nfrom fastapi.responses import StreamingResponse\nfrom reportlab.pdfgen import canvas\nimport io\n\nrouter = APIRouter()\n\n@router.get('/pdf')\ndef pdf():\n    buf = io.BytesIO()\n    c = canvas.Canvas(buf)\n    c.setFont('Helvetica-Bold', 18)\n    c.drawString(100, 800, '{{title}}')\n    c.showPage()\n    c.save()\n    buf.seek(0)\n    return StreamingResponse(buf, media_type='application/pdf',\n        headers={'Content-Disposition': 'attachment; filename=report.pdf'})",
+  "language": "py",
+  "deps": [
+    "fastapi",
+    "reportlab"
+  ],
+  "summary_zh": "FastAPI ReportLab PDF"
+}

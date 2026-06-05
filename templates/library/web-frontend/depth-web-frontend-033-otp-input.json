@@ -1,0 +1,28 @@
+{
+  "id": "depth-web-frontend-033-otp-input",
+  "category": "web-frontend/inputs/otp",
+  "intents_zh": [
+    "OTP 驗證碼輸入",
+    "6 碼一次性密碼",
+    "input-otp 元件",
+    "驗證碼欄位",
+    "2FA 輸入"
+  ],
+  "intents_en": [
+    "OTP input component",
+    "6 digit code input",
+    "input-otp",
+    "2fa code input",
+    "one time code"
+  ],
+  "slots": [
+    "component_name",
+    "length"
+  ],
+  "code": "'use client';\nimport { OTPInput, SlotProps } from 'input-otp';\n\nfunction Slot(p: SlotProps) {\n  return <div className={`w-10 h-12 border rounded flex items-center justify-center ${p.isActive ? 'ring-2 ring-blue-500':''}`}>{p.char ?? ''}</div>;\n}\n\nexport function {{component_name}}({ onComplete }: { onComplete: (v: string) => void }) {\n  return (\n    <OTPInput maxLength={ {{length}} } onComplete={onComplete} render={({ slots }) => (\n      <div className=\"flex gap-2\">{slots.map((s, i) => <Slot key={i} {...s} />)}</div>\n    )} />\n  );\n}",
+  "language": "tsx",
+  "deps": [
+    "input-otp"
+  ],
+  "summary_zh": "input-otp 一次性密碼輸入"
+}

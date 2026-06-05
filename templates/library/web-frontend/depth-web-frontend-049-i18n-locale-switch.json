@@ -1,0 +1,28 @@
+{
+  "id": "depth-web-frontend-049-i18n-locale-switch",
+  "category": "web-frontend/i18n/locale-switcher",
+  "intents_zh": [
+    "語言切換器",
+    "locale 切換 UI",
+    "Next router locale",
+    "下拉切換語系",
+    "i18n switch"
+  ],
+  "intents_en": [
+    "locale switcher",
+    "language switch dropdown",
+    "next router locale",
+    "i18n switch component",
+    "change locale"
+  ],
+  "slots": [
+    "component_name",
+    "locales"
+  ],
+  "code": "'use client';\nimport { useRouter, usePathname } from 'next/navigation';\n\nconst LOCALES = {{locales}} as const;\n\nexport function {{component_name}}({ current }: { current: string }) {\n  const router = useRouter();\n  const path = usePathname();\n  function change(next: string) {\n    const segs = path.split('/'); segs[1] = next;\n    router.push(segs.join('/'));\n  }\n  return (\n    <select value={current} onChange={e => change(e.target.value)}>\n      {LOCALES.map(l => <option key={l} value={l}>{l}</option>)}\n    </select>\n  );\n}",
+  "language": "tsx",
+  "deps": [
+    "next"
+  ],
+  "summary_zh": "Next.js locale 切換下拉"
+}

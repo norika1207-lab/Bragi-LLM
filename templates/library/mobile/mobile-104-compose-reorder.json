@@ -1,0 +1,29 @@
+{
+  "id": "mobile-104-compose-reorder",
+  "category": "mobile/compose/list",
+  "intents_zh": [
+    "Compose reorderable list",
+    "Compose 拖曳重排",
+    "Compose drag reorder",
+    "Compose sortable LazyColumn",
+    "Compose 拖拉順序",
+    "Compose 重排清單",
+    "reorderable Compose"
+  ],
+  "intents_en": [
+    "compose reorderable list",
+    "compose drag reorder",
+    "sortable LazyColumn compose",
+    "compose drag rows",
+    "compose move items",
+    "reorderable compose lib",
+    "jetpack compose sort"
+  ],
+  "slots": [],
+  "code": "import androidx.compose.foundation.lazy.LazyColumn\nimport androidx.compose.foundation.lazy.items\nimport androidx.compose.foundation.lazy.rememberLazyListState\nimport androidx.compose.material3.*\nimport androidx.compose.runtime.*\nimport org.burnoutcrew.reorderable.*\n@Composable\nfun R(){\n  var items by remember{mutableStateOf(List(8){\"row $it\"})}\n  val st=rememberReorderableLazyListState(onMove={f,t->items=items.toMutableList().apply{add(t.index,removeAt(f.index))}})\n  LazyColumn(state=st.listState,modifier=androidx.compose.ui.Modifier.reorderable(st).detectReorderAfterLongPress(st)){items(items,key={it}){x->ReorderableItem(st,key=x){_->ListItem(headlineContent={Text(x)})}}}}",
+  "language": "kt",
+  "deps": [
+    "org.burnoutcrew.composereorderable:reorderable"
+  ],
+  "summary_zh": "Compose reorderable LazyColumn 拖曳重排"
+}

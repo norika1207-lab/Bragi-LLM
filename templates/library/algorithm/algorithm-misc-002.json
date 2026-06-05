@@ -1,0 +1,23 @@
+{
+  "id": "algorithm-misc-002",
+  "category": "algorithm/misc/quickselect",
+  "intents_zh": [
+    "quickselect",
+    "第 k 小",
+    "給我 quickselect",
+    "O(n) 找 kth"
+  ],
+  "intents_en": [
+    "quickselect",
+    "kth smallest",
+    "quickselect algorithm",
+    "find kth"
+  ],
+  "slots": [
+    "fn_name"
+  ],
+  "code": "import random\n\ndef {{fn_name}}(arr, k):\n    arr = list(arr)\n    lo, hi = 0, len(arr) - 1\n    while lo < hi:\n        pivot = arr[random.randint(lo, hi)]\n        i, j = lo, hi\n        while i <= j:\n            while arr[i] < pivot: i += 1\n            while arr[j] > pivot: j -= 1\n            if i <= j:\n                arr[i], arr[j] = arr[j], arr[i]\n                i += 1; j -= 1\n        if k <= j: hi = j\n        elif k >= i: lo = i\n        else: return arr[k]\n    return arr[k]",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "快速選取第 k 小元素"
+}

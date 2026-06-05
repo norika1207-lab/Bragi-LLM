@@ -1,0 +1,29 @@
+{
+  "id": "web-frontend-batch3-015-svelte-timer",
+  "category": "web-frontend/svelte/apps/timer",
+  "intents_zh": [
+    "Svelte 倒數計時器",
+    "Svelte countdown",
+    "Svelte timer 元件",
+    "Svelte 計時",
+    "Svelte 番茄鐘",
+    "Svelte 分秒計時"
+  ],
+  "intents_en": [
+    "svelte countdown timer",
+    "svelte timer component",
+    "svelte pomodoro",
+    "svelte minute counter",
+    "svelte time down",
+    "svelte stopwatch"
+  ],
+  "slots": [
+    "initial_seconds"
+  ],
+  "code": "<script>\n  import { onDestroy } from 'svelte';\n  let left = {{initial_seconds}};\n  let id = null;\n  function start() {\n    if (id) return;\n    id = setInterval(() => {\n      if (left > 0) left--;\n      else { clearInterval(id); id = null; }\n    }, 1000);\n  }\n  function pause() { clearInterval(id); id = null; }\n  function reset() { pause(); left = {{initial_seconds}}; }\n  onDestroy(pause);\n</script>\n<h2>{Math.floor(left/60)}:{String(left%60).padStart(2,'0')}</h2>\n<button on:click={start}>Start</button>\n<button on:click={pause}>Pause</button>\n<button on:click={reset}>Reset</button>",
+  "language": "svelte",
+  "deps": [
+    "svelte"
+  ],
+  "summary_zh": "Svelte 倒數計時器"
+}

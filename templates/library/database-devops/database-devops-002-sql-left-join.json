@@ -1,0 +1,30 @@
+{
+  "id": "database-devops-002-sql-left-join",
+  "category": "database-devops/sql/joins",
+  "intents_zh": [
+    "left join 範本",
+    "左連接保留左表全部",
+    "撈所有用戶連同他們的訂單",
+    "SQL 左外連接",
+    "left outer join 寫法",
+    "所有客戶包括沒下單的"
+  ],
+  "intents_en": [
+    "left join template",
+    "left outer join",
+    "keep all rows from left table",
+    "users with optional orders",
+    "left join with nulls",
+    "all customers even without orders"
+  ],
+  "slots": [
+    "left_table",
+    "right_table",
+    "left_key",
+    "right_key"
+  ],
+  "code": "SELECT l.*, r.*\nFROM {{left_table}} AS l\nLEFT JOIN {{right_table}} AS r\n  ON l.{{left_key}} = r.{{right_key}};",
+  "language": "sql",
+  "deps": [],
+  "summary_zh": "左外連接保留左表全部"
+}

@@ -1,0 +1,33 @@
+{
+  "id": "mobile-046-flutter-onboard",
+  "category": "mobile/flutter/onboarding",
+  "intents_zh": [
+    "Flutter 引導頁",
+    "flutter onboarding 三頁",
+    "flutter PageView 教學",
+    "新手引導 flutter",
+    "flutter intro slides",
+    "flutter swipe pages",
+    "onboarding 範例 flutter"
+  ],
+  "intents_en": [
+    "flutter onboarding",
+    "flutter PageView intro",
+    "intro slides flutter",
+    "first launch flutter",
+    "onboarding pages flutter",
+    "flutter swipe intro",
+    "flutter walkthrough"
+  ],
+  "slots": [
+    "title1",
+    "title2",
+    "title3"
+  ],
+  "code": "import 'package:flutter/material.dart';\nclass On extends StatelessWidget{final VoidCallback onDone;const On({super.key,required this.onDone});\n  @override Widget build(BuildContext c){final titles=['{{title1}}','{{title2}}','{{title3}}'];\n    return Scaffold(body:PageView(children:[for(final t in titles)Center(child:Text(t,style:const TextStyle(fontSize:28)))]),floatingActionButton:FloatingActionButton(onPressed:onDone,child:const Icon(Icons.check)));}}",
+  "language": "dart",
+  "deps": [
+    "flutter"
+  ],
+  "summary_zh": "Flutter PageView 三頁 onboarding"
+}

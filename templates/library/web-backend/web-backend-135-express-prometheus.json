@@ -1,0 +1,26 @@
+{
+  "id": "web-backend-135-express-prometheus",
+  "category": "web-backend/express/observability",
+  "intents_zh": [
+    "express prometheus metrics",
+    "加 /metrics endpoint",
+    "prom-client 範例",
+    "express 監控指標",
+    "prometheus default metrics"
+  ],
+  "intents_en": [
+    "express prometheus metrics",
+    "metrics endpoint express",
+    "prom-client example",
+    "express monitoring",
+    "default metrics prometheus"
+  ],
+  "slots": [],
+  "code": "const express = require('express');\nconst client = require('prom-client');\n\nconst register = new client.Registry();\nclient.collectDefaultMetrics({ register });\n\nconst httpDuration = new client.Histogram({\n  name: 'http_request_duration_seconds',\n  help: 'http duration',\n  labelNames: ['method', 'route', 'status'],\n  registers: [register]\n});\n\nfunction metricsMiddleware(req, res, next) {\n  const end = httpDuration.startTimer();\n  res.on('finish', () => end({ method: req.method, route: req.route?.path || req.path, status: res.statusCode }));\n  next();\n}\n\nconst metricsRouter = express.Router();\nmetricsRouter.get('/metrics', async (req, res) => {\n  res.set('Content-Type', register.contentType);\n  res.end(await register.metrics());\n});\n\nmodule.exports = { metricsMiddleware, metricsRouter };",
+  "language": "js",
+  "deps": [
+    "express",
+    "prom-client"
+  ],
+  "summary_zh": "Express Prometheus metrics"
+}

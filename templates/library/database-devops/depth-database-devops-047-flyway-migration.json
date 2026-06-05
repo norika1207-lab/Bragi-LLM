@@ -1,0 +1,24 @@
+{
+  "id": "depth-database-devops-047-flyway-migration",
+  "category": "database-devops/db/migration",
+  "intents_zh": [
+    "flyway 遷移腳本",
+    "V1__init.sql",
+    "schema 版控"
+  ],
+  "intents_en": [
+    "flyway migration",
+    "V1__init.sql",
+    "schema versioning"
+  ],
+  "slots": [
+    "version",
+    "description"
+  ],
+  "code": "-- V{{version}}__{{description}}.sql\nBEGIN;\n\nCREATE TABLE IF NOT EXISTS app_user (\n    id          BIGSERIAL PRIMARY KEY,\n    email       TEXT NOT NULL UNIQUE,\n    created_at  TIMESTAMPTZ NOT NULL DEFAULT now()\n);\n\nCREATE INDEX IF NOT EXISTS idx_app_user_email ON app_user(email);\n\nCOMMIT;",
+  "language": "sql",
+  "deps": [
+    "flyway"
+  ],
+  "summary_zh": "flyway V?__desc.sql 範本,交易包覆"
+}

@@ -1,0 +1,24 @@
+{
+  "id": "database-devops-031-alembic-env",
+  "category": "database-devops/migration/alembic",
+  "intents_zh": [
+    "alembic env.py",
+    "alembic 設定 metadata",
+    "alembic 自動偵測"
+  ],
+  "intents_en": [
+    "alembic env.py",
+    "alembic metadata target",
+    "alembic autogenerate setup"
+  ],
+  "slots": [
+    "models_module"
+  ],
+  "code": "from logging.config import fileConfig\nfrom sqlalchemy import engine_from_config, pool\nfrom alembic import context\nfrom {{models_module}} import Base\n\nconfig = context.config\nfileConfig(config.config_file_name)\ntarget_metadata = Base.metadata\n\ndef run_migrations_online():\n    connectable = engine_from_config(config.get_section(config.config_ini_section), prefix='sqlalchemy.', poolclass=pool.NullPool)\n    with connectable.connect() as connection:\n        context.configure(connection=connection, target_metadata=target_metadata)\n        with context.begin_transaction():\n            context.run_migrations()\n\nrun_migrations_online()",
+  "language": "py",
+  "deps": [
+    "alembic",
+    "sqlalchemy"
+  ],
+  "summary_zh": "Alembic env.py 連線設定"
+}

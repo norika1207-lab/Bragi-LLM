@@ -1,0 +1,29 @@
+{
+  "id": "depth-algorithm-054-dancing-links",
+  "category": "algorithm/search/dlx",
+  "intents_zh": [
+    "dancing links",
+    "DLX 算法",
+    "精確覆蓋",
+    "Knuth Algorithm X",
+    "數獨 DLX",
+    "exact cover DLX",
+    "DLX 模板"
+  ],
+  "intents_en": [
+    "dancing links DLX",
+    "exact cover algorithm",
+    "Knuth algorithm X",
+    "sudoku DLX",
+    "DLX template",
+    "exact cover solver",
+    "dancing links exact"
+  ],
+  "slots": [
+    "matrix"
+  ],
+  "code": "def algorithm_x(matrix={{matrix}}):\n    rows = {i: set(j for j, v in enumerate(row) if v) for i, row in enumerate(matrix)}\n    cols = {j: set(i for i in rows if j in rows[i]) for j in range(len(matrix[0]))}\n    solution = []\n    def solve():\n        if not cols: return True\n        c = min(cols, key=lambda x: len(cols[x]))\n        if not cols[c]: return False\n        for r in list(cols[c]):\n            solution.append(r)\n            removed_cols = []\n            for j in rows[r]:\n                for i in cols[j]:\n                    for k in rows[i]:\n                        if k != j: cols[k].discard(i)\n                removed_cols.append((j, cols.pop(j)))\n            if solve(): return True\n            for j, col in reversed(removed_cols):\n                cols[j] = col\n                for i in col:\n                    for k in rows[i]:\n                        if k != j: cols[k].add(i)\n            solution.pop()\n        return False\n    return solution if solve() else None",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "Knuth Algorithm X 解精確覆蓋問題"
+}

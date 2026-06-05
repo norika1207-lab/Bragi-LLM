@@ -1,0 +1,27 @@
+{
+  "id": "web-frontend-batch2-007-sheet-bottom",
+  "category": "web-frontend/react/layout/sheet-bottom",
+  "intents_zh": [
+    "底部 sheet",
+    "bottom sheet",
+    "手機底部彈出",
+    "action sheet",
+    "下拉操作面板",
+    "底部選單"
+  ],
+  "intents_en": [
+    "bottom sheet",
+    "mobile bottom panel",
+    "action sheet",
+    "slide-up panel",
+    "bottom drawer",
+    "mobile menu sheet"
+  ],
+  "slots": [
+    "title"
+  ],
+  "code": "import { useState } from 'react';\n\nexport function BottomSheet({ children }) {\n  const [open, setOpen] = useState(false);\n  return (\n    <>\n      <button onClick={() => setOpen(true)} className=\"rounded bg-black px-4 py-2 text-white\">Open Sheet</button>\n      {open && (\n        <div className=\"fixed inset-0 z-50\">\n          <div className=\"absolute inset-0 bg-black/40\" onClick={() => setOpen(false)} />\n          <div className=\"absolute bottom-0 left-0 right-0 rounded-t-2xl bg-white p-6 shadow-xl\">\n            <div className=\"mx-auto mb-4 h-1 w-12 rounded bg-gray-300\" />\n            <h2 className=\"mb-3 text-lg font-semibold\">{{title}}</h2>\n            {children}\n          </div>\n        </div>\n      )}\n    </>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "行動裝置底部 sheet"
+}

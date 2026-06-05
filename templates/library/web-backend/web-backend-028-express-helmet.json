@@ -1,0 +1,27 @@
+{
+  "id": "web-backend-028-express-helmet",
+  "category": "web-backend/express/security",
+  "intents_zh": [
+    "express helmet 安全 headers",
+    "加 security middleware",
+    "helmet 設定",
+    "content security policy",
+    "express secure headers"
+  ],
+  "intents_en": [
+    "helmet express security",
+    "security headers express",
+    "helmet middleware",
+    "CSP setup express",
+    "secure http headers"
+  ],
+  "slots": [
+    "csp_origin"
+  ],
+  "code": "const helmet = require('helmet');\n\nmodule.exports = helmet({\n  contentSecurityPolicy: {\n    directives: {\n      defaultSrc: [\"'self'\"],\n      scriptSrc: [\"'self'\", '{{csp_origin}}'],\n      imgSrc: [\"'self'\", 'data:', 'https:']\n    }\n  },\n  crossOriginEmbedderPolicy: false\n});",
+  "language": "js",
+  "deps": [
+    "helmet"
+  ],
+  "summary_zh": "Helmet 安全 headers 與 CSP"
+}

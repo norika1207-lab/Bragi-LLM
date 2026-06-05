@@ -1,0 +1,30 @@
+{
+  "id": "depth-algorithm-006-fenwick-2d",
+  "category": "algorithm/bit/2d",
+  "intents_zh": [
+    "二維樹狀數組",
+    "2D BIT",
+    "矩陣前綴和動態",
+    "二維單點更新",
+    "平面 BIT",
+    "2D Fenwick",
+    "矩形求和"
+  ],
+  "intents_en": [
+    "2D Fenwick tree",
+    "2D BIT",
+    "matrix prefix sum dynamic",
+    "two dimensional BIT",
+    "2D range sum point update",
+    "plane BIT",
+    "grid Fenwick"
+  ],
+  "slots": [
+    "n",
+    "m"
+  ],
+  "code": "class BIT2D:\n    def __init__(self, n={{n}}, m={{m}}):\n        self.n, self.m = n, m\n        self.t = [[0]*(m+1) for _ in range(n+1)]\n    def update(self, x, y, v):\n        x += 1; i = x\n        while i <= self.n:\n            j = y + 1\n            while j <= self.m:\n                self.t[i][j] += v\n                j += j & -j\n            i += i & -i\n    def query(self, x, y):\n        x += 1; y += 1; s = 0; i = x\n        while i > 0:\n            j = y\n            while j > 0:\n                s += self.t[i][j]\n                j -= j & -j\n            i -= i & -i\n        return s",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "二維樹狀數組支援 O(log^2) 更新查詢"
+}

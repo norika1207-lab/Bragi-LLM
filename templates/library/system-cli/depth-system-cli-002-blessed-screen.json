@@ -1,0 +1,29 @@
+{
+  "id": "depth-system-cli-002-blessed-screen",
+  "category": "system-cli/tui/blessed",
+  "intents_zh": [
+    "blessed 終端介面",
+    "Node blessed TUI",
+    "blessed 畫面元件",
+    "Node 終端機框架",
+    "blessed box 顯示",
+    "blessed 鍵盤事件"
+  ],
+  "intents_en": [
+    "blessed terminal UI",
+    "node blessed TUI",
+    "blessed box widget",
+    "node terminal framework",
+    "blessed key event",
+    "blessed screen"
+  ],
+  "slots": [
+    "box_content"
+  ],
+  "code": "const blessed = require('blessed');\nconst screen = blessed.screen({ smartCSR: true, title: 'tui' });\n\nconst box = blessed.box({\n  top: 'center', left: 'center', width: '50%', height: '50%',\n  content: '{{box_content}}',\n  border: { type: 'line' },\n  style: { border: { fg: 'cyan' } }\n});\n\nscreen.append(box);\nscreen.key(['q', 'C-c'], () => process.exit(0));\nscreen.render();",
+  "language": "javascript",
+  "deps": [
+    "blessed"
+  ],
+  "summary_zh": "blessed Node TUI 起手居中 box 與離開鍵"
+}

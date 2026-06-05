@@ -1,0 +1,30 @@
+{
+  "id": "mobile-070-swiftui-share",
+  "category": "mobile/swiftui/share",
+  "intents_zh": [
+    "SwiftUI ShareLink",
+    "SwiftUI 分享",
+    "SwiftUI 系統分享",
+    "share text SwiftUI",
+    "ShareLink 範例",
+    "SwiftUI share sheet",
+    "Swift 分享 url"
+  ],
+  "intents_en": [
+    "swiftui ShareLink",
+    "share sheet swiftui",
+    "share text swiftui",
+    "ShareLink example",
+    "swiftui native share",
+    "swift share url",
+    "swiftui share content"
+  ],
+  "slots": [
+    "url",
+    "label"
+  ],
+  "code": "import SwiftUI\nstruct S:View{var body:some View{\n  ShareLink(item:URL(string:\"{{url}}\")!){Label(\"{{label}}\",systemImage:\"square.and.arrow.up\")}}}",
+  "language": "swift",
+  "deps": [],
+  "summary_zh": "SwiftUI ShareLink 分享 URL"
+}

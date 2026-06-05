@@ -1,0 +1,28 @@
+{
+  "id": "firmware-040-esp32-https-cert",
+  "category": "firmware/esp32/network",
+  "intents_zh": [
+    "ESP32 HTTPS 請求",
+    "TLS GET",
+    "WiFiClientSecure 範例",
+    "抓 https URL",
+    "ESP32 安全連線"
+  ],
+  "intents_en": [
+    "ESP32 HTTPS GET",
+    "TLS request ESP32",
+    "WiFiClientSecure example",
+    "fetch https URL",
+    "secure HTTP client"
+  ],
+  "slots": [
+    "ssid",
+    "password",
+    "host",
+    "path"
+  ],
+  "code": "#include <WiFi.h>\n#include <WiFiClientSecure.h>\n\nvoid setup() {\n  Serial.begin(115200);\n  WiFi.begin(\"{{ssid}}\", \"{{password}}\");\n  while (WiFi.status() != WL_CONNECTED) delay(300);\n  WiFiClientSecure c;\n  c.setInsecure();\n  if (!c.connect(\"{{host}}\", 443)) { Serial.println(\"fail\"); return; }\n  c.printf(\"GET %s HTTP/1.0\\r\\nHost: %s\\r\\n\\r\\n\", \"{{path}}\", \"{{host}}\");\n  while (c.connected() || c.available()) if (c.available()) Serial.write(c.read());\n}\n\nvoid loop() {}",
+  "language": "ino",
+  "deps": [],
+  "summary_zh": "ESP32 HTTPS 請求 (insecure 模式)"
+}

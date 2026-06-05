@@ -1,0 +1,31 @@
+{
+  "id": "mobile-015-rn-iap",
+  "category": "mobile/rn/iap",
+  "intents_zh": [
+    "RN 內購",
+    "React Native in app purchase",
+    "RN IAP 範例",
+    "App Store 內購 RN",
+    "react-native-iap",
+    "內購商品列表 RN",
+    "RN 訂閱 IAP"
+  ],
+  "intents_en": [
+    "rn in app purchase",
+    "react native iap",
+    "subscription rn",
+    "react-native-iap example",
+    "app store iap rn",
+    "purchase product rn",
+    "iap setup rn"
+  ],
+  "slots": [
+    "product_id"
+  ],
+  "code": "import RNIap from 'react-native-iap';\nexport async function buy(){\n  await RNIap.initConnection();\n  const products=await RNIap.getProducts({skus:['{{product_id}}']});\n  if(!products.length)throw new Error('no product');\n  const purchase=await RNIap.requestPurchase({sku:'{{product_id}}'});\n  await RNIap.finishTransaction({purchase:purchase as any,isConsumable:true});\n  return purchase;}",
+  "language": "ts",
+  "deps": [
+    "react-native-iap"
+  ],
+  "summary_zh": "react-native-iap 觸發單次內購流程"
+}

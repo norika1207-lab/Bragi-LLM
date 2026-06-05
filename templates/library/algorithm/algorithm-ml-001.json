@@ -1,0 +1,25 @@
+{
+  "id": "algorithm-ml-001",
+  "category": "algorithm/ml/tfidf",
+  "intents_zh": [
+    "tf-idf",
+    "給我 tf idf",
+    "關鍵詞權重",
+    "sklearn tfidf"
+  ],
+  "intents_en": [
+    "tf-idf",
+    "tfidf vectorizer",
+    "tf idf weighting",
+    "sklearn tfidf"
+  ],
+  "slots": [
+    "docs_var"
+  ],
+  "code": "from sklearn.feature_extraction.text import TfidfVectorizer\n\nvec = TfidfVectorizer()\nmatrix = vec.fit_transform({{docs_var}})\nfeatures = vec.get_feature_names_out()\nprint(matrix.shape, features[:10])",
+  "language": "py",
+  "deps": [
+    "scikit-learn"
+  ],
+  "summary_zh": "用 sklearn 算 tf-idf 矩陣"
+}

@@ -1,0 +1,33 @@
+{
+  "id": "mobile-037-flutter-map",
+  "category": "mobile/flutter/map",
+  "intents_zh": [
+    "Flutter google map",
+    "flutter 地圖元件",
+    "flutter google_maps_flutter",
+    "flutter 顯示地圖",
+    "flutter map marker",
+    "Flutter 經緯度地圖",
+    "Flutter 地圖範例"
+  ],
+  "intents_en": [
+    "flutter google map",
+    "google_maps_flutter",
+    "show map flutter",
+    "map marker flutter",
+    "flutter mapview",
+    "flutter coordinates map",
+    "flutter maps example"
+  ],
+  "slots": [
+    "lat",
+    "lng",
+    "title"
+  ],
+  "code": "import 'package:flutter/material.dart';\nimport 'package:google_maps_flutter/google_maps_flutter.dart';\nclass M extends StatelessWidget{const M({super.key});\n  @override Widget build(BuildContext c)=>GoogleMap(\n    initialCameraPosition:const CameraPosition(target:LatLng({{lat}},{{lng}}),zoom:14),\n    markers:{const Marker(markerId:MarkerId('m'),position:LatLng({{lat}},{{lng}}),infoWindow:InfoWindow(title:'{{title}}'))});}",
+  "language": "dart",
+  "deps": [
+    "google_maps_flutter"
+  ],
+  "summary_zh": "Flutter Google map + marker"
+}

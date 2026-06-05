@@ -1,0 +1,33 @@
+{
+  "id": "llm-tools-011-openai-embedding",
+  "category": "llm-tools/embedding/openai",
+  "intents_zh": [
+    "openai embedding 範例",
+    "用 text-embedding-3 算向量",
+    "openai 向量化",
+    "openai embed wrapper",
+    "embed 一批文字",
+    "openai embedding api",
+    "小封裝 openai embed",
+    "embed model 呼叫"
+  ],
+  "intents_en": [
+    "openai embedding example",
+    "text-embedding-3 wrapper",
+    "openai vectorize",
+    "openai embed batch",
+    "embedding api wrapper",
+    "openai embed sdk",
+    "minimal openai embed",
+    "embed texts openai"
+  ],
+  "slots": [
+    "model_name"
+  ],
+  "code": "from openai import OpenAI\n\nclient = OpenAI()\n\ndef embed(texts: list[str]) -> list[list[float]]:\n    resp = client.embeddings.create(model=\"{{model_name}}\", input=texts)\n    return [d.embedding for d in resp.data]\n\nif __name__ == \"__main__\":\n    v = embed([\"hello\", \"world\"])\n    print(len(v), len(v[0]))",
+  "language": "py",
+  "deps": [
+    "openai"
+  ],
+  "summary_zh": "OpenAI text-embedding API 批次嵌入"
+}

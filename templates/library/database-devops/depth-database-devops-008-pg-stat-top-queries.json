@@ -1,0 +1,25 @@
+{
+  "id": "depth-database-devops-008-pg-stat-top-queries",
+  "category": "database-devops/postgres/observability",
+  "intents_zh": [
+    "pg_stat_statements 前 N 名",
+    "最耗時 SQL",
+    "查找 hot query",
+    "top time consumers"
+  ],
+  "intents_en": [
+    "pg_stat_statements top N",
+    "most expensive SQL",
+    "find hot query",
+    "top time consumers"
+  ],
+  "slots": [
+    "limit_n"
+  ],
+  "code": "SELECT\n  substring(query, 1, 80) AS q,\n  calls,\n  round(total_exec_time::numeric, 1) AS total_ms,\n  round(mean_exec_time::numeric, 2) AS mean_ms,\n  rows\nFROM pg_stat_statements\nORDER BY total_exec_time DESC\nLIMIT {{limit_n}};",
+  "language": "sql",
+  "deps": [
+    "pg_stat_statements"
+  ],
+  "summary_zh": "列出累計耗時最高的 SQL 前 N 筆"
+}

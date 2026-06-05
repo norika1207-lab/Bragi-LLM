@@ -1,0 +1,21 @@
+{
+  "id": "algorithm-graph-012",
+  "category": "algorithm/graph/cycle_detect_directed",
+  "intents_zh": [
+    "有向圖判環",
+    "detect cycle directed",
+    "給我 dfs 判環"
+  ],
+  "intents_en": [
+    "detect cycle directed",
+    "dfs cycle detection",
+    "check cycle in digraph"
+  ],
+  "slots": [
+    "fn_name"
+  ],
+  "code": "def {{fn_name}}(graph):\n    WHITE, GRAY, BLACK = 0, 1, 2\n    color = {u: WHITE for u in graph}\n    def dfs(u):\n        color[u] = GRAY\n        for v in graph.get(u, []):\n            if color.get(v, WHITE) == GRAY: return True\n            if color.get(v, WHITE) == WHITE and dfs(v): return True\n        color[u] = BLACK\n        return False\n    return any(color[u] == WHITE and dfs(u) for u in graph)",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "DFS 三色判有向圖環"
+}

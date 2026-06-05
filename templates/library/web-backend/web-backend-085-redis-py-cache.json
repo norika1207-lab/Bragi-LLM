@@ -1,0 +1,27 @@
+{
+  "id": "web-backend-085-redis-py-cache",
+  "category": "web-backend/cache",
+  "intents_zh": [
+    "python redis cache",
+    "快取 helper python",
+    "get or set redis py",
+    "aioredis 範例",
+    "快取 decorator"
+  ],
+  "intents_en": [
+    "python redis cache helper",
+    "redis get or set python",
+    "aioredis example",
+    "cache decorator python",
+    "redis async helper"
+  ],
+  "slots": [
+    "default_ttl_sec"
+  ],
+  "code": "import json\nimport redis.asyncio as redis\n\n_client = redis.from_url('redis://localhost:6379')\n\nasync def get_or_set(key: str, loader, ttl: int = {{default_ttl_sec}}):\n    hit = await _client.get(key)\n    if hit is not None:\n        return json.loads(hit)\n    value = await loader()\n    await _client.set(key, json.dumps(value), ex=ttl)\n    return value",
+  "language": "py",
+  "deps": [
+    "redis"
+  ],
+  "summary_zh": "Python async Redis get-or-set"
+}

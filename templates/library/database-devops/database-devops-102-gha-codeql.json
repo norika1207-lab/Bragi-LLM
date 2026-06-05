@@ -1,0 +1,21 @@
+{
+  "id": "database-devops-102-gha-codeql",
+  "category": "database-devops/cicd/github-actions",
+  "intents_zh": [
+    "GHA CodeQL 掃描",
+    "程式碼安全分析",
+    "CodeQL workflow"
+  ],
+  "intents_en": [
+    "github actions codeql",
+    "code security scan",
+    "codeql workflow"
+  ],
+  "slots": [
+    "language"
+  ],
+  "code": "name: CodeQL\non:\n  push: { branches: [main] }\n  schedule: [{ cron: '0 6 * * 1' }]\n\njobs:\n  analyze:\n    runs-on: ubuntu-latest\n    permissions: { security-events: write, contents: read }\n    steps:\n      - uses: actions/checkout@v4\n      - uses: github/codeql-action/init@v3\n        with: { languages: '{{language}}' }\n      - uses: github/codeql-action/autobuild@v3\n      - uses: github/codeql-action/analyze@v3",
+  "language": "yaml",
+  "deps": [],
+  "summary_zh": "GHA CodeQL 安全掃描"
+}

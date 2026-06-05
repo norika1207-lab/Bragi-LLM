@@ -1,0 +1,28 @@
+{
+  "id": "depth-llm-tools-048-ollama-local",
+  "category": "llm-tools/serving/ollama",
+  "intents_zh": [
+    "Ollama 本地呼叫",
+    "ollama python client",
+    "本機模型快速跑",
+    "ollama chat",
+    "本地 LLM 整合"
+  ],
+  "intents_en": [
+    "Ollama local call",
+    "ollama python client",
+    "run local model fast",
+    "ollama chat",
+    "local LLM integration"
+  ],
+  "slots": [
+    "model",
+    "prompt"
+  ],
+  "code": "import ollama\n\nr = ollama.chat(model={{model}}, messages=[{\"role\":\"user\",\"content\":{{prompt}}}])\nprint(r[\"message\"][\"content\"])",
+  "language": "python",
+  "deps": [
+    "ollama"
+  ],
+  "summary_zh": "ollama python client 直接跟本地 Ollama 對話"
+}

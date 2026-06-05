@@ -1,0 +1,33 @@
+{
+  "id": "patch-k8s-004-statefulset-pvc",
+  "category": "database-devops/kubernetes/stateful",
+  "intents_zh": [
+    "寫一個 StatefulSet 含 PVC 模板",
+    "k8s 跑資料庫的 statefulset",
+    "我要有持久化儲存的 sts",
+    "statefulset 加 volumeClaimTemplates",
+    "幫我生 db 用的 sts yaml"
+  ],
+  "intents_en": [
+    "create statefulset with pvc",
+    "k8s statefulset for database",
+    "sts with persistent volume template",
+    "stateful workload with volume claim",
+    "generate statefulset manifest"
+  ],
+  "slots": [
+    "sts_name",
+    "namespace",
+    "image",
+    "replicas",
+    "container_port",
+    "storage_size",
+    "storage_class"
+  ],
+  "code": "apiVersion: apps/v1\nkind: StatefulSet\nmetadata:\n  name: {{sts_name}}\n  namespace: {{namespace}}\nspec:\n  serviceName: {{sts_name}}\n  replicas: {{replicas}}\n  selector:\n    matchLabels:\n      app: {{sts_name}}\n  template:\n    metadata:\n      labels:\n        app: {{sts_name}}\n    spec:\n      containers:\n        - name: {{sts_name}}\n          image: {{image}}\n          ports:\n            - containerPort: {{container_port}}\n          volumeMounts:\n            - name: data\n              mountPath: /var/lib/data\n  volumeClaimTemplates:\n    - metadata:\n        name: data\n      spec:\n        accessModes: [\"ReadWriteOnce\"]\n        storageClassName: {{storage_class}}\n        resources:\n          requests:\n            storage: {{storage_size}}\n",
+  "language": "yaml",
+  "deps": [
+    "kubernetes"
+  ],
+  "summary_zh": "StatefulSet 帶 volumeClaimTemplates,每個 replica 自動掛獨立 PVC"
+}

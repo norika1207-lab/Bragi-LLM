@@ -1,0 +1,20 @@
+{
+  "id": "algorithm-misc-016",
+  "category": "algorithm/misc/largest_rectangle",
+  "intents_zh": [
+    "柱狀圖最大矩形",
+    "largest rectangle in histogram",
+    "給我 histogram"
+  ],
+  "intents_en": [
+    "largest rectangle histogram",
+    "monotonic stack rectangle"
+  ],
+  "slots": [
+    "fn_name"
+  ],
+  "code": "def {{fn_name}}(heights):\n    stack = []\n    best = 0\n    heights = heights + [0]\n    for i, h in enumerate(heights):\n        while stack and heights[stack[-1]] > h:\n            top = stack.pop()\n            left = stack[-1] if stack else -1\n            best = max(best, heights[top] * (i - left - 1))\n        stack.append(i)\n    return best",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "單調棧解最大矩形面積"
+}

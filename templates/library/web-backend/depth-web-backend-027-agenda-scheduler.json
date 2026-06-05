@@ -1,0 +1,27 @@
+{
+  "id": "depth-web-backend-027-agenda-scheduler",
+  "category": "web-backend/scheduler/agenda",
+  "intents_zh": [
+    "agenda MongoDB 排程",
+    "Node 持久化排程",
+    "agenda define + every",
+    "可重啟的 job 排程",
+    "Mongo 排程器"
+  ],
+  "intents_en": [
+    "agenda mongodb scheduler",
+    "node persistent scheduler",
+    "agenda define every",
+    "resumable job scheduler",
+    "mongo scheduler"
+  ],
+  "slots": [
+    "mongo_url"
+  ],
+  "code": "import Agenda from 'agenda';\nconst agenda = new Agenda({ db: { address: '{{mongo_url}}' } });\nagenda.define('send-report', async (job) => { await sendReport(job.attrs.data); });\nawait agenda.start();\nawait agenda.every('0 9 * * *', 'send-report', { team: 'ops' });",
+  "language": "js",
+  "deps": [
+    "agenda"
+  ],
+  "summary_zh": "agenda 持久化排程任務"
+}

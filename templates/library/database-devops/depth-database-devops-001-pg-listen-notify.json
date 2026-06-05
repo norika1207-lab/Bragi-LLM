@@ -1,0 +1,28 @@
+{
+  "id": "depth-database-devops-001-pg-listen-notify",
+  "category": "database-devops/postgres/pubsub",
+  "intents_zh": [
+    "postgres LISTEN NOTIFY 範例",
+    "用 pg 做事件通知",
+    "訂閱 postgres channel",
+    "postgres 推送變更",
+    "listen notify python"
+  ],
+  "intents_en": [
+    "postgres LISTEN NOTIFY example",
+    "subscribe to pg channel",
+    "pg event notification",
+    "push changes from postgres",
+    "listen notify python"
+  ],
+  "slots": [
+    "channel_name",
+    "dsn"
+  ],
+  "code": "import psycopg2, select\nconn = psycopg2.connect('{{dsn}}')\nconn.set_isolation_level(psycopg2.extensions.ISOLATION_LEVEL_AUTOCOMMIT)\ncur = conn.cursor()\ncur.execute(\"LISTEN {{channel_name}};\")\nprint('listening on {{channel_name}}')\nwhile True:\n    if select.select([conn], [], [], 5) == ([], [], []):\n        continue\n    conn.poll()\n    while conn.notifies:\n        n = conn.notifies.pop(0)\n        print('got NOTIFY:', n.pid, n.channel, n.payload)",
+  "language": "py",
+  "deps": [
+    "psycopg2-binary"
+  ],
+  "summary_zh": "用 LISTEN/NOTIFY 做 postgres 即時事件訂閱"
+}

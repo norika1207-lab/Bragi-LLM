@@ -1,0 +1,22 @@
+{
+  "id": "depth-database-devops-012-autovacuum-tuning",
+  "category": "database-devops/postgres/maintenance",
+  "intents_zh": [
+    "autovacuum 參數調校",
+    "table 級別 autovacuum",
+    "hot table 加速 vacuum"
+  ],
+  "intents_en": [
+    "autovacuum tuning",
+    "per-table autovacuum",
+    "speed up vacuum hot table"
+  ],
+  "slots": [
+    "table_name",
+    "scale_factor"
+  ],
+  "code": "ALTER TABLE {{table_name}} SET (\n  autovacuum_vacuum_scale_factor = {{scale_factor}},\n  autovacuum_analyze_scale_factor = {{scale_factor}},\n  autovacuum_vacuum_cost_limit = 2000,\n  autovacuum_vacuum_cost_delay = 10\n);",
+  "language": "sql",
+  "deps": [],
+  "summary_zh": "對 hot table 開更積極的 autovacuum"
+}

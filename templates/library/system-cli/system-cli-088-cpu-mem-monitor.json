@@ -1,0 +1,23 @@
+{
+  "id": "system-cli-088-cpu-mem-monitor",
+  "category": "system-cli/ops/monitor",
+  "intents_zh": [
+    "CPU memory 監控",
+    "psutil 看資源",
+    "系統資源 snapshot"
+  ],
+  "intents_en": [
+    "psutil cpu memory monitor",
+    "resource snapshot",
+    "system stats python"
+  ],
+  "slots": [
+    "interval_s"
+  ],
+  "code": "import psutil, time\n\nwhile True:\n    cpu = psutil.cpu_percent(interval=1)\n    mem = psutil.virtual_memory()\n    print(f'{time.strftime(\"%H:%M:%S\")} cpu={cpu}% mem={mem.percent}% used={mem.used//1024//1024}MB')\n    time.sleep({{interval_s}})",
+  "language": "py",
+  "deps": [
+    "psutil"
+  ],
+  "summary_zh": "psutil CPU/RAM 監控"
+}

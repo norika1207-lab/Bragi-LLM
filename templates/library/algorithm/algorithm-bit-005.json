@@ -1,0 +1,20 @@
+{
+  "id": "algorithm-bit-005",
+  "category": "algorithm/bit/reverse_bits",
+  "intents_zh": [
+    "反轉位元",
+    "reverse bits",
+    "給我 reverse bits"
+  ],
+  "intents_en": [
+    "reverse bits",
+    "bit reverse 32"
+  ],
+  "slots": [
+    "fn_name"
+  ],
+  "code": "def {{fn_name}}(n, width=32):\n    r = 0\n    for _ in range(width):\n        r = (r << 1) | (n & 1)\n        n >>= 1\n    return r",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "反轉 n 的位元"
+}

@@ -1,0 +1,27 @@
+{
+  "id": "web-frontend-batch2-018-app-shell",
+  "category": "web-frontend/react/layout/app-shell",
+  "intents_zh": [
+    "app shell",
+    "應用外殼",
+    "PWA shell",
+    "頂部 + 側邊外殼",
+    "主框架",
+    "app 主結構"
+  ],
+  "intents_en": [
+    "app shell",
+    "application shell",
+    "PWA shell",
+    "top plus sidebar shell",
+    "main frame",
+    "app scaffold"
+  ],
+  "slots": [
+    "children"
+  ],
+  "code": "export function AppShell({ children }) {\n  return (\n    <div className=\"flex h-screen flex-col\">\n      <header className=\"h-12 border-b bg-white px-4 flex items-center\">App</header>\n      <div className=\"flex flex-1 overflow-hidden\">\n        <nav className=\"w-14 border-r bg-gray-900 text-white flex flex-col items-center py-4 gap-4\">\n          <div className=\"h-8 w-8 rounded bg-gray-700\" />\n          <div className=\"h-8 w-8 rounded bg-gray-700\" />\n        </nav>\n        <main className=\"flex-1 overflow-y-auto\">{children}</main>\n      </div>\n    </div>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "頂部 header + icon 側欄的 app shell"
+}

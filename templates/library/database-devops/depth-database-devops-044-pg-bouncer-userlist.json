@@ -1,0 +1,24 @@
+{
+  "id": "depth-database-devops-044-pg-bouncer-userlist",
+  "category": "database-devops/postgres/pool",
+  "intents_zh": [
+    "pgbouncer userlist",
+    "scram-sha-256 密碼檔",
+    "auth_file"
+  ],
+  "intents_en": [
+    "pgbouncer userlist",
+    "scram-sha-256 password file",
+    "auth_file"
+  ],
+  "slots": [
+    "app_user",
+    "scram_hash"
+  ],
+  "code": "\"{{app_user}}\" \"{{scram_hash}}\"\n\"readonly\" \"SCRAM-SHA-256$4096:...:...\"",
+  "language": "txt",
+  "deps": [
+    "pgbouncer"
+  ],
+  "summary_zh": "pgbouncer userlist.txt 存 scram hash"
+}

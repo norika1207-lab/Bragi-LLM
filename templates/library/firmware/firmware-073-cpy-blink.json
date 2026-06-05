@@ -1,0 +1,27 @@
+{
+  "id": "firmware-073-cpy-blink",
+  "category": "firmware/circuitpython/gpio",
+  "intents_zh": [
+    "CircuitPython 閃 LED",
+    "cpy 範例",
+    "digitalio 範例",
+    "cpy hello",
+    "circuitpython 入門"
+  ],
+  "intents_en": [
+    "CircuitPython blink",
+    "digitalio example",
+    "cpy LED example",
+    "Adafruit board blink",
+    "circuitpython hello"
+  ],
+  "slots": [
+    "led_name"
+  ],
+  "code": "import board\nimport digitalio\nimport time\n\nled = digitalio.DigitalInOut(board.{{led_name}})\nled.direction = digitalio.Direction.OUTPUT\nwhile True:\n    led.value = True\n    time.sleep(0.5)\n    led.value = False\n    time.sleep(0.5)",
+  "language": "py",
+  "deps": [
+    "adafruit-circuitpython-board"
+  ],
+  "summary_zh": "CircuitPython 基本 LED 閃爍"
+}

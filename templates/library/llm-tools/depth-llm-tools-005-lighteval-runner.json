@@ -1,0 +1,29 @@
+{
+  "id": "depth-llm-tools-005-lighteval-runner",
+  "category": "llm-tools/eval/lighteval",
+  "intents_zh": [
+    "跑 lighteval 評測",
+    "HF lighteval 啟動",
+    "批次跑 benchmark",
+    "評測腳本",
+    "lighteval CLI 包裝"
+  ],
+  "intents_en": [
+    "run lighteval",
+    "launch HF lighteval",
+    "batch benchmark",
+    "eval script",
+    "lighteval CLI wrapper"
+  ],
+  "slots": [
+    "model",
+    "tasks",
+    "output_dir"
+  ],
+  "code": "import subprocess\n\ndef run_lighteval({{model}}, {{tasks}}, {{output_dir}}):\n    cmd = [\"lighteval\", \"accelerate\", \"--model_args\", f\"pretrained={{{model}}}\",\n           \"--tasks\", {{tasks}}, \"--output_dir\", {{output_dir}}, \"--save_details\"]\n    return subprocess.run(cmd, check=True)",
+  "language": "python",
+  "deps": [
+    "lighteval"
+  ],
+  "summary_zh": "lighteval CLI 包裝執行 benchmark"
+}

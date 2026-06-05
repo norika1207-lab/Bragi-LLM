@@ -1,0 +1,24 @@
+{
+  "id": "algorithm-tree-005",
+  "category": "algorithm/tree/fenwick",
+  "intents_zh": [
+    "樹狀陣列",
+    "BIT",
+    "Fenwick tree",
+    "前綴和更新",
+    "給我 BIT"
+  ],
+  "intents_en": [
+    "Fenwick tree",
+    "BIT",
+    "binary indexed tree",
+    "range sum update"
+  ],
+  "slots": [
+    "class_name"
+  ],
+  "code": "class {{class_name}}:\n    def __init__(self, n):\n        self.n = n\n        self.t = [0]*(n+1)\n    def update(self, i, delta):\n        i += 1\n        while i <= self.n:\n            self.t[i] += delta\n            i += i & -i\n    def query(self, i):\n        i += 1\n        s = 0\n        while i > 0:\n            s += self.t[i]\n            i -= i & -i\n        return s\n    def range_sum(self, l, r):\n        return self.query(r) - (self.query(l-1) if l else 0)",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "Fenwick 樹狀陣列"
+}

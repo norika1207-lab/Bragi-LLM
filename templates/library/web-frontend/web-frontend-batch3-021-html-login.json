@@ -1,0 +1,27 @@
+{
+  "id": "web-frontend-batch3-021-html-login",
+  "category": "web-frontend/html/forms/login",
+  "intents_zh": [
+    "純 HTML 登入表單",
+    "原生 HTML login",
+    "靜態登入頁",
+    "沒 framework 登入",
+    "vanilla login",
+    "HTML form 帳密"
+  ],
+  "intents_en": [
+    "plain html login",
+    "vanilla login form",
+    "static login page",
+    "no framework login",
+    "html form auth",
+    "raw html login"
+  ],
+  "slots": [
+    "form_action"
+  ],
+  "code": "<!DOCTYPE html>\n<html lang=\"en\">\n<head><meta charset=\"utf-8\"><title>Login</title>\n<style>\n  body { font-family: system-ui; display: grid; place-items: center; min-height: 100vh; }\n  form { display: flex; flex-direction: column; gap: .75rem; min-width: 300px; }\n  input, button { padding: .6rem; font-size: 1rem; }\n  button { background: #2563eb; color: white; border: 0; border-radius: 4px; cursor: pointer; }\n</style>\n</head>\n<body>\n  <form action=\"{{form_action}}\" method=\"POST\">\n    <h1>Sign in</h1>\n    <input name=\"email\" type=\"email\" placeholder=\"Email\" required>\n    <input name=\"password\" type=\"password\" placeholder=\"Password\" required>\n    <button type=\"submit\">Sign in</button>\n  </form>\n</body>\n</html>",
+  "language": "html",
+  "deps": [],
+  "summary_zh": "純 HTML 登入頁含基本樣式"
+}

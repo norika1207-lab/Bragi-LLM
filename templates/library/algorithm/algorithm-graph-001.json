@@ -1,0 +1,26 @@
+{
+  "id": "algorithm-graph-001",
+  "category": "algorithm/graph/dijkstra",
+  "intents_zh": [
+    "Dijkstra",
+    "最短路徑",
+    "給我 dijkstra",
+    "加權圖最短路",
+    "heap dijkstra",
+    "單源最短路"
+  ],
+  "intents_en": [
+    "Dijkstra",
+    "shortest path weighted",
+    "single source shortest path",
+    "dijkstra with heap",
+    "write dijkstra"
+  ],
+  "slots": [
+    "fn_name"
+  ],
+  "code": "import heapq\n\ndef {{fn_name}}(graph, src):\n    dist = {n: float('inf') for n in graph}\n    dist[src] = 0\n    pq = [(0, src)]\n    while pq:\n        d, u = heapq.heappop(pq)\n        if d > dist[u]:\n            continue\n        for v, w in graph[u]:\n            nd = d + w\n            if nd < dist[v]:\n                dist[v] = nd\n                heapq.heappush(pq, (nd, v))\n    return dist",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "Dijkstra 最短路徑，heap 版"
+}

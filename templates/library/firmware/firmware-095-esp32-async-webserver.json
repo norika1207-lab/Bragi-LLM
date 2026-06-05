@@ -1,0 +1,29 @@
+{
+  "id": "firmware-095-esp32-async-webserver",
+  "category": "firmware/esp32/network",
+  "intents_zh": [
+    "ESP32 AsyncWebServer",
+    "非阻塞 web server",
+    "ESPAsyncWebServer 範例",
+    "ESP32 高效能網頁",
+    "async 路由"
+  ],
+  "intents_en": [
+    "ESP32 AsyncWebServer",
+    "ESPAsyncWebServer example",
+    "non-blocking http ESP32",
+    "async route handler",
+    "ESPAsyncWebServer hello"
+  ],
+  "slots": [
+    "ssid",
+    "password"
+  ],
+  "code": "#include <WiFi.h>\n#include <ESPAsyncWebServer.h>\nAsyncWebServer server(80);\n\nvoid setup() {\n  WiFi.begin(\"{{ssid}}\", \"{{password}}\");\n  while (WiFi.status() != WL_CONNECTED) delay(300);\n  server.on(\"/\", HTTP_GET, [](AsyncWebServerRequest* req) {\n    req->send(200, \"text/plain\", \"hello async\");\n  });\n  server.on(\"/json\", HTTP_GET, [](AsyncWebServerRequest* req) {\n    req->send(200, \"application/json\", \"{\\\"ok\\\":true}\");\n  });\n  server.begin();\n}\n\nvoid loop() {}",
+  "language": "ino",
+  "deps": [
+    "ESPAsyncWebServer",
+    "AsyncTCP"
+  ],
+  "summary_zh": "ESP32 AsyncWebServer 非阻塞 HTTP"
+}

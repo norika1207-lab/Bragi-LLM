@@ -1,0 +1,25 @@
+{
+  "id": "firmware-081-arduino-tone-buzzer",
+  "category": "firmware/arduino/audio",
+  "intents_zh": [
+    "Arduino 蜂鳴器",
+    "tone() 發聲",
+    "play melody",
+    "buzzer 範例",
+    "發出聲音 Arduino"
+  ],
+  "intents_en": [
+    "Arduino buzzer tone",
+    "play melody tone()",
+    "piezo buzzer",
+    "beep sound Arduino",
+    "tone library example"
+  ],
+  "slots": [
+    "buzzer_pin"
+  ],
+  "code": "const int BUZ = {{buzzer_pin}};\nint melody[] = {262, 294, 330, 349, 392, 440, 494, 523};\n\nvoid setup() {\n  for (int i = 0; i < 8; i++) {\n    tone(BUZ, melody[i], 300);\n    delay(350);\n  }\n  noTone(BUZ);\n}\n\nvoid loop() {}",
+  "language": "ino",
+  "deps": [],
+  "summary_zh": "Arduino tone 蜂鳴器播放音階"
+}

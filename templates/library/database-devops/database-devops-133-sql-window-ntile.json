@@ -1,0 +1,23 @@
+{
+  "id": "database-devops-133-sql-window-ntile",
+  "category": "database-devops/sql/windows",
+  "intents_zh": [
+    "NTILE 分位數分桶",
+    "window ntile 4 分位",
+    "用戶分四等份"
+  ],
+  "intents_en": [
+    "ntile quartile",
+    "window ntile",
+    "split into buckets"
+  ],
+  "slots": [
+    "table",
+    "order_col",
+    "n_buckets"
+  ],
+  "code": "SELECT *,\n  NTILE({{n_buckets}}) OVER (ORDER BY {{order_col}}) AS bucket\nFROM {{table}};",
+  "language": "sql",
+  "deps": [],
+  "summary_zh": "NTILE 把列分成 N 等分"
+}

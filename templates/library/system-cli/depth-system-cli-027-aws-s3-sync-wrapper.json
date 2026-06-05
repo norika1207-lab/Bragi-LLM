@@ -1,0 +1,26 @@
+{
+  "id": "depth-system-cli-027-aws-s3-sync-wrapper",
+  "category": "system-cli/aws/s3",
+  "intents_zh": [
+    "S3 同步包裝",
+    "dry-run 後正式 sync",
+    "S3 上傳含 exclude",
+    "s3 sync 確認"
+  ],
+  "intents_en": [
+    "s3 sync wrapper",
+    "dry-run then sync",
+    "s3 upload exclude",
+    "s3 sync confirm"
+  ],
+  "slots": [
+    "local_dir",
+    "s3_uri"
+  ],
+  "code": "#!/usr/bin/env bash\nset -euo pipefail\n\nLOCAL=\"{{local_dir}}\"\nDST=\"{{s3_uri}}\"\n\necho \"=== dry-run ===\"\naws s3 sync \"$LOCAL\" \"$DST\" \\\n  --exclude \"*.DS_Store\" --exclude \".git/*\" --exclude \"node_modules/*\" \\\n  --dryrun\n\nread -rp \"proceed? (y/N) \" ans\n[[ \"$ans\" == \"y\" ]] || exit 0\n\naws s3 sync \"$LOCAL\" \"$DST\" \\\n  --exclude \"*.DS_Store\" --exclude \".git/*\" --exclude \"node_modules/*\" \\\n  --delete",
+  "language": "bash",
+  "deps": [
+    "awscli"
+  ],
+  "summary_zh": "S3 sync 先 dry-run 再確認執行"
+}

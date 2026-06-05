@@ -1,0 +1,28 @@
+{
+  "id": "depth-web-frontend-035-codemirror-editor",
+  "category": "web-frontend/editors/codemirror",
+  "intents_zh": [
+    "CodeMirror 6 編輯器",
+    "輕量 code editor",
+    "@uiw/react-codemirror",
+    "CM6 react",
+    "語言擴充"
+  ],
+  "intents_en": [
+    "codemirror 6 react",
+    "lightweight code editor",
+    "@uiw/react-codemirror",
+    "cm6 setup",
+    "language extension"
+  ],
+  "slots": [
+    "component_name"
+  ],
+  "code": "'use client';\nimport CodeMirror from '@uiw/react-codemirror';\nimport { javascript } from '@codemirror/lang-javascript';\n\nexport function {{component_name}}({ value, onChange }: { value: string; onChange: (v: string) => void }) {\n  return <CodeMirror value={value} height=\"320px\" extensions={[javascript({ jsx: true })]} onChange={onChange} />;\n}",
+  "language": "tsx",
+  "deps": [
+    "@uiw/react-codemirror",
+    "@codemirror/lang-javascript"
+  ],
+  "summary_zh": "CodeMirror 6 輕量編輯器"
+}

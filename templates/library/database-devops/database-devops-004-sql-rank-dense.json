@@ -1,0 +1,27 @@
+{
+  "id": "database-devops-004-sql-rank-dense",
+  "category": "database-devops/sql/windows",
+  "intents_zh": [
+    "DENSE_RANK 範本",
+    "密集排名不跳號",
+    "分組內密集排名",
+    "排名不要跳",
+    "window dense_rank"
+  ],
+  "intents_en": [
+    "dense_rank example",
+    "dense rank no gaps",
+    "ranking within group",
+    "window dense_rank",
+    "tied ranks no skip"
+  ],
+  "slots": [
+    "table",
+    "partition_col",
+    "score_col"
+  ],
+  "code": "SELECT *,\n  DENSE_RANK() OVER (\n    PARTITION BY {{partition_col}}\n    ORDER BY {{score_col}} DESC\n  ) AS dr\nFROM {{table}};",
+  "language": "sql",
+  "deps": [],
+  "summary_zh": "分組密集排名不跳號"
+}

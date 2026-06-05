@@ -1,0 +1,23 @@
+{
+  "id": "system-cli-051-structured-logging",
+  "category": "system-cli/logging/python",
+  "intents_zh": [
+    "python structlog 結構化日誌",
+    "json log 輸出",
+    "structured logging"
+  ],
+  "intents_en": [
+    "python structlog setup",
+    "json structured logging",
+    "structlog template"
+  ],
+  "slots": [
+    "logger_name"
+  ],
+  "code": "import structlog, logging, sys\n\nlogging.basicConfig(format='%(message)s', stream=sys.stdout, level=logging.INFO)\nstructlog.configure(processors=[\n    structlog.processors.TimeStamper(fmt='iso'),\n    structlog.processors.add_log_level,\n    structlog.processors.JSONRenderer(),\n])\n\nlog = structlog.get_logger('{{logger_name}}')\nlog.info('startup', port=8080, env='prod')\nlog.warning('slow_query', ms=1230, query='select 1')",
+  "language": "py",
+  "deps": [
+    "structlog"
+  ],
+  "summary_zh": "structlog JSON 結構化日誌"
+}

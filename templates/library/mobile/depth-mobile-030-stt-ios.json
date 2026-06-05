@@ -1,0 +1,25 @@
+{
+  "id": "depth-mobile-030-stt-ios",
+  "category": "mobile/speech/stt-ios",
+  "intents_zh": [
+    "iOS 語音轉文字",
+    "SFSpeechRecognizer",
+    "語音辨識授權",
+    "recognitionTask",
+    "Speech framework"
+  ],
+  "intents_en": [
+    "iOS speech to text",
+    "SFSpeechRecognizer",
+    "speech authorization",
+    "recognitionTask",
+    "Speech framework"
+  ],
+  "slots": [
+    "locale"
+  ],
+  "code": "import Speech\nlet recognizer = SFSpeechRecognizer(locale: Locale(identifier: \"{{locale}}\"))!\nSFSpeechRecognizer.requestAuthorization { _ in }\nlet req = SFSpeechAudioBufferRecognitionRequest()\nlet task = recognizer.recognitionTask(with: req) { result, error in\n  if let r = result { print(r.bestTranscription.formattedString) }\n}",
+  "language": "swift",
+  "deps": [],
+  "summary_zh": "iOS Speech 語音轉文字"
+}

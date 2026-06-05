@@ -1,0 +1,21 @@
+{
+  "id": "system-cli-072-git-clean-branches",
+  "category": "system-cli/git/cleanup",
+  "intents_zh": [
+    "清理已合併 branch",
+    "刪掉 merged 分支",
+    "git branch cleanup"
+  ],
+  "intents_en": [
+    "delete merged branches",
+    "clean git branches",
+    "git branch cleanup script"
+  ],
+  "slots": [
+    "main_branch"
+  ],
+  "code": "#!/usr/bin/env bash\nset -euo pipefail\nMAIN=\"{{main_branch}}\"\ngit fetch -p\nfor b in $(git branch --merged $MAIN | grep -v \"^\\*\" | grep -v \" $MAIN$\"); do\n  echo \"deleting $b\"\n  git branch -d \"$b\"\ndone",
+  "language": "sh",
+  "deps": [],
+  "summary_zh": "刪除已合併的本地分支"
+}

@@ -1,0 +1,23 @@
+{
+  "id": "database-devops-097-gha-deploy-ssh",
+  "category": "database-devops/cicd/github-actions",
+  "intents_zh": [
+    "GHA SSH 部署",
+    "ssh 到主機跑 deploy",
+    "appleboy ssh-action"
+  ],
+  "intents_en": [
+    "github actions ssh deploy",
+    "ssh into server deploy",
+    "appleboy ssh-action"
+  ],
+  "slots": [
+    "host",
+    "user",
+    "deploy_script"
+  ],
+  "code": "name: Deploy SSH\non:\n  push: { branches: [main] }\n\njobs:\n  deploy:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: appleboy/ssh-action@v1\n        with:\n          host: {{host}}\n          username: {{user}}\n          key: ${{ secrets.SSH_PRIVATE_KEY }}\n          script: |\n            {{deploy_script}}",
+  "language": "yaml",
+  "deps": [],
+  "summary_zh": "GHA SSH 連到主機部署"
+}

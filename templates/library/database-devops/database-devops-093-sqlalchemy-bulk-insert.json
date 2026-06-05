@@ -1,0 +1,23 @@
+{
+  "id": "database-devops-093-sqlalchemy-bulk-insert",
+  "category": "database-devops/orm/sqlalchemy",
+  "intents_zh": [
+    "SQLAlchemy 批次寫入",
+    "bulk_insert_mappings",
+    "sqlalchemy 大量塞資料"
+  ],
+  "intents_en": [
+    "sqlalchemy bulk insert",
+    "bulk_insert_mappings",
+    "mass insert sqlalchemy"
+  ],
+  "slots": [
+    "model_class"
+  ],
+  "code": "def bulk_insert(db, rows: list[dict]):\n    db.bulk_insert_mappings({{model_class}}, rows)\n    db.commit()\n\n# usage\n# bulk_insert(db, [{'name': 'a'}, {'name': 'b'}])",
+  "language": "py",
+  "deps": [
+    "sqlalchemy"
+  ],
+  "summary_zh": "SQLAlchemy bulk_insert_mappings"
+}

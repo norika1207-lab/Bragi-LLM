@@ -1,0 +1,25 @@
+{
+  "id": "depth-system-cli-031-kubectl-logs-multi",
+  "category": "system-cli/kubectl/logs",
+  "intents_zh": [
+    "kubectl 多 pod log",
+    "stern 替代腳本",
+    "label 抓 log",
+    "k8s 同時看多 pod log"
+  ],
+  "intents_en": [
+    "kubectl multi pod logs",
+    "stern alternative",
+    "label based logs",
+    "follow many k8s logs"
+  ],
+  "slots": [
+    "label_selector"
+  ],
+  "code": "#!/usr/bin/env bash\nset -euo pipefail\n\npods=$(kubectl get pods -l \"{{label_selector}}\" -o name)\n[ -z \"$pods\" ] && { echo \"no pods match\"; exit 1; }\n\ncolors=(31 32 33 34 35 36)\ni=0\nfor p in $pods; do\n  c=${colors[$((i % 6))]}\n  name=${p#pod/}\n  ( kubectl logs -f \"$p\" --tail=20 --all-containers 2>&1 \\\n    | sed -u \"s/^/\\x1b[${c}m[$name]\\x1b[0m /\" ) &\n  i=$((i+1))\ndone\ntrap 'kill 0' EXIT\nwait",
+  "language": "bash",
+  "deps": [
+    "kubectl"
+  ],
+  "summary_zh": "依 label 並行 follow 多 pod log 加色"
+}

@@ -1,0 +1,26 @@
+{
+  "id": "firmware-065-mpy-wifi",
+  "category": "firmware/micropython/network",
+  "intents_zh": [
+    "MicroPython 連 WiFi",
+    "mpy 上網",
+    "network.WLAN 範例",
+    "ESP32 mpy wifi",
+    "連 AP micropython"
+  ],
+  "intents_en": [
+    "MicroPython WiFi connect",
+    "ESP32 micropython wifi",
+    "network.WLAN example",
+    "mpy join AP",
+    "wifi station micropython"
+  ],
+  "slots": [
+    "ssid",
+    "password"
+  ],
+  "code": "import network, time\n\nwlan = network.WLAN(network.STA_IF)\nwlan.active(True)\nwlan.connect(\"{{ssid}}\", \"{{password}}\")\nwhile not wlan.isconnected():\n    time.sleep(0.5)\nprint(wlan.ifconfig())",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "MicroPython 連 WiFi 並印 IP 設定"
+}

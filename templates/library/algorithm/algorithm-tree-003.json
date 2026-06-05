@@ -1,0 +1,23 @@
+{
+  "id": "algorithm-tree-003",
+  "category": "algorithm/tree/segment",
+  "intents_zh": [
+    "線段樹",
+    "segment tree",
+    "區間和 query",
+    "給我 segment tree"
+  ],
+  "intents_en": [
+    "segment tree",
+    "range sum query",
+    "point update segment tree",
+    "seg tree"
+  ],
+  "slots": [
+    "class_name"
+  ],
+  "code": "class {{class_name}}:\n    def __init__(self, arr):\n        n = len(arr)\n        self.n = n\n        self.t = [0]*(4*n)\n        if n: self._build(arr, 1, 0, n-1)\n    def _build(self, a, v, l, r):\n        if l == r:\n            self.t[v] = a[l]; return\n        m = (l+r)//2\n        self._build(a, v*2, l, m)\n        self._build(a, v*2+1, m+1, r)\n        self.t[v] = self.t[v*2] + self.t[v*2+1]\n    def update(self, i, val, v=1, l=0, r=None):\n        if r is None: r = self.n-1\n        if l == r: self.t[v] = val; return\n        m = (l+r)//2\n        if i <= m: self.update(i, val, v*2, l, m)\n        else: self.update(i, val, v*2+1, m+1, r)\n        self.t[v] = self.t[v*2] + self.t[v*2+1]\n    def query(self, ql, qr, v=1, l=0, r=None):\n        if r is None: r = self.n-1\n        if ql > r or qr < l: return 0\n        if ql <= l and r <= qr: return self.t[v]\n        m = (l+r)//2\n        return self.query(ql, qr, v*2, l, m) + self.query(ql, qr, v*2+1, m+1, r)",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "區間和線段樹，點更新"
+}

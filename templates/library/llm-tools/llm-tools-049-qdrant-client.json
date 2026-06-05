@@ -1,0 +1,35 @@
+{
+  "id": "llm-tools-049-qdrant-client",
+  "category": "llm-tools/vectordb/qdrant",
+  "intents_zh": [
+    "qdrant 範例",
+    "qdrant 建 collection",
+    "qdrant 寫入查詢",
+    "用 qdrant 存向量",
+    "qdrant python client",
+    "qdrant 基本用法",
+    "qdrant CRUD",
+    "qdrant 起步"
+  ],
+  "intents_en": [
+    "qdrant example",
+    "qdrant collection setup",
+    "qdrant insert query",
+    "qdrant python client",
+    "qdrant basic crud",
+    "minimal qdrant",
+    "qdrant scaffold",
+    "qdrant getting started"
+  ],
+  "slots": [
+    "collection_name",
+    "dim",
+    "qdrant_url"
+  ],
+  "code": "from qdrant_client import QdrantClient\nfrom qdrant_client.http.models import Distance, VectorParams, PointStruct\n\nclient = QdrantClient(url=\"{{qdrant_url}}\")\n\nclient.recreate_collection(\n    collection_name=\"{{collection_name}}\",\n    vectors_config=VectorParams(size={{dim}}, distance=Distance.COSINE),\n)\n\ndef upsert(points: list[PointStruct]):\n    client.upsert(collection_name=\"{{collection_name}}\", points=points)\n\ndef search(vec, k=5):\n    return client.search(collection_name=\"{{collection_name}}\", query_vector=vec, limit=k)",
+  "language": "py",
+  "deps": [
+    "qdrant-client"
+  ],
+  "summary_zh": "Qdrant collection 建立、upsert、查詢"
+}

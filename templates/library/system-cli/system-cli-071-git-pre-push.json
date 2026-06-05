@@ -1,0 +1,21 @@
+{
+  "id": "system-cli-071-git-pre-push",
+  "category": "system-cli/git/hooks",
+  "intents_zh": [
+    "git pre-push hook 跑測試",
+    "推之前先 lint",
+    "git hook 範本"
+  ],
+  "intents_en": [
+    "git pre-push hook",
+    "run tests before push",
+    "git hook template"
+  ],
+  "slots": [
+    "test_cmd"
+  ],
+  "code": "#!/usr/bin/env bash\n# .git/hooks/pre-push\nset -e\necho '>> running pre-push checks'\n{{test_cmd}}\necho '>> ok'",
+  "language": "sh",
+  "deps": [],
+  "summary_zh": "git pre-push 跑測試 hook"
+}

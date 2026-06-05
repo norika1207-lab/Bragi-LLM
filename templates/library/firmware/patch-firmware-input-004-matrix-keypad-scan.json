@@ -1,0 +1,30 @@
+{
+  "id": "patch-firmware-input-004-matrix-keypad-scan",
+  "category": "firmware/input/keypad",
+  "intents_zh": [
+    "4x4 矩陣鍵盤掃描",
+    "Arduino keypad 矩陣",
+    "薄膜鍵盤讀取",
+    "matrix keypad 行列掃描",
+    "讀 16 鍵小鍵盤"
+  ],
+  "intents_en": [
+    "4x4 matrix keypad scan",
+    "arduino keypad library",
+    "row column keypad read",
+    "membrane keypad arduino",
+    "matrix keypad polling"
+  ],
+  "slots": [
+    "rows",
+    "cols",
+    "row_pins",
+    "col_pins"
+  ],
+  "code": "#include <Keypad.h>\n\nconst byte ROWS = {{rows}};\nconst byte COLS = {{cols}};\nchar keys[ROWS][COLS] = {\n  {'1','2','3','A'},\n  {'4','5','6','B'},\n  {'7','8','9','C'},\n  {'*','0','#','D'}\n};\nbyte rowPins[ROWS] = {{row_pins}};\nbyte colPins[COLS] = {{col_pins}};\n\nKeypad kpd = Keypad(makeKeymap(keys), rowPins, colPins, ROWS, COLS);\n\nvoid setup() {\n  Serial.begin(115200);\n}\n\nvoid loop() {\n  char k = kpd.getKey();\n  if (k) {\n    Serial.print(\"key=\");\n    Serial.println(k);\n  }\n}",
+  "language": "ino",
+  "deps": [
+    "Keypad"
+  ],
+  "summary_zh": "Arduino 用 Keypad 函式庫掃描矩陣鍵盤輸出按鍵字元"
+}

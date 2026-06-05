@@ -1,0 +1,27 @@
+{
+  "id": "depth-system-cli-032-kubectl-port-forward-mgr",
+  "category": "system-cli/kubectl/port-forward",
+  "intents_zh": [
+    "k8s port-forward 管理",
+    "多 service forward",
+    "port-forward 保活",
+    "kubectl pf 重啟"
+  ],
+  "intents_en": [
+    "k8s port forward manager",
+    "multi service forward",
+    "port forward keepalive",
+    "kubectl pf restart"
+  ],
+  "slots": [
+    "service_name",
+    "local_port",
+    "remote_port"
+  ],
+  "code": "#!/usr/bin/env bash\nset -euo pipefail\n\nSVC=\"{{service_name}}\"\nLOCAL={{local_port}}\nREMOTE={{remote_port}}\n\nwhile true; do\n  echo \"[$(date -Is)] forward svc/$SVC $LOCAL -> $REMOTE\"\n  kubectl port-forward \"svc/$SVC\" \"$LOCAL:$REMOTE\" || true\n  echo \"disconnected, retry in 2s\"\n  sleep 2\ndone",
+  "language": "bash",
+  "deps": [
+    "kubectl"
+  ],
+  "summary_zh": "kubectl port-forward 自動重連保活"
+}

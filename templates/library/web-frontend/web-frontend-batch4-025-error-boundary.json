@@ -1,0 +1,27 @@
+{
+  "id": "web-frontend-batch4-025-error-boundary",
+  "category": "web-frontend/nextjs/app-router/error",
+  "intents_zh": [
+    "error.tsx 錯誤頁",
+    "路由級錯誤邊界",
+    "reset 錯誤",
+    "App Router 錯誤元件",
+    "顯示錯誤訊息",
+    "client error boundary"
+  ],
+  "intents_en": [
+    "error.tsx page",
+    "route error boundary",
+    "reset error",
+    "app router error",
+    "show error message",
+    "client error boundary"
+  ],
+  "slots": [],
+  "code": "'use client';\n\nexport default function Error({ error, reset }: { error: Error; reset: () => void }) {\n  return (\n    <div className=\"p-6\">\n      <h2 className=\"text-xl font-semibold text-red-600\">Something went wrong</h2>\n      <p className=\"mt-2 text-sm text-gray-600\">{error.message}</p>\n      <button onClick={reset} className=\"mt-4 px-3 py-1 border rounded\">Try again</button>\n    </div>\n  );\n}",
+  "language": "tsx",
+  "deps": [
+    "react"
+  ],
+  "summary_zh": "App Router error.tsx 客戶端錯誤邊界"
+}

@@ -1,0 +1,26 @@
+{
+  "id": "web-backend-051-fastapi-ws",
+  "category": "web-backend/fastapi/websocket",
+  "intents_zh": [
+    "fastapi websocket chat",
+    "ws broadcast fastapi",
+    "即時聊天 fastapi",
+    "WebSocket endpoint",
+    "fastapi 即時"
+  ],
+  "intents_en": [
+    "fastapi websocket chat",
+    "ws broadcast fastapi",
+    "realtime chat fastapi",
+    "websocket endpoint fastapi",
+    "fastapi ws example"
+  ],
+  "slots": [],
+  "code": "from fastapi import FastAPI, WebSocket, WebSocketDisconnect\n\napp = FastAPI()\nclients: set[WebSocket] = set()\n\n@app.websocket('/ws')\nasync def ws_endpoint(ws: WebSocket):\n    await ws.accept()\n    clients.add(ws)\n    try:\n        while True:\n            msg = await ws.receive_text()\n            for c in list(clients):\n                try: await c.send_text(msg)\n                except Exception: clients.discard(c)\n    except WebSocketDisconnect:\n        clients.discard(ws)",
+  "language": "py",
+  "deps": [
+    "fastapi",
+    "websockets"
+  ],
+  "summary_zh": "FastAPI WebSocket 廣播聊天"
+}

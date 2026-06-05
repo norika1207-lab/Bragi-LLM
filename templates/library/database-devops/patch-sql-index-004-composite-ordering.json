@@ -1,0 +1,34 @@
+{
+  "id": "patch-sql-index-004-composite-ordering",
+  "category": "database-devops/index/composite",
+  "intents_zh": [
+    "複合索引欄位順序",
+    "composite index 怎麼排",
+    "多欄位索引順序錯了",
+    "leftmost prefix rule",
+    "選擇性高的欄位放前面嗎",
+    "ESR rule 索引"
+  ],
+  "intents_en": [
+    "composite index column order",
+    "multi column index ordering",
+    "leftmost prefix rule explained",
+    "equality range sort ESR",
+    "compound index design",
+    "which column first in index"
+  ],
+  "slots": [
+    "table_name",
+    "index_name",
+    "equality_col",
+    "range_col",
+    "sort_col"
+  ],
+  "code": "-- ESR rule: Equality, then Range, then Sort\n-- Equality columns first, range column next, sort column last\nCREATE INDEX CONCURRENTLY IF NOT EXISTS {{index_name}}\n  ON {{table_name}} ({{equality_col}}, {{range_col}}, {{sort_col}});\n\n-- Query that fully uses this index\nEXPLAIN (ANALYZE, BUFFERS)\nSELECT *\nFROM {{table_name}}\nWHERE {{equality_col}} = $1\n  AND {{range_col}} BETWEEN $2 AND $3\nORDER BY {{sort_col}} DESC\nLIMIT 50;\n\n-- Look for: Index Scan using {{index_name}}, no Sort node, no Filter on indexed cols",
+  "language": "sql",
+  "deps": [
+    "postgresql>=12",
+    "mysql>=8"
+  ],
+  "summary_zh": "按 ESR(Equality, Range, Sort) 規則排複合索引欄位順序，避免額外 Sort"
+}

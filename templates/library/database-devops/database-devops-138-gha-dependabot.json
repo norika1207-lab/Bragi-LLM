@@ -1,0 +1,19 @@
+{
+  "id": "database-devops-138-gha-dependabot",
+  "category": "database-devops/cicd/github-actions",
+  "intents_zh": [
+    "dependabot 設定",
+    "自動更新依賴 PR",
+    "dependabot.yml"
+  ],
+  "intents_en": [
+    "dependabot config",
+    "auto dep update pr",
+    "dependabot.yml"
+  ],
+  "slots": [],
+  "code": "version: 2\nupdates:\n  - package-ecosystem: \"npm\"\n    directory: \"/\"\n    schedule:\n      interval: \"weekly\"\n    open-pull-requests-limit: 5\n    groups:\n      dev-deps:\n        dependency-type: \"development\"\n\n  - package-ecosystem: \"github-actions\"\n    directory: \"/\"\n    schedule:\n      interval: \"monthly\"\n\n  - package-ecosystem: \"docker\"\n    directory: \"/\"\n    schedule:\n      interval: \"monthly\"",
+  "language": "yaml",
+  "deps": [],
+  "summary_zh": "Dependabot 多生態自動更新"
+}

@@ -1,0 +1,29 @@
+{
+  "id": "web-backend-046-fastapi-hello",
+  "category": "web-backend/fastapi/basic",
+  "intents_zh": [
+    "fastapi 起手",
+    "最小 fastapi app",
+    "fastapi hello world",
+    "起 uvicorn",
+    "fastapi 基本"
+  ],
+  "intents_en": [
+    "minimal fastapi",
+    "fastapi hello world",
+    "scaffold fastapi",
+    "uvicorn run",
+    "basic fastapi app"
+  ],
+  "slots": [
+    "route_path",
+    "message"
+  ],
+  "code": "from fastapi import FastAPI\n\napp = FastAPI()\n\n@app.get('{{route_path}}')\ndef index():\n    return {'message': '{{message}}'}\n\n# uvicorn main:app --reload --port 8000",
+  "language": "py",
+  "deps": [
+    "fastapi",
+    "uvicorn"
+  ],
+  "summary_zh": "FastAPI 最小 app"
+}

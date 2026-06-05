@@ -1,0 +1,21 @@
+{
+  "id": "depth-database-devops-030-grafana-datasource",
+  "category": "database-devops/observability/grafana",
+  "intents_zh": [
+    "grafana provisioning datasource",
+    "prometheus + loki 自動掛",
+    "data source yaml"
+  ],
+  "intents_en": [
+    "grafana provisioning datasource",
+    "auto add prometheus loki",
+    "datasources yaml"
+  ],
+  "slots": [],
+  "code": "apiVersion: 1\ndatasources:\n  - name: Prometheus\n    type: prometheus\n    access: proxy\n    url: http://prometheus:9090\n    isDefault: true\n  - name: Loki\n    type: loki\n    access: proxy\n    url: http://loki:3100\n    jsonData:\n      maxLines: 1000",
+  "language": "yaml",
+  "deps": [
+    "grafana"
+  ],
+  "summary_zh": "Grafana provisioning 自動掛 Prom + Loki"
+}

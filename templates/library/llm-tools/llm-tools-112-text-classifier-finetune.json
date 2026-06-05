@@ -1,0 +1,37 @@
+{
+  "id": "llm-tools-112-text-classifier-finetune",
+  "category": "llm-tools/finetune/classifier",
+  "intents_zh": [
+    "文本分類微調",
+    "BERT 分類微調",
+    "sequence classification 微調",
+    "HF Trainer 分類",
+    "fine-tune classifier",
+    "用 transformers 練分類",
+    "bert finetune",
+    "分類模型訓練"
+  ],
+  "intents_en": [
+    "text classifier finetune",
+    "bert classification finetune",
+    "sequence classification trainer",
+    "hf trainer classifier",
+    "finetune classifier",
+    "train text classifier",
+    "bert finetune",
+    "transformers classifier"
+  ],
+  "slots": [
+    "base_model",
+    "num_labels",
+    "output_dir"
+  ],
+  "code": "from transformers import AutoTokenizer, AutoModelForSequenceClassification, TrainingArguments, Trainer\nfrom datasets import load_dataset\n\ntok = AutoTokenizer.from_pretrained(\"{{base_model}}\")\nmodel = AutoModelForSequenceClassification.from_pretrained(\"{{base_model}}\", num_labels={{num_labels}})\n\nds = load_dataset(\"json\", data_files={\"train\": \"train.jsonl\", \"eval\": \"eval.jsonl\"})\ndef tk(b): return tok(b[\"text\"], truncation=True, padding=\"max_length\", max_length=256)\nds = ds.map(tk, batched=True)\n\nargs = TrainingArguments(output_dir=\"{{output_dir}}\", num_train_epochs=3, per_device_train_batch_size=8, eval_strategy=\"epoch\")\nTrainer(model=model, args=args, train_dataset=ds[\"train\"], eval_dataset=ds[\"eval\"], tokenizer=tok).train()",
+  "language": "py",
+  "deps": [
+    "transformers",
+    "datasets",
+    "torch"
+  ],
+  "summary_zh": "transformers Trainer 文本分類微調"
+}

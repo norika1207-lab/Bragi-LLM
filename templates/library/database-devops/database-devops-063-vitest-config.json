@@ -1,0 +1,23 @@
+{
+  "id": "database-devops-063-vitest-config",
+  "category": "database-devops/test/vitest",
+  "intents_zh": [
+    "vitest.config.ts",
+    "vitest 設定 jsdom",
+    "vitest coverage"
+  ],
+  "intents_en": [
+    "vitest.config.ts",
+    "vitest jsdom setup",
+    "vitest coverage config"
+  ],
+  "slots": [],
+  "code": "import { defineConfig } from 'vitest/config'\n\nexport default defineConfig({\n  test: {\n    environment: 'jsdom',\n    globals: true,\n    setupFiles: ['./test/setup.ts'],\n    coverage: {\n      provider: 'v8',\n      reporter: ['text', 'html', 'lcov'],\n      exclude: ['node_modules/', 'test/'],\n    },\n  },\n})",
+  "language": "ts",
+  "deps": [
+    "vitest",
+    "@vitest/coverage-v8",
+    "jsdom"
+  ],
+  "summary_zh": "vitest 設定 jsdom + coverage"
+}

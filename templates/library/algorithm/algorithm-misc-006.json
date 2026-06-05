@@ -1,0 +1,21 @@
+{
+  "id": "algorithm-misc-006",
+  "category": "algorithm/misc/bloom_filter",
+  "intents_zh": [
+    "布隆過濾器",
+    "bloom filter",
+    "給我 bloom filter"
+  ],
+  "intents_en": [
+    "bloom filter",
+    "probabilistic set",
+    "bloom filter impl"
+  ],
+  "slots": [
+    "class_name"
+  ],
+  "code": "import hashlib\n\nclass {{class_name}}:\n    def __init__(self, size=1024, hashes=4):\n        self.size = size\n        self.hashes = hashes\n        self.bits = [0]*size\n    def _idx(self, item, i):\n        h = hashlib.md5(f'{i}:{item}'.encode()).hexdigest()\n        return int(h, 16) % self.size\n    def add(self, item):\n        for i in range(self.hashes):\n            self.bits[self._idx(item, i)] = 1\n    def __contains__(self, item):\n        return all(self.bits[self._idx(item, i)] for i in range(self.hashes))",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "簡易布隆過濾器"
+}

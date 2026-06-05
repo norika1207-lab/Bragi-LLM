@@ -1,0 +1,28 @@
+{
+  "id": "depth-web-backend-020-rabbitmq-producer",
+  "category": "web-backend/queue/rabbitmq",
+  "intents_zh": [
+    "amqplib 發訊",
+    "RabbitMQ producer",
+    "direct exchange 發布",
+    "發 message 到 queue",
+    "Node 連 RabbitMQ"
+  ],
+  "intents_en": [
+    "amqplib publish",
+    "rabbitmq producer",
+    "direct exchange publish",
+    "send message to queue",
+    "node connect rabbitmq"
+  ],
+  "slots": [
+    "url",
+    "queue"
+  ],
+  "code": "import amqp from 'amqplib';\nconst conn = await amqp.connect('{{url}}');\nconst ch = await conn.createChannel();\nawait ch.assertQueue('{{queue}}', { durable: true });\nch.sendToQueue('{{queue}}', Buffer.from(JSON.stringify({ hello: 1 })), { persistent: true });",
+  "language": "js",
+  "deps": [
+    "amqplib"
+  ],
+  "summary_zh": "RabbitMQ amqplib producer"
+}

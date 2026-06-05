@@ -1,0 +1,34 @@
+{
+  "id": "llm-tools-058-streamlit-chat",
+  "category": "llm-tools/ui/streamlit",
+  "intents_zh": [
+    "streamlit chat",
+    "st.chat_message 範例",
+    "streamlit LLM UI",
+    "streamlit chatbot",
+    "快速 st 寫 chat",
+    "streamlit demo",
+    "用 streamlit 起 chat",
+    "streamlit + openai"
+  ],
+  "intents_en": [
+    "streamlit chat",
+    "st.chat_message example",
+    "streamlit llm ui",
+    "streamlit chatbot",
+    "quick streamlit chat",
+    "streamlit demo",
+    "streamlit openai",
+    "minimal streamlit chat"
+  ],
+  "slots": [
+    "model_name"
+  ],
+  "code": "import streamlit as st\nfrom openai import OpenAI\n\nclient = OpenAI()\nif \"msgs\" not in st.session_state:\n    st.session_state.msgs = []\n\nfor m in st.session_state.msgs:\n    st.chat_message(m[\"role\"]).write(m[\"content\"])\n\nif prompt := st.chat_input():\n    st.session_state.msgs.append({\"role\": \"user\", \"content\": prompt})\n    st.chat_message(\"user\").write(prompt)\n    r = client.chat.completions.create(model=\"{{model_name}}\", messages=st.session_state.msgs)\n    a = r.choices[0].message.content\n    st.session_state.msgs.append({\"role\": \"assistant\", \"content\": a})\n    st.chat_message(\"assistant\").write(a)",
+  "language": "py",
+  "deps": [
+    "streamlit",
+    "openai"
+  ],
+  "summary_zh": "Streamlit chat_message 對話 UI"
+}

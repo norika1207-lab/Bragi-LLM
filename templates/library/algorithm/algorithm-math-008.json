@@ -1,0 +1,22 @@
+{
+  "id": "algorithm-math-008",
+  "category": "algorithm/math/combination_mod",
+  "intents_zh": [
+    "組合數取模",
+    "C(n,k) mod",
+    "nCk mod p",
+    "給我 combination mod"
+  ],
+  "intents_en": [
+    "combination mod",
+    "nCk mod p",
+    "binomial coefficient mod"
+  ],
+  "slots": [
+    "fn_name"
+  ],
+  "code": "def {{fn_name}}(n, k, mod=10**9+7):\n    if k < 0 or k > n: return 0\n    num = den = 1\n    for i in range(k):\n        num = num * (n - i) % mod\n        den = den * (i + 1) % mod\n    return num * pow(den, mod-2, mod) % mod",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "nCk mod p 含費馬小定理"
+}

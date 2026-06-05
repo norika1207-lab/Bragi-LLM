@@ -1,0 +1,31 @@
+{
+  "id": "mobile-112-rn-toast",
+  "category": "mobile/rn/feedback",
+  "intents_zh": [
+    "RN toast 訊息",
+    "React Native toast",
+    "RN ToastAndroid 範例",
+    "RN 跳出短訊息",
+    "跨平台 toast RN",
+    "RN snackbar 簡易",
+    "RN 提示訊息"
+  ],
+  "intents_en": [
+    "rn toast",
+    "ToastAndroid rn",
+    "react native toast",
+    "rn snackbar simple",
+    "rn alert toast",
+    "cross platform toast rn",
+    "rn brief message"
+  ],
+  "slots": [
+    "text"
+  ],
+  "code": "import {ToastAndroid,Platform,Alert} from 'react-native';\nexport function toast(){\n  if(Platform.OS==='android'){ToastAndroid.show('{{text}}',ToastAndroid.SHORT);}\n  else{Alert.alert('{{text}}');}}",
+  "language": "ts",
+  "deps": [
+    "react-native"
+  ],
+  "summary_zh": "RN 跨平台 toast(Android+iOS Alert)"
+}

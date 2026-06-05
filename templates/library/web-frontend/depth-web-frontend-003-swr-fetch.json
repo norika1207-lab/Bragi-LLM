@@ -1,0 +1,28 @@
+{
+  "id": "depth-web-frontend-003-swr-fetch",
+  "category": "web-frontend/data-fetching/swr",
+  "intents_zh": [
+    "swr 抓資料",
+    "useSWR 範例",
+    "swr 自動重抓",
+    "key 帶參數 swr",
+    "swr fallback"
+  ],
+  "intents_en": [
+    "swr useSWR example",
+    "swr data fetching",
+    "swr revalidate",
+    "swr with params",
+    "useSWR fallback"
+  ],
+  "slots": [
+    "endpoint",
+    "key_name"
+  ],
+  "code": "import useSWR from 'swr';\n\nconst fetcher = (url: string) => fetch(url).then(r => r.json());\n\nexport function use{{key_name}}(id: string) {\n  const { data, error, isLoading, mutate } = useSWR(\n    id ? `{{endpoint}}/${id}` : null,\n    fetcher,\n    { revalidateOnFocus: false }\n  );\n  return { data, error, isLoading, refresh: mutate };\n}",
+  "language": "tsx",
+  "deps": [
+    "swr"
+  ],
+  "summary_zh": "swr 條件抓取與手動 mutate"
+}

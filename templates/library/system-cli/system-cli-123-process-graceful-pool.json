@@ -1,0 +1,22 @@
+{
+  "id": "system-cli-123-process-graceful-pool",
+  "category": "system-cli/concurrency/pool",
+  "intents_zh": [
+    "python concurrent.futures 池",
+    "ThreadPoolExecutor 範本",
+    "平行下載 IO"
+  ],
+  "intents_en": [
+    "python ThreadPoolExecutor",
+    "futures pool template",
+    "parallel IO with futures"
+  ],
+  "slots": [
+    "worker_fn",
+    "items_var"
+  ],
+  "code": "from concurrent.futures import ThreadPoolExecutor, as_completed\n\ndef {{worker_fn}}(x):\n    import time, random\n    time.sleep(random.random())\n    return x, x*2\n\n{{items_var}} = list(range(20))\nwith ThreadPoolExecutor(max_workers=8) as pool:\n    futs = [pool.submit({{worker_fn}}, x) for x in {{items_var}}]\n    for fut in as_completed(futs):\n        x, y = fut.result()\n        print(x, '->', y)",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "ThreadPoolExecutor 平行 IO"
+}

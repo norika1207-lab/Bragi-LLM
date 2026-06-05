@@ -1,0 +1,25 @@
+{
+  "id": "system-cli-079-uvicorn-launch",
+  "category": "system-cli/net/http",
+  "intents_zh": [
+    "uvicorn 啟動 ASGI",
+    "fastapi 跑起來",
+    "uvicorn 範本"
+  ],
+  "intents_en": [
+    "launch uvicorn server",
+    "run fastapi app",
+    "uvicorn run command"
+  ],
+  "slots": [
+    "module_path",
+    "app_var",
+    "port"
+  ],
+  "code": "#!/usr/bin/env bash\nset -euo pipefail\nexec uvicorn {{module_path}}:{{app_var}} \\\n  --host 0.0.0.0 \\\n  --port {{port}} \\\n  --workers 2 \\\n  --log-level info \\\n  --proxy-headers",
+  "language": "sh",
+  "deps": [
+    "uvicorn"
+  ],
+  "summary_zh": "uvicorn 生產啟動命令"
+}

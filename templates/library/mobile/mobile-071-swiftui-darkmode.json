@@ -1,0 +1,27 @@
+{
+  "id": "mobile-071-swiftui-darkmode",
+  "category": "mobile/swiftui/theme",
+  "intents_zh": [
+    "SwiftUI dark mode",
+    "SwiftUI colorScheme",
+    "SwiftUI 暗色",
+    "SwiftUI preferredColorScheme",
+    "SwiftUI 跟隨系統主題",
+    "深色模式 SwiftUI",
+    "Swift theme"
+  ],
+  "intents_en": [
+    "swiftui dark mode",
+    "swiftui colorScheme",
+    "swiftui preferredColorScheme",
+    "follow system theme swiftui",
+    "dark light swiftui",
+    "swift dark theme",
+    "theme swiftui"
+  ],
+  "slots": [],
+  "code": "import SwiftUI\nstruct Themed:View{@Environment(\\.colorScheme) var scheme\n  var body:some View{Text(\"scheme: \\(scheme == .dark ?\"dark\":\"light\")\").padding().background(scheme == .dark ?Color.black:Color.white)}}",
+  "language": "swift",
+  "deps": [],
+  "summary_zh": "SwiftUI 讀 colorScheme 跟隨系統主題"
+}

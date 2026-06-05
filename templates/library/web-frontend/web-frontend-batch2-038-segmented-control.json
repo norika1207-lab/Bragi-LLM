@@ -1,0 +1,27 @@
+{
+  "id": "web-frontend-batch2-038-segmented-control",
+  "category": "web-frontend/react/layout/segmented-control",
+  "intents_zh": [
+    "segmented control",
+    "分段控制器",
+    "選項切換按鈕",
+    "iOS 風格切換",
+    "tab 按鈕組",
+    "切換組"
+  ],
+  "intents_en": [
+    "segmented control",
+    "toggle group",
+    "option switch",
+    "iOS-style switcher",
+    "button group",
+    "segment switcher"
+  ],
+  "slots": [
+    "options"
+  ],
+  "code": "import { useState } from 'react';\n\nexport function Segmented() {\n  const opts = {{options}};\n  const [val, setVal] = useState(opts[0].value);\n  return (\n    <div className=\"inline-flex rounded-lg bg-gray-100 p-1\">\n      {opts.map((o) => (\n        <button key={o.value} onClick={() => setVal(o.value)}\n          className={`rounded-md px-4 py-1.5 text-sm font-medium ${val === o.value ? 'bg-white shadow' : 'text-gray-600'}`}>\n          {o.label}\n        </button>\n      ))}\n    </div>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "iOS 風格分段切換器"
+}

@@ -1,0 +1,29 @@
+{
+  "id": "mobile-109-flutter-search",
+  "category": "mobile/flutter/list",
+  "intents_zh": [
+    "Flutter 搜尋欄",
+    "flutter SearchBar",
+    "flutter 列表過濾",
+    "Flutter 搜尋過濾清單",
+    "filter list flutter",
+    "flutter search field",
+    "Flutter list 過濾"
+  ],
+  "intents_en": [
+    "flutter search bar",
+    "filter list flutter",
+    "flutter searchable list",
+    "flutter text filter",
+    "flutter search field",
+    "search and filter flutter",
+    "flutter list search"
+  ],
+  "slots": [],
+  "code": "import 'package:flutter/material.dart';\nclass S extends StatefulWidget{const S({super.key});@override State<S> createState()=>_S();}\nclass _S extends State<S>{String q='';final all=List.generate(30,(i)=>'item $i');\n  @override Widget build(BuildContext c){final f=all.where((x)=>x.contains(q)).toList();\n    return Scaffold(appBar:AppBar(title:TextField(decoration:const InputDecoration(hintText:'search'),onChanged:(v)=>setState(()=>q=v))),body:ListView.builder(itemCount:f.length,itemBuilder:(_,i)=>ListTile(title:Text(f[i]))));}}",
+  "language": "dart",
+  "deps": [
+    "flutter"
+  ],
+  "summary_zh": "Flutter 搜尋欄即時過濾列表"
+}

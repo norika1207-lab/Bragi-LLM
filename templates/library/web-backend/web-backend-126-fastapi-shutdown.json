@@ -1,0 +1,28 @@
+{
+  "id": "web-backend-126-fastapi-shutdown",
+  "category": "web-backend/fastapi/structure",
+  "intents_zh": [
+    "fastapi lifespan",
+    "startup shutdown event",
+    "fastapi 啟動初始化",
+    "關閉 db connection",
+    "lifespan context"
+  ],
+  "intents_en": [
+    "fastapi lifespan event",
+    "startup shutdown fastapi",
+    "fastapi init resources",
+    "close db on shutdown",
+    "lifespan context"
+  ],
+  "slots": [
+    "db_url"
+  ],
+  "code": "from contextlib import asynccontextmanager\nfrom fastapi import FastAPI\nimport asyncpg\n\n@asynccontextmanager\nasync def lifespan(app: FastAPI):\n    app.state.pool = await asyncpg.create_pool(dsn='{{db_url}}', min_size=1, max_size=10)\n    yield\n    await app.state.pool.close()\n\napp = FastAPI(lifespan=lifespan)\n\n@app.get('/users/{uid}')\nasync def get_user(uid: int):\n    async with app.state.pool.acquire() as con:\n        row = await con.fetchrow('SELECT * FROM users WHERE id=$1', uid)\n        return dict(row) if row else None",
+  "language": "py",
+  "deps": [
+    "fastapi",
+    "asyncpg"
+  ],
+  "summary_zh": "FastAPI lifespan + asyncpg pool"
+}

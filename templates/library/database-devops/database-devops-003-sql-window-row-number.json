@@ -1,0 +1,29 @@
+{
+  "id": "database-devops-003-sql-window-row-number",
+  "category": "database-devops/sql/windows",
+  "intents_zh": [
+    "window function 編號",
+    "每組裡面排序編號",
+    "ROW_NUMBER 用法",
+    "分組內排名",
+    "每個用戶最新一筆",
+    "partition by 編號"
+  ],
+  "intents_en": [
+    "row_number window function",
+    "rank within partition",
+    "number rows per group",
+    "latest row per user",
+    "window function example",
+    "partition and order"
+  ],
+  "slots": [
+    "table",
+    "partition_col",
+    "order_col"
+  ],
+  "code": "SELECT *,\n  ROW_NUMBER() OVER (\n    PARTITION BY {{partition_col}}\n    ORDER BY {{order_col}} DESC\n  ) AS rn\nFROM {{table}};",
+  "language": "sql",
+  "deps": [],
+  "summary_zh": "用 ROW_NUMBER 在分組內編號"
+}

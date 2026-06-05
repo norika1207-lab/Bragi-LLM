@@ -1,0 +1,21 @@
+{
+  "id": "database-devops-076-sql-soft-delete",
+  "category": "database-devops/sql/pattern",
+  "intents_zh": [
+    "軟刪除查詢",
+    "soft delete deleted_at",
+    "只撈沒被刪掉的"
+  ],
+  "intents_en": [
+    "soft delete query",
+    "deleted_at filter",
+    "exclude soft-deleted"
+  ],
+  "slots": [
+    "table"
+  ],
+  "code": "SELECT *\nFROM {{table}}\nWHERE deleted_at IS NULL\nORDER BY created_at DESC;\n\n-- soft delete\nUPDATE {{table}} SET deleted_at = NOW() WHERE id = $1;",
+  "language": "sql",
+  "deps": [],
+  "summary_zh": "軟刪除查詢與更新"
+}

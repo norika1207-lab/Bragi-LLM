@@ -1,0 +1,34 @@
+{
+  "id": "llm-tools-004-ollama-chat",
+  "category": "llm-tools/client/ollama",
+  "intents_zh": [
+    "接本地 ollama",
+    "ollama python 客戶端",
+    "用 ollama 跑 llama3",
+    "local llm 呼叫",
+    "ollama chat 範例",
+    "怎麼用 ollama api",
+    "本地模型推論",
+    "ollama 呼叫包裝"
+  ],
+  "intents_en": [
+    "call local ollama",
+    "ollama python client",
+    "run llama3 via ollama",
+    "local llm wrapper",
+    "ollama chat example",
+    "local inference api",
+    "ollama sdk",
+    "minimal ollama call"
+  ],
+  "slots": [
+    "model_name",
+    "host_url"
+  ],
+  "code": "import ollama\n\nclient = ollama.Client(host=\"{{host_url}}\")\n\ndef chat(prompt: str) -> str:\n    resp = client.chat(\n        model=\"{{model_name}}\",\n        messages=[{\"role\": \"user\", \"content\": prompt}],\n    )\n    return resp[\"message\"][\"content\"]\n\nif __name__ == \"__main__\":\n    print(chat(\"hello\"))",
+  "language": "py",
+  "deps": [
+    "ollama"
+  ],
+  "summary_zh": "Ollama 本地模型 chat 呼叫"
+}

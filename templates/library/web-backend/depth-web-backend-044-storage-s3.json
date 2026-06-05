@@ -1,0 +1,27 @@
+{
+  "id": "depth-web-backend-044-storage-s3",
+  "category": "web-backend/storage/s3",
+  "intents_zh": [
+    "S3 adapter 實作",
+    "AWS SDK v3 put/get",
+    "S3 storage class",
+    "串流上傳 S3",
+    "s3 GetObject 串流"
+  ],
+  "intents_en": [
+    "s3 adapter impl",
+    "aws sdk v3 put get",
+    "s3 storage class",
+    "stream upload s3",
+    "s3 getobject stream"
+  ],
+  "slots": [
+    "bucket"
+  ],
+  "code": "import { S3Client, PutObjectCommand, GetObjectCommand, DeleteObjectCommand } from '@aws-sdk/client-s3';\nconst s3 = new S3Client({});\nexport class S3Storage implements Storage {\n  put(k, body, mime?) { return s3.send(new PutObjectCommand({ Bucket: '{{bucket}}', Key: k, Body: body, ContentType: mime })).then(() => {}); }\n  async get(k) { return (await s3.send(new GetObjectCommand({ Bucket: '{{bucket}}', Key: k }))).Body as any; }\n  delete(k) { return s3.send(new DeleteObjectCommand({ Bucket: '{{bucket}}', Key: k })).then(() => {}); }\n  async url(k) { return `https://{{bucket}}.s3.amazonaws.com/${k}`; }\n}",
+  "language": "ts",
+  "deps": [
+    "@aws-sdk/client-s3"
+  ],
+  "summary_zh": "S3 storage adapter"
+}

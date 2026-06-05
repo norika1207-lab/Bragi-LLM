@@ -1,0 +1,26 @@
+{
+  "id": "depth-database-devops-060-tf-state-remote",
+  "category": "database-devops/iac/terraform",
+  "intents_zh": [
+    "terraform remote state s3",
+    "state lock dynamodb",
+    "backend 設定"
+  ],
+  "intents_en": [
+    "terraform remote state s3",
+    "state lock dynamodb",
+    "backend config"
+  ],
+  "slots": [
+    "bucket",
+    "key",
+    "region",
+    "lock_table"
+  ],
+  "code": "terraform {\n  backend \"s3\" {\n    bucket         = \"{{bucket}}\"\n    key            = \"{{key}}\"\n    region         = \"{{region}}\"\n    dynamodb_table = \"{{lock_table}}\"\n    encrypt        = true\n  }\n}",
+  "language": "hcl",
+  "deps": [
+    "terraform"
+  ],
+  "summary_zh": "Terraform S3 後端 + DynamoDB lock,加密 state"
+}

@@ -1,0 +1,24 @@
+{
+  "id": "database-devops-140-vitest-msw",
+  "category": "database-devops/test/vitest",
+  "intents_zh": [
+    "vitest + msw",
+    "mock HTTP request",
+    "msw server setup"
+  ],
+  "intents_en": [
+    "vitest msw",
+    "mock http request",
+    "msw server setup"
+  ],
+  "slots": [
+    "api_url"
+  ],
+  "code": "import { setupServer } from 'msw/node'\nimport { http, HttpResponse } from 'msw'\nimport { beforeAll, afterEach, afterAll, expect, it } from 'vitest'\n\nconst server = setupServer(\n  http.get('{{api_url}}', () => HttpResponse.json({ ok: true, items: [1, 2, 3] })),\n)\n\nbeforeAll(() => server.listen())\nafterEach(() => server.resetHandlers())\nafterAll(() => server.close())\n\nit('fetches from mocked api', async () => {\n  const r = await fetch('{{api_url}}').then((r) => r.json())\n  expect(r.ok).toBe(true)\n})",
+  "language": "ts",
+  "deps": [
+    "vitest",
+    "msw"
+  ],
+  "summary_zh": "vitest + msw mock HTTP"
+}

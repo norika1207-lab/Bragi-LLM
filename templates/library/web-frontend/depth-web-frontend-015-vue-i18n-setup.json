@@ -1,0 +1,27 @@
+{
+  "id": "depth-web-frontend-015-vue-i18n-setup",
+  "category": "web-frontend/i18n/vue-i18n",
+  "intents_zh": [
+    "vue-i18n 設定",
+    "Vue 多語言",
+    "createI18n",
+    "$t 翻譯",
+    "locale 切換 vue"
+  ],
+  "intents_en": [
+    "vue-i18n createI18n",
+    "vue internationalization",
+    "$t translate",
+    "locale messages vue",
+    "vue i18n setup"
+  ],
+  "slots": [
+    "default_locale"
+  ],
+  "code": "import { createI18n } from 'vue-i18n';\n\nexport const i18n = createI18n({\n  legacy: false,\n  locale: '{{default_locale}}',\n  fallbackLocale: 'en',\n  messages: {\n    en: { hello: 'Hello {name}' },\n    zh: { hello: '你好 {name}' },\n  },\n});\n\n// main.ts: app.use(i18n)\n// template: {{ $t('hello', { name: 'norika' }) }}",
+  "language": "ts",
+  "deps": [
+    "vue-i18n"
+  ],
+  "summary_zh": "vue-i18n composition mode 初始化"
+}

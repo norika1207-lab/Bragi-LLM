@@ -1,0 +1,31 @@
+{
+  "id": "mobile-042-flutter-iap",
+  "category": "mobile/flutter/iap",
+  "intents_zh": [
+    "Flutter 內購",
+    "flutter in_app_purchase",
+    "flutter IAP",
+    "訂閱內購 flutter",
+    "flutter 商品列表",
+    "app store iap flutter",
+    "flutter 內購流程"
+  ],
+  "intents_en": [
+    "flutter in app purchase",
+    "in_app_purchase flutter",
+    "flutter iap example",
+    "subscription flutter",
+    "purchase product flutter",
+    "flutter app store iap",
+    "flutter buy product"
+  ],
+  "slots": [
+    "product_id"
+  ],
+  "code": "import 'package:in_app_purchase/in_app_purchase.dart';\nFuture<void> buy()async{\n  final iap=InAppPurchase.instance;\n  if(!await iap.isAvailable())throw Exception('iap unavailable');\n  final r=await iap.queryProductDetails({'{{product_id}}'});\n  if(r.notFoundIDs.isNotEmpty)throw Exception('product missing');\n  final p=PurchaseParam(productDetails:r.productDetails.first);\n  await iap.buyConsumable(purchaseParam:p);}",
+  "language": "dart",
+  "deps": [
+    "in_app_purchase"
+  ],
+  "summary_zh": "Flutter in_app_purchase 觸發內購"
+}

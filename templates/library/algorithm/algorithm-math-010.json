@@ -1,0 +1,21 @@
+{
+  "id": "algorithm-math-010",
+  "category": "algorithm/math/prime_factor",
+  "intents_zh": [
+    "質因數分解",
+    "prime factorization",
+    "給我分解質因數"
+  ],
+  "intents_en": [
+    "prime factorization",
+    "factorize integer",
+    "trial division"
+  ],
+  "slots": [
+    "fn_name"
+  ],
+  "code": "def {{fn_name}}(n):\n    factors = {}\n    d = 2\n    while d*d <= n:\n        while n % d == 0:\n            factors[d] = factors.get(d, 0) + 1\n            n //= d\n        d += 1\n    if n > 1:\n        factors[n] = factors.get(n, 0) + 1\n    return factors",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "試除法質因數分解"
+}

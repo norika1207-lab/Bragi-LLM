@@ -1,0 +1,25 @@
+{
+  "id": "depth-system-cli-024-env-loader-hierarchy",
+  "category": "system-cli/env/loader",
+  "intents_zh": [
+    "env 多層載入",
+    "環境變數階層覆蓋",
+    ".env.local 覆蓋 .env",
+    "Python env hierarchy"
+  ],
+  "intents_en": [
+    "env hierarchy loader",
+    "layered env override",
+    "env.local over env",
+    "python env hierarchy"
+  ],
+  "slots": [
+    "env_dir"
+  ],
+  "code": "import os\nfrom pathlib import Path\nfrom dotenv import dotenv_values\n\ndef load_env(env=\"development\", base=\"{{env_dir}}\"):\n    base = Path(base)\n    files = [\n        base / \".env\",\n        base / f\".env.{env}\",\n        base / \".env.local\",\n        base / f\".env.{env}.local\",\n    ]\n    merged = {}\n    for f in files:\n        if f.exists():\n            print(f\"loading {f}\")\n            merged.update({k: v for k, v in dotenv_values(f).items() if v is not None})\n    for k, v in merged.items():\n        os.environ.setdefault(k, v)\n    return merged\n\nif __name__ == \"__main__\":\n    cfg = load_env(os.getenv(\"APP_ENV\", \"development\"))\n    print(cfg)",
+  "language": "python",
+  "deps": [
+    "python-dotenv"
+  ],
+  "summary_zh": "env 階層載入 .env -> env.X -> local 覆蓋"
+}

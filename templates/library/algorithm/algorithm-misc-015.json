@@ -1,0 +1,20 @@
+{
+  "id": "algorithm-misc-015",
+  "category": "algorithm/misc/water_trap",
+  "intents_zh": [
+    "接雨水",
+    "trapping rain water",
+    "給我 trap water"
+  ],
+  "intents_en": [
+    "trap rain water",
+    "trapping water two pointer"
+  ],
+  "slots": [
+    "fn_name"
+  ],
+  "code": "def {{fn_name}}(height):\n    l, r = 0, len(height) - 1\n    lm = rm = res = 0\n    while l < r:\n        if height[l] < height[r]:\n            lm = max(lm, height[l])\n            res += lm - height[l]\n            l += 1\n        else:\n            rm = max(rm, height[r])\n            res += rm - height[r]\n            r -= 1\n    return res",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "雙指針接雨水"
+}

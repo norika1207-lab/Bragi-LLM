@@ -1,0 +1,23 @@
+{
+  "id": "depth-mobile-024-arkit-stub",
+  "category": "mobile/ar/arkit",
+  "intents_zh": [
+    "ARKit 基本場景",
+    "ARSCNView 啟動",
+    "ARWorldTrackingConfiguration",
+    "放置 anchor",
+    "iOS AR"
+  ],
+  "intents_en": [
+    "ARKit basic scene",
+    "ARSCNView start",
+    "ARWorldTrackingConfiguration",
+    "place anchor",
+    "iOS AR"
+  ],
+  "slots": [],
+  "code": "import ARKit\nclass ARViewController: UIViewController, ARSCNViewDelegate {\n  let sceneView = ARSCNView()\n  override func viewDidAppear(_ animated: Bool) {\n    super.viewDidAppear(animated)\n    let config = ARWorldTrackingConfiguration()\n    config.planeDetection = [.horizontal]\n    sceneView.session.run(config)\n  }\n  override func viewWillDisappear(_ animated: Bool) { sceneView.session.pause() }\n}",
+  "language": "swift",
+  "deps": [],
+  "summary_zh": "ARKit 水平面偵測啟動"
+}

@@ -1,0 +1,29 @@
+{
+  "id": "mobile-127-rn-qrscan",
+  "category": "mobile/rn/scan",
+  "intents_zh": [
+    "RN 掃 QR code",
+    "React Native QR scan",
+    "expo barcode scanner",
+    "RN 條碼掃描",
+    "掃 QR RN",
+    "RN expo camera barcode",
+    "QR scan RN"
+  ],
+  "intents_en": [
+    "rn qr scan",
+    "react native qr scanner",
+    "expo barcode scanner",
+    "rn barcode scan",
+    "scan qr code rn",
+    "expo camera barcode",
+    "qr scan rn"
+  ],
+  "slots": [],
+  "code": "import React,{useEffect,useState} from 'react';\nimport {View,Text} from 'react-native';\nimport {CameraView,useCameraPermissions} from 'expo-camera';\nexport default function Q(){\n  const[p,req]=useCameraPermissions();const[v,setV]=useState('');\n  useEffect(()=>{if(!p?.granted)req();},[p]);\n  if(!p?.granted)return(<Text>need cam</Text>);\n  return(<View style={{flex:1}}><CameraView style={{flex:1}} barcodeScannerSettings={{barcodeTypes:['qr']}} onBarcodeScanned={({data})=>setV(data)}/><Text>{v}</Text></View>);}",
+  "language": "tsx",
+  "deps": [
+    "expo-camera"
+  ],
+  "summary_zh": "Expo Camera 掃 QR code 顯示內容"
+}

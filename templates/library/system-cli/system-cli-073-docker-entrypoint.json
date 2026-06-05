@@ -1,0 +1,23 @@
+{
+  "id": "system-cli-073-docker-entrypoint",
+  "category": "system-cli/docker/entrypoint",
+  "intents_zh": [
+    "docker entrypoint script",
+    "容器啟動腳本",
+    "等 DB 起來再啟動 app"
+  ],
+  "intents_en": [
+    "docker entrypoint script",
+    "wait for db then start",
+    "container init script"
+  ],
+  "slots": [
+    "db_host",
+    "db_port",
+    "app_cmd"
+  ],
+  "code": "#!/usr/bin/env bash\nset -euo pipefail\n\necho 'waiting for {{db_host}}:{{db_port}}'\nuntil bash -c \"cat < /dev/tcp/{{db_host}}/{{db_port}}\" 2>/dev/null; do\n  sleep 1\ndone\n\necho 'running migrations'\n# alembic upgrade head || true\n\necho 'starting app'\nexec {{app_cmd}}",
+  "language": "sh",
+  "deps": [],
+  "summary_zh": "docker entrypoint 等 DB"
+}

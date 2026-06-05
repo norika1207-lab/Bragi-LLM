@@ -1,0 +1,33 @@
+{
+  "id": "mobile-019-rn-onboard",
+  "category": "mobile/rn/onboarding",
+  "intents_zh": [
+    "RN 新手引導 carousel",
+    "onboarding 三頁 RN",
+    "React Native swiper 教學頁",
+    "RN 導覽輪播",
+    "新用戶引導 RN",
+    "onboarding pages RN",
+    "RN 啟動引導"
+  ],
+  "intents_en": [
+    "rn onboarding carousel",
+    "react native intro slides",
+    "onboarding pages rn",
+    "swiper intro rn",
+    "first launch tutorial rn",
+    "onboarding flow rn",
+    "intro carousel rn"
+  ],
+  "slots": [
+    "title1",
+    "title2",
+    "title3"
+  ],
+  "code": "import React,{useRef} from 'react';\nimport {View,Text,ScrollView,Dimensions,Button} from 'react-native';\nconst {width}=Dimensions.get('window');\nconst pages=['{{title1}}','{{title2}}','{{title3}}'];\nexport default function On({onDone}:{onDone:()=>void}){\n  const sv=useRef<ScrollView>(null);\n  return(<View style={{flex:1}}><ScrollView ref={sv} horizontal pagingEnabled showsHorizontalScrollIndicator={false}>{pages.map((p,i)=>(<View key={i} style={{width,justifyContent:'center',alignItems:'center'}}><Text style={{fontSize:24}}>{p}</Text></View>))}</ScrollView><Button title='Done' onPress={onDone}/></View>);}",
+  "language": "tsx",
+  "deps": [
+    "react-native"
+  ],
+  "summary_zh": "RN 水平輪播三頁 onboarding"
+}

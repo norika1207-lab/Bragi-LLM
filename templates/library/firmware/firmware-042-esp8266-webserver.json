@@ -1,0 +1,29 @@
+{
+  "id": "firmware-042-esp8266-webserver",
+  "category": "firmware/esp8266/network",
+  "intents_zh": [
+    "ESP8266 Web Server",
+    "NodeMCU 架網頁",
+    "ESP8266 HTTP server",
+    "用 8266 控 LED",
+    "小網頁伺服器"
+  ],
+  "intents_en": [
+    "ESP8266 web server",
+    "NodeMCU HTTP server",
+    "serve page from ESP8266",
+    "ESP8266WebServer",
+    "onboard html ESP8266"
+  ],
+  "slots": [
+    "ssid",
+    "password",
+    "led_pin"
+  ],
+  "code": "#include <ESP8266WiFi.h>\n#include <ESP8266WebServer.h>\nESP8266WebServer server(80);\nconst int LED = {{led_pin}};\n\nvoid setup() {\n  pinMode(LED, OUTPUT);\n  WiFi.begin(\"{{ssid}}\", \"{{password}}\");\n  while (WiFi.status() != WL_CONNECTED) delay(300);\n  server.on(\"/\", []() { server.send(200, \"text/html\", \"<a href=/on>on</a> <a href=/off>off</a>\"); });\n  server.on(\"/on\", []() { digitalWrite(LED, HIGH); server.send(200, \"text/plain\", \"on\"); });\n  server.on(\"/off\", []() { digitalWrite(LED, LOW); server.send(200, \"text/plain\", \"off\"); });\n  server.begin();\n}\n\nvoid loop() { server.handleClient(); }",
+  "language": "ino",
+  "deps": [
+    "ESP8266WebServer"
+  ],
+  "summary_zh": "ESP8266 內建 web server 控制 LED"
+}

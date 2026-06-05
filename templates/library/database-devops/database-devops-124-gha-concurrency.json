@@ -1,0 +1,19 @@
+{
+  "id": "database-devops-124-gha-concurrency",
+  "category": "database-devops/cicd/github-actions",
+  "intents_zh": [
+    "GHA concurrency 取消舊 run",
+    "同一 PR 只跑最新",
+    "cancel-in-progress"
+  ],
+  "intents_en": [
+    "github actions concurrency",
+    "cancel previous runs",
+    "cancel-in-progress"
+  ],
+  "slots": [],
+  "code": "name: CI\non: [push, pull_request]\n\nconcurrency:\n  group: ${{ github.workflow }}-${{ github.ref }}\n  cancel-in-progress: true\n\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - run: echo \"only the latest commit runs\"",
+  "language": "yaml",
+  "deps": [],
+  "summary_zh": "GHA concurrency 取消過時 run"
+}

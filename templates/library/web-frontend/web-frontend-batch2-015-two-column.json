@@ -1,0 +1,28 @@
+{
+  "id": "web-frontend-batch2-015-two-column",
+  "category": "web-frontend/react/layout/two-column",
+  "intents_zh": [
+    "雙欄版型",
+    "兩欄布局",
+    "sidebar + content",
+    "左右分欄",
+    "two column layout",
+    "主內容加側欄"
+  ],
+  "intents_en": [
+    "two column layout",
+    "sidebar plus main",
+    "split layout",
+    "content with side",
+    "two pane",
+    "double column"
+  ],
+  "slots": [
+    "sidebar_content",
+    "main_content"
+  ],
+  "code": "export function TwoColumn() {\n  return (\n    <div className=\"flex min-h-screen\">\n      <aside className=\"w-64 border-r bg-gray-50 p-4\">\n        {{sidebar_content}}\n      </aside>\n      <main className=\"flex-1 p-6\">\n        {{main_content}}\n      </main>\n    </div>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "左側欄 + 右主內容雙欄版型"
+}

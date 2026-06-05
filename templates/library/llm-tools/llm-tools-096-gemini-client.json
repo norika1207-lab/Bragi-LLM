@@ -1,0 +1,33 @@
+{
+  "id": "llm-tools-096-gemini-client",
+  "category": "llm-tools/client/gemini",
+  "intents_zh": [
+    "gemini sdk",
+    "google generativeai",
+    "用 gemini 呼叫",
+    "gemini 範例",
+    "gemini chat",
+    "google ai client",
+    "gemini-1.5 包裝",
+    "minimal gemini"
+  ],
+  "intents_en": [
+    "gemini sdk example",
+    "google generativeai client",
+    "call gemini api",
+    "gemini chat wrapper",
+    "minimal gemini",
+    "google ai studio",
+    "gemini 1.5 example",
+    "gemini api"
+  ],
+  "slots": [
+    "model_name"
+  ],
+  "code": "import google.generativeai as genai\nimport os\n\ngenai.configure(api_key=os.environ[\"GOOGLE_API_KEY\"])\nmodel = genai.GenerativeModel(\"{{model_name}}\")\n\ndef chat(prompt: str) -> str:\n    return model.generate_content(prompt).text\n\nif __name__ == \"__main__\":\n    print(chat(\"hi\"))",
+  "language": "py",
+  "deps": [
+    "google-generativeai"
+  ],
+  "summary_zh": "Google Gemini SDK 呼叫"
+}

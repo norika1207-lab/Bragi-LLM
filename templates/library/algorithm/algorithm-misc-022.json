@@ -1,0 +1,20 @@
+{
+  "id": "algorithm-misc-022",
+  "category": "algorithm/misc/linked_list_reverse",
+  "intents_zh": [
+    "反轉鏈表",
+    "reverse linked list",
+    "給我 reverse list"
+  ],
+  "intents_en": [
+    "reverse linked list",
+    "linked list reverse iterative"
+  ],
+  "slots": [
+    "fn_name"
+  ],
+  "code": "def {{fn_name}}(head):\n    prev = None\n    while head:\n        nxt = head.next\n        head.next = prev\n        prev = head\n        head = nxt\n    return prev",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "迭代反轉鏈表"
+}

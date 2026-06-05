@@ -1,0 +1,28 @@
+{
+  "id": "web-frontend-batch2-002-footer",
+  "category": "web-frontend/react/layout/footer",
+  "intents_zh": [
+    "做個 footer",
+    "頁尾元件",
+    "footer 多欄連結",
+    "版權頁尾",
+    "公司資訊 footer",
+    "底部資訊區"
+  ],
+  "intents_en": [
+    "create footer",
+    "page footer component",
+    "multi-column footer",
+    "copyright footer",
+    "company info footer",
+    "bottom info section"
+  ],
+  "slots": [
+    "company",
+    "year"
+  ],
+  "code": "export function Footer() {\n  return (\n    <footer className=\"border-t bg-gray-50\">\n      <div className=\"mx-auto grid max-w-7xl grid-cols-2 gap-8 px-4 py-10 md:grid-cols-4\">\n        <div>\n          <h3 className=\"mb-3 font-semibold\">{{company}}</h3>\n          <p className=\"text-sm text-gray-600\">Building tools that matter.</p>\n        </div>\n        <div><h4 className=\"mb-2 text-sm font-semibold\">Product</h4><ul className=\"space-y-1 text-sm text-gray-600\"><li>Pricing</li><li>Changelog</li></ul></div>\n        <div><h4 className=\"mb-2 text-sm font-semibold\">Company</h4><ul className=\"space-y-1 text-sm text-gray-600\"><li>About</li><li>Contact</li></ul></div>\n        <div><h4 className=\"mb-2 text-sm font-semibold\">Legal</h4><ul className=\"space-y-1 text-sm text-gray-600\"><li>Terms</li><li>Privacy</li></ul></div>\n      </div>\n      <div className=\"border-t py-4 text-center text-xs text-gray-500\">© {{year}} {{company}}</div>\n    </footer>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "多欄連結頁尾含版權列"
+}

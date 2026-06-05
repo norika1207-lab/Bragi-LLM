@@ -1,0 +1,29 @@
+{
+  "id": "depth-algorithm-041-convex-hull-andrew",
+  "category": "algorithm/geometry/convex-hull",
+  "intents_zh": [
+    "Andrew 凸包",
+    "convex hull 模板",
+    "凸包單調鏈",
+    "Graham scan 凸包",
+    "2D 凸包算法",
+    "上下凸殼",
+    "凸包計算"
+  ],
+  "intents_en": [
+    "Andrew monotone chain",
+    "convex hull algorithm",
+    "convex hull template",
+    "Graham scan",
+    "2D convex hull",
+    "upper lower hull",
+    "compute convex hull"
+  ],
+  "slots": [
+    "points"
+  ],
+  "code": "def convex_hull(points={{points}}):\n    pts = sorted(set(map(tuple, points)))\n    if len(pts) <= 1: return pts\n    def cross(o, a, b):\n        return (a[0]-o[0])*(b[1]-o[1]) - (a[1]-o[1])*(b[0]-o[0])\n    lower = []\n    for p in pts:\n        while len(lower) >= 2 and cross(lower[-2], lower[-1], p) <= 0:\n            lower.pop()\n        lower.append(p)\n    upper = []\n    for p in reversed(pts):\n        while len(upper) >= 2 and cross(upper[-2], upper[-1], p) <= 0:\n            upper.pop()\n        upper.append(p)\n    return lower[:-1] + upper[:-1]",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "Andrew 單調鏈算法計算 2D 凸包"
+}

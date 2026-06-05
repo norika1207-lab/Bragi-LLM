@@ -1,0 +1,25 @@
+{
+  "id": "algorithm-search-002",
+  "category": "algorithm/search/lower_bound",
+  "intents_zh": [
+    "lower_bound",
+    "找第一個不小於 target",
+    "二分找插入位置",
+    "bisect_left",
+    "給我 lower bound"
+  ],
+  "intents_en": [
+    "lower bound",
+    "first index >= target",
+    "binary insert position",
+    "bisect left",
+    "lower_bound impl"
+  ],
+  "slots": [
+    "fn_name"
+  ],
+  "code": "def {{fn_name}}(arr, target):\n    lo, hi = 0, len(arr)\n    while lo < hi:\n        mid = (lo + hi) // 2\n        if arr[mid] < target:\n            lo = mid + 1\n        else:\n            hi = mid\n    return lo",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "第一個不小於 target 的位置"
+}

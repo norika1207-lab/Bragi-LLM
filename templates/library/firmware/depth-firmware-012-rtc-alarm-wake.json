@@ -1,0 +1,27 @@
+{
+  "id": "depth-firmware-012-rtc-alarm-wake",
+  "category": "firmware/power/rtc-wake",
+  "intents_zh": [
+    "定時喚醒",
+    "RTC timer wake",
+    "睡幾秒後醒",
+    "periodic deep sleep",
+    "定時拍照睡醒"
+  ],
+  "intents_en": [
+    "rtc alarm wake",
+    "timer wakeup deep sleep",
+    "wake after seconds",
+    "periodic wake",
+    "scheduled wake"
+  ],
+  "slots": [
+    "sleep_seconds"
+  ],
+  "code": "#include \"esp_sleep.h\"\nesp_sleep_enable_timer_wakeup((uint64_t){{sleep_seconds}} * 1000000ULL);\nesp_deep_sleep_start();",
+  "language": "c",
+  "deps": [
+    "esp-idf"
+  ],
+  "summary_zh": "用 RTC timer 設定 N 秒後喚醒進入 deep sleep"
+}

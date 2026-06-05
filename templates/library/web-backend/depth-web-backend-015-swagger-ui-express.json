@@ -1,0 +1,27 @@
+{
+  "id": "depth-web-backend-015-swagger-ui-express",
+  "category": "web-backend/openapi/swagger-ui",
+  "intents_zh": [
+    "Express 掛 swagger UI",
+    "API 文件頁面",
+    "swagger-ui-express 範例",
+    "線上 API 探索",
+    "掛 docs route"
+  ],
+  "intents_en": [
+    "express swagger ui",
+    "api docs page",
+    "swagger-ui-express example",
+    "online api explorer",
+    "mount docs route"
+  ],
+  "slots": [
+    "spec_path"
+  ],
+  "code": "import swaggerUi from 'swagger-ui-express';\nimport spec from '{{spec_path}}' assert { type: 'json' };\napp.use('/docs', swaggerUi.serve, swaggerUi.setup(spec));",
+  "language": "js",
+  "deps": [
+    "swagger-ui-express"
+  ],
+  "summary_zh": "Express 掛 Swagger UI"
+}

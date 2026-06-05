@@ -1,0 +1,36 @@
+{
+  "id": "llm-tools-060-instructor-pydantic",
+  "category": "llm-tools/output/instructor",
+  "intents_zh": [
+    "instructor pydantic",
+    "用 instructor 抽結構",
+    "instructor 範例",
+    "openai pydantic 抽取",
+    "instructor patch",
+    "instructor 強型別",
+    "structured extraction",
+    "instructor 範本"
+  ],
+  "intents_en": [
+    "instructor pydantic",
+    "extract structured with instructor",
+    "instructor patch openai",
+    "instructor example",
+    "openai typed extraction",
+    "instructor template",
+    "strongly typed llm",
+    "minimal instructor"
+  ],
+  "slots": [
+    "model_name",
+    "class_name"
+  ],
+  "code": "from openai import OpenAI\nimport instructor\nfrom pydantic import BaseModel\n\nclient = instructor.from_openai(OpenAI())\n\nclass {{class_name}}(BaseModel):\n    name: str\n    age: int\n\ndef extract(text: str) -> {{class_name}}:\n    return client.chat.completions.create(\n        model=\"{{model_name}}\",\n        response_model={{class_name}},\n        messages=[{\"role\": \"user\", \"content\": text}],\n    )\n\nif __name__ == \"__main__\":\n    print(extract(\"Alice is 30 years old.\"))",
+  "language": "py",
+  "deps": [
+    "openai",
+    "instructor",
+    "pydantic"
+  ],
+  "summary_zh": "instructor 將 OpenAI 輸出綁 pydantic"
+}

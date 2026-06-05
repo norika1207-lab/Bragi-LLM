@@ -1,0 +1,27 @@
+{
+  "id": "depth-web-frontend-016-stitches-styled",
+  "category": "web-frontend/css-in-js/stitches",
+  "intents_zh": [
+    "stitches styled component",
+    "CSS-in-JS variants",
+    "tokens 主題",
+    "stitches 設定",
+    "near-zero runtime"
+  ],
+  "intents_en": [
+    "stitches styled component",
+    "css-in-js variants",
+    "stitches tokens",
+    "stitches setup",
+    "near zero runtime"
+  ],
+  "slots": [
+    "component_name"
+  ],
+  "code": "import { styled } from '@stitches/react';\n\nexport const {{component_name}} = styled('button', {\n  px: '$3', py: '$2', borderRadius: 8, fontWeight: 500,\n  variants: {\n    intent: {\n      primary: { bg: '$blue9', color: 'white' },\n      ghost:   { bg: 'transparent', color: '$gray12' },\n    },\n    size: { sm: { fontSize: 12 }, md: { fontSize: 14 } },\n  },\n  defaultVariants: { intent: 'primary', size: 'md' },\n});",
+  "language": "tsx",
+  "deps": [
+    "@stitches/react"
+  ],
+  "summary_zh": "stitches variants 樣式組件"
+}

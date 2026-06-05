@@ -1,0 +1,29 @@
+{
+  "id": "web-frontend-batch2-016-three-column",
+  "category": "web-frontend/react/layout/three-column",
+  "intents_zh": [
+    "三欄版型",
+    "three column",
+    "左中右布局",
+    "郵件 app 風格",
+    "Gmail 風格三欄",
+    "三欄頁面"
+  ],
+  "intents_en": [
+    "three column layout",
+    "mail app layout",
+    "three pane",
+    "left main right",
+    "Gmail-style layout",
+    "triple column"
+  ],
+  "slots": [
+    "left",
+    "center",
+    "right"
+  ],
+  "code": "export function ThreeColumn() {\n  return (\n    <div className=\"flex h-screen\">\n      <aside className=\"w-56 border-r bg-gray-50 p-4 overflow-y-auto\">{{left}}</aside>\n      <main className=\"flex-1 p-6 overflow-y-auto\">{{center}}</main>\n      <aside className=\"w-72 border-l bg-gray-50 p-4 overflow-y-auto\">{{right}}</aside>\n    </div>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "左中右三欄滿版版型"
+}

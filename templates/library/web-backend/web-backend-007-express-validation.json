@@ -1,0 +1,27 @@
+{
+  "id": "web-backend-007-express-validation",
+  "category": "web-backend/express/validation",
+  "intents_zh": [
+    "express 請求驗證",
+    "用 zod 驗 body",
+    "加 request schema validation",
+    "驗證 req.body 格式",
+    "express 加 zod middleware"
+  ],
+  "intents_en": [
+    "request validation express",
+    "zod body validation",
+    "validate request schema",
+    "express zod middleware",
+    "input validation middleware"
+  ],
+  "slots": [
+    "schema_name"
+  ],
+  "code": "const { z } = require('zod');\n\nconst {{schema_name}} = z.object({\n  email: z.string().email(),\n  age: z.number().int().min(0).max(150)\n});\n\nfunction validateBody(schema) {\n  return (req, res, next) => {\n    const result = schema.safeParse(req.body);\n    if (!result.success) return res.status(400).json({ errors: result.error.issues });\n    req.body = result.data;\n    next();\n  };\n}\n\nmodule.exports = { {{schema_name}}, validateBody };",
+  "language": "js",
+  "deps": [
+    "zod"
+  ],
+  "summary_zh": "Express + zod request body 驗證"
+}

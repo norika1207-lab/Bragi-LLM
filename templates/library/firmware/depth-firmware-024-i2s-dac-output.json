@@ -1,0 +1,31 @@
+{
+  "id": "depth-firmware-024-i2s-dac-output",
+  "category": "firmware/audio/i2s",
+  "intents_zh": [
+    "I2S 音訊輸出",
+    "MAX98357A 喇叭",
+    "DAC 播放音訊",
+    "output sine wave",
+    "i2s_write 播音"
+  ],
+  "intents_en": [
+    "i2s audio output",
+    "max98357a speaker",
+    "dac play audio",
+    "play sine i2s",
+    "i2s_write tones"
+  ],
+  "slots": [
+    "bck_pin",
+    "ws_pin",
+    "data_pin",
+    "freq_hz",
+    "sample_rate"
+  ],
+  "code": "#include \"driver/i2s.h\"\ni2s_config_t cfg = {\n    .mode = (i2s_mode_t)(I2S_MODE_MASTER | I2S_MODE_TX),\n    .sample_rate = {{sample_rate}},\n    .bits_per_sample = I2S_BITS_PER_SAMPLE_16BIT,\n    .channel_format = I2S_CHANNEL_FMT_RIGHT_LEFT,\n    .communication_format = I2S_COMM_FORMAT_STAND_I2S,\n    .dma_buf_count = 4, .dma_buf_len = 256,\n};\ni2s_pin_config_t pins = { .bck_io_num = {{bck_pin}}, .ws_io_num = {{ws_pin}}, .data_out_num = {{data_pin}}, .data_in_num = -1 };\ni2s_driver_install(I2S_NUM_0, &cfg, 0, NULL);\ni2s_set_pin(I2S_NUM_0, &pins);\nint16_t buf[256]; size_t bw;\nfor (int i = 0; i < 256; i++) buf[i] = (int16_t)(sin(2*M_PI*{{freq_hz}}*i/{{sample_rate}}) * 16000);\nwhile (1) i2s_write(I2S_NUM_0, buf, sizeof(buf), &bw, portMAX_DELAY);",
+  "language": "c",
+  "deps": [
+    "esp-idf"
+  ],
+  "summary_zh": "從 I2S DAC 輸出正弦波到喇叭"
+}

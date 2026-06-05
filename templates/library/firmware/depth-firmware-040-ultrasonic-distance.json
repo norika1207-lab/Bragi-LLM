@@ -1,0 +1,28 @@
+{
+  "id": "depth-firmware-040-ultrasonic-distance",
+  "category": "firmware/sensor/ultrasonic",
+  "intents_zh": [
+    "超音波測距",
+    "HC-SR04 距離",
+    "pulseIn ultrasonic",
+    "ESP32 ultrasonic",
+    "echo trigger"
+  ],
+  "intents_en": [
+    "ultrasonic distance",
+    "hc-sr04 measure",
+    "pulsein ultrasonic",
+    "echo trigger",
+    "range cm"
+  ],
+  "slots": [
+    "trig_pin",
+    "echo_pin"
+  ],
+  "code": "long read_cm() {\n    digitalWrite({{trig_pin}}, LOW); delayMicroseconds(2);\n    digitalWrite({{trig_pin}}, HIGH); delayMicroseconds(10);\n    digitalWrite({{trig_pin}}, LOW);\n    long dur = pulseIn({{echo_pin}}, HIGH, 30000);\n    return dur * 0.0343 / 2;\n}\nvoid setup() {\n    Serial.begin(115200);\n    pinMode({{trig_pin}}, OUTPUT);\n    pinMode({{echo_pin}}, INPUT);\n}\nvoid loop() { Serial.println(read_cm()); delay(200); }",
+  "language": "cpp",
+  "deps": [
+    "Arduino"
+  ],
+  "summary_zh": "HC-SR04 trigger/echo 量測距離 cm"
+}

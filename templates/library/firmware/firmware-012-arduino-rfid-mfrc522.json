@@ -1,0 +1,28 @@
+{
+  "id": "firmware-012-arduino-rfid-mfrc522",
+  "category": "firmware/arduino/rfid",
+  "intents_zh": [
+    "RFID 讀卡",
+    "MFRC522 模組",
+    "讀悠遊卡 UID",
+    "RC522 範例",
+    "Arduino 刷卡"
+  ],
+  "intents_en": [
+    "RFID MFRC522 reader",
+    "read RFID card UID",
+    "RC522 example",
+    "NFC card read Arduino",
+    "SPI RFID module"
+  ],
+  "slots": [
+    "ss_pin",
+    "rst_pin"
+  ],
+  "code": "#include <SPI.h>\n#include <MFRC522.h>\nMFRC522 mfrc522({{ss_pin}}, {{rst_pin}});\n\nvoid setup() {\n  Serial.begin(115200);\n  SPI.begin();\n  mfrc522.PCD_Init();\n}\n\nvoid loop() {\n  if (!mfrc522.PICC_IsNewCardPresent()) return;\n  if (!mfrc522.PICC_ReadCardSerial()) return;\n  Serial.print(\"UID:\");\n  for (byte i = 0; i < mfrc522.uid.size; i++) {\n    Serial.print(mfrc522.uid.uidByte[i] < 0x10 ? \" 0\" : \" \");\n    Serial.print(mfrc522.uid.uidByte[i], HEX);\n  }\n  Serial.println();\n  mfrc522.PICC_HaltA();\n}",
+  "language": "ino",
+  "deps": [
+    "MFRC522"
+  ],
+  "summary_zh": "MFRC522 RFID 讀卡並列印 UID"
+}

@@ -1,0 +1,27 @@
+{
+  "id": "patch-firmware-input-002-esp32-button-interrupt",
+  "category": "firmware/input/button",
+  "intents_zh": [
+    "ESP32 按鈕中斷去抖",
+    "ESP32 interrupt 加 millis 過濾",
+    "ESP32 GPIO 按鍵 ISR",
+    "ESP32 按鈕喚醒處理",
+    "用 attachInterrupt 做按鍵",
+    "ESP32 防彈跳中斷版"
+  ],
+  "intents_en": [
+    "ESP32 button interrupt debounce",
+    "attachInterrupt with millis filter",
+    "ISR button ESP32",
+    "hardware interrupt debounce",
+    "esp32 gpio interrupt button"
+  ],
+  "slots": [
+    "button_pin",
+    "debounce_ms"
+  ],
+  "code": "const int buttonPin = {{button_pin}};\nconst unsigned long debounceMs = {{debounce_ms}};\nvolatile unsigned long lastIsr = 0;\nvolatile bool pressedFlag = false;\n\nvoid IRAM_ATTR handleButton() {\n  unsigned long now = millis();\n  if (now - lastIsr > debounceMs) {\n    pressedFlag = true;\n    lastIsr = now;\n  }\n}\n\nvoid setup() {\n  Serial.begin(115200);\n  pinMode(buttonPin, INPUT_PULLUP);\n  attachInterrupt(digitalPinToInterrupt(buttonPin), handleButton, FALLING);\n}\n\nvoid loop() {\n  if (pressedFlag) {\n    pressedFlag = false;\n    Serial.println(\"button event\");\n  }\n}",
+  "language": "ino",
+  "deps": [],
+  "summary_zh": "ESP32 用 GPIO 中斷加 millis 過濾，做硬體中斷式按鍵去抖"
+}

@@ -1,0 +1,25 @@
+{
+  "id": "firmware-063-stm32-low-power-stop",
+  "category": "firmware/stm32/power",
+  "intents_zh": [
+    "STM32 stop mode",
+    "低功耗睡眠",
+    "HAL_PWR_EnterSTOPMode",
+    "stm32 省電",
+    "wake from stop"
+  ],
+  "intents_en": [
+    "STM32 stop mode low power",
+    "HAL_PWR_EnterSTOPMode",
+    "STM32 power saving",
+    "wake STM32 from stop",
+    "sleep mode STM32"
+  ],
+  "slots": [],
+  "code": "#include \"main.h\"\n\nint main(void) {\n  HAL_Init();\n  SystemClock_Config();\n  MX_GPIO_Init();\n  while (1) {\n    HAL_SuspendTick();\n    HAL_PWR_EnterSTOPMode(PWR_MAINREGULATOR_ON, PWR_STOPENTRY_WFI);\n    HAL_ResumeTick();\n    SystemClock_Config();\n  }\n}",
+  "language": "c",
+  "deps": [
+    "STM32 HAL"
+  ],
+  "summary_zh": "STM32 進入 STOP 低功耗模式"
+}

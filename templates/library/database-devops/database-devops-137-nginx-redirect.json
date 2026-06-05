@@ -1,0 +1,22 @@
+{
+  "id": "database-devops-137-nginx-redirect",
+  "category": "database-devops/nginx/proxy",
+  "intents_zh": [
+    "nginx 301 redirect",
+    "網域跳轉",
+    "www 轉 non-www"
+  ],
+  "intents_en": [
+    "nginx 301 redirect",
+    "domain redirect",
+    "www to apex"
+  ],
+  "slots": [
+    "from_domain",
+    "to_domain"
+  ],
+  "code": "server {\n  listen 80;\n  listen 443 ssl;\n  server_name {{from_domain}};\n\n  return 301 https://{{to_domain}}$request_uri;\n}",
+  "language": "nginx",
+  "deps": [],
+  "summary_zh": "nginx 域名 301 永久跳轉"
+}

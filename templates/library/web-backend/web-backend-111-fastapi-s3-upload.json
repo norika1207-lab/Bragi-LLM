@@ -1,0 +1,29 @@
+{
+  "id": "web-backend-111-fastapi-s3-upload",
+  "category": "web-backend/fastapi/storage",
+  "intents_zh": [
+    "fastapi s3 presigned",
+    "python boto3 presign",
+    "fastapi 上傳 s3",
+    "產生 s3 上傳 url python",
+    "s3 put signed url"
+  ],
+  "intents_en": [
+    "fastapi s3 presigned",
+    "boto3 presign url",
+    "upload to s3 fastapi",
+    "s3 put signed url python",
+    "fastapi storage s3"
+  ],
+  "slots": [
+    "bucket",
+    "region"
+  ],
+  "code": "import boto3\nfrom fastapi import APIRouter\nfrom pydantic import BaseModel\nimport time\n\nrouter = APIRouter()\ns3 = boto3.client('s3', region_name='{{region}}')\n\nclass PresignReq(BaseModel):\n    filename: str\n    content_type: str\n\n@router.post('/presign')\nasync def presign(req: PresignReq):\n    key = f'uploads/{int(time.time())}-{req.filename}'\n    url = s3.generate_presigned_url('put_object',\n        Params={'Bucket': '{{bucket}}', 'Key': key, 'ContentType': req.content_type},\n        ExpiresIn=300)\n    return {'url': url, 'key': key}",
+  "language": "py",
+  "deps": [
+    "fastapi",
+    "boto3"
+  ],
+  "summary_zh": "FastAPI boto3 presigned upload"
+}

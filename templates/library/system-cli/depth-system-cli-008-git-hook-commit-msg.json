@@ -1,0 +1,23 @@
+{
+  "id": "depth-system-cli-008-git-hook-commit-msg",
+  "category": "system-cli/git-hooks/commit-msg",
+  "intents_zh": [
+    "commit message hook",
+    "強制 commit 格式",
+    "conventional commits 檢查",
+    "commit-msg 驗證"
+  ],
+  "intents_en": [
+    "commit msg hook",
+    "enforce commit format",
+    "conventional commits check",
+    "commit-msg validator"
+  ],
+  "slots": [],
+  "code": "#!/usr/bin/env bash\n# .git/hooks/commit-msg\nmsg=$(cat \"$1\")\npattern='^(feat|fix|docs|style|refactor|test|chore|perf)(\\(.+\\))?: .{1,80}$'\n\nif ! echo \"$msg\" | grep -qE \"$pattern\"; then\n  echo \"commit msg must follow conventional commits:\"\n  echo \"  feat(scope): short description\"\n  exit 1\nfi",
+  "language": "bash",
+  "deps": [
+    "git"
+  ],
+  "summary_zh": "commit-msg hook 強制 conventional commits 格式"
+}

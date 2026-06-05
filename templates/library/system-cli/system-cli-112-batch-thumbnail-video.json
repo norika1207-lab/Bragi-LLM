@@ -1,0 +1,25 @@
+{
+  "id": "system-cli-112-batch-thumbnail-video",
+  "category": "system-cli/batch/video",
+  "intents_zh": [
+    "影片批次取首幀縮圖",
+    "ffmpeg 抽 thumbnail",
+    "批次 video poster"
+  ],
+  "intents_en": [
+    "batch video thumbnail",
+    "ffmpeg poster frame",
+    "video to jpg batch"
+  ],
+  "slots": [
+    "src_dir",
+    "out_dir",
+    "ts"
+  ],
+  "code": "#!/usr/bin/env bash\nset -euo pipefail\nIN=\"{{src_dir}}\"; OUT=\"{{out_dir}}\"; mkdir -p \"$OUT\"\nfor f in \"$IN\"/*.{mp4,mov,mkv,webm}; do\n  [[ -e \"$f\" ]] || continue\n  name=$(basename \"${f%.*}\")\n  ffmpeg -y -loglevel error -ss {{ts}} -i \"$f\" -vframes 1 -q:v 3 \"$OUT/$name.jpg\"\n  echo \"$name.jpg\"\ndone",
+  "language": "sh",
+  "deps": [
+    "ffmpeg"
+  ],
+  "summary_zh": "ffmpeg 批次抽縮圖"
+}

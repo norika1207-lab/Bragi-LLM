@@ -1,0 +1,27 @@
+{
+  "id": "web-frontend-batch4-019-dynamic-route",
+  "category": "web-frontend/nextjs/app-router/dynamic-route",
+  "intents_zh": [
+    "動態路由頁",
+    "[id] page",
+    "抓 params",
+    "Next.js 動態 segment",
+    "slug 路由",
+    "article 詳細頁"
+  ],
+  "intents_en": [
+    "dynamic route page",
+    "params id page",
+    "slug route",
+    "app router dynamic",
+    "article detail page",
+    "next.js [id] page"
+  ],
+  "slots": [
+    "resource_label"
+  ],
+  "code": "export default function DetailPage({ params }: { params: { id: string } }) {\n  return (\n    <main className=\"p-8\">\n      <h1 className=\"text-2xl font-bold\">{{resource_label}} {params.id}</h1>\n      <p className=\"mt-2 text-gray-600\">Detail for id: {params.id}</p>\n    </main>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "App Router 動態 [id] 詳細頁"
+}

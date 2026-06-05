@@ -1,0 +1,31 @@
+{
+  "id": "mobile-119-rn-webview",
+  "category": "mobile/rn/web",
+  "intents_zh": [
+    "RN WebView",
+    "React Native 內嵌網頁",
+    "RN 開網頁",
+    "WebView 範例 RN",
+    "RN 顯示網站",
+    "react-native-webview",
+    "RN 嵌入 html"
+  ],
+  "intents_en": [
+    "RN WebView",
+    "react-native-webview",
+    "embed website rn",
+    "open url webview rn",
+    "rn show html",
+    "webview example rn",
+    "rn browser view"
+  ],
+  "slots": [
+    "page_url"
+  ],
+  "code": "import React from 'react';\nimport {WebView} from 'react-native-webview';\nexport default function W(){return(<WebView source={{uri:'{{page_url}}'}} style={{flex:1}}/>);}",
+  "language": "tsx",
+  "deps": [
+    "react-native-webview"
+  ],
+  "summary_zh": "RN WebView 嵌入網頁"
+}

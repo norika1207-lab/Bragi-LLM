@@ -1,0 +1,27 @@
+{
+  "id": "web-backend-106-express-loggerwinston",
+  "category": "web-backend/express/middleware",
+  "intents_zh": [
+    "express winston log",
+    "加 winston logger",
+    "結構化 log express",
+    "express 寫 log file",
+    "logger setup"
+  ],
+  "intents_en": [
+    "express winston logger",
+    "structured log express",
+    "log to file express",
+    "winston setup",
+    "logger middleware express"
+  ],
+  "slots": [
+    "log_file"
+  ],
+  "code": "const winston = require('winston');\n\nconst logger = winston.createLogger({\n  level: process.env.LOG_LEVEL || 'info',\n  format: winston.format.combine(winston.format.timestamp(), winston.format.json()),\n  transports: [\n    new winston.transports.Console(),\n    new winston.transports.File({ filename: '{{log_file}}' })\n  ]\n});\n\nmodule.exports = logger;",
+  "language": "js",
+  "deps": [
+    "winston"
+  ],
+  "summary_zh": "Winston 結構化 logger"
+}

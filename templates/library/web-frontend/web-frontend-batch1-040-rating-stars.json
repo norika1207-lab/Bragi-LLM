@@ -1,0 +1,27 @@
+{
+  "id": "web-frontend-batch1-040-rating-stars",
+  "category": "web-frontend/react/inputs/rating",
+  "intents_zh": [
+    "星星評分元件",
+    "star rating React",
+    "五星評分輸入",
+    "評分元件",
+    "評星評論",
+    "可點星等"
+  ],
+  "intents_en": [
+    "star rating",
+    "rating component",
+    "five star input",
+    "react rating stars",
+    "review rating",
+    "star picker"
+  ],
+  "slots": [
+    "component_name"
+  ],
+  "code": "import { useState } from 'react';\n\nexport default function {{component_name}}({ max = 5 }: { max?: number }) {\n  const [rating, setRating] = useState(0);\n  return (\n    <div>\n      {Array.from({ length: max }).map((_, i) => (\n        <button key={i} onClick={() => setRating(i + 1)} className=\"text-2xl\">\n          {i < rating ? '★' : '☆'}\n        </button>\n      ))}\n    </div>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "可點選星星評分元件"
+}

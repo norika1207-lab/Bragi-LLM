@@ -1,0 +1,26 @@
+{
+  "id": "web-backend-121-flask-graphql-ariadne",
+  "category": "web-backend/flask/graphql",
+  "intents_zh": [
+    "flask graphql ariadne",
+    "ariadne resolver",
+    "flask 加 graphql endpoint",
+    "schema-first graphql",
+    "flask graphql 範例"
+  ],
+  "intents_en": [
+    "flask graphql ariadne",
+    "ariadne resolver",
+    "graphql endpoint flask",
+    "schema-first graphql",
+    "flask graphql example"
+  ],
+  "slots": [],
+  "code": "from ariadne import QueryType, make_executable_schema, gql\nfrom ariadne.wsgi import GraphQL\nfrom flask import Flask\n\ntype_defs = gql('type Query { hello: String! }')\nquery = QueryType()\n\n@query.field('hello')\ndef resolve_hello(*_):\n    return 'world'\n\nschema = make_executable_schema(type_defs, query)\napp = Flask(__name__)\napp.add_url_rule('/graphql', view_func=GraphQL(schema), methods=['GET', 'POST'])",
+  "language": "py",
+  "deps": [
+    "flask",
+    "ariadne"
+  ],
+  "summary_zh": "Flask + Ariadne GraphQL"
+}

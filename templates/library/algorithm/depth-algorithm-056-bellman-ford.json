@@ -1,0 +1,31 @@
+{
+  "id": "depth-algorithm-056-bellman-ford",
+  "category": "algorithm/graph/bellman-ford",
+  "intents_zh": [
+    "Bellman Ford 算法",
+    "負權最短路",
+    "bellman ford 模板",
+    "負環檢測",
+    "spfa 風格 bellman",
+    "單源最短路負權",
+    "Bellman 算法"
+  ],
+  "intents_en": [
+    "Bellman Ford algorithm",
+    "negative weight shortest path",
+    "bellman ford template",
+    "negative cycle detection",
+    "SPFA style bellman",
+    "single source negative edges",
+    "Bellman algorithm"
+  ],
+  "slots": [
+    "n",
+    "edges",
+    "src"
+  ],
+  "code": "def bellman_ford(n={{n}}, edges={{edges}}, src={{src}}):\n    INF = float('inf')\n    dist = [INF]*n; dist[src] = 0\n    for _ in range(n-1):\n        updated = False\n        for u, v, w in edges:\n            if dist[u] != INF and dist[u]+w < dist[v]:\n                dist[v] = dist[u]+w; updated = True\n        if not updated: break\n    for u, v, w in edges:\n        if dist[u] != INF and dist[u]+w < dist[v]:\n            return None\n    return dist",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "Bellman Ford 處理負權單源最短路與負環檢測"
+}

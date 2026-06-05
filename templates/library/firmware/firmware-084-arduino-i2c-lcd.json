@@ -1,0 +1,28 @@
+{
+  "id": "firmware-084-arduino-i2c-lcd",
+  "category": "firmware/arduino/display",
+  "intents_zh": [
+    "I2C LCD 1602",
+    "LiquidCrystal_I2C",
+    "Arduino 顯示文字 LCD",
+    "1602 模組",
+    "16x2 顯示"
+  ],
+  "intents_en": [
+    "Arduino I2C LCD 1602",
+    "LiquidCrystal_I2C example",
+    "16x2 display",
+    "I2C LCD print",
+    "LCD module Arduino"
+  ],
+  "slots": [
+    "i2c_addr",
+    "text"
+  ],
+  "code": "#include <Wire.h>\n#include <LiquidCrystal_I2C.h>\nLiquidCrystal_I2C lcd({{i2c_addr}}, 16, 2);\n\nvoid setup() {\n  lcd.init();\n  lcd.backlight();\n  lcd.setCursor(0, 0);\n  lcd.print(\"{{text}}\");\n}\n\nvoid loop() {}",
+  "language": "ino",
+  "deps": [
+    "LiquidCrystal I2C"
+  ],
+  "summary_zh": "Arduino I2C 1602 LCD 顯示文字"
+}

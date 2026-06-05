@@ -1,0 +1,22 @@
+{
+  "id": "system-cli-014-systemd-timer",
+  "category": "system-cli/ops/systemd",
+  "intents_zh": [
+    "systemd timer 取代 cron",
+    "定時任務 systemd",
+    "systemd 定期跑 script"
+  ],
+  "intents_en": [
+    "systemd timer template",
+    "cron replacement with systemd",
+    "scheduled task via systemd"
+  ],
+  "slots": [
+    "job_name",
+    "schedule"
+  ],
+  "code": "# /etc/systemd/system/{{job_name}}.timer\n[Unit]\nDescription=Timer for {{job_name}}\n\n[Timer]\nOnCalendar={{schedule}}\nPersistent=true\nUnit={{job_name}}.service\n\n[Install]\nWantedBy=timers.target",
+  "language": "ini",
+  "deps": [],
+  "summary_zh": "systemd timer 定時觸發"
+}

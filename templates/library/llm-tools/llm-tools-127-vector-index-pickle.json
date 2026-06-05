@@ -1,0 +1,33 @@
+{
+  "id": "llm-tools-127-vector-index-pickle",
+  "category": "llm-tools/vectordb/pickle-store",
+  "intents_zh": [
+    "輕量 pickle 向量庫",
+    "numpy + pickle 存向量",
+    "minimal vector store",
+    "沒裝 faiss 也能用",
+    "土法向量庫",
+    "pickle 索引",
+    "快速 vector store",
+    "local vector store"
+  ],
+  "intents_en": [
+    "pickle vector store",
+    "numpy pickle vector index",
+    "minimal vector store",
+    "no-faiss vector store",
+    "light vector index",
+    "local vector store",
+    "quick vector store",
+    "tiny vector db"
+  ],
+  "slots": [
+    "store_path"
+  ],
+  "code": "import pickle, numpy as np\nfrom pathlib import Path\n\nclass Store:\n    def __init__(self, path: str = \"{{store_path}}\"):\n        self.path = Path(path)\n        if self.path.exists():\n            self.docs, self.vecs = pickle.loads(self.path.read_bytes())\n        else:\n            self.docs, self.vecs = [], np.zeros((0, 0))\n\n    def add(self, doc: str, vec: np.ndarray):\n        if self.vecs.size == 0:\n            self.vecs = vec.reshape(1, -1)\n        else:\n            self.vecs = np.vstack([self.vecs, vec])\n        self.docs.append(doc)\n\n    def search(self, q: np.ndarray, k=5):\n        sims = (self.vecs @ q).flatten()\n        idx = np.argsort(-sims)[:k]\n        return [(self.docs[i], float(sims[i])) for i in idx]\n\n    def save(self):\n        self.path.write_bytes(pickle.dumps((self.docs, self.vecs)))",
+  "language": "py",
+  "deps": [
+    "numpy"
+  ],
+  "summary_zh": "無外部依賴的 pickle + numpy 向量庫"
+}

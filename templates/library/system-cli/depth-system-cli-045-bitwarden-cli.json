@@ -1,0 +1,24 @@
+{
+  "id": "depth-system-cli-045-bitwarden-cli",
+  "category": "system-cli/password/bitwarden",
+  "intents_zh": [
+    "bw bitwarden CLI 包裝",
+    "解鎖快取 session",
+    "bw get password",
+    "bitwarden 自動 fill"
+  ],
+  "intents_en": [
+    "bw bitwarden cli wrapper",
+    "unlock cached session",
+    "bw get password",
+    "bitwarden autofill"
+  ],
+  "slots": [],
+  "code": "#!/usr/bin/env bash\nset -euo pipefail\n\nif [ -z \"${BW_SESSION:-}\" ] || ! bw status 2>/dev/null | grep -q unlocked; then\n  export BW_SESSION=$(bw unlock --raw)\nfi\n\ncmd=${1:-list}\nshift || true\n\ncase \"$cmd\" in\n  get)    bw get password \"$1\" ;;\n  user)   bw get username \"$1\" ;;\n  totp)   bw get totp \"$1\" ;;\n  search) bw list items --search \"$1\" | jq '.[] | {name, login: .login.username}' ;;\n  sync)   bw sync ;;\n  *) echo \"usage: $0 {get|user|totp|search|sync} <item>\"; exit 1 ;;\nesac",
+  "language": "bash",
+  "deps": [
+    "bitwarden-cli",
+    "jq"
+  ],
+  "summary_zh": "bitwarden CLI 包裝含 session 快取"
+}

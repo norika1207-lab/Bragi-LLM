@@ -1,0 +1,25 @@
+{
+  "id": "depth-mobile-007-safari-vc",
+  "category": "mobile/inappbrowser/ios",
+  "intents_zh": [
+    "iOS SFSafariViewController",
+    "app 內開網頁",
+    "Safari VC present",
+    "內嵌瀏覽器",
+    "不跳出 App 開連結"
+  ],
+  "intents_en": [
+    "iOS SFSafariViewController",
+    "in-app browser",
+    "present Safari VC",
+    "embedded browser",
+    "open link in app"
+  ],
+  "slots": [
+    "url_string"
+  ],
+  "code": "import SafariServices\nlet vc = SFSafariViewController(url: URL(string: \"{{url_string}}\")!)\nvc.preferredControlTintColor = .systemBlue\npresent(vc, animated: true)",
+  "language": "swift",
+  "deps": [],
+  "summary_zh": "iOS 內嵌 Safari 開連結"
+}

@@ -1,0 +1,29 @@
+{
+  "id": "depth-algorithm-039-miller-rabin",
+  "category": "algorithm/math/miller-rabin",
+  "intents_zh": [
+    "Miller Rabin 素性測試",
+    "隨機素性檢測",
+    "大數判素",
+    "miller rabin 模板",
+    "快速素性",
+    "費馬素性",
+    "素數檢測"
+  ],
+  "intents_en": [
+    "Miller Rabin primality test",
+    "probabilistic primality",
+    "big integer primality",
+    "miller rabin template",
+    "fast prime check",
+    "Fermat primality",
+    "is prime test"
+  ],
+  "slots": [
+    "n"
+  ],
+  "code": "def miller_rabin(n={{n}}):\n    if n < 2: return False\n    for p in (2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37):\n        if n % p == 0: return n == p\n    d = n - 1; r = 0\n    while d % 2 == 0: d //= 2; r += 1\n    for a in (2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37):\n        if a >= n: continue\n        x = pow(a, d, n)\n        if x == 1 or x == n-1: continue\n        for _ in range(r-1):\n            x = x*x % n\n            if x == n-1: break\n        else:\n            return False\n    return True",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "Miller Rabin 確定性素性測試 (適用 64 bit)"
+}

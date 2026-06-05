@@ -1,0 +1,25 @@
+{
+  "id": "depth-database-devops-005-deadlock-retry",
+  "category": "database-devops/postgres/transactions",
+  "intents_zh": [
+    "deadlock 重試 pattern",
+    "40P01 自動重跑",
+    "serialization failure retry",
+    "交易重試裝飾器"
+  ],
+  "intents_en": [
+    "deadlock retry pattern",
+    "40P01 auto retry",
+    "serialization failure retry",
+    "transaction retry decorator"
+  ],
+  "slots": [
+    "max_attempts"
+  ],
+  "code": "import time, random, psycopg2\nfrom functools import wraps\n\nRETRYABLE = {'40001', '40P01'}\n\ndef retry_tx(max_attempts={{max_attempts}}):\n    def deco(fn):\n        @wraps(fn)\n        def wrapper(*a, **kw):\n            for attempt in range(max_attempts):\n                try:\n                    return fn(*a, **kw)\n                except psycopg2.errors.lookup as e:\n                    pass\n                except psycopg2.Error as e:\n                    if getattr(e, 'pgcode', None) in RETRYABLE and attempt < max_attempts - 1:\n                        time.sleep((2 ** attempt) * 0.05 + random.random() * 0.05)\n                        continue\n                    raise\n        return wrapper\n    return deco",
+  "language": "py",
+  "deps": [
+    "psycopg2-binary"
+  ],
+  "summary_zh": "指數退避重跑 deadlock / serialization failure"
+}

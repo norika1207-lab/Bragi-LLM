@@ -1,0 +1,28 @@
+{
+  "id": "web-frontend-batch3-038-html-testimonial",
+  "category": "web-frontend/html/cards/testimonial",
+  "intents_zh": [
+    "客戶評價卡",
+    "testimonial card",
+    "用戶見證",
+    "引用卡片",
+    "推薦語區塊",
+    "quote card"
+  ],
+  "intents_en": [
+    "testimonial card",
+    "customer quote card",
+    "user review card",
+    "quote block",
+    "praise card",
+    "feedback card"
+  ],
+  "slots": [
+    "author_name",
+    "role"
+  ],
+  "code": "<figure class=\"testimonial\">\n  <blockquote>\n    <p>This product completely changed how our team ships. We are 3x faster with half the bugs.</p>\n  </blockquote>\n  <figcaption>\n    <img src=\"https://i.pravatar.cc/48\" alt=\"\">\n    <div>\n      <strong>{{author_name}}</strong>\n      <span>{{role}}</span>\n    </div>\n  </figcaption>\n</figure>\n<style>\n  .testimonial { max-width: 480px; background: #f9fafb; border-radius: 12px; padding: 1.5rem; font-family: system-ui; }\n  .testimonial blockquote { margin: 0 0 1rem; font-size: 1.1rem; line-height: 1.5; }\n  .testimonial figcaption { display: flex; align-items: center; gap: .75rem; }\n  .testimonial img { border-radius: 50%; }\n  .testimonial span { display: block; color: #6b7280; font-size: .9rem; }\n</style>",
+  "language": "html",
+  "deps": [],
+  "summary_zh": "客戶見證卡含頭像與職稱"
+}

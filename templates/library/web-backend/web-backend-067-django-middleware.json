@@ -1,0 +1,27 @@
+{
+  "id": "web-backend-067-django-middleware",
+  "category": "web-backend/django/middleware",
+  "intents_zh": [
+    "django middleware",
+    "自訂 middleware",
+    "記錄 request 時間",
+    "加 header middleware",
+    "middleware 模板"
+  ],
+  "intents_en": [
+    "custom django middleware",
+    "request timing middleware",
+    "add header middleware",
+    "django middleware template",
+    "logging middleware django"
+  ],
+  "slots": [
+    "middleware_name"
+  ],
+  "code": "import time\n\nclass {{middleware_name}}:\n    def __init__(self, get_response):\n        self.get_response = get_response\n\n    def __call__(self, request):\n        start = time.time()\n        response = self.get_response(request)\n        elapsed_ms = int((time.time() - start) * 1000)\n        response['X-Response-Time-ms'] = str(elapsed_ms)\n        return response",
+  "language": "py",
+  "deps": [
+    "django"
+  ],
+  "summary_zh": "Django 自訂 middleware"
+}

@@ -1,0 +1,23 @@
+{
+  "id": "database-devops-152-prisma-connection-pool",
+  "category": "database-devops/orm/prisma",
+  "intents_zh": [
+    "Prisma 連線數設定",
+    "datasource pool",
+    "prisma connection_limit"
+  ],
+  "intents_en": [
+    "prisma connection pool",
+    "datasource pool",
+    "connection_limit"
+  ],
+  "slots": [
+    "pool_size"
+  ],
+  "code": "// connection url params:\n// postgres://user:pass@host:5432/db?connection_limit={{pool_size}}&pool_timeout=10\n\nimport { PrismaClient } from '@prisma/client'\n\nexport const prisma = new PrismaClient({\n  log: ['warn', 'error'],\n  datasources: {\n    db: { url: process.env.DATABASE_URL },\n  },\n})\n\nprocess.on('beforeExit', async () => {\n  await prisma.$disconnect()\n})",
+  "language": "ts",
+  "deps": [
+    "@prisma/client"
+  ],
+  "summary_zh": "prisma 連線池大小與優雅關閉"
+}

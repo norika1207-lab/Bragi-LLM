@@ -1,0 +1,28 @@
+{
+  "id": "web-backend-130-express-typeorm",
+  "category": "web-backend/express/db",
+  "intents_zh": [
+    "typeorm entity",
+    "decorator orm node",
+    "typeorm + express",
+    "建立 typeorm model",
+    "ts orm 範例"
+  ],
+  "intents_en": [
+    "typeorm entity decorator",
+    "typeorm + express",
+    "node ts orm",
+    "define typeorm model",
+    "typeorm example"
+  ],
+  "slots": [
+    "entity_name"
+  ],
+  "code": "import 'reflect-metadata';\nimport { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn } from 'typeorm';\n\n@Entity()\nexport class {{entity_name}} {\n  @PrimaryGeneratedColumn('uuid')\n  id!: string;\n\n  @Column({ length: 120 })\n  name!: string;\n\n  @Column({ unique: true })\n  email!: string;\n\n  @CreateDateColumn()\n  createdAt!: Date;\n}",
+  "language": "ts",
+  "deps": [
+    "typeorm",
+    "reflect-metadata"
+  ],
+  "summary_zh": "TypeORM Entity 定義"
+}

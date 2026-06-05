@@ -1,0 +1,30 @@
+{
+  "id": "depth-algorithm-015-persistent-segtree",
+  "category": "algorithm/segtree/persistent",
+  "intents_zh": [
+    "可持久化線段樹",
+    "主席樹",
+    "persistent segment tree",
+    "版本線段樹",
+    "區間第 k 小",
+    "可持久化權值線段樹",
+    "主席樹模板"
+  ],
+  "intents_en": [
+    "persistent segment tree",
+    "chairman tree",
+    "kth smallest in range",
+    "versioned segtree",
+    "persistent value segtree",
+    "functional segment tree",
+    "persistent segtree kth"
+  ],
+  "slots": [
+    "arr",
+    "sorted_vals"
+  ],
+  "code": "class PersistentSeg:\n    def __init__(self, n):\n        self.L = [0]; self.R = [0]; self.S = [0]; self.n = n\n    def build(self, l, r):\n        self.L.append(0); self.R.append(0); self.S.append(0)\n        node = len(self.S)-1\n        if l == r: return node\n        m = (l+r)//2\n        self.L[node] = self.build(l, m)\n        self.R[node] = self.build(m+1, r)\n        return node\n    def update(self, prev, l, r, pos):\n        self.L.append(self.L[prev]); self.R.append(self.R[prev]); self.S.append(self.S[prev]+1)\n        node = len(self.S)-1\n        if l == r: return node\n        m = (l+r)//2\n        if pos <= m: self.L[node] = self.update(self.L[prev], l, m, pos)\n        else: self.R[node] = self.update(self.R[prev], m+1, r, pos)\n        return node\n    def kth(self, u, v, l, r, k):\n        if l == r: return l\n        m = (l+r)//2\n        cnt = self.S[self.L[v]] - self.S[self.L[u]]\n        if k <= cnt: return self.kth(self.L[u], self.L[v], l, m, k)\n        return self.kth(self.R[u], self.R[v], m+1, r, k-cnt)",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "可持久化線段樹支援區間第 k 小查詢"
+}

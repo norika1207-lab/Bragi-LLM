@@ -1,0 +1,28 @@
+{
+  "id": "web-frontend-batch2-001-header",
+  "category": "web-frontend/react/layout/header",
+  "intents_zh": [
+    "做一個網站 header",
+    "建立頂部導航列",
+    "header 含 logo 和選單",
+    "固定在頂部的 header",
+    "響應式 header",
+    "header 帶搜尋框"
+  ],
+  "intents_en": [
+    "create site header",
+    "build top navigation bar",
+    "header with logo and menu",
+    "sticky header at top",
+    "responsive header",
+    "header with search"
+  ],
+  "slots": [
+    "site_name",
+    "nav_items"
+  ],
+  "code": "export function Header() {\n  const items = {{nav_items}};\n  return (\n    <header className=\"sticky top-0 z-50 w-full border-b bg-white/80 backdrop-blur\">\n      <div className=\"mx-auto flex h-14 max-w-7xl items-center justify-between px-4\">\n        <a href=\"/\" className=\"text-lg font-semibold\">{{site_name}}</a>\n        <nav className=\"flex gap-6 text-sm\">\n          {items.map((it) => (\n            <a key={it.href} href={it.href} className=\"text-gray-700 hover:text-black\">{it.label}</a>\n          ))}\n        </nav>\n      </div>\n    </header>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "sticky 頂部 header 含 logo 與導航連結"
+}

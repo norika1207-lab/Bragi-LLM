@@ -1,0 +1,25 @@
+{
+  "id": "depth-database-devops-050-helm-values-prod",
+  "category": "database-devops/k8s/helm",
+  "intents_zh": [
+    "helm values prod 覆寫",
+    "resource limit",
+    "replicas hpa"
+  ],
+  "intents_en": [
+    "helm values prod override",
+    "resource limit",
+    "replicas hpa"
+  ],
+  "slots": [
+    "replicas",
+    "cpu_req",
+    "mem_req"
+  ],
+  "code": "replicaCount: {{replicas}}\n\nresources:\n  requests:\n    cpu: {{cpu_req}}\n    memory: {{mem_req}}\n  limits:\n    cpu: 1\n    memory: 1Gi\n\nautoscaling:\n  enabled: true\n  minReplicas: {{replicas}}\n  maxReplicas: 10\n  targetCPUUtilizationPercentage: 70\n\npodDisruptionBudget:\n  minAvailable: 1",
+  "language": "yaml",
+  "deps": [
+    "helm"
+  ],
+  "summary_zh": "helm values 生產設定,HPA + PDB"
+}

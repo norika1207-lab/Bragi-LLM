@@ -1,0 +1,21 @@
+{
+  "id": "depth-database-devops-009-pg-stat-bloat",
+  "category": "database-devops/postgres/observability",
+  "intents_zh": [
+    "檢查 table bloat",
+    "dead tuple 比例",
+    "哪張表該 vacuum",
+    "膨脹比"
+  ],
+  "intents_en": [
+    "check table bloat",
+    "dead tuple ratio",
+    "which table needs vacuum",
+    "bloat report"
+  ],
+  "slots": [],
+  "code": "SELECT relname,\n       n_live_tup,\n       n_dead_tup,\n       round(n_dead_tup * 100.0 / NULLIF(n_live_tup + n_dead_tup, 0), 2) AS dead_pct,\n       last_autovacuum,\n       last_autoanalyze\nFROM pg_stat_user_tables\nORDER BY n_dead_tup DESC\nLIMIT 20;",
+  "language": "sql",
+  "deps": [],
+  "summary_zh": "找 dead tuple 比例高的表優先 vacuum"
+}

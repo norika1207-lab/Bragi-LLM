@@ -1,0 +1,21 @@
+{
+  "id": "database-devops-080-dockerfile-multistage-rust",
+  "category": "database-devops/docker/dockerfile",
+  "intents_zh": [
+    "Rust Dockerfile",
+    "rust 多階段 build",
+    "rust 容器最小化"
+  ],
+  "intents_en": [
+    "rust dockerfile",
+    "rust multistage",
+    "minimal rust container"
+  ],
+  "slots": [
+    "binary_name"
+  ],
+  "code": "FROM rust:1-slim AS build\nWORKDIR /src\nCOPY Cargo.toml Cargo.lock ./\nRUN mkdir src && echo 'fn main(){}' > src/main.rs && cargo build --release && rm -rf src target/release/{{binary_name}}*\nCOPY . .\nRUN cargo build --release\n\nFROM gcr.io/distroless/cc-debian12\nCOPY --from=build /src/target/release/{{binary_name}} /{{binary_name}}\nENTRYPOINT [\"/{{binary_name}}\"]",
+  "language": "dockerfile",
+  "deps": [],
+  "summary_zh": "Rust distroless 多階段 Dockerfile"
+}

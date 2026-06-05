@@ -1,0 +1,27 @@
+{
+  "id": "web-backend-117-express-asyncqueue",
+  "category": "web-backend/express/queue",
+  "intents_zh": [
+    "express 內建 queue",
+    "p-queue concurrency",
+    "限制併發任務",
+    "async queue helper",
+    "node task queue"
+  ],
+  "intents_en": [
+    "express in-process queue",
+    "p-queue concurrency",
+    "limit concurrent tasks",
+    "async queue helper",
+    "node task queue"
+  ],
+  "slots": [
+    "concurrency"
+  ],
+  "code": "const PQueue = require('p-queue').default;\nconst queue = new PQueue({ concurrency: {{concurrency}} });\n\nasync function enqueue(task) {\n  return queue.add(task);\n}\n\nqueue.on('idle', () => console.log('queue idle'));\nqueue.on('error', (err) => console.error('task error', err));\n\nmodule.exports = { enqueue, queue };",
+  "language": "js",
+  "deps": [
+    "p-queue"
+  ],
+  "summary_zh": "p-queue 併發控制"
+}

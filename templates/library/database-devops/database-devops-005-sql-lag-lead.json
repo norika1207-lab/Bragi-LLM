@@ -1,0 +1,28 @@
+{
+  "id": "database-devops-005-sql-lag-lead",
+  "category": "database-devops/sql/windows",
+  "intents_zh": [
+    "LAG 取前一列",
+    "LEAD 取下一列",
+    "window 比較相鄰列",
+    "算前後差值",
+    "跟上一筆比"
+  ],
+  "intents_en": [
+    "lag previous row",
+    "lead next row",
+    "compare with previous row",
+    "window lag lead",
+    "difference from prior row"
+  ],
+  "slots": [
+    "table",
+    "partition_col",
+    "order_col",
+    "value_col"
+  ],
+  "code": "SELECT *,\n  LAG({{value_col}}) OVER (\n    PARTITION BY {{partition_col}} ORDER BY {{order_col}}\n  ) AS prev_val,\n  {{value_col}} - LAG({{value_col}}) OVER (\n    PARTITION BY {{partition_col}} ORDER BY {{order_col}}\n  ) AS delta\nFROM {{table}};",
+  "language": "sql",
+  "deps": [],
+  "summary_zh": "用 LAG 算相鄰列差值"
+}

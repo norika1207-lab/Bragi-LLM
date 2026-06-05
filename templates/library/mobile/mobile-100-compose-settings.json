@@ -1,0 +1,32 @@
+{
+  "id": "mobile-100-compose-settings",
+  "category": "mobile/compose/settings",
+  "intents_zh": [
+    "Compose 設定頁",
+    "Compose Switch 列表",
+    "Compose preferences ui",
+    "Compose settings list",
+    "Material3 Switch 設定",
+    "Compose toggle row",
+    "Compose 偏好頁"
+  ],
+  "intents_en": [
+    "compose settings page",
+    "compose switch list",
+    "compose preferences ui",
+    "compose settings list",
+    "material3 Switch settings",
+    "compose toggle row",
+    "compose prefs ui"
+  ],
+  "slots": [
+    "row1",
+    "row2"
+  ],
+  "code": "import androidx.compose.foundation.layout.*\nimport androidx.compose.material3.*\nimport androidx.compose.runtime.*\nimport androidx.compose.ui.Modifier\nimport androidx.compose.ui.unit.dp\n@Composable\nfun S(){\n  var a by remember{mutableStateOf(false)};var b by remember{mutableStateOf(true)}\n  Column(Modifier.padding(16.dp)){\n    Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween){Text(\"{{row1}}\");Switch(checked=a,onCheckedChange={a=it})}\n    Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween){Text(\"{{row2}}\");Switch(checked=b,onCheckedChange={b=it})}}}",
+  "language": "kt",
+  "deps": [
+    "androidx.compose.material3"
+  ],
+  "summary_zh": "Compose 兩列 Switch 設定頁"
+}

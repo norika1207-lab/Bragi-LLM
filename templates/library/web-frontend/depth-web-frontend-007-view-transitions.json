@@ -1,0 +1,25 @@
+{
+  "id": "depth-web-frontend-007-view-transitions",
+  "category": "web-frontend/animation/view-transitions",
+  "intents_zh": [
+    "View Transitions API",
+    "頁面切換動畫",
+    "startViewTransition",
+    "平滑路由轉場",
+    "共享元素過場"
+  ],
+  "intents_en": [
+    "view transitions api",
+    "page transition browser",
+    "startViewTransition",
+    "shared element transition",
+    "route morph"
+  ],
+  "slots": [
+    "nav_fn"
+  ],
+  "code": "export function {{nav_fn}}(updateDom: () => void) {\n  if (!('startViewTransition' in document)) {\n    updateDom();\n    return;\n  }\n  // @ts-ignore\n  document.startViewTransition(() => updateDom());\n}\n\n// CSS:\n// ::view-transition-old(root), ::view-transition-new(root) { animation-duration: 0.3s; }",
+  "language": "ts",
+  "deps": [],
+  "summary_zh": "瀏覽器 View Transitions API 包裝"
+}

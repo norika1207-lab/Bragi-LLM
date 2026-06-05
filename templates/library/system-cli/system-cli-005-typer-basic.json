@@ -1,0 +1,26 @@
+{
+  "id": "system-cli-005-typer-basic",
+  "category": "system-cli/python/typer",
+  "intents_zh": [
+    "用 typer 寫 CLI",
+    "typer 範本",
+    "python 型別註解寫 CLI",
+    "typer 入門"
+  ],
+  "intents_en": [
+    "typer CLI template",
+    "basic typer app",
+    "python typer skeleton",
+    "typed CLI with typer"
+  ],
+  "slots": [
+    "app_name",
+    "cmd_name"
+  ],
+  "code": "import typer\n\napp = typer.Typer(help='{{app_name}}')\n\n@app.command()\ndef {{cmd_name}}(name: str, count: int = 1, upper: bool = False):\n    msg = name.upper() if upper else name\n    for _ in range(count):\n        typer.echo(msg)\n\nif __name__ == '__main__':\n    app()",
+  "language": "py",
+  "deps": [
+    "typer"
+  ],
+  "summary_zh": "typer 型別驅動 CLI"
+}

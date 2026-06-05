@@ -1,0 +1,33 @@
+{
+  "id": "llm-tools-101-fewshot-prompt",
+  "category": "llm-tools/prompt/fewshot",
+  "intents_zh": [
+    "few-shot prompt 範本",
+    "少樣本提示",
+    "example-based prompt",
+    "插入範例 prompt",
+    "fewshot template",
+    "給 demo 樣本",
+    "few-shot 範例",
+    "示範式提問"
+  ],
+  "intents_en": [
+    "few-shot prompt",
+    "examples-based prompt",
+    "fewshot template",
+    "prompt with demos",
+    "insert examples",
+    "few-shot example",
+    "minimal fewshot",
+    "prompt with shots"
+  ],
+  "slots": [
+    "model_name"
+  ],
+  "code": "from openai import OpenAI\n\nclient = OpenAI()\n\nEXAMPLES = [\n    (\"happy\", \"positive\"),\n    (\"sad\", \"negative\"),\n    (\"angry\", \"negative\"),\n]\n\ndef classify(word: str) -> str:\n    shots = \"\\n\".join(f\"Word: {w} -> {l}\" for w, l in EXAMPLES)\n    r = client.chat.completions.create(\n        model=\"{{model_name}}\",\n        messages=[{\"role\": \"user\", \"content\": f\"{shots}\\nWord: {word} ->\"}],\n    )\n    return r.choices[0].message.content.strip()\n\nif __name__ == \"__main__\":\n    print(classify(\"joyful\"))",
+  "language": "py",
+  "deps": [
+    "openai"
+  ],
+  "summary_zh": "few-shot examples 注入式分類"
+}

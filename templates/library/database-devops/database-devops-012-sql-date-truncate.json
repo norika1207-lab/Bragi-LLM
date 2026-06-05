@@ -1,0 +1,25 @@
+{
+  "id": "database-devops-012-sql-date-truncate",
+  "category": "database-devops/sql/datetime",
+  "intents_zh": [
+    "按月聚合",
+    "date_trunc 月份",
+    "時間截斷到月",
+    "每月統計"
+  ],
+  "intents_en": [
+    "aggregate by month",
+    "date_trunc month",
+    "monthly stats",
+    "truncate to month"
+  ],
+  "slots": [
+    "table",
+    "date_col",
+    "metric_col"
+  ],
+  "code": "SELECT DATE_TRUNC('month', {{date_col}}) AS month,\n  COUNT(*) AS cnt,\n  SUM({{metric_col}}) AS total\nFROM {{table}}\nGROUP BY 1\nORDER BY 1;",
+  "language": "sql",
+  "deps": [],
+  "summary_zh": "按月截斷時間聚合"
+}

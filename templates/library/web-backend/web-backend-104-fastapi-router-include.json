@@ -1,0 +1,28 @@
+{
+  "id": "web-backend-104-fastapi-router-include",
+  "category": "web-backend/fastapi/structure",
+  "intents_zh": [
+    "fastapi APIRouter include",
+    "拆分 fastapi 路由",
+    "include_router 範例",
+    "模組化 fastapi",
+    "prefix tag router"
+  ],
+  "intents_en": [
+    "fastapi include_router",
+    "modular fastapi",
+    "APIRouter prefix tag",
+    "split fastapi routes",
+    "fastapi structure"
+  ],
+  "slots": [
+    "prefix",
+    "tag"
+  ],
+  "code": "from fastapi import FastAPI\nfrom .routers import users, posts, auth\n\napp = FastAPI()\napp.include_router(users.router, prefix='{{prefix}}/users', tags=['{{tag}}'])\napp.include_router(posts.router, prefix='{{prefix}}/posts', tags=['posts'])\napp.include_router(auth.router, prefix='{{prefix}}/auth', tags=['auth'])",
+  "language": "py",
+  "deps": [
+    "fastapi"
+  ],
+  "summary_zh": "FastAPI include_router 模組化"
+}

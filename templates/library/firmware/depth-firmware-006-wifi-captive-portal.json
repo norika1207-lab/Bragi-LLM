@@ -1,0 +1,30 @@
+{
+  "id": "depth-firmware-006-wifi-captive-portal",
+  "category": "firmware/network/provisioning",
+  "intents_zh": [
+    "WiFi 設定頁",
+    "captive portal 配網",
+    "AP mode 設定頁",
+    "掃描 WiFi 顯示",
+    "強制跳轉設定頁"
+  ],
+  "intents_en": [
+    "wifi captive portal",
+    "ap config page",
+    "wifi provisioning portal",
+    "scan wifi list",
+    "force redirect portal"
+  ],
+  "slots": [
+    "ap_ssid"
+  ],
+  "code": "WiFi.mode(WIFI_AP);\nWiFi.softAP(\"{{ap_ssid}}\");\nDNSServer dns; dns.start(53, \"*\", WiFi.softAPIP());\nAsyncWebServer server(80);\nserver.on(\"/\", HTTP_GET, [](AsyncWebServerRequest *r){\n    r->send(200, \"text/html\", \"<form action=/save><input name=ssid><input name=pw><button>Save</button></form>\");\n});\nserver.on(\"/save\", HTTP_GET, [](AsyncWebServerRequest *r){\n    Preferences p; p.begin(\"wifi\");\n    p.putString(\"ssid\", r->getParam(\"ssid\")->value());\n    p.putString(\"pw\", r->getParam(\"pw\")->value());\n    r->send(200, \"text/plain\", \"saved, rebooting\");\n    delay(1000); ESP.restart();\n});\nserver.begin();",
+  "language": "cpp",
+  "deps": [
+    "WiFi",
+    "ESPAsyncWebServer",
+    "DNSServer",
+    "Preferences"
+  ],
+  "summary_zh": "AP 模式架設配網表單並把 SSID/密碼存到 NVS"
+}

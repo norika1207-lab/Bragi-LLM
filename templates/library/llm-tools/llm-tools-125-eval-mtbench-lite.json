@@ -1,0 +1,35 @@
+{
+  "id": "llm-tools-125-eval-mtbench-lite",
+  "category": "llm-tools/eval/mtbench-lite",
+  "intents_zh": [
+    "輕量 MT-Bench",
+    "多輪評測",
+    "pairwise mtbench",
+    "小型 LLM 評測",
+    "mt-bench style judge",
+    "多輪比較評分",
+    "mtbench 簡化版",
+    "quality mt-bench"
+  ],
+  "intents_en": [
+    "lite mt-bench eval",
+    "multi-turn evaluation",
+    "pairwise mtbench",
+    "small llm eval",
+    "mt-bench style judge",
+    "two-turn comparison",
+    "mtbench simplified",
+    "quality mtbench"
+  ],
+  "slots": [
+    "judge_model",
+    "model_a",
+    "model_b"
+  ],
+  "code": "from openai import OpenAI\nimport json\n\nclient = OpenAI()\n\ndef gen(model: str, msgs):\n    r = client.chat.completions.create(model=model, messages=msgs)\n    return r.choices[0].message.content\n\ndef compare(question: str) -> str:\n    msgs = [{\"role\": \"user\", \"content\": question}]\n    a = gen(\"{{model_a}}\", msgs)\n    b = gen(\"{{model_b}}\", msgs)\n    judge_prompt = f\"Q: {question}\\nA: {a}\\nB: {b}\\nWhich is better? A_BETTER, B_BETTER, or TIE.\"\n    return gen(\"{{judge_model}}\", [{\"role\": \"user\", \"content\": judge_prompt}])\n\nif __name__ == \"__main__\":\n    print(compare(\"explain entropy in 2 sentences\"))",
+  "language": "py",
+  "deps": [
+    "openai"
+  ],
+  "summary_zh": "輕量 pairwise MT-Bench 風格評測"
+}

@@ -1,0 +1,27 @@
+{
+  "id": "web-frontend-batch1-039-toggle-switch",
+  "category": "web-frontend/react/inputs/toggle",
+  "intents_zh": [
+    "toggle switch 元件",
+    "開關按鈕",
+    "iOS 風格 switch",
+    "React toggle",
+    "on off switch",
+    "slider switch"
+  ],
+  "intents_en": [
+    "toggle switch",
+    "on off switch",
+    "ios style switch",
+    "react toggle",
+    "slider switch",
+    "boolean toggle"
+  ],
+  "slots": [
+    "component_name"
+  ],
+  "code": "import { useState } from 'react';\n\nexport default function {{component_name}}({ initial = false }: { initial?: boolean }) {\n  const [on, setOn] = useState(initial);\n  return (\n    <button\n      onClick={() => setOn((v) => !v)}\n      className={`w-12 h-6 rounded-full relative transition ${on ? 'bg-green-500' : 'bg-gray-300'}`}\n    >\n      <span className={`absolute top-0.5 w-5 h-5 bg-white rounded-full transition ${on ? 'left-6' : 'left-0.5'}`} />\n    </button>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "iOS 風格 toggle switch"
+}

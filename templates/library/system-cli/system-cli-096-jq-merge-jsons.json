@@ -1,0 +1,24 @@
+{
+  "id": "system-cli-096-jq-merge-jsons",
+  "category": "system-cli/data/jq",
+  "intents_zh": [
+    "jq 合併多個 json",
+    "merge json file",
+    "jq 多檔合併"
+  ],
+  "intents_en": [
+    "merge json files with jq",
+    "jq combine multiple",
+    "slurp json merge"
+  ],
+  "slots": [
+    "glob_pattern",
+    "out_file"
+  ],
+  "code": "#!/usr/bin/env bash\nset -euo pipefail\njq -s 'add' {{glob_pattern}} > \"{{out_file}}\"\necho \"merged -> {{out_file}}\"\njq 'length' \"{{out_file}}\"",
+  "language": "sh",
+  "deps": [
+    "jq"
+  ],
+  "summary_zh": "jq slurp 多 json 合併"
+}

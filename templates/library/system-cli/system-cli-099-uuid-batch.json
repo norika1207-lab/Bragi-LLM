@@ -1,0 +1,22 @@
+{
+  "id": "system-cli-099-uuid-batch",
+  "category": "system-cli/util/id",
+  "intents_zh": [
+    "批次生 uuid",
+    "python 產生 ID list",
+    "uuid 列表"
+  ],
+  "intents_en": [
+    "batch generate uuid",
+    "python uuid list",
+    "make uuids file"
+  ],
+  "slots": [
+    "count",
+    "out_file"
+  ],
+  "code": "import uuid\n\nwith open('{{out_file}}','w') as f:\n    for _ in range({{count}}):\n        f.write(str(uuid.uuid4()) + '\\n')\nprint('wrote {{count}} uuids')",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "產生 N 個 uuid 到檔"
+}

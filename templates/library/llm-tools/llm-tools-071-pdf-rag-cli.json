@@ -1,0 +1,38 @@
+{
+  "id": "llm-tools-071-pdf-rag-cli",
+  "category": "llm-tools/rag/pdf-cli",
+  "intents_zh": [
+    "PDF 問答 CLI",
+    "ask pdf cli",
+    "給 pdf 問問題",
+    "pdf rag 一鍵",
+    "cli pdf qa",
+    "pdf knowledge",
+    "本機 pdf qa",
+    "聊 pdf"
+  ],
+  "intents_en": [
+    "pdf qa cli",
+    "ask pdf script",
+    "pdf rag one-shot",
+    "chat with pdf cli",
+    "one-file pdf qa",
+    "local pdf qa",
+    "pdf knowledge cli",
+    "interrogate pdf"
+  ],
+  "slots": [
+    "pdf_path",
+    "model_name",
+    "embed_model"
+  ],
+  "code": "from pypdf import PdfReader\nfrom sentence_transformers import SentenceTransformer\nfrom openai import OpenAI\nimport numpy as np\n\ntext = \" \".join(p.extract_text() or \"\" for p in PdfReader(\"{{pdf_path}}\").pages)\nchunks = [text[i:i+800] for i in range(0, len(text), 700)]\nemb = SentenceTransformer(\"{{embed_model}}\")\nvecs = emb.encode(chunks, normalize_embeddings=True)\nllm = OpenAI()\n\ndef ask(q: str) -> str:\n    qv = emb.encode([q], normalize_embeddings=True)\n    top = np.argsort(-(vecs @ qv.T).flatten())[:4]\n    ctx = \"\\n\".join(chunks[i] for i in top)\n    r = llm.chat.completions.create(model=\"{{model_name}}\",\n        messages=[{\"role\": \"user\", \"content\": f\"Ctx:\\n{ctx}\\nQ: {q}\"}])\n    return r.choices[0].message.content\n\nif __name__ == \"__main__\":\n    import sys; print(ask(\" \".join(sys.argv[1:])))",
+  "language": "py",
+  "deps": [
+    "pypdf",
+    "sentence-transformers",
+    "openai",
+    "numpy"
+  ],
+  "summary_zh": "單檔 PDF + 向量檢索 + LLM 問答 CLI"
+}

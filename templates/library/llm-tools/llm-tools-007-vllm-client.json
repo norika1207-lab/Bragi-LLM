@@ -1,0 +1,34 @@
+{
+  "id": "llm-tools-007-vllm-client",
+  "category": "llm-tools/client/vllm",
+  "intents_zh": [
+    "呼叫 vllm 服務",
+    "用 openai sdk 接 vllm",
+    "vllm 客戶端",
+    "本地 vllm chat",
+    "vllm openai 相容呼叫",
+    "怎麼打 vllm",
+    "vllm 包裝",
+    "vllm http 呼叫"
+  ],
+  "intents_en": [
+    "call vllm server",
+    "openai sdk against vllm",
+    "vllm client",
+    "vllm chat completion",
+    "vllm openai compatible call",
+    "query vllm http",
+    "vllm wrapper",
+    "vllm endpoint client"
+  ],
+  "slots": [
+    "base_url",
+    "model_id"
+  ],
+  "code": "from openai import OpenAI\n\nclient = OpenAI(base_url=\"{{base_url}}/v1\", api_key=\"EMPTY\")\n\ndef chat(prompt: str) -> str:\n    resp = client.chat.completions.create(\n        model=\"{{model_id}}\",\n        messages=[{\"role\": \"user\", \"content\": prompt}],\n    )\n    return resp.choices[0].message.content\n\nif __name__ == \"__main__\":\n    print(chat(\"hello\"))",
+  "language": "py",
+  "deps": [
+    "openai"
+  ],
+  "summary_zh": "以 OpenAI SDK 呼叫 vLLM 服務"
+}

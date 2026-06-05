@@ -1,0 +1,35 @@
+{
+  "id": "llm-tools-006-vllm-server",
+  "category": "llm-tools/serving/vllm",
+  "intents_zh": [
+    "啟動 vLLM server",
+    "vllm openai 相容服務",
+    "用 vllm 部署模型",
+    "vllm serve 範例",
+    "vllm cli 啟動",
+    "怎麼跑 vllm",
+    "vllm api server",
+    "vllm 部署 script"
+  ],
+  "intents_en": [
+    "start vllm server",
+    "vllm openai compatible",
+    "deploy model with vllm",
+    "vllm serve command",
+    "run vllm api",
+    "vllm cli launch",
+    "vllm hosting",
+    "vllm deployment script"
+  ],
+  "slots": [
+    "model_id",
+    "port",
+    "tensor_parallel"
+  ],
+  "code": "#!/bin/bash\nset -e\n\nvllm serve {{model_id}} \\\n  --host 0.0.0.0 \\\n  --port {{port}} \\\n  --tensor-parallel-size {{tensor_parallel}} \\\n  --dtype auto \\\n  --max-model-len 8192",
+  "language": "sh",
+  "deps": [
+    "vllm"
+  ],
+  "summary_zh": "vLLM OpenAI 相容 API server 啟動腳本"
+}

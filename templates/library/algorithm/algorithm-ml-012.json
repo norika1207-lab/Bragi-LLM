@@ -1,0 +1,25 @@
+{
+  "id": "algorithm-ml-012",
+  "category": "algorithm/ml/train_test_split",
+  "intents_zh": [
+    "切分訓練測試",
+    "train test split",
+    "sklearn 切資料"
+  ],
+  "intents_en": [
+    "train test split",
+    "sklearn split",
+    "split dataset"
+  ],
+  "slots": [
+    "X_var",
+    "y_var",
+    "test_size"
+  ],
+  "code": "from sklearn.model_selection import train_test_split\n\nX_train, X_test, y_train, y_test = train_test_split(\n    {{X_var}}, {{y_var}}, test_size={{test_size}}, random_state=42)\nprint(X_train.shape, X_test.shape)",
+  "language": "py",
+  "deps": [
+    "scikit-learn"
+  ],
+  "summary_zh": "訓練測試切分"
+}

@@ -1,0 +1,30 @@
+{
+  "id": "depth-algorithm-045-bitmask-dp-tsp",
+  "category": "algorithm/dp/bitmask-tsp",
+  "intents_zh": [
+    "旅行商 bitmask DP",
+    "TSP 狀態壓縮 DP",
+    "Held Karp 算法",
+    "TSP DP 模板",
+    "狀壓 DP 旅行商",
+    "bitmask tsp 解",
+    "O(n^2 2^n) TSP"
+  ],
+  "intents_en": [
+    "TSP bitmask DP",
+    "Held Karp algorithm",
+    "traveling salesman DP",
+    "bitmask DP TSP",
+    "state compression TSP",
+    "Held-Karp template",
+    "TSP exact DP"
+  ],
+  "slots": [
+    "dist",
+    "start"
+  ],
+  "code": "def tsp(dist={{dist}}, start={{start}}):\n    n = len(dist); INF = float('inf')\n    dp = [[INF]*n for _ in range(1<<n)]\n    dp[1<<start][start] = 0\n    for mask in range(1<<n):\n        for u in range(n):\n            if dp[mask][u] == INF or not (mask & (1<<u)): continue\n            for v in range(n):\n                if mask & (1<<v): continue\n                nm = mask | (1<<v)\n                nd = dp[mask][u] + dist[u][v]\n                if nd < dp[nm][v]: dp[nm][v] = nd\n    full = (1<<n) - 1\n    return min(dp[full][v] + dist[v][start] for v in range(n))",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "Held-Karp 狀態壓縮 DP 求 TSP 最短迴路"
+}

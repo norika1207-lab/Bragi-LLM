@@ -1,0 +1,32 @@
+{
+  "id": "llm-tools-051-pgvector-setup",
+  "category": "llm-tools/vectordb/pgvector",
+  "intents_zh": [
+    "pgvector 建表",
+    "postgres 向量",
+    "pgvector 範例",
+    "用 pgvector 存 embedding",
+    "postgres + vector",
+    "建 ivfflat index",
+    "pgvector schema",
+    "pgvector 起步"
+  ],
+  "intents_en": [
+    "pgvector setup",
+    "postgres vector table",
+    "pgvector example",
+    "ivfflat index",
+    "embedding column postgres",
+    "pgvector minimal",
+    "pg + vector",
+    "pgvector scaffold"
+  ],
+  "slots": [
+    "table_name",
+    "dim"
+  ],
+  "code": "-- enable extension\nCREATE EXTENSION IF NOT EXISTS vector;\n\nCREATE TABLE {{table_name}} (\n    id BIGSERIAL PRIMARY KEY,\n    content TEXT NOT NULL,\n    embedding vector({{dim}})\n);\n\nCREATE INDEX ON {{table_name}}\n    USING ivfflat (embedding vector_cosine_ops)\n    WITH (lists = 100);\n\n-- query example\n-- SELECT id, content FROM {{table_name}}\n-- ORDER BY embedding <=> '[0.1, 0.2, ...]' LIMIT 5;",
+  "language": "sql",
+  "deps": [],
+  "summary_zh": "pgvector 表與 ivfflat 索引"
+}

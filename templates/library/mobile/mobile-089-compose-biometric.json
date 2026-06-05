@@ -1,0 +1,32 @@
+{
+  "id": "mobile-089-compose-biometric",
+  "category": "mobile/compose/auth",
+  "intents_zh": [
+    "Compose 生物辨識",
+    "Android BiometricPrompt Kotlin",
+    "Compose fingerprint",
+    "Compose face auth",
+    "Android 指紋 Compose",
+    "BiometricPrompt 範例 Kotlin",
+    "Compose biometric login"
+  ],
+  "intents_en": [
+    "compose biometric",
+    "android BiometricPrompt kotlin",
+    "fingerprint compose",
+    "face auth compose",
+    "BiometricPrompt example",
+    "biometric login compose",
+    "android biometric kotlin"
+  ],
+  "slots": [
+    "title",
+    "subtitle"
+  ],
+  "code": "import androidx.biometric.BiometricPrompt\nimport androidx.fragment.app.FragmentActivity\nimport java.util.concurrent.Executors\nfun bio(activity:FragmentActivity,onOk:()->Unit,onFail:()->Unit){\n  val info=BiometricPrompt.PromptInfo.Builder().setTitle(\"{{title}}\").setSubtitle(\"{{subtitle}}\").setNegativeButtonText(\"Cancel\").build()\n  val p=BiometricPrompt(activity,Executors.newSingleThreadExecutor(),object:BiometricPrompt.AuthenticationCallback(){\n    override fun onAuthenticationSucceeded(r:BiometricPrompt.AuthenticationResult){onOk()}\n    override fun onAuthenticationFailed(){onFail()}})\n  p.authenticate(info)}",
+  "language": "kt",
+  "deps": [
+    "androidx.biometric:biometric"
+  ],
+  "summary_zh": "Android BiometricPrompt 指紋/臉部驗證"
+}

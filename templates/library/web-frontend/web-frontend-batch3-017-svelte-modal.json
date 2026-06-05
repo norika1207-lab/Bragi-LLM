@@ -1,0 +1,29 @@
+{
+  "id": "web-frontend-batch3-017-svelte-modal",
+  "category": "web-frontend/svelte/ui/modal",
+  "intents_zh": [
+    "Svelte modal",
+    "Svelte 對話框",
+    "Svelte dialog",
+    "Svelte 彈窗元件",
+    "Svelte 浮層 modal",
+    "Svelte slot modal"
+  ],
+  "intents_en": [
+    "svelte modal",
+    "svelte dialog component",
+    "svelte popup",
+    "svelte overlay modal",
+    "svelte modal with slot",
+    "svelte open close dialog"
+  ],
+  "slots": [
+    "title"
+  ],
+  "code": "<script>\n  import { createEventDispatcher } from 'svelte';\n  export let open = false;\n  export let title = '{{title}}';\n  const dispatch = createEventDispatcher();\n</script>\n{#if open}\n  <div class=\"backdrop\" on:click|self={() => dispatch('close')}>\n    <div class=\"modal\">\n      <header><h3>{title}</h3><button on:click={() => dispatch('close')}>x</button></header>\n      <slot />\n    </div>\n  </div>\n{/if}\n<style>\n  .backdrop { position: fixed; inset: 0; background: rgba(0,0,0,.5); display: flex; align-items: center; justify-content: center; }\n  .modal { background: white; padding: 1.5rem; border-radius: 8px; min-width: 320px; }\n</style>",
+  "language": "svelte",
+  "deps": [
+    "svelte"
+  ],
+  "summary_zh": "Svelte modal 元件含 slot 與事件"
+}

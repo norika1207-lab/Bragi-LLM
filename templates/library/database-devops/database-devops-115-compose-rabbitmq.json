@@ -1,0 +1,22 @@
+{
+  "id": "database-devops-115-compose-rabbitmq",
+  "category": "database-devops/docker/compose",
+  "intents_zh": [
+    "compose rabbitmq",
+    "本地 mq",
+    "rabbitmq + management"
+  ],
+  "intents_en": [
+    "compose rabbitmq",
+    "local mq",
+    "rabbitmq management"
+  ],
+  "slots": [
+    "user",
+    "password"
+  ],
+  "code": "services:\n  rabbitmq:\n    image: rabbitmq:3-management-alpine\n    environment:\n      RABBITMQ_DEFAULT_USER: {{user}}\n      RABBITMQ_DEFAULT_PASS: {{password}}\n    ports:\n      - \"5672:5672\"\n      - \"15672:15672\"\n    volumes: [\"rabbitdata:/var/lib/rabbitmq\"]\n\nvolumes:\n  rabbitdata:",
+  "language": "yaml",
+  "deps": [],
+  "summary_zh": "compose RabbitMQ + management UI"
+}

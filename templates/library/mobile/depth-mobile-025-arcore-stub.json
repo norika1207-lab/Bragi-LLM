@@ -1,0 +1,25 @@
+{
+  "id": "depth-mobile-025-arcore-stub",
+  "category": "mobile/ar/arcore",
+  "intents_zh": [
+    "ARCore Sceneform",
+    "ArFragment 設定",
+    "Android AR 啟動",
+    "Anchor + Node",
+    "placeAnchor"
+  ],
+  "intents_en": [
+    "ARCore Sceneform",
+    "ArFragment setup",
+    "Android AR start",
+    "Anchor and Node",
+    "placeAnchor"
+  ],
+  "slots": [],
+  "code": "val arFragment = supportFragmentManager.findFragmentById(R.id.ar_fragment) as ArFragment\narFragment.setOnTapArPlaneListener { hit, _, _ ->\n    val anchor = hit.createAnchor()\n    val anchorNode = AnchorNode(anchor).apply { setParent(arFragment.arSceneView.scene) }\n    ModelRenderable.builder().setSource(this, Uri.parse(\"model.glb\")).build()\n        .thenAccept { TransformableNode(arFragment.transformationSystem).apply { renderable = it; setParent(anchorNode) } }\n}",
+  "language": "kotlin",
+  "deps": [
+    "com.google.ar.sceneform.ux:sceneform-ux"
+  ],
+  "summary_zh": "ARCore tap-to-place 範例"
+}

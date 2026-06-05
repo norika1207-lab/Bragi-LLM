@@ -1,0 +1,33 @@
+{
+  "id": "llm-tools-033-token-counter",
+  "category": "llm-tools/utils/token-count",
+  "intents_zh": [
+    "算 token 數",
+    "tiktoken 計數",
+    "openai token counter",
+    "count tokens",
+    "幫我數 token",
+    "token 估算",
+    "prompt 多長",
+    "tiktoken 範例"
+  ],
+  "intents_en": [
+    "count tokens",
+    "tiktoken counter",
+    "openai token count",
+    "estimate token usage",
+    "prompt token length",
+    "tiktoken example",
+    "token usage util",
+    "compute tokens"
+  ],
+  "slots": [
+    "model_name"
+  ],
+  "code": "import tiktoken\n\nenc = tiktoken.encoding_for_model(\"{{model_name}}\")\n\ndef count(text: str) -> int:\n    return len(enc.encode(text))\n\ndef count_messages(messages: list[dict]) -> int:\n    return sum(count(m[\"content\"]) + 4 for m in messages) + 2\n\nif __name__ == \"__main__\":\n    print(count(\"hello world\"))",
+  "language": "py",
+  "deps": [
+    "tiktoken"
+  ],
+  "summary_zh": "tiktoken 算 token 數工具"
+}

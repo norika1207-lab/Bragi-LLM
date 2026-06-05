@@ -1,0 +1,21 @@
+{
+  "id": "database-devops-168-sql-skip-locked",
+  "category": "database-devops/sql/queue",
+  "intents_zh": [
+    "SQL 做 queue",
+    "FOR UPDATE SKIP LOCKED",
+    "postgres job queue"
+  ],
+  "intents_en": [
+    "sql queue pattern",
+    "for update skip locked",
+    "postgres job queue"
+  ],
+  "slots": [
+    "queue_table"
+  ],
+  "code": "-- worker pulls one job atomically\nWITH next_job AS (\n  SELECT id\n  FROM {{queue_table}}\n  WHERE status = 'pending'\n  ORDER BY created_at\n  LIMIT 1\n  FOR UPDATE SKIP LOCKED\n)\nUPDATE {{queue_table}} q\nSET status = 'running', started_at = NOW()\nFROM next_job\nWHERE q.id = next_job.id\nRETURNING q.*;",
+  "language": "sql",
+  "deps": [],
+  "summary_zh": "用 SKIP LOCKED 做 postgres job queue"
+}

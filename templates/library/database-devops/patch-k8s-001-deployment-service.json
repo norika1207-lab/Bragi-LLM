@@ -1,0 +1,34 @@
+{
+  "id": "patch-k8s-001-deployment-service",
+  "category": "database-devops/kubernetes/workload",
+  "intents_zh": [
+    "幫我寫一個 k8s Deployment 加 Service 的 yaml",
+    "產生 Deployment + ClusterIP Service manifest",
+    "k8s 部署檔模板給我",
+    "我要一個含 service 的 deployment",
+    "寫個 k8s deployment 跟對應 service",
+    "deploy yaml 加 svc 一起出"
+  ],
+  "intents_en": [
+    "generate k8s deployment with service yaml",
+    "create deployment and clusterip service manifest",
+    "k8s deployment template with svc",
+    "write deployment plus service for kubernetes",
+    "give me deployment and service yaml",
+    "scaffold k8s workload manifest"
+  ],
+  "slots": [
+    "app_name",
+    "namespace",
+    "image",
+    "replicas",
+    "container_port",
+    "service_port"
+  ],
+  "code": "apiVersion: apps/v1\nkind: Deployment\nmetadata:\n  name: {{app_name}}\n  namespace: {{namespace}}\nspec:\n  replicas: {{replicas}}\n  selector:\n    matchLabels:\n      app: {{app_name}}\n  template:\n    metadata:\n      labels:\n        app: {{app_name}}\n    spec:\n      containers:\n        - name: {{app_name}}\n          image: {{image}}\n          ports:\n            - containerPort: {{container_port}}\n          resources:\n            requests:\n              cpu: 100m\n              memory: 128Mi\n            limits:\n              cpu: 500m\n              memory: 512Mi\n          readinessProbe:\n            httpGet:\n              path: /healthz\n              port: {{container_port}}\n---\napiVersion: v1\nkind: Service\nmetadata:\n  name: {{app_name}}\n  namespace: {{namespace}}\nspec:\n  selector:\n    app: {{app_name}}\n  ports:\n    - port: {{service_port}}\n      targetPort: {{container_port}}\n  type: ClusterIP\n",
+  "language": "yaml",
+  "deps": [
+    "kubernetes"
+  ],
+  "summary_zh": "k8s Deployment 加 ClusterIP Service 的基本部署模板含 resource limits 跟 readiness probe"
+}

@@ -1,0 +1,28 @@
+{
+  "id": "depth-web-frontend-029-audio-player",
+  "category": "web-frontend/media/audio",
+  "intents_zh": [
+    "音訊播放器",
+    "HTML audio 控制",
+    "播放暫停 ui",
+    "seek bar",
+    "audio progress"
+  ],
+  "intents_en": [
+    "audio player react",
+    "html audio control",
+    "play pause ui",
+    "seek bar",
+    "audio progress"
+  ],
+  "slots": [
+    "component_name",
+    "src"
+  ],
+  "code": "'use client';\nimport { useRef, useState } from 'react';\n\nexport function {{component_name}}() {\n  const ref = useRef<HTMLAudioElement>(null);\n  const [playing, setPlaying] = useState(false);\n  const [t, setT] = useState(0); const [dur, setDur] = useState(0);\n  return (\n    <div>\n      <audio ref={ref} src=\"{{src}}\" onTimeUpdate={e => setT(e.currentTarget.currentTime)} onLoadedMetadata={e => setDur(e.currentTarget.duration)} />\n      <button onClick={() => { const a = ref.current!; playing ? a.pause() : a.play(); setPlaying(!playing); }}>{playing ? '⏸' : '▶'}</button>\n      <input type=\"range\" min={0} max={dur} value={t} onChange={e => { ref.current!.currentTime = +e.target.value; }} />\n      <span>{t.toFixed(1)} / {dur.toFixed(1)}</span>\n    </div>\n  );\n}",
+  "language": "tsx",
+  "deps": [
+    "react"
+  ],
+  "summary_zh": "自訂 audio 播放控制器"
+}

@@ -1,0 +1,24 @@
+{
+  "id": "system-cli-100-ffmpeg-batch-audio",
+  "category": "system-cli/batch/audio",
+  "intents_zh": [
+    "批次轉 wav 16k",
+    "ffmpeg 整資料夾",
+    "音訊正規化"
+  ],
+  "intents_en": [
+    "batch convert to wav 16k",
+    "ffmpeg folder audio",
+    "normalize audio batch"
+  ],
+  "slots": [
+    "src_dir",
+    "out_dir"
+  ],
+  "code": "#!/usr/bin/env bash\nset -euo pipefail\nIN=\"{{src_dir}}\"; OUT=\"{{out_dir}}\"\nmkdir -p \"$OUT\"\nfor f in \"$IN\"/*.{mp3,m4a,flac,wav}; do\n  [[ -e \"$f\" ]] || continue\n  name=$(basename \"${f%.*}\")\n  ffmpeg -y -loglevel error -i \"$f\" -ac 1 -ar 16000 \"$OUT/$name.wav\"\n  echo \"$name.wav\"\ndone",
+  "language": "sh",
+  "deps": [
+    "ffmpeg"
+  ],
+  "summary_zh": "ffmpeg 批次轉 16k mono wav"
+}

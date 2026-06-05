@@ -1,0 +1,27 @@
+{
+  "id": "depth-web-backend-036-soft-delete-knex",
+  "category": "web-backend/pattern/soft-delete",
+  "intents_zh": [
+    "soft delete deleted_at",
+    "Knex 軟刪除 helper",
+    "查詢自動排除",
+    "還原刪除",
+    "邏輯刪除"
+  ],
+  "intents_en": [
+    "soft delete deleted_at",
+    "knex soft delete helper",
+    "query auto exclude",
+    "restore deleted",
+    "logical delete"
+  ],
+  "slots": [
+    "table"
+  ],
+  "code": "export const softDelete = {\n  remove: (id) => db('{{table}}').where({ id }).update({ deleted_at: db.fn.now() }),\n  restore: (id) => db('{{table}}').where({ id }).update({ deleted_at: null }),\n  active: () => db('{{table}}').whereNull('deleted_at'),\n};",
+  "language": "js",
+  "deps": [
+    "knex"
+  ],
+  "summary_zh": "Knex 軟刪除 helper"
+}

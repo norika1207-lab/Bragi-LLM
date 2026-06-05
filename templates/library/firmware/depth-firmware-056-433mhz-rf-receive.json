@@ -1,0 +1,27 @@
+{
+  "id": "depth-firmware-056-433mhz-rf-receive",
+  "category": "firmware/radio/rf433",
+  "intents_zh": [
+    "433MHz RF 接收",
+    "RCSwitch decode",
+    "遙控插座",
+    "RF sniffer",
+    "rolling code"
+  ],
+  "intents_en": [
+    "433mhz rf receive",
+    "rcswitch decode",
+    "rf remote sniff",
+    "wireless socket",
+    "rf sniffer"
+  ],
+  "slots": [
+    "rx_pin"
+  ],
+  "code": "#include <RCSwitch.h>\nRCSwitch sw = RCSwitch();\nvoid setup() {\n    Serial.begin(115200);\n    sw.enableReceive(digitalPinToInterrupt({{rx_pin}}));\n}\nvoid loop() {\n    if (sw.available()) {\n        Serial.printf(\"code=%lu bits=%u\\n\", sw.getReceivedValue(), sw.getReceivedBitlength());\n        sw.resetAvailable();\n    }\n}",
+  "language": "cpp",
+  "deps": [
+    "rc-switch"
+  ],
+  "summary_zh": "RCSwitch 接收 433MHz RF 遙控碼"
+}

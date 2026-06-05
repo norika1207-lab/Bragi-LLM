@@ -1,0 +1,21 @@
+{
+  "id": "algorithm-string-003",
+  "category": "algorithm/string/rabin_karp",
+  "intents_zh": [
+    "Rabin Karp",
+    "rolling hash 字串搜尋",
+    "給我 rabin karp"
+  ],
+  "intents_en": [
+    "Rabin-Karp",
+    "rolling hash search",
+    "rabin karp string match"
+  ],
+  "slots": [
+    "fn_name"
+  ],
+  "code": "def {{fn_name}}(text, pattern, base=257, mod=10**9+7):\n    n, m = len(text), len(pattern)\n    if m > n: return -1\n    ph = 0; th = 0; pw = 1\n    for i in range(m):\n        ph = (ph*base + ord(pattern[i])) % mod\n        th = (th*base + ord(text[i])) % mod\n        if i < m-1: pw = (pw*base) % mod\n    for i in range(n - m + 1):\n        if ph == th and text[i:i+m] == pattern:\n            return i\n        if i < n - m:\n            th = ((th - ord(text[i])*pw) * base + ord(text[i+m])) % mod\n    return -1",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "Rabin-Karp 滾動雜湊字串搜尋"
+}

@@ -1,0 +1,33 @@
+{
+  "id": "llm-tools-120-typescript-openai",
+  "category": "llm-tools/client/ts-openai",
+  "intents_zh": [
+    "typescript 用 openai",
+    "node openai sdk",
+    "ts openai 範例",
+    "用 ts 寫 chat",
+    "node.js gpt",
+    "openai js",
+    "ts 客戶端",
+    "node openai wrapper"
+  ],
+  "intents_en": [
+    "typescript openai client",
+    "node openai sdk",
+    "ts openai example",
+    "node.js gpt wrapper",
+    "openai js",
+    "minimal ts openai",
+    "node openai wrapper",
+    "js openai chat"
+  ],
+  "slots": [
+    "model_name"
+  ],
+  "code": "import OpenAI from \"openai\";\n\nconst client = new OpenAI();\n\nexport async function chat(prompt: string): Promise<string> {\n  const r = await client.chat.completions.create({\n    model: \"{{model_name}}\",\n    messages: [{ role: \"user\", content: prompt }],\n  });\n  return r.choices[0].message.content ?? \"\";\n}\n\nchat(\"hello\").then(console.log);",
+  "language": "ts",
+  "deps": [
+    "openai"
+  ],
+  "summary_zh": "TypeScript OpenAI SDK chat 包裝"
+}

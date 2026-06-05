@@ -1,0 +1,27 @@
+{
+  "id": "web-frontend-batch2-014-responsive-grid",
+  "category": "web-frontend/react/layout/responsive-grid",
+  "intents_zh": [
+    "響應式網格",
+    "響應卡片格",
+    "grid 排版",
+    "RWD grid",
+    "卡片網格",
+    "自適應網格"
+  ],
+  "intents_en": [
+    "responsive grid",
+    "card grid",
+    "responsive cards",
+    "tailwind grid",
+    "auto grid",
+    "RWD card layout"
+  ],
+  "slots": [
+    "items"
+  ],
+  "code": "export function CardGrid() {\n  const items = {{items}};\n  return (\n    <div className=\"grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4\">\n      {items.map((it) => (\n        <div key={it.id} className=\"rounded-lg border p-4 shadow-sm hover:shadow-md\">\n          <h3 className=\"mb-2 font-semibold\">{it.title}</h3>\n          <p className=\"text-sm text-gray-600\">{it.desc}</p>\n        </div>\n      ))}\n    </div>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "1-4 欄響應式卡片網格"
+}

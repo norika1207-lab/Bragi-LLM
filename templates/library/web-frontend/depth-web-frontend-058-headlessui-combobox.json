@@ -1,0 +1,27 @@
+{
+  "id": "depth-web-frontend-058-headlessui-combobox",
+  "category": "web-frontend/ui/combobox",
+  "intents_zh": [
+    "可搜尋下拉 combobox",
+    "Headless UI combobox",
+    "自動完成",
+    "autocomplete react",
+    "下拉搜尋"
+  ],
+  "intents_en": [
+    "combobox headless ui",
+    "autocomplete react",
+    "searchable select",
+    "filter dropdown",
+    "combobox component"
+  ],
+  "slots": [
+    "component_name"
+  ],
+  "code": "'use client';\nimport { Combobox } from '@headlessui/react';\nimport { useState } from 'react';\n\nexport function {{component_name}}({ options }: { options: { id: string; label: string }[] }) {\n  const [q, setQ] = useState(''); const [sel, setSel] = useState<typeof options[number] | null>(null);\n  const filtered = q ? options.filter(o => o.label.toLowerCase().includes(q.toLowerCase())) : options;\n  return (\n    <Combobox value={sel} onChange={setSel}>\n      <Combobox.Input onChange={(e) => setQ(e.target.value)} displayValue={(o: any) => o?.label ?? ''} />\n      <Combobox.Options>\n        {filtered.map(o => <Combobox.Option key={o.id} value={o}>{o.label}</Combobox.Option>)}\n      </Combobox.Options>\n    </Combobox>\n  );\n}",
+  "language": "tsx",
+  "deps": [
+    "@headlessui/react"
+  ],
+  "summary_zh": "Headless UI 可搜尋 combobox"
+}

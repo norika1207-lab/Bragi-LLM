@@ -1,0 +1,31 @@
+{
+  "id": "mobile-036-flutter-biometric",
+  "category": "mobile/flutter/auth",
+  "intents_zh": [
+    "Flutter 指紋",
+    "flutter local_auth",
+    "flutter Face ID",
+    "flutter biometric",
+    "生物辨識 flutter",
+    "TouchID flutter",
+    "flutter 解鎖驗證"
+  ],
+  "intents_en": [
+    "flutter biometric",
+    "flutter local_auth",
+    "face id flutter",
+    "fingerprint flutter",
+    "biometric unlock flutter",
+    "touch id flutter",
+    "flutter authenticate biometric"
+  ],
+  "slots": [
+    "reason"
+  ],
+  "code": "import 'package:local_auth/local_auth.dart';\nFuture<bool> bioAuth()async{\n  final a=LocalAuthentication();\n  final ok=await a.canCheckBiometrics&&await a.isDeviceSupported();\n  if(!ok)return false;\n  return await a.authenticate(localizedReason:'{{reason}}',options:const AuthenticationOptions(biometricOnly:true));}",
+  "language": "dart",
+  "deps": [
+    "local_auth"
+  ],
+  "summary_zh": "Flutter local_auth 生物辨識驗證"
+}

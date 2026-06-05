@@ -1,0 +1,30 @@
+{
+  "id": "web-frontend-batch4-029-form-react-hook-form",
+  "category": "web-frontend/react/forms/react-hook-form",
+  "intents_zh": [
+    "react-hook-form 表單",
+    "驗證 email 表單",
+    "RHF 基本範例",
+    "受控表單",
+    "錯誤訊息表單",
+    "表單驗證"
+  ],
+  "intents_en": [
+    "react-hook-form example",
+    "email form validation",
+    "RHF basic",
+    "controlled form",
+    "form with errors",
+    "input validation"
+  ],
+  "slots": [
+    "submit_label"
+  ],
+  "code": "'use client';\nimport { useForm } from 'react-hook-form';\n\ntype FormData = { email: string; password: string };\n\nexport default function LoginForm() {\n  const { register, handleSubmit, formState: { errors } } = useForm<FormData>();\n  return (\n    <form onSubmit={handleSubmit((d) => console.log(d))} className=\"space-y-3\">\n      <input {...register('email', { required: true })} className=\"border rounded px-3 py-2 w-full\" />\n      {errors.email && <p className=\"text-red-500 text-sm\">Required</p>}\n      <input type=\"password\" {...register('password', { required: true, minLength: 6 })} className=\"border rounded px-3 py-2 w-full\" />\n      <button className=\"bg-indigo-600 text-white px-4 py-2 rounded\">{{submit_label}}</button>\n    </form>\n  );\n}",
+  "language": "tsx",
+  "deps": [
+    "react-hook-form",
+    "react"
+  ],
+  "summary_zh": "react-hook-form 登入表單含驗證"
+}

@@ -1,0 +1,37 @@
+{
+  "id": "patch-terraform-004-lambda-apigateway",
+  "category": "database-devops/terraform/aws-serverless",
+  "intents_zh": [
+    "terraform 部署 lambda 加 api gateway",
+    "tf 寫 lambda function 接 http api",
+    "用 terraform 開 serverless endpoint",
+    "lambda + apigw 一鍵 tf 範本",
+    "Terraform 起 python lambda 並暴露 HTTP",
+    "tf 設定 aws lambda http api 路由",
+    "幫我寫 lambda zip 部署加 api gateway"
+  ],
+  "intents_en": [
+    "terraform lambda with api gateway",
+    "deploy serverless function via tf",
+    "lambda http endpoint terraform",
+    "aws lambda api gateway tf module",
+    "provision lambda plus http api in terraform",
+    "tf zip deploy lambda with api route",
+    "serverless python lambda terraform"
+  ],
+  "slots": [
+    "function_name",
+    "handler",
+    "runtime",
+    "zip_path",
+    "api_name",
+    "route_path"
+  ],
+  "code": "resource \"aws_iam_role\" \"lambda_exec\" {\n  name = \"{{function_name}}-role\"\n  assume_role_policy = jsonencode({\n    Version = \"2012-10-17\"\n    Statement = [{\n      Action    = \"sts:AssumeRole\"\n      Effect    = \"Allow\"\n      Principal = { Service = \"lambda.amazonaws.com\" }\n    }]\n  })\n}\n\nresource \"aws_iam_role_policy_attachment\" \"basic\" {\n  role       = aws_iam_role.lambda_exec.name\n  policy_arn = \"arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole\"\n}\n\nresource \"aws_lambda_function\" \"this\" {\n  function_name = \"{{function_name}}\"\n  role          = aws_iam_role.lambda_exec.arn\n  handler       = \"{{handler}}\"\n  runtime       = \"{{runtime}}\"\n  filename      = \"{{zip_path}}\"\n  source_code_hash = filebase64sha256(\"{{zip_path}}\")\n}\n\nresource \"aws_apigatewayv2_api\" \"this\" {\n  name          = \"{{api_name}}\"\n  protocol_type = \"HTTP\"\n}\n\nresource \"aws_apigatewayv2_integration\" \"this\" {\n  api_id             = aws_apigatewayv2_api.this.id\n  integration_type   = \"AWS_PROXY\"\n  integration_uri    = aws_lambda_function.this.invoke_arn\n  payload_format_version = \"2.0\"\n}\n\nresource \"aws_apigatewayv2_route\" \"this\" {\n  api_id    = aws_apigatewayv2_api.this.id\n  route_key = \"ANY {{route_path}}\"\n  target    = \"integrations/${aws_apigatewayv2_integration.this.id}\"\n}\n\nresource \"aws_apigatewayv2_stage\" \"this\" {\n  api_id      = aws_apigatewayv2_api.this.id\n  name        = \"$default\"\n  auto_deploy = true\n}\n\nresource \"aws_lambda_permission\" \"apigw\" {\n  statement_id  = \"AllowAPIGatewayInvoke\"\n  action        = \"lambda:InvokeFunction\"\n  function_name = aws_lambda_function.this.function_name\n  principal     = \"apigateway.amazonaws.com\"\n  source_arn    = \"${aws_apigatewayv2_api.this.execution_arn}/*/*\"\n}",
+  "language": "hcl",
+  "deps": [
+    "terraform",
+    "hashicorp/aws"
+  ],
+  "summary_zh": "Terraform 起 Lambda 並透過 API Gateway HTTP API 暴露端點。"
+}

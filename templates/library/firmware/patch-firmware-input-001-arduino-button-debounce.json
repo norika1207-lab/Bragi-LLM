@@ -1,0 +1,30 @@
+{
+  "id": "patch-firmware-input-001-arduino-button-debounce",
+  "category": "firmware/input/button",
+  "intents_zh": [
+    "Arduino 按鈕去抖動",
+    "幫我寫一個 button debounce",
+    "處理按鍵彈跳問題",
+    "Arduino 按鈕 millis 去抖",
+    "我按鈕一直連發要怎麼擋",
+    "做一個按鈕單次觸發"
+  ],
+  "intents_en": [
+    "Arduino button debounce",
+    "software debounce with millis",
+    "remove button bounce",
+    "single press detection arduino",
+    "debounce push button",
+    "stable button read",
+    "filter button noise"
+  ],
+  "slots": [
+    "button_pin",
+    "debounce_ms",
+    "active_state"
+  ],
+  "code": "const int buttonPin = {{button_pin}};\nconst unsigned long debounceMs = {{debounce_ms}};\nint lastReading = HIGH;\nint stableState = HIGH;\nunsigned long lastChange = 0;\n\nvoid setup() {\n  pinMode(buttonPin, INPUT_PULLUP);\n  Serial.begin(115200);\n}\n\nvoid loop() {\n  int reading = digitalRead(buttonPin);\n  if (reading != lastReading) {\n    lastChange = millis();\n    lastReading = reading;\n  }\n  if (millis() - lastChange > debounceMs && reading != stableState) {\n    stableState = reading;\n    if (stableState == {{active_state}}) {\n      Serial.println(\"pressed\");\n    }\n  }\n}",
+  "language": "ino",
+  "deps": [],
+  "summary_zh": "Arduino 用 millis 做按鈕去抖動，單次觸發 pressed 事件"
+}

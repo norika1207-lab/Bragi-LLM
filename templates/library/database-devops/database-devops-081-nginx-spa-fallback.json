@@ -1,0 +1,19 @@
+{
+  "id": "database-devops-081-nginx-spa-fallback",
+  "category": "database-devops/nginx/proxy",
+  "intents_zh": [
+    "nginx SPA fallback",
+    "try_files index.html",
+    "SPA 路由 fallback"
+  ],
+  "intents_en": [
+    "nginx spa fallback",
+    "try_files index.html",
+    "spa routing fallback"
+  ],
+  "slots": [],
+  "code": "server {\n  listen 80;\n  root /usr/share/nginx/html;\n  index index.html;\n\n  location / {\n    try_files $uri $uri/ /index.html;\n  }\n\n  location /assets/ {\n    expires 1y;\n    add_header Cache-Control \"public, immutable\";\n  }\n}",
+  "language": "nginx",
+  "deps": [],
+  "summary_zh": "nginx SPA fallback 到 index.html"
+}

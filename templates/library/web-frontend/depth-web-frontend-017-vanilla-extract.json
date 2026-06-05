@@ -1,0 +1,27 @@
+{
+  "id": "depth-web-frontend-017-vanilla-extract",
+  "category": "web-frontend/css-in-js/vanilla-extract",
+  "intents_zh": [
+    "vanilla-extract style",
+    "零執行期 CSS",
+    "sprinkles",
+    "atomic css 編譯期",
+    "style.css.ts"
+  ],
+  "intents_en": [
+    "vanilla-extract style",
+    "zero runtime css",
+    "sprinkles atomic",
+    "compile time css",
+    "style.css.ts"
+  ],
+  "slots": [
+    "style_name"
+  ],
+  "code": "import { style } from '@vanilla-extract/css';\n\nexport const {{style_name}} = style({\n  display: 'flex',\n  gap: 8,\n  padding: 12,\n  borderRadius: 8,\n  background: 'var(--surface)',\n  ':hover': { background: 'var(--surface-hover)' },\n});",
+  "language": "ts",
+  "deps": [
+    "@vanilla-extract/css"
+  ],
+  "summary_zh": "vanilla-extract 編譯期樣式"
+}

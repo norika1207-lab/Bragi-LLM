@@ -1,0 +1,26 @@
+{
+  "id": "web-backend-127-express-graphql-auth",
+  "category": "web-backend/express/graphql",
+  "intents_zh": [
+    "graphql context auth",
+    "resolver 取得 user",
+    "apollo context jwt",
+    "graphql 加 user context",
+    "驗證 graphql resolver"
+  ],
+  "intents_en": [
+    "graphql context auth",
+    "resolver get user",
+    "apollo context jwt",
+    "graphql user context",
+    "authenticate graphql resolver"
+  ],
+  "slots": [],
+  "code": "const { expressMiddleware } = require('@apollo/server/express4');\nconst jwt = require('jsonwebtoken');\n\nfunction makeContext({ req }) {\n  const auth = req.headers.authorization || '';\n  const token = auth.startsWith('Bearer ') ? auth.slice(7) : null;\n  let user = null;\n  if (token) {\n    try { user = jwt.verify(token, process.env.JWT_SECRET); } catch {}\n  }\n  return { user };\n}\n\nmodule.exports = (server) => expressMiddleware(server, { context: makeContext });",
+  "language": "js",
+  "deps": [
+    "@apollo/server",
+    "jsonwebtoken"
+  ],
+  "summary_zh": "Apollo context 注入登入 user"
+}

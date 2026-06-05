@@ -1,0 +1,22 @@
+{
+  "id": "database-devops-131-nginx-upstream-failover",
+  "category": "database-devops/nginx/loadbalancer",
+  "intents_zh": [
+    "nginx upstream backup",
+    "主備切換",
+    "failover 設定"
+  ],
+  "intents_en": [
+    "nginx upstream backup",
+    "primary backup",
+    "failover config"
+  ],
+  "slots": [
+    "primary",
+    "backup"
+  ],
+  "code": "upstream app_pool {\n  server {{primary}} max_fails=2 fail_timeout=10s;\n  server {{backup}} backup;\n}\n\nserver {\n  listen 80;\n  location / {\n    proxy_pass http://app_pool;\n    proxy_next_upstream error timeout http_502 http_503 http_504;\n    proxy_connect_timeout 3s;\n  }\n}",
+  "language": "nginx",
+  "deps": [],
+  "summary_zh": "nginx 主備 upstream failover"
+}

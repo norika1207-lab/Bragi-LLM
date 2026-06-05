@@ -1,0 +1,21 @@
+{
+  "id": "database-devops-092-pg-listen-notify",
+  "category": "database-devops/sql/postgres",
+  "intents_zh": [
+    "postgres LISTEN NOTIFY",
+    "pg pub-sub",
+    "postgres 通知 channel"
+  ],
+  "intents_en": [
+    "postgres listen notify",
+    "pg pubsub",
+    "postgres notification channel"
+  ],
+  "slots": [
+    "channel_name"
+  ],
+  "code": "-- in psql\nLISTEN {{channel_name}};\n\n-- in another session\nNOTIFY {{channel_name}}, 'payload-data';\n\n-- trigger to auto-notify on row change\nCREATE OR REPLACE FUNCTION notify_change() RETURNS trigger AS $$\nBEGIN\n  PERFORM pg_notify('{{channel_name}}', row_to_json(NEW)::text);\n  RETURN NEW;\nEND;\n$$ LANGUAGE plpgsql;",
+  "language": "sql",
+  "deps": [],
+  "summary_zh": "Postgres LISTEN/NOTIFY + trigger"
+}

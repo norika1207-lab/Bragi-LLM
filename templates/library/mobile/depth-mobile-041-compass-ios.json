@@ -1,0 +1,23 @@
+{
+  "id": "depth-mobile-041-compass-ios",
+  "category": "mobile/sensors/compass-ios",
+  "intents_zh": [
+    "iOS 磁力計羅盤",
+    "CLLocationManager heading",
+    "startUpdatingHeading",
+    "didUpdateHeading",
+    "trueHeading"
+  ],
+  "intents_en": [
+    "iOS magnetometer compass",
+    "CLLocationManager heading",
+    "startUpdatingHeading",
+    "didUpdateHeading",
+    "trueHeading"
+  ],
+  "slots": [],
+  "code": "import CoreLocation\nclass Compass: NSObject, CLLocationManagerDelegate {\n  let lm = CLLocationManager()\n  override init() { super.init(); lm.delegate = self; lm.startUpdatingHeading() }\n  func locationManager(_ m: CLLocationManager, didUpdateHeading h: CLHeading) {\n    print(\"heading\", h.trueHeading)\n  }\n}",
+  "language": "swift",
+  "deps": [],
+  "summary_zh": "iOS 羅盤方向訂閱"
+}

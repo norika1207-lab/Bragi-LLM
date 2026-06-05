@@ -1,0 +1,35 @@
+{
+  "id": "patch-terraform-002-s3-versioning-lifecycle",
+  "category": "database-devops/terraform/aws-storage",
+  "intents_zh": [
+    "terraform 建 s3 bucket 開 versioning 加 lifecycle",
+    "tf 寫一個 s3 加版本控制跟 30 天轉 IA",
+    "用 terraform 起 s3 並設定生命週期規則",
+    "S3 bucket 加 versioning 跟自動 archive",
+    "幫我寫 tf 的 s3 module 含版本跟過期",
+    "terraform aws_s3_bucket 範本 含生命週期",
+    "S3 加 versioning 90 天丟 glacier"
+  ],
+  "intents_en": [
+    "terraform s3 bucket with versioning and lifecycle",
+    "tf s3 bucket archive to glacier after 90 days",
+    "create s3 with version control terraform",
+    "s3 lifecycle rule transition to IA",
+    "aws s3 module terraform with retention",
+    "terraform provision s3 bucket versioning enabled",
+    "s3 bucket lifecycle policy in tf"
+  ],
+  "slots": [
+    "bucket_name",
+    "ia_transition_days",
+    "glacier_transition_days",
+    "expiration_days"
+  ],
+  "code": "resource \"aws_s3_bucket\" \"this\" {\n  bucket = \"{{bucket_name}}\"\n}\n\nresource \"aws_s3_bucket_versioning\" \"this\" {\n  bucket = aws_s3_bucket.this.id\n  versioning_configuration {\n    status = \"Enabled\"\n  }\n}\n\nresource \"aws_s3_bucket_lifecycle_configuration\" \"this\" {\n  bucket = aws_s3_bucket.this.id\n\n  rule {\n    id     = \"archive-and-expire\"\n    status = \"Enabled\"\n\n    transition {\n      days          = {{ia_transition_days}}\n      storage_class = \"STANDARD_IA\"\n    }\n\n    transition {\n      days          = {{glacier_transition_days}}\n      storage_class = \"GLACIER\"\n    }\n\n    expiration {\n      days = {{expiration_days}}\n    }\n\n    noncurrent_version_expiration {\n      noncurrent_days = {{expiration_days}}\n    }\n  }\n}",
+  "language": "hcl",
+  "deps": [
+    "terraform",
+    "hashicorp/aws"
+  ],
+  "summary_zh": "Terraform 建立 S3 bucket 並啟用 versioning 與分階段生命週期 archive。"
+}

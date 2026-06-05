@@ -1,0 +1,29 @@
+{
+  "id": "depth-web-backend-006-ws-redis-adapter",
+  "category": "web-backend/websocket/scale",
+  "intents_zh": [
+    "socket.io redis adapter 跨節點",
+    "多進程 ws 廣播",
+    "scale-out websocket",
+    "redis pub/sub adapter",
+    "水平擴展 ws"
+  ],
+  "intents_en": [
+    "socket.io redis adapter",
+    "multi-node ws broadcast",
+    "scale-out websocket",
+    "redis pubsub adapter",
+    "horizontal ws scale"
+  ],
+  "slots": [
+    "redis_url"
+  ],
+  "code": "import { createAdapter } from '@socket.io/redis-adapter';\nimport { createClient } from 'redis';\nconst pub = createClient({ url: '{{redis_url}}' });\nconst sub = pub.duplicate();\nawait Promise.all([pub.connect(), sub.connect()]);\nio.adapter(createAdapter(pub, sub));",
+  "language": "js",
+  "deps": [
+    "socket.io",
+    "@socket.io/redis-adapter",
+    "redis"
+  ],
+  "summary_zh": "socket.io 接 Redis adapter 跨節點"
+}

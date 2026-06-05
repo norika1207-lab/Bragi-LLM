@@ -1,0 +1,28 @@
+{
+  "id": "web-frontend-batch1-028-search-debounce",
+  "category": "web-frontend/react/search/debounce",
+  "intents_zh": [
+    "debounce 搜尋輸入",
+    "搜尋框防抖",
+    "React debounce search",
+    "input 延遲觸發",
+    "延遲搜尋 API",
+    "搜尋框 debounce hook"
+  ],
+  "intents_en": [
+    "debounced search",
+    "search input debounce",
+    "react debounce input",
+    "delayed search api",
+    "debounce hook search",
+    "search box debounce"
+  ],
+  "slots": [
+    "component_name",
+    "search_url"
+  ],
+  "code": "import { useEffect, useState } from 'react';\n\nexport default function {{component_name}}() {\n  const [q, setQ] = useState('');\n  const [results, setResults] = useState<any[]>([]);\n\n  useEffect(() => {\n    if (!q) { setResults([]); return; }\n    const t = setTimeout(async () => {\n      const res = await fetch(`{{search_url}}?q=${encodeURIComponent(q)}`);\n      setResults(await res.json());\n    }, 300);\n    return () => clearTimeout(t);\n  }, [q]);\n\n  return (\n    <div>\n      <input value={q} onChange={(e) => setQ(e.target.value)} className=\"border rounded px-2 py-1 w-full\" />\n      <ul>{results.map((r, i) => <li key={i}>{r.title ?? r.name ?? JSON.stringify(r)}</li>)}</ul>\n    </div>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "debounce 搜尋輸入框 300ms"
+}

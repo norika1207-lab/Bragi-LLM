@@ -1,0 +1,27 @@
+{
+  "id": "web-frontend-batch2-020-mega-menu",
+  "category": "web-frontend/react/layout/mega-menu",
+  "intents_zh": [
+    "mega menu",
+    "巨型選單",
+    "大型下拉",
+    "多欄選單",
+    "電商導航",
+    "產品分類選單"
+  ],
+  "intents_en": [
+    "mega menu",
+    "large dropdown",
+    "multi-column menu",
+    "ecommerce nav",
+    "category mega menu",
+    "big nav menu"
+  ],
+  "slots": [
+    "categories"
+  ],
+  "code": "import { useState } from 'react';\n\nexport function MegaMenu() {\n  const [open, setOpen] = useState(false);\n  const cats = {{categories}};\n  return (\n    <div className=\"relative\" onMouseLeave={() => setOpen(false)}>\n      <button onMouseEnter={() => setOpen(true)} className=\"px-4 py-3 font-medium\">Products ▾</button>\n      {open && (\n        <div className=\"absolute left-0 top-full z-20 w-screen max-w-4xl bg-white border shadow-xl p-8\">\n          <div className=\"grid grid-cols-4 gap-8\">\n            {cats.map((cat) => (\n              <div key={cat.title}>\n                <h4 className=\"mb-3 font-semibold text-gray-900\">{cat.title}</h4>\n                <ul className=\"space-y-2\">\n                  {cat.items.map((it) => (\n                    <li key={it.href}><a href={it.href} className=\"text-sm text-gray-600 hover:text-blue-600\">{it.label}</a></li>\n                  ))}\n                </ul>\n              </div>\n            ))}\n          </div>\n        </div>\n      )}\n    </div>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "多欄分類 mega menu"
+}

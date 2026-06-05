@@ -1,0 +1,27 @@
+{
+  "id": "web-backend-114-fastapi-graphql-strawberry-sub",
+  "category": "web-backend/fastapi/graphql",
+  "intents_zh": [
+    "graphql subscription strawberry",
+    "fastapi graphql 推播",
+    "async subscription",
+    "graphql 即時更新",
+    "strawberry subscription"
+  ],
+  "intents_en": [
+    "graphql subscription strawberry",
+    "fastapi graphql push",
+    "async subscription",
+    "graphql realtime",
+    "strawberry subscription fastapi"
+  ],
+  "slots": [
+    "interval_sec"
+  ],
+  "code": "import strawberry\nimport asyncio\nfrom typing import AsyncGenerator\n\n@strawberry.type\nclass Query:\n    @strawberry.field\n    def ping(self) -> str: return 'pong'\n\n@strawberry.type\nclass Subscription:\n    @strawberry.subscription\n    async def counter(self, target: int = 10) -> AsyncGenerator[int, None]:\n        for i in range(target):\n            yield i\n            await asyncio.sleep({{interval_sec}})\n\nschema = strawberry.Schema(query=Query, subscription=Subscription)",
+  "language": "py",
+  "deps": [
+    "strawberry-graphql"
+  ],
+  "summary_zh": "Strawberry GraphQL subscription"
+}

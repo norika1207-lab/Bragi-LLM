@@ -1,0 +1,27 @@
+{
+  "id": "web-frontend-batch1-021-date-picker-native",
+  "category": "web-frontend/react/date-pickers/native",
+  "intents_zh": [
+    "日期選擇器",
+    "React date picker",
+    "native date input 包裝",
+    "選日期元件",
+    "date input 元件",
+    "HTML date input"
+  ],
+  "intents_en": [
+    "date picker",
+    "react date picker",
+    "native date input",
+    "date selector",
+    "html date input",
+    "calendar date input"
+  ],
+  "slots": [
+    "component_name"
+  ],
+  "code": "import { useState } from 'react';\n\nexport default function {{component_name}}({ initial }: { initial?: string }) {\n  const [date, setDate] = useState(initial ?? new Date().toISOString().slice(0, 10));\n  return (\n    <input\n      type=\"date\"\n      value={date}\n      onChange={(e) => setDate(e.target.value)}\n      className=\"px-3 py-2 border rounded\"\n    />\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "原生 HTML date input 包裝"
+}

@@ -1,0 +1,21 @@
+{
+  "id": "algorithm-graph-018",
+  "category": "algorithm/graph/clone_graph",
+  "intents_zh": [
+    "克隆圖",
+    "clone graph",
+    "給我 clone graph"
+  ],
+  "intents_en": [
+    "clone graph",
+    "deep copy graph",
+    "graph clone bfs"
+  ],
+  "slots": [
+    "fn_name"
+  ],
+  "code": "from collections import deque\n\ndef {{fn_name}}(node, NodeClass):\n    if not node: return None\n    mapping = {node: NodeClass(node.val)}\n    q = deque([node])\n    while q:\n        u = q.popleft()\n        for nb in u.neighbors:\n            if nb not in mapping:\n                mapping[nb] = NodeClass(nb.val)\n                q.append(nb)\n            mapping[u].neighbors.append(mapping[nb])\n    return mapping[node]",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "BFS 克隆無向圖"
+}

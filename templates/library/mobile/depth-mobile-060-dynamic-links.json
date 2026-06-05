@@ -1,0 +1,27 @@
+{
+  "id": "depth-mobile-060-dynamic-links",
+  "category": "mobile/deeplink/dynamic",
+  "intents_zh": [
+    "Firebase Dynamic Links",
+    "短連結帶 deferred deep link",
+    "跨平台動態連結",
+    "onLink listener",
+    "RN dynamic link"
+  ],
+  "intents_en": [
+    "Firebase Dynamic Links",
+    "deferred deep link",
+    "cross platform dynamic link",
+    "onLink listener",
+    "RN dynamic link"
+  ],
+  "slots": [
+    "fallback_url"
+  ],
+  "code": "import dynamicLinks from '@react-native-firebase/dynamic-links';\ndynamicLinks().getInitialLink().then(link => link && handle(link.url));\nconst unsub = dynamicLinks().onLink(link => handle(link.url));\nfunction handle(url: string) { console.log('dl', url || '{{fallback_url}}'); }",
+  "language": "ts",
+  "deps": [
+    "@react-native-firebase/dynamic-links"
+  ],
+  "summary_zh": "RN Firebase Dynamic Links 監聽"
+}

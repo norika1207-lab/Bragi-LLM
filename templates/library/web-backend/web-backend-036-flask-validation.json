@@ -1,0 +1,29 @@
+{
+  "id": "web-backend-036-flask-validation",
+  "category": "web-backend/flask/validation",
+  "intents_zh": [
+    "flask 用 pydantic 驗證",
+    "flask request schema",
+    "驗證 body flask",
+    "pydantic + flask",
+    "schema validation flask"
+  ],
+  "intents_en": [
+    "flask pydantic validation",
+    "request schema flask",
+    "body validator flask",
+    "pydantic + flask",
+    "input validation flask"
+  ],
+  "slots": [
+    "schema_name"
+  ],
+  "code": "from flask import Flask, request, jsonify\nfrom pydantic import BaseModel, ValidationError, EmailStr\n\napp = Flask(__name__)\n\nclass {{schema_name}}(BaseModel):\n    email: EmailStr\n    age: int\n\n@app.post('/users')\ndef create_user():\n    try:\n        data = {{schema_name}}(**(request.get_json() or {}))\n    except ValidationError as e:\n        return jsonify(errors=e.errors()), 400\n    return jsonify(data.model_dump()), 201",
+  "language": "py",
+  "deps": [
+    "flask",
+    "pydantic",
+    "email-validator"
+  ],
+  "summary_zh": "Flask + pydantic 驗證"
+}

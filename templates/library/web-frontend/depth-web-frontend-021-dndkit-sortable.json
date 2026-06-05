@@ -1,0 +1,29 @@
+{
+  "id": "depth-web-frontend-021-dndkit-sortable",
+  "category": "web-frontend/dnd/dnd-kit",
+  "intents_zh": [
+    "dnd-kit 排序清單",
+    "可拖曳列表",
+    "SortableContext",
+    "拖拉重排",
+    "dnd kit useSortable"
+  ],
+  "intents_en": [
+    "dnd-kit sortable list",
+    "drag drop reorder",
+    "SortableContext",
+    "useSortable hook",
+    "drag list react"
+  ],
+  "slots": [
+    "list_name"
+  ],
+  "code": "'use client';\nimport { DndContext, closestCenter } from '@dnd-kit/core';\nimport { SortableContext, arrayMove, useSortable, verticalListSortingStrategy } from '@dnd-kit/sortable';\nimport { CSS } from '@dnd-kit/utilities';\nimport { useState } from 'react';\n\nfunction Row({ id }: { id: string }) {\n  const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id });\n  return <li ref={setNodeRef} style={{ transform: CSS.Transform.toString(transform), transition }} {...attributes} {...listeners}>{id}</li>;\n}\n\nexport function {{list_name}}() {\n  const [items, setItems] = useState(['a','b','c']);\n  return (\n    <DndContext collisionDetection={closestCenter} onDragEnd={(e) => {\n      if (e.over && e.active.id !== e.over.id) setItems(items => arrayMove(items, items.indexOf(String(e.active.id)), items.indexOf(String(e.over!.id))));\n    }}>\n      <SortableContext items={items} strategy={verticalListSortingStrategy}>\n        <ul>{items.map(id => <Row key={id} id={id} />)}</ul>\n      </SortableContext>\n    </DndContext>\n  );\n}",
+  "language": "tsx",
+  "deps": [
+    "@dnd-kit/core",
+    "@dnd-kit/sortable",
+    "@dnd-kit/utilities"
+  ],
+  "summary_zh": "dnd-kit 垂直可排序列表"
+}

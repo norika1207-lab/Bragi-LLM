@@ -1,0 +1,23 @@
+{
+  "id": "database-devops-113-sql-tsrange",
+  "category": "database-devops/sql/postgres",
+  "intents_zh": [
+    "postgres 時間範圍重疊",
+    "tsrange overlap",
+    "預約時段衝突檢查"
+  ],
+  "intents_en": [
+    "postgres tsrange overlap",
+    "time range overlap",
+    "booking conflict check"
+  ],
+  "slots": [
+    "table",
+    "start_col",
+    "end_col"
+  ],
+  "code": "-- find overlapping bookings\nSELECT a.id, b.id\nFROM {{table}} a\nJOIN {{table}} b ON a.id < b.id\n  AND tsrange(a.{{start_col}}, a.{{end_col}}) && tsrange(b.{{start_col}}, b.{{end_col}});\n\n-- exclusion constraint to prevent overlap\nALTER TABLE {{table}}\nADD CONSTRAINT no_overlap EXCLUDE USING gist (\n  tsrange({{start_col}}, {{end_col}}) WITH &&\n);",
+  "language": "sql",
+  "deps": [],
+  "summary_zh": "Postgres tsrange 重疊查詢 + 約束"
+}

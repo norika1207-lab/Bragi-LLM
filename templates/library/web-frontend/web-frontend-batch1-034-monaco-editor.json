@@ -1,0 +1,30 @@
+{
+  "id": "web-frontend-batch1-034-monaco-editor",
+  "category": "web-frontend/react/code-editor/monaco",
+  "intents_zh": [
+    "Monaco editor 包裝",
+    "React 程式碼編輯器",
+    "embed Monaco",
+    "VS Code editor 元件",
+    "給我 code editor",
+    "line-numbers code edit"
+  ],
+  "intents_en": [
+    "monaco editor wrapper",
+    "react code editor",
+    "embed monaco",
+    "vs code style editor",
+    "code editor component",
+    "react monaco"
+  ],
+  "slots": [
+    "component_name",
+    "language_id"
+  ],
+  "code": "import Editor from '@monaco-editor/react';\nimport { useState } from 'react';\n\nexport default function {{component_name}}({ initial = '' }: { initial?: string }) {\n  const [code, setCode] = useState(initial);\n  return (\n    <Editor\n      height=\"400px\"\n      language=\"{{language_id}}\"\n      value={code}\n      onChange={(v) => setCode(v ?? '')}\n      options={{ minimap: { enabled: false }, fontSize: 14 }}\n    />\n  );\n}",
+  "language": "tsx",
+  "deps": [
+    "@monaco-editor/react"
+  ],
+  "summary_zh": "Monaco code editor React 包裝"
+}

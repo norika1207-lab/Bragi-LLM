@@ -1,0 +1,29 @@
+{
+  "id": "mobile-080-swiftui-anim",
+  "category": "mobile/swiftui/anim",
+  "intents_zh": [
+    "SwiftUI 淡入動畫",
+    "SwiftUI withAnimation",
+    "SwiftUI fade in",
+    "SwiftUI 動畫範例",
+    "入場動畫 SwiftUI",
+    "SwiftUI opacity animation",
+    "SwiftUI animation"
+  ],
+  "intents_en": [
+    "swiftui fade in",
+    "swiftui withAnimation",
+    "swiftui entrance animation",
+    "swiftui opacity animation",
+    "animate swiftui",
+    "swiftui animation example",
+    "fade animation swiftui"
+  ],
+  "slots": [
+    "seconds"
+  ],
+  "code": "import SwiftUI\nstruct Fade<C:View>:View{@State var o=0.0;let c:()->C\n  var body:some View{c().opacity(o).onAppear{withAnimation(.easeIn(duration:{{seconds}})){o=1}}}}",
+  "language": "swift",
+  "deps": [],
+  "summary_zh": "SwiftUI withAnimation 淡入包裝"
+}

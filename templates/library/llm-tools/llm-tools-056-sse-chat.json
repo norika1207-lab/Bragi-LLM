@@ -1,0 +1,36 @@
+{
+  "id": "llm-tools-056-sse-chat",
+  "category": "llm-tools/server/sse",
+  "intents_zh": [
+    "SSE 串流 chat",
+    "server-sent events GPT",
+    "fastapi sse 範例",
+    "串流 chat 端點",
+    "stream chat http",
+    "SSE openai 包裝",
+    "串流回應 web",
+    "SSE endpoint"
+  ],
+  "intents_en": [
+    "sse streaming chat",
+    "server-sent events gpt",
+    "fastapi sse example",
+    "streaming chat endpoint",
+    "sse openai wrapper",
+    "stream web chat",
+    "sse endpoint",
+    "push tokens via sse"
+  ],
+  "slots": [
+    "model_name",
+    "port"
+  ],
+  "code": "from fastapi import FastAPI\nfrom fastapi.responses import StreamingResponse\nfrom openai import OpenAI\nimport uvicorn\n\napp = FastAPI()\nclient = OpenAI()\n\ndef gen(prompt: str):\n    stream = client.chat.completions.create(\n        model=\"{{model_name}}\",\n        messages=[{\"role\": \"user\", \"content\": prompt}],\n        stream=True,\n    )\n    for chunk in stream:\n        d = chunk.choices[0].delta.content\n        if d:\n            yield f\"data: {d}\\n\\n\"\n    yield \"data: [DONE]\\n\\n\"\n\n@app.get(\"/stream\")\ndef stream(q: str):\n    return StreamingResponse(gen(q), media_type=\"text/event-stream\")\n\nif __name__ == \"__main__\":\n    uvicorn.run(app, host=\"0.0.0.0\", port={{port}})",
+  "language": "py",
+  "deps": [
+    "fastapi",
+    "uvicorn",
+    "openai"
+  ],
+  "summary_zh": "FastAPI SSE 串流 chat 端點"
+}

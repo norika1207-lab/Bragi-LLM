@@ -1,0 +1,19 @@
+{
+  "id": "database-devops-165-gha-test-postgres",
+  "category": "database-devops/cicd/github-actions",
+  "intents_zh": [
+    "GHA 用 postgres service",
+    "CI 跑整合測試",
+    "action service container"
+  ],
+  "intents_en": [
+    "github actions postgres service",
+    "ci integration test pg",
+    "service container"
+  ],
+  "slots": [],
+  "code": "name: Integration\non: [push]\n\njobs:\n  test:\n    runs-on: ubuntu-latest\n    services:\n      postgres:\n        image: postgres:16\n        env:\n          POSTGRES_PASSWORD: postgres\n          POSTGRES_DB: test\n        options: >-\n          --health-cmd \"pg_isready -U postgres\"\n          --health-interval 5s\n          --health-retries 10\n        ports: ['5432:5432']\n    env:\n      DATABASE_URL: postgres://postgres:postgres@localhost:5432/test\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-node@v4\n        with: { node-version: '20' }\n      - run: npm ci\n      - run: npm run migrate\n      - run: npm test",
+  "language": "yaml",
+  "deps": [],
+  "summary_zh": "GHA 加 postgres service 跑整合測試"
+}

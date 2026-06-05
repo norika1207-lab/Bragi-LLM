@@ -1,0 +1,19 @@
+{
+  "id": "database-devops-082-gha-cache-deps",
+  "category": "database-devops/cicd/github-actions",
+  "intents_zh": [
+    "GHA cache 依賴",
+    "快取 node_modules",
+    "快取 pip"
+  ],
+  "intents_en": [
+    "github actions cache deps",
+    "cache node_modules",
+    "cache pip"
+  ],
+  "slots": [],
+  "code": "      - uses: actions/cache@v4\n        with:\n          path: |\n            ~/.npm\n            ~/.cache/pip\n            **/node_modules\n          key: ${{ runner.os }}-deps-${{ hashFiles('**/package-lock.json', '**/requirements*.txt') }}\n          restore-keys: |\n            ${{ runner.os }}-deps-",
+  "language": "yaml",
+  "deps": [],
+  "summary_zh": "GHA 快取 npm + pip 依賴"
+}

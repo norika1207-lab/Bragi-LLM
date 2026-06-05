@@ -1,0 +1,26 @@
+{
+  "id": "database-devops-016-sql-json-extract",
+  "category": "database-devops/sql/postgres",
+  "intents_zh": [
+    "postgres jsonb 取值",
+    "JSON 欄位提取",
+    "jsonb 操作符",
+    "抓 JSON 內層"
+  ],
+  "intents_en": [
+    "postgres jsonb extract",
+    "json column query",
+    "jsonb operator",
+    "get nested json"
+  ],
+  "slots": [
+    "table",
+    "jsonb_col",
+    "key",
+    "nested_key"
+  ],
+  "code": "SELECT\n  {{jsonb_col}}->>'{{key}}' AS top_val,\n  {{jsonb_col}}#>>'{ {{key}},{{nested_key}} }' AS nested_val\nFROM {{table}}\nWHERE {{jsonb_col}} @> '{\"{{key}}\": \"target\"}';",
+  "language": "sql",
+  "deps": [],
+  "summary_zh": "Postgres jsonb 欄位提取"
+}

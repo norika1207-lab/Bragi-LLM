@@ -1,0 +1,27 @@
+{
+  "id": "depth-web-backend-049-mock-server-msw-node",
+  "category": "web-backend/testing/msw",
+  "intents_zh": [
+    "MSW node 測試 mock",
+    "攔截 HTTP 測 API",
+    "setupServer + handlers",
+    "Jest 整合 mock",
+    "msw rest handler"
+  ],
+  "intents_en": [
+    "msw node test mock",
+    "intercept http for tests",
+    "setupserver handlers",
+    "jest integration mock",
+    "msw rest handler"
+  ],
+  "slots": [
+    "base_url"
+  ],
+  "code": "import { setupServer } from 'msw/node';\nimport { http, HttpResponse } from 'msw';\nexport const server = setupServer(\n  http.get('{{base_url}}/users/:id', ({ params }) => HttpResponse.json({ id: params.id, name: 'mock' })),\n);\nbeforeAll(() => server.listen());\nafterEach(() => server.resetHandlers());\nafterAll(() => server.close());",
+  "language": "js",
+  "deps": [
+    "msw"
+  ],
+  "summary_zh": "MSW node 測試 mock server"
+}

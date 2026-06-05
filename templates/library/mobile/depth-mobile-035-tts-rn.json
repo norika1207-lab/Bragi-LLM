@@ -1,0 +1,28 @@
+{
+  "id": "depth-mobile-035-tts-rn",
+  "category": "mobile/speech/tts-rn",
+  "intents_zh": [
+    "RN tts",
+    "react-native-tts",
+    "跨平台文字轉語音",
+    "Tts.speak",
+    "RN 朗讀"
+  ],
+  "intents_en": [
+    "RN tts",
+    "react-native-tts",
+    "cross platform TTS",
+    "Tts.speak",
+    "RN speak"
+  ],
+  "slots": [
+    "text",
+    "lang_code"
+  ],
+  "code": "import Tts from 'react-native-tts';\nawait Tts.setDefaultLanguage('{{lang_code}}');\nTts.speak('{{text}}', { iosVoiceId: 'com.apple.ttsbundle.Samantha-compact', rate: 0.5 });",
+  "language": "ts",
+  "deps": [
+    "react-native-tts"
+  ],
+  "summary_zh": "RN tts 跨平台朗讀"
+}

@@ -1,0 +1,36 @@
+{
+  "id": "depth-algorithm-024-gradient-boosting-scratch",
+  "category": "algorithm/ml/gradient-boosting",
+  "intents_zh": [
+    "梯度提升從零實作",
+    "gradient boosting 手寫",
+    "GBDT 殘差擬合",
+    "回歸樹梯度提升",
+    "boosting 殘差",
+    "加法模型",
+    "GB 樹模板"
+  ],
+  "intents_en": [
+    "gradient boosting from scratch",
+    "GBDT residual fit",
+    "boosting regression trees",
+    "additive model boosting",
+    "gradient boost numpy",
+    "GB template",
+    "manual gradient boosting"
+  ],
+  "slots": [
+    "X",
+    "y",
+    "n_estimators",
+    "lr",
+    "max_depth"
+  ],
+  "code": "import numpy as np\nfrom sklearn.tree import DecisionTreeRegressor\n\ndef gradient_boost(X={{X}}, y={{y}}, n_estimators={{n_estimators}}, lr={{lr}}, max_depth={{max_depth}}):\n    pred = np.full_like(y, y.mean(), dtype=float)\n    trees = []\n    for _ in range(n_estimators):\n        residual = y - pred\n        tree = DecisionTreeRegressor(max_depth=max_depth)\n        tree.fit(X, residual)\n        pred += lr * tree.predict(X)\n        trees.append(tree)\n    return trees, y.mean()\n\ndef gb_predict(X, trees, base, lr):\n    p = np.full(X.shape[0], base, dtype=float)\n    for t in trees: p += lr * t.predict(X)\n    return p",
+  "language": "py",
+  "deps": [
+    "numpy",
+    "scikit-learn"
+  ],
+  "summary_zh": "用回歸樹從零實作梯度提升回歸"
+}

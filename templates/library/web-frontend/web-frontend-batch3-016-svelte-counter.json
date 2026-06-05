@@ -1,0 +1,29 @@
+{
+  "id": "web-frontend-batch3-016-svelte-counter",
+  "category": "web-frontend/svelte/apps/counter",
+  "intents_zh": [
+    "Svelte 計數器",
+    "Svelte counter",
+    "Svelte 加減按鈕",
+    "Svelte 入門 counter",
+    "Svelte 簡單計數",
+    "Svelte ++ --"
+  ],
+  "intents_en": [
+    "svelte counter",
+    "svelte increment button",
+    "svelte simple counter",
+    "svelte hello counter",
+    "svelte plus minus",
+    "svelte count component"
+  ],
+  "slots": [
+    "step"
+  ],
+  "code": "<script>\n  let count = 0;\n  const step = {{step}};\n</script>\n<button on:click={() => count -= step}>-</button>\n<span>{count}</span>\n<button on:click={() => count += step}>+</button>",
+  "language": "svelte",
+  "deps": [
+    "svelte"
+  ],
+  "summary_zh": "Svelte 計數器最小範例"
+}

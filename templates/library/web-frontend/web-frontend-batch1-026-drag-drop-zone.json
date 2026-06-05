@@ -1,0 +1,27 @@
+{
+  "id": "web-frontend-batch1-026-drag-drop-zone",
+  "category": "web-frontend/react/file-upload/drag-drop",
+  "intents_zh": [
+    "拖曳上傳區",
+    "drag and drop file zone",
+    "拖放上傳",
+    "drop zone 元件",
+    "拖檔到區域上傳",
+    "drag drop upload"
+  ],
+  "intents_en": [
+    "drag drop file zone",
+    "drop zone component",
+    "drag and drop upload",
+    "file dropzone",
+    "drag drop file upload",
+    "react drop area"
+  ],
+  "slots": [
+    "component_name"
+  ],
+  "code": "import { useState } from 'react';\n\nexport default function {{component_name}}({ onFiles }: { onFiles?: (f: File[]) => void }) {\n  const [over, setOver] = useState(false);\n\n  function onDrop(e: React.DragEvent) {\n    e.preventDefault();\n    setOver(false);\n    const files = Array.from(e.dataTransfer.files);\n    onFiles?.(files);\n  }\n\n  return (\n    <div\n      onDragOver={(e) => { e.preventDefault(); setOver(true); }}\n      onDragLeave={() => setOver(false)}\n      onDrop={onDrop}\n      className={`border-2 border-dashed rounded p-8 text-center ${over ? 'bg-blue-50 border-blue-400' : 'border-gray-300'}`}\n    >\n      Drop files here\n    </div>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "拖放檔案 drop zone 元件"
+}

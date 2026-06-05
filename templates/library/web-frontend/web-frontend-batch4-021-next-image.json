@@ -1,0 +1,32 @@
+{
+  "id": "web-frontend-batch4-021-next-image",
+  "category": "web-frontend/nextjs/image/optimised",
+  "intents_zh": [
+    "優化圖片",
+    "next/image 範例",
+    "響應式 image",
+    "加 priority 的圖",
+    "blur placeholder",
+    "Next 圖片元件"
+  ],
+  "intents_en": [
+    "next image component",
+    "optimized image",
+    "responsive image",
+    "priority image",
+    "next/image with blur",
+    "image with sizes"
+  ],
+  "slots": [
+    "image_src",
+    "image_alt",
+    "width",
+    "height"
+  ],
+  "code": "import Image from 'next/image';\n\nexport default function Hero() {\n  return (\n    <Image\n      src=\"{{image_src}}\"\n      alt=\"{{image_alt}}\"\n      width={{width}}\n      height={{height}}\n      priority\n      className=\"rounded-xl\"\n    />\n  );\n}",
+  "language": "tsx",
+  "deps": [
+    "next"
+  ],
+  "summary_zh": "next/image 優化圖片含 priority"
+}

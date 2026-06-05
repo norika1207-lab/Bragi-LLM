@@ -1,0 +1,26 @@
+{
+  "id": "firmware-094-arduino-encoder",
+  "category": "firmware/arduino/input",
+  "intents_zh": [
+    "旋轉編碼器",
+    "encoder 讀取",
+    "Arduino 旋鈕",
+    "KY-040",
+    "encoder 中斷"
+  ],
+  "intents_en": [
+    "Arduino rotary encoder",
+    "KY-040 encoder",
+    "read quadrature encoder",
+    "encoder interrupt",
+    "rotary knob Arduino"
+  ],
+  "slots": [
+    "clk_pin",
+    "dt_pin"
+  ],
+  "code": "const int CLK = {{clk_pin}};\nconst int DT = {{dt_pin}};\nvolatile long pos = 0;\nint lastClk = HIGH;\n\nvoid isr() {\n  int c = digitalRead(CLK);\n  if (c != lastClk && c == LOW) {\n    if (digitalRead(DT) != c) pos++; else pos--;\n  }\n  lastClk = c;\n}\n\nvoid setup() {\n  pinMode(CLK, INPUT_PULLUP);\n  pinMode(DT, INPUT_PULLUP);\n  attachInterrupt(digitalPinToInterrupt(CLK), isr, CHANGE);\n  Serial.begin(115200);\n}\n\nvoid loop() {\n  Serial.println(pos);\n  delay(200);\n}",
+  "language": "ino",
+  "deps": [],
+  "summary_zh": "Arduino 旋轉編碼器中斷讀取"
+}

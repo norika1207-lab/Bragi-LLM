@@ -1,0 +1,27 @@
+{
+  "id": "depth-llm-tools-060-hyde-retrieval",
+  "category": "llm-tools/retrieval/hyde",
+  "intents_zh": [
+    "HyDE 假設文件檢索",
+    "先 LLM 生答案再 embed",
+    "hypothetical document",
+    "HyDE 技巧",
+    "假設答案檢索"
+  ],
+  "intents_en": [
+    "HyDE hypothetical doc",
+    "LLM-generated answer then embed",
+    "hypothetical document",
+    "HyDE technique",
+    "fake-answer retrieval"
+  ],
+  "slots": [
+    "llm_call",
+    "embed_fn",
+    "query"
+  ],
+  "code": "def hyde({{llm_call}}, {{embed_fn}}, {{query}}):\n    fake = {{llm_call}}(f\"Write a 100-word passage that answers: {{{query}}}\")\n    return {{embed_fn}}(fake)",
+  "language": "python",
+  "deps": [],
+  "summary_zh": "用 LLM 寫一段假設答案再 embed 拿來做檢索向量"
+}

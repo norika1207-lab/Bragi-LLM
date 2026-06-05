@@ -1,0 +1,23 @@
+{
+  "id": "database-devops-148-sql-listen-py",
+  "category": "database-devops/sql/postgres",
+  "intents_zh": [
+    "python 監聽 postgres notify",
+    "asyncpg listen",
+    "python pub/sub pg"
+  ],
+  "intents_en": [
+    "python listen postgres",
+    "asyncpg listen channel",
+    "python pg pubsub"
+  ],
+  "slots": [
+    "channel"
+  ],
+  "code": "import asyncio, asyncpg\n\nasync def listen():\n    conn = await asyncpg.connect(dsn=os.environ['DATABASE_URL'])\n    async def cb(connection, pid, channel, payload):\n        print(f'received on {channel}: {payload}')\n    await conn.add_listener('{{channel}}', cb)\n    print('listening...')\n    while True:\n        await asyncio.sleep(60)\n\nasyncio.run(listen())",
+  "language": "py",
+  "deps": [
+    "asyncpg"
+  ],
+  "summary_zh": "asyncpg 監聽 postgres NOTIFY"
+}

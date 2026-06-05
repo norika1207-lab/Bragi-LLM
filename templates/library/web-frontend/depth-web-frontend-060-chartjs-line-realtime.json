@@ -1,0 +1,29 @@
+{
+  "id": "depth-web-frontend-060-chartjs-line-realtime",
+  "category": "web-frontend/charts/realtime",
+  "intents_zh": [
+    "即時折線圖",
+    "streaming chart",
+    "資料持續推進",
+    "realtime dashboard",
+    "chart.js 即時"
+  ],
+  "intents_en": [
+    "realtime line chart",
+    "streaming chart",
+    "live updating chart",
+    "realtime dashboard",
+    "chartjs live"
+  ],
+  "slots": [
+    "component_name",
+    "window_size"
+  ],
+  "code": "'use client';\nimport { Line } from 'react-chartjs-2';\nimport { Chart as ChartJS, LineElement, PointElement, LinearScale, CategoryScale, Tooltip } from 'chart.js';\nimport { useEffect, useState } from 'react';\nChartJS.register(LineElement, PointElement, LinearScale, CategoryScale, Tooltip);\n\nexport function {{component_name}}({ sample }: { sample: () => number }) {\n  const [pts, setPts] = useState<number[]>([]);\n  useEffect(() => {\n    const id = setInterval(() => setPts(p => [...p.slice(-({{window_size}}-1)), sample()]), 1000);\n    return () => clearInterval(id);\n  }, [sample]);\n  return <Line data={{ labels: pts.map((_,i) => i), datasets:[{ data: pts, borderColor:'#0EA5E9', tension:0.3, pointRadius:0 }] }} options={{ animation:false, scales:{ x:{ display:false } } }} />;\n}",
+  "language": "tsx",
+  "deps": [
+    "chart.js",
+    "react-chartjs-2"
+  ],
+  "summary_zh": "chart.js 即時推進折線圖"
+}

@@ -1,0 +1,27 @@
+{
+  "id": "depth-web-backend-050-mock-server-nock",
+  "category": "web-backend/testing/nock",
+  "intents_zh": [
+    "nock 攔截 HTTP",
+    "Node 測試 mock",
+    "nock get/post",
+    "record/replay",
+    "測試外呼 mock"
+  ],
+  "intents_en": [
+    "nock intercept http",
+    "node test mock",
+    "nock get post",
+    "record replay",
+    "external call mock"
+  ],
+  "slots": [
+    "host"
+  ],
+  "code": "import nock from 'nock';\nbeforeEach(() => {\n  nock('{{host}}').get('/api/v1/ping').reply(200, { ok: true });\n});\nafterEach(() => nock.cleanAll());",
+  "language": "js",
+  "deps": [
+    "nock"
+  ],
+  "summary_zh": "nock 攔截外部 HTTP"
+}

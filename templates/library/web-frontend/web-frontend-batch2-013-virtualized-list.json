@@ -1,0 +1,29 @@
+{
+  "id": "web-frontend-batch2-013-virtualized-list",
+  "category": "web-frontend/react/layout/virtualized-list",
+  "intents_zh": [
+    "虛擬列表",
+    "virtualized list",
+    "大量資料列表",
+    "效能列表",
+    "window 化列表",
+    "虛擬滾動"
+  ],
+  "intents_en": [
+    "virtualized list",
+    "virtual scroll list",
+    "large list rendering",
+    "windowed list",
+    "performant long list",
+    "react-window list"
+  ],
+  "slots": [
+    "item_count"
+  ],
+  "code": "import { FixedSizeList } from 'react-window';\n\nexport function VList({ items }) {\n  return (\n    <FixedSizeList height={400} width={'100%'} itemSize={48} itemCount={{{item_count}}}>\n      {({ index, style }) => (\n        <div style={style} className=\"flex items-center border-b px-4\">\n          {items[index]?.label ?? `Item ${index}`}\n        </div>\n      )}\n    </FixedSizeList>\n  );\n}",
+  "language": "tsx",
+  "deps": [
+    "react-window"
+  ],
+  "summary_zh": "react-window 虛擬化長列表"
+}

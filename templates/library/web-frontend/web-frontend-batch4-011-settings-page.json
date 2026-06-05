@@ -1,0 +1,27 @@
+{
+  "id": "web-frontend-batch4-011-settings-page",
+  "category": "web-frontend/nextjs/app-router/settings",
+  "intents_zh": [
+    "設定頁面",
+    "個人設定頁",
+    "產生 settings 表單",
+    "帳號設定",
+    "偏好設定頁",
+    "setting form"
+  ],
+  "intents_en": [
+    "settings page",
+    "user preferences",
+    "account settings form",
+    "preferences page",
+    "profile settings",
+    "settings form"
+  ],
+  "slots": [
+    "update_action"
+  ],
+  "code": "export default function SettingsPage() {\n  return (\n    <main className=\"max-w-2xl mx-auto p-8\">\n      <h1 className=\"text-2xl font-bold mb-6\">Settings</h1>\n      <form action=\"{{update_action}}\" method=\"post\" className=\"space-y-4\">\n        <label className=\"block\">\n          <span className=\"text-sm text-gray-600\">Display name</span>\n          <input name=\"name\" className=\"mt-1 w-full border rounded px-3 py-2\" />\n        </label>\n        <label className=\"block\">\n          <span className=\"text-sm text-gray-600\">Email</span>\n          <input name=\"email\" type=\"email\" className=\"mt-1 w-full border rounded px-3 py-2\" />\n        </label>\n        <button className=\"px-4 py-2 bg-indigo-600 text-white rounded\">Save</button>\n      </form>\n    </main>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "使用者設定頁含 name email 表單"
+}

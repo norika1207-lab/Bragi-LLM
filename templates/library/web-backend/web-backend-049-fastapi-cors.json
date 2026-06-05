@@ -1,0 +1,27 @@
+{
+  "id": "web-backend-049-fastapi-cors",
+  "category": "web-backend/fastapi/middleware",
+  "intents_zh": [
+    "fastapi CORS",
+    "allow origin fastapi",
+    "跨域設定 fastapi",
+    "CORSMiddleware 用法",
+    "preflight fastapi"
+  ],
+  "intents_en": [
+    "fastapi cors middleware",
+    "allow origins fastapi",
+    "CORSMiddleware example",
+    "cross origin fastapi",
+    "cors setup fastapi"
+  ],
+  "slots": [
+    "allowed_origin"
+  ],
+  "code": "from fastapi import FastAPI\nfrom fastapi.middleware.cors import CORSMiddleware\n\napp = FastAPI()\napp.add_middleware(\n    CORSMiddleware,\n    allow_origins=['{{allowed_origin}}'],\n    allow_credentials=True,\n    allow_methods=['*'],\n    allow_headers=['*']\n)",
+  "language": "py",
+  "deps": [
+    "fastapi"
+  ],
+  "summary_zh": "FastAPI CORS middleware"
+}

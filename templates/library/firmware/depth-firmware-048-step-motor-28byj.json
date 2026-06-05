@@ -1,0 +1,31 @@
+{
+  "id": "depth-firmware-048-step-motor-28byj",
+  "category": "firmware/peripheral/stepper",
+  "intents_zh": [
+    "步進馬達控制",
+    "28BYJ-48 ULN2003",
+    "Stepper lib",
+    "旋轉指定步數",
+    "半步驅動"
+  ],
+  "intents_en": [
+    "stepper motor control",
+    "28byj-48 uln2003",
+    "stepper lib",
+    "rotate steps",
+    "half step"
+  ],
+  "slots": [
+    "in1",
+    "in2",
+    "in3",
+    "in4",
+    "steps"
+  ],
+  "code": "#include <Stepper.h>\nStepper m(2048, {{in1}}, {{in3}}, {{in2}}, {{in4}});\nvoid setup() { m.setSpeed(10); m.step({{steps}}); }\nvoid loop() {}",
+  "language": "cpp",
+  "deps": [
+    "Stepper"
+  ],
+  "summary_zh": "28BYJ-48 + ULN2003 步進馬達轉指定步數"
+}

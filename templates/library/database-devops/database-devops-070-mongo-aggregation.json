@@ -1,0 +1,23 @@
+{
+  "id": "database-devops-070-mongo-aggregation",
+  "category": "database-devops/nosql/mongo",
+  "intents_zh": [
+    "mongo aggregation pipeline",
+    "mongo 聚合 group",
+    "mongo $match $group"
+  ],
+  "intents_en": [
+    "mongo aggregation pipeline",
+    "mongo group by",
+    "mongo match group"
+  ],
+  "slots": [
+    "collection",
+    "group_field",
+    "sum_field"
+  ],
+  "code": "db.{{collection}}.aggregate([\n  { $match: { status: 'active' } },\n  { $group: {\n      _id: '${{group_field}}',\n      total: { $sum: '${{sum_field}}' },\n      count: { $sum: 1 },\n  }},\n  { $sort: { total: -1 } },\n  { $limit: 20 },\n])",
+  "language": "js",
+  "deps": [],
+  "summary_zh": "mongo aggregation match+group+sort"
+}

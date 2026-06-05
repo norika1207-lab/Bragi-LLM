@@ -1,0 +1,23 @@
+{
+  "id": "system-cli-085-spinner-cli",
+  "category": "system-cli/python/output",
+  "intents_zh": [
+    "python 終端 spinner",
+    "loading 動畫",
+    "halo spinner"
+  ],
+  "intents_en": [
+    "python terminal spinner",
+    "halo loading animation",
+    "cli spinner"
+  ],
+  "slots": [
+    "task_label"
+  ],
+  "code": "from halo import Halo\nimport time\n\nspinner = Halo(text='{{task_label}}', spinner='dots')\nspinner.start()\ntry:\n    time.sleep(2)\n    spinner.succeed('{{task_label}} done')\nexcept Exception as e:\n    spinner.fail(str(e))",
+  "language": "py",
+  "deps": [
+    "halo"
+  ],
+  "summary_zh": "halo 終端 spinner"
+}

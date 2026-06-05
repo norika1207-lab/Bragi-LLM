@@ -1,0 +1,25 @@
+{
+  "id": "firmware-045-esp8266-deep-sleep",
+  "category": "firmware/esp8266/power",
+  "intents_zh": [
+    "ESP8266 deep sleep",
+    "NodeMCU 深層睡眠",
+    "RST D0 短接",
+    "8266 省電",
+    "定時喚醒 8266"
+  ],
+  "intents_en": [
+    "ESP8266 deep sleep",
+    "NodeMCU power save",
+    "ESP.deepSleep example",
+    "timer wake ESP8266",
+    "low power sleep 8266"
+  ],
+  "slots": [
+    "sleep_us"
+  ],
+  "code": "void setup() {\n  Serial.begin(115200);\n  Serial.println(\"sleeping\");\n  ESP.deepSleep({{sleep_us}});\n}\n\nvoid loop() {}",
+  "language": "ino",
+  "deps": [],
+  "summary_zh": "ESP8266 deep sleep 進入低功耗"
+}

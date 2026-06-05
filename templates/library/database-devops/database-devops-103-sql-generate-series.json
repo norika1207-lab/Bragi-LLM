@@ -1,0 +1,22 @@
+{
+  "id": "database-devops-103-sql-generate-series",
+  "category": "database-devops/sql/postgres",
+  "intents_zh": [
+    "generate_series 生成日期",
+    "postgres 日期填充",
+    "補滿時間軸"
+  ],
+  "intents_en": [
+    "generate_series dates",
+    "fill missing dates",
+    "postgres date range"
+  ],
+  "slots": [
+    "start_date",
+    "end_date"
+  ],
+  "code": "WITH days AS (\n  SELECT generate_series('{{start_date}}'::date, '{{end_date}}'::date, INTERVAL '1 day')::date AS d\n)\nSELECT d, COALESCE(c.cnt, 0) AS cnt\nFROM days\nLEFT JOIN (\n  SELECT created_at::date AS d, COUNT(*) AS cnt FROM events GROUP BY 1\n) c USING (d)\nORDER BY d;",
+  "language": "sql",
+  "deps": [],
+  "summary_zh": "用 generate_series 補滿日期空白"
+}

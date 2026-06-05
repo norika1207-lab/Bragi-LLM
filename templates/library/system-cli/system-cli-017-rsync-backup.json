@@ -1,0 +1,22 @@
+{
+  "id": "system-cli-017-rsync-backup",
+  "category": "system-cli/backup/rsync",
+  "intents_zh": [
+    "rsync 備份 script",
+    "資料夾增量同步",
+    "rsync 排除暫存"
+  ],
+  "intents_en": [
+    "rsync backup script",
+    "incremental folder sync",
+    "rsync with excludes"
+  ],
+  "slots": [
+    "src_path",
+    "dst_path"
+  ],
+  "code": "#!/usr/bin/env bash\nset -euo pipefail\nSRC=\"{{src_path}}\"\nDST=\"{{dst_path}}\"\n\nrsync -avh --delete \\\n  --exclude '.DS_Store' \\\n  --exclude 'node_modules/' \\\n  --exclude '__pycache__/' \\\n  --exclude '*.tmp' \\\n  \"$SRC/\" \"$DST/\"\n\necho \"backup done: $(date -Iseconds)\"",
+  "language": "sh",
+  "deps": [],
+  "summary_zh": "rsync 增量備份含排除"
+}

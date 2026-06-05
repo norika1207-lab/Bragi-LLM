@@ -1,0 +1,27 @@
+{
+  "id": "depth-mobile-009-inappbrowser-rn",
+  "category": "mobile/inappbrowser/reactnative",
+  "intents_zh": [
+    "RN InAppBrowser",
+    "跨平台 in-app 瀏覽器",
+    "react-native-inappbrowser-reborn",
+    "openAuth deep link",
+    "app 內網頁"
+  ],
+  "intents_en": [
+    "RN InAppBrowser",
+    "cross platform in-app browser",
+    "inappbrowser reborn",
+    "openAuth deep link",
+    "in-app web view"
+  ],
+  "slots": [
+    "url_string"
+  ],
+  "code": "import InAppBrowser from 'react-native-inappbrowser-reborn';\n\nexport async function openInApp(url = '{{url_string}}') {\n  if (await InAppBrowser.isAvailable()) {\n    return InAppBrowser.open(url, { dismissButtonStyle: 'close', animated: true });\n  }\n  return Linking.openURL(url);\n}",
+  "language": "ts",
+  "deps": [
+    "react-native-inappbrowser-reborn"
+  ],
+  "summary_zh": "RN 內嵌瀏覽器封裝"
+}

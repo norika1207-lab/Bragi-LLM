@@ -1,0 +1,25 @@
+{
+  "id": "depth-mobile-023-nfc-rn",
+  "category": "mobile/nfc/reactnative",
+  "intents_zh": [
+    "RN nfc-manager",
+    "react-native NFC 讀取",
+    "NfcManager.start",
+    "registerTagEvent",
+    "跨平台 NFC"
+  ],
+  "intents_en": [
+    "RN nfc-manager",
+    "react-native NFC",
+    "NfcManager start",
+    "registerTagEvent",
+    "cross platform NFC"
+  ],
+  "slots": [],
+  "code": "import NfcManager, { NfcTech, Ndef } from 'react-native-nfc-manager';\nexport async function readNdef() {\n  await NfcManager.start();\n  try {\n    await NfcManager.requestTechnology(NfcTech.Ndef);\n    const tag = await NfcManager.getTag();\n    const payload = tag?.ndefMessage?.[0]?.payload;\n    return payload ? Ndef.text.decodePayload(Uint8Array.from(payload)) : null;\n  } finally { NfcManager.cancelTechnologyRequest(); }\n}",
+  "language": "ts",
+  "deps": [
+    "react-native-nfc-manager"
+  ],
+  "summary_zh": "RN NFC 讀取 NDEF 文字"
+}

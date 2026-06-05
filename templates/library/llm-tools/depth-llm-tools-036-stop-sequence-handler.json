@@ -1,0 +1,26 @@
+{
+  "id": "depth-llm-tools-036-stop-sequence-handler",
+  "category": "llm-tools/streaming/stop",
+  "intents_zh": [
+    "stop sequence 處理",
+    "串流時偵測停止字串",
+    "early termination",
+    "stop token 偵測",
+    "串流截斷"
+  ],
+  "intents_en": [
+    "stop sequence handler",
+    "detect stop string in stream",
+    "early termination",
+    "stop token detect",
+    "stream cutoff"
+  ],
+  "slots": [
+    "stream",
+    "stop_sequences"
+  ],
+  "code": "def with_stop({{stream}}, {{stop_sequences}}):\n    buf = \"\"\n    for chunk in {{stream}}:\n        buf += chunk\n        yield chunk\n        for s in {{stop_sequences}}:\n            if s in buf: return",
+  "language": "python",
+  "deps": [],
+  "summary_zh": "在串流 chunk 累積緩衝偵測 stop 字串並中止"
+}

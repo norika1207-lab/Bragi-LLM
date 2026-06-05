@@ -1,0 +1,25 @@
+{
+  "id": "system-cli-048-retry-backoff-python",
+  "category": "system-cli/reliability/retry",
+  "intents_zh": [
+    "python 重試 + backoff",
+    "指數退避重試",
+    "tenacity 範本"
+  ],
+  "intents_en": [
+    "python retry with backoff",
+    "exponential backoff",
+    "tenacity template"
+  ],
+  "slots": [
+    "fn_name",
+    "url_var"
+  ],
+  "code": "from tenacity import retry, wait_exponential, stop_after_attempt, retry_if_exception_type\nimport requests\n\n@retry(\n    wait=wait_exponential(multiplier=1, min=1, max=30),\n    stop=stop_after_attempt(5),\n    retry=retry_if_exception_type(requests.RequestException),\n    reraise=True,\n)\ndef {{fn_name}}({{url_var}}):\n    r = requests.get({{url_var}}, timeout=10)\n    r.raise_for_status()\n    return r.json()\n\nprint({{fn_name}}('https://example.com'))",
+  "language": "py",
+  "deps": [
+    "tenacity",
+    "requests"
+  ],
+  "summary_zh": "tenacity 指數退避重試"
+}

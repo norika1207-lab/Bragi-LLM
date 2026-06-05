@@ -1,0 +1,28 @@
+{
+  "id": "depth-firmware-003-sd-read-file",
+  "category": "firmware/storage/sd",
+  "intents_zh": [
+    "從 SD 讀檔",
+    "SD 卡讀取每行",
+    "解析 SD 上設定檔",
+    "fgets SD",
+    "SD 讀 config"
+  ],
+  "intents_en": [
+    "read file from sd",
+    "read lines sd",
+    "parse sd config",
+    "fgets sd",
+    "sd read config"
+  ],
+  "slots": [
+    "path",
+    "buf_size"
+  ],
+  "code": "FILE *f = fopen(\"{{path}}\", \"r\");\nchar line[{{buf_size}}];\nwhile (fgets(line, sizeof(line), f)) {\n    line[strcspn(line, \"\\r\\n\")] = 0;\n    ESP_LOGI(\"SD\", \"%s\", line);\n}\nfclose(f);",
+  "language": "c",
+  "deps": [
+    "esp-idf"
+  ],
+  "summary_zh": "逐行讀取 SD 卡上的文字檔"
+}

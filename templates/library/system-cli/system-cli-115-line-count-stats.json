@@ -1,0 +1,21 @@
+{
+  "id": "system-cli-115-line-count-stats",
+  "category": "system-cli/text/stats",
+  "intents_zh": [
+    "統計每個檔行數",
+    "程式碼行數 by ext",
+    "line count stats"
+  ],
+  "intents_en": [
+    "line count by extension",
+    "code line stats",
+    "loc counter"
+  ],
+  "slots": [
+    "root_dir"
+  ],
+  "code": "from collections import Counter\nfrom pathlib import Path\n\nstats = Counter()\nfor p in Path('{{root_dir}}').rglob('*'):\n    if not p.is_file() or '/.git/' in str(p): continue\n    ext = p.suffix or '<none>'\n    try:\n        n = sum(1 for _ in p.open('rb'))\n        stats[ext] += n\n    except Exception:\n        pass\n\nfor ext, n in stats.most_common(20):\n    print(f'{ext:10s} {n:8d}')",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "按副檔名統計總行數"
+}

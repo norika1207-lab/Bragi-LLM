@@ -1,0 +1,30 @@
+{
+  "id": "mobile-074-swiftui-settings",
+  "category": "mobile/swiftui/settings",
+  "intents_zh": [
+    "SwiftUI 設定頁",
+    "SwiftUI Toggle 列表",
+    "SwiftUI Form 設定",
+    "SwiftUI 偏好頁",
+    "設定畫面 SwiftUI",
+    "SwiftUI settings template",
+    "SwiftUI prefs ui"
+  ],
+  "intents_en": [
+    "swiftui settings page",
+    "swiftui Form toggle",
+    "swiftui preferences",
+    "settings template swiftui",
+    "swiftui toggle list",
+    "app settings swiftui",
+    "swiftui prefs ui"
+  ],
+  "slots": [
+    "row1",
+    "row2"
+  ],
+  "code": "import SwiftUI\nstruct S:View{@State var a=false;@State var b=true\n  var body:some View{Form{Toggle(\"{{row1}}\",isOn:$a);Toggle(\"{{row2}}\",isOn:$b)}}}",
+  "language": "swift",
+  "deps": [],
+  "summary_zh": "SwiftUI Form + Toggle 設定頁"
+}

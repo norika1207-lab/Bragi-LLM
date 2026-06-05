@@ -1,0 +1,29 @@
+{
+  "id": "depth-mobile-016-local-notif-android",
+  "category": "mobile/notifications/local-android",
+  "intents_zh": [
+    "Android 本地通知",
+    "NotificationCompat builder",
+    "AlarmManager 排程通知",
+    "channel id 建立",
+    "定時通知"
+  ],
+  "intents_en": [
+    "Android local notification",
+    "NotificationCompat builder",
+    "AlarmManager schedule",
+    "create channel",
+    "timed notification"
+  ],
+  "slots": [
+    "channel_id",
+    "title",
+    "body"
+  ],
+  "code": "val channel = NotificationChannel(\"{{channel_id}}\", \"Reminders\", NotificationManager.IMPORTANCE_DEFAULT)\ngetSystemService(NotificationManager::class.java).createNotificationChannel(channel)\nval n = NotificationCompat.Builder(this, \"{{channel_id}}\")\n    .setSmallIcon(R.drawable.ic_bell)\n    .setContentTitle(\"{{title}}\").setContentText(\"{{body}}\")\n    .setAutoCancel(true).build()\nNotificationManagerCompat.from(this).notify(101, n)",
+  "language": "kotlin",
+  "deps": [
+    "androidx.core:core-ktx"
+  ],
+  "summary_zh": "Android channel + 本地通知"
+}

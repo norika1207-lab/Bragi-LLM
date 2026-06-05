@@ -1,0 +1,33 @@
+{
+  "id": "llm-tools-030-gguf-loader",
+  "category": "llm-tools/loader/gguf",
+  "intents_zh": [
+    "GGUF 載入器",
+    "讀 gguf metadata",
+    "檢視 gguf 模型",
+    "gguf 讀檔",
+    "用 gguf-py 讀檔",
+    "查 gguf 結構",
+    "gguf inspector",
+    "print gguf info"
+  ],
+  "intents_en": [
+    "gguf loader",
+    "read gguf metadata",
+    "inspect gguf model",
+    "gguf file reader",
+    "gguf-py example",
+    "print gguf info",
+    "check gguf structure",
+    "gguf parser"
+  ],
+  "slots": [
+    "gguf_path"
+  ],
+  "code": "from gguf import GGUFReader\n\nreader = GGUFReader(\"{{gguf_path}}\")\n\ndef info():\n    print(\"fields:\")\n    for k, v in reader.fields.items():\n        print(f\"  {k}: {v.parts}\")\n    print(\"tensors:\", len(reader.tensors))\n    for t in reader.tensors[:5]:\n        print(f\"  {t.name} {t.shape} {t.tensor_type}\")\n\nif __name__ == \"__main__\":\n    info()",
+  "language": "py",
+  "deps": [
+    "gguf"
+  ],
+  "summary_zh": "GGUF 模型 metadata 與 tensor 檢視"
+}

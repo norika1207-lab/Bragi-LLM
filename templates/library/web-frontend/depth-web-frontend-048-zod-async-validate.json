@@ -1,0 +1,27 @@
+{
+  "id": "depth-web-frontend-048-zod-async-validate",
+  "category": "web-frontend/forms/validation",
+  "intents_zh": [
+    "zod 非同步驗證",
+    "檢查 email 唯一",
+    "superRefine async",
+    "遠端驗證 form",
+    "async refine"
+  ],
+  "intents_en": [
+    "zod async validation",
+    "check email unique",
+    "superRefine async",
+    "remote validation",
+    "async refine zod"
+  ],
+  "slots": [
+    "schema_name"
+  ],
+  "code": "import { z } from 'zod';\n\nexport const {{schema_name}} = z.object({\n  email: z.string().email(),\n}).superRefine(async (d, ctx) => {\n  const res = await fetch(`/api/check-email?email=${encodeURIComponent(d.email)}`);\n  const { taken } = await res.json();\n  if (taken) ctx.addIssue({ code: 'custom', path: ['email'], message: '此 email 已被註冊' });\n});",
+  "language": "ts",
+  "deps": [
+    "zod"
+  ],
+  "summary_zh": "zod superRefine 非同步驗證"
+}

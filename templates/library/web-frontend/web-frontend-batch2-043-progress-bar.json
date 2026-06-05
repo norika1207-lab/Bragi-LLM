@@ -1,0 +1,28 @@
+{
+  "id": "web-frontend-batch2-043-progress-bar",
+  "category": "web-frontend/react/layout/progress-bar",
+  "intents_zh": [
+    "進度條",
+    "progress bar",
+    "上傳進度",
+    "百分比條",
+    "載入進度",
+    "横條進度"
+  ],
+  "intents_en": [
+    "progress bar",
+    "upload progress",
+    "percentage bar",
+    "loading bar",
+    "linear progress",
+    "horizontal progress"
+  ],
+  "slots": [
+    "percent",
+    "label"
+  ],
+  "code": "export function ProgressBar() {\n  const p = {{percent}};\n  return (\n    <div>\n      <div className=\"mb-1 flex justify-between text-xs text-gray-600\">\n        <span>{{label}}</span>\n        <span>{p}%</span>\n      </div>\n      <div className=\"h-2 w-full overflow-hidden rounded-full bg-gray-200\">\n        <div className=\"h-full bg-blue-600 transition-all\" style={{ width: `${p}%` }} />\n      </div>\n    </div>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "帶標籤的水平進度條"
+}

@@ -1,0 +1,27 @@
+{
+  "id": "web-backend-120-express-gzip",
+  "category": "web-backend/express/middleware",
+  "intents_zh": [
+    "express compression",
+    "gzip response",
+    "加壓縮 middleware",
+    "express 加速回應",
+    "response 壓縮"
+  ],
+  "intents_en": [
+    "express compression middleware",
+    "gzip response",
+    "compress response express",
+    "response compression",
+    "express speed up"
+  ],
+  "slots": [
+    "min_size"
+  ],
+  "code": "const compression = require('compression');\n\nmodule.exports = compression({\n  threshold: {{min_size}},\n  filter: (req, res) => {\n    if (req.headers['x-no-compression']) return false;\n    return compression.filter(req, res);\n  }\n});",
+  "language": "js",
+  "deps": [
+    "compression"
+  ],
+  "summary_zh": "Express gzip 壓縮 middleware"
+}

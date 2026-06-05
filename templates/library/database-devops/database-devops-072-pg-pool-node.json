@@ -1,0 +1,21 @@
+{
+  "id": "database-devops-072-pg-pool-node",
+  "category": "database-devops/connection/postgres",
+  "intents_zh": [
+    "node pg Pool",
+    "pg 連線池",
+    "Node postgres client"
+  ],
+  "intents_en": [
+    "node pg pool",
+    "postgres connection pool",
+    "pg client setup"
+  ],
+  "slots": [],
+  "code": "import { Pool } from 'pg'\n\nexport const pool = new Pool({\n  connectionString: process.env.DATABASE_URL,\n  max: 20,\n  idleTimeoutMillis: 30000,\n  connectionTimeoutMillis: 2000,\n})\n\npool.on('error', (err) => console.error('pg pool error', err))\n\nexport async function query<T = any>(text: string, params?: any[]) {\n  const res = await pool.query<T>(text, params)\n  return res.rows\n}",
+  "language": "ts",
+  "deps": [
+    "pg"
+  ],
+  "summary_zh": "Node pg Pool 連線池設定"
+}

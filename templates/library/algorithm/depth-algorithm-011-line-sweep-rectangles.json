@@ -1,0 +1,29 @@
+{
+  "id": "depth-algorithm-011-line-sweep-rectangles",
+  "category": "algorithm/sweep/rectangles",
+  "intents_zh": [
+    "矩形面積並",
+    "掃描線矩形",
+    "sweep rectangle area",
+    "atlantis 問題",
+    "座標離散化矩形面積",
+    "掃描線加線段樹",
+    "矩形聯集面積"
+  ],
+  "intents_en": [
+    "rectangle area union sweep",
+    "atlantis problem",
+    "sweep line rectangles",
+    "coordinate compression rectangles",
+    "union of rectangles area",
+    "line sweep area",
+    "klee algorithm"
+  ],
+  "slots": [
+    "rects"
+  ],
+  "code": "def rect_union_area(rects={{rects}}):\n    events = []\n    xs = set()\n    for x1, y1, x2, y2 in rects:\n        events.append((y1, 1, x1, x2))\n        events.append((y2, -1, x1, x2))\n        xs.add(x1); xs.add(x2)\n    events.sort()\n    active = []\n    area = 0; prev_y = events[0][0]\n    for y, typ, x1, x2 in events:\n        if active:\n            merged = []\n            for a, b in sorted(active):\n                if merged and a <= merged[-1][1]:\n                    merged[-1] = (merged[-1][0], max(merged[-1][1], b))\n                else:\n                    merged.append((a, b))\n            width = sum(b-a for a, b in merged)\n            area += width * (y - prev_y)\n        if typ == 1: active.append((x1, x2))\n        else: active.remove((x1, x2))\n        prev_y = y\n    return area",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "掃描線計算矩形聯集面積（樸素版）"
+}

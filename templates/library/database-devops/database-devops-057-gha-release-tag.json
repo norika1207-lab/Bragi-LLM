@@ -1,0 +1,19 @@
+{
+  "id": "database-devops-057-gha-release-tag",
+  "category": "database-devops/cicd/github-actions",
+  "intents_zh": [
+    "GHA 自動建 release",
+    "tag push 建 GitHub Release",
+    "release-please"
+  ],
+  "intents_en": [
+    "github actions release",
+    "auto create release",
+    "release on tag"
+  ],
+  "slots": [],
+  "code": "name: Release\non:\n  push:\n    tags: ['v*']\n\njobs:\n  release:\n    runs-on: ubuntu-latest\n    permissions:\n      contents: write\n    steps:\n      - uses: actions/checkout@v4\n        with: { fetch-depth: 0 }\n      - name: Generate changelog\n        id: cl\n        run: |\n          echo \"notes<<EOF\" >> $GITHUB_OUTPUT\n          git log --pretty=format:\"- %s\" $(git describe --tags --abbrev=0 HEAD^)..HEAD >> $GITHUB_OUTPUT\n          echo \"EOF\" >> $GITHUB_OUTPUT\n      - uses: softprops/action-gh-release@v2\n        with:\n          body: ${{ steps.cl.outputs.notes }}",
+  "language": "yaml",
+  "deps": [],
+  "summary_zh": "GHA tag 自動產生 GitHub Release"
+}

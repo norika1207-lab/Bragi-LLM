@@ -1,0 +1,30 @@
+{
+  "id": "patch-firmware-input-003-rpi-rotary-encoder",
+  "category": "firmware/input/encoder",
+  "intents_zh": [
+    "Raspberry Pi 旋轉編碼器",
+    "RPi GPIO 讀 rotary encoder",
+    "樹莓派旋鈕讀取",
+    "KY-040 rotary 讀方向",
+    "編碼器 CLK DT 判斷正反轉",
+    "RPi 讀旋鈕步數"
+  ],
+  "intents_en": [
+    "raspberry pi rotary encoder reader",
+    "KY-040 encoder gpio",
+    "read rotary direction RPi",
+    "encoder CLK DT python",
+    "rpi gpio quadrature encoder"
+  ],
+  "slots": [
+    "clk_pin",
+    "dt_pin",
+    "sw_pin"
+  ],
+  "code": "import RPi.GPIO as GPIO\nimport time\n\nCLK = {{clk_pin}}\nDT = {{dt_pin}}\nSW = {{sw_pin}}\n\nGPIO.setmode(GPIO.BCM)\nGPIO.setup(CLK, GPIO.IN, pull_up_down=GPIO.PUD_UP)\nGPIO.setup(DT, GPIO.IN, pull_up_down=GPIO.PUD_UP)\nGPIO.setup(SW, GPIO.IN, pull_up_down=GPIO.PUD_UP)\n\ncounter = 0\nlast_clk = GPIO.input(CLK)\ntry:\n    while True:\n        clk = GPIO.input(CLK)\n        if clk != last_clk:\n            if GPIO.input(DT) != clk:\n                counter += 1\n            else:\n                counter -= 1\n            print(f\"pos={counter}\")\n        last_clk = clk\n        if GPIO.input(SW) == 0:\n            print(\"sw pressed\")\n            time.sleep(0.2)\n        time.sleep(0.001)\nfinally:\n    GPIO.cleanup()",
+  "language": "py",
+  "deps": [
+    "RPi.GPIO"
+  ],
+  "summary_zh": "樹莓派讀 KY-040 旋轉編碼器，輸出步數與按下事件"
+}

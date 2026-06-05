@@ -1,0 +1,30 @@
+{
+  "id": "depth-llm-tools-053-prompt-cache-anthropic",
+  "category": "llm-tools/prompt-mgmt/cache-anthropic",
+  "intents_zh": [
+    "Anthropic prompt caching",
+    "cache_control 標記",
+    "降低 system token 成本",
+    "快取靜態 prompt",
+    "prompt 快取折扣"
+  ],
+  "intents_en": [
+    "Anthropic prompt caching",
+    "cache_control marker",
+    "reduce system token cost",
+    "cache static prompt",
+    "prompt cache discount"
+  ],
+  "slots": [
+    "client",
+    "model",
+    "system_text",
+    "user_msg"
+  ],
+  "code": "r = {{client}}.messages.create(\n    model={{model}},\n    system=[{\"type\": \"text\", \"text\": {{system_text}}, \"cache_control\": {\"type\": \"ephemeral\"}}],\n    messages=[{\"role\": \"user\", \"content\": {{user_msg}}}],\n    max_tokens=1024,\n)",
+  "language": "python",
+  "deps": [
+    "anthropic"
+  ],
+  "summary_zh": "在 Anthropic system 區段加 cache_control 啟用 prompt cache"
+}

@@ -1,0 +1,33 @@
+{
+  "id": "depth-algorithm-022-viterbi-hmm",
+  "category": "algorithm/hmm/viterbi",
+  "intents_zh": [
+    "維特比算法",
+    "viterbi HMM",
+    "HMM 解碼",
+    "最大概率狀態序列",
+    "隱馬可夫解碼",
+    "viterbi 動態規劃",
+    "POS tagging viterbi"
+  ],
+  "intents_en": [
+    "Viterbi algorithm",
+    "HMM decoding",
+    "maximum likelihood state sequence",
+    "Viterbi dynamic programming",
+    "POS tagging Viterbi",
+    "hidden markov decode",
+    "Viterbi template"
+  ],
+  "slots": [
+    "obs",
+    "states",
+    "start_p",
+    "trans_p",
+    "emit_p"
+  ],
+  "code": "import math\n\ndef viterbi(obs={{obs}}, states={{states}}, start_p={{start_p}}, trans_p={{trans_p}}, emit_p={{emit_p}}):\n    V = [{}]; path = {}\n    for s in states:\n        V[0][s] = math.log(start_p[s] + 1e-12) + math.log(emit_p[s][obs[0]] + 1e-12)\n        path[s] = [s]\n    for t in range(1, len(obs)):\n        V.append({}); new_path = {}\n        for s in states:\n            prob, prev = max((V[t-1][p0] + math.log(trans_p[p0][s] + 1e-12) + math.log(emit_p[s][obs[t]] + 1e-12), p0) for p0 in states)\n            V[t][s] = prob; new_path[s] = path[prev] + [s]\n        path = new_path\n    prob, state = max((V[-1][s], s) for s in states)\n    return prob, path[state]",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "Viterbi 算法解碼 HMM 最可能狀態序列"
+}

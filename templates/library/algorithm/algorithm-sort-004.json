@@ -1,0 +1,27 @@
+{
+  "id": "algorithm-sort-004",
+  "category": "algorithm/sort/heap",
+  "intents_zh": [
+    "堆排序",
+    "heap sort",
+    "用 heap 排序",
+    "heapsort python",
+    "原地堆排序",
+    "給我 heap sort"
+  ],
+  "intents_en": [
+    "heap sort",
+    "heapsort",
+    "in-place heap sort",
+    "sort using heap",
+    "write heapsort",
+    "heap-based sort"
+  ],
+  "slots": [
+    "fn_name"
+  ],
+  "code": "def {{fn_name}}(arr):\n    n = len(arr)\n    def sift(start, end):\n        root = start\n        while 2*root+1 <= end:\n            child = 2*root+1\n            if child+1 <= end and arr[child] < arr[child+1]:\n                child += 1\n            if arr[root] < arr[child]:\n                arr[root], arr[child] = arr[child], arr[root]\n                root = child\n            else:\n                return\n    for s in range((n-2)//2, -1, -1):\n        sift(s, n-1)\n    for e in range(n-1, 0, -1):\n        arr[0], arr[e] = arr[e], arr[0]\n        sift(0, e-1)\n    return arr",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "原地堆排序"
+}

@@ -1,0 +1,34 @@
+{
+  "id": "llm-tools-086-langchain-tool",
+  "category": "llm-tools/langchain/tool",
+  "intents_zh": [
+    "langchain tool 裝飾器",
+    "@tool 範例",
+    "langchain tools",
+    "綁工具給 agent",
+    "tool decorator langchain",
+    "langchain 工具註冊",
+    "定義 tool",
+    "給 agent 工具"
+  ],
+  "intents_en": [
+    "langchain tool decorator",
+    "@tool example",
+    "define langchain tool",
+    "bind tools to agent",
+    "langchain tool registration",
+    "tool decorator",
+    "tool for agent",
+    "langchain tools"
+  ],
+  "slots": [
+    "tool_name"
+  ],
+  "code": "from langchain_core.tools import tool\nfrom langchain_openai import ChatOpenAI\n\n@tool\ndef {{tool_name}}(query: str) -> str:\n    \"\"\"Run a search and return summary.\"\"\"\n    return f\"results for: {query}\"\n\nllm = ChatOpenAI(model=\"gpt-4o-mini\").bind_tools([{{tool_name}}])\nprint(llm.invoke(\"search hello\").tool_calls)",
+  "language": "py",
+  "deps": [
+    "langchain-core",
+    "langchain-openai"
+  ],
+  "summary_zh": "LangChain @tool 註冊並綁 LLM"
+}

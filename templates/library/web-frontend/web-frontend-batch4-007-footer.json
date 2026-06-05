@@ -1,0 +1,28 @@
+{
+  "id": "web-frontend-batch4-007-footer",
+  "category": "web-frontend/nextjs/landing/footer",
+  "intents_zh": [
+    "寫個網站 footer",
+    "多欄頁尾",
+    "產生版權與連結頁尾",
+    "tailwind footer",
+    "公司資訊頁腳",
+    "social link 頁尾"
+  ],
+  "intents_en": [
+    "site footer",
+    "multi-column footer",
+    "copyright footer",
+    "tailwind footer",
+    "footer with links",
+    "social links footer"
+  ],
+  "slots": [
+    "company_name",
+    "year"
+  ],
+  "code": "export default function Footer() {\n  return (\n    <footer className=\"bg-gray-900 text-gray-300 py-12\">\n      <div className=\"mx-auto max-w-6xl px-6 grid md:grid-cols-4 gap-8\">\n        <div>\n          <h3 className=\"font-semibold text-white\">{{company_name}}</h3>\n        </div>\n        <div><h4 className=\"font-medium\">Product</h4><ul className=\"mt-3 space-y-2 text-sm\"><li><a href=\"#\">Features</a></li></ul></div>\n        <div><h4 className=\"font-medium\">Company</h4><ul className=\"mt-3 space-y-2 text-sm\"><li><a href=\"#\">About</a></li></ul></div>\n        <div><h4 className=\"font-medium\">Legal</h4><ul className=\"mt-3 space-y-2 text-sm\"><li><a href=\"#\">Privacy</a></li></ul></div>\n      </div>\n      <p className=\"mt-8 text-center text-xs\">&copy; {{year}} {{company_name}}</p>\n    </footer>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "深色四欄頁尾含版權"
+}

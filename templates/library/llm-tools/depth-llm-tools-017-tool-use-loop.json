@@ -1,0 +1,32 @@
+{
+  "id": "depth-llm-tools-017-tool-use-loop",
+  "category": "llm-tools/tool-use/loop",
+  "intents_zh": [
+    "tool use 迴圈",
+    "function calling 多輪",
+    "tool 結果回灌",
+    "ReAct loop",
+    "agent 工具迴圈"
+  ],
+  "intents_en": [
+    "tool use loop",
+    "function calling multi-turn",
+    "feed tool result back",
+    "ReAct loop",
+    "agent tool loop"
+  ],
+  "slots": [
+    "client",
+    "model",
+    "messages",
+    "tools",
+    "tool_impls",
+    "max_steps"
+  ],
+  "code": "def tool_loop({{client}}, {{model}}, {{messages}}, {{tools}}, {{tool_impls}}, {{max_steps}}=8):\n    for _ in range({{max_steps}}):\n        r = {{client}}.chat.completions.create(model={{model}}, messages={{messages}}, tools={{tools}})\n        msg = r.choices[0].message\n        {{messages}}.append(msg.model_dump())\n        if not msg.tool_calls: return msg.content\n        for call in msg.tool_calls:\n            result = {{tool_impls}}[call.function.name](call.function.arguments)\n            {{messages}}.append({\"role\": \"tool\", \"tool_call_id\": call.id, \"content\": str(result)})\n    raise RuntimeError(\"max steps exceeded\")",
+  "language": "python",
+  "deps": [
+    "openai"
+  ],
+  "summary_zh": "OpenAI tool use 多輪迴圈直到模型不再呼叫工具"
+}

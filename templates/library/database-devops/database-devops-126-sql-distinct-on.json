@@ -1,0 +1,23 @@
+{
+  "id": "database-devops-126-sql-distinct-on",
+  "category": "database-devops/sql/postgres",
+  "intents_zh": [
+    "postgres DISTINCT ON",
+    "每組第一筆",
+    "抓每個用戶最新一筆"
+  ],
+  "intents_en": [
+    "postgres distinct on",
+    "first row per group",
+    "latest per user"
+  ],
+  "slots": [
+    "table",
+    "group_col",
+    "order_col"
+  ],
+  "code": "SELECT DISTINCT ON ({{group_col}}) *\nFROM {{table}}\nORDER BY {{group_col}}, {{order_col}} DESC;",
+  "language": "sql",
+  "deps": [],
+  "summary_zh": "Postgres DISTINCT ON 取每組首列"
+}

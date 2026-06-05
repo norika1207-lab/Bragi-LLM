@@ -1,0 +1,29 @@
+{
+  "id": "depth-algorithm-001-union-find-basic",
+  "category": "algorithm/dsu/basic",
+  "intents_zh": [
+    "並查集模板",
+    "union find 路徑壓縮",
+    "DSU 基礎",
+    "合併查詢集合",
+    "島嶼連通用 DSU",
+    "路徑壓縮加權平衡",
+    "寫一個 union find"
+  ],
+  "intents_en": [
+    "union find template",
+    "DSU with path compression",
+    "disjoint set union basic",
+    "union by rank",
+    "connected components DSU",
+    "write union find",
+    "quick union path compression"
+  ],
+  "slots": [
+    "n"
+  ],
+  "code": "class DSU:\n    def __init__(self, n={{n}}):\n        self.p = list(range(n))\n        self.r = [0]*n\n    def find(self, x):\n        while self.p[x] != x:\n            self.p[x] = self.p[self.p[x]]\n            x = self.p[x]\n        return x\n    def union(self, a, b):\n        ra, rb = self.find(a), self.find(b)\n        if ra == rb: return False\n        if self.r[ra] < self.r[rb]: ra, rb = rb, ra\n        self.p[rb] = ra\n        if self.r[ra] == self.r[rb]: self.r[ra] += 1\n        return True",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "路徑壓縮加按秩合併的標準並查集"
+}

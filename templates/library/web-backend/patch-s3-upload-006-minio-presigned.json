@@ -1,0 +1,33 @@
+{
+  "id": "patch-s3-upload-006-minio-presigned",
+  "category": "web-backend/upload/minio",
+  "intents_zh": [
+    "MinIO 上傳",
+    "self-hosted S3 用 MinIO",
+    "MinIO presigned URL",
+    "本地 MinIO 開發環境上傳",
+    "用 S3 SDK 連自家 MinIO",
+    "MinIO node 範例"
+  ],
+  "intents_en": [
+    "upload to minio self-hosted s3",
+    "minio presigned put url node",
+    "use aws sdk v3 with minio endpoint",
+    "local s3 dev with minio",
+    "minio path style addressing",
+    "node minio upload example"
+  ],
+  "slots": [
+    "minio_endpoint",
+    "bucket_name",
+    "access_key",
+    "secret_key"
+  ],
+  "code": "import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';\nimport { getSignedUrl } from '@aws-sdk/s3-request-presigner';\n\nconst minio = new S3Client({\n  region: 'us-east-1',\n  endpoint: '{{minio_endpoint}}',\n  forcePathStyle: true,\n  credentials: {\n    accessKeyId: '{{access_key}}',\n    secretAccessKey: '{{secret_key}}',\n  },\n});\n\nexport async function minioPut(key: string, body: Buffer, contentType: string) {\n  await minio.send(new PutObjectCommand({\n    Bucket: '{{bucket_name}}',\n    Key: key,\n    Body: body,\n    ContentType: contentType,\n  }));\n}\n\nexport async function minioPresignedPut(key: string) {\n  const cmd = new PutObjectCommand({ Bucket: '{{bucket_name}}', Key: key });\n  return await getSignedUrl(minio, cmd, { expiresIn: 900 });\n}",
+  "language": "ts",
+  "deps": [
+    "@aws-sdk/client-s3",
+    "@aws-sdk/s3-request-presigner"
+  ],
+  "summary_zh": "用 S3 SDK 對接自架 MinIO，path-style addressing 跟 presigned"
+}

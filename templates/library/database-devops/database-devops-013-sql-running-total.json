@@ -1,0 +1,25 @@
+{
+  "id": "database-devops-013-sql-running-total",
+  "category": "database-devops/sql/windows",
+  "intents_zh": [
+    "累計總和",
+    "running total",
+    "window 累加",
+    "逐日累計"
+  ],
+  "intents_en": [
+    "running total",
+    "cumulative sum",
+    "window sum",
+    "running sum by date"
+  ],
+  "slots": [
+    "table",
+    "date_col",
+    "value_col"
+  ],
+  "code": "SELECT {{date_col}}, {{value_col}},\n  SUM({{value_col}}) OVER (\n    ORDER BY {{date_col}}\n    ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW\n  ) AS running_total\nFROM {{table}};",
+  "language": "sql",
+  "deps": [],
+  "summary_zh": "window 函數做累計總和"
+}

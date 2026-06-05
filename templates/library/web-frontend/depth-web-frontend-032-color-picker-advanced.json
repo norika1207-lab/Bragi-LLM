@@ -1,0 +1,27 @@
+{
+  "id": "depth-web-frontend-032-color-picker-advanced",
+  "category": "web-frontend/inputs/color-picker",
+  "intents_zh": [
+    "進階色彩選擇",
+    "react-colorful",
+    "HSL/HEX 切換",
+    "色票挑選",
+    "color picker react"
+  ],
+  "intents_en": [
+    "advanced color picker",
+    "react-colorful",
+    "hex hsl picker",
+    "color swatch",
+    "color picker react"
+  ],
+  "slots": [
+    "component_name"
+  ],
+  "code": "'use client';\nimport { HexColorPicker, HexColorInput } from 'react-colorful';\nimport { useState } from 'react';\n\nconst presets = ['#0EA5E9','#22C55E','#F59E0B','#EF4444','#A855F7','#111827'];\n\nexport function {{component_name}}({ onChange }: { onChange: (c: string) => void }) {\n  const [c, setC] = useState('#0EA5E9');\n  function update(v: string) { setC(v); onChange(v); }\n  return (\n    <div>\n      <HexColorPicker color={c} onChange={update} />\n      <HexColorInput color={c} onChange={update} prefixed />\n      <div style={{ display:'flex', gap:6, marginTop:8 }}>\n        {presets.map(p => <button key={p} onClick={() => update(p)} style={{ background:p, width:20, height:20, borderRadius:4 }} />)}\n      </div>\n    </div>\n  );\n}",
+  "language": "tsx",
+  "deps": [
+    "react-colorful"
+  ],
+  "summary_zh": "react-colorful 進階色彩選擇器"
+}

@@ -1,0 +1,23 @@
+{
+  "id": "algorithm-graph-011",
+  "category": "algorithm/graph/max_flow",
+  "intents_zh": [
+    "最大流",
+    "Edmonds-Karp",
+    "max flow",
+    "給我網路流"
+  ],
+  "intents_en": [
+    "max flow",
+    "Edmonds-Karp",
+    "network flow",
+    "BFS max flow"
+  ],
+  "slots": [
+    "fn_name"
+  ],
+  "code": "from collections import defaultdict, deque\n\ndef {{fn_name}}(cap, s, t):\n    flow = 0\n    cap = {u: dict(v) for u, v in cap.items()}\n    while True:\n        parent = {s: None}\n        q = deque([s])\n        while q and t not in parent:\n            u = q.popleft()\n            for v, c in cap.get(u, {}).items():\n                if v not in parent and c > 0:\n                    parent[v] = u\n                    q.append(v)\n        if t not in parent: break\n        path_flow = float('inf')\n        v = t\n        while parent[v] is not None:\n            path_flow = min(path_flow, cap[parent[v]][v])\n            v = parent[v]\n        v = t\n        while parent[v] is not None:\n            u = parent[v]\n            cap[u][v] -= path_flow\n            cap.setdefault(v, {})[u] = cap.get(v, {}).get(u, 0) + path_flow\n            v = u\n        flow += path_flow\n    return flow",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "Edmonds-Karp 最大流"
+}

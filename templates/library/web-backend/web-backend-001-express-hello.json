@@ -1,0 +1,31 @@
+{
+  "id": "web-backend-001-express-hello",
+  "category": "web-backend/express/basic",
+  "intents_zh": [
+    "給我一個 express 起手 server",
+    "Express 最小 server 範例",
+    "起一個 express app 監聽 port",
+    "用 express 寫個 hello world",
+    "Express 基本 server 怎麼寫",
+    "幫我 scaffold express server"
+  ],
+  "intents_en": [
+    "minimal express server",
+    "scaffold express hello world",
+    "basic express app listening on port",
+    "start an express server",
+    "express boilerplate",
+    "simple node http server with express"
+  ],
+  "slots": [
+    "port",
+    "route_path",
+    "message"
+  ],
+  "code": "const express = require('express');\nconst app = express();\napp.use(express.json());\n\napp.get('{{route_path}}', (req, res) => {\n  res.json({ message: '{{message}}' });\n});\n\napp.listen({{port}}, () => {\n  console.log('listening on {{port}}');\n});",
+  "language": "js",
+  "deps": [
+    "express"
+  ],
+  "summary_zh": "Express 最小可運作 server"
+}

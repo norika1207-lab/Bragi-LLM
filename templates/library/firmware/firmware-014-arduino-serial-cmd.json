@@ -1,0 +1,26 @@
+{
+  "id": "firmware-014-arduino-serial-cmd",
+  "category": "firmware/arduino/uart",
+  "intents_zh": [
+    "Serial 收指令",
+    "用 Serial 控制 LED",
+    "Arduino 接收指令",
+    "串列命令解析",
+    "電腦傳指令"
+  ],
+  "intents_en": [
+    "Serial command parser",
+    "Arduino control via serial",
+    "read serial line",
+    "command from PC",
+    "UART command handler"
+  ],
+  "slots": [
+    "led_pin",
+    "baud"
+  ],
+  "code": "const int LED = {{led_pin}};\nString buf;\n\nvoid setup() {\n  Serial.begin({{baud}});\n  pinMode(LED, OUTPUT);\n}\n\nvoid loop() {\n  while (Serial.available()) {\n    char c = Serial.read();\n    if (c == '\\n') {\n      if (buf == \"on\") digitalWrite(LED, HIGH);\n      else if (buf == \"off\") digitalWrite(LED, LOW);\n      else Serial.println(\"unknown\");\n      buf = \"\";\n    } else buf += c;\n  }\n}",
+  "language": "ino",
+  "deps": [],
+  "summary_zh": "Arduino Serial 指令解析控制 LED"
+}

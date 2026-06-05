@@ -1,0 +1,28 @@
+{
+  "id": "firmware-009-arduino-dht-read",
+  "category": "firmware/arduino/sensor",
+  "intents_zh": [
+    "DHT11 溫溼度",
+    "DHT22 讀取",
+    "溫濕度感測器",
+    "DHT sensor 範例",
+    "量溫度濕度"
+  ],
+  "intents_en": [
+    "DHT11 temperature humidity",
+    "DHT22 read",
+    "Arduino DHT sensor",
+    "read temp humidity",
+    "DHT library example"
+  ],
+  "slots": [
+    "dht_pin",
+    "dht_type"
+  ],
+  "code": "#include <DHT.h>\n#define DHTPIN {{dht_pin}}\n#define DHTTYPE {{dht_type}}\nDHT dht(DHTPIN, DHTTYPE);\n\nvoid setup() {\n  Serial.begin(115200);\n  dht.begin();\n}\n\nvoid loop() {\n  float h = dht.readHumidity();\n  float t = dht.readTemperature();\n  if (!isnan(h) && !isnan(t)) {\n    Serial.print(\"T=\"); Serial.print(t);\n    Serial.print(\" H=\"); Serial.println(h);\n  }\n  delay(2000);\n}",
+  "language": "ino",
+  "deps": [
+    "DHT sensor library"
+  ],
+  "summary_zh": "DHT11/DHT22 溫溼度讀取"
+}

@@ -1,0 +1,23 @@
+{
+  "id": "depth-mobile-044-netinfo-ios",
+  "category": "mobile/network/monitor-ios",
+  "intents_zh": [
+    "iOS NWPathMonitor",
+    "網路狀態變化",
+    "Wi-Fi cellular 判斷",
+    "Network framework",
+    "連線監聽"
+  ],
+  "intents_en": [
+    "iOS NWPathMonitor",
+    "network status change",
+    "Wi-Fi cellular detection",
+    "Network framework",
+    "connectivity"
+  ],
+  "slots": [],
+  "code": "import Network\nlet monitor = NWPathMonitor()\nmonitor.pathUpdateHandler = { path in\n  let kind: String = path.usesInterfaceType(.wifi) ? \"wifi\" :\n                     path.usesInterfaceType(.cellular) ? \"cellular\" : \"other\"\n  print(path.status == .satisfied ? \"online \\(kind)\" : \"offline\")\n}\nmonitor.start(queue: DispatchQueue.global())",
+  "language": "swift",
+  "deps": [],
+  "summary_zh": "iOS NWPathMonitor 網路狀態"
+}

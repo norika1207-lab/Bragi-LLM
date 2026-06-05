@@ -1,0 +1,21 @@
+{
+  "id": "database-devops-043-compose-ml-training",
+  "category": "database-devops/docker/compose",
+  "intents_zh": [
+    "ML 訓練 compose",
+    "pytorch GPU 容器",
+    "compose 跑訓練"
+  ],
+  "intents_en": [
+    "ml training compose",
+    "pytorch gpu container",
+    "training compose"
+  ],
+  "slots": [
+    "image_tag"
+  ],
+  "code": "services:\n  train:\n    image: {{image_tag}}\n    deploy:\n      resources:\n        reservations:\n          devices:\n            - driver: nvidia\n              count: all\n              capabilities: [gpu]\n    volumes:\n      - ./data:/data\n      - ./checkpoints:/checkpoints\n      - ./src:/workspace\n    working_dir: /workspace\n    command: python train.py --data /data --out /checkpoints",
+  "language": "yaml",
+  "deps": [],
+  "summary_zh": "compose GPU 訓練容器"
+}

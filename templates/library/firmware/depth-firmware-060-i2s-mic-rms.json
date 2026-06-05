@@ -1,0 +1,27 @@
+{
+  "id": "depth-firmware-060-i2s-mic-rms",
+  "category": "firmware/audio/dsp",
+  "intents_zh": [
+    "麥克風音量 RMS",
+    "I2S 計算 dB",
+    "loudness meter",
+    "噪音感測",
+    "sound level"
+  ],
+  "intents_en": [
+    "mic rms volume",
+    "i2s db level",
+    "loudness meter",
+    "noise sensor",
+    "sound level"
+  ],
+  "slots": [
+    "sample_count"
+  ],
+  "code": "int32_t samples[{{sample_count}}]; size_t br;\ni2s_read(I2S_NUM_0, samples, sizeof(samples), &br, portMAX_DELAY);\ndouble sum = 0;\nint n = br / sizeof(int32_t);\nfor (int i = 0; i < n; i++) {\n    double s = samples[i] >> 14;\n    sum += s * s;\n}\ndouble rms = sqrt(sum / n);\ndouble db = 20 * log10(rms + 1);\nESP_LOGI(\"AUDIO\", \"rms=%.0f dB=%.1f\", rms, db);",
+  "language": "c",
+  "deps": [
+    "esp-idf"
+  ],
+  "summary_zh": "對 I2S 麥克風樣本算 RMS 與相對 dB 值"
+}

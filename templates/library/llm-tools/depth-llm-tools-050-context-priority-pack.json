@@ -1,0 +1,27 @@
+{
+  "id": "depth-llm-tools-050-context-priority-pack",
+  "category": "llm-tools/context/priority-pack",
+  "intents_zh": [
+    "優先級裝箱 context",
+    "重要片段先放",
+    "knapsack-style packing",
+    "按分數塞 token",
+    "context 裝填"
+  ],
+  "intents_en": [
+    "priority-pack context",
+    "important snippets first",
+    "knapsack-style packing",
+    "fill by score",
+    "context packing"
+  ],
+  "slots": [
+    "snippets",
+    "tokenizer",
+    "budget"
+  ],
+  "code": "def pack({{snippets}}, {{tokenizer}}, {{budget}}):\n    ranked = sorted({{snippets}}, key=lambda s: -s[\"score\"])\n    out, used = [], 0\n    for s in ranked:\n        t = len({{tokenizer}}.encode(s[\"text\"]))\n        if used + t > {{budget}}: continue\n        out.append(s); used += t\n    return out",
+  "language": "python",
+  "deps": [],
+  "summary_zh": "按 score 由高到低塞片段，超過預算就跳過"
+}

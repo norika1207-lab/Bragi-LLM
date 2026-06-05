@@ -1,0 +1,29 @@
+{
+  "id": "mobile-052-flutter-gesture",
+  "category": "mobile/flutter/gesture",
+  "intents_zh": [
+    "Flutter GestureDetector",
+    "flutter 拖曳手勢",
+    "flutter pan gesture",
+    "flutter 拖元件",
+    "拖動方塊 flutter",
+    "flutter onPanUpdate",
+    "手勢偵測 flutter"
+  ],
+  "intents_en": [
+    "flutter GestureDetector",
+    "flutter pan gesture",
+    "draggable widget flutter",
+    "flutter onPanUpdate",
+    "drag box flutter",
+    "gesture detector flutter",
+    "flutter touch drag"
+  ],
+  "slots": [],
+  "code": "import 'package:flutter/material.dart';\nclass D extends StatefulWidget{const D({super.key});@override State<D> createState()=>_D();}\nclass _D extends State<D>{Offset p=Offset.zero;\n  @override Widget build(BuildContext c)=>Stack(children:[Positioned(left:p.dx,top:p.dy,child:GestureDetector(onPanUpdate:(d)=>setState(()=>p+=d.delta),child:Container(width:80,height:80,color:Colors.blue)))]);}",
+  "language": "dart",
+  "deps": [
+    "flutter"
+  ],
+  "summary_zh": "Flutter GestureDetector 拖動方塊"
+}

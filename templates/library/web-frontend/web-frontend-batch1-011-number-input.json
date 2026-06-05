@@ -1,0 +1,27 @@
+{
+  "id": "web-frontend-batch1-011-number-input",
+  "category": "web-frontend/react/inputs/number",
+  "intents_zh": [
+    "數字輸入框",
+    "number input 加減按鈕",
+    "stepper input",
+    "quantity input",
+    "數量選擇器",
+    "加減 input"
+  ],
+  "intents_en": [
+    "number input",
+    "stepper input",
+    "quantity input",
+    "number with plus minus",
+    "increment decrement input",
+    "numeric input"
+  ],
+  "slots": [
+    "component_name"
+  ],
+  "code": "import { useState } from 'react';\n\ntype Props = { min?: number; max?: number; initial?: number };\n\nexport default function {{component_name}}({ min = 0, max = 99, initial = 0 }: Props) {\n  const [n, setN] = useState(initial);\n  return (\n    <div className=\"inline-flex items-center gap-2\">\n      <button onClick={() => setN((v) => Math.max(min, v - 1))}>-</button>\n      <input\n        type=\"number\"\n        value={n}\n        onChange={(e) => setN(Math.max(min, Math.min(max, Number(e.target.value))))}\n        className=\"w-16 text-center border rounded\"\n      />\n      <button onClick={() => setN((v) => Math.min(max, v + 1))}>+</button>\n    </div>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "加減按鈕數字輸入器"
+}

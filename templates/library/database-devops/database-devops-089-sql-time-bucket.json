@@ -1,0 +1,23 @@
+{
+  "id": "database-devops-089-sql-time-bucket",
+  "category": "database-devops/sql/datetime",
+  "intents_zh": [
+    "時間分桶",
+    "按小時聚合",
+    "postgres 5 分鐘 bucket"
+  ],
+  "intents_en": [
+    "time bucket",
+    "aggregate by hour",
+    "5 minute bucket"
+  ],
+  "slots": [
+    "table",
+    "time_col",
+    "value_col"
+  ],
+  "code": "SELECT\n  to_timestamp(floor(extract(epoch FROM {{time_col}}) / 300) * 300) AS bucket,\n  AVG({{value_col}}) AS avg_val,\n  COUNT(*) AS n\nFROM {{table}}\nWHERE {{time_col}} >= NOW() - INTERVAL '24 hours'\nGROUP BY bucket\nORDER BY bucket;",
+  "language": "sql",
+  "deps": [],
+  "summary_zh": "5 分鐘時間分桶聚合"
+}

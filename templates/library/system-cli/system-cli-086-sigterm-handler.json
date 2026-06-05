@@ -1,0 +1,21 @@
+{
+  "id": "system-cli-086-sigterm-handler",
+  "category": "system-cli/process/signal",
+  "intents_zh": [
+    "python 處理 SIGTERM",
+    "graceful shutdown",
+    "捕捉 ctrl-c"
+  ],
+  "intents_en": [
+    "python sigterm handler",
+    "graceful shutdown signal",
+    "catch ctrl-c"
+  ],
+  "slots": [
+    "loop_body"
+  ],
+  "code": "import signal, time, sys\n\nstopping = False\ndef _stop(signum, frame):\n    global stopping\n    print(f'caught {signum}, stopping')\n    stopping = True\n\nsignal.signal(signal.SIGINT, _stop)\nsignal.signal(signal.SIGTERM, _stop)\n\nwhile not stopping:\n    {{loop_body}}\n    time.sleep(1)\n\nprint('clean exit')",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "SIGTERM/INT graceful shutdown"
+}

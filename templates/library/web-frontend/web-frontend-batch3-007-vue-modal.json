@@ -1,0 +1,29 @@
+{
+  "id": "web-frontend-batch3-007-vue-modal",
+  "category": "web-frontend/vue/ui/modal",
+  "intents_zh": [
+    "Vue modal 元件",
+    "Vue 對話框",
+    "Vue dialog 視窗",
+    "Vue teleport modal",
+    "Vue 彈窗",
+    "Vue v-model 開關 modal"
+  ],
+  "intents_en": [
+    "vue modal",
+    "vue dialog component",
+    "vue teleport modal",
+    "vue popup",
+    "vue v-model modal",
+    "vue overlay dialog"
+  ],
+  "slots": [
+    "title_prop"
+  ],
+  "code": "<script setup>\ndefineProps({ open: Boolean, title: { type: String, default: '{{title_prop}}' } })\nconst emit = defineEmits(['close'])\n</script>\n<template>\n  <Teleport to=\"body\">\n    <div v-if=\"open\" class=\"backdrop\" @click.self=\"emit('close')\">\n      <div class=\"modal\">\n        <header><h3>{{ title }}</h3><button @click=\"emit('close')\">x</button></header>\n        <slot />\n      </div>\n    </div>\n  </Teleport>\n</template>\n<style scoped>\n.backdrop { position: fixed; inset: 0; background: rgba(0,0,0,.5); display: flex; align-items: center; justify-content: center; }\n.modal { background: white; padding: 1.5rem; border-radius: 8px; min-width: 320px; }\n</style>",
+  "language": "vue",
+  "deps": [
+    "vue"
+  ],
+  "summary_zh": "Vue Teleport modal 元件含 slot"
+}

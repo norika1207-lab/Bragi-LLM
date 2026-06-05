@@ -1,0 +1,33 @@
+{
+  "id": "llm-tools-092-hf-spaces-client",
+  "category": "llm-tools/client/hf-spaces",
+  "intents_zh": [
+    "HF Spaces 呼叫",
+    "gradio_client 範例",
+    "呼叫 huggingface space",
+    "用 spaces 當 LLM",
+    "hf spaces client",
+    "gradio_client predict",
+    "HF demo 客戶端",
+    "spaces 推論"
+  ],
+  "intents_en": [
+    "hf spaces client",
+    "gradio_client example",
+    "call hf space",
+    "use space as llm",
+    "gradio_client predict",
+    "spaces inference",
+    "minimal hf spaces client",
+    "hf demo client"
+  ],
+  "slots": [
+    "space_id"
+  ],
+  "code": "from gradio_client import Client\n\nclient = Client(\"{{space_id}}\")\n\ndef predict(prompt: str) -> str:\n    return client.predict(prompt, api_name=\"/predict\")\n\nif __name__ == \"__main__\":\n    print(predict(\"hello\"))",
+  "language": "py",
+  "deps": [
+    "gradio_client"
+  ],
+  "summary_zh": "gradio_client 呼叫 HF Space"
+}

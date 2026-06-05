@@ -1,0 +1,19 @@
+{
+  "id": "database-devops-075-gha-matrix-os",
+  "category": "database-devops/cicd/github-actions",
+  "intents_zh": [
+    "GHA 跨平台 matrix",
+    "windows mac linux 都跑",
+    "OS matrix"
+  ],
+  "intents_en": [
+    "github actions os matrix",
+    "cross-platform ci",
+    "windows mac linux test"
+  ],
+  "slots": [],
+  "code": "name: Cross-platform\non: [push, pull_request]\n\njobs:\n  test:\n    strategy:\n      matrix:\n        os: [ubuntu-latest, macos-latest, windows-latest]\n        node: [18, 20, 22]\n    runs-on: ${{ matrix.os }}\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-node@v4\n        with: { node-version: ${{ matrix.node }} }\n      - run: npm ci\n      - run: npm test",
+  "language": "yaml",
+  "deps": [],
+  "summary_zh": "GHA OS + node 版本 matrix"
+}

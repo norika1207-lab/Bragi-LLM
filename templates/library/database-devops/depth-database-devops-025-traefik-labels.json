@@ -1,0 +1,26 @@
+{
+  "id": "depth-database-devops-025-traefik-labels",
+  "category": "database-devops/proxy/traefik",
+  "intents_zh": [
+    "Traefik docker labels",
+    "compose 服務貼 traefik 標籤",
+    "自動 LE 憑證"
+  ],
+  "intents_en": [
+    "Traefik docker labels",
+    "compose service traefik labels",
+    "auto LE cert"
+  ],
+  "slots": [
+    "service_name",
+    "host",
+    "port"
+  ],
+  "code": "services:\n  {{service_name}}:\n    image: nginx:alpine\n    labels:\n      - 'traefik.enable=true'\n      - 'traefik.http.routers.{{service_name}}.rule=Host(`{{host}}`)'\n      - 'traefik.http.routers.{{service_name}}.entrypoints=websecure'\n      - 'traefik.http.routers.{{service_name}}.tls.certresolver=le'\n      - 'traefik.http.services.{{service_name}}.loadbalancer.server.port={{port}}'\n    networks: [web]\nnetworks:\n  web:\n    external: true",
+  "language": "yaml",
+  "deps": [
+    "traefik",
+    "docker-compose"
+  ],
+  "summary_zh": "docker compose 用 traefik label 自動掛域名與 LE"
+}

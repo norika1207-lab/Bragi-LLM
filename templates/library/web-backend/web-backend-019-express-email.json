@@ -1,0 +1,29 @@
+{
+  "id": "web-backend-019-express-email",
+  "category": "web-backend/express/email",
+  "intents_zh": [
+    "寄信 nodemailer",
+    "發送 email 範例",
+    "smtp 寄信",
+    "用 nodemailer 寄通知",
+    "email sender service"
+  ],
+  "intents_en": [
+    "send email nodemailer",
+    "smtp email node",
+    "nodemailer example",
+    "email notification service",
+    "send transactional email"
+  ],
+  "slots": [
+    "smtp_host",
+    "smtp_port",
+    "from_address"
+  ],
+  "code": "const nodemailer = require('nodemailer');\n\nconst transporter = nodemailer.createTransport({\n  host: '{{smtp_host}}',\n  port: {{smtp_port}},\n  secure: false,\n  auth: { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS }\n});\n\nasync function sendMail({ to, subject, html }) {\n  return transporter.sendMail({\n    from: '{{from_address}}',\n    to, subject, html\n  });\n}\n\nmodule.exports = { sendMail };",
+  "language": "js",
+  "deps": [
+    "nodemailer"
+  ],
+  "summary_zh": "Nodemailer SMTP 寄信封裝"
+}

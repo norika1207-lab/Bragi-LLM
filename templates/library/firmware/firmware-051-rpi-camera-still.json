@@ -1,0 +1,27 @@
+{
+  "id": "firmware-051-rpi-camera-still",
+  "category": "firmware/rpi/camera",
+  "intents_zh": [
+    "樹莓派拍照",
+    "picamera2 範例",
+    "Pi 相機",
+    "拍張照存檔",
+    "libcamera python"
+  ],
+  "intents_en": [
+    "Raspberry Pi camera capture",
+    "picamera2 example",
+    "take still photo Pi",
+    "libcamera python",
+    "Pi cam snapshot"
+  ],
+  "slots": [
+    "filepath"
+  ],
+  "code": "from picamera2 import Picamera2\nimport time\n\ncam = Picamera2()\ncam.configure(cam.create_still_configuration())\ncam.start()\ntime.sleep(2)\ncam.capture_file(\"{{filepath}}\")\ncam.stop()",
+  "language": "py",
+  "deps": [
+    "picamera2"
+  ],
+  "summary_zh": "Raspberry Pi 用 picamera2 拍照存檔"
+}

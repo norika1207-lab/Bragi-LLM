@@ -1,0 +1,30 @@
+{
+  "id": "depth-algorithm-012-mo-algorithm",
+  "category": "algorithm/offline/mo",
+  "intents_zh": [
+    "莫隊算法",
+    "Mo algorithm",
+    "離線區間查詢",
+    "分塊排序查詢",
+    "區間眾數離線",
+    "sqrt 分塊離線",
+    "mo 算法模板"
+  ],
+  "intents_en": [
+    "Mo algorithm",
+    "offline range query",
+    "sqrt block sort queries",
+    "Mo's algorithm template",
+    "range distinct count offline",
+    "block decomposition queries",
+    "offline Mo"
+  ],
+  "slots": [
+    "arr",
+    "queries"
+  ],
+  "code": "def mo_algorithm(a={{arr}}, queries={{queries}}):\n    n = len(a); B = max(1, int(n**0.5))\n    Q = [(l, r, i) for i, (l, r) in enumerate(queries)]\n    Q.sort(key=lambda x: (x[0]//B, x[1] if (x[0]//B)%2==0 else -x[1]))\n    cnt = {}; distinct = 0; ans = [0]*len(queries)\n    l = 0; r = -1\n    def add(x):\n        nonlocal distinct\n        cnt[x] = cnt.get(x, 0) + 1\n        if cnt[x] == 1: distinct += 1\n    def rem(x):\n        nonlocal distinct\n        cnt[x] -= 1\n        if cnt[x] == 0: distinct -= 1\n    for ql, qr, idx in Q:\n        while r < qr: r += 1; add(a[r])\n        while l > ql: l -= 1; add(a[l])\n        while r > qr: rem(a[r]); r -= 1\n        while l < ql: rem(a[l]); l += 1\n        ans[idx] = distinct\n    return ans",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "莫隊算法離線處理區間不同元素數查詢"
+}

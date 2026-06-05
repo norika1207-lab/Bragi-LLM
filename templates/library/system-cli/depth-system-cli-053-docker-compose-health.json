@@ -1,0 +1,27 @@
+{
+  "id": "depth-system-cli-053-docker-compose-health",
+  "category": "system-cli/docker/health",
+  "intents_zh": [
+    "docker compose 等服務 healthy",
+    "等所有 healthcheck",
+    "compose up 後驗證",
+    "compose 健康輪詢"
+  ],
+  "intents_en": [
+    "docker compose wait healthy",
+    "wait all healthchecks",
+    "verify after compose up",
+    "compose health poll"
+  ],
+  "slots": [
+    "compose_file",
+    "timeout_seconds"
+  ],
+  "code": "#!/usr/bin/env bash\nset -euo pipefail\n\nCF=\"{{compose_file}}\"\nTIMEOUT={{timeout_seconds}}\n\ndocker compose -f \"$CF\" up -d\n\nstart=$(date +%s)\nwhile :; do\n  unhealthy=$(docker compose -f \"$CF\" ps --format json \\\n    | jq -r 'select(.Health!=\"\" and .Health!=\"healthy\") | .Name')\n  [ -z \"$unhealthy\" ] && { echo \"all healthy\"; exit 0; }\n  now=$(date +%s)\n  if [ $((now - start)) -gt \"$TIMEOUT\" ]; then\n    echo \"timeout, still unhealthy:\"; echo \"$unhealthy\"; exit 1\n  fi\n  echo \"waiting: $(echo $unhealthy | tr '\\n' ' ')\"\n  sleep 2\ndone",
+  "language": "bash",
+  "deps": [
+    "docker",
+    "jq"
+  ],
+  "summary_zh": "compose up 後輪詢等所有服務 healthy"
+}

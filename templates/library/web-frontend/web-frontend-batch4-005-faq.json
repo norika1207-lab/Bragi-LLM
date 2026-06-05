@@ -1,0 +1,32 @@
+{
+  "id": "web-frontend-batch4-005-faq",
+  "category": "web-frontend/nextjs/landing/faq",
+  "intents_zh": [
+    "做 FAQ 摺疊區",
+    "常見問題手風琴",
+    "產生 FAQ 列表",
+    "可展開的問答",
+    "details 標籤做 FAQ",
+    "落地頁問答區"
+  ],
+  "intents_en": [
+    "faq accordion section",
+    "collapsible faq list",
+    "details based faq",
+    "landing page q and a",
+    "expandable faq",
+    "faq block"
+  ],
+  "slots": [
+    "q_one",
+    "a_one",
+    "q_two",
+    "a_two",
+    "q_three",
+    "a_three"
+  ],
+  "code": "export default function FAQ() {\n  const items = [\n    { q: '{{q_one}}', a: '{{a_one}}' },\n    { q: '{{q_two}}', a: '{{a_two}}' },\n    { q: '{{q_three}}', a: '{{a_three}}' },\n  ];\n  return (\n    <section className=\"py-20\">\n      <div className=\"mx-auto max-w-3xl px-6 space-y-4\">\n        <h2 className=\"text-3xl font-bold mb-8\">FAQ</h2>\n        {items.map((item) => (\n          <details key={item.q} className=\"group rounded-lg border border-gray-200 p-4\">\n            <summary className=\"cursor-pointer font-medium\">{item.q}</summary>\n            <p className=\"mt-2 text-gray-600\">{item.a}</p>\n          </details>\n        ))}\n      </div>\n    </section>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "用 details 標籤做的 FAQ 手風琴"
+}

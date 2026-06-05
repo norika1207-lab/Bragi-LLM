@@ -1,0 +1,26 @@
+{
+  "id": "algorithm-ml-018",
+  "category": "algorithm/ml/grid_search",
+  "intents_zh": [
+    "GridSearchCV",
+    "超參數調優",
+    "給我 grid search"
+  ],
+  "intents_en": [
+    "GridSearchCV",
+    "hyperparameter tuning",
+    "grid search sklearn"
+  ],
+  "slots": [
+    "estimator",
+    "param_grid",
+    "X_train",
+    "y_train"
+  ],
+  "code": "from sklearn.model_selection import GridSearchCV\n\ngs = GridSearchCV({{estimator}}, {{param_grid}}, cv=5, n_jobs=-1, scoring='accuracy')\ngs.fit({{X_train}}, {{y_train}})\nprint('best params:', gs.best_params_)\nprint('best score:', gs.best_score_)",
+  "language": "py",
+  "deps": [
+    "scikit-learn"
+  ],
+  "summary_zh": "GridSearchCV 超參數搜尋"
+}

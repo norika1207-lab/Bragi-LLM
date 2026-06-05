@@ -1,0 +1,30 @@
+{
+  "id": "depth-algorithm-057-johnson-apsp",
+  "category": "algorithm/graph/johnson",
+  "intents_zh": [
+    "Johnson 算法",
+    "稀疏圖全源最短路",
+    "johnson 重賦權",
+    "負權全源最短路",
+    "reweight dijkstra",
+    "johnson 模板",
+    "APSP sparse"
+  ],
+  "intents_en": [
+    "Johnson algorithm APSP",
+    "all pairs shortest path sparse",
+    "reweight dijkstra",
+    "Johnson template",
+    "negative weight APSP",
+    "Johnson reweighting",
+    "sparse APSP"
+  ],
+  "slots": [
+    "n",
+    "edges"
+  ],
+  "code": "import heapq\n\ndef johnson(n={{n}}, edges={{edges}}):\n    aug = edges + [(n, v, 0) for v in range(n)]\n    INF = float('inf'); h = [0]*(n+1)\n    for _ in range(n):\n        for u, v, w in aug:\n            if h[u]+w < h[v]: h[v] = h[u]+w\n    for u, v, w in aug:\n        if h[u]+w < h[v]: return None\n    adj = [[] for _ in range(n)]\n    for u, v, w in edges:\n        adj[u].append((v, w + h[u] - h[v]))\n    apsp = []\n    for s in range(n):\n        d = [INF]*n; d[s] = 0; pq = [(0, s)]\n        while pq:\n            du, u = heapq.heappop(pq)\n            if du > d[u]: continue\n            for v, w in adj[u]:\n                if du+w < d[v]: d[v] = du+w; heapq.heappush(pq, (d[v], v))\n        apsp.append([d[v] - h[s] + h[v] if d[v] < INF else INF for v in range(n)])\n    return apsp",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "Johnson 重賦權結合 Dijkstra 求稀疏圖全源最短路"
+}

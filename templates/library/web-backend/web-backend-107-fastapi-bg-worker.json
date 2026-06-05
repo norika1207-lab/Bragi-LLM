@@ -1,0 +1,29 @@
+{
+  "id": "web-backend-107-fastapi-bg-worker",
+  "category": "web-backend/fastapi/queue",
+  "intents_zh": [
+    "fastapi RQ worker",
+    "python-rq 背景任務",
+    "fastapi enqueue job",
+    "redis queue python",
+    "rq + fastapi"
+  ],
+  "intents_en": [
+    "fastapi rq worker",
+    "python-rq background",
+    "fastapi enqueue job",
+    "redis queue python",
+    "rq + fastapi"
+  ],
+  "slots": [
+    "queue_name"
+  ],
+  "code": "from redis import Redis\nfrom rq import Queue, Worker\nfrom fastapi import FastAPI\n\nredis_conn = Redis()\nq = Queue('{{queue_name}}', connection=redis_conn)\n\ndef slow_task(payload: dict):\n    import time; time.sleep(2)\n    return {'done': True, 'payload': payload}\n\napp = FastAPI()\n\n@app.post('/enqueue')\nasync def enqueue(data: dict):\n    job = q.enqueue(slow_task, data)\n    return {'job_id': job.id}\n\n# run worker separately: rq worker {{queue_name}}",
+  "language": "py",
+  "deps": [
+    "fastapi",
+    "rq",
+    "redis"
+  ],
+  "summary_zh": "FastAPI + RQ 背景任務"
+}

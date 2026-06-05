@@ -1,0 +1,29 @@
+{
+  "id": "web-frontend-batch3-008-vue-dropdown",
+  "category": "web-frontend/vue/ui/dropdown",
+  "intents_zh": [
+    "Vue dropdown 選單",
+    "Vue 下拉選單",
+    "Vue select 元件",
+    "Vue 點擊外部關閉 dropdown",
+    "Vue 選項清單",
+    "Vue 客製 select"
+  ],
+  "intents_en": [
+    "vue dropdown",
+    "vue custom select",
+    "vue click outside dropdown",
+    "vue menu component",
+    "vue option list",
+    "vue select component"
+  ],
+  "slots": [
+    "options_var"
+  ],
+  "code": "<script setup>\nimport { ref, onMounted, onUnmounted } from 'vue'\nconst props = defineProps({ {{options_var}}: { type: Array, required: true } })\nconst open = ref(false)\nconst selected = ref(null)\nconst root = ref(null)\nfunction onClick(e) { if (root.value && !root.value.contains(e.target)) open.value = false }\nonMounted(() => document.addEventListener('click', onClick))\nonUnmounted(() => document.removeEventListener('click', onClick))\n</script>\n<template>\n  <div ref=\"root\" class=\"dd\">\n    <button @click=\"open = !open\">{{ selected || 'Select' }}</button>\n    <ul v-if=\"open\">\n      <li v-for=\"o in {{options_var}}\" :key=\"o\" @click=\"selected = o; open = false\">{{ o }}</li>\n    </ul>\n  </div>\n</template>",
+  "language": "vue",
+  "deps": [
+    "vue"
+  ],
+  "summary_zh": "Vue dropdown 含 click outside 關閉"
+}

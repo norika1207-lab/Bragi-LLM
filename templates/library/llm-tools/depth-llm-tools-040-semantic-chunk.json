@@ -1,0 +1,29 @@
+{
+  "id": "depth-llm-tools-040-semantic-chunk",
+  "category": "llm-tools/chunking/semantic",
+  "intents_zh": [
+    "語義切塊",
+    "embedding 相似度斷句",
+    "semantic chunker",
+    "主題邊界偵測",
+    "語意分段"
+  ],
+  "intents_en": [
+    "semantic chunking",
+    "embedding similarity split",
+    "semantic chunker",
+    "topic boundary detect",
+    "meaning-based split"
+  ],
+  "slots": [
+    "sentences",
+    "embed_fn",
+    "threshold"
+  ],
+  "code": "import numpy as np\n\ndef semantic_chunks({{sentences}}, {{embed_fn}}, {{threshold}}=0.7):\n    embs = [{{embed_fn}}(s) for s in {{sentences}}]\n    chunks, cur = [], [{{sentences}}[0]]\n    for i in range(1, len({{sentences}})):\n        sim = np.dot(embs[i-1], embs[i]) / (np.linalg.norm(embs[i-1]) * np.linalg.norm(embs[i]))\n        if sim < {{threshold}}: chunks.append(\" \".join(cur)); cur = []\n        cur.append({{sentences}}[i])\n    if cur: chunks.append(\" \".join(cur))\n    return chunks",
+  "language": "python",
+  "deps": [
+    "numpy"
+  ],
+  "summary_zh": "用相鄰句 embedding 餘弦相似度低於門檻處切塊"
+}

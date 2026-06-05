@@ -1,0 +1,22 @@
+{
+  "id": "system-cli-049-retry-bash",
+  "category": "system-cli/reliability/retry",
+  "intents_zh": [
+    "bash 重試命令",
+    "shell retry loop",
+    "重試直到成功"
+  ],
+  "intents_en": [
+    "bash retry loop",
+    "shell retry until success",
+    "retry command bash"
+  ],
+  "slots": [
+    "cmd",
+    "max_tries"
+  ],
+  "code": "#!/usr/bin/env bash\nset -uo pipefail\nMAX={{max_tries}}\nDELAY=2\nfor i in $(seq 1 $MAX); do\n  if {{cmd}}; then\n    echo \"ok on attempt $i\"; exit 0\n  fi\n  echo \"attempt $i failed, sleep $DELAY\"\n  sleep $DELAY\n  DELAY=$((DELAY*2))\ndone\necho \"failed after $MAX attempts\" >&2; exit 1",
+  "language": "sh",
+  "deps": [],
+  "summary_zh": "bash 指數退避重試"
+}

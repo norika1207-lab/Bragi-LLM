@@ -1,0 +1,29 @@
+{
+  "id": "web-frontend-batch3-004-vue-calculator",
+  "category": "web-frontend/vue/apps/calculator",
+  "intents_zh": [
+    "Vue 計算機",
+    "Vue 簡單 calculator",
+    "Vue 四則運算元件",
+    "Vue 數字鍵盤計算",
+    "Vue 加減乘除",
+    "Vue 算術 app"
+  ],
+  "intents_en": [
+    "vue calculator",
+    "vue simple calculator component",
+    "vue arithmetic app",
+    "vue number keypad",
+    "vue four operations",
+    "vue calc widget"
+  ],
+  "slots": [
+    "title"
+  ],
+  "code": "<script setup>\nimport { ref } from 'vue'\nconst expr = ref('')\nconst result = ref('')\nfunction press(k) { expr.value += k }\nfunction clear() { expr.value = ''; result.value = '' }\nfunction calc() {\n  try { result.value = String(Function('return ' + expr.value)()) }\n  catch { result.value = 'Err' }\n}\n</script>\n<template>\n  <div class=\"calc\">\n    <h3>{{title}}</h3>\n    <div class=\"display\">{{ expr || '0' }} = {{ result }}</div>\n    <div class=\"keys\">\n      <button v-for=\"k in ['7','8','9','/','4','5','6','*','1','2','3','-','0','.','+']\" :key=\"k\" @click=\"press(k)\">{{ k }}</button>\n      <button @click=\"clear\">C</button>\n      <button @click=\"calc\">=</button>\n    </div>\n  </div>\n</template>",
+  "language": "vue",
+  "deps": [
+    "vue"
+  ],
+  "summary_zh": "Vue 簡易計算機元件"
+}

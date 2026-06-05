@@ -1,0 +1,28 @@
+{
+  "id": "firmware-046-rpi-gpio-blink",
+  "category": "firmware/rpi/gpio",
+  "intents_zh": [
+    "樹莓派閃 LED",
+    "Raspberry Pi GPIO",
+    "RPi.GPIO 範例",
+    "樹莓派閃燈",
+    "Pi 控 LED"
+  ],
+  "intents_en": [
+    "Raspberry Pi blink LED",
+    "RPi.GPIO example",
+    "Pi LED control",
+    "GPIO output Pi",
+    "python blink Pi"
+  ],
+  "slots": [
+    "led_pin",
+    "interval"
+  ],
+  "code": "import RPi.GPIO as GPIO\nimport time\n\nLED = {{led_pin}}\nGPIO.setmode(GPIO.BCM)\nGPIO.setup(LED, GPIO.OUT)\ntry:\n    while True:\n        GPIO.output(LED, GPIO.HIGH)\n        time.sleep({{interval}})\n        GPIO.output(LED, GPIO.LOW)\n        time.sleep({{interval}})\nexcept KeyboardInterrupt:\n    GPIO.cleanup()",
+  "language": "py",
+  "deps": [
+    "RPi.GPIO"
+  ],
+  "summary_zh": "樹莓派 RPi.GPIO 閃 LED"
+}

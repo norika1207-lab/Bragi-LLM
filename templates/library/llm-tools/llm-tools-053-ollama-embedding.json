@@ -1,0 +1,33 @@
+{
+  "id": "llm-tools-053-ollama-embedding",
+  "category": "llm-tools/embedding/ollama",
+  "intents_zh": [
+    "ollama 本地 embedding",
+    "用 ollama 算向量",
+    "local embedding model",
+    "ollama nomic-embed",
+    "local embed wrapper",
+    "ollama embed 範例",
+    "本地向量化",
+    "ollama embeddings api"
+  ],
+  "intents_en": [
+    "ollama local embedding",
+    "local embed model",
+    "nomic-embed via ollama",
+    "ollama vectorize",
+    "local embedding api",
+    "ollama embed wrapper",
+    "minimal ollama embed",
+    "ollama embeddings"
+  ],
+  "slots": [
+    "model_name"
+  ],
+  "code": "import ollama\n\ndef embed(texts: list[str]) -> list[list[float]]:\n    out = []\n    for t in texts:\n        r = ollama.embeddings(model=\"{{model_name}}\", prompt=t)\n        out.append(r[\"embedding\"])\n    return out\n\nif __name__ == \"__main__\":\n    v = embed([\"hello\", \"world\"])\n    print(len(v), len(v[0]))",
+  "language": "py",
+  "deps": [
+    "ollama"
+  ],
+  "summary_zh": "Ollama 本地 embedding 呼叫"
+}

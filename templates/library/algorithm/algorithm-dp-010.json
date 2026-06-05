@@ -1,0 +1,21 @@
+{
+  "id": "algorithm-dp-010",
+  "category": "algorithm/dp/partition_equal_subset",
+  "intents_zh": [
+    "分割等和子集",
+    "partition equal subset sum",
+    "給我子集和 dp"
+  ],
+  "intents_en": [
+    "partition equal subset sum",
+    "subset sum dp",
+    "equal partition"
+  ],
+  "slots": [
+    "fn_name"
+  ],
+  "code": "def {{fn_name}}(nums):\n    s = sum(nums)\n    if s % 2: return False\n    target = s // 2\n    dp = {0}\n    for x in nums:\n        dp = dp | {v + x for v in dp if v + x <= target}\n        if target in dp: return True\n    return False",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "判斷是否可分割成兩等和子集"
+}

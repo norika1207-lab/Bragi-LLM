@@ -1,0 +1,22 @@
+{
+  "id": "system-cli-018-tar-backup-dated",
+  "category": "system-cli/backup/tar",
+  "intents_zh": [
+    "tar 打包加日期",
+    "資料夾打包備份",
+    "壓縮帶 timestamp"
+  ],
+  "intents_en": [
+    "tar backup with timestamp",
+    "dated archive script",
+    "tarball backup"
+  ],
+  "slots": [
+    "src_dir",
+    "backup_dir"
+  ],
+  "code": "#!/usr/bin/env bash\nset -euo pipefail\nSRC=\"{{src_dir}}\"\nOUT=\"{{backup_dir}}\"\nTS=$(date +%Y%m%d-%H%M%S)\nmkdir -p \"$OUT\"\ntar -czf \"$OUT/$(basename $SRC)-$TS.tar.gz\" -C \"$(dirname $SRC)\" \"$(basename $SRC)\"\nls -lh \"$OUT/$(basename $SRC)-$TS.tar.gz\"",
+  "language": "sh",
+  "deps": [],
+  "summary_zh": "打 tar.gz 含時戳"
+}

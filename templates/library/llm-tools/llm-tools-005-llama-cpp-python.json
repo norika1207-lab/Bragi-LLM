@@ -1,0 +1,34 @@
+{
+  "id": "llm-tools-005-llama-cpp-python",
+  "category": "llm-tools/client/llama-cpp",
+  "intents_zh": [
+    "llama.cpp python 載入",
+    "用 llama-cpp-python 跑 GGUF",
+    "本地 gguf 模型推論",
+    "llama_cpp 範例",
+    "載入 GGUF 檔做生成",
+    "怎麼用 llama.cpp",
+    "local gguf 呼叫",
+    "llama-cpp 基本用法"
+  ],
+  "intents_en": [
+    "llama-cpp-python load gguf",
+    "run gguf locally",
+    "llama.cpp wrapper",
+    "gguf inference example",
+    "local gguf model",
+    "minimal llama-cpp",
+    "load quantized model",
+    "llama-cpp basic usage"
+  ],
+  "slots": [
+    "gguf_path",
+    "n_ctx"
+  ],
+  "code": "from llama_cpp import Llama\n\nllm = Llama(\n    model_path=\"{{gguf_path}}\",\n    n_ctx={{n_ctx}},\n    n_gpu_layers=-1,\n)\n\ndef generate(prompt: str) -> str:\n    out = llm.create_chat_completion(\n        messages=[{\"role\": \"user\", \"content\": prompt}],\n    )\n    return out[\"choices\"][0][\"message\"][\"content\"]\n\nif __name__ == \"__main__\":\n    print(generate(\"hi\"))",
+  "language": "py",
+  "deps": [
+    "llama-cpp-python"
+  ],
+  "summary_zh": "llama.cpp python 載入 GGUF 推論"
+}

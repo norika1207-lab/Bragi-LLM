@@ -1,0 +1,23 @@
+{
+  "id": "system-cli-054-port-check",
+  "category": "system-cli/net/port",
+  "intents_zh": [
+    "檢查 port 有沒有開",
+    "等 service 起來",
+    "wait-for-port"
+  ],
+  "intents_en": [
+    "check if port open",
+    "wait for port script",
+    "tcp probe"
+  ],
+  "slots": [
+    "host",
+    "port",
+    "timeout_s"
+  ],
+  "code": "#!/usr/bin/env bash\nset -euo pipefail\nHOST=\"{{host}}\"; PORT=\"{{port}}\"; TIMEOUT={{timeout_s}}\n\nend=$((SECONDS+TIMEOUT))\nuntil bash -c \"cat < /dev/tcp/$HOST/$PORT\" 2>/dev/null; do\n  if (( SECONDS >= end )); then\n    echo \"timeout $HOST:$PORT\" >&2; exit 1\n  fi\n  sleep 1\ndone\necho \"$HOST:$PORT is up\"",
+  "language": "sh",
+  "deps": [],
+  "summary_zh": "等 TCP port 開啟"
+}

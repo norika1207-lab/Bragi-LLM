@@ -1,0 +1,23 @@
+{
+  "id": "algorithm-tree-004",
+  "category": "algorithm/tree/heap",
+  "intents_zh": [
+    "最小堆",
+    "min heap",
+    "給我 heap",
+    "二元堆"
+  ],
+  "intents_en": [
+    "min heap",
+    "binary heap",
+    "write heap",
+    "priority queue heap"
+  ],
+  "slots": [
+    "class_name"
+  ],
+  "code": "class {{class_name}}:\n    def __init__(self):\n        self.h = []\n    def push(self, x):\n        self.h.append(x)\n        i = len(self.h)-1\n        while i and self.h[(i-1)//2] > self.h[i]:\n            self.h[(i-1)//2], self.h[i] = self.h[i], self.h[(i-1)//2]\n            i = (i-1)//2\n    def pop(self):\n        if not self.h: return None\n        top = self.h[0]\n        last = self.h.pop()\n        if self.h:\n            self.h[0] = last\n            i, n = 0, len(self.h)\n            while True:\n                l, r, s = 2*i+1, 2*i+2, i\n                if l < n and self.h[l] < self.h[s]: s = l\n                if r < n and self.h[r] < self.h[s]: s = r\n                if s == i: break\n                self.h[i], self.h[s] = self.h[s], self.h[i]\n                i = s\n        return top",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "手刻最小二元堆"
+}

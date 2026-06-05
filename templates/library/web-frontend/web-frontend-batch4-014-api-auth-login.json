@@ -1,0 +1,29 @@
+{
+  "id": "web-frontend-batch4-014-api-auth-login",
+  "category": "web-frontend/nextjs/api/auth-login",
+  "intents_zh": [
+    "登入 API",
+    "驗證 email 密碼的 route",
+    "POST login handler",
+    "auth API 端點",
+    "發 token 的 API",
+    "JSON 登入端點"
+  ],
+  "intents_en": [
+    "login api route",
+    "auth POST endpoint",
+    "credentials handler",
+    "token issue api",
+    "sign in handler",
+    "authentication api"
+  ],
+  "slots": [
+    "token_secret"
+  ],
+  "code": "import { NextResponse } from 'next/server';\n\nexport async function POST(req: Request) {\n  const { email, password } = await req.json();\n  if (!email || !password) {\n    return NextResponse.json({ error: 'missing fields' }, { status: 400 });\n  }\n  const token = Buffer.from(`${email}:{{token_secret}}`).toString('base64');\n  return NextResponse.json({ token });\n}",
+  "language": "ts",
+  "deps": [
+    "next"
+  ],
+  "summary_zh": "App Router 登入 POST API"
+}

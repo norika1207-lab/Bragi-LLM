@@ -1,0 +1,27 @@
+{
+  "id": "web-frontend-batch1-016-checkbox-group",
+  "category": "web-frontend/react/checkboxes/group",
+  "intents_zh": [
+    "checkbox 群組",
+    "複選群組",
+    "選擇興趣 checkbox",
+    "勾選列表元件",
+    "group checkbox",
+    "多個 checkbox 共用 state"
+  ],
+  "intents_en": [
+    "checkbox group",
+    "multi checkbox",
+    "checkbox list",
+    "group of checkboxes",
+    "react checkbox group",
+    "multiple checkboxes"
+  ],
+  "slots": [
+    "component_name"
+  ],
+  "code": "import { useState } from 'react';\n\ntype Props = { items: string[] };\n\nexport default function {{component_name}}({ items }: Props) {\n  const [picked, setPicked] = useState<Set<string>>(new Set());\n\n  function toggle(i: string) {\n    const next = new Set(picked);\n    next.has(i) ? next.delete(i) : next.add(i);\n    setPicked(next);\n  }\n\n  return (\n    <div>\n      {items.map((i) => (\n        <label key={i} className=\"block\">\n          <input type=\"checkbox\" checked={picked.has(i)} onChange={() => toggle(i)} />\n          <span className=\"ml-2\">{i}</span>\n        </label>\n      ))}\n    </div>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "checkbox 群組共用 Set state"
+}

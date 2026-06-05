@@ -1,0 +1,31 @@
+{
+  "id": "mobile-064-swiftui-map",
+  "category": "mobile/swiftui/map",
+  "intents_zh": [
+    "SwiftUI Map",
+    "SwiftUI MapKit",
+    "SwiftUI 地圖",
+    "SwiftUI map marker",
+    "顯示座標 SwiftUI",
+    "SwiftUI map annotation",
+    "iOS 地圖 SwiftUI"
+  ],
+  "intents_en": [
+    "swiftui Map",
+    "MapKit swiftui",
+    "show map swiftui",
+    "map annotation swiftui",
+    "swiftui coordinates map",
+    "ios map swiftui",
+    "map view swiftui"
+  ],
+  "slots": [
+    "lat",
+    "lng",
+    "title"
+  ],
+  "code": "import SwiftUI\nimport MapKit\nstruct M:View{\n  @State var camera:MapCameraPosition = .region(MKCoordinateRegion(center:CLLocationCoordinate2D(latitude:{{lat}},longitude:{{lng}}),latitudinalMeters:2000,longitudinalMeters:2000))\n  var body:some View{Map(position:$camera){Marker(\"{{title}}\",coordinate:CLLocationCoordinate2D(latitude:{{lat}},longitude:{{lng}}))}}}",
+  "language": "swift",
+  "deps": [],
+  "summary_zh": "SwiftUI MapKit + Marker"
+}

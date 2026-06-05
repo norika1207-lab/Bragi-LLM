@@ -1,0 +1,27 @@
+{
+  "id": "depth-llm-tools-014-memory-summariser",
+  "category": "llm-tools/memory/summarise",
+  "intents_zh": [
+    "對話記憶摘要",
+    "壓縮歷史對話",
+    "rolling summary",
+    "memory 滾動摘要",
+    "會話濃縮"
+  ],
+  "intents_en": [
+    "conversation memory summariser",
+    "compress history",
+    "rolling summary",
+    "memory compaction",
+    "session digest"
+  ],
+  "slots": [
+    "history",
+    "llm_call",
+    "threshold"
+  ],
+  "code": "def summarise_memory({{history}}, {{llm_call}}, {{threshold}}=20):\n    if len({{history}}) < {{threshold}}: return {{history}}\n    old = {{history}}[:-5]\n    recent = {{history}}[-5:]\n    text = \"\\n\".join(f\"{m['role']}: {m['content']}\" for m in old)\n    summary = {{llm_call}}(f\"Summarise the conversation in 200 words:\\n{text}\")\n    return [{\"role\": \"system\", \"content\": f\"Prior context: {summary}\"}] + recent",
+  "language": "python",
+  "deps": [],
+  "summary_zh": "當對話超過門檻把舊訊息壓成 200 字摘要當 system 注入"
+}

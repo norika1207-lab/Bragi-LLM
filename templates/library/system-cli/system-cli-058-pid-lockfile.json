@@ -1,0 +1,21 @@
+{
+  "id": "system-cli-058-pid-lockfile",
+  "category": "system-cli/concurrency/lock",
+  "intents_zh": [
+    "script 防止重複執行",
+    "pid lockfile",
+    "互斥執行"
+  ],
+  "intents_en": [
+    "prevent concurrent script",
+    "pid lockfile pattern",
+    "mutex shell script"
+  ],
+  "slots": [
+    "script_name"
+  ],
+  "code": "#!/usr/bin/env bash\nset -euo pipefail\nLOCK=\"/tmp/{{script_name}}.lock\"\nexec 9>\"$LOCK\"\nif ! flock -n 9; then\n  echo \"{{script_name}} already running\" >&2; exit 1\nfi\n\necho $$ >&9\n# real work\nsleep 5\necho 'done'",
+  "language": "sh",
+  "deps": [],
+  "summary_zh": "flock 防止重複執行"
+}

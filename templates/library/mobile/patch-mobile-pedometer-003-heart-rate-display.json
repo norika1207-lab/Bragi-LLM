@@ -1,0 +1,30 @@
+{
+  "id": "patch-mobile-pedometer-003-heart-rate-display",
+  "category": "mobile/health/heart-rate",
+  "intents_zh": [
+    "心率顯示元件",
+    "做一個 BPM 顯示畫面",
+    "心跳動畫 React Native",
+    "heart rate UI 卡片",
+    "顯示即時心率",
+    "做個會跳動的心臟圖示"
+  ],
+  "intents_en": [
+    "heart rate BPM display",
+    "pulsing heart UI React Native",
+    "show live heart rate",
+    "BPM card component",
+    "animated heart icon screen"
+  ],
+  "slots": [
+    "component_name",
+    "bpm_prop"
+  ],
+  "code": "import React, { useEffect, useRef } from 'react';\nimport { View, Text, Animated, StyleSheet } from 'react-native';\n\nexport default function {{component_name}}({ {{bpm_prop}} = 72 }) {\n  const scale = useRef(new Animated.Value(1)).current;\n  useEffect(() => {\n    const interval = 60000 / {{bpm_prop}};\n    const loop = Animated.loop(Animated.sequence([\n      Animated.timing(scale, { toValue: 1.25, duration: interval / 2, useNativeDriver: true }),\n      Animated.timing(scale, { toValue: 1, duration: interval / 2, useNativeDriver: true }),\n    ]));\n    loop.start();\n    return () => loop.stop();\n  }, [{{bpm_prop}}]);\n\n  return (\n    <View style={styles.row}>\n      <Animated.Text style={[styles.heart, { transform: [{ scale }] }]}>♥</Animated.Text>\n      <Text style={styles.bpm}>{{{bpm_prop}}} <Text style={styles.unit}>BPM</Text></Text>\n    </View>\n  );\n}\nconst styles = StyleSheet.create({\n  row: { flexDirection: 'row', alignItems: 'center', padding: 16 },\n  heart: { fontSize: 48, color: '#e63946', marginRight: 12 },\n  bpm: { fontSize: 36, fontWeight: '700' },\n  unit: { fontSize: 14, color: '#888' }\n});",
+  "language": "tsx",
+  "deps": [
+    "react-native",
+    "react"
+  ],
+  "summary_zh": "心率 BPM 顯示卡，含跟隨節拍跳動的心臟動畫"
+}

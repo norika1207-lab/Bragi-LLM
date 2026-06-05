@@ -1,0 +1,27 @@
+{
+  "id": "web-frontend-batch1-020-range-slider-dual",
+  "category": "web-frontend/react/sliders/range",
+  "intents_zh": [
+    "雙端 range slider",
+    "價格區間滑桿",
+    "min-max 拉桿",
+    "double range slider",
+    "區間選擇器",
+    "兩個 thumb slider"
+  ],
+  "intents_en": [
+    "dual range slider",
+    "price range slider",
+    "min max slider",
+    "two thumb slider",
+    "range picker slider",
+    "interval slider"
+  ],
+  "slots": [
+    "component_name"
+  ],
+  "code": "import { useState } from 'react';\n\nexport default function {{component_name}}({ min = 0, max = 100 }: { min?: number; max?: number }) {\n  const [lo, setLo] = useState(min);\n  const [hi, setHi] = useState(max);\n  return (\n    <div>\n      <input type=\"range\" min={min} max={max} value={lo} onChange={(e) => setLo(Math.min(Number(e.target.value), hi))} className=\"w-full\" />\n      <input type=\"range\" min={min} max={max} value={hi} onChange={(e) => setHi(Math.max(Number(e.target.value), lo))} className=\"w-full\" />\n      <div className=\"text-sm\">{lo} - {hi}</div>\n    </div>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "雙 thumb 區間 slider"
+}

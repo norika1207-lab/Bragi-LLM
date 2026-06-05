@@ -1,0 +1,27 @@
+{
+  "id": "web-frontend-batch1-012-textarea-autosize",
+  "category": "web-frontend/react/inputs/textarea",
+  "intents_zh": [
+    "自動調整高度 textarea",
+    "auto resize textarea",
+    "可成長 textarea",
+    "React 自適應文字區",
+    "auto-grow 文字框",
+    "聊天輸入 textarea"
+  ],
+  "intents_en": [
+    "auto resize textarea",
+    "auto grow textarea",
+    "react textarea autosize",
+    "expanding textarea",
+    "chat input textarea",
+    "dynamic height textarea"
+  ],
+  "slots": [
+    "component_name"
+  ],
+  "code": "import { useRef, useEffect } from 'react';\n\ntype Props = { value: string; onChange: (v: string) => void; placeholder?: string };\n\nexport default function {{component_name}}({ value, onChange, placeholder }: Props) {\n  const ref = useRef<HTMLTextAreaElement>(null);\n\n  useEffect(() => {\n    const el = ref.current;\n    if (!el) return;\n    el.style.height = 'auto';\n    el.style.height = el.scrollHeight + 'px';\n  }, [value]);\n\n  return (\n    <textarea\n      ref={ref}\n      value={value}\n      onChange={(e) => onChange(e.target.value)}\n      placeholder={placeholder}\n      rows={1}\n      className=\"w-full px-3 py-2 border rounded resize-none overflow-hidden\"\n    />\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "隨內容自動調整高度的 textarea"
+}

@@ -1,0 +1,24 @@
+{
+  "id": "depth-database-devops-021-ansible-inventory",
+  "category": "database-devops/ansible",
+  "intents_zh": [
+    "ansible inventory ini",
+    "主機分群",
+    "groups 設定"
+  ],
+  "intents_en": [
+    "ansible inventory ini",
+    "host groups",
+    "group_vars setup"
+  ],
+  "slots": [
+    "web_host",
+    "db_host"
+  ],
+  "code": "[web]\n{{web_host}} ansible_user=ubuntu\n\n[db]\n{{db_host}} ansible_user=ubuntu\n\n[all:vars]\nansible_python_interpreter=/usr/bin/python3\nansible_ssh_common_args='-o StrictHostKeyChecking=no'",
+  "language": "ini",
+  "deps": [
+    "ansible"
+  ],
+  "summary_zh": "ansible inventory 分 web/db 群組"
+}

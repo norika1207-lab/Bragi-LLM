@@ -1,0 +1,21 @@
+{
+  "id": "database-devops-086-sql-pivot-postgres",
+  "category": "database-devops/sql/postgres",
+  "intents_zh": [
+    "postgres crosstab",
+    "pivot 用 tablefunc",
+    "postgres pivot 真實"
+  ],
+  "intents_en": [
+    "postgres crosstab",
+    "tablefunc pivot",
+    "real pivot postgres"
+  ],
+  "slots": [
+    "source_query"
+  ],
+  "code": "CREATE EXTENSION IF NOT EXISTS tablefunc;\n\nSELECT * FROM crosstab(\n  $$ {{source_query}} $$,\n  $$ VALUES ('A'::text), ('B'), ('C') $$\n) AS ct(row_label text, a_val numeric, b_val numeric, c_val numeric);",
+  "language": "sql",
+  "deps": [],
+  "summary_zh": "Postgres tablefunc crosstab pivot"
+}

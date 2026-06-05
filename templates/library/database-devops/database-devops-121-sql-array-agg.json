@@ -1,0 +1,23 @@
+{
+  "id": "database-devops-121-sql-array-agg",
+  "category": "database-devops/sql/postgres",
+  "intents_zh": [
+    "postgres array_agg",
+    "聚合成陣列",
+    "group_concat postgres"
+  ],
+  "intents_en": [
+    "postgres array_agg",
+    "aggregate to array",
+    "group_concat postgres"
+  ],
+  "slots": [
+    "group_col",
+    "item_col",
+    "table"
+  ],
+  "code": "SELECT {{group_col}},\n  array_agg({{item_col}} ORDER BY {{item_col}}) AS items,\n  string_agg({{item_col}}::text, ', ' ORDER BY {{item_col}}) AS items_csv,\n  json_agg({{item_col}}) AS items_json\nFROM {{table}}\nGROUP BY {{group_col}};",
+  "language": "sql",
+  "deps": [],
+  "summary_zh": "Postgres array_agg / string_agg / json_agg"
+}

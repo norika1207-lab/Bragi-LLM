@@ -1,0 +1,28 @@
+{
+  "id": "firmware-041-esp8266-wifi",
+  "category": "firmware/esp8266/network",
+  "intents_zh": [
+    "ESP8266 連 WiFi",
+    "NodeMCU 上網",
+    "ESP8266 wifi 範例",
+    "WeMos D1 連網",
+    "ESP-01 連 AP"
+  ],
+  "intents_en": [
+    "ESP8266 WiFi connect",
+    "NodeMCU wifi example",
+    "WeMos D1 connect",
+    "ESP8266 station mode",
+    "wifi begin ESP8266"
+  ],
+  "slots": [
+    "ssid",
+    "password"
+  ],
+  "code": "#include <ESP8266WiFi.h>\n\nvoid setup() {\n  Serial.begin(115200);\n  WiFi.mode(WIFI_STA);\n  WiFi.begin(\"{{ssid}}\", \"{{password}}\");\n  while (WiFi.status() != WL_CONNECTED) { delay(500); Serial.print('.'); }\n  Serial.println();\n  Serial.println(WiFi.localIP());\n}\n\nvoid loop() {}",
+  "language": "ino",
+  "deps": [
+    "ESP8266WiFi"
+  ],
+  "summary_zh": "ESP8266 連 WiFi 並顯示 IP"
+}

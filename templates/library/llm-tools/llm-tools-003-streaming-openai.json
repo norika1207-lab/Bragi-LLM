@@ -1,0 +1,33 @@
+{
+  "id": "llm-tools-003-streaming-openai",
+  "category": "llm-tools/client/streaming",
+  "intents_zh": [
+    "openai 串流回應",
+    "stream chat completion",
+    "逐字輸出 GPT",
+    "streaming response 範例",
+    "怎麼讓 GPT 一字一字吐",
+    "async stream openai",
+    "流式輸出包裝",
+    "stream tokens"
+  ],
+  "intents_en": [
+    "openai streaming response",
+    "stream chat tokens",
+    "token by token output",
+    "streaming completion example",
+    "async stream openai",
+    "stream gpt response",
+    "incremental output",
+    "streaming wrapper"
+  ],
+  "slots": [
+    "model_name"
+  ],
+  "code": "from openai import OpenAI\n\nclient = OpenAI()\n\ndef stream_chat(prompt: str):\n    stream = client.chat.completions.create(\n        model=\"{{model_name}}\",\n        messages=[{\"role\": \"user\", \"content\": prompt}],\n        stream=True,\n    )\n    for chunk in stream:\n        delta = chunk.choices[0].delta.content\n        if delta:\n            print(delta, end=\"\", flush=True)\n    print()\n\nif __name__ == \"__main__\":\n    stream_chat(\"tell me a joke\")",
+  "language": "py",
+  "deps": [
+    "openai"
+  ],
+  "summary_zh": "OpenAI 串流逐 token 輸出"
+}

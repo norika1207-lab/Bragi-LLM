@@ -1,0 +1,21 @@
+{
+  "id": "algorithm-bit-004",
+  "category": "algorithm/bit/single_number",
+  "intents_zh": [
+    "只出現一次的數",
+    "single number XOR",
+    "給我找唯一數"
+  ],
+  "intents_en": [
+    "single number",
+    "XOR find unique",
+    "find one occurrence"
+  ],
+  "slots": [
+    "fn_name"
+  ],
+  "code": "def {{fn_name}}(nums):\n    r = 0\n    for x in nums: r ^= x\n    return r",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "XOR 找唯一出現一次的數"
+}

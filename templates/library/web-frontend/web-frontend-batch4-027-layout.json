@@ -1,0 +1,27 @@
+{
+  "id": "web-frontend-batch4-027-layout",
+  "category": "web-frontend/nextjs/app-router/layout",
+  "intents_zh": [
+    "root layout",
+    "共用 layout 元件",
+    "Next.js layout.tsx",
+    "包 header footer 的 layout",
+    "html body 結構",
+    "app layout"
+  ],
+  "intents_en": [
+    "root layout",
+    "shared layout component",
+    "next.js layout.tsx",
+    "layout wrapping header footer",
+    "html body wrapper",
+    "app layout"
+  ],
+  "slots": [
+    "site_title"
+  ],
+  "code": "export const metadata = { title: '{{site_title}}' };\n\nexport default function RootLayout({ children }: { children: React.ReactNode }) {\n  return (\n    <html lang=\"en\">\n      <body className=\"min-h-screen bg-white text-gray-900\">\n        {children}\n      </body>\n    </html>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "App Router root layout 基本骨架"
+}

@@ -1,0 +1,32 @@
+{
+  "id": "mobile-087-compose-datastore",
+  "category": "mobile/compose/storage",
+  "intents_zh": [
+    "Compose DataStore",
+    "Android DataStore preferences",
+    "Kotlin Compose 本地存",
+    "Compose 持久化",
+    "DataStore key value",
+    "preferences datastore Compose",
+    "Compose 存設定"
+  ],
+  "intents_en": [
+    "compose DataStore",
+    "android DataStore preferences",
+    "kotlin compose persist",
+    "preferences datastore example",
+    "key value datastore",
+    "compose save settings",
+    "local storage compose"
+  ],
+  "slots": [
+    "pref_name",
+    "key_name"
+  ],
+  "code": "import android.content.Context\nimport androidx.datastore.preferences.core.*\nimport androidx.datastore.preferences.preferencesDataStore\nimport kotlinx.coroutines.flow.Flow\nimport kotlinx.coroutines.flow.map\nval Context.dataStore by preferencesDataStore(name=\"{{pref_name}}\")\nval KEY=stringPreferencesKey(\"{{key_name}}\")\nfun read(c:Context):Flow<String?> = c.dataStore.data.map{it[KEY]}\nsuspend fun write(c:Context,v:String){c.dataStore.edit{it[KEY]=v}}",
+  "language": "kt",
+  "deps": [
+    "androidx.datastore:datastore-preferences"
+  ],
+  "summary_zh": "Compose Preferences DataStore 讀寫"
+}

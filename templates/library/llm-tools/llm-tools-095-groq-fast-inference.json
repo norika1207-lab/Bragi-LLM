@@ -1,0 +1,33 @@
+{
+  "id": "llm-tools-095-groq-fast-inference",
+  "category": "llm-tools/client/groq",
+  "intents_zh": [
+    "groq 超快推論",
+    "groq sdk",
+    "用 groq 呼叫 llama",
+    "groq 範例",
+    "groq client",
+    "groq fast inference",
+    "groq wrapper",
+    "groq api"
+  ],
+  "intents_en": [
+    "groq fast inference",
+    "groq sdk",
+    "call llama via groq",
+    "groq client example",
+    "groq wrapper",
+    "groq api",
+    "ultra-fast groq",
+    "minimal groq"
+  ],
+  "slots": [
+    "model_name"
+  ],
+  "code": "from groq import Groq\n\nclient = Groq()\n\ndef chat(prompt: str) -> str:\n    r = client.chat.completions.create(\n        model=\"{{model_name}}\",\n        messages=[{\"role\": \"user\", \"content\": prompt}],\n    )\n    return r.choices[0].message.content\n\nif __name__ == \"__main__\":\n    print(chat(\"hi\"))",
+  "language": "py",
+  "deps": [
+    "groq"
+  ],
+  "summary_zh": "Groq 超快推論 SDK"
+}

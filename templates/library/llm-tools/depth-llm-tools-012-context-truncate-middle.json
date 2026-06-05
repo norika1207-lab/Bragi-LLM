@@ -1,0 +1,27 @@
+{
+  "id": "depth-llm-tools-012-context-truncate-middle",
+  "category": "llm-tools/context/truncation",
+  "intents_zh": [
+    "從中間截斷上下文",
+    "保留頭尾刪中間",
+    "context 縮減",
+    "lost-in-the-middle 策略",
+    "截斷中段"
+  ],
+  "intents_en": [
+    "truncate middle of context",
+    "keep head tail drop middle",
+    "context shrink",
+    "lost-in-the-middle strategy",
+    "middle truncation"
+  ],
+  "slots": [
+    "text",
+    "tokenizer",
+    "max_tokens"
+  ],
+  "code": "def truncate_middle({{text}}, {{tokenizer}}, {{max_tokens}}):\n    ids = {{tokenizer}}.encode({{text}})\n    if len(ids) <= {{max_tokens}}: return {{text}}\n    head = {{max_tokens}} // 2\n    tail = {{max_tokens}} - head\n    kept = ids[:head] + ids[-tail:]\n    return {{tokenizer}}.decode(kept)",
+  "language": "python",
+  "deps": [],
+  "summary_zh": "保留頭尾刪中段，避開 lost-in-the-middle"
+}

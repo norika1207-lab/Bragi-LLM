@@ -1,0 +1,19 @@
+{
+  "id": "database-devops-120-gha-changed-files",
+  "category": "database-devops/cicd/github-actions",
+  "intents_zh": [
+    "GHA 偵測變更檔案",
+    "只跑變動的測試",
+    "changed-files action"
+  ],
+  "intents_en": [
+    "github actions changed files",
+    "run on changed paths",
+    "changed-files action"
+  ],
+  "slots": [],
+  "code": "name: Smart CI\non: [pull_request]\n\njobs:\n  changes:\n    runs-on: ubuntu-latest\n    outputs:\n      backend: ${{ steps.f.outputs.backend_any_changed }}\n      frontend: ${{ steps.f.outputs.frontend_any_changed }}\n    steps:\n      - uses: actions/checkout@v4\n      - uses: tj-actions/changed-files@v44\n        id: f\n        with:\n          files_yaml: |\n            backend:\n              - 'server/**'\n            frontend:\n              - 'web/**'\n\n  backend:\n    needs: changes\n    if: needs.changes.outputs.backend == 'true'\n    runs-on: ubuntu-latest\n    steps: [{ run: 'echo running backend tests' }]",
+  "language": "yaml",
+  "deps": [],
+  "summary_zh": "GHA 按變更路徑分流 job"
+}

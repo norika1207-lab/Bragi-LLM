@@ -1,0 +1,29 @@
+{
+  "id": "web-frontend-batch4-037-table",
+  "category": "web-frontend/react/components/table",
+  "intents_zh": [
+    "資料表格",
+    "tailwind table",
+    "data list 表",
+    "headers 加 rows",
+    "清單 table",
+    "展示用 table"
+  ],
+  "intents_en": [
+    "data table",
+    "tailwind table",
+    "headers rows table",
+    "list table",
+    "display table",
+    "simple table"
+  ],
+  "slots": [
+    "col_one",
+    "col_two",
+    "col_three"
+  ],
+  "code": "export default function DataTable({ rows }: { rows: { a: string; b: string; c: string }[] }) {\n  return (\n    <table className=\"min-w-full border\">\n      <thead className=\"bg-gray-50\">\n        <tr>\n          <th className=\"text-left px-4 py-2\">{{col_one}}</th>\n          <th className=\"text-left px-4 py-2\">{{col_two}}</th>\n          <th className=\"text-left px-4 py-2\">{{col_three}}</th>\n        </tr>\n      </thead>\n      <tbody>\n        {rows.map((r, i) => (\n          <tr key={i} className=\"border-t\">\n            <td className=\"px-4 py-2\">{r.a}</td>\n            <td className=\"px-4 py-2\">{r.b}</td>\n            <td className=\"px-4 py-2\">{r.c}</td>\n          </tr>\n        ))}\n      </tbody>\n    </table>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "三欄資料表格元件"
+}

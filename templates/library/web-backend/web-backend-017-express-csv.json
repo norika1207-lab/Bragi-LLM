@@ -1,0 +1,30 @@
+{
+  "id": "web-backend-017-express-csv",
+  "category": "web-backend/express/export",
+  "intents_zh": [
+    "匯出 CSV endpoint",
+    "express CSV download",
+    "產生 CSV 回傳",
+    "下載報表 csv",
+    "stream csv response"
+  ],
+  "intents_en": [
+    "csv export endpoint",
+    "download csv express",
+    "generate csv response",
+    "stream csv to client",
+    "report csv export"
+  ],
+  "slots": [
+    "filename",
+    "resource"
+  ],
+  "code": "const express = require('express');\nconst { stringify } = require('csv-stringify');\nconst router = express.Router();\n\nrouter.get('/export/{{resource}}', async (req, res) => {\n  const rows = await db('{{resource}}').select('*');\n  res.set({\n    'Content-Type': 'text/csv',\n    'Content-Disposition': `attachment; filename=\"{{filename}}.csv\"`\n  });\n  stringify(rows, { header: true }).pipe(res);\n});\n\nmodule.exports = router;",
+  "language": "js",
+  "deps": [
+    "express",
+    "csv-stringify",
+    "knex"
+  ],
+  "summary_zh": "Express CSV 串流匯出"
+}

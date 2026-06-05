@@ -1,0 +1,57 @@
+[
+  {"query_zh": "做個登入頁", "query_en": "make a login page", "expected_domain": "web-frontend", "notes": "vague, very common"},
+  {"query_zh": "React 註冊表單，含 email 驗證跟密碼強度", "query_en": "React signup form with email validation and password strength", "expected_domain": "web-frontend", "notes": "specific, multi-feature"},
+  {"query_zh": "用 Tailwind 寫一個 responsive navbar", "query_en": "responsive navbar with Tailwind", "expected_domain": "web-frontend", "notes": "styling system named"},
+  {"query_zh": "Next.js app router 的 server component 範例", "query_en": "Next.js app router server component example", "expected_domain": "web-frontend", "notes": "framework specific"},
+  {"query_zh": "vue 3 composition API todo list", "query_en": "vue 3 composition API todo list", "expected_domain": "web-frontend", "notes": "alt framework"},
+  {"query_zh": "做個 dark mode toggle", "query_en": "dark mode toggle", "expected_domain": "web-frontend", "notes": "common micro-task"},
+  {"query_zh": "infinite scroll list", "query_en": "infinite scroll list", "expected_domain": "web-frontend", "notes": "UI pattern"},
+
+  {"query_zh": "Express REST API CRUD，連 PostgreSQL", "query_en": "Express REST API CRUD with PostgreSQL", "expected_domain": "web-backend", "notes": "specific stack"},
+  {"query_zh": "FastAPI JWT 登入 endpoint", "query_en": "FastAPI JWT login endpoint", "expected_domain": "web-backend", "notes": "auth pattern"},
+  {"query_zh": "幫我寫一個 webhook receiver", "query_en": "webhook receiver", "expected_domain": "web-backend", "notes": "vague backend"},
+  {"query_zh": "Django model + migration: blog post", "query_en": "Django model and migration for blog post", "expected_domain": "web-backend", "notes": "ORM"},
+  {"query_zh": "Go gin server with rate limit middleware", "query_en": "Go gin server with rate limit middleware", "expected_domain": "web-backend", "notes": "specific lang+lib"},
+  {"query_zh": "Node.js file upload to S3", "query_en": "Node.js file upload to S3", "expected_domain": "web-backend", "notes": "cloud integration"},
+  {"query_zh": "GraphQL resolver 範例", "query_en": "GraphQL resolver example", "expected_domain": "web-backend", "notes": "API style"},
+
+  {"query_zh": "React Native 登入畫面", "query_en": "React Native login screen", "expected_domain": "mobile", "notes": "cross-platform"},
+  {"query_zh": "SwiftUI list with pull to refresh", "query_en": "SwiftUI list with pull to refresh", "expected_domain": "mobile", "notes": "iOS native"},
+  {"query_zh": "Android Jetpack Compose 底部導航", "query_en": "Android Jetpack Compose bottom navigation", "expected_domain": "mobile", "notes": "Android native"},
+  {"query_zh": "Flutter HTTP request with error handling", "query_en": "Flutter HTTP request with error handling", "expected_domain": "mobile", "notes": "Flutter"},
+  {"query_zh": "iOS push notification setup", "query_en": "iOS push notification setup", "expected_domain": "mobile", "notes": "platform service"},
+  {"query_zh": "做個簡單的計步 App 畫面", "query_en": "simple step counter app screen", "expected_domain": "mobile", "notes": "sensor-ish, ambiguous between mobile and firmware"},
+
+  {"query_zh": "bash 批次重命名資料夾下 .jpg 檔", "query_en": "bash batch rename .jpg files in folder", "expected_domain": "system-cli", "notes": "shell scripting"},
+  {"query_zh": "Python CLI tool with argparse subcommands", "query_en": "Python CLI tool with argparse subcommands", "expected_domain": "system-cli", "notes": "CLI framework"},
+  {"query_zh": "監看資料夾，新檔案出現就跑 script", "query_en": "watch folder, run script when new file appears", "expected_domain": "system-cli", "notes": "inotify pattern"},
+  {"query_zh": "systemd service unit file", "query_en": "systemd service unit file", "expected_domain": "system-cli", "notes": "linux ops"},
+  {"query_zh": "cron job 每天 3am 跑備份", "query_en": "cron job daily 3am backup", "expected_domain": "system-cli", "notes": "scheduling"},
+  {"query_zh": "rsync 增量備份到遠端機器", "query_en": "rsync incremental backup to remote", "expected_domain": "system-cli", "notes": "ops"},
+
+  {"query_zh": "ESP32 讀 DHT22 溫濕度送 MQTT", "query_en": "ESP32 read DHT22 temp humidity send via MQTT", "expected_domain": "firmware", "notes": "embedded IoT"},
+  {"query_zh": "Arduino servo motor sweep", "query_en": "Arduino servo motor sweep", "expected_domain": "firmware", "notes": "actuator basic"},
+  {"query_zh": "Raspberry Pi GPIO 按鈕 debounce", "query_en": "Raspberry Pi GPIO button debounce", "expected_domain": "firmware", "notes": "input handling"},
+  {"query_zh": "STM32 UART DMA receive", "query_en": "STM32 UART DMA receive", "expected_domain": "firmware", "notes": "low-level MCU"},
+  {"query_zh": "ESP-NOW 兩台 ESP32 互傳", "query_en": "ESP-NOW between two ESP32", "expected_domain": "firmware", "notes": "wireless protocol"},
+
+  {"query_zh": "LangChain RAG over local PDFs", "query_en": "LangChain RAG over local PDFs", "expected_domain": "llm-tools", "notes": "RAG pattern"},
+  {"query_zh": "用 OpenAI function calling 做個天氣 agent", "query_en": "OpenAI function calling weather agent", "expected_domain": "llm-tools", "notes": "tool use"},
+  {"query_zh": "sentence-transformers 算文件相似度", "query_en": "sentence-transformers compute document similarity", "expected_domain": "llm-tools", "notes": "embedding"},
+  {"query_zh": "llama.cpp Python 載 GGUF 推論", "query_en": "llama.cpp Python load GGUF and run inference", "expected_domain": "llm-tools", "notes": "local LLM"},
+  {"query_zh": "streaming token output from Anthropic API", "query_en": "streaming token output from Anthropic API", "expected_domain": "llm-tools", "notes": "API streaming"},
+
+  {"query_zh": "binary search 寫法", "query_en": "binary search implementation", "expected_domain": "algorithm", "notes": "classic"},
+  {"query_zh": "Dijkstra shortest path with heap", "query_en": "Dijkstra shortest path with heap", "expected_domain": "algorithm", "notes": "graph"},
+  {"query_zh": "LRU cache O(1)", "query_en": "LRU cache O(1)", "expected_domain": "algorithm", "notes": "data structure"},
+  {"query_zh": "用 DP 解 longest common subsequence", "query_en": "DP longest common subsequence", "expected_domain": "algorithm", "notes": "DP"},
+  {"query_zh": "quicksort with median of three", "query_en": "quicksort with median of three", "expected_domain": "algorithm", "notes": "sort variant"},
+
+  {"query_zh": "PostgreSQL index 設計 for 查近 30 天訂單", "query_en": "PostgreSQL index for last 30 days orders query", "expected_domain": "database-devops", "notes": "index tuning"},
+  {"query_zh": "Docker compose: postgres + redis + app", "query_en": "Docker compose postgres redis app", "expected_domain": "database-devops", "notes": "compose stack"},
+  {"query_zh": "GitHub Actions Python CI: test + lint", "query_en": "GitHub Actions Python CI test and lint", "expected_domain": "database-devops", "notes": "CI yaml"},
+  {"query_zh": "nginx reverse proxy with SSL", "query_en": "nginx reverse proxy with SSL", "expected_domain": "database-devops", "notes": "web ops"},
+  {"query_zh": "MongoDB aggregation pipeline group by day", "query_en": "MongoDB aggregation pipeline group by day", "expected_domain": "database-devops", "notes": "NoSQL query"},
+  {"query_zh": "Kubernetes deployment + service yaml", "query_en": "Kubernetes deployment and service yaml", "expected_domain": "database-devops", "notes": "k8s manifest"},
+  {"query_zh": "Terraform 開一台 EC2", "query_en": "Terraform provision an EC2 instance", "expected_domain": "database-devops", "notes": "IaC"}
+]

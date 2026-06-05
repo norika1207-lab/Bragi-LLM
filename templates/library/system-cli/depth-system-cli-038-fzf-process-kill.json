@@ -1,0 +1,24 @@
+{
+  "id": "depth-system-cli-038-fzf-process-kill",
+  "category": "system-cli/selector/ps",
+  "intents_zh": [
+    "fzf 選 process 殺",
+    "互動 kill",
+    "ps fzf 包裝",
+    "終止程序選單"
+  ],
+  "intents_en": [
+    "fzf process kill",
+    "interactive kill",
+    "ps fzf wrapper",
+    "pick process to kill"
+  ],
+  "slots": [],
+  "code": "#!/usr/bin/env bash\nset -euo pipefail\n\npid=$(ps -eo pid,user,pcpu,pmem,comm,args --sort=-pcpu \\\n  | sed 1d \\\n  | fzf --prompt=\"kill> \" --height=60% --header=\"pid user cpu mem cmd args\" \\\n  | awk '{print $1}')\n\n[ -z \"$pid\" ] && exit 0\nread -rp \"kill $pid? (y/N) \" ans\n[[ \"$ans\" == \"y\" ]] && kill -TERM \"$pid\"",
+  "language": "bash",
+  "deps": [
+    "fzf",
+    "procps"
+  ],
+  "summary_zh": "fzf 列 process 確認後 SIGTERM"
+}

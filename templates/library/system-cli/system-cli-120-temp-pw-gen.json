@@ -1,0 +1,21 @@
+{
+  "id": "system-cli-120-temp-pw-gen",
+  "category": "system-cli/util/secret",
+  "intents_zh": [
+    "生隨機密碼",
+    "python 安全亂碼",
+    "secrets module"
+  ],
+  "intents_en": [
+    "random password generator",
+    "python secrets token",
+    "secure random string"
+  ],
+  "slots": [
+    "length"
+  ],
+  "code": "import secrets, string\n\nalpha = string.ascii_letters + string.digits + '!@#$%^&*-_'\npw = ''.join(secrets.choice(alpha) for _ in range({{length}}))\nprint(pw)",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "secrets 生隨機密碼"
+}

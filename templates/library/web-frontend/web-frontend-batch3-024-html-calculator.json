@@ -1,0 +1,27 @@
+{
+  "id": "web-frontend-batch3-024-html-calculator",
+  "category": "web-frontend/html/apps/calculator",
+  "intents_zh": [
+    "純 HTML 計算機",
+    "vanilla JS calculator",
+    "靜態計算機",
+    "沒 framework 計算機",
+    "HTML+JS calc",
+    "原生算術"
+  ],
+  "intents_en": [
+    "plain html calculator",
+    "vanilla js calculator",
+    "static calculator",
+    "no framework calc",
+    "html js arithmetic",
+    "raw calculator"
+  ],
+  "slots": [
+    "bg_color"
+  ],
+  "code": "<!DOCTYPE html>\n<html><head><meta charset=\"utf-8\"><title>Calc</title>\n<style>\n  body { background: {{bg_color}}; font-family: system-ui; }\n  #d { font-size: 2rem; padding: 1rem; background: #111; color: #0f0; }\n  button { padding: 1rem; font-size: 1.2rem; }\n  .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; }\n</style></head>\n<body>\n  <div id=\"d\">0</div>\n  <div class=\"grid\" id=\"keys\"></div>\n  <script>\n    const d = document.getElementById('d');\n    let expr = '';\n    const keys = ['7','8','9','/','4','5','6','*','1','2','3','-','0','.','=','+','C'];\n    keys.forEach(k => {\n      const b = document.createElement('button');\n      b.textContent = k;\n      b.onclick = () => {\n        if (k === 'C') expr = '';\n        else if (k === '=') { try { expr = String(Function('return ' + expr)()); } catch { expr = 'Err'; } }\n        else expr += k;\n        d.textContent = expr || '0';\n      };\n      document.getElementById('keys').appendChild(b);\n    });\n  </script>\n</body></html>",
+  "language": "html",
+  "deps": [],
+  "summary_zh": "純 HTML 計算機含基本樣式"
+}

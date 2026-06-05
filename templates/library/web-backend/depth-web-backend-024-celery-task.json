@@ -1,0 +1,27 @@
+{
+  "id": "depth-web-backend-024-celery-task",
+  "category": "web-backend/queue/celery",
+  "intents_zh": [
+    "Celery 定義任務",
+    "Python 背景工作",
+    "Celery beat 排程",
+    "retry 與 acks_late",
+    "Celery worker"
+  ],
+  "intents_en": [
+    "celery define task",
+    "python background job",
+    "celery beat schedule",
+    "retry acks_late",
+    "celery worker"
+  ],
+  "slots": [
+    "broker_url"
+  ],
+  "code": "from celery import Celery\napp = Celery('app', broker='{{broker_url}}')\n\n@app.task(bind=True, autoretry_for=(Exception,), retry_backoff=True, max_retries=5, acks_late=True)\ndef send_email(self, to: str):\n    deliver(to)",
+  "language": "py",
+  "deps": [
+    "celery"
+  ],
+  "summary_zh": "Celery task with retry/backoff"
+}

@@ -1,0 +1,23 @@
+{
+  "id": "depth-database-devops-026-traefik-static",
+  "category": "database-devops/proxy/traefik",
+  "intents_zh": [
+    "traefik 靜態設定",
+    "entrypoints + certresolver",
+    "traefik.yml 範例"
+  ],
+  "intents_en": [
+    "traefik static config",
+    "entrypoints and certresolver",
+    "traefik.yml example"
+  ],
+  "slots": [
+    "email"
+  ],
+  "code": "entryPoints:\n  web:\n    address: ':80'\n    http:\n      redirections:\n        entryPoint:\n          to: websecure\n          scheme: https\n  websecure:\n    address: ':443'\n\ncertificatesResolvers:\n  le:\n    acme:\n      email: {{email}}\n      storage: /letsencrypt/acme.json\n      httpChallenge:\n        entryPoint: web\n\nproviders:\n  docker:\n    exposedByDefault: false",
+  "language": "yaml",
+  "deps": [
+    "traefik"
+  ],
+  "summary_zh": "traefik 靜態 config,web 自動轉 https + LE"
+}

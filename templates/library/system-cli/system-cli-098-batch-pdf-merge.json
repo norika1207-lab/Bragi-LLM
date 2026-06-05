@@ -1,0 +1,24 @@
+{
+  "id": "system-cli-098-batch-pdf-merge",
+  "category": "system-cli/batch/pdf",
+  "intents_zh": [
+    "合併 PDF",
+    "批次拼接 pdf",
+    "pypdf merge"
+  ],
+  "intents_en": [
+    "merge pdf files",
+    "batch pdf concat",
+    "pypdf combine"
+  ],
+  "slots": [
+    "src_dir",
+    "out_pdf"
+  ],
+  "code": "from pypdf import PdfWriter\nfrom pathlib import Path\n\nwriter = PdfWriter()\nfor p in sorted(Path('{{src_dir}}').glob('*.pdf')):\n    writer.append(str(p))\n\nwith open('{{out_pdf}}','wb') as f:\n    writer.write(f)\nprint('merged -> {{out_pdf}}')",
+  "language": "py",
+  "deps": [
+    "pypdf"
+  ],
+  "summary_zh": "pypdf 合併多 PDF"
+}

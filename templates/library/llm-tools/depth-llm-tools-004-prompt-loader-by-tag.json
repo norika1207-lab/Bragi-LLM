@@ -1,0 +1,27 @@
+{
+  "id": "depth-llm-tools-004-prompt-loader-by-tag",
+  "category": "llm-tools/prompt-mgmt/loader",
+  "intents_zh": [
+    "按 git tag 載入 prompt",
+    "取特定版本 prompt",
+    "prompt rollback",
+    "固定版本 prompt",
+    "版本鎖定載入"
+  ],
+  "intents_en": [
+    "load prompt by git tag",
+    "fetch specific prompt version",
+    "prompt rollback",
+    "pinned prompt load",
+    "version-locked loading"
+  ],
+  "slots": [
+    "repo_dir",
+    "tag",
+    "path"
+  ],
+  "code": "import subprocess\n\ndef load_prompt_at({{repo_dir}}, {{tag}}, {{path}}):\n    return subprocess.check_output(\n        [\"git\", \"-C\", {{repo_dir}}, \"show\", f\"{{{tag}}}:{{{path}}}\"]\n    ).decode()",
+  "language": "python",
+  "deps": [],
+  "summary_zh": "從特定 git tag/commit 抓 prompt 內容，鎖定版本"
+}

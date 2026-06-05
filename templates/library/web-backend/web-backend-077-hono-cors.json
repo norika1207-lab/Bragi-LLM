@@ -1,0 +1,27 @@
+{
+  "id": "web-backend-077-hono-cors",
+  "category": "web-backend/hono/middleware",
+  "intents_zh": [
+    "hono CORS",
+    "加 cors middleware hono",
+    "cross origin hono",
+    "cors 設定 hono",
+    "preflight hono"
+  ],
+  "intents_en": [
+    "hono cors",
+    "hono cors middleware",
+    "cross origin hono",
+    "cors setup hono",
+    "preflight hono"
+  ],
+  "slots": [
+    "allowed_origin"
+  ],
+  "code": "import { Hono } from 'hono';\nimport { cors } from 'hono/cors';\n\nconst app = new Hono();\napp.use('*', cors({\n  origin: '{{allowed_origin}}',\n  allowMethods: ['GET', 'POST', 'PUT', 'DELETE'],\n  credentials: true,\n  maxAge: 86400\n}));\n\nexport default app;",
+  "language": "ts",
+  "deps": [
+    "hono"
+  ],
+  "summary_zh": "Hono CORS middleware"
+}

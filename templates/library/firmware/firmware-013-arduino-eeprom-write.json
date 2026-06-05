@@ -1,0 +1,26 @@
+{
+  "id": "firmware-013-arduino-eeprom-write",
+  "category": "firmware/arduino/storage",
+  "intents_zh": [
+    "EEPROM 存資料",
+    "Arduino 儲存設定",
+    "斷電不丟資料",
+    "EEPROM 讀寫",
+    "保留設定值"
+  ],
+  "intents_en": [
+    "Arduino EEPROM write",
+    "persist settings",
+    "EEPROM read write",
+    "non-volatile storage",
+    "save config to EEPROM"
+  ],
+  "slots": [
+    "address",
+    "value"
+  ],
+  "code": "#include <EEPROM.h>\nconst int ADDR = {{address}};\n\nvoid setup() {\n  Serial.begin(115200);\n  EEPROM.write(ADDR, {{value}});\n  delay(50);\n  byte v = EEPROM.read(ADDR);\n  Serial.print(\"stored=\"); Serial.println(v);\n}\n\nvoid loop() {}",
+  "language": "ino",
+  "deps": [],
+  "summary_zh": "Arduino EEPROM 寫入與讀回"
+}

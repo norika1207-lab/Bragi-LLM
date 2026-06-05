@@ -1,0 +1,21 @@
+{
+  "id": "algorithm-misc-019",
+  "category": "algorithm/misc/island_count",
+  "intents_zh": [
+    "島嶼數量",
+    "number of islands",
+    "給我 island bfs"
+  ],
+  "intents_en": [
+    "number of islands",
+    "count islands grid",
+    "island bfs"
+  ],
+  "slots": [
+    "fn_name"
+  ],
+  "code": "def {{fn_name}}(grid):\n    if not grid: return 0\n    R, C = len(grid), len(grid[0])\n    count = 0\n    def dfs(r, c):\n        if 0<=r<R and 0<=c<C and grid[r][c] == '1':\n            grid[r][c] = '0'\n            dfs(r+1,c); dfs(r-1,c); dfs(r,c+1); dfs(r,c-1)\n    for r in range(R):\n        for c in range(C):\n            if grid[r][c] == '1':\n                count += 1\n                dfs(r, c)\n    return count",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "DFS 計算島嶼數量"
+}

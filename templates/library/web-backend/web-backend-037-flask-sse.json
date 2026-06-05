@@ -1,0 +1,27 @@
+{
+  "id": "web-backend-037-flask-sse",
+  "category": "web-backend/flask/streaming",
+  "intents_zh": [
+    "flask SSE",
+    "Server-Sent Events flask",
+    "flask stream response",
+    "推播事件 flask",
+    "event-stream flask"
+  ],
+  "intents_en": [
+    "flask sse stream",
+    "server-sent events flask",
+    "stream response flask",
+    "event-stream endpoint",
+    "sse python"
+  ],
+  "slots": [
+    "interval_sec"
+  ],
+  "code": "from flask import Flask, Response\nimport time, json\n\napp = Flask(__name__)\n\n@app.get('/stream')\ndef stream():\n    def gen():\n        while True:\n            payload = json.dumps({'ts': time.time()})\n            yield f'data: {payload}\\n\\n'\n            time.sleep({{interval_sec}})\n    return Response(gen(), mimetype='text/event-stream')",
+  "language": "py",
+  "deps": [
+    "flask"
+  ],
+  "summary_zh": "Flask SSE 串流"
+}

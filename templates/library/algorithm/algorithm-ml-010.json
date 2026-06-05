@@ -1,0 +1,23 @@
+{
+  "id": "algorithm-ml-010",
+  "category": "algorithm/ml/cross_entropy",
+  "intents_zh": [
+    "交叉熵 loss",
+    "cross entropy",
+    "給我 ce loss"
+  ],
+  "intents_en": [
+    "cross entropy loss",
+    "CE loss numpy",
+    "categorical cross entropy"
+  ],
+  "slots": [
+    "fn_name"
+  ],
+  "code": "import numpy as np\n\ndef {{fn_name}}(probs, labels):\n    probs = np.clip(np.asarray(probs), 1e-12, 1.0)\n    labels = np.asarray(labels, dtype=int)\n    return -float(np.log(probs[np.arange(len(labels)), labels]).mean())",
+  "language": "py",
+  "deps": [
+    "numpy"
+  ],
+  "summary_zh": "分類交叉熵 loss"
+}

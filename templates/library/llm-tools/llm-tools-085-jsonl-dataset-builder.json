@@ -1,0 +1,31 @@
+{
+  "id": "llm-tools-085-jsonl-dataset-builder",
+  "category": "llm-tools/data/jsonl-builder",
+  "intents_zh": [
+    "微調 jsonl 產生",
+    "build openai jsonl",
+    "sft 訓練資料格式",
+    "openai chat finetune jsonl",
+    "產生訓練 jsonl",
+    "sft data builder",
+    "fine-tune dataset",
+    "jsonl messages 格式"
+  ],
+  "intents_en": [
+    "build openai finetune jsonl",
+    "sft dataset builder",
+    "openai chat jsonl format",
+    "produce training jsonl",
+    "sft data format",
+    "finetune dataset",
+    "jsonl messages format",
+    "training jsonl helper"
+  ],
+  "slots": [
+    "output_path"
+  ],
+  "code": "import json\n\ndef write(pairs: list[tuple[str, str]], path: str = \"{{output_path}}\"):\n    with open(path, \"w\") as f:\n        for q, a in pairs:\n            row = {\"messages\": [\n                {\"role\": \"user\", \"content\": q},\n                {\"role\": \"assistant\", \"content\": a},\n            ]}\n            f.write(json.dumps(row, ensure_ascii=False) + \"\\n\")\n\nif __name__ == \"__main__\":\n    write([(\"hi\", \"hello\"), (\"bye\", \"goodbye\")])",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "產生 OpenAI fine-tune 用 jsonl"
+}

@@ -1,0 +1,26 @@
+{
+  "id": "depth-system-cli-019-pass-cli-wrapper",
+  "category": "system-cli/password/manager",
+  "intents_zh": [
+    "pass 密碼管理包裝",
+    "CLI 密碼存取",
+    "gpg pass 取密碼",
+    "pass 搜尋複製"
+  ],
+  "intents_en": [
+    "pass cli wrapper",
+    "cli password store",
+    "gpg pass get",
+    "pass search copy"
+  ],
+  "slots": [
+    "clipboard_seconds"
+  ],
+  "code": "#!/usr/bin/env bash\nset -euo pipefail\n\ncmd=${1:-list}\nshift || true\n\ncase \"$cmd\" in\n  list)   pass ls ;;\n  get)    pass show -c{{clipboard_seconds}} \"$1\" ;;\n  add)    pass insert -m \"$1\" ;;\n  search) pass grep \"$1\" ;;\n  gen)    pass generate \"$1\" \"${2:-20}\" ;;\n  rm)     pass rm \"$1\" ;;\n  *) echo \"usage: $0 {list|get|add|search|gen|rm} <name>\"; exit 1 ;;\nesac",
+  "language": "bash",
+  "deps": [
+    "pass",
+    "gnupg"
+  ],
+  "summary_zh": "pass 密碼管理 CLI 包裝含複製計時"
+}

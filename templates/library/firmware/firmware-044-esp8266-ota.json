@@ -1,0 +1,29 @@
+{
+  "id": "firmware-044-esp8266-ota",
+  "category": "firmware/esp8266/ota",
+  "intents_zh": [
+    "ESP8266 OTA",
+    "NodeMCU 空中更新",
+    "ArduinoOTA 8266",
+    "遠端燒 ESP8266",
+    "8266 OTA upload"
+  ],
+  "intents_en": [
+    "ESP8266 OTA update",
+    "ArduinoOTA NodeMCU",
+    "wireless flash ESP8266",
+    "8266 firmware update",
+    "over the air ESP8266"
+  ],
+  "slots": [
+    "ssid",
+    "password",
+    "hostname"
+  ],
+  "code": "#include <ESP8266WiFi.h>\n#include <ArduinoOTA.h>\n\nvoid setup() {\n  Serial.begin(115200);\n  WiFi.begin(\"{{ssid}}\", \"{{password}}\");\n  while (WiFi.status() != WL_CONNECTED) delay(300);\n  ArduinoOTA.setHostname(\"{{hostname}}\");\n  ArduinoOTA.begin();\n}\n\nvoid loop() { ArduinoOTA.handle(); }",
+  "language": "ino",
+  "deps": [
+    "ArduinoOTA"
+  ],
+  "summary_zh": "ESP8266 ArduinoOTA 空中更新"
+}

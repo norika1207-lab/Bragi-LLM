@@ -1,0 +1,34 @@
+{
+  "id": "llm-tools-025-mcp-server-skeleton",
+  "category": "llm-tools/mcp/server",
+  "intents_zh": [
+    "MCP server 骨架",
+    "寫個 MCP server",
+    "fastmcp 範本",
+    "Model Context Protocol server",
+    "MCP tool 註冊",
+    "起一個 MCP",
+    "MCP minimal",
+    "MCP scaffold"
+  ],
+  "intents_en": [
+    "mcp server skeleton",
+    "write mcp server",
+    "fastmcp template",
+    "model context protocol server",
+    "mcp tool registration",
+    "start mcp",
+    "minimal mcp",
+    "mcp scaffold"
+  ],
+  "slots": [
+    "server_name",
+    "tool_name"
+  ],
+  "code": "from mcp.server.fastmcp import FastMCP\n\nmcp = FastMCP(\"{{server_name}}\")\n\n@mcp.tool()\ndef {{tool_name}}(query: str) -> str:\n    \"\"\"do something with query\"\"\"\n    return f\"got: {query}\"\n\nif __name__ == \"__main__\":\n    mcp.run()",
+  "language": "py",
+  "deps": [
+    "mcp"
+  ],
+  "summary_zh": "FastMCP 最小 MCP server 骨架"
+}

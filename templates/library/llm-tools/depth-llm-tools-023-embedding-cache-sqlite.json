@@ -1,0 +1,27 @@
+{
+  "id": "depth-llm-tools-023-embedding-cache-sqlite",
+  "category": "llm-tools/embedding/cache",
+  "intents_zh": [
+    "embedding sqlite 快取",
+    "避免重複呼叫 embed",
+    "hash 索引快取",
+    "本地 embedding 快取",
+    "embed cache 持久化"
+  ],
+  "intents_en": [
+    "embedding sqlite cache",
+    "avoid duplicate embed calls",
+    "hash indexed cache",
+    "local embedding cache",
+    "persistent embed cache"
+  ],
+  "slots": [
+    "db_path",
+    "model",
+    "embed_fn"
+  ],
+  "code": "import sqlite3, hashlib, json\n\nclass EmbedCache:\n    def __init__(self, path={{db_path}}):\n        self.db = sqlite3.connect(path)\n        self.db.execute(\"CREATE TABLE IF NOT EXISTS emb(k TEXT PRIMARY KEY, v BLOB)\")\n    def get(self, text):\n        k = hashlib.sha256(f\"{{{model}}}|{text}\".encode()).hexdigest()\n        row = self.db.execute(\"SELECT v FROM emb WHERE k=?\", (k,)).fetchone()\n        if row: return json.loads(row[0])\n        v = {{embed_fn}}(text)\n        self.db.execute(\"INSERT INTO emb VALUES(?,?)\", (k, json.dumps(v)))\n        self.db.commit()\n        return v",
+  "language": "python",
+  "deps": [],
+  "summary_zh": "用 sqlite 把 text+model hash 對應 embedding 快取下來"
+}

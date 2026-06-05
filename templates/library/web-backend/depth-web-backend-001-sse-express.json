@@ -1,0 +1,28 @@
+{
+  "id": "depth-web-backend-001-sse-express",
+  "category": "web-backend/sse/express",
+  "intents_zh": [
+    "Express SSE 端點",
+    "建立 server-sent events",
+    "推送即時訊息給瀏覽器",
+    "SSE 串流範例",
+    "Node 即時推播"
+  ],
+  "intents_en": [
+    "express sse endpoint",
+    "server-sent events node",
+    "push realtime to browser",
+    "sse stream example",
+    "node live push"
+  ],
+  "slots": [
+    "path",
+    "channel"
+  ],
+  "code": "app.get('{{path}}', (req, res) => {\n  res.setHeader('Content-Type', 'text/event-stream');\n  res.setHeader('Cache-Control', 'no-cache');\n  res.setHeader('Connection', 'keep-alive');\n  res.flushHeaders();\n  const send = (data) => res.write(`event: {{channel}}\\ndata: ${JSON.stringify(data)}\\n\\n`);\n  const id = setInterval(() => send({ ts: Date.now() }), 1000);\n  req.on('close', () => { clearInterval(id); res.end(); });\n});",
+  "language": "js",
+  "deps": [
+    "express"
+  ],
+  "summary_zh": "Express SSE 端點骨架"
+}

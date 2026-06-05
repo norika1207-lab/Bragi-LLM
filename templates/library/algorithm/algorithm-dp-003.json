@@ -1,0 +1,23 @@
+{
+  "id": "algorithm-dp-003",
+  "category": "algorithm/dp/knapsack_01",
+  "intents_zh": [
+    "01 背包",
+    "0/1 knapsack",
+    "背包 dp",
+    "給我 knapsack"
+  ],
+  "intents_en": [
+    "0/1 knapsack",
+    "knapsack dp",
+    "01 knapsack",
+    "write knapsack"
+  ],
+  "slots": [
+    "fn_name"
+  ],
+  "code": "def {{fn_name}}(weights, values, cap):\n    dp = [0]*(cap+1)\n    for w, v in zip(weights, values):\n        for c in range(cap, w-1, -1):\n            dp[c] = max(dp[c], dp[c-w] + v)\n    return dp[cap]",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "0/1 背包，一維滾動陣列"
+}

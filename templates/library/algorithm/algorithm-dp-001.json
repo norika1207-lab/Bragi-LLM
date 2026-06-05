@@ -1,0 +1,23 @@
+{
+  "id": "algorithm-dp-001",
+  "category": "algorithm/dp/lcs",
+  "intents_zh": [
+    "最長公共子序列",
+    "LCS",
+    "給我 lcs dp",
+    "兩字串 lcs"
+  ],
+  "intents_en": [
+    "LCS",
+    "longest common subsequence",
+    "lcs dp",
+    "two string lcs"
+  ],
+  "slots": [
+    "fn_name"
+  ],
+  "code": "def {{fn_name}}(a, b):\n    m, n = len(a), len(b)\n    dp = [[0]*(n+1) for _ in range(m+1)]\n    for i in range(m):\n        for j in range(n):\n            if a[i] == b[j]:\n                dp[i+1][j+1] = dp[i][j] + 1\n            else:\n                dp[i+1][j+1] = max(dp[i][j+1], dp[i+1][j])\n    return dp[m][n]",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "最長公共子序列長度"
+}

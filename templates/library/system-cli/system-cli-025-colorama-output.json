@@ -1,0 +1,23 @@
+{
+  "id": "system-cli-025-colorama-output",
+  "category": "system-cli/python/output",
+  "intents_zh": [
+    "python 終端上色",
+    "colorama 上色",
+    "print 彩色文字"
+  ],
+  "intents_en": [
+    "colorama colored output",
+    "python terminal colors",
+    "color print with colorama"
+  ],
+  "slots": [
+    "msg_var"
+  ],
+  "code": "from colorama import Fore, Style, init\ninit(autoreset=True)\n\ndef info(msg):    print(Fore.CYAN + '[i] ' + msg)\ndef ok(msg):      print(Fore.GREEN + '[ok] ' + msg)\ndef warn(msg):    print(Fore.YELLOW + '[!] ' + msg)\ndef err(msg):     print(Fore.RED + Style.BRIGHT + '[x] ' + msg)\n\ninfo('start')\nok('{{msg_var}} done')\nwarn('disk near full')\nerr('connection refused')",
+  "language": "py",
+  "deps": [
+    "colorama"
+  ],
+  "summary_zh": "colorama 四級上色日誌"
+}

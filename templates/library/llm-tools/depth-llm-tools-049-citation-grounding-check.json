@@ -1,0 +1,30 @@
+{
+  "id": "depth-llm-tools-049-citation-grounding-check",
+  "category": "llm-tools/retrieval/grounding",
+  "intents_zh": [
+    "檢查答案有來源",
+    "ungrounded 句子偵測",
+    "RAG grounding 驗證",
+    "幻覺檢查",
+    "句子比對來源"
+  ],
+  "intents_en": [
+    "check answer grounding",
+    "detect ungrounded sentences",
+    "RAG grounding verify",
+    "hallucination check",
+    "sentence-source match"
+  ],
+  "slots": [
+    "sentences",
+    "sources",
+    "embed_fn",
+    "threshold"
+  ],
+  "code": "import numpy as np\n\ndef grounded({{sentences}}, {{sources}}, {{embed_fn}}, {{threshold}}=0.6):\n    src_e = [{{embed_fn}}(s) for s in {{sources}}]\n    flags = []\n    for sent in {{sentences}}:\n        e = {{embed_fn}}(sent)\n        sims = [np.dot(e, se)/(np.linalg.norm(e)*np.linalg.norm(se)) for se in src_e]\n        flags.append(max(sims) >= {{threshold}})\n    return flags",
+  "language": "python",
+  "deps": [
+    "numpy"
+  ],
+  "summary_zh": "逐句跟所有來源 embedding 比對，低於門檻標 ungrounded"
+}

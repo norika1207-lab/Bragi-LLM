@@ -1,0 +1,29 @@
+{
+  "id": "web-frontend-batch3-045-svelte-table",
+  "category": "web-frontend/svelte/ui/table",
+  "intents_zh": [
+    "Svelte table",
+    "Svelte 資料表",
+    "Svelte each table",
+    "Svelte 排序表格",
+    "Svelte 動態表",
+    "Svelte 顯示資料"
+  ],
+  "intents_en": [
+    "svelte table",
+    "svelte data table",
+    "svelte each table",
+    "svelte sortable table",
+    "svelte dynamic table",
+    "svelte display data"
+  ],
+  "slots": [
+    "rows_prop"
+  ],
+  "code": "<script>\n  export let {{rows_prop}} = [];\n  let sortKey = null;\n  let asc = true;\n  $: headers = {{rows_prop}}[0] ? Object.keys({{rows_prop}}[0]) : [];\n  $: sorted = sortKey\n    ? [...{{rows_prop}}].sort((a, b) => {\n        const r = a[sortKey] > b[sortKey] ? 1 : -1;\n        return asc ? r : -r;\n      })\n    : {{rows_prop}};\n  function sortBy(k) {\n    if (sortKey === k) asc = !asc;\n    else { sortKey = k; asc = true; }\n  }\n</script>\n<table>\n  <thead>\n    <tr>{#each headers as h}<th on:click={() => sortBy(h)}>{h}</th>{/each}</tr>\n  </thead>\n  <tbody>\n    {#each sorted as r}\n      <tr>{#each headers as h}<td>{r[h]}</td>{/each}</tr>\n    {/each}\n  </tbody>\n</table>\n<style>\n  table { border-collapse: collapse; width: 100%; }\n  th, td { padding: .5rem; border-bottom: 1px solid #e5e7eb; text-align: left; }\n  th { cursor: pointer; background: #f9fafb; }\n</style>",
+  "language": "svelte",
+  "deps": [
+    "svelte"
+  ],
+  "summary_zh": "Svelte 可排序動態表格"
+}

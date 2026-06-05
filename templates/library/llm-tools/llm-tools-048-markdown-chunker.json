@@ -1,0 +1,31 @@
+{
+  "id": "llm-tools-048-markdown-chunker",
+  "category": "llm-tools/rag/markdown-chunker",
+  "intents_zh": [
+    "markdown 按標題切",
+    "md heading chunker",
+    "按 # 切塊",
+    "md 結構切",
+    "markdown header splitter",
+    "md 切塊保留 heading",
+    "langchain markdown splitter",
+    "md 拆段"
+  ],
+  "intents_en": [
+    "markdown heading splitter",
+    "split md by headers",
+    "markdown header chunker",
+    "heading-aware split",
+    "langchain markdown splitter",
+    "md structure chunker",
+    "md section splitter",
+    "split md to chunks"
+  ],
+  "slots": [],
+  "code": "from langchain_text_splitters import MarkdownHeaderTextSplitter\n\nheaders = [(\"#\", \"h1\"), (\"##\", \"h2\"), (\"###\", \"h3\")]\nsplitter = MarkdownHeaderTextSplitter(headers_to_split_on=headers)\n\ndef chunk_md(md: str):\n    return splitter.split_text(md)\n\nif __name__ == \"__main__\":\n    print(chunk_md(\"# A\\nhi\\n## B\\nhello\"))",
+  "language": "py",
+  "deps": [
+    "langchain-text-splitters"
+  ],
+  "summary_zh": "按 Markdown 標題層級切塊"
+}

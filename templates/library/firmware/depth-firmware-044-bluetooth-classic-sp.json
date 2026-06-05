@@ -1,0 +1,27 @@
+{
+  "id": "depth-firmware-044-bluetooth-classic-sp",
+  "category": "firmware/wireless/bt-classic",
+  "intents_zh": [
+    "藍牙 SPP",
+    "BluetoothSerial",
+    "序列藍牙",
+    "手機 BT 終端",
+    "BT 透傳"
+  ],
+  "intents_en": [
+    "bluetooth spp",
+    "bluetoothserial",
+    "serial over bt",
+    "phone bt terminal",
+    "bt passthrough"
+  ],
+  "slots": [
+    "bt_name"
+  ],
+  "code": "#include <BluetoothSerial.h>\nBluetoothSerial SerialBT;\nvoid setup() {\n    Serial.begin(115200);\n    SerialBT.begin(\"{{bt_name}}\");\n}\nvoid loop() {\n    if (Serial.available()) SerialBT.write(Serial.read());\n    if (SerialBT.available()) Serial.write(SerialBT.read());\n}",
+  "language": "cpp",
+  "deps": [
+    "BluetoothSerial"
+  ],
+  "summary_zh": "ESP32 Classic Bluetooth SPP 串列透傳"
+}

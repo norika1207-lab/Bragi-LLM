@@ -1,0 +1,28 @@
+{
+  "id": "depth-web-frontend-013-theme-toggle",
+  "category": "web-frontend/theming/css-variables",
+  "intents_zh": [
+    "主題切換按鈕",
+    "深色模式 toggle",
+    "useTheme 切換",
+    "light dark button",
+    "主題 icon"
+  ],
+  "intents_en": [
+    "theme toggle button",
+    "dark mode switch",
+    "useTheme hook",
+    "light dark icon toggle",
+    "mode switcher"
+  ],
+  "slots": [
+    "button_name"
+  ],
+  "code": "'use client';\nimport { useTheme } from 'next-themes';\nimport { Moon, Sun } from 'lucide-react';\n\nexport function {{button_name}}() {\n  const { theme, setTheme } = useTheme();\n  return (\n    <button onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')} aria-label=\"toggle theme\">\n      {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}\n    </button>\n  );\n}",
+  "language": "tsx",
+  "deps": [
+    "next-themes",
+    "lucide-react"
+  ],
+  "summary_zh": "next-themes 主題切換按鈕"
+}

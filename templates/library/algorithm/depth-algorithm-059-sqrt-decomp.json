@@ -1,0 +1,29 @@
+{
+  "id": "depth-algorithm-059-sqrt-decomp",
+  "category": "algorithm/sqrt/decomposition",
+  "intents_zh": [
+    "分塊算法",
+    "sqrt decomposition",
+    "平方分塊",
+    "區間和分塊",
+    "塊狀數組",
+    "O(sqrt n) 查詢",
+    "分塊模板"
+  ],
+  "intents_en": [
+    "sqrt decomposition",
+    "square root block",
+    "block decomposition",
+    "O(sqrt n) range sum",
+    "block array",
+    "sqrt block template",
+    "decomposition template"
+  ],
+  "slots": [
+    "arr"
+  ],
+  "code": "import math\n\nclass SqrtDecomp:\n    def __init__(self, a={{arr}}):\n        self.a = a[:]; self.n = len(a)\n        self.B = max(1, int(math.isqrt(self.n)))\n        self.blocks = [sum(a[i:i+self.B]) for i in range(0, self.n, self.B)]\n    def update(self, i, v):\n        b = i // self.B\n        self.blocks[b] += v - self.a[i]\n        self.a[i] = v\n    def query(self, l, r):\n        s = 0; bl = l // self.B; br = r // self.B\n        if bl == br:\n            return sum(self.a[l:r+1])\n        s += sum(self.a[l:(bl+1)*self.B])\n        for b in range(bl+1, br): s += self.blocks[b]\n        s += sum(self.a[br*self.B:r+1])\n        return s",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "平方分塊維護區間和支援單點更新"
+}

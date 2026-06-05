@@ -1,0 +1,29 @@
+{
+  "id": "firmware-070-mpy-oled",
+  "category": "firmware/micropython/display",
+  "intents_zh": [
+    "mpy OLED 顯示",
+    "SSD1306 micropython",
+    "mpy 顯示文字",
+    "ESP32 oled micropython",
+    "mpy 螢幕"
+  ],
+  "intents_en": [
+    "MicroPython SSD1306 OLED",
+    "mpy display text",
+    "ESP32 oled micropython",
+    "ssd1306 example mpy",
+    "draw text mpy"
+  ],
+  "slots": [
+    "sda_pin",
+    "scl_pin",
+    "text"
+  ],
+  "code": "from machine import Pin, I2C\nimport ssd1306\n\ni2c = I2C(0, sda=Pin({{sda_pin}}), scl=Pin({{scl_pin}}))\noled = ssd1306.SSD1306_I2C(128, 64, i2c)\noled.fill(0)\noled.text(\"{{text}}\", 0, 20)\noled.show()",
+  "language": "py",
+  "deps": [
+    "micropython-ssd1306"
+  ],
+  "summary_zh": "MicroPython SSD1306 OLED 文字顯示"
+}

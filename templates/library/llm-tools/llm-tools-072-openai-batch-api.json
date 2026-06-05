@@ -1,0 +1,33 @@
+{
+  "id": "llm-tools-072-openai-batch-api",
+  "category": "llm-tools/openai/batch-api",
+  "intents_zh": [
+    "openai batch api",
+    "批次離線跑 GPT",
+    "便宜批次推論",
+    "upload jsonl batch",
+    "openai batch 範例",
+    "批次任務 submit",
+    "非同步批跑",
+    "batch endpoint"
+  ],
+  "intents_en": [
+    "openai batch api",
+    "offline batch jobs",
+    "cheap batch inference",
+    "submit jsonl batch",
+    "openai batch example",
+    "async batch jobs",
+    "batch endpoint",
+    "bulk gpt jobs"
+  ],
+  "slots": [
+    "jsonl_path"
+  ],
+  "code": "from openai import OpenAI\n\nclient = OpenAI()\n\nf = client.files.create(file=open(\"{{jsonl_path}}\", \"rb\"), purpose=\"batch\")\nbatch = client.batches.create(\n    input_file_id=f.id,\n    endpoint=\"/v1/chat/completions\",\n    completion_window=\"24h\",\n)\nprint(\"batch id:\", batch.id, \"status:\", batch.status)",
+  "language": "py",
+  "deps": [
+    "openai"
+  ],
+  "summary_zh": "提交 OpenAI Batch API 離線任務"
+}

@@ -1,0 +1,29 @@
+{
+  "id": "depth-algorithm-017-shunting-yard",
+  "category": "algorithm/parser/shunting-yard",
+  "intents_zh": [
+    "調度場算法",
+    "shunting yard",
+    "中綴轉後綴",
+    "表達式解析",
+    "運算符優先級轉換",
+    "RPN 轉換",
+    "中綴轉 postfix"
+  ],
+  "intents_en": [
+    "shunting yard algorithm",
+    "infix to postfix",
+    "expression parser",
+    "operator precedence parsing",
+    "RPN conversion",
+    "Dijkstra shunting yard",
+    "infix to RPN"
+  ],
+  "slots": [
+    "expr"
+  ],
+  "code": "def shunting_yard(expr={{expr}}):\n    prec = {'+':1, '-':1, '*':2, '/':2, '^':3}\n    right_assoc = {'^'}\n    out = []; ops = []\n    tokens = expr.replace('(', ' ( ').replace(')', ' ) ').split()\n    for tok in tokens:\n        if tok.replace('.', '', 1).isdigit():\n            out.append(tok)\n        elif tok in prec:\n            while ops and ops[-1] != '(' and (prec[ops[-1]] > prec[tok] or (prec[ops[-1]] == prec[tok] and tok not in right_assoc)):\n                out.append(ops.pop())\n            ops.append(tok)\n        elif tok == '(':\n            ops.append(tok)\n        elif tok == ')':\n            while ops and ops[-1] != '(': out.append(ops.pop())\n            ops.pop()\n    while ops: out.append(ops.pop())\n    return out",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "調度場算法將中綴表達式轉為後綴 RPN"
+}

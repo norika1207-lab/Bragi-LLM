@@ -1,0 +1,33 @@
+{
+  "id": "llm-tools-029-llm-judge",
+  "category": "llm-tools/eval/llm-judge",
+  "intents_zh": [
+    "LLM as judge",
+    "用 LLM 當評審",
+    "裁判模型",
+    "pairwise judge",
+    "LLM 評分",
+    "判斷誰較好",
+    "judge prompt",
+    "裁判 prompt"
+  ],
+  "intents_en": [
+    "llm as judge",
+    "pairwise judge",
+    "llm grader",
+    "judge model wrapper",
+    "llm scoring",
+    "compare two answers",
+    "judge prompt",
+    "evaluator llm"
+  ],
+  "slots": [
+    "judge_model"
+  ],
+  "code": "from openai import OpenAI\nimport re\n\nclient = OpenAI()\n\nJUDGE = (\"Compare A vs B for question. Reply with one of: A_BETTER, B_BETTER, TIE.\\n\"\n         \"Q: {q}\\nA: {a}\\nB: {b}\")\n\ndef judge(q: str, a: str, b: str) -> str:\n    r = client.chat.completions.create(\n        model=\"{{judge_model}}\",\n        messages=[{\"role\": \"user\", \"content\": JUDGE.format(q=q, a=a, b=b)}],\n    )\n    out = r.choices[0].message.content\n    m = re.search(r\"(A_BETTER|B_BETTER|TIE)\", out)\n    return m.group(1) if m else \"TIE\"\n\nif __name__ == \"__main__\":\n    print(judge(\"2+2?\", \"4\", \"five\"))",
+  "language": "py",
+  "deps": [
+    "openai"
+  ],
+  "summary_zh": "LLM as judge pairwise 比較"
+}

@@ -1,0 +1,27 @@
+{
+  "id": "web-frontend-batch3-029-html-modal",
+  "category": "web-frontend/html/ui/modal",
+  "intents_zh": [
+    "HTML modal",
+    "原生 dialog",
+    "HTML 對話框",
+    "vanilla 彈窗",
+    "HTML5 dialog tag",
+    "靜態 modal"
+  ],
+  "intents_en": [
+    "html modal",
+    "native dialog",
+    "vanilla popup",
+    "html5 dialog tag",
+    "static modal",
+    "raw modal"
+  ],
+  "slots": [
+    "title"
+  ],
+  "code": "<dialog id=\"m\">\n  <h2>{{title}}</h2>\n  <p>Modal body content here.</p>\n  <form method=\"dialog\">\n    <button>Close</button>\n  </form>\n</dialog>\n<button id=\"open\">Open modal</button>\n<script>\n  const m = document.getElementById('m');\n  document.getElementById('open').onclick = () => m.showModal();\n</script>\n<style>\n  dialog::backdrop { background: rgba(0,0,0,.5); }\n  dialog { border: 0; border-radius: 8px; padding: 1.5rem; min-width: 320px; }\n</style>",
+  "language": "html",
+  "deps": [],
+  "summary_zh": "原生 HTML5 dialog modal"
+}

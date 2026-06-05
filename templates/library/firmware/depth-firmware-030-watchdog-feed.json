@@ -1,0 +1,27 @@
+{
+  "id": "depth-firmware-030-watchdog-feed",
+  "category": "firmware/rtos/watchdog",
+  "intents_zh": [
+    "看門狗喂狗",
+    "esp_task_wdt_reset",
+    "防止 watchdog reset",
+    "task watchdog",
+    "定時 feed"
+  ],
+  "intents_en": [
+    "watchdog feed",
+    "esp_task_wdt_reset",
+    "prevent wdt reset",
+    "task watchdog",
+    "feed dog"
+  ],
+  "slots": [
+    "timeout_sec"
+  ],
+  "code": "#include \"esp_task_wdt.h\"\nesp_task_wdt_init({{timeout_sec}}, true);\nesp_task_wdt_add(NULL);\nwhile (1) {\n    // do work\n    esp_task_wdt_reset();\n    vTaskDelay(pdMS_TO_TICKS(500));\n}",
+  "language": "c",
+  "deps": [
+    "esp-idf"
+  ],
+  "summary_zh": "註冊 task 到 watchdog 並定時餵狗避免重啟"
+}

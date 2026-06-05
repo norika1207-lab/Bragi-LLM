@@ -1,0 +1,28 @@
+{
+  "id": "firmware-057-stm32-uart-print",
+  "category": "firmware/stm32/uart",
+  "intents_zh": [
+    "STM32 UART 印字",
+    "HAL_UART_Transmit",
+    "STM32 序列輸出",
+    "stm32 printf",
+    "stm32 hello uart"
+  ],
+  "intents_en": [
+    "STM32 UART print",
+    "HAL_UART_Transmit example",
+    "STM32 serial output",
+    "printf STM32",
+    "UART hello world"
+  ],
+  "slots": [
+    "uart_handle",
+    "message"
+  ],
+  "code": "#include \"main.h\"\n#include <string.h>\nextern UART_HandleTypeDef {{uart_handle}};\n\nint main(void) {\n  HAL_Init();\n  SystemClock_Config();\n  MX_GPIO_Init();\n  MX_USART2_UART_Init();\n  const char* msg = \"{{message}}\\r\\n\";\n  while (1) {\n    HAL_UART_Transmit(&{{uart_handle}}, (uint8_t*)msg, strlen(msg), HAL_MAX_DELAY);\n    HAL_Delay(1000);\n  }\n}",
+  "language": "c",
+  "deps": [
+    "STM32 HAL"
+  ],
+  "summary_zh": "STM32 UART 週期送字串"
+}

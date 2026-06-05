@@ -1,0 +1,28 @@
+{
+  "id": "web-backend-016-express-webhook",
+  "category": "web-backend/express/webhook",
+  "intents_zh": [
+    "express webhook receiver",
+    "收 stripe webhook",
+    "驗證簽章 webhook",
+    "raw body 收 webhook",
+    "github webhook handler"
+  ],
+  "intents_en": [
+    "webhook receiver express",
+    "stripe webhook verify",
+    "github webhook handler",
+    "raw body webhook",
+    "verify webhook signature"
+  ],
+  "slots": [
+    "webhook_secret_env",
+    "event_path"
+  ],
+  "code": "const express = require('express');\nconst crypto = require('crypto');\nconst router = express.Router();\n\nrouter.post('{{event_path}}', express.raw({ type: 'application/json' }), (req, res) => {\n  const sig = req.headers['x-signature'];\n  const expected = crypto.createHmac('sha256', process.env.{{webhook_secret_env}})\n    .update(req.body).digest('hex');\n  if (sig !== expected) return res.status(401).end();\n  const event = JSON.parse(req.body.toString());\n  console.log('event:', event.type);\n  res.json({ received: true });\n});\n\nmodule.exports = router;",
+  "language": "js",
+  "deps": [
+    "express"
+  ],
+  "summary_zh": "Express HMAC 簽章 webhook 接收器"
+}

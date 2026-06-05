@@ -1,0 +1,29 @@
+{
+  "id": "web-backend-069-django-celery",
+  "category": "web-backend/django/queue",
+  "intents_zh": [
+    "django celery 設定",
+    "celery task django",
+    "background task django",
+    "celery worker django",
+    "async job django"
+  ],
+  "intents_en": [
+    "django celery setup",
+    "celery task django",
+    "background task django",
+    "celery worker django",
+    "async job django"
+  ],
+  "slots": [
+    "broker_url"
+  ],
+  "code": "# project/celery.py\nimport os\nfrom celery import Celery\n\nos.environ.setdefault('DJANGO_SETTINGS_MODULE', 'project.settings')\napp = Celery('project', broker='{{broker_url}}', backend='{{broker_url}}')\napp.config_from_object('django.conf:settings', namespace='CELERY')\napp.autodiscover_tasks()\n\n# myapp/tasks.py\nfrom celery import shared_task\n\n@shared_task\ndef send_welcome(user_id: int):\n    print(f'sending welcome to {user_id}')\n    return True",
+  "language": "py",
+  "deps": [
+    "django",
+    "celery",
+    "redis"
+  ],
+  "summary_zh": "Django + Celery 任務設定"
+}

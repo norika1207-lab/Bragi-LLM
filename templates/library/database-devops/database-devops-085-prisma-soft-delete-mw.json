@@ -1,0 +1,23 @@
+{
+  "id": "database-devops-085-prisma-soft-delete-mw",
+  "category": "database-devops/orm/prisma",
+  "intents_zh": [
+    "prisma soft delete middleware",
+    "prisma 軟刪除中介層",
+    "extension 加 deletedAt"
+  ],
+  "intents_en": [
+    "prisma soft delete middleware",
+    "prisma extension soft delete",
+    "auto deletedAt"
+  ],
+  "slots": [
+    "model_name"
+  ],
+  "code": "import { PrismaClient } from '@prisma/client'\n\nexport const prisma = new PrismaClient().$extends({\n  query: {\n    {{model_name}}: {\n      async findMany({ args, query }) {\n        args.where = { ...args.where, deletedAt: null }\n        return query(args)\n      },\n      async delete({ args, query }) {\n        return (prisma as any).{{model_name}}.update({ where: args.where, data: { deletedAt: new Date() } })\n      },\n    },\n  },\n})",
+  "language": "ts",
+  "deps": [
+    "@prisma/client"
+  ],
+  "summary_zh": "prisma extension 實作軟刪除"
+}

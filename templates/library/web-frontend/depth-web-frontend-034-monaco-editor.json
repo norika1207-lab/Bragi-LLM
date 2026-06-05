@@ -1,0 +1,28 @@
+{
+  "id": "depth-web-frontend-034-monaco-editor",
+  "category": "web-frontend/editors/monaco",
+  "intents_zh": [
+    "Monaco 編輯器",
+    "程式碼編輯器 react",
+    "@monaco-editor/react",
+    "語法高亮 editor",
+    "內嵌 VSCode"
+  ],
+  "intents_en": [
+    "monaco editor react",
+    "code editor component",
+    "@monaco-editor/react",
+    "embedded vscode editor",
+    "syntax highlight editor"
+  ],
+  "slots": [
+    "component_name",
+    "language"
+  ],
+  "code": "'use client';\nimport Editor from '@monaco-editor/react';\n\nexport function {{component_name}}({ value, onChange }: { value: string; onChange: (v: string) => void }) {\n  return (\n    <Editor\n      height=\"320px\"\n      defaultLanguage=\"{{language}}\"\n      value={value}\n      onChange={(v) => onChange(v ?? '')}\n      theme=\"vs-dark\"\n      options={{ minimap: { enabled: false }, fontSize: 13, scrollBeyondLastLine: false }}\n    />\n  );\n}",
+  "language": "tsx",
+  "deps": [
+    "@monaco-editor/react"
+  ],
+  "summary_zh": "Monaco 程式碼編輯器包裝"
+}

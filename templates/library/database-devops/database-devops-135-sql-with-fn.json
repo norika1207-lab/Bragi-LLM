@@ -1,0 +1,21 @@
+{
+  "id": "database-devops-135-sql-with-fn",
+  "category": "database-devops/sql/postgres",
+  "intents_zh": [
+    "postgres function 函式",
+    "plpgsql 範本",
+    "UDF 自訂函式"
+  ],
+  "intents_en": [
+    "postgres function plpgsql",
+    "user-defined function",
+    "plpgsql template"
+  ],
+  "slots": [
+    "fn_name"
+  ],
+  "code": "CREATE OR REPLACE FUNCTION {{fn_name}}(input_id INT)\nRETURNS TABLE(id INT, name TEXT, score NUMERIC) AS $$\nBEGIN\n  RETURN QUERY\n  SELECT u.id, u.name, COALESCE(SUM(o.amount), 0) AS score\n  FROM users u\n  LEFT JOIN orders o ON o.user_id = u.id\n  WHERE u.id = input_id\n  GROUP BY u.id, u.name;\nEND;\n$$ LANGUAGE plpgsql STABLE;",
+  "language": "sql",
+  "deps": [],
+  "summary_zh": "Postgres plpgsql 自訂函式"
+}

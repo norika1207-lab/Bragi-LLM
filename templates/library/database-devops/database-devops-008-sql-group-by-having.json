@@ -1,0 +1,28 @@
+{
+  "id": "database-devops-008-sql-group-by-having",
+  "category": "database-devops/sql/aggregation",
+  "intents_zh": [
+    "分組聚合加 having 過濾",
+    "GROUP BY HAVING 範本",
+    "聚合後篩選",
+    "每組超過 N 筆",
+    "group having"
+  ],
+  "intents_en": [
+    "group by with having",
+    "aggregate filter",
+    "groups over threshold",
+    "having clause example",
+    "filter aggregated rows"
+  ],
+  "slots": [
+    "table",
+    "group_col",
+    "metric_col",
+    "threshold"
+  ],
+  "code": "SELECT {{group_col}}, COUNT(*) AS cnt, AVG({{metric_col}}) AS avg_val\nFROM {{table}}\nGROUP BY {{group_col}}\nHAVING COUNT(*) > {{threshold}}\nORDER BY cnt DESC;",
+  "language": "sql",
+  "deps": [],
+  "summary_zh": "GROUP BY 加 HAVING 過濾"
+}

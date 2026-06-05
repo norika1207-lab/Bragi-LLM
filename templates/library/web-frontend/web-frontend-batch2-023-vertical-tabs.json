@@ -1,0 +1,27 @@
+{
+  "id": "web-frontend-batch2-023-vertical-tabs",
+  "category": "web-frontend/react/layout/vertical-tabs",
+  "intents_zh": [
+    "垂直 tabs",
+    "直立頁籤",
+    "左側 tab",
+    "設定頁 tab",
+    "縱向分頁",
+    "設定分類 tabs"
+  ],
+  "intents_en": [
+    "vertical tabs",
+    "side tabs",
+    "left tabs",
+    "settings tabs",
+    "stacked tabs",
+    "column tabs"
+  ],
+  "slots": [
+    "tabs"
+  ],
+  "code": "import { useState } from 'react';\n\nexport function VerticalTabs() {\n  const tabs = {{tabs}};\n  const [active, setActive] = useState(tabs[0].id);\n  return (\n    <div className=\"flex gap-6\">\n      <div className=\"w-48 flex flex-col\">\n        {tabs.map((t) => (\n          <button key={t.id} onClick={() => setActive(t.id)}\n            className={`text-left px-4 py-2 rounded ${active === t.id ? 'bg-blue-50 text-blue-700' : 'hover:bg-gray-50'}`}>\n            {t.label}\n          </button>\n        ))}\n      </div>\n      <div className=\"flex-1\">{tabs.find((t) => t.id === active)?.content}</div>\n    </div>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "設定頁風格的垂直 tab"
+}

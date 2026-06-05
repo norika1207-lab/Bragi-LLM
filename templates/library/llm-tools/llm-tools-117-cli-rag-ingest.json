@@ -1,0 +1,35 @@
+{
+  "id": "llm-tools-117-cli-rag-ingest",
+  "category": "llm-tools/rag/ingest-cli",
+  "intents_zh": [
+    "文件 ingest CLI",
+    "資料夾批次 ingest",
+    "掃描 folder 建索引",
+    "cli ingest 工具",
+    "批次匯入文件",
+    "ingest script",
+    "RAG 入庫 cli",
+    "folder to vector store"
+  ],
+  "intents_en": [
+    "folder ingest cli",
+    "batch ingest documents",
+    "build index from folder",
+    "cli ingest tool",
+    "rag ingest script",
+    "import docs to vector store",
+    "folder to vector store",
+    "ingest script"
+  ],
+  "slots": [
+    "docs_dir",
+    "index_path",
+    "embed_model"
+  ],
+  "code": "import glob, pickle\nfrom sentence_transformers import SentenceTransformer\nfrom pathlib import Path\n\nmodel = SentenceTransformer(\"{{embed_model}}\")\n\ndef ingest(folder: str = \"{{docs_dir}}\", out: str = \"{{index_path}}\"):\n    files = glob.glob(f\"{folder}/**/*.txt\", recursive=True)\n    docs = [Path(f).read_text(errors=\"ignore\") for f in files]\n    vecs = model.encode(docs, normalize_embeddings=True, show_progress_bar=True)\n    with open(out, \"wb\") as f:\n        pickle.dump({\"docs\": docs, \"paths\": files, \"vecs\": vecs}, f)\n    print(f\"ingested {len(docs)} docs -> {out}\")\n\nif __name__ == \"__main__\":\n    ingest()",
+  "language": "py",
+  "deps": [
+    "sentence-transformers"
+  ],
+  "summary_zh": "目錄文件批次 ingest 成 pickle 索引"
+}

@@ -1,0 +1,24 @@
+{
+  "id": "system-cli-024-rich-table",
+  "category": "system-cli/python/output",
+  "intents_zh": [
+    "rich 印表格",
+    "終端漂亮表格",
+    "python rich table"
+  ],
+  "intents_en": [
+    "rich table output",
+    "pretty terminal table",
+    "python rich table example"
+  ],
+  "slots": [
+    "col_a",
+    "col_b"
+  ],
+  "code": "from rich.console import Console\nfrom rich.table import Table\n\nconsole = Console()\ntable = Table(title='Report')\ntable.add_column('{{col_a}}', style='cyan')\ntable.add_column('{{col_b}}', style='magenta', justify='right')\n\nrows = [('alpha', '1'), ('beta', '2'), ('gamma', '3')]\nfor a, b in rows:\n    table.add_row(a, b)\n\nconsole.print(table)",
+  "language": "py",
+  "deps": [
+    "rich"
+  ],
+  "summary_zh": "rich Table 終端表格"
+}

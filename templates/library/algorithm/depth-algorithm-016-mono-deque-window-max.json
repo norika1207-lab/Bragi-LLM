@@ -1,0 +1,30 @@
+{
+  "id": "depth-algorithm-016-mono-deque-window-max",
+  "category": "algorithm/sliding/monotonic-deque",
+  "intents_zh": [
+    "單調隊列滑動窗口最大",
+    "monotonic deque",
+    "滑窗最大值",
+    "sliding window maximum",
+    "O(n) 窗口最值",
+    "單調雙端隊列",
+    "滑動窗口最值模板"
+  ],
+  "intents_en": [
+    "sliding window maximum",
+    "monotonic deque",
+    "O(n) window max",
+    "deque sliding max",
+    "window maximum template",
+    "sliding max monotonic",
+    "leetcode 239"
+  ],
+  "slots": [
+    "arr",
+    "k"
+  ],
+  "code": "from collections import deque\n\ndef sliding_max(a={{arr}}, k={{k}}):\n    dq = deque(); res = []\n    for i, x in enumerate(a):\n        while dq and a[dq[-1]] <= x: dq.pop()\n        dq.append(i)\n        if dq[0] <= i - k: dq.popleft()\n        if i >= k - 1: res.append(a[dq[0]])\n    return res",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "單調雙端隊列實作滑窗最大值 O(n)"
+}

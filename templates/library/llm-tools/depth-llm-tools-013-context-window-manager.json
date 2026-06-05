@@ -1,0 +1,27 @@
+{
+  "id": "depth-llm-tools-013-context-window-manager",
+  "category": "llm-tools/context/manager",
+  "intents_zh": [
+    "context window 管理",
+    "訊息陣列裁切",
+    "保留 system + 最新",
+    "對話歷史窗口",
+    "sliding context"
+  ],
+  "intents_en": [
+    "context window manager",
+    "message array trim",
+    "keep system plus recent",
+    "conversation window",
+    "sliding context"
+  ],
+  "slots": [
+    "messages",
+    "tokenizer",
+    "budget"
+  ],
+  "code": "def fit_window({{messages}}, {{tokenizer}}, {{budget}}):\n    sys = [m for m in {{messages}} if m[\"role\"] == \"system\"]\n    rest = [m for m in {{messages}} if m[\"role\"] != \"system\"]\n    used = sum(len({{tokenizer}}.encode(m[\"content\"])) for m in sys)\n    out = []\n    for m in reversed(rest):\n        t = len({{tokenizer}}.encode(m[\"content\"]))\n        if used + t > {{budget}}: break\n        out.append(m); used += t\n    return sys + list(reversed(out))",
+  "language": "python",
+  "deps": [],
+  "summary_zh": "保留 system 訊息與從尾巴塞回符合預算的對話"
+}

@@ -1,0 +1,29 @@
+{
+  "id": "web-backend-038-flask-sqlalchemy",
+  "category": "web-backend/flask/db",
+  "intents_zh": [
+    "flask-sqlalchemy 範例",
+    "flask 接 db",
+    "ORM model flask",
+    "flask 建表",
+    "sqlalchemy 用法"
+  ],
+  "intents_en": [
+    "flask sqlalchemy example",
+    "flask db model",
+    "orm setup flask",
+    "sqlalchemy with flask",
+    "db connection flask"
+  ],
+  "slots": [
+    "db_uri",
+    "table_name"
+  ],
+  "code": "from flask import Flask\nfrom flask_sqlalchemy import SQLAlchemy\n\napp = Flask(__name__)\napp.config['SQLALCHEMY_DATABASE_URI'] = '{{db_uri}}'\napp.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False\ndb = SQLAlchemy(app)\n\nclass {{table_name|capitalize}}(db.Model):\n    __tablename__ = '{{table_name}}'\n    id = db.Column(db.Integer, primary_key=True)\n    name = db.Column(db.String(120), nullable=False)\n\nwith app.app_context():\n    db.create_all()",
+  "language": "py",
+  "deps": [
+    "flask",
+    "flask-sqlalchemy"
+  ],
+  "summary_zh": "Flask-SQLAlchemy ORM 設定"
+}

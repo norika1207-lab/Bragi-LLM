@@ -1,0 +1,24 @@
+{
+  "id": "depth-database-devops-017-argocd-appset",
+  "category": "database-devops/gitops/argocd",
+  "intents_zh": [
+    "ApplicationSet 多環境",
+    "argocd generator",
+    "多 cluster 套同一份 manifest"
+  ],
+  "intents_en": [
+    "ApplicationSet multi env",
+    "argocd generator",
+    "multi cluster same manifest"
+  ],
+  "slots": [
+    "set_name",
+    "repo_url"
+  ],
+  "code": "apiVersion: argoproj.io/v1alpha1\nkind: ApplicationSet\nmetadata:\n  name: {{set_name}}\nspec:\n  generators:\n    - list:\n        elements:\n          - env: dev\n          - env: staging\n          - env: prod\n  template:\n    metadata:\n      name: '{{set_name}}-{{`{{env}}`}}'\n    spec:\n      project: default\n      source:\n        repoURL: {{repo_url}}\n        path: 'overlays/{{`{{env}}`}}'\n      destination:\n        server: https://kubernetes.default.svc\n        namespace: '{{`{{env}}`}}'",
+  "language": "yaml",
+  "deps": [
+    "argocd"
+  ],
+  "summary_zh": "ApplicationSet 一份 spec 展開多環境"
+}

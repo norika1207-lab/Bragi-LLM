@@ -1,0 +1,27 @@
+{
+  "id": "web-backend-062-fastapi-csv",
+  "category": "web-backend/fastapi/export",
+  "intents_zh": [
+    "fastapi csv 匯出",
+    "下載 csv fastapi",
+    "stream csv fastapi",
+    "CSV endpoint",
+    "產生 csv fastapi"
+  ],
+  "intents_en": [
+    "fastapi csv export",
+    "download csv fastapi",
+    "stream csv fastapi",
+    "csv endpoint",
+    "generate csv fastapi"
+  ],
+  "slots": [
+    "filename"
+  ],
+  "code": "from fastapi import APIRouter\nfrom fastapi.responses import StreamingResponse\nimport csv, io\n\nrouter = APIRouter()\n\n@router.get('/export')\ndef export():\n    def gen():\n        buf = io.StringIO()\n        w = csv.writer(buf)\n        w.writerow(['id', 'name'])\n        yield buf.getvalue(); buf.seek(0); buf.truncate(0)\n        for i in range(100):\n            w.writerow([i, f'item-{i}'])\n            yield buf.getvalue(); buf.seek(0); buf.truncate(0)\n    return StreamingResponse(gen(), media_type='text/csv',\n        headers={'Content-Disposition': 'attachment; filename=\"{{filename}}.csv\"'})",
+  "language": "py",
+  "deps": [
+    "fastapi"
+  ],
+  "summary_zh": "FastAPI 串流 CSV 匯出"
+}

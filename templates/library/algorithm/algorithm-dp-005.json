@@ -1,0 +1,23 @@
+{
+  "id": "algorithm-dp-005",
+  "category": "algorithm/dp/lis",
+  "intents_zh": [
+    "最長遞增子序列",
+    "LIS",
+    "給我 lis nlogn",
+    "patience sort"
+  ],
+  "intents_en": [
+    "LIS",
+    "longest increasing subsequence",
+    "lis nlogn",
+    "patience sort lis"
+  ],
+  "slots": [
+    "fn_name"
+  ],
+  "code": "from bisect import bisect_left\n\ndef {{fn_name}}(arr):\n    tails = []\n    for x in arr:\n        i = bisect_left(tails, x)\n        if i == len(tails):\n            tails.append(x)\n        else:\n            tails[i] = x\n    return len(tails)",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "LIS 長度，O(n log n)"
+}

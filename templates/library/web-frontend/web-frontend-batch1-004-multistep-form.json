@@ -1,0 +1,27 @@
+{
+  "id": "web-frontend-batch1-004-multistep-form",
+  "category": "web-frontend/react/forms/multi-step",
+  "intents_zh": [
+    "多步驟表單",
+    "React wizard form",
+    "分步驟 form",
+    "step by step 表單",
+    "多頁 form 流程",
+    "onboarding 多步驟"
+  ],
+  "intents_en": [
+    "multi step form",
+    "wizard form react",
+    "stepper form",
+    "multi page form",
+    "step by step form",
+    "onboarding wizard"
+  ],
+  "slots": [
+    "component_name"
+  ],
+  "code": "import { useState } from 'react';\n\nexport default function {{component_name}}() {\n  const [step, setStep] = useState(0);\n  const [data, setData] = useState({ name: '', email: '', plan: '' });\n  const steps = [\n    <input key=\"n\" placeholder=\"Name\" value={data.name} onChange={(e) => setData({ ...data, name: e.target.value })} />,\n    <input key=\"e\" placeholder=\"Email\" value={data.email} onChange={(e) => setData({ ...data, email: e.target.value })} />,\n    <select key=\"p\" value={data.plan} onChange={(e) => setData({ ...data, plan: e.target.value })}>\n      <option value=\"\">Pick plan</option>\n      <option value=\"free\">Free</option>\n      <option value=\"pro\">Pro</option>\n    </select>,\n  ];\n\n  return (\n    <div>\n      <p>Step {step + 1} / {steps.length}</p>\n      {steps[step]}\n      <div>\n        <button onClick={() => setStep((s) => Math.max(0, s - 1))} disabled={step === 0}>Back</button>\n        <button onClick={() => setStep((s) => Math.min(steps.length - 1, s + 1))} disabled={step === steps.length - 1}>Next</button>\n      </div>\n    </div>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "多步驟 wizard form 三步驟"
+}

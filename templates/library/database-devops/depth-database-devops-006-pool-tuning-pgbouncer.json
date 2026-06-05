@@ -1,0 +1,28 @@
+{
+  "id": "depth-database-devops-006-pool-tuning-pgbouncer",
+  "category": "database-devops/postgres/pool",
+  "intents_zh": [
+    "pgbouncer 設定",
+    "連線池調校",
+    "transaction pooling 範例",
+    "max_client_conn"
+  ],
+  "intents_en": [
+    "pgbouncer config",
+    "connection pool tuning",
+    "transaction pooling example",
+    "max_client_conn"
+  ],
+  "slots": [
+    "db_name",
+    "db_host",
+    "pool_size",
+    "max_clients"
+  ],
+  "code": "[databases]\n{{db_name}} = host={{db_host}} port=5432 dbname={{db_name}}\n\n[pgbouncer]\nlisten_addr = 0.0.0.0\nlisten_port = 6432\nauth_type = scram-sha-256\nauth_file = /etc/pgbouncer/userlist.txt\npool_mode = transaction\nmax_client_conn = {{max_clients}}\ndefault_pool_size = {{pool_size}}\nreserve_pool_size = 5\nserver_idle_timeout = 600\nlog_connections = 0\nlog_disconnections = 0",
+  "language": "ini",
+  "deps": [
+    "pgbouncer"
+  ],
+  "summary_zh": "pgbouncer transaction mode 連線池基本配置"
+}

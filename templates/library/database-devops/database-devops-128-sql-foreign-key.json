@@ -1,0 +1,23 @@
+{
+  "id": "database-devops-128-sql-foreign-key",
+  "category": "database-devops/sql/ddl",
+  "intents_zh": [
+    "SQL 外鍵",
+    "加 foreign key",
+    "references 設定"
+  ],
+  "intents_en": [
+    "foreign key constraint",
+    "add references",
+    "sql fk"
+  ],
+  "slots": [
+    "child_table",
+    "child_col",
+    "parent_table"
+  ],
+  "code": "ALTER TABLE {{child_table}}\nADD CONSTRAINT fk_{{child_table}}_{{child_col}}\nFOREIGN KEY ({{child_col}})\nREFERENCES {{parent_table}}(id)\nON DELETE CASCADE\nON UPDATE NO ACTION;",
+  "language": "sql",
+  "deps": [],
+  "summary_zh": "加外鍵約束含 CASCADE"
+}

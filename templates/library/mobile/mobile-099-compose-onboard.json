@@ -1,0 +1,33 @@
+{
+  "id": "mobile-099-compose-onboard",
+  "category": "mobile/compose/onboarding",
+  "intents_zh": [
+    "Compose HorizontalPager onboarding",
+    "Compose 引導頁",
+    "Compose 教學三頁",
+    "jetpack compose intro",
+    "Compose pager onboarding",
+    "Compose 新手 carousel",
+    "Compose onboarding 範例"
+  ],
+  "intents_en": [
+    "compose HorizontalPager onboarding",
+    "compose intro pages",
+    "compose three page tutorial",
+    "jetpack compose carousel",
+    "compose pager onboarding",
+    "compose first launch",
+    "compose walkthrough"
+  ],
+  "slots": [
+    "t1",
+    "t2",
+    "t3"
+  ],
+  "code": "import androidx.compose.foundation.layout.*\nimport androidx.compose.foundation.pager.HorizontalPager\nimport androidx.compose.foundation.pager.rememberPagerState\nimport androidx.compose.material3.Text\nimport androidx.compose.runtime.Composable\nimport androidx.compose.ui.Alignment\nimport androidx.compose.ui.Modifier\n@Composable\nfun Onboard(){\n  val pages=listOf(\"{{t1}}\",\"{{t2}}\",\"{{t3}}\")\n  val st=rememberPagerState{pages.size}\n  HorizontalPager(state=st,modifier=Modifier.fillMaxSize()){i->Box(Modifier.fillMaxSize(),contentAlignment=Alignment.Center){Text(pages[i])}}}",
+  "language": "kt",
+  "deps": [
+    "androidx.compose.foundation"
+  ],
+  "summary_zh": "Compose HorizontalPager onboarding 三頁"
+}

@@ -1,0 +1,27 @@
+{
+  "id": "mobile-117-swiftui-sheet",
+  "category": "mobile/swiftui/feedback",
+  "intents_zh": [
+    "SwiftUI sheet",
+    "SwiftUI 彈出 sheet",
+    "SwiftUI presentation",
+    "SwiftUI modal",
+    "Swift sheet 範例",
+    "SwiftUI sheet binding",
+    "SwiftUI 半屏"
+  ],
+  "intents_en": [
+    "swiftui sheet",
+    "swiftui modal sheet",
+    "swiftui presentation",
+    "sheet binding swiftui",
+    "swiftui half sheet",
+    "present sheet swiftui",
+    "swiftui modal example"
+  ],
+  "slots": [],
+  "code": "import SwiftUI\nstruct Host:View{@State var show=false\n  var body:some View{Button(\"Open\"){show=true}.sheet(isPresented:$show){VStack{Text(\"sheet\");Button(\"Close\"){show=false}}.presentationDetents([.medium,.large])}}}",
+  "language": "swift",
+  "deps": [],
+  "summary_zh": "SwiftUI sheet with detents"
+}

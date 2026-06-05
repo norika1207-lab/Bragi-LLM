@@ -1,0 +1,31 @@
+{
+  "id": "depth-llm-tools-020-instructor-wrapper",
+  "category": "llm-tools/structured/instructor",
+  "intents_zh": [
+    "instructor 結構化輸出",
+    "Pydantic 自動模型輸出",
+    "response_model 包裝",
+    "強型別 LLM 回應",
+    "instructor 用法"
+  ],
+  "intents_en": [
+    "instructor structured output",
+    "Pydantic auto LLM model",
+    "response_model wrapper",
+    "typed LLM response",
+    "instructor usage"
+  ],
+  "slots": [
+    "model",
+    "prompt",
+    "schema_class"
+  ],
+  "code": "import instructor\nfrom openai import OpenAI\n\nclient = instructor.from_openai(OpenAI())\nresult = client.chat.completions.create(\n    model={{model}},\n    response_model={{schema_class}},\n    messages=[{\"role\": \"user\", \"content\": {{prompt}}}],\n    max_retries=3,\n)",
+  "language": "python",
+  "deps": [
+    "instructor",
+    "openai",
+    "pydantic"
+  ],
+  "summary_zh": "instructor 庫直接拿 Pydantic class 當結構輸出 schema"
+}

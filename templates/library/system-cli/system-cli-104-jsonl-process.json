@@ -1,0 +1,23 @@
+{
+  "id": "system-cli-104-jsonl-process",
+  "category": "system-cli/data/jsonl",
+  "intents_zh": [
+    "處理 jsonl",
+    "ndjson 過濾",
+    "jsonl filter"
+  ],
+  "intents_en": [
+    "process jsonl file",
+    "ndjson filter",
+    "jsonl line processor"
+  ],
+  "slots": [
+    "in_jsonl",
+    "out_jsonl",
+    "field"
+  ],
+  "code": "import json\n\nkept = 0\nwith open('{{in_jsonl}}') as fi, open('{{out_jsonl}}','w') as fo:\n    for line in fi:\n        line = line.strip()\n        if not line: continue\n        obj = json.loads(line)\n        if obj.get('{{field}}'):\n            fo.write(json.dumps(obj, ensure_ascii=False) + '\\n')\n            kept += 1\nprint(f'kept {kept}')",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "jsonl 逐行過濾"
+}

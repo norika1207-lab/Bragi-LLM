@@ -1,0 +1,36 @@
+{
+  "id": "llm-tools-044-hybrid-search",
+  "category": "llm-tools/rag/hybrid-search",
+  "intents_zh": [
+    "混合檢索",
+    "BM25 + 向量",
+    "hybrid search",
+    "RRF 排序",
+    "reciprocal rank fusion",
+    "稀疏稠密混合",
+    "hybrid retriever",
+    "結合關鍵字與語義"
+  ],
+  "intents_en": [
+    "hybrid search",
+    "bm25 plus vector",
+    "reciprocal rank fusion",
+    "sparse dense fusion",
+    "hybrid retriever",
+    "keyword and semantic",
+    "rrf ranking",
+    "mixed retrieval"
+  ],
+  "slots": [
+    "embed_model",
+    "top_k"
+  ],
+  "code": "from rank_bm25 import BM25Okapi\nfrom sentence_transformers import SentenceTransformer\nimport numpy as np\n\nemb = SentenceTransformer(\"{{embed_model}}\")\n\ndef hybrid(query: str, docs: list[str], k: int = {{top_k}}):\n    bm25 = BM25Okapi([d.split() for d in docs])\n    bm_scores = bm25.get_scores(query.split())\n    dv = emb.encode(docs, normalize_embeddings=True)\n    qv = emb.encode([query], normalize_embeddings=True)\n    vec_scores = (dv @ qv.T).flatten()\n    bm = (bm_scores - bm_scores.min()) / (bm_scores.ptp() + 1e-9)\n    vs = (vec_scores - vec_scores.min()) / (vec_scores.ptp() + 1e-9)\n    final = bm + vs\n    idx = np.argsort(-final)[:k]\n    return [(docs[i], float(final[i])) for i in idx]",
+  "language": "py",
+  "deps": [
+    "rank-bm25",
+    "sentence-transformers",
+    "numpy"
+  ],
+  "summary_zh": "BM25 + 向量分數融合混合檢索"
+}

@@ -1,0 +1,28 @@
+{
+  "id": "depth-web-frontend-010-jotai-atom",
+  "category": "web-frontend/state/jotai",
+  "intents_zh": [
+    "jotai atom",
+    "原子化狀態",
+    "useAtom",
+    "derived atom",
+    "jotai 基本"
+  ],
+  "intents_en": [
+    "jotai atom example",
+    "atomic state",
+    "useAtom",
+    "derived atom",
+    "primitive atom"
+  ],
+  "slots": [
+    "atom_name",
+    "initial_value"
+  ],
+  "code": "import { atom, useAtom } from 'jotai';\n\nexport const {{atom_name}}Atom = atom({{initial_value}});\nexport const doubled{{atom_name}}Atom = atom((get) => get({{atom_name}}Atom) * 2);\n\nexport function use{{atom_name}}() {\n  const [v, set] = useAtom({{atom_name}}Atom);\n  const [d] = useAtom(doubled{{atom_name}}Atom);\n  return { v, set, d };\n}",
+  "language": "ts",
+  "deps": [
+    "jotai"
+  ],
+  "summary_zh": "jotai primitive 與 derived atom"
+}

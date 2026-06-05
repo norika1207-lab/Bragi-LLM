@@ -1,0 +1,31 @@
+{
+  "id": "firmware-030-esp32-oled-ssd1306",
+  "category": "firmware/esp32/display",
+  "intents_zh": [
+    "SSD1306 OLED",
+    "ESP32 顯示文字",
+    "I2C OLED 範例",
+    "小螢幕顯示",
+    "0.96 吋 OLED"
+  ],
+  "intents_en": [
+    "SSD1306 OLED display",
+    "ESP32 I2C OLED",
+    "print text on OLED",
+    "Adafruit SSD1306",
+    "128x64 display"
+  ],
+  "slots": [
+    "sda_pin",
+    "scl_pin",
+    "oled_addr",
+    "text"
+  ],
+  "code": "#include <Wire.h>\n#include <Adafruit_SSD1306.h>\nAdafruit_SSD1306 oled(128, 64, &Wire, -1);\n\nvoid setup() {\n  Wire.begin({{sda_pin}}, {{scl_pin}});\n  oled.begin(SSD1306_SWITCHCAPVCC, {{oled_addr}});\n  oled.clearDisplay();\n  oled.setTextSize(2);\n  oled.setTextColor(SSD1306_WHITE);\n  oled.setCursor(0, 20);\n  oled.print(\"{{text}}\");\n  oled.display();\n}\n\nvoid loop() {}",
+  "language": "ino",
+  "deps": [
+    "Adafruit SSD1306",
+    "Adafruit GFX Library"
+  ],
+  "summary_zh": "SSD1306 OLED 顯示文字"
+}

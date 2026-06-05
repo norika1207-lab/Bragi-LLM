@@ -1,0 +1,30 @@
+{
+  "id": "depth-llm-tools-019-structured-output-retry",
+  "category": "llm-tools/structured/retry",
+  "intents_zh": [
+    "結構化輸出 parse 重試",
+    "JSON 解析失敗回灌",
+    "Pydantic 驗證重試",
+    "結構輸出修正",
+    "parse error recovery"
+  ],
+  "intents_en": [
+    "structured output parse retry",
+    "feed JSON error back",
+    "Pydantic retry",
+    "structured fix loop",
+    "parse error recovery"
+  ],
+  "slots": [
+    "llm_call",
+    "prompt",
+    "schema",
+    "max_retries"
+  ],
+  "code": "import json\nfrom pydantic import ValidationError\n\ndef structured_retry({{llm_call}}, {{prompt}}, {{schema}}, {{max_retries}}=3):\n    msg = {{prompt}}\n    for _ in range({{max_retries}}):\n        raw = {{llm_call}}(msg)\n        try:\n            return {{schema}}.model_validate_json(raw)\n        except (ValidationError, json.JSONDecodeError) as e:\n            msg = f\"{{{prompt}}}\\n\\nPrevious output:\\n{raw}\\n\\nError: {e}\\nFix and reply JSON only.\"\n    raise RuntimeError(\"structured parse failed\")",
+  "language": "python",
+  "deps": [
+    "pydantic"
+  ],
+  "summary_zh": "結構化輸出 parse 錯就把錯訊息回灌請模型修正"
+}

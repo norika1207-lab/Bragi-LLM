@@ -1,0 +1,33 @@
+{
+  "id": "llm-tools-084-chain-of-thought",
+  "category": "llm-tools/prompt/cot",
+  "intents_zh": [
+    "chain of thought",
+    "CoT 提示",
+    "step by step prompt",
+    "let's think step by step",
+    "CoT wrapper",
+    "逐步推理",
+    "think step by step",
+    "CoT 範例"
+  ],
+  "intents_en": [
+    "chain of thought prompt",
+    "cot wrapper",
+    "think step by step",
+    "step by step prompt",
+    "cot example",
+    "reasoning prompt",
+    "reflective prompt",
+    "cot template"
+  ],
+  "slots": [
+    "model_name"
+  ],
+  "code": "from openai import OpenAI\n\nclient = OpenAI()\n\ndef cot(question: str) -> str:\n    r = client.chat.completions.create(\n        model=\"{{model_name}}\",\n        messages=[\n            {\"role\": \"system\", \"content\": \"Think step by step. End with: Answer: <final>\"},\n            {\"role\": \"user\", \"content\": question},\n        ],\n    )\n    text = r.choices[0].message.content\n    if \"Answer:\" in text:\n        return text.split(\"Answer:\")[-1].strip()\n    return text",
+  "language": "py",
+  "deps": [
+    "openai"
+  ],
+  "summary_zh": "chain-of-thought 逐步推理 prompt"
+}

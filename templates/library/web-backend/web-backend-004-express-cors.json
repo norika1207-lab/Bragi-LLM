@@ -1,0 +1,28 @@
+{
+  "id": "web-backend-004-express-cors",
+  "category": "web-backend/express/middleware",
+  "intents_zh": [
+    "express CORS 設定",
+    "幫我開 CORS",
+    "允許跨域請求 express",
+    "設定特定 origin 白名單",
+    "CORS preflight 處理"
+  ],
+  "intents_en": [
+    "enable CORS in express",
+    "express cors whitelist",
+    "setup cors middleware",
+    "allow cross origin express",
+    "cors preflight handling"
+  ],
+  "slots": [
+    "allowed_origin",
+    "allowed_methods"
+  ],
+  "code": "const cors = require('cors');\n\nmodule.exports = cors({\n  origin: (origin, cb) => {\n    const allowed = ['{{allowed_origin}}'];\n    if (!origin || allowed.includes(origin)) cb(null, true);\n    else cb(new Error('CORS blocked: ' + origin));\n  },\n  methods: '{{allowed_methods}}'.split(','),\n  credentials: true,\n  maxAge: 86400\n});",
+  "language": "js",
+  "deps": [
+    "cors"
+  ],
+  "summary_zh": "Express CORS 白名單中介層"
+}

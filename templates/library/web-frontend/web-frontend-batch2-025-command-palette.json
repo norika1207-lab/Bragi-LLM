@@ -1,0 +1,27 @@
+{
+  "id": "web-frontend-batch2-025-command-palette",
+  "category": "web-frontend/react/layout/command-palette",
+  "intents_zh": [
+    "命令面板",
+    "cmd+k 搜尋",
+    "快捷指令",
+    "spotlight 搜尋",
+    "command palette",
+    "快速指令"
+  ],
+  "intents_en": [
+    "command palette",
+    "cmd+k search",
+    "quick actions",
+    "spotlight search",
+    "command menu",
+    "quick commands"
+  ],
+  "slots": [
+    "commands"
+  ],
+  "code": "import { useEffect, useState } from 'react';\n\nexport function CommandPalette() {\n  const [open, setOpen] = useState(false);\n  const [q, setQ] = useState('');\n  const cmds = {{commands}};\n  useEffect(() => {\n    const h = (e: KeyboardEvent) => {\n      if ((e.metaKey || e.ctrlKey) && e.key === 'k') { e.preventDefault(); setOpen(true); }\n      if (e.key === 'Escape') setOpen(false);\n    };\n    window.addEventListener('keydown', h);\n    return () => window.removeEventListener('keydown', h);\n  }, []);\n  if (!open) return null;\n  const filtered = cmds.filter((c) => c.label.toLowerCase().includes(q.toLowerCase()));\n  return (\n    <div className=\"fixed inset-0 z-50 flex items-start justify-center bg-black/50 pt-24\" onClick={() => setOpen(false)}>\n      <div className=\"w-full max-w-lg rounded-lg bg-white shadow-xl\" onClick={(e) => e.stopPropagation()}>\n        <input autoFocus value={q} onChange={(e) => setQ(e.target.value)} placeholder=\"Type a command...\" className=\"w-full border-b px-4 py-3 outline-none\" />\n        <ul className=\"max-h-80 overflow-y-auto p-2\">\n          {filtered.map((c) => (\n            <li key={c.id} onClick={c.action} className=\"cursor-pointer rounded px-3 py-2 hover:bg-gray-100\">{c.label}</li>\n          ))}\n        </ul>\n      </div>\n    </div>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "Cmd+K 喚出的命令面板"
+}

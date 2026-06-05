@@ -1,0 +1,26 @@
+{
+  "id": "web-backend-098-trpc-router",
+  "category": "web-backend/rpc",
+  "intents_zh": [
+    "trpc router 範例",
+    "trpc procedure",
+    "type-safe rpc",
+    "trpc server",
+    "input output schema trpc"
+  ],
+  "intents_en": [
+    "trpc router example",
+    "trpc procedure",
+    "type safe rpc node",
+    "trpc server setup",
+    "trpc input schema"
+  ],
+  "slots": [],
+  "code": "import { initTRPC } from '@trpc/server';\nimport { z } from 'zod';\n\nconst t = initTRPC.create();\n\nexport const appRouter = t.router({\n  hello: t.procedure\n    .input(z.object({ name: z.string() }))\n    .query(({ input }) => ({ greeting: `hello ${input.name}` })),\n  add: t.procedure\n    .input(z.object({ a: z.number(), b: z.number() }))\n    .mutation(({ input }) => ({ sum: input.a + input.b }))\n});\n\nexport type AppRouter = typeof appRouter;",
+  "language": "ts",
+  "deps": [
+    "@trpc/server",
+    "zod"
+  ],
+  "summary_zh": "tRPC type-safe router"
+}

@@ -1,0 +1,30 @@
+{
+  "id": "web-backend-013-express-session",
+  "category": "web-backend/express/auth",
+  "intents_zh": [
+    "express session 設定",
+    "用 express-session 存登入",
+    "cookie session 範例",
+    "加 session middleware",
+    "redis store session"
+  ],
+  "intents_en": [
+    "express session setup",
+    "cookie session middleware",
+    "express-session example",
+    "session with redis store",
+    "store session in cookie"
+  ],
+  "slots": [
+    "secret",
+    "cookie_max_age"
+  ],
+  "code": "const session = require('express-session');\nconst RedisStore = require('connect-redis').default;\nconst { createClient } = require('redis');\n\nconst client = createClient();\nclient.connect().catch(console.error);\n\nmodule.exports = session({\n  store: new RedisStore({ client }),\n  secret: '{{secret}}',\n  resave: false,\n  saveUninitialized: false,\n  cookie: {\n    httpOnly: true,\n    secure: process.env.NODE_ENV === 'production',\n    maxAge: {{cookie_max_age}}\n  }\n});",
+  "language": "js",
+  "deps": [
+    "express-session",
+    "connect-redis",
+    "redis"
+  ],
+  "summary_zh": "Express Redis session 中介層"
+}

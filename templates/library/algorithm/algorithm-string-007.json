@@ -1,0 +1,19 @@
+{
+  "id": "algorithm-string-007",
+  "category": "algorithm/string/longest_palindrome_dp",
+  "intents_zh": [
+    "最長回文 dp",
+    "longest palindromic substring dp"
+  ],
+  "intents_en": [
+    "longest palindrome dp",
+    "palindrome substring dp"
+  ],
+  "slots": [
+    "fn_name"
+  ],
+  "code": "def {{fn_name}}(s):\n    n = len(s)\n    if n < 2: return s\n    start, max_len = 0, 1\n    dp = [[False]*n for _ in range(n)]\n    for i in range(n): dp[i][i] = True\n    for L in range(2, n+1):\n        for i in range(n - L + 1):\n            j = i + L - 1\n            if s[i] == s[j] and (L == 2 or dp[i+1][j-1]):\n                dp[i][j] = True\n                if L > max_len:\n                    start, max_len = i, L\n    return s[start:start+max_len]",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "DP 找最長回文子字串"
+}

@@ -1,0 +1,29 @@
+{
+  "id": "depth-web-frontend-001-react-query-basic",
+  "category": "web-frontend/data-fetching/react-query",
+  "intents_zh": [
+    "用 react-query 抓資料",
+    "useQuery 範例",
+    "TanStack Query 基本用法",
+    "React Query 取 API",
+    "query key 快取資料"
+  ],
+  "intents_en": [
+    "react-query basic useQuery",
+    "tanstack query fetch",
+    "react query example",
+    "useQuery hook",
+    "cache api with react-query"
+  ],
+  "slots": [
+    "query_key",
+    "endpoint",
+    "type_name"
+  ],
+  "code": "import { useQuery } from '@tanstack/react-query';\n\nexport function use{{type_name}}(id: string) {\n  return useQuery({\n    queryKey: ['{{query_key}}', id],\n    queryFn: async () => {\n      const res = await fetch(`{{endpoint}}/${id}`);\n      if (!res.ok) throw new Error('fetch failed');\n      return res.json();\n    },\n    staleTime: 60_000,\n  });\n}",
+  "language": "tsx",
+  "deps": [
+    "@tanstack/react-query"
+  ],
+  "summary_zh": "react-query useQuery 基本資料抓取 hook"
+}

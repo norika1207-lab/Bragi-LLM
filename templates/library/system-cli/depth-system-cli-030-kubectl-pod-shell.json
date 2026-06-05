@@ -1,0 +1,24 @@
+{
+  "id": "depth-system-cli-030-kubectl-pod-shell",
+  "category": "system-cli/kubectl/exec",
+  "intents_zh": [
+    "kubectl 互動進 pod",
+    "fzf 選 pod exec",
+    "k8s 進容器 shell",
+    "kubectl exec 包裝"
+  ],
+  "intents_en": [
+    "kubectl interactive pod",
+    "fzf pick pod exec",
+    "k8s pod shell",
+    "kubectl exec wrapper"
+  ],
+  "slots": [],
+  "code": "#!/usr/bin/env bash\nset -euo pipefail\n\npod=$(kubectl get pods -o custom-columns=NAME:.metadata.name,STATUS:.status.phase --no-headers \\\n  | fzf --prompt=\"pod> \" | awk '{print $1}')\n[ -z \"$pod\" ] && exit 0\n\ncontainers=$(kubectl get pod \"$pod\" -o jsonpath='{.spec.containers[*].name}')\nif [ \"$(echo $containers | wc -w)\" -gt 1 ]; then\n  container=$(echo $containers | tr ' ' '\\n' | fzf --prompt=\"container> \")\n  kubectl exec -it \"$pod\" -c \"$container\" -- sh -c 'bash || sh'\nelse\n  kubectl exec -it \"$pod\" -- sh -c 'bash || sh'\nfi",
+  "language": "bash",
+  "deps": [
+    "kubectl",
+    "fzf"
+  ],
+  "summary_zh": "fzf 選 pod 與 container 後 exec shell"
+}

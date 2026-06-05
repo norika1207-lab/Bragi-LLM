@@ -1,0 +1,33 @@
+{
+  "id": "patch-sql-index-007-gist-range-geo",
+  "category": "database-devops/index/gist",
+  "intents_zh": [
+    "GiST index 用法",
+    "範圍型別加索引",
+    "tstzrange 索引",
+    "地理座標索引 postgis",
+    "區間重疊查詢加速",
+    "range overlap index"
+  ],
+  "intents_en": [
+    "gist index for range type",
+    "tstzrange overlap index",
+    "postgis spatial index",
+    "geometry gist index",
+    "range && operator index",
+    "exclude constraint with gist"
+  ],
+  "slots": [
+    "table_name",
+    "range_column",
+    "index_name",
+    "tenant_column"
+  ],
+  "code": "-- GiST index for range overlap queries and exclusion constraints\nCREATE INDEX CONCURRENTLY IF NOT EXISTS {{index_name}}\n  ON {{table_name}} USING GIST ({{tenant_column}}, {{range_column}});\n\n-- Bookings that overlap a given window\nEXPLAIN ANALYZE\nSELECT *\nFROM {{table_name}}\nWHERE {{tenant_column}} = $1\n  AND {{range_column}} && tstzrange($2, $3, '[)');\n\n-- Bonus: prevent overlapping bookings per tenant\n-- ALTER TABLE {{table_name}} ADD CONSTRAINT no_overlap\n--   EXCLUDE USING GIST ({{tenant_column}} WITH =, {{range_column}} WITH &&);",
+  "language": "sql",
+  "deps": [
+    "postgresql>=12",
+    "btree_gist"
+  ],
+  "summary_zh": "GiST index 配合 range 型別做 overlap 查詢與 exclusion constraint"
+}

@@ -1,0 +1,26 @@
+{
+  "id": "depth-database-devops-052-vault-agent",
+  "category": "database-devops/secrets/vault",
+  "intents_zh": [
+    "Vault agent template",
+    "注入 secret 到檔案",
+    "auto auth approle"
+  ],
+  "intents_en": [
+    "Vault agent template",
+    "render secret to file",
+    "auto auth approle"
+  ],
+  "slots": [
+    "role_id_path",
+    "secret_id_path",
+    "kv_path",
+    "out_path"
+  ],
+  "code": "auto_auth {\n  method \"approle\" {\n    config = {\n      role_id_file_path   = \"{{role_id_path}}\"\n      secret_id_file_path = \"{{secret_id_path}}\"\n    }\n  }\n}\n\ntemplate {\n  destination = \"{{out_path}}\"\n  contents = <<EOT\n{{`{{ with secret \"`}}{{kv_path}}{{`\" }}`}}\nDB_PASSWORD={{`{{ .Data.data.password }}{{ end }}`}}\nEOT\n}",
+  "language": "hcl",
+  "deps": [
+    "vault-agent"
+  ],
+  "summary_zh": "Vault agent approle 自動登入並 render secret 到檔案"
+}

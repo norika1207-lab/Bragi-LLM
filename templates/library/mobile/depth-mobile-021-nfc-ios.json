@@ -1,0 +1,23 @@
+{
+  "id": "depth-mobile-021-nfc-ios",
+  "category": "mobile/nfc/ios",
+  "intents_zh": [
+    "iOS NFC NDEF 讀取",
+    "NFCNDEFReaderSession",
+    "CoreNFC tag scan",
+    "讀 NFC 標籤",
+    "didDetect NDEF"
+  ],
+  "intents_en": [
+    "iOS NFC NDEF read",
+    "NFCNDEFReaderSession",
+    "CoreNFC tag scan",
+    "read NFC tag",
+    "didDetect NDEF"
+  ],
+  "slots": [],
+  "code": "import CoreNFC\nclass NFCReader: NSObject, NFCNDEFReaderSessionDelegate {\n  var session: NFCNDEFReaderSession?\n  func start() {\n    session = NFCNDEFReaderSession(delegate: self, queue: nil, invalidateAfterFirstRead: true)\n    session?.alertMessage = \"Hold tag near phone\"\n    session?.begin()\n  }\n  func readerSession(_ s: NFCNDEFReaderSession, didDetectNDEFs messages: [NFCNDEFMessage]) {\n    messages.flatMap { $0.records }.forEach { print(String(data: $0.payload, encoding: .utf8) ?? \"\") }\n  }\n  func readerSession(_ s: NFCNDEFReaderSession, didInvalidateWithError error: Error) {}\n}",
+  "language": "swift",
+  "deps": [],
+  "summary_zh": "iOS CoreNFC 讀 NDEF 標籤"
+}

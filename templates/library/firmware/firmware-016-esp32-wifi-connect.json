@@ -1,0 +1,28 @@
+{
+  "id": "firmware-016-esp32-wifi-connect",
+  "category": "firmware/esp32/network",
+  "intents_zh": [
+    "ESP32 連 WiFi",
+    "連無線網路",
+    "WiFi.begin 範例",
+    "ESP32 上網",
+    "連 AP"
+  ],
+  "intents_en": [
+    "ESP32 WiFi connect",
+    "connect to AP",
+    "WiFi.begin example",
+    "ESP32 join wifi",
+    "wifi station mode"
+  ],
+  "slots": [
+    "ssid",
+    "password"
+  ],
+  "code": "#include <WiFi.h>\nconst char* SSID = \"{{ssid}}\";\nconst char* PASS = \"{{password}}\";\n\nvoid setup() {\n  Serial.begin(115200);\n  WiFi.mode(WIFI_STA);\n  WiFi.begin(SSID, PASS);\n  while (WiFi.status() != WL_CONNECTED) { delay(500); Serial.print('.'); }\n  Serial.println();\n  Serial.print(\"IP=\"); Serial.println(WiFi.localIP());\n}\n\nvoid loop() {}",
+  "language": "ino",
+  "deps": [
+    "WiFi"
+  ],
+  "summary_zh": "ESP32 連接 WiFi 並顯示 IP"
+}

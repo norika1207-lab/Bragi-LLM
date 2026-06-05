@@ -1,0 +1,22 @@
+{
+  "id": "database-devops-125-compose-minio",
+  "category": "database-devops/docker/compose",
+  "intents_zh": [
+    "compose minio",
+    "本地 S3 相容",
+    "minio + console"
+  ],
+  "intents_en": [
+    "compose minio",
+    "local s3",
+    "minio console"
+  ],
+  "slots": [
+    "root_user",
+    "root_password"
+  ],
+  "code": "services:\n  minio:\n    image: minio/minio\n    command: server /data --console-address ':9001'\n    environment:\n      MINIO_ROOT_USER: {{root_user}}\n      MINIO_ROOT_PASSWORD: {{root_password}}\n    ports:\n      - \"9000:9000\"\n      - \"9001:9001\"\n    volumes: [\"miniodata:/data\"]\n\nvolumes:\n  miniodata:",
+  "language": "yaml",
+  "deps": [],
+  "summary_zh": "compose MinIO S3 相容儲存"
+}

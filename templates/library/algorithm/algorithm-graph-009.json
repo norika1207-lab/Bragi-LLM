@@ -1,0 +1,21 @@
+{
+  "id": "algorithm-graph-009",
+  "category": "algorithm/graph/scc_tarjan",
+  "intents_zh": [
+    "Tarjan SCC",
+    "強連通分量",
+    "給我 SCC"
+  ],
+  "intents_en": [
+    "Tarjan SCC",
+    "strongly connected components",
+    "SCC algorithm"
+  ],
+  "slots": [
+    "fn_name"
+  ],
+  "code": "def {{fn_name}}(graph):\n    idx = {}\n    low = {}\n    stack = []\n    on_stack = set()\n    sccs = []\n    counter = [0]\n    def dfs(v):\n        idx[v] = low[v] = counter[0]; counter[0] += 1\n        stack.append(v); on_stack.add(v)\n        for w in graph.get(v, []):\n            if w not in idx:\n                dfs(w)\n                low[v] = min(low[v], low[w])\n            elif w in on_stack:\n                low[v] = min(low[v], idx[w])\n        if low[v] == idx[v]:\n            scc = []\n            while True:\n                w = stack.pop(); on_stack.remove(w)\n                scc.append(w)\n                if w == v: break\n            sccs.append(scc)\n    for v in graph:\n        if v not in idx:\n            dfs(v)\n    return sccs",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "Tarjan 強連通分量"
+}

@@ -1,0 +1,30 @@
+{
+  "id": "depth-firmware-034-mqtt-subscribe",
+  "category": "firmware/network/mqtt",
+  "intents_zh": [
+    "MQTT 訂閱",
+    "收 MQTT 命令",
+    "subscribe callback",
+    "遠端控制 LED",
+    "topic 解析"
+  ],
+  "intents_en": [
+    "mqtt subscribe",
+    "receive mqtt cmd",
+    "subscribe callback",
+    "remote led control",
+    "topic handler"
+  ],
+  "slots": [
+    "broker",
+    "topic",
+    "control_pin"
+  ],
+  "code": "#include <PubSubClient.h>\n#include <WiFi.h>\nWiFiClient w; PubSubClient mqtt(w);\nvoid cb(char *topic, byte *payload, unsigned int len) {\n    digitalWrite({{control_pin}}, payload[0] == '1' ? HIGH : LOW);\n}\nvoid setup() {\n    pinMode({{control_pin}}, OUTPUT);\n    mqtt.setServer(\"{{broker}}\", 1883);\n    mqtt.setCallback(cb);\n    mqtt.connect(\"dev\");\n    mqtt.subscribe(\"{{topic}}\");\n}\nvoid loop() { mqtt.loop(); }",
+  "language": "cpp",
+  "deps": [
+    "PubSubClient",
+    "WiFi"
+  ],
+  "summary_zh": "訂閱 MQTT topic 並依 payload 控 GPIO"
+}

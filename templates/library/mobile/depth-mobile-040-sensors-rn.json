@@ -1,0 +1,27 @@
+{
+  "id": "depth-mobile-040-sensors-rn",
+  "category": "mobile/sensors/reactnative",
+  "intents_zh": [
+    "RN expo-sensors",
+    "Accelerometer.addListener",
+    "Gyroscope.setUpdateInterval",
+    "跨平台感測器",
+    "RN motion"
+  ],
+  "intents_en": [
+    "RN expo-sensors",
+    "Accelerometer.addListener",
+    "Gyroscope setUpdateInterval",
+    "cross platform sensors",
+    "RN motion"
+  ],
+  "slots": [
+    "interval_ms"
+  ],
+  "code": "import { Accelerometer, Gyroscope } from 'expo-sensors';\nAccelerometer.setUpdateInterval({{interval_ms}});\nGyroscope.setUpdateInterval({{interval_ms}});\nconst a = Accelerometer.addListener(({ x, y, z }) => console.log('acc', x, y, z));\nconst g = Gyroscope.addListener(({ x, y, z }) => console.log('gyr', x, y, z));\n// later: a.remove(); g.remove();",
+  "language": "ts",
+  "deps": [
+    "expo-sensors"
+  ],
+  "summary_zh": "Expo sensors 訂閱加速度與陀螺儀"
+}

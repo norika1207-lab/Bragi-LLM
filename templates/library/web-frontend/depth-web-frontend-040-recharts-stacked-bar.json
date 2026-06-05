@@ -1,0 +1,28 @@
+{
+  "id": "depth-web-frontend-040-recharts-stacked-bar",
+  "category": "web-frontend/charts/recharts",
+  "intents_zh": [
+    "堆疊長條圖 recharts",
+    "stacked bar",
+    "多系列長條",
+    "分組比較",
+    "recharts bar"
+  ],
+  "intents_en": [
+    "recharts stacked bar",
+    "stacked bar chart",
+    "grouped bars",
+    "multi series bar",
+    "recharts bar example"
+  ],
+  "slots": [
+    "component_name",
+    "keys"
+  ],
+  "code": "'use client';\nimport { BarChart, Bar, XAxis, YAxis, Legend, Tooltip, ResponsiveContainer } from 'recharts';\n\nconst colors = ['#0EA5E9','#22C55E','#F59E0B','#EF4444'];\n\nexport function {{component_name}}({ data, keys = {{keys}} as string[] }: { data: any[]; keys?: string[] }) {\n  return (\n    <ResponsiveContainer width=\"100%\" height={300}>\n      <BarChart data={data}>\n        <XAxis dataKey=\"name\" /><YAxis /><Tooltip /><Legend />\n        {keys.map((k, i) => <Bar key={k} dataKey={k} stackId=\"a\" fill={colors[i % colors.length]} />)}\n      </BarChart>\n    </ResponsiveContainer>\n  );\n}",
+  "language": "tsx",
+  "deps": [
+    "recharts"
+  ],
+  "summary_zh": "recharts 多系列堆疊長條"
+}

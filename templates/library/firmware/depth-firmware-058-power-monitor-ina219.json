@@ -1,0 +1,26 @@
+{
+  "id": "depth-firmware-058-power-monitor-ina219",
+  "category": "firmware/sensor/power",
+  "intents_zh": [
+    "INA219 量電流",
+    "電壓電流功率",
+    "電池監控",
+    "i2c power monitor",
+    "電源量測"
+  ],
+  "intents_en": [
+    "ina219 current",
+    "voltage current power",
+    "battery monitor",
+    "i2c power monitor",
+    "power measure"
+  ],
+  "slots": [],
+  "code": "#include <Adafruit_INA219.h>\nAdafruit_INA219 ina;\nvoid setup() { Serial.begin(115200); ina.begin(); }\nvoid loop() {\n    Serial.printf(\"V=%.2f I=%.1fmA P=%.1fmW\\n\",\n        ina.getBusVoltage_V(),\n        ina.getCurrent_mA(),\n        ina.getPower_mW());\n    delay(1000);\n}",
+  "language": "cpp",
+  "deps": [
+    "Adafruit_INA219",
+    "Wire"
+  ],
+  "summary_zh": "INA219 量測匯流排電壓電流功率"
+}

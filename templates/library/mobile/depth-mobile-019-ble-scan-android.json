@@ -1,0 +1,25 @@
+{
+  "id": "depth-mobile-019-ble-scan-android",
+  "category": "mobile/bluetooth/android",
+  "intents_zh": [
+    "Android BLE 掃描",
+    "BluetoothLeScanner",
+    "ScanCallback",
+    "startScan with filter",
+    "藍牙周邊發現"
+  ],
+  "intents_en": [
+    "Android BLE scan",
+    "BluetoothLeScanner",
+    "ScanCallback",
+    "startScan with filter",
+    "BLE peripheral discovery"
+  ],
+  "slots": [
+    "service_uuid"
+  ],
+  "code": "val scanner = BluetoothAdapter.getDefaultAdapter().bluetoothLeScanner\nval filter = ScanFilter.Builder().setServiceUuid(ParcelUuid.fromString(\"{{service_uuid}}\")).build()\nval settings = ScanSettings.Builder().setScanMode(ScanSettings.SCAN_MODE_LOW_LATENCY).build()\nscanner.startScan(listOf(filter), settings, object : ScanCallback() {\n    override fun onScanResult(callbackType: Int, result: ScanResult) {\n        Log.d(\"BLE\", \"${result.device.address} rssi=${result.rssi}\")\n    }\n})",
+  "language": "kotlin",
+  "deps": [],
+  "summary_zh": "Android BLE 掃描周邊"
+}

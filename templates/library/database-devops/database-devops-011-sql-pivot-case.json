@@ -1,0 +1,26 @@
+{
+  "id": "database-devops-011-sql-pivot-case",
+  "category": "database-devops/sql/aggregation",
+  "intents_zh": [
+    "CASE 模擬 pivot",
+    "行轉列",
+    "按條件加總",
+    "pivot 表"
+  ],
+  "intents_en": [
+    "pivot using case",
+    "conditional aggregation",
+    "rows to columns",
+    "crosstab with case"
+  ],
+  "slots": [
+    "table",
+    "group_col",
+    "category_col",
+    "metric_col"
+  ],
+  "code": "SELECT {{group_col}},\n  SUM(CASE WHEN {{category_col}} = 'A' THEN {{metric_col}} ELSE 0 END) AS a_sum,\n  SUM(CASE WHEN {{category_col}} = 'B' THEN {{metric_col}} ELSE 0 END) AS b_sum,\n  SUM(CASE WHEN {{category_col}} = 'C' THEN {{metric_col}} ELSE 0 END) AS c_sum\nFROM {{table}}\nGROUP BY {{group_col}};",
+  "language": "sql",
+  "deps": [],
+  "summary_zh": "用 CASE 做行轉列 pivot"
+}

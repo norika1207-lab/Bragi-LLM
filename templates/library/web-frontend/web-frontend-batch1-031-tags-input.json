@@ -1,0 +1,27 @@
+{
+  "id": "web-frontend-batch1-031-tags-input",
+  "category": "web-frontend/react/inputs/tags",
+  "intents_zh": [
+    "tag 輸入元件",
+    "標籤輸入",
+    "chips input",
+    "逗號 / Enter 加標籤",
+    "React tags input",
+    "可移除標籤輸入"
+  ],
+  "intents_en": [
+    "tags input",
+    "chips input",
+    "react tag input",
+    "enter to add tag",
+    "removable tags input",
+    "tag editor input"
+  ],
+  "slots": [
+    "component_name"
+  ],
+  "code": "import { useState } from 'react';\n\nexport default function {{component_name}}() {\n  const [tags, setTags] = useState<string[]>([]);\n  const [draft, setDraft] = useState('');\n\n  function add() {\n    const v = draft.trim();\n    if (v && !tags.includes(v)) setTags([...tags, v]);\n    setDraft('');\n  }\n\n  return (\n    <div className=\"border rounded p-2 flex flex-wrap gap-1\">\n      {tags.map((t) => (\n        <span key={t} className=\"bg-gray-200 px-2 rounded\">\n          {t} <button onClick={() => setTags(tags.filter((x) => x !== t))}>×</button>\n        </span>\n      ))}\n      <input\n        value={draft}\n        onChange={(e) => setDraft(e.target.value)}\n        onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); add(); } }}\n        className=\"flex-1 outline-none\"\n      />\n    </div>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "Enter 鍵加入的 tags 輸入元件"
+}

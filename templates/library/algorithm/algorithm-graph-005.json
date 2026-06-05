@@ -1,0 +1,23 @@
+{
+  "id": "algorithm-graph-005",
+  "category": "algorithm/graph/mst_prim",
+  "intents_zh": [
+    "Prim",
+    "最小生成樹 Prim",
+    "heap prim",
+    "給我 prim"
+  ],
+  "intents_en": [
+    "Prim",
+    "MST Prim",
+    "prim algorithm",
+    "heap prim"
+  ],
+  "slots": [
+    "fn_name"
+  ],
+  "code": "import heapq\n\ndef {{fn_name}}(graph, start):\n    visited = {start}\n    pq = [(w, start, v) for v, w in graph[start]]\n    heapq.heapify(pq)\n    mst, total = [], 0\n    while pq:\n        w, u, v = heapq.heappop(pq)\n        if v in visited:\n            continue\n        visited.add(v)\n        mst.append((u, v, w))\n        total += w\n        for nb, nw in graph[v]:\n            if nb not in visited:\n                heapq.heappush(pq, (nw, v, nb))\n    return mst, total",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "Prim MST 從 start 開始"
+}

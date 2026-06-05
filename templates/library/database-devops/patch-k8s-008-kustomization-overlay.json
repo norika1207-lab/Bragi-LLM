@@ -1,0 +1,33 @@
+{
+  "id": "patch-k8s-008-kustomization-overlay",
+  "category": "database-devops/kubernetes/kustomize",
+  "intents_zh": [
+    "產生 kustomization overlay 結構",
+    "幫我做 kustomize prod overlay",
+    "k8s 環境分流模板",
+    "我要 base 加 overlay 的 kustomization",
+    "kustomize patch 範例"
+  ],
+  "intents_en": [
+    "create kustomization overlay",
+    "kustomize prod environment patch",
+    "k8s base and overlay structure",
+    "kustomization yaml template",
+    "overlay patch with image tag"
+  ],
+  "slots": [
+    "overlay_env",
+    "base_path",
+    "namespace",
+    "image_name",
+    "new_tag",
+    "replica_count",
+    "target_deployment"
+  ],
+  "code": "apiVersion: kustomize.config.k8s.io/v1beta1\nkind: Kustomization\nnamespace: {{namespace}}\nresources:\n  - {{base_path}}\nnamePrefix: {{overlay_env}}-\ncommonLabels:\n  env: {{overlay_env}}\nimages:\n  - name: {{image_name}}\n    newTag: {{new_tag}}\npatches:\n  - target:\n      kind: Deployment\n      name: {{target_deployment}}\n    patch: |-\n      - op: replace\n        path: /spec/replicas\n        value: {{replica_count}}\n",
+  "language": "yaml",
+  "deps": [
+    "kustomize"
+  ],
+  "summary_zh": "Kustomize overlay 對 base 套 namespace、prefix、image tag 跟 replica 數的 patch"
+}

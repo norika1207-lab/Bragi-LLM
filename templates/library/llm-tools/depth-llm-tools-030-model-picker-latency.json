@@ -1,0 +1,26 @@
+{
+  "id": "depth-llm-tools-030-model-picker-latency",
+  "category": "llm-tools/router/latency",
+  "intents_zh": [
+    "按延遲選模型",
+    "低延遲優先 router",
+    "p50 延遲挑選",
+    "延遲門檻路由",
+    "快模型優先"
+  ],
+  "intents_en": [
+    "pick model by latency",
+    "low-latency first router",
+    "p50 latency selection",
+    "latency threshold routing",
+    "fast model first"
+  ],
+  "slots": [
+    "candidates",
+    "latency_budget_ms"
+  ],
+  "code": "def pick_by_latency({{candidates}}, {{latency_budget_ms}}):\n    eligible = [c for c in {{candidates}} if c[\"p50_ms\"] <= {{latency_budget_ms}}]\n    if not eligible: return min({{candidates}}, key=lambda c: c[\"p50_ms\"])\n    return min(eligible, key=lambda c: c[\"cost_per_1k\"])",
+  "language": "python",
+  "deps": [],
+  "summary_zh": "先過濾延遲達標，再從中挑最便宜的模型"
+}

@@ -1,0 +1,30 @@
+{
+  "id": "depth-algorithm-026-bpe-tokeniser",
+  "category": "algorithm/nlp/bpe",
+  "intents_zh": [
+    "BPE 分詞",
+    "byte pair encoding 訓練",
+    "BPE tokenizer 從零",
+    "子詞分詞",
+    "BPE merge 訓練",
+    "BPE 詞表構建",
+    "subword 分詞"
+  ],
+  "intents_en": [
+    "BPE tokenizer from scratch",
+    "byte pair encoding training",
+    "subword tokenization",
+    "BPE merges",
+    "train BPE",
+    "BPE vocab build",
+    "subword segmentation"
+  ],
+  "slots": [
+    "corpus",
+    "num_merges"
+  ],
+  "code": "from collections import Counter\n\ndef get_stats(vocab):\n    pairs = Counter()\n    for word, freq in vocab.items():\n        symbols = word.split()\n        for i in range(len(symbols)-1):\n            pairs[(symbols[i], symbols[i+1])] += freq\n    return pairs\n\ndef merge_vocab(pair, vocab):\n    bigram = ' '.join(pair); replacement = ''.join(pair)\n    return {w.replace(bigram, replacement): f for w, f in vocab.items()}\n\ndef train_bpe(corpus={{corpus}}, num_merges={{num_merges}}):\n    vocab = Counter()\n    for word in corpus:\n        vocab[' '.join(list(word)) + ' </w>'] += 1\n    merges = []\n    for _ in range(num_merges):\n        pairs = get_stats(vocab)\n        if not pairs: break\n        best = max(pairs, key=pairs.get)\n        vocab = merge_vocab(best, vocab)\n        merges.append(best)\n    return merges, vocab",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "從零實作 BPE 分詞訓練流程"
+}

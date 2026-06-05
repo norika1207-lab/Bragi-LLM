@@ -1,0 +1,29 @@
+{
+  "id": "mobile-051-flutter-reorder",
+  "category": "mobile/flutter/list",
+  "intents_zh": [
+    "Flutter ReorderableListView",
+    "flutter 拖曳排序",
+    "flutter 拖拉重排",
+    "flutter sortable list",
+    "拖動順序 flutter",
+    "flutter drag reorder",
+    "重排清單 flutter"
+  ],
+  "intents_en": [
+    "flutter ReorderableListView",
+    "flutter drag to reorder",
+    "sortable list flutter",
+    "reorder items flutter",
+    "flutter drag rows",
+    "flutter sort by drag",
+    "drag reorder flutter"
+  ],
+  "slots": [],
+  "code": "import 'package:flutter/material.dart';\nclass R extends StatefulWidget{const R({super.key});@override State<R> createState()=>_R();}\nclass _R extends State<R>{final items=List.generate(8,(i)=>'Row $i');\n  @override Widget build(BuildContext c)=>ReorderableListView(onReorder:(o,n){setState((){if(n>o)n-=1;final x=items.removeAt(o);items.insert(n,x);});},children:[for(final x in items)ListTile(key:ValueKey(x),title:Text(x),trailing:const Icon(Icons.drag_handle))]);}",
+  "language": "dart",
+  "deps": [
+    "flutter"
+  ],
+  "summary_zh": "Flutter ReorderableListView 拖曳重排"
+}

@@ -1,0 +1,29 @@
+{
+  "id": "firmware-025-esp32-ble-peripheral",
+  "category": "firmware/esp32/ble",
+  "intents_zh": [
+    "ESP32 BLE peripheral",
+    "建立 BLE 服務",
+    "BLE characteristic",
+    "廣播 BLE",
+    "手機連 ESP32"
+  ],
+  "intents_en": [
+    "ESP32 BLE peripheral",
+    "BLE GATT server",
+    "advertise BLE service",
+    "BLE characteristic write",
+    "NimBLE peripheral"
+  ],
+  "slots": [
+    "device_name",
+    "service_uuid",
+    "char_uuid"
+  ],
+  "code": "#include <BLEDevice.h>\n#include <BLEServer.h>\n#include <BLEUtils.h>\n\nvoid setup() {\n  Serial.begin(115200);\n  BLEDevice::init(\"{{device_name}}\");\n  BLEServer* server = BLEDevice::createServer();\n  BLEService* svc = server->createService(\"{{service_uuid}}\");\n  BLECharacteristic* ch = svc->createCharacteristic(\"{{char_uuid}}\", BLECharacteristic::PROPERTY_READ | BLECharacteristic::PROPERTY_WRITE);\n  ch->setValue(\"hello\");\n  svc->start();\n  BLEAdvertising* adv = BLEDevice::getAdvertising();\n  adv->addServiceUUID(\"{{service_uuid}}\");\n  adv->start();\n}\n\nvoid loop() { delay(2000); }",
+  "language": "ino",
+  "deps": [
+    "BLE"
+  ],
+  "summary_zh": "ESP32 BLE peripheral 廣播自訂服務"
+}

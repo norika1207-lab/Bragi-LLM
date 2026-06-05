@@ -1,0 +1,22 @@
+{
+  "id": "system-cli-103-self-update-script",
+  "category": "system-cli/ops/update",
+  "intents_zh": [
+    "script 自我更新",
+    "git pull 重啟",
+    "自更新工具"
+  ],
+  "intents_en": [
+    "self-update script",
+    "git pull and restart",
+    "auto update tool"
+  ],
+  "slots": [
+    "repo_dir",
+    "restart_cmd"
+  ],
+  "code": "#!/usr/bin/env bash\nset -euo pipefail\ncd \"{{repo_dir}}\"\ngit fetch --quiet\nLOCAL=$(git rev-parse @)\nREMOTE=$(git rev-parse @{u})\nif [[ \"$LOCAL\" == \"$REMOTE\" ]]; then\n  echo 'up to date'; exit 0\nfi\necho 'updating...'\ngit pull --ff-only\n{{restart_cmd}}",
+  "language": "sh",
+  "deps": [],
+  "summary_zh": "git pull 後重啟服務"
+}

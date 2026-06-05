@@ -1,0 +1,32 @@
+{
+  "id": "mobile-030-flutter-pullrefresh",
+  "category": "mobile/flutter/list",
+  "intents_zh": [
+    "Flutter RefreshIndicator",
+    "flutter 下拉刷新",
+    "flutter list 下拉重整",
+    "Flutter pull to refresh",
+    "flutter 列表 refresh",
+    "下拉更新 flutter",
+    "ListView refresh flutter"
+  ],
+  "intents_en": [
+    "flutter pull to refresh",
+    "RefreshIndicator flutter",
+    "flutter listview refresh",
+    "pull down refresh flutter",
+    "flutter list reload",
+    "refresh on swipe flutter",
+    "flutter on refresh"
+  ],
+  "slots": [
+    "endpoint"
+  ],
+  "code": "import 'package:flutter/material.dart';\nimport 'package:http/http.dart' as http;\nimport 'dart:convert';\nclass L extends StatefulWidget{const L({super.key});@override State<L> createState()=>_S();}\nclass _S extends State<L>{List items=[];\n  Future<void> load()async{final r=await http.get(Uri.parse('{{endpoint}}'));setState(()=>items=jsonDecode(r.body));}\n  @override void initState(){super.initState();load();}\n  @override Widget build(BuildContext c)=>RefreshIndicator(onRefresh:load,child:ListView.builder(itemCount:items.length,itemBuilder:(_,i)=>ListTile(title:Text(items[i]['title'].toString()))));}",
+  "language": "dart",
+  "deps": [
+    "http",
+    "flutter"
+  ],
+  "summary_zh": "Flutter RefreshIndicator 下拉刷新列表"
+}

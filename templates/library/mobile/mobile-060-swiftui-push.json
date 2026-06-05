@@ -1,0 +1,27 @@
+{
+  "id": "mobile-060-swiftui-push",
+  "category": "mobile/swiftui/push",
+  "intents_zh": [
+    "SwiftUI 推播註冊",
+    "iOS UNUserNotificationCenter",
+    "SwiftUI 推播權限",
+    "APNs token Swift",
+    "SwiftUI 註冊推播",
+    "推播設定 SwiftUI",
+    "iOS push register"
+  ],
+  "intents_en": [
+    "swiftui register push",
+    "ios UNUserNotificationCenter",
+    "apns token swift",
+    "ios push permission swiftui",
+    "register notifications swift",
+    "push setup ios",
+    "ios remote notifications"
+  ],
+  "slots": [],
+  "code": "import UIKit\nimport UserNotifications\nclass NotifSetup:NSObject,UNUserNotificationCenterDelegate{\n  func setup(){let c=UNUserNotificationCenter.current();c.delegate=self\n    c.requestAuthorization(options:[.alert,.badge,.sound]){g,_ in if g{DispatchQueue.main.async{UIApplication.shared.registerForRemoteNotifications()}}}}\n  func userNotificationCenter(_ c:UNUserNotificationCenter,willPresent n:UNNotification)async->UNNotificationPresentationOptions{[.banner,.sound]}}",
+  "language": "swift",
+  "deps": [],
+  "summary_zh": "iOS 推播權限請求與註冊"
+}

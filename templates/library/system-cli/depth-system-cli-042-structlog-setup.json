@@ -1,0 +1,25 @@
+{
+  "id": "depth-system-cli-042-structlog-setup",
+  "category": "system-cli/logging/structlog",
+  "intents_zh": [
+    "structlog 設定",
+    "Python 結構化 dict log",
+    "structlog JSON 輸出",
+    "structlog dev console"
+  ],
+  "intents_en": [
+    "structlog setup",
+    "python dict structured log",
+    "structlog json",
+    "structlog dev console"
+  ],
+  "slots": [
+    "env_var"
+  ],
+  "code": "import os, sys, logging, structlog\n\nshared = [\n    structlog.contextvars.merge_contextvars,\n    structlog.processors.add_log_level,\n    structlog.processors.TimeStamper(fmt=\"iso\"),\n    structlog.processors.StackInfoRenderer(),\n    structlog.processors.format_exc_info,\n]\n\nif os.getenv(\"{{env_var}}\") == \"dev\":\n    processors = shared + [structlog.dev.ConsoleRenderer(colors=True)]\nelse:\n    processors = shared + [structlog.processors.JSONRenderer()]\n\nstructlog.configure(\n    processors=processors,\n    wrapper_class=structlog.make_filtering_bound_logger(logging.INFO),\n    logger_factory=structlog.PrintLoggerFactory(sys.stderr),\n    cache_logger_on_first_use=True,\n)\n\nlog = structlog.get_logger()\nlog.info(\"started\", user_id=42)",
+  "language": "python",
+  "deps": [
+    "structlog"
+  ],
+  "summary_zh": "structlog dev console / prod JSON 雙模"
+}

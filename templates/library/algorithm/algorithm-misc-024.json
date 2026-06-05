@@ -1,0 +1,19 @@
+{
+  "id": "algorithm-misc-024",
+  "category": "algorithm/misc/merge_two_sorted_lists",
+  "intents_zh": [
+    "合併兩個有序鏈表",
+    "merge two sorted lists"
+  ],
+  "intents_en": [
+    "merge two sorted lists",
+    "merge linked lists"
+  ],
+  "slots": [
+    "fn_name"
+  ],
+  "code": "def {{fn_name}}(a, b):\n    class N: pass\n    dummy = N(); dummy.next = None\n    tail = dummy\n    while a and b:\n        if a.val <= b.val:\n            tail.next = a; a = a.next\n        else:\n            tail.next = b; b = b.next\n        tail = tail.next\n    tail.next = a or b\n    return dummy.next",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "合併兩個有序鏈表"
+}

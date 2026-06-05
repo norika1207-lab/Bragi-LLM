@@ -1,0 +1,24 @@
+{
+  "id": "depth-database-devops-011-vacuum-cron",
+  "category": "database-devops/postgres/maintenance",
+  "intents_zh": [
+    "vacuum analyze 排程",
+    "cron 跑 vacuum",
+    "定時 maintenance",
+    "reindex 排程"
+  ],
+  "intents_en": [
+    "vacuum analyze cron",
+    "schedule vacuum",
+    "periodic maintenance",
+    "reindex schedule"
+  ],
+  "slots": [
+    "db_name",
+    "schedule"
+  ],
+  "code": "# /etc/cron.d/pg-maintenance\n{{schedule}} postgres psql -d {{db_name}} -c 'VACUUM (ANALYZE, VERBOSE);' >> /var/log/pg-vacuum.log 2>&1\n# 週日凌晨 3 點 reindex 重型表\n0 3 * * 0 postgres psql -d {{db_name}} -c 'REINDEX TABLE CONCURRENTLY public.events;' >> /var/log/pg-reindex.log 2>&1",
+  "language": "cron",
+  "deps": [],
+  "summary_zh": "crontab 排 vacuum/analyze 與週末 reindex"
+}

@@ -1,0 +1,27 @@
+{
+  "id": "depth-llm-tools-042-prompt-ab-test",
+  "category": "llm-tools/prompt-mgmt/ab",
+  "intents_zh": [
+    "prompt A/B 測試",
+    "兩版 prompt 比較",
+    "隨機分流評分",
+    "prompt 賽馬",
+    "prompt 變體實驗"
+  ],
+  "intents_en": [
+    "prompt A/B test",
+    "compare two prompt versions",
+    "random split scoring",
+    "prompt bake-off",
+    "prompt variant experiment"
+  ],
+  "slots": [
+    "variants",
+    "examples",
+    "score_fn"
+  ],
+  "code": "import random, statistics\n\ndef ab_test({{variants}}, {{examples}}, {{score_fn}}):\n    results = {k: [] for k in {{variants}}}\n    for ex in {{examples}}:\n        for name, prompt_fn in {{variants}}.items():\n            results[name].append({{score_fn}}(prompt_fn(ex), ex))\n    return {k: statistics.mean(v) for k, v in results.items()}",
+  "language": "python",
+  "deps": [],
+  "summary_zh": "對每個範例跑所有 prompt 變體並回傳平均分"
+}

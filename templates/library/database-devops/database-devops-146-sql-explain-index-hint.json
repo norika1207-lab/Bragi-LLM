@@ -1,0 +1,19 @@
+{
+  "id": "database-devops-146-sql-explain-index-hint",
+  "category": "database-devops/sql/perf",
+  "intents_zh": [
+    "看 index 是否被用到",
+    "pg_stat_user_indexes",
+    "未使用的 index"
+  ],
+  "intents_en": [
+    "check index usage",
+    "pg_stat_user_indexes",
+    "unused indexes"
+  ],
+  "slots": [],
+  "code": "-- index usage stats\nSELECT schemaname, relname, indexrelname, idx_scan, idx_tup_read\nFROM pg_stat_user_indexes\nORDER BY idx_scan ASC\nLIMIT 30;\n\n-- size of indexes\nSELECT indexrelname, pg_size_pretty(pg_relation_size(indexrelid))\nFROM pg_stat_user_indexes\nORDER BY pg_relation_size(indexrelid) DESC\nLIMIT 20;",
+  "language": "sql",
+  "deps": [],
+  "summary_zh": "Postgres index 使用率與大小"
+}

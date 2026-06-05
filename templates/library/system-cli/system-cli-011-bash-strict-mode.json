@@ -1,0 +1,21 @@
+{
+  "id": "system-cli-011-bash-strict-mode",
+  "category": "system-cli/shell/bash",
+  "intents_zh": [
+    "bash 嚴格模式 boilerplate",
+    "shell script 安全前綴",
+    "bash 預設防呆"
+  ],
+  "intents_en": [
+    "bash strict mode template",
+    "safe bash script header",
+    "unofficial bash strict mode"
+  ],
+  "slots": [
+    "script_purpose"
+  ],
+  "code": "#!/usr/bin/env bash\n# {{script_purpose}}\nset -Eeuo pipefail\nIFS=$'\\n\\t'\n\ntrap 'echo \"error on line $LINENO\" >&2' ERR\n\nmain() {\n  echo \"running {{script_purpose}}\"\n  # TODO\n}\n\nmain \"$@\"",
+  "language": "sh",
+  "deps": [],
+  "summary_zh": "bash strict mode + ERR trap"
+}

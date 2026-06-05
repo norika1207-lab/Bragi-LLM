@@ -1,0 +1,33 @@
+{
+  "id": "llm-tools-077-streaming-token-callback",
+  "category": "llm-tools/utils/token-callback",
+  "intents_zh": [
+    "token callback",
+    "逐 token 處理",
+    "stream handler",
+    "openai 串流 callback",
+    "async iterator wrapper",
+    "stream + callback",
+    "stream consumer",
+    "token hook"
+  ],
+  "intents_en": [
+    "per-token callback",
+    "stream handler",
+    "openai stream callback",
+    "async iterator wrapper",
+    "token hook",
+    "stream consumer",
+    "stream callback",
+    "token processing hook"
+  ],
+  "slots": [
+    "model_name"
+  ],
+  "code": "from openai import OpenAI\nfrom typing import Callable\n\nclient = OpenAI()\n\ndef stream_with_cb(prompt: str, on_token: Callable[[str], None]) -> str:\n    out = []\n    s = client.chat.completions.create(\n        model=\"{{model_name}}\",\n        messages=[{\"role\": \"user\", \"content\": prompt}],\n        stream=True,\n    )\n    for chunk in s:\n        d = chunk.choices[0].delta.content\n        if d:\n            on_token(d)\n            out.append(d)\n    return \"\".join(out)\n\nif __name__ == \"__main__\":\n    full = stream_with_cb(\"hi\", lambda t: print(t, end=\"\"))",
+  "language": "py",
+  "deps": [
+    "openai"
+  ],
+  "summary_zh": "OpenAI 串流逐 token callback 處理"
+}

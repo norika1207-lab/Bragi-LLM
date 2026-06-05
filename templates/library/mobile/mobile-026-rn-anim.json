@@ -1,0 +1,31 @@
+{
+  "id": "mobile-026-rn-anim",
+  "category": "mobile/rn/anim",
+  "intents_zh": [
+    "RN 淡入動畫",
+    "React Native fade in",
+    "reanimated 動畫",
+    "RN animated 元件",
+    "淡入淡出 RN",
+    "RN withTiming",
+    "入場動畫 RN"
+  ],
+  "intents_en": [
+    "rn fade in animation",
+    "react native animated",
+    "reanimated withTiming",
+    "fade animation rn",
+    "entrance animation rn",
+    "rn animated value",
+    "animate opacity rn"
+  ],
+  "slots": [
+    "duration_ms"
+  ],
+  "code": "import React,{useEffect} from 'react';\nimport Animated,{useSharedValue,useAnimatedStyle,withTiming} from 'react-native-reanimated';\nexport default function Fade({children}:{children:React.ReactNode}){\n  const o=useSharedValue(0);\n  useEffect(()=>{o.value=withTiming(1,{duration:{{duration_ms}}});},[o]);\n  const st=useAnimatedStyle(()=>({opacity:o.value}));\n  return(<Animated.View style={st}>{children}</Animated.View>);}",
+  "language": "tsx",
+  "deps": [
+    "react-native-reanimated"
+  ],
+  "summary_zh": "RN reanimated 淡入包裝元件"
+}

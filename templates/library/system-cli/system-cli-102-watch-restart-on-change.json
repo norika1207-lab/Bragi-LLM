@@ -1,0 +1,24 @@
+{
+  "id": "system-cli-102-watch-restart-on-change",
+  "category": "system-cli/dev/reload",
+  "intents_zh": [
+    "watchexec 改檔自動 restart",
+    "dev 自動 reload",
+    "檔案變更重啟"
+  ],
+  "intents_en": [
+    "watchexec auto restart",
+    "dev autoreload",
+    "restart on file change"
+  ],
+  "slots": [
+    "watch_glob",
+    "run_cmd"
+  ],
+  "code": "#!/usr/bin/env bash\nset -euo pipefail\n# requires `watchexec`\nexec watchexec -r -e {{watch_glob}} --clear -- bash -c '{{run_cmd}}'",
+  "language": "sh",
+  "deps": [
+    "watchexec"
+  ],
+  "summary_zh": "watchexec 變更自動重啟"
+}

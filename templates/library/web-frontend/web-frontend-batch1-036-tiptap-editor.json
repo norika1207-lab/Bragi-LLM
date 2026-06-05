@@ -1,0 +1,30 @@
+{
+  "id": "web-frontend-batch1-036-tiptap-editor",
+  "category": "web-frontend/react/rich-text/tiptap",
+  "intents_zh": [
+    "富文本編輯器",
+    "Tiptap React 包裝",
+    "rich text editor",
+    "WYSIWYG 元件",
+    "可格式化文字編輯",
+    "Notion 風編輯器"
+  ],
+  "intents_en": [
+    "rich text editor",
+    "tiptap wrapper",
+    "wysiwyg editor react",
+    "formatted text editor",
+    "react rich text",
+    "notion style editor"
+  ],
+  "slots": [
+    "component_name"
+  ],
+  "code": "import { useEditor, EditorContent } from '@tiptap/react';\nimport StarterKit from '@tiptap/starter-kit';\n\nexport default function {{component_name}}({ initial = '' }: { initial?: string }) {\n  const editor = useEditor({\n    extensions: [StarterKit],\n    content: initial,\n  });\n\n  return (\n    <div className=\"border rounded\">\n      <div className=\"border-b p-2 flex gap-2\">\n        <button onClick={() => editor?.chain().focus().toggleBold().run()}>B</button>\n        <button onClick={() => editor?.chain().focus().toggleItalic().run()}>I</button>\n      </div>\n      <EditorContent editor={editor} className=\"p-3 min-h-[200px]\" />\n    </div>\n  );\n}",
+  "language": "tsx",
+  "deps": [
+    "@tiptap/react",
+    "@tiptap/starter-kit"
+  ],
+  "summary_zh": "Tiptap 富文本編輯器含 bold/italic 工具列"
+}

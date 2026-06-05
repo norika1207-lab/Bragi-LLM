@@ -1,0 +1,21 @@
+{
+  "id": "database-devops-112-gha-release-please",
+  "category": "database-devops/cicd/github-actions",
+  "intents_zh": [
+    "release-please workflow",
+    "自動 changelog",
+    "semantic release"
+  ],
+  "intents_en": [
+    "release-please workflow",
+    "auto changelog",
+    "semantic release"
+  ],
+  "slots": [
+    "package_type"
+  ],
+  "code": "name: Release Please\non:\n  push:\n    branches: [main]\n\njobs:\n  release:\n    runs-on: ubuntu-latest\n    permissions:\n      contents: write\n      pull-requests: write\n    steps:\n      - uses: googleapis/release-please-action@v4\n        with:\n          release-type: {{package_type}}",
+  "language": "yaml",
+  "deps": [],
+  "summary_zh": "release-please 自動發版 workflow"
+}

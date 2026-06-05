@@ -1,0 +1,27 @@
+{
+  "id": "firmware-053-rpi-pwm-servo",
+  "category": "firmware/rpi/actuator",
+  "intents_zh": [
+    "樹莓派 servo",
+    "gpiozero Servo",
+    "Pi 控制舵機",
+    "Pi PWM servo",
+    "SG90 樹莓派"
+  ],
+  "intents_en": [
+    "Raspberry Pi servo",
+    "gpiozero Servo example",
+    "Pi PWM servo control",
+    "SG90 on Pi",
+    "sweep servo Pi"
+  ],
+  "slots": [
+    "servo_pin"
+  ],
+  "code": "from gpiozero import Servo\nfrom time import sleep\n\ns = Servo({{servo_pin}})\nwhile True:\n    s.min()\n    sleep(1)\n    s.mid()\n    sleep(1)\n    s.max()\n    sleep(1)",
+  "language": "py",
+  "deps": [
+    "gpiozero"
+  ],
+  "summary_zh": "Raspberry Pi gpiozero 控制 servo"
+}

@@ -1,0 +1,28 @@
+{
+  "id": "depth-llm-tools-002-sse-reconnect",
+  "category": "llm-tools/streaming/resilience",
+  "intents_zh": [
+    "SSE 自動重連",
+    "串流斷線重試",
+    "保留 last-event-id",
+    "串流容錯",
+    "重連續傳"
+  ],
+  "intents_en": [
+    "SSE auto reconnect",
+    "stream retry on drop",
+    "last-event-id resume",
+    "streaming fault tolerance",
+    "reconnect continuation"
+  ],
+  "slots": [
+    "url",
+    "max_retries"
+  ],
+  "code": "import httpx, time\n\ndef robust_sse({{url}}, {{max_retries}}=5):\n    last_id, attempt = None, 0\n    while attempt < {{max_retries}}:\n        headers = {\"Last-Event-ID\": last_id} if last_id else {}\n        try:\n            with httpx.stream(\"GET\", {{url}}, headers=headers, timeout=None) as r:\n                for line in r.iter_lines():\n                    if line.startswith(\"id: \"): last_id = line[4:]\n                    elif line.startswith(\"data: \"): yield line[6:]\n            return\n        except (httpx.ReadError, httpx.RemoteProtocolError):\n            attempt += 1\n            time.sleep(2 ** attempt)",
+  "language": "python",
+  "deps": [
+    "httpx"
+  ],
+  "summary_zh": "SSE 串流斷線指數退避重連，保留 last-event-id"
+}

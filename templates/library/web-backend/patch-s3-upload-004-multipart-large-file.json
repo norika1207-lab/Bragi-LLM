@@ -1,0 +1,33 @@
+{
+  "id": "patch-s3-upload-004-multipart-large-file",
+  "category": "web-backend/upload/multipart",
+  "intents_zh": [
+    "S3 大檔多段上傳",
+    "用 Upload 套件做 multipart",
+    "大檔分段上 S3",
+    "stream 多段上傳到 S3",
+    "lib-storage Upload 範例",
+    "怎麼上傳幾 GB 的檔案到 S3"
+  ],
+  "intents_en": [
+    "s3 multipart upload large file",
+    "aws sdk lib-storage Upload class",
+    "stream big file to s3 multipart",
+    "upload gigabyte file to s3",
+    "parallel part upload s3",
+    "node multipart upload to s3"
+  ],
+  "slots": [
+    "bucket_name",
+    "region",
+    "part_size_mb",
+    "queue_size"
+  ],
+  "code": "import { S3Client } from '@aws-sdk/client-s3';\nimport { Upload } from '@aws-sdk/lib-storage';\nimport { createReadStream } from 'fs';\n\nconst s3 = new S3Client({ region: '{{region}}' });\n\nexport async function uploadLargeFile(localPath: string, key: string, contentType: string) {\n  const upload = new Upload({\n    client: s3,\n    params: {\n      Bucket: '{{bucket_name}}',\n      Key: key,\n      Body: createReadStream(localPath),\n      ContentType: contentType,\n    },\n    queueSize: {{queue_size}},\n    partSize: {{part_size_mb}} * 1024 * 1024,\n    leavePartsOnError: false,\n  });\n  upload.on('httpUploadProgress', (p) => {\n    console.log(`uploaded ${p.loaded} / ${p.total}`);\n  });\n  return await upload.done();\n}",
+  "language": "ts",
+  "deps": [
+    "@aws-sdk/client-s3",
+    "@aws-sdk/lib-storage"
+  ],
+  "summary_zh": "用 lib-storage Upload 做 S3 multipart 大檔上傳含進度"
+}

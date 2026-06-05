@@ -1,0 +1,28 @@
+{
+  "id": "firmware-074-cpy-neopixel",
+  "category": "firmware/circuitpython/led",
+  "intents_zh": [
+    "CircuitPython NeoPixel",
+    "cpy 燈條",
+    "RGB LED cpy",
+    "adafruit neopixel python",
+    "cpy 彩虹"
+  ],
+  "intents_en": [
+    "CircuitPython NeoPixel",
+    "cpy RGB strip",
+    "Adafruit neopixel python",
+    "rainbow cpy",
+    "WS2812 circuitpython"
+  ],
+  "slots": [
+    "pin_name",
+    "num_pixels"
+  ],
+  "code": "import board\nimport neopixel\n\npixels = neopixel.NeoPixel(board.{{pin_name}}, {{num_pixels}}, brightness=0.2, auto_write=False)\npixels.fill((10, 0, 30))\npixels.show()",
+  "language": "py",
+  "deps": [
+    "adafruit-circuitpython-neopixel"
+  ],
+  "summary_zh": "CircuitPython NeoPixel 燈條控制"
+}

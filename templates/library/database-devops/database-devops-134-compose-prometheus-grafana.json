@@ -1,0 +1,21 @@
+{
+  "id": "database-devops-134-compose-prometheus-grafana",
+  "category": "database-devops/docker/compose",
+  "intents_zh": [
+    "compose prometheus + grafana",
+    "本地監控 stack",
+    "metrics 觀測"
+  ],
+  "intents_en": [
+    "compose prometheus grafana",
+    "local monitoring",
+    "metrics stack"
+  ],
+  "slots": [
+    "grafana_password"
+  ],
+  "code": "services:\n  prometheus:\n    image: prom/prometheus\n    volumes:\n      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro\n      - promdata:/prometheus\n    ports: [\"9090:9090\"]\n\n  grafana:\n    image: grafana/grafana\n    environment:\n      GF_SECURITY_ADMIN_PASSWORD: {{grafana_password}}\n    ports: [\"3000:3000\"]\n    volumes: [\"grafanadata:/var/lib/grafana\"]\n    depends_on: [prometheus]\n\nvolumes:\n  promdata:\n  grafanadata:",
+  "language": "yaml",
+  "deps": [],
+  "summary_zh": "compose Prometheus + Grafana 監控"
+}

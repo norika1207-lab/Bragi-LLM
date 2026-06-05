@@ -1,0 +1,23 @@
+{
+  "id": "database-devops-079-sqlalchemy-migration-autogen",
+  "category": "database-devops/migration/alembic",
+  "intents_zh": [
+    "alembic autogenerate",
+    "alembic 自動產 migration 指令",
+    "alembic 升級指令"
+  ],
+  "intents_en": [
+    "alembic autogenerate",
+    "alembic generate migration",
+    "alembic upgrade command"
+  ],
+  "slots": [
+    "message"
+  ],
+  "code": "#!/usr/bin/env bash\nset -euo pipefail\n\n# Generate a new migration from model changes\nalembic revision --autogenerate -m \"{{message}}\"\n\n# Apply pending migrations\nalembic upgrade head\n\n# Show current revision\nalembic current",
+  "language": "sh",
+  "deps": [
+    "alembic"
+  ],
+  "summary_zh": "alembic autogenerate 工作流"
+}

@@ -1,0 +1,33 @@
+{
+  "id": "patch-mobile-pedometer-004-activity-ring",
+  "category": "mobile/health/activity-ring",
+  "intents_zh": [
+    "做個 Apple Watch 風格活動圈",
+    "活動環 SVG 元件",
+    "三圈進度視覺化",
+    "daily ring 畫面",
+    "React Native 圓環進度條",
+    "畫個健身環"
+  ],
+  "intents_en": [
+    "Apple Watch style activity ring",
+    "three ring progress component",
+    "daily activity rings SVG",
+    "React Native circular progress ring",
+    "fitness ring UI"
+  ],
+  "slots": [
+    "component_name",
+    "move_pct",
+    "exercise_pct",
+    "stand_pct"
+  ],
+  "code": "import React from 'react';\nimport Svg, { Circle } from 'react-native-svg';\nimport { View } from 'react-native';\n\nfunction Ring({ pct, r, color, stroke = 14 }) {\n  const c = 2 * Math.PI * r;\n  return (\n    <>\n      <Circle cx=\"100\" cy=\"100\" r={r} stroke={color + '33'} strokeWidth={stroke} fill=\"none\" />\n      <Circle cx=\"100\" cy=\"100\" r={r} stroke={color} strokeWidth={stroke} fill=\"none\"\n        strokeDasharray={`${c} ${c}`} strokeDashoffset={c * (1 - pct / 100)}\n        strokeLinecap=\"round\" transform=\"rotate(-90 100 100)\" />\n    </>\n  );\n}\n\nexport default function {{component_name}}() {\n  return (\n    <View>\n      <Svg width={200} height={200}>\n        <Ring pct={{{move_pct}}} r={80} color=\"#fa114f\" />\n        <Ring pct={{{exercise_pct}}} r={62} color=\"#a4f439\" />\n        <Ring pct={{{stand_pct}}} r={44} color=\"#1cd8ed\" />\n      </Svg>\n    </View>\n  );\n}",
+  "language": "tsx",
+  "deps": [
+    "react-native-svg",
+    "react-native",
+    "react"
+  ],
+  "summary_zh": "三層活動圈 SVG 元件（move/exercise/stand），仿 Apple Watch"
+}

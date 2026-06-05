@@ -1,0 +1,23 @@
+{
+  "id": "database-devops-071-redis-cache",
+  "category": "database-devops/cache/redis",
+  "intents_zh": [
+    "Redis 快取範本",
+    "ioredis get/set",
+    "Node 用 redis cache"
+  ],
+  "intents_en": [
+    "redis cache template",
+    "ioredis get set",
+    "node redis cache"
+  ],
+  "slots": [
+    "key_prefix"
+  ],
+  "code": "import Redis from 'ioredis'\nconst redis = new Redis(process.env.REDIS_URL!)\n\nexport async function cached<T>(key: string, ttl: number, loader: () => Promise<T>): Promise<T> {\n  const full = `{{key_prefix}}:${key}`\n  const hit = await redis.get(full)\n  if (hit) return JSON.parse(hit) as T\n  const value = await loader()\n  await redis.set(full, JSON.stringify(value), 'EX', ttl)\n  return value\n}",
+  "language": "ts",
+  "deps": [
+    "ioredis"
+  ],
+  "summary_zh": "Redis cache-aside 包裝 helper"
+}

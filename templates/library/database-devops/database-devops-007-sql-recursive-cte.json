@@ -1,0 +1,28 @@
+{
+  "id": "database-devops-007-sql-recursive-cte",
+  "category": "database-devops/sql/cte",
+  "intents_zh": [
+    "遞迴 CTE",
+    "樹狀結構遞迴查詢",
+    "層級展開",
+    "recursive with",
+    "員工主管階層遞迴"
+  ],
+  "intents_en": [
+    "recursive cte",
+    "hierarchy traversal",
+    "tree query",
+    "recursive with",
+    "org chart query"
+  ],
+  "slots": [
+    "table",
+    "id_col",
+    "parent_col",
+    "root_id"
+  ],
+  "code": "WITH RECURSIVE tree AS (\n  SELECT {{id_col}}, {{parent_col}}, 0 AS depth\n  FROM {{table}}\n  WHERE {{id_col}} = {{root_id}}\n  UNION ALL\n  SELECT t.{{id_col}}, t.{{parent_col}}, tree.depth + 1\n  FROM {{table}} t\n  JOIN tree ON t.{{parent_col}} = tree.{{id_col}}\n)\nSELECT * FROM tree;",
+  "language": "sql",
+  "deps": [],
+  "summary_zh": "遞迴 CTE 展開階層"
+}

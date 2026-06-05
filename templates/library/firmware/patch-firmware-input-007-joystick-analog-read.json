@@ -1,0 +1,28 @@
+{
+  "id": "patch-firmware-input-007-joystick-analog-read",
+  "category": "firmware/input/joystick",
+  "intents_zh": [
+    "搖桿類比讀取",
+    "Arduino joystick X Y SW",
+    "讀 analog 搖桿並做死區",
+    "joystick deadzone 處理",
+    "ESP32 讀搖桿模組"
+  ],
+  "intents_en": [
+    "joystick analog read arduino",
+    "XY joystick with deadzone",
+    "read joystick module SW",
+    "analog joystick mapping",
+    "esp32 joystick input"
+  ],
+  "slots": [
+    "x_pin",
+    "y_pin",
+    "sw_pin",
+    "deadzone"
+  ],
+  "code": "const int xPin = {{x_pin}};\nconst int yPin = {{y_pin}};\nconst int swPin = {{sw_pin}};\nconst int deadzone = {{deadzone}};\nconst int center = 512;\n\nvoid setup() {\n  Serial.begin(115200);\n  pinMode(swPin, INPUT_PULLUP);\n}\n\nint applyDeadzone(int v) {\n  int d = v - center;\n  if (abs(d) < deadzone) return 0;\n  return d;\n}\n\nvoid loop() {\n  int x = applyDeadzone(analogRead(xPin));\n  int y = applyDeadzone(analogRead(yPin));\n  int sw = digitalRead(swPin) == LOW ? 1 : 0;\n  Serial.print(\"x=\"); Serial.print(x);\n  Serial.print(\" y=\"); Serial.print(y);\n  Serial.print(\" sw=\"); Serial.println(sw);\n  delay(50);\n}",
+  "language": "ino",
+  "deps": [],
+  "summary_zh": "Arduino 讀類比搖桿 XY 與按鈕，套用死區過濾雜訊"
+}

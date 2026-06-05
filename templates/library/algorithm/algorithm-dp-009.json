@@ -1,0 +1,22 @@
+{
+  "id": "algorithm-dp-009",
+  "category": "algorithm/dp/house_robber",
+  "intents_zh": [
+    "打家劫舍",
+    "house robber",
+    "給我 rob dp",
+    "不能相鄰最大和"
+  ],
+  "intents_en": [
+    "house robber",
+    "rob dp",
+    "max sum non adjacent"
+  ],
+  "slots": [
+    "fn_name"
+  ],
+  "code": "def {{fn_name}}(nums):\n    prev = curr = 0\n    for x in nums:\n        prev, curr = curr, max(curr, prev + x)\n    return curr",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "不相鄰最大和 DP"
+}

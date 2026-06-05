@@ -1,0 +1,27 @@
+{
+  "id": "web-frontend-batch2-031-toast",
+  "category": "web-frontend/react/layout/toast",
+  "intents_zh": [
+    "toast 通知",
+    "訊息提示",
+    "snackbar",
+    "暫時提示",
+    "通知列",
+    "彈出訊息"
+  ],
+  "intents_en": [
+    "toast notification",
+    "snackbar",
+    "ephemeral message",
+    "alert toast",
+    "popup notification",
+    "banner toast"
+  ],
+  "slots": [
+    "duration_ms"
+  ],
+  "code": "import { useEffect, useState } from 'react';\n\nexport function Toast({ message, onClose }) {\n  useEffect(() => {\n    const t = setTimeout(onClose, {{duration_ms}});\n    return () => clearTimeout(t);\n  }, []);\n  return (\n    <div className=\"fixed bottom-6 right-6 z-50 rounded-lg bg-gray-900 px-4 py-3 text-sm text-white shadow-lg\">\n      {message}\n    </div>\n  );\n}\n\nexport function useToast() {\n  const [msg, setMsg] = useState<string | null>(null);\n  return { msg, show: setMsg, hide: () => setMsg(null) };\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "自動消失的右下角 toast"
+}

@@ -1,0 +1,31 @@
+{
+  "id": "patch-sql-index-003-expression-lower",
+  "category": "database-devops/index/expression",
+  "intents_zh": [
+    "case insensitive 查詢加 index",
+    "lower(email) 索引",
+    "expression index 怎麼寫",
+    "函數索引 email",
+    "不分大小寫搜尋",
+    "functional index postgres"
+  ],
+  "intents_en": [
+    "expression index on lower email",
+    "functional index for case-insensitive search",
+    "index lower column",
+    "case insensitive lookup index",
+    "computed expression index",
+    "index on function result"
+  ],
+  "slots": [
+    "table_name",
+    "index_name",
+    "text_column"
+  ],
+  "code": "-- Expression index for case-insensitive lookup\n-- Query MUST use the same expression to hit the index\nCREATE INDEX CONCURRENTLY IF NOT EXISTS {{index_name}}\n  ON {{table_name}} (lower({{text_column}}));\n\n-- Matching query\nEXPLAIN ANALYZE\nSELECT *\nFROM {{table_name}}\nWHERE lower({{text_column}}) = lower($1);\n\n-- Anti-pattern (will NOT use the index):\n-- SELECT * FROM {{table_name}} WHERE {{text_column}} ILIKE $1;",
+  "language": "sql",
+  "deps": [
+    "postgresql>=10"
+  ],
+  "summary_zh": "用 expression index 加速 lower(col) 查詢，query 須用同一表達式才會命中"
+}

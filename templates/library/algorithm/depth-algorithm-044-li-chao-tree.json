@@ -1,0 +1,29 @@
+{
+  "id": "depth-algorithm-044-li-chao-tree",
+  "category": "algorithm/segtree/li-chao",
+  "intents_zh": [
+    "李超線段樹",
+    "Li Chao tree",
+    "直線最值線段樹",
+    "convex hull trick 動態",
+    "凸殼維護",
+    "li chao 模板",
+    "動態凸殼"
+  ],
+  "intents_en": [
+    "Li Chao segment tree",
+    "line container li chao",
+    "dynamic convex hull trick",
+    "li chao template",
+    "line max segment tree",
+    "dynamic line container",
+    "convex hull trick li chao"
+  ],
+  "slots": [
+    "x_max"
+  ],
+  "code": "INF = float('inf')\nclass LiChao:\n    def __init__(self, x_max={{x_max}}):\n        self.X = x_max\n        self.tree = [None]*(4*x_max)\n    def f(self, line, x): return line[0]*x + line[1]\n    def insert(self, line, p=1, l=0, r=None):\n        if r is None: r = self.X-1\n        if self.tree[p] is None: self.tree[p] = line; return\n        m = (l+r)//2\n        lo_new = self.f(line, l) < self.f(self.tree[p], l)\n        mi_new = self.f(line, m) < self.f(self.tree[p], m)\n        if mi_new: self.tree[p], line = line, self.tree[p]\n        if l == r: return\n        if lo_new != mi_new: self.insert(line, 2*p, l, m)\n        else: self.insert(line, 2*p+1, m+1, r)\n    def query(self, x, p=1, l=0, r=None):\n        if r is None: r = self.X-1\n        if self.tree[p] is None: return INF\n        res = self.f(self.tree[p], x)\n        if l == r: return res\n        m = (l+r)//2\n        if x <= m: return min(res, self.query(x, 2*p, l, m))\n        return min(res, self.query(x, 2*p+1, m+1, r))",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "李超線段樹動態維護直線最值"
+}

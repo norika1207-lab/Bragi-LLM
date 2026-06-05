@@ -1,0 +1,33 @@
+{
+  "id": "mobile-021-rn-profile",
+  "category": "mobile/rn/profile",
+  "intents_zh": [
+    "RN 個人頁",
+    "React Native profile screen",
+    "RN 用戶資料頁",
+    "個人檔案 UI RN",
+    "RN 顯示頭像名字",
+    "profile page RN",
+    "RN 我的頁面"
+  ],
+  "intents_en": [
+    "rn profile screen",
+    "react native profile page",
+    "user profile ui rn",
+    "avatar name screen rn",
+    "profile template rn",
+    "my page rn",
+    "account screen rn"
+  ],
+  "slots": [
+    "avatar_url",
+    "name",
+    "bio"
+  ],
+  "code": "import React from 'react';\nimport {View,Text,Image,StyleSheet} from 'react-native';\nexport default function P(){return(<View style={s.c}><Image source={{uri:'{{avatar_url}}'}} style={s.a}/><Text style={s.n}>{{name}}</Text><Text style={s.b}>{{bio}}</Text></View>);}\nconst s=StyleSheet.create({c:{flex:1,alignItems:'center',padding:24},a:{width:120,height:120,borderRadius:60,marginBottom:16},n:{fontSize:20,fontWeight:'600'},b:{color:'#666',marginTop:8,textAlign:'center'}});",
+  "language": "tsx",
+  "deps": [
+    "react-native"
+  ],
+  "summary_zh": "RN 個人檔案頁含頭像名字 bio"
+}

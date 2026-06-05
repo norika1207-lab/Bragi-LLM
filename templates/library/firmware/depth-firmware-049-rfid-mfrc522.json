@@ -1,0 +1,29 @@
+{
+  "id": "depth-firmware-049-rfid-mfrc522",
+  "category": "firmware/wireless/rfid",
+  "intents_zh": [
+    "RFID 讀卡",
+    "MFRC522 UID",
+    "NFC 13.56MHz",
+    "門禁讀卡機",
+    "RC522 SPI"
+  ],
+  "intents_en": [
+    "rfid read",
+    "mfrc522 uid",
+    "nfc 13.56mhz",
+    "access card reader",
+    "rc522 spi"
+  ],
+  "slots": [
+    "ss_pin",
+    "rst_pin"
+  ],
+  "code": "#include <MFRC522.h>\n#include <SPI.h>\nMFRC522 rfid({{ss_pin}}, {{rst_pin}});\nvoid setup() { Serial.begin(115200); SPI.begin(); rfid.PCD_Init(); }\nvoid loop() {\n    if (!rfid.PICC_IsNewCardPresent() || !rfid.PICC_ReadCardSerial()) return;\n    for (byte i = 0; i < rfid.uid.size; i++) Serial.printf(\"%02X \", rfid.uid.uidByte[i]);\n    Serial.println();\n    rfid.PICC_HaltA();\n}",
+  "language": "cpp",
+  "deps": [
+    "MFRC522",
+    "SPI"
+  ],
+  "summary_zh": "MFRC522 SPI 讀取 RFID 卡片 UID"
+}

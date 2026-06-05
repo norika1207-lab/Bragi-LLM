@@ -1,0 +1,31 @@
+{
+  "id": "firmware-007-arduino-stepper",
+  "category": "firmware/arduino/actuator",
+  "intents_zh": [
+    "步進馬達",
+    "stepper motor",
+    "28BYJ-48 控制",
+    "步進電機轉一圈",
+    "Arduino 步進"
+  ],
+  "intents_en": [
+    "Arduino stepper motor",
+    "28BYJ-48 control",
+    "rotate stepper one revolution",
+    "Stepper library example",
+    "drive ULN2003"
+  ],
+  "slots": [
+    "pin1",
+    "pin2",
+    "pin3",
+    "pin4",
+    "steps_per_rev"
+  ],
+  "code": "#include <Stepper.h>\nconst int STEPS = {{steps_per_rev}};\nStepper myStepper(STEPS, {{pin1}}, {{pin3}}, {{pin2}}, {{pin4}});\n\nvoid setup() {\n  myStepper.setSpeed(15);\n  Serial.begin(115200);\n}\n\nvoid loop() {\n  myStepper.step(STEPS);\n  delay(1000);\n  myStepper.step(-STEPS);\n  delay(1000);\n}",
+  "language": "ino",
+  "deps": [
+    "Stepper"
+  ],
+  "summary_zh": "Arduino 步進馬達正反轉"
+}

@@ -1,0 +1,26 @@
+{
+  "id": "depth-llm-tools-054-openai-prompt-cache",
+  "category": "llm-tools/prompt-mgmt/cache-openai",
+  "intents_zh": [
+    "OpenAI prompt cache 友善 prompt",
+    "固定前綴 prompt",
+    "cache 命中率優化",
+    "靜態 prefix",
+    "cache-aware ordering"
+  ],
+  "intents_en": [
+    "OpenAI prompt-cache friendly prompt",
+    "fixed prefix prompt",
+    "cache hit optimisation",
+    "static prefix",
+    "cache-aware ordering"
+  ],
+  "slots": [
+    "static_system",
+    "dynamic_user"
+  ],
+  "code": "# OpenAI auto-caches identical >=1024-token prefixes. Keep static parts first.\nmessages = [\n    {\"role\": \"system\", \"content\": {{static_system}}},\n    {\"role\": \"user\", \"content\": {{dynamic_user}}},\n]",
+  "language": "python",
+  "deps": [],
+  "summary_zh": "OpenAI 自動快取相同前綴，靜態 system 放最前讓快取生效"
+}

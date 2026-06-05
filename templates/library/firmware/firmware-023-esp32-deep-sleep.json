@@ -1,0 +1,25 @@
+{
+  "id": "firmware-023-esp32-deep-sleep",
+  "category": "firmware/esp32/power",
+  "intents_zh": [
+    "ESP32 深層睡眠",
+    "省電模式",
+    "deep sleep",
+    "定時喚醒",
+    "低功耗運行"
+  ],
+  "intents_en": [
+    "ESP32 deep sleep",
+    "timer wakeup",
+    "low power sleep",
+    "power saving ESP32",
+    "wake from sleep"
+  ],
+  "slots": [
+    "sleep_seconds"
+  ],
+  "code": "#define uS_TO_S 1000000ULL\nconst int SECS = {{sleep_seconds}};\n\nvoid setup() {\n  Serial.begin(115200);\n  Serial.println(\"booting, sleeping soon\");\n  esp_sleep_enable_timer_wakeup(SECS * uS_TO_S);\n  delay(200);\n  esp_deep_sleep_start();\n}\n\nvoid loop() {}",
+  "language": "ino",
+  "deps": [],
+  "summary_zh": "ESP32 深層睡眠定時喚醒"
+}

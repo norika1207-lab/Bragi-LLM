@@ -1,0 +1,22 @@
+{
+  "id": "database-devops-111-sql-cte-update",
+  "category": "database-devops/sql/dml",
+  "intents_zh": [
+    "CTE + UPDATE",
+    "用 WITH 寫 update",
+    "postgres update from cte"
+  ],
+  "intents_en": [
+    "cte update",
+    "update from cte",
+    "with then update"
+  ],
+  "slots": [
+    "table",
+    "filter_col"
+  ],
+  "code": "WITH targets AS (\n  SELECT id\n  FROM {{table}}\n  WHERE {{filter_col}} IS NULL\n  LIMIT 1000\n  FOR UPDATE SKIP LOCKED\n)\nUPDATE {{table}} t\nSET {{filter_col}} = NOW()\nFROM targets\nWHERE t.id = targets.id\nRETURNING t.id;",
+  "language": "sql",
+  "deps": [],
+  "summary_zh": "CTE + UPDATE 用 SKIP LOCKED 批次處理"
+}

@@ -1,0 +1,33 @@
+{
+  "id": "llm-tools-074-mlx-load",
+  "category": "llm-tools/inference/mlx",
+  "intents_zh": [
+    "mlx 載入模型",
+    "蘋果 M 系列 mlx",
+    "mlx-lm 推論",
+    "macOS mlx llm",
+    "mlx generate",
+    "用 mlx 跑 llama",
+    "mlx 範例",
+    "mlx mini wrapper"
+  ],
+  "intents_en": [
+    "mlx load model",
+    "mlx-lm inference",
+    "apple silicon mlx",
+    "mac llm with mlx",
+    "mlx generate example",
+    "run llama on mlx",
+    "minimal mlx",
+    "mlx wrapper"
+  ],
+  "slots": [
+    "model_id"
+  ],
+  "code": "from mlx_lm import load, generate\n\nmodel, tok = load(\"{{model_id}}\")\n\ndef run(prompt: str, max_tokens: int = 256) -> str:\n    return generate(model, tok, prompt=prompt, max_tokens=max_tokens)\n\nif __name__ == \"__main__\":\n    print(run(\"hello\"))",
+  "language": "py",
+  "deps": [
+    "mlx-lm"
+  ],
+  "summary_zh": "Apple MLX-LM 載入與生成"
+}

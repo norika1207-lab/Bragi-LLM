@@ -1,0 +1,27 @@
+{
+  "id": "depth-mobile-043-magnetometer-rn",
+  "category": "mobile/sensors/magnetometer-rn",
+  "intents_zh": [
+    "RN expo-sensors Magnetometer",
+    "磁場讀值",
+    "setUpdateInterval",
+    "RN compass",
+    "heading"
+  ],
+  "intents_en": [
+    "RN Magnetometer expo",
+    "magnetic field reading",
+    "setUpdateInterval",
+    "RN compass",
+    "heading"
+  ],
+  "slots": [
+    "interval_ms"
+  ],
+  "code": "import { Magnetometer } from 'expo-sensors';\nMagnetometer.setUpdateInterval({{interval_ms}});\nconst sub = Magnetometer.addListener(({ x, y, z }) => {\n  const heading = (Math.atan2(y, x) * 180) / Math.PI;\n  console.log('heading', (heading + 360) % 360);\n});",
+  "language": "ts",
+  "deps": [
+    "expo-sensors"
+  ],
+  "summary_zh": "Expo 磁力計算方位角"
+}

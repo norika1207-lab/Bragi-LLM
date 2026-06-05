@@ -1,0 +1,29 @@
+{
+  "id": "web-backend-053-fastapi-deps-db",
+  "category": "web-backend/fastapi/db",
+  "intents_zh": [
+    "fastapi + sqlalchemy session",
+    "Depends 注入 db",
+    "async sqlalchemy fastapi",
+    "db session 依賴",
+    "fastapi orm setup"
+  ],
+  "intents_en": [
+    "fastapi sqlalchemy depends",
+    "async sqlalchemy session",
+    "db dependency fastapi",
+    "sqlalchemy orm fastapi",
+    "db setup fastapi"
+  ],
+  "slots": [
+    "db_url"
+  ],
+  "code": "from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker, AsyncSession\nfrom sqlalchemy.orm import DeclarativeBase\nfrom fastapi import Depends\n\nengine = create_async_engine('{{db_url}}', echo=False)\nSessionLocal = async_sessionmaker(engine, expire_on_commit=False)\n\nclass Base(DeclarativeBase):\n    pass\n\nasync def get_db() -> AsyncSession:\n    async with SessionLocal() as session:\n        yield session\n\n# usage: async def handler(db: AsyncSession = Depends(get_db)): ...",
+  "language": "py",
+  "deps": [
+    "fastapi",
+    "sqlalchemy",
+    "asyncpg"
+  ],
+  "summary_zh": "FastAPI async SQLAlchemy session 依賴"
+}

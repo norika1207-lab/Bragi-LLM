@@ -1,0 +1,19 @@
+{
+  "id": "algorithm-misc-030",
+  "category": "algorithm/misc/longest_consecutive",
+  "intents_zh": [
+    "最長連續序列",
+    "longest consecutive sequence"
+  ],
+  "intents_en": [
+    "longest consecutive sequence",
+    "hash set consecutive"
+  ],
+  "slots": [
+    "fn_name"
+  ],
+  "code": "def {{fn_name}}(nums):\n    s = set(nums)\n    best = 0\n    for n in s:\n        if n - 1 not in s:\n            cur = n; cnt = 1\n            while cur + 1 in s:\n                cur += 1; cnt += 1\n            best = max(best, cnt)\n    return best",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "O(n) 最長連續序列"
+}

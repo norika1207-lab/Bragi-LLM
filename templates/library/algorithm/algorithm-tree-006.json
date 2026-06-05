@@ -1,0 +1,21 @@
+{
+  "id": "algorithm-tree-006",
+  "category": "algorithm/tree/traversal",
+  "intents_zh": [
+    "樹遍歷",
+    "inorder preorder postorder",
+    "給我三種遍歷"
+  ],
+  "intents_en": [
+    "tree traversal",
+    "inorder preorder postorder",
+    "binary tree traversal"
+  ],
+  "slots": [
+    "fn_prefix"
+  ],
+  "code": "def {{fn_prefix}}_inorder(node, out=None):\n    if out is None: out = []\n    if node:\n        {{fn_prefix}}_inorder(node.left, out)\n        out.append(node.val)\n        {{fn_prefix}}_inorder(node.right, out)\n    return out\n\ndef {{fn_prefix}}_preorder(node, out=None):\n    if out is None: out = []\n    if node:\n        out.append(node.val)\n        {{fn_prefix}}_preorder(node.left, out)\n        {{fn_prefix}}_preorder(node.right, out)\n    return out\n\ndef {{fn_prefix}}_postorder(node, out=None):\n    if out is None: out = []\n    if node:\n        {{fn_prefix}}_postorder(node.left, out)\n        {{fn_prefix}}_postorder(node.right, out)\n        out.append(node.val)\n    return out",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "二元樹三種遞迴遍歷"
+}

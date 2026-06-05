@@ -1,0 +1,29 @@
+{
+  "id": "mobile-081-compose-login",
+  "category": "mobile/compose/auth",
+  "intents_zh": [
+    "Compose 登入畫面",
+    "Jetpack Compose login",
+    "Kotlin Compose 登入",
+    "Compose email password",
+    "Android Compose 登入頁",
+    "Compose signin",
+    "Compose 登入表單"
+  ],
+  "intents_en": [
+    "jetpack compose login",
+    "kotlin compose login",
+    "compose email password",
+    "compose signin form",
+    "android compose login",
+    "compose login screen",
+    "compose auth ui"
+  ],
+  "slots": [],
+  "code": "import androidx.compose.foundation.layout.*\nimport androidx.compose.material3.*\nimport androidx.compose.runtime.*\nimport androidx.compose.ui.Modifier\nimport androidx.compose.ui.unit.dp\n@Composable\nfun LoginScreen(onSubmit:(String,String)->Unit){\n  var e by remember{mutableStateOf(\"\")};var p by remember{mutableStateOf(\"\")}\n  Column(Modifier.fillMaxSize().padding(24.dp)){\n    OutlinedTextField(value=e,onValueChange={e=it},label={Text(\"email\")})\n    OutlinedTextField(value=p,onValueChange={p=it},label={Text(\"password\")})\n    Spacer(Modifier.height(12.dp))\n    Button(onClick={onSubmit(e,p)}){Text(\"Login\")}}}",
+  "language": "kt",
+  "deps": [
+    "androidx.compose.material3"
+  ],
+  "summary_zh": "Compose 登入表單呼叫 callback"
+}

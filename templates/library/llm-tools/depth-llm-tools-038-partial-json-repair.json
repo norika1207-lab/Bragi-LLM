@@ -1,0 +1,27 @@
+{
+  "id": "depth-llm-tools-038-partial-json-repair",
+  "category": "llm-tools/structured/repair",
+  "intents_zh": [
+    "半截 JSON 修補",
+    "補完未閉合括號",
+    "json-repair 修壞 JSON",
+    "容錯 JSON 解析",
+    "streaming JSON 修復"
+  ],
+  "intents_en": [
+    "partial JSON repair",
+    "close unbalanced brackets",
+    "json-repair fix",
+    "fault-tolerant JSON parse",
+    "streaming JSON fix"
+  ],
+  "slots": [
+    "broken_json"
+  ],
+  "code": "from json_repair import repair_json\n\nfixed = repair_json({{broken_json}}, return_objects=True)",
+  "language": "python",
+  "deps": [
+    "json-repair"
+  ],
+  "summary_zh": "json-repair 自動修補半截或壞掉的 JSON 字串"
+}

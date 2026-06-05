@@ -1,0 +1,25 @@
+{
+  "id": "database-devops-110-pytest-coverage",
+  "category": "database-devops/test/pytest",
+  "intents_zh": [
+    "pytest coverage 設定",
+    "pyproject coverage",
+    "cov-fail-under"
+  ],
+  "intents_en": [
+    "pytest coverage config",
+    "pyproject coverage",
+    "cov-fail-under"
+  ],
+  "slots": [
+    "package_name",
+    "threshold"
+  ],
+  "code": "[tool.pytest.ini_options]\naddopts = \"--cov={{package_name}} --cov-report=term-missing --cov-report=xml --cov-fail-under={{threshold}}\"\ntestpaths = [\"tests\"]\n\n[tool.coverage.run]\nbranch = true\nsource = [\"{{package_name}}\"]\n\n[tool.coverage.report]\nexclude_lines = [\n  \"pragma: no cover\",\n  \"raise NotImplementedError\",\n  \"if __name__ == .__main__.:\",\n]",
+  "language": "toml",
+  "deps": [
+    "pytest",
+    "pytest-cov"
+  ],
+  "summary_zh": "pyproject pytest + coverage 設定"
+}

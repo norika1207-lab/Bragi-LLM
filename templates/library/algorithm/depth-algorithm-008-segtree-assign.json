@@ -1,0 +1,30 @@
+{
+  "id": "depth-algorithm-008-segtree-assign",
+  "category": "algorithm/segtree/assign",
+  "intents_zh": [
+    "區間覆蓋線段樹",
+    "segment tree assign",
+    "區間賦值最大值",
+    "染色線段樹",
+    "區間設值查最大",
+    "lazy assign segtree",
+    "區間覆寫"
+  ],
+  "intents_en": [
+    "segment tree range assign",
+    "range assign max segtree",
+    "painting segtree",
+    "interval assign",
+    "lazy assign template",
+    "range cover query max",
+    "assignment lazy seg"
+  ],
+  "slots": [
+    "n",
+    "NEG_INF"
+  ],
+  "code": "class AssignSeg:\n    INF = {{NEG_INF}}\n    def __init__(self, n={{n}}):\n        self.n = n\n        self.t = [self.INF]*(4*n)\n        self.lz = [None]*(4*n)\n    def push(self, p):\n        if self.lz[p] is not None:\n            for c in (2*p, 2*p+1):\n                self.t[c] = self.lz[p]; self.lz[c] = self.lz[p]\n            self.lz[p] = None\n    def assign(self, ql, qr, v, p=1, l=0, r=None):\n        if r is None: r = self.n-1\n        if ql <= l and r <= qr:\n            self.t[p] = v; self.lz[p] = v; return\n        self.push(p); m = (l+r)//2\n        if ql <= m: self.assign(ql,qr,v,2*p,l,m)\n        if qr > m: self.assign(ql,qr,v,2*p+1,m+1,r)\n        self.t[p] = max(self.t[2*p], self.t[2*p+1])\n    def query(self, ql, qr, p=1, l=0, r=None):\n        if r is None: r = self.n-1\n        if ql <= l and r <= qr: return self.t[p]\n        self.push(p); m = (l+r)//2; res = self.INF\n        if ql <= m: res = max(res, self.query(ql,qr,2*p,l,m))\n        if qr > m: res = max(res, self.query(ql,qr,2*p+1,m+1,r))\n        return res",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "區間賦值並查詢最大值的線段樹"
+}

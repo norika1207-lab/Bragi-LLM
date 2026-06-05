@@ -1,0 +1,29 @@
+{
+  "id": "mobile-018-rn-splash",
+  "category": "mobile/rn/launch",
+  "intents_zh": [
+    "RN splash screen",
+    "React Native 開頁",
+    "expo splash",
+    "RN 啟動畫面",
+    "RN 開場 logo",
+    "splash 設定 RN",
+    "RN 隱藏 splash"
+  ],
+  "intents_en": [
+    "rn splash screen",
+    "expo splash",
+    "react native launch screen",
+    "hide splash rn",
+    "initial loading rn",
+    "splash setup rn",
+    "app launch screen rn"
+  ],
+  "slots": [],
+  "code": "import * as SplashScreen from 'expo-splash-screen';\nimport {useEffect,useState} from 'react';\nSplashScreen.preventAutoHideAsync().catch(()=>{});\nexport function useSplash(load:()=>Promise<void>){\n  const[ready,setReady]=useState(false);\n  useEffect(()=>{(async()=>{try{await load();}finally{setReady(true);await SplashScreen.hideAsync();}})();},[load]);\n  return ready;}",
+  "language": "ts",
+  "deps": [
+    "expo-splash-screen"
+  ],
+  "summary_zh": "Expo splash 隱藏控制 hook"
+}

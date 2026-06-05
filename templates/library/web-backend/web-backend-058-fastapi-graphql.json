@@ -1,0 +1,28 @@
+{
+  "id": "web-backend-058-fastapi-graphql",
+  "category": "web-backend/fastapi/graphql",
+  "intents_zh": [
+    "fastapi graphql",
+    "strawberry resolver",
+    "graphql endpoint fastapi",
+    "schema + resolver fastapi",
+    "apollo + fastapi"
+  ],
+  "intents_en": [
+    "fastapi graphql strawberry",
+    "graphql resolver fastapi",
+    "strawberry schema",
+    "graphql endpoint fastapi",
+    "graphql with fastapi"
+  ],
+  "slots": [
+    "type_name"
+  ],
+  "code": "import strawberry\nfrom fastapi import FastAPI\nfrom strawberry.fastapi import GraphQLRouter\n\n@strawberry.type\nclass {{type_name}}:\n    id: str\n    name: str\n\n_store: list[{{type_name}}] = []\n\n@strawberry.type\nclass Query:\n    @strawberry.field\n    def items(self) -> list[{{type_name}}]:\n        return _store\n\n@strawberry.type\nclass Mutation:\n    @strawberry.mutation\n    def add(self, name: str) -> {{type_name}}:\n        item = {{type_name}}(id=str(len(_store) + 1), name=name)\n        _store.append(item)\n        return item\n\nschema = strawberry.Schema(query=Query, mutation=Mutation)\napp = FastAPI()\napp.include_router(GraphQLRouter(schema), prefix='/graphql')",
+  "language": "py",
+  "deps": [
+    "fastapi",
+    "strawberry-graphql"
+  ],
+  "summary_zh": "FastAPI + strawberry GraphQL"
+}

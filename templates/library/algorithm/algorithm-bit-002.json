@@ -1,0 +1,21 @@
+{
+  "id": "algorithm-bit-002",
+  "category": "algorithm/bit/subset_enum",
+  "intents_zh": [
+    "列舉子集",
+    "bitmask 列舉",
+    "給我子集列舉"
+  ],
+  "intents_en": [
+    "enumerate subsets",
+    "bitmask subsets",
+    "iterate submasks"
+  ],
+  "slots": [
+    "fn_name"
+  ],
+  "code": "def {{fn_name}}(mask):\n    sub = mask\n    while True:\n        yield sub\n        if sub == 0: break\n        sub = (sub - 1) & mask",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "列舉 mask 所有子集"
+}

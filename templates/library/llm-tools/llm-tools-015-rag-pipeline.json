@@ -1,0 +1,37 @@
+{
+  "id": "llm-tools-015-rag-pipeline",
+  "category": "llm-tools/rag/pipeline",
+  "intents_zh": [
+    "完整 RAG pipeline",
+    "retrieve + generate",
+    "RAG 範本",
+    "用向量庫 + LLM 做 QA",
+    "rag 流程",
+    "檢索增強生成",
+    "rag minimal",
+    "給我一個 RAG"
+  ],
+  "intents_en": [
+    "full rag pipeline",
+    "retrieve plus generate",
+    "minimal rag template",
+    "rag qa with vector db",
+    "retrieval augmented generation",
+    "basic rag",
+    "rag scaffold",
+    "rag example"
+  ],
+  "slots": [
+    "embed_model",
+    "llm_model",
+    "top_k"
+  ],
+  "code": "from sentence_transformers import SentenceTransformer\nfrom openai import OpenAI\nimport numpy as np\n\nembedder = SentenceTransformer(\"{{embed_model}}\")\nllm = OpenAI()\nDOCS, VECS = [], None\n\ndef ingest(docs: list[str]):\n    global DOCS, VECS\n    DOCS = docs\n    VECS = embedder.encode(docs, normalize_embeddings=True)\n\ndef retrieve(q: str):\n    qv = embedder.encode([q], normalize_embeddings=True)\n    sims = (VECS @ qv.T).flatten()\n    idx = np.argsort(-sims)[:{{top_k}}]\n    return [DOCS[i] for i in idx]\n\ndef answer(q: str) -> str:\n    ctx = \"\\n\".join(retrieve(q))\n    r = llm.chat.completions.create(\n        model=\"{{llm_model}}\",\n        messages=[{\"role\": \"user\", \"content\": f\"Context:\\n{ctx}\\n\\nQ: {q}\"}],\n    )\n    return r.choices[0].message.content",
+  "language": "py",
+  "deps": [
+    "sentence-transformers",
+    "openai",
+    "numpy"
+  ],
+  "summary_zh": "最簡 RAG: 向量檢索 + LLM 回答"
+}

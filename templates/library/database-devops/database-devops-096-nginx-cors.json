@@ -1,0 +1,21 @@
+{
+  "id": "database-devops-096-nginx-cors",
+  "category": "database-devops/nginx/security",
+  "intents_zh": [
+    "nginx CORS 設定",
+    "加 CORS header",
+    "nginx 跨域"
+  ],
+  "intents_en": [
+    "nginx cors config",
+    "add cors header",
+    "cross origin nginx"
+  ],
+  "slots": [
+    "allowed_origin"
+  ],
+  "code": "location /api/ {\n  add_header 'Access-Control-Allow-Origin' '{{allowed_origin}}' always;\n  add_header 'Access-Control-Allow-Methods' 'GET, POST, PUT, DELETE, OPTIONS' always;\n  add_header 'Access-Control-Allow-Headers' 'Authorization, Content-Type' always;\n  add_header 'Access-Control-Allow-Credentials' 'true' always;\n\n  if ($request_method = 'OPTIONS') {\n    return 204;\n  }\n\n  proxy_pass http://127.0.0.1:3000;\n}",
+  "language": "nginx",
+  "deps": [],
+  "summary_zh": "nginx CORS header + preflight"
+}

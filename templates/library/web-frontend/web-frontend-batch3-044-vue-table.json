@@ -1,0 +1,29 @@
+{
+  "id": "web-frontend-batch3-044-vue-table",
+  "category": "web-frontend/vue/ui/table",
+  "intents_zh": [
+    "Vue 表格元件",
+    "Vue 資料 table",
+    "Vue v-for 表格",
+    "Vue 動態 table",
+    "Vue sortable table",
+    "Vue 資料展示表"
+  ],
+  "intents_en": [
+    "vue table component",
+    "vue data table",
+    "vue v-for table",
+    "vue dynamic table",
+    "vue sortable table",
+    "vue display table"
+  ],
+  "slots": [
+    "rows_prop"
+  ],
+  "code": "<script setup>\nimport { ref, computed } from 'vue'\nconst props = defineProps({ {{rows_prop}}: { type: Array, default: () => [] } })\nconst sortKey = ref(null)\nconst asc = ref(true)\nconst sorted = computed(() => {\n  if (!sortKey.value) return props.{{rows_prop}}\n  return [...props.{{rows_prop}}].sort((a, b) => {\n    const r = a[sortKey.value] > b[sortKey.value] ? 1 : -1\n    return asc.value ? r : -r\n  })\n})\nfunction sortBy(k) {\n  if (sortKey.value === k) asc.value = !asc.value\n  else { sortKey.value = k; asc.value = true }\n}\nconst headers = computed(() => props.{{rows_prop}}[0] ? Object.keys(props.{{rows_prop}}[0]) : [])\n</script>\n<template>\n  <table>\n    <thead>\n      <tr>\n        <th v-for=\"h in headers\" :key=\"h\" @click=\"sortBy(h)\">{{ h }}</th>\n      </tr>\n    </thead>\n    <tbody>\n      <tr v-for=\"(r, i) in sorted\" :key=\"i\">\n        <td v-for=\"h in headers\" :key=\"h\">{{ r[h] }}</td>\n      </tr>\n    </tbody>\n  </table>\n</template>",
+  "language": "vue",
+  "deps": [
+    "vue"
+  ],
+  "summary_zh": "Vue 可排序動態表格"
+}

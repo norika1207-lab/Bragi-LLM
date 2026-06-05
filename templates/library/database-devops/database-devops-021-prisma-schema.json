@@ -1,0 +1,27 @@
+{
+  "id": "database-devops-021-prisma-schema",
+  "category": "database-devops/orm/prisma",
+  "intents_zh": [
+    "Prisma schema",
+    "prisma model",
+    "建一個 prisma 模型",
+    "schema.prisma 範本"
+  ],
+  "intents_en": [
+    "prisma schema",
+    "prisma model",
+    "schema.prisma example",
+    "prisma datasource"
+  ],
+  "slots": [
+    "model_name",
+    "table_name"
+  ],
+  "code": "datasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\ngenerator client {\n  provider = \"prisma-client-js\"\n}\n\nmodel {{model_name}} {\n  id        Int      @id @default(autoincrement())\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  @@map(\"{{table_name}}\")\n}",
+  "language": "prisma",
+  "deps": [
+    "prisma",
+    "@prisma/client"
+  ],
+  "summary_zh": "Prisma schema 基本模型"
+}

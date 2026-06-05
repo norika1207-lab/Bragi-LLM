@@ -1,0 +1,32 @@
+{
+  "id": "depth-algorithm-058-edmonds-karp",
+  "category": "algorithm/flow/edmonds-karp",
+  "intents_zh": [
+    "Edmonds Karp",
+    "BFS 最大流",
+    "edmonds karp 模板",
+    "O(VE^2) 最大流",
+    "BFS 增廣路",
+    "Ford Fulkerson BFS",
+    "網路流 BFS"
+  ],
+  "intents_en": [
+    "Edmonds Karp",
+    "BFS max flow",
+    "Ford Fulkerson BFS",
+    "Edmonds Karp template",
+    "O(VE^2) flow",
+    "BFS augmenting path",
+    "network flow BFS"
+  ],
+  "slots": [
+    "n",
+    "capacity",
+    "s",
+    "t"
+  ],
+  "code": "from collections import deque\n\ndef edmonds_karp(n={{n}}, cap={{capacity}}, s={{s}}, t={{t}}):\n    flow = 0\n    while True:\n        parent = [-1]*n; parent[s] = s\n        q = deque([s])\n        while q and parent[t] == -1:\n            u = q.popleft()\n            for v in range(n):\n                if parent[v] == -1 and cap[u][v] > 0:\n                    parent[v] = u; q.append(v)\n        if parent[t] == -1: break\n        push = float('inf'); v = t\n        while v != s:\n            push = min(push, cap[parent[v]][v]); v = parent[v]\n        v = t\n        while v != s:\n            cap[parent[v]][v] -= push; cap[v][parent[v]] += push; v = parent[v]\n        flow += push\n    return flow",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "Edmonds Karp BFS 增廣路求最大流"
+}

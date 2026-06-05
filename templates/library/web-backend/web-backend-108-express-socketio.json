@@ -1,0 +1,28 @@
+{
+  "id": "web-backend-108-express-socketio",
+  "category": "web-backend/express/websocket",
+  "intents_zh": [
+    "socket.io 範例",
+    "express + socket.io",
+    "即時聊天 socket.io",
+    "房間 broadcast",
+    "socket.io server"
+  ],
+  "intents_en": [
+    "socket.io express",
+    "realtime chat socket.io",
+    "room broadcast socket.io",
+    "socket.io server",
+    "node socket.io"
+  ],
+  "slots": [
+    "port"
+  ],
+  "code": "const http = require('http');\nconst express = require('express');\nconst { Server } = require('socket.io');\n\nconst app = express();\nconst server = http.createServer(app);\nconst io = new Server(server, { cors: { origin: '*' } });\n\nio.on('connection', (socket) => {\n  socket.on('join', (room) => socket.join(room));\n  socket.on('message', ({ room, text }) => {\n    io.to(room).emit('message', { id: socket.id, text, ts: Date.now() });\n  });\n});\n\nserver.listen({{port}}, () => console.log('socket.io on {{port}}'));",
+  "language": "js",
+  "deps": [
+    "express",
+    "socket.io"
+  ],
+  "summary_zh": "Socket.io 房間聊天"
+}

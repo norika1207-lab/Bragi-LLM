@@ -1,0 +1,33 @@
+{
+  "id": "mobile-029-flutter-tabs",
+  "category": "mobile/flutter/nav",
+  "intents_zh": [
+    "Flutter bottom navigation",
+    "flutter 底部 tab",
+    "三頁 tab flutter",
+    "Flutter BottomNavigationBar",
+    "Flutter 主頁底欄",
+    "底部導航 flutter",
+    "flutter tabs 範例"
+  ],
+  "intents_en": [
+    "flutter bottom nav",
+    "BottomNavigationBar flutter",
+    "flutter tabs example",
+    "flutter three tab nav",
+    "bottom tabs flutter",
+    "flutter main nav",
+    "bottom nav bar flutter"
+  ],
+  "slots": [
+    "tab1",
+    "tab2",
+    "tab3"
+  ],
+  "code": "import 'package:flutter/material.dart';\nclass Home extends StatefulWidget{const Home({super.key});@override State<Home> createState()=>_H();}\nclass _H extends State<Home>{int i=0;\n  final pages=[const Center(child:Text('{{tab1}}')),const Center(child:Text('{{tab2}}')),const Center(child:Text('{{tab3}}'))];\n  @override Widget build(BuildContext c)=>Scaffold(body:pages[i],bottomNavigationBar:BottomNavigationBar(currentIndex:i,onTap:(x)=>setState(()=>i=x),items:const[BottomNavigationBarItem(icon:Icon(Icons.home),label:'{{tab1}}'),BottomNavigationBarItem(icon:Icon(Icons.search),label:'{{tab2}}'),BottomNavigationBarItem(icon:Icon(Icons.person),label:'{{tab3}}')]));}",
+  "language": "dart",
+  "deps": [
+    "flutter"
+  ],
+  "summary_zh": "Flutter 三頁底部導航骨架"
+}

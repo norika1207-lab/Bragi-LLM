@@ -1,0 +1,28 @@
+{
+  "id": "web-backend-096-express-mongoclient",
+  "category": "web-backend/express/db",
+  "intents_zh": [
+    "express 接 mongodb",
+    "MongoClient connect",
+    "node mongo 範例",
+    "express mongo CRUD",
+    "mongo client wrapper"
+  ],
+  "intents_en": [
+    "express mongodb client",
+    "MongoClient connect node",
+    "node mongo example",
+    "mongo CRUD express",
+    "mongo client wrapper"
+  ],
+  "slots": [
+    "mongo_url",
+    "db_name"
+  ],
+  "code": "const { MongoClient } = require('mongodb');\nconst client = new MongoClient('{{mongo_url}}');\nlet db;\n\nasync function init() {\n  await client.connect();\n  db = client.db('{{db_name}}');\n  console.log('mongo connected');\n}\n\nfunction collection(name) {\n  if (!db) throw new Error('mongo not initialized');\n  return db.collection(name);\n}\n\nmodule.exports = { init, collection };",
+  "language": "js",
+  "deps": [
+    "mongodb"
+  ],
+  "summary_zh": "MongoDB native client 連線封裝"
+}

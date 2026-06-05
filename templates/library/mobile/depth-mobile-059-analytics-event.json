@@ -1,0 +1,30 @@
+{
+  "id": "depth-mobile-059-analytics-event",
+  "category": "mobile/observability/analytics-event",
+  "intents_zh": [
+    "Firebase Analytics logEvent",
+    "事件追蹤",
+    "analytics track event",
+    "跨平台埋點",
+    "custom event"
+  ],
+  "intents_en": [
+    "Firebase Analytics logEvent",
+    "event tracking",
+    "analytics track",
+    "cross platform telemetry",
+    "custom event"
+  ],
+  "slots": [
+    "event_name",
+    "param_key",
+    "param_val"
+  ],
+  "code": "import analytics from '@react-native-firebase/analytics';\nexport async function trackEvent() {\n  await analytics().logEvent('{{event_name}}', { '{{param_key}}': '{{param_val}}' });\n}",
+  "language": "ts",
+  "deps": [
+    "@react-native-firebase/app",
+    "@react-native-firebase/analytics"
+  ],
+  "summary_zh": "RN Firebase Analytics 事件埋點"
+}

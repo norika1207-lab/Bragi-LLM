@@ -1,0 +1,27 @@
+{
+  "id": "depth-web-backend-005-ws-native-rooms",
+  "category": "web-backend/websocket/native",
+  "intents_zh": [
+    "原生 ws 房間管理",
+    "Node ws 套件房間",
+    "WebSocket 群播實作",
+    "手刻房間訂閱",
+    "ws 廣播給 room"
+  ],
+  "intents_en": [
+    "native ws rooms",
+    "node ws package rooms",
+    "websocket broadcast room",
+    "manual room subscribe",
+    "ws emit to room"
+  ],
+  "slots": [
+    "port"
+  ],
+  "code": "const wss = new WebSocketServer({ port: {{port}} });\nconst rooms = new Map();\nwss.on('connection', (ws) => {\n  ws.on('message', (raw) => {\n    const m = JSON.parse(raw);\n    if (m.type === 'join') {\n      if (!rooms.has(m.room)) rooms.set(m.room, new Set());\n      rooms.get(m.room).add(ws);\n      ws.room = m.room;\n    } else if (m.type === 'msg') {\n      for (const c of rooms.get(ws.room) || []) c.send(JSON.stringify(m));\n    }\n  });\n  ws.on('close', () => rooms.get(ws.room)?.delete(ws));\n});",
+  "language": "js",
+  "deps": [
+    "ws"
+  ],
+  "summary_zh": "原生 ws 手刻房間 + 廣播"
+}

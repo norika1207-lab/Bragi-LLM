@@ -1,0 +1,34 @@
+{
+  "id": "llm-tools-039-retry-backoff",
+  "category": "llm-tools/utils/retry",
+  "intents_zh": [
+    "重試 backoff",
+    "tenacity 重試 openai",
+    "retry 退避",
+    "rate limit 重試",
+    "openai 重試包裝",
+    "exponential backoff",
+    "retry decorator",
+    "容錯重試"
+  ],
+  "intents_en": [
+    "retry backoff",
+    "tenacity retry openai",
+    "exponential backoff",
+    "rate limit retry",
+    "retry decorator",
+    "fault tolerant llm call",
+    "openai retry",
+    "resilient client"
+  ],
+  "slots": [
+    "max_attempts"
+  ],
+  "code": "from tenacity import retry, wait_exponential, stop_after_attempt, retry_if_exception_type\nfrom openai import OpenAI, RateLimitError, APIError\n\nclient = OpenAI()\n\n@retry(\n    wait=wait_exponential(min=1, max=30),\n    stop=stop_after_attempt({{max_attempts}}),\n    retry=retry_if_exception_type((RateLimitError, APIError)),\n)\ndef chat(prompt: str, model: str) -> str:\n    r = client.chat.completions.create(model=model, messages=[{\"role\": \"user\", \"content\": prompt}])\n    return r.choices[0].message.content",
+  "language": "py",
+  "deps": [
+    "openai",
+    "tenacity"
+  ],
+  "summary_zh": "tenacity 指數退避重試 OpenAI 呼叫"
+}

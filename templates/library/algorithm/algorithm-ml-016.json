@@ -1,0 +1,24 @@
+{
+  "id": "algorithm-ml-016",
+  "category": "algorithm/ml/random_forest",
+  "intents_zh": [
+    "隨機森林",
+    "random forest",
+    "sklearn rf"
+  ],
+  "intents_en": [
+    "random forest",
+    "sklearn random forest",
+    "rf classifier"
+  ],
+  "slots": [
+    "X_train",
+    "y_train"
+  ],
+  "code": "from sklearn.ensemble import RandomForestClassifier\n\nclf = RandomForestClassifier(n_estimators=100, random_state=0, n_jobs=-1)\nclf.fit({{X_train}}, {{y_train}})\nprint('feature importances:', clf.feature_importances_)",
+  "language": "py",
+  "deps": [
+    "scikit-learn"
+  ],
+  "summary_zh": "隨機森林分類"
+}

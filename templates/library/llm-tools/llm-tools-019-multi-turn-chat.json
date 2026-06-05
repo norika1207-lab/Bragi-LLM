@@ -1,0 +1,34 @@
+{
+  "id": "llm-tools-019-multi-turn-chat",
+  "category": "llm-tools/chat/multi-turn",
+  "intents_zh": [
+    "多輪對話狀態",
+    "chat history 管理",
+    "multi-turn chat",
+    "維護 messages list",
+    "對話記憶體",
+    "openai 多輪",
+    "chat state",
+    "保留上下文"
+  ],
+  "intents_en": [
+    "multi-turn chat state",
+    "chat history manager",
+    "conversation memory",
+    "openai multi-turn",
+    "messages list manager",
+    "stateful chat",
+    "context retention",
+    "chat session"
+  ],
+  "slots": [
+    "model_name",
+    "system_prompt"
+  ],
+  "code": "from openai import OpenAI\n\nclient = OpenAI()\n\nclass Chat:\n    def __init__(self):\n        self.history = [{\"role\": \"system\", \"content\": \"{{system_prompt}}\"}]\n\n    def send(self, msg: str) -> str:\n        self.history.append({\"role\": \"user\", \"content\": msg})\n        r = client.chat.completions.create(model=\"{{model_name}}\", messages=self.history)\n        reply = r.choices[0].message.content\n        self.history.append({\"role\": \"assistant\", \"content\": reply})\n        return reply\n\nif __name__ == \"__main__\":\n    c = Chat()\n    print(c.send(\"hi\"))\n    print(c.send(\"what did I just say?\"))",
+  "language": "py",
+  "deps": [
+    "openai"
+  ],
+  "summary_zh": "維護 messages 歷史的多輪對話類別"
+}

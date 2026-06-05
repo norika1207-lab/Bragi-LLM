@@ -1,0 +1,28 @@
+{
+  "id": "depth-firmware-059-co2-mhz19",
+  "category": "firmware/sensor/co2",
+  "intents_zh": [
+    "MH-Z19 CO2",
+    "二氧化碳 PPM",
+    "空氣品質感測",
+    "UART CO2",
+    "ABC 校正"
+  ],
+  "intents_en": [
+    "mh-z19 co2",
+    "co2 ppm",
+    "air quality sensor",
+    "uart co2",
+    "abc calibration"
+  ],
+  "slots": [
+    "rx_pin",
+    "tx_pin"
+  ],
+  "code": "#include <MHZ19.h>\nHardwareSerial mhSerial(1);\nMHZ19 mh;\nvoid setup() {\n    Serial.begin(115200);\n    mhSerial.begin(9600, SERIAL_8N1, {{rx_pin}}, {{tx_pin}});\n    mh.begin(mhSerial);\n    mh.autoCalibration();\n}\nvoid loop() {\n    Serial.printf(\"CO2=%d ppm T=%d\\n\", mh.getCO2(), mh.getTemperature());\n    delay(2000);\n}",
+  "language": "cpp",
+  "deps": [
+    "MH-Z19"
+  ],
+  "summary_zh": "MH-Z19 透過 UART 讀取 CO2 濃度"
+}

@@ -1,0 +1,26 @@
+{
+  "id": "depth-mobile-033-tts-ios",
+  "category": "mobile/speech/tts-ios",
+  "intents_zh": [
+    "iOS AVSpeechSynthesizer",
+    "文字轉語音",
+    "AVSpeechUtterance",
+    "語速 voice 設定",
+    "speak text"
+  ],
+  "intents_en": [
+    "iOS AVSpeechSynthesizer",
+    "text to speech",
+    "AVSpeechUtterance",
+    "rate voice config",
+    "speak text"
+  ],
+  "slots": [
+    "text",
+    "voice_lang"
+  ],
+  "code": "import AVFoundation\nlet synth = AVSpeechSynthesizer()\nlet u = AVSpeechUtterance(string: \"{{text}}\")\nu.voice = AVSpeechSynthesisVoice(language: \"{{voice_lang}}\")\nu.rate = 0.5\nsynth.speak(u)",
+  "language": "swift",
+  "deps": [],
+  "summary_zh": "iOS AVSpeech 文字朗讀"
+}

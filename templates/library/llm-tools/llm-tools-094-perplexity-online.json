@@ -1,0 +1,33 @@
+{
+  "id": "llm-tools-094-perplexity-online",
+  "category": "llm-tools/client/perplexity",
+  "intents_zh": [
+    "perplexity api",
+    "pplx online search",
+    "sonar 模型",
+    "perplexity 範例",
+    "sonar online",
+    "perplexity client",
+    "用 pplx 搜尋型 LLM",
+    "pplx wrapper"
+  ],
+  "intents_en": [
+    "perplexity api",
+    "pplx online search",
+    "sonar model",
+    "perplexity client",
+    "pplx wrapper",
+    "perplexity example",
+    "online search llm",
+    "pplx sdk"
+  ],
+  "slots": [
+    "model_name"
+  ],
+  "code": "from openai import OpenAI\nimport os\n\nclient = OpenAI(api_key=os.environ[\"PPLX_API_KEY\"], base_url=\"https://api.perplexity.ai\")\n\ndef ask(prompt: str) -> str:\n    r = client.chat.completions.create(\n        model=\"{{model_name}}\",\n        messages=[{\"role\": \"user\", \"content\": prompt}],\n    )\n    return r.choices[0].message.content\n\nif __name__ == \"__main__\":\n    print(ask(\"latest news on AI\"))",
+  "language": "py",
+  "deps": [
+    "openai"
+  ],
+  "summary_zh": "Perplexity sonar 線上搜尋模型"
+}

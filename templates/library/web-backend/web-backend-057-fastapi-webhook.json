@@ -1,0 +1,28 @@
+{
+  "id": "web-backend-057-fastapi-webhook",
+  "category": "web-backend/fastapi/webhook",
+  "intents_zh": [
+    "fastapi webhook",
+    "驗證簽章 fastapi",
+    "收 stripe webhook fastapi",
+    "github webhook fastapi",
+    "hmac fastapi"
+  ],
+  "intents_en": [
+    "fastapi webhook receiver",
+    "verify signature fastapi",
+    "stripe webhook fastapi",
+    "github webhook fastapi",
+    "hmac verify fastapi"
+  ],
+  "slots": [
+    "secret_env",
+    "header_name"
+  ],
+  "code": "from fastapi import APIRouter, Request, HTTPException\nimport hmac, hashlib, os, json\n\nrouter = APIRouter()\n\n@router.post('/webhook')\nasync def webhook(request: Request):\n    body = await request.body()\n    sig = request.headers.get('{{header_name}}', '')\n    expected = hmac.new(os.environ['{{secret_env}}'].encode(), body, hashlib.sha256).hexdigest()\n    if not hmac.compare_digest(sig, expected):\n        raise HTTPException(401, 'bad signature')\n    event = json.loads(body)\n    return {'received': True, 'type': event.get('type')}",
+  "language": "py",
+  "deps": [
+    "fastapi"
+  ],
+  "summary_zh": "FastAPI HMAC webhook 接收"
+}

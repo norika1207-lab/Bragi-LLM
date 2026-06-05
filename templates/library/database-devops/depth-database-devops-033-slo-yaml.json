@@ -1,0 +1,25 @@
+{
+  "id": "depth-database-devops-033-slo-yaml",
+  "category": "database-devops/sre/slo",
+  "intents_zh": [
+    "SLO yaml 定義",
+    "sloth slo",
+    "error budget"
+  ],
+  "intents_en": [
+    "SLO yaml definition",
+    "sloth SLO",
+    "error budget"
+  ],
+  "slots": [
+    "service_name",
+    "objective",
+    "window"
+  ],
+  "code": "version: prometheus/v1\nservice: {{service_name}}\nlabels:\n  team: platform\nslos:\n  - name: availability\n    objective: {{objective}}\n    description: '{{service_name}} 99x availability over {{window}}'\n    sli:\n      events:\n        error_query: sum(rate(http_requests_total{service=\"{{service_name}}\",code=~\"5..\"}[5m]))\n        total_query: sum(rate(http_requests_total{service=\"{{service_name}}\"}[5m]))\n    alerting:\n      page_alert: { labels: { severity: page } }\n      ticket_alert: { labels: { severity: ticket } }",
+  "language": "yaml",
+  "deps": [
+    "sloth"
+  ],
+  "summary_zh": "sloth 風格 SLO,含 SLI query 與 multi-window alert"
+}

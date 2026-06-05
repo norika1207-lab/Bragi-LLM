@@ -1,0 +1,21 @@
+{
+  "id": "depth-database-devops-038-pg-explain-analyze",
+  "category": "database-devops/postgres/tuning",
+  "intents_zh": [
+    "EXPLAIN ANALYZE 範例",
+    "看 query plan",
+    "buffers 模式"
+  ],
+  "intents_en": [
+    "EXPLAIN ANALYZE example",
+    "query plan inspect",
+    "buffers mode"
+  ],
+  "slots": [
+    "target_sql"
+  ],
+  "code": "EXPLAIN (ANALYZE, BUFFERS, VERBOSE, FORMAT TEXT)\n{{target_sql}};",
+  "language": "sql",
+  "deps": [],
+  "summary_zh": "EXPLAIN ANALYZE + BUFFERS 完整跑一次查 plan"
+}

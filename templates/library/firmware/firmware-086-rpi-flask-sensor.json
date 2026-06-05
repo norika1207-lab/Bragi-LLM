@@ -1,0 +1,27 @@
+{
+  "id": "firmware-086-rpi-flask-sensor",
+  "category": "firmware/rpi/network",
+  "intents_zh": [
+    "樹莓派 Flask 感測 API",
+    "Pi 感測網頁",
+    "Flask + sensor",
+    "Pi 溫溼度 API",
+    "Pi 提供 REST"
+  ],
+  "intents_en": [
+    "Raspberry Pi Flask API",
+    "Pi sensor REST endpoint",
+    "Flask DHT API",
+    "expose sensor http Pi",
+    "Pi web sensor"
+  ],
+  "slots": [
+    "port"
+  ],
+  "code": "from flask import Flask, jsonify\nimport random\n\napp = Flask(__name__)\n\n@app.get('/temp')\ndef temp():\n    return jsonify(c=20 + random.random() * 5)\n\nif __name__ == '__main__':\n    app.run(host='0.0.0.0', port={{port}})",
+  "language": "py",
+  "deps": [
+    "flask"
+  ],
+  "summary_zh": "樹莓派 Flask 提供溫度 API"
+}

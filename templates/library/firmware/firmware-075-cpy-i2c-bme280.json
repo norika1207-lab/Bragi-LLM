@@ -1,0 +1,25 @@
+{
+  "id": "firmware-075-cpy-i2c-bme280",
+  "category": "firmware/circuitpython/sensor",
+  "intents_zh": [
+    "cpy BME280",
+    "circuitpython 溫溼度",
+    "Adafruit BME280 範例",
+    "cpy 環境感測",
+    "cpy I2C 感測"
+  ],
+  "intents_en": [
+    "CircuitPython BME280",
+    "adafruit BME280 example",
+    "cpy i2c sensor",
+    "read environmental cpy",
+    "BME280 circuitpython"
+  ],
+  "slots": [],
+  "code": "import board, busio\nimport adafruit_bme280.basic as adafruit_bme280\n\ni2c = busio.I2C(board.SCL, board.SDA)\nbme = adafruit_bme280.Adafruit_BME280_I2C(i2c)\nprint(bme.temperature, bme.humidity, bme.pressure)",
+  "language": "py",
+  "deps": [
+    "adafruit-circuitpython-bme280"
+  ],
+  "summary_zh": "CircuitPython BME280 環境感測"
+}

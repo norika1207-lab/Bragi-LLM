@@ -1,0 +1,33 @@
+{
+  "id": "patch-sql-index-002-partial-active-rows",
+  "category": "database-devops/index/partial",
+  "intents_zh": [
+    "partial index 怎麼建",
+    "只索引未刪除的列",
+    "where status active 的 partial index",
+    "部分索引省空間",
+    "soft delete 加索引",
+    "活躍訂單 index"
+  ],
+  "intents_en": [
+    "partial index for active rows",
+    "filtered index where not deleted",
+    "small index for hot subset",
+    "postgres partial index example",
+    "index where status pending",
+    "skip soft-deleted rows in index"
+  ],
+  "slots": [
+    "table_name",
+    "index_name",
+    "filter_column",
+    "filter_value",
+    "lookup_column"
+  ],
+  "code": "-- Partial index: only rows matching hot predicate are indexed\n-- Shrinks index size and write amplification dramatically\nCREATE INDEX CONCURRENTLY IF NOT EXISTS {{index_name}}\n  ON {{table_name}} ({{lookup_column}})\n  WHERE {{filter_column}} = '{{filter_value}}';\n\n-- Planner only uses partial index when WHERE clause includes the predicate\nEXPLAIN ANALYZE\nSELECT *\nFROM {{table_name}}\nWHERE {{filter_column}} = '{{filter_value}}'\n  AND {{lookup_column}} = $1;",
+  "language": "sql",
+  "deps": [
+    "postgresql>=11"
+  ],
+  "summary_zh": "為熱資料子集建立 partial index，省空間且查詢必須帶 predicate 才命中"
+}

@@ -1,0 +1,24 @@
+{
+  "id": "system-cli-042-watch-files-python",
+  "category": "system-cli/file/watch",
+  "intents_zh": [
+    "python 監看資料夾變化",
+    "watchdog 範本",
+    "檔案改動自動觸發"
+  ],
+  "intents_en": [
+    "python file watcher",
+    "watchdog template",
+    "trigger on file change"
+  ],
+  "slots": [
+    "watch_path",
+    "cmd_to_run"
+  ],
+  "code": "from watchdog.observers import Observer\nfrom watchdog.events import FileSystemEventHandler\nimport subprocess, time, sys\n\nclass H(FileSystemEventHandler):\n    def on_modified(self, event):\n        if event.is_directory: return\n        print(f'changed: {event.src_path}')\n        subprocess.run('{{cmd_to_run}}', shell=True)\n\nobs = Observer()\nobs.schedule(H(), '{{watch_path}}', recursive=True)\nobs.start()\ntry:\n    while True: time.sleep(1)\nexcept KeyboardInterrupt:\n    obs.stop()\nobs.join()",
+  "language": "py",
+  "deps": [
+    "watchdog"
+  ],
+  "summary_zh": "watchdog 檔案改動觸發命令"
+}

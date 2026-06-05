@@ -1,0 +1,24 @@
+{
+  "id": "database-devops-035-dockerfile-node",
+  "category": "database-devops/docker/dockerfile",
+  "intents_zh": [
+    "Node Dockerfile",
+    "多階段 build node app",
+    "Dockerfile node 生產",
+    "node 容器化"
+  ],
+  "intents_en": [
+    "node dockerfile",
+    "multi-stage node build",
+    "production node container",
+    "dockerize node app"
+  ],
+  "slots": [
+    "node_version",
+    "port"
+  ],
+  "code": "FROM node:{{node_version}}-alpine AS deps\nWORKDIR /app\nCOPY package*.json ./\nRUN npm ci --omit=dev\n\nFROM node:{{node_version}}-alpine AS build\nWORKDIR /app\nCOPY package*.json ./\nRUN npm ci\nCOPY . .\nRUN npm run build\n\nFROM node:{{node_version}}-alpine\nWORKDIR /app\nENV NODE_ENV=production\nCOPY --from=deps /app/node_modules ./node_modules\nCOPY --from=build /app/dist ./dist\nCOPY package*.json ./\nEXPOSE {{port}}\nCMD [\"node\", \"dist/index.js\"]",
+  "language": "dockerfile",
+  "deps": [],
+  "summary_zh": "Node 多階段 Dockerfile"
+}

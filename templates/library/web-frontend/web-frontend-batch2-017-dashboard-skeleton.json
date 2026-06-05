@@ -1,0 +1,28 @@
+{
+  "id": "web-frontend-batch2-017-dashboard-skeleton",
+  "category": "web-frontend/react/layout/dashboard-skeleton",
+  "intents_zh": [
+    "dashboard 骨架",
+    "管理後台 layout",
+    "admin 版型",
+    "儀表板樣板",
+    "後台頁面",
+    "dashboard 樣板"
+  ],
+  "intents_en": [
+    "dashboard skeleton",
+    "admin layout",
+    "dashboard template",
+    "admin shell",
+    "backoffice layout",
+    "dashboard scaffold"
+  ],
+  "slots": [
+    "page_title",
+    "children"
+  ],
+  "code": "export function DashboardLayout({ children }) {\n  return (\n    <div className=\"flex h-screen flex-col\">\n      <header className=\"flex h-14 items-center justify-between border-b px-6\">\n        <h1 className=\"font-semibold\">{{page_title}}</h1>\n        <div className=\"text-sm\">user@example.com</div>\n      </header>\n      <div className=\"flex flex-1 overflow-hidden\">\n        <aside className=\"w-56 border-r bg-gray-50 p-4\">\n          <nav className=\"space-y-1 text-sm\">\n            <a className=\"block rounded px-3 py-2 hover:bg-gray-100\">Overview</a>\n            <a className=\"block rounded px-3 py-2 hover:bg-gray-100\">Users</a>\n            <a className=\"block rounded px-3 py-2 hover:bg-gray-100\">Settings</a>\n          </nav>\n        </aside>\n        <main className=\"flex-1 overflow-y-auto bg-gray-100 p-6\">{children}</main>\n      </div>\n    </div>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "後台 dashboard 標準骨架"
+}

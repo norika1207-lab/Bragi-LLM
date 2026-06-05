@@ -1,0 +1,34 @@
+{
+  "id": "llm-tools-090-mcp-resource",
+  "category": "llm-tools/mcp/resource",
+  "intents_zh": [
+    "MCP resource 範例",
+    "fastmcp resource",
+    "給 client 讀 resource",
+    "mcp 提供檔案資源",
+    "resource 註冊",
+    "mcp file resource",
+    "mcp expose data",
+    "MCP resource handler"
+  ],
+  "intents_en": [
+    "mcp resource example",
+    "fastmcp resource",
+    "expose resource via mcp",
+    "mcp file resource",
+    "resource registration",
+    "mcp data exposure",
+    "mcp resource handler",
+    "minimal mcp resource"
+  ],
+  "slots": [
+    "server_name",
+    "resource_uri"
+  ],
+  "code": "from mcp.server.fastmcp import FastMCP\n\nmcp = FastMCP(\"{{server_name}}\")\n\n@mcp.resource(\"{{resource_uri}}\")\ndef get_data() -> str:\n    return \"hello from resource\"\n\nif __name__ == \"__main__\":\n    mcp.run()",
+  "language": "py",
+  "deps": [
+    "mcp"
+  ],
+  "summary_zh": "FastMCP resource 註冊範例"
+}

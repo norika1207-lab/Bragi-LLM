@@ -1,0 +1,32 @@
+{
+  "id": "mobile-093-compose-video",
+  "category": "mobile/compose/media",
+  "intents_zh": [
+    "Compose ExoPlayer",
+    "Compose 播影片 Kotlin",
+    "Compose 影片元件",
+    "ExoPlayer Compose AndroidView",
+    "Android Compose 播 mp4",
+    "Compose video playback",
+    "Compose 播 url 影片"
+  ],
+  "intents_en": [
+    "compose ExoPlayer",
+    "compose video player kotlin",
+    "ExoPlayer Compose AndroidView",
+    "android compose video",
+    "compose play mp4",
+    "video playback compose",
+    "stream video compose"
+  ],
+  "slots": [
+    "video_url"
+  ],
+  "code": "import androidx.compose.runtime.*\nimport androidx.compose.ui.platform.LocalContext\nimport androidx.compose.ui.viewinterop.AndroidView\nimport androidx.media3.common.MediaItem\nimport androidx.media3.exoplayer.ExoPlayer\nimport androidx.media3.ui.PlayerView\n@Composable\nfun V(){\n  val ctx=LocalContext.current\n  val player=remember{ExoPlayer.Builder(ctx).build().apply{setMediaItem(MediaItem.fromUri(\"{{video_url}}\"));prepare();playWhenReady=true}}\n  DisposableEffect(Unit){onDispose{player.release()}}\n  AndroidView(factory={PlayerView(it).apply{this.player=player}})}",
+  "language": "kt",
+  "deps": [
+    "androidx.media3:media3-exoplayer",
+    "androidx.media3:media3-ui"
+  ],
+  "summary_zh": "Compose ExoPlayer 播放遠端影片"
+}

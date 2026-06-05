@@ -1,0 +1,28 @@
+{
+  "id": "depth-web-backend-007-file-stream-download",
+  "category": "web-backend/files/stream",
+  "intents_zh": [
+    "串流下載大檔",
+    "Node 檔案 stream 回應",
+    "邊讀邊送檔",
+    "避免一次載入記憶體",
+    "Express 下載"
+  ],
+  "intents_en": [
+    "stream large file download",
+    "node file stream response",
+    "pipe file to response",
+    "avoid loading into memory",
+    "express download"
+  ],
+  "slots": [
+    "path",
+    "filename"
+  ],
+  "code": "app.get('/download', (req, res) => {\n  const stat = fs.statSync('{{path}}');\n  res.setHeader('Content-Length', stat.size);\n  res.setHeader('Content-Type', 'application/octet-stream');\n  res.setHeader('Content-Disposition', 'attachment; filename=\"{{filename}}\"');\n  fs.createReadStream('{{path}}').pipe(res);\n});",
+  "language": "js",
+  "deps": [
+    "express"
+  ],
+  "summary_zh": "Express 串流下載大檔"
+}

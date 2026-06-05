@@ -1,0 +1,26 @@
+{
+  "id": "depth-system-cli-010-chokidar-watch",
+  "category": "system-cli/watcher/node",
+  "intents_zh": [
+    "Node 檔案監聽",
+    "chokidar 範本",
+    "Node debounce 觀察",
+    "檔案變動 callback Node"
+  ],
+  "intents_en": [
+    "node file watcher",
+    "chokidar starter",
+    "node debounce watch",
+    "file change callback node"
+  ],
+  "slots": [
+    "watch_glob",
+    "debounce_ms"
+  ],
+  "code": "const chokidar = require('chokidar');\n\nlet timer;\nconst debounce = (fn, ms) => (...args) => {\n  clearTimeout(timer);\n  timer = setTimeout(() => fn(...args), ms);\n};\n\nconst handler = debounce((path) => {\n  console.log(`changed: ${path}`);\n}, {{debounce_ms}});\n\nchokidar.watch('{{watch_glob}}', { ignored: /node_modules|\\.git/, ignoreInitial: true })\n  .on('add', handler)\n  .on('change', handler)\n  .on('unlink', handler);",
+  "language": "javascript",
+  "deps": [
+    "chokidar"
+  ],
+  "summary_zh": "chokidar Node watcher 含 debounce"
+}

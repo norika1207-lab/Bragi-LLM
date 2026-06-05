@@ -1,0 +1,23 @@
+{
+  "id": "database-devops-060-pytest-fixture",
+  "category": "database-devops/test/pytest",
+  "intents_zh": [
+    "pytest fixture",
+    "共用測試資料 fixture",
+    "yield fixture 範本"
+  ],
+  "intents_en": [
+    "pytest fixture",
+    "shared test data",
+    "yield fixture"
+  ],
+  "slots": [
+    "fixture_name"
+  ],
+  "code": "import pytest\n\n@pytest.fixture(scope='function')\ndef {{fixture_name}}():\n    resource = {'value': 42, 'items': []}\n    yield resource\n    resource['items'].clear()\n\ndef test_uses_fixture({{fixture_name}}):\n    {{fixture_name}}['items'].append('x')\n    assert {{fixture_name}}['value'] == 42",
+  "language": "py",
+  "deps": [
+    "pytest"
+  ],
+  "summary_zh": "pytest yield fixture 範本"
+}

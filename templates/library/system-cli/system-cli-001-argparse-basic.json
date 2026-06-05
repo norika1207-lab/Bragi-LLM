@@ -1,0 +1,29 @@
+{
+  "id": "system-cli-001-argparse-basic",
+  "category": "system-cli/python/argparse",
+  "intents_zh": [
+    "寫個 argparse CLI",
+    "python 命令列參數解析",
+    "幫我做 python CLI 骨架",
+    "用 argparse 接 input output",
+    "Python 寫 CLI 工具入口",
+    "argparse 範本給我"
+  ],
+  "intents_en": [
+    "python argparse CLI skeleton",
+    "basic argparse template",
+    "add CLI args with argparse",
+    "make a python command line tool",
+    "argparse boilerplate",
+    "python CLI entry point"
+  ],
+  "slots": [
+    "tool_name",
+    "input_arg",
+    "output_arg"
+  ],
+  "code": "import argparse\n\ndef main():\n    parser = argparse.ArgumentParser(prog='{{tool_name}}', description='{{tool_name}} CLI')\n    parser.add_argument('--{{input_arg}}', required=True, help='input path')\n    parser.add_argument('--{{output_arg}}', required=True, help='output path')\n    parser.add_argument('-v', '--verbose', action='store_true')\n    args = parser.parse_args()\n    if args.verbose:\n        print(f'reading {args.{{input_arg}}}')\n    # TODO: real work\n    print(f'wrote {args.{{output_arg}}}')\n\nif __name__ == '__main__':\n    main()",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "argparse 基本 CLI 骨架，含 input/output/verbose"
+}

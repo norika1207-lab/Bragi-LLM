@@ -1,0 +1,26 @@
+{
+  "id": "depth-system-cli-016-mitmproxy-rewrite",
+  "category": "system-cli/proxy/mitmproxy",
+  "intents_zh": [
+    "mitmproxy 攔截改 header",
+    "mitmproxy 改 response",
+    "mitm addon script",
+    "Python 代理改寫"
+  ],
+  "intents_en": [
+    "mitmproxy intercept header",
+    "mitmproxy modify response",
+    "mitm addon",
+    "python proxy rewrite"
+  ],
+  "slots": [
+    "match_host",
+    "inject_header"
+  ],
+  "code": "# addon.py  run: mitmdump -s addon.py\nfrom mitmproxy import http\n\ndef request(flow: http.HTTPFlow) -> None:\n    if \"{{match_host}}\" in flow.request.pretty_host:\n        flow.request.headers[\"x-injected\"] = \"{{inject_header}}\"\n\ndef response(flow: http.HTTPFlow) -> None:\n    if flow.response and flow.response.headers.get(\"content-type\", \"\").startswith(\"text/html\"):\n        flow.response.text = flow.response.text.replace(\"</body>\", \"<!-- patched --></body>\")",
+  "language": "python",
+  "deps": [
+    "mitmproxy"
+  ],
+  "summary_zh": "mitmproxy addon 攔截改 header 與 HTML"
+}

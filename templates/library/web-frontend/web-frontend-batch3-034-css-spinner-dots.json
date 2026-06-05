@@ -1,0 +1,27 @@
+{
+  "id": "web-frontend-batch3-034-css-spinner-dots",
+  "category": "web-frontend/css/ui/spinner",
+  "intents_zh": [
+    "CSS 三點 spinner",
+    "CSS dots loading",
+    "跳動點 loader",
+    "純 CSS 點點動畫",
+    "三點等待",
+    "loading dots"
+  ],
+  "intents_en": [
+    "css dots spinner",
+    "loading dots",
+    "three dots loader",
+    "pulsing dots",
+    "css pulse loading",
+    "wait dots"
+  ],
+  "slots": [
+    "dot_color"
+  ],
+  "code": "<div class=\"dots\">\n  <span></span><span></span><span></span>\n</div>\n<style>\n  .dots { display: inline-flex; gap: 6px; }\n  .dots span {\n    width: 10px; height: 10px; border-radius: 50%;\n    background: {{dot_color}};\n    animation: bounce 1.4s infinite ease-in-out both;\n  }\n  .dots span:nth-child(1) { animation-delay: -.32s; }\n  .dots span:nth-child(2) { animation-delay: -.16s; }\n  @keyframes bounce { 0%, 80%, 100% { transform: scale(0); } 40% { transform: scale(1); } }\n</style>",
+  "language": "html",
+  "deps": [],
+  "summary_zh": "純 CSS 三點跳動 spinner"
+}

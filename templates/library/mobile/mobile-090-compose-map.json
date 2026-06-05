@@ -1,0 +1,33 @@
+{
+  "id": "mobile-090-compose-map",
+  "category": "mobile/compose/map",
+  "intents_zh": [
+    "Compose Google Map",
+    "Compose Maps SDK",
+    "Compose 地圖元件",
+    "Compose google maps compose",
+    "Android Compose 地圖",
+    "map marker Compose",
+    "Compose 顯示經緯度"
+  ],
+  "intents_en": [
+    "compose google maps",
+    "maps-compose example",
+    "compose map widget",
+    "android compose map",
+    "map marker compose",
+    "compose show coordinates",
+    "google maps compose"
+  ],
+  "slots": [
+    "lat",
+    "lng",
+    "title"
+  ],
+  "code": "import androidx.compose.runtime.Composable\nimport com.google.android.gms.maps.model.CameraPosition\nimport com.google.android.gms.maps.model.LatLng\nimport com.google.maps.android.compose.*\n@Composable\nfun M(){\n  val pos=LatLng({{lat}},{{lng}})\n  val cs=rememberCameraPositionState{position=CameraPosition.fromLatLngZoom(pos,14f)}\n  GoogleMap(cameraPositionState=cs){Marker(state=MarkerState(position=pos),title=\"{{title}}\")}}",
+  "language": "kt",
+  "deps": [
+    "com.google.maps.android:maps-compose"
+  ],
+  "summary_zh": "Compose Google Map + Marker"
+}

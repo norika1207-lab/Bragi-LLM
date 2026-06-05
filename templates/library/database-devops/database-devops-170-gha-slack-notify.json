@@ -1,0 +1,19 @@
+{
+  "id": "database-devops-170-gha-slack-notify",
+  "category": "database-devops/cicd/github-actions",
+  "intents_zh": [
+    "GHA slack 通知",
+    "CI 失敗通知 slack",
+    "slack webhook action"
+  ],
+  "intents_en": [
+    "github actions slack notify",
+    "ci failure slack",
+    "slack webhook"
+  ],
+  "slots": [],
+  "code": "      - name: Slack notify on failure\n        if: failure()\n        uses: slackapi/slack-github-action@v1\n        with:\n          payload: |\n            {\n              \"text\": \"CI failed: ${{ github.workflow }} on ${{ github.ref_name }}\",\n              \"blocks\": [{\n                \"type\": \"section\",\n                \"text\": { \"type\": \"mrkdwn\", \"text\": \"*${{ github.workflow }}* failed on `${{ github.ref_name }}` by ${{ github.actor }}\\n<${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|View run>\" }\n              }]\n            }\n        env:\n          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}",
+  "language": "yaml",
+  "deps": [],
+  "summary_zh": "GHA 失敗時通知 Slack"
+}

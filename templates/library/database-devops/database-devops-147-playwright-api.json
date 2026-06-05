@@ -1,0 +1,23 @@
+{
+  "id": "database-devops-147-playwright-api",
+  "category": "database-devops/test/playwright",
+  "intents_zh": [
+    "playwright API 測試",
+    "request context",
+    "E2E + API"
+  ],
+  "intents_en": [
+    "playwright api test",
+    "request context",
+    "e2e plus api"
+  ],
+  "slots": [
+    "base_url"
+  ],
+  "code": "import { test, expect, request } from '@playwright/test'\n\ntest('api returns user', async () => {\n  const ctx = await request.newContext({ baseURL: '{{base_url}}' })\n  const res = await ctx.get('/api/users/1')\n  expect(res.status()).toBe(200)\n  const body = await res.json()\n  expect(body).toHaveProperty('id', 1)\n})",
+  "language": "ts",
+  "deps": [
+    "@playwright/test"
+  ],
+  "summary_zh": "playwright API request context 測試"
+}

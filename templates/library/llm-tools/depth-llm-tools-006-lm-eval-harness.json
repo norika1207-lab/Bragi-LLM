@@ -1,0 +1,29 @@
+{
+  "id": "depth-llm-tools-006-lm-eval-harness",
+  "category": "llm-tools/eval/eleuther",
+  "intents_zh": [
+    "跑 lm-eval-harness",
+    "Eleuther 評測",
+    "批次 eval task",
+    "HF 模型跑分",
+    "eval harness 包裝"
+  ],
+  "intents_en": [
+    "run lm-eval-harness",
+    "Eleuther eval",
+    "batch eval task",
+    "HF model score",
+    "harness wrapper"
+  ],
+  "slots": [
+    "model",
+    "tasks",
+    "batch_size"
+  ],
+  "code": "from lm_eval import simple_evaluate\n\nresults = simple_evaluate(\n    model=\"hf\",\n    model_args=f\"pretrained={{{model}}}\",\n    tasks={{tasks}}.split(\",\"),\n    batch_size={{batch_size}},\n)\nprint(results[\"results\"])",
+  "language": "python",
+  "deps": [
+    "lm-eval"
+  ],
+  "summary_zh": "lm-evaluation-harness Python API 跑分"
+}

@@ -1,0 +1,21 @@
+{
+  "id": "algorithm-graph-010",
+  "category": "algorithm/graph/bipartite",
+  "intents_zh": [
+    "判斷二分圖",
+    "bipartite check",
+    "給我 bipartite"
+  ],
+  "intents_en": [
+    "bipartite check",
+    "is graph bipartite",
+    "two coloring"
+  ],
+  "slots": [
+    "fn_name"
+  ],
+  "code": "from collections import deque\n\ndef {{fn_name}}(graph):\n    color = {}\n    for s in graph:\n        if s in color: continue\n        color[s] = 0\n        q = deque([s])\n        while q:\n            u = q.popleft()\n            for v in graph[u]:\n                if v not in color:\n                    color[v] = 1 - color[u]\n                    q.append(v)\n                elif color[v] == color[u]:\n                    return False\n    return True",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "BFS 判斷二分圖"
+}

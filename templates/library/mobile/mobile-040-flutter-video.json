@@ -1,0 +1,31 @@
+{
+  "id": "mobile-040-flutter-video",
+  "category": "mobile/flutter/media",
+  "intents_zh": [
+    "Flutter video_player",
+    "flutter 播影片",
+    "flutter mp4 播放",
+    "Flutter 影片元件",
+    "video_player flutter 範例",
+    "flutter 播 url 影片",
+    "video 播 flutter"
+  ],
+  "intents_en": [
+    "flutter video_player",
+    "play video flutter",
+    "flutter mp4 player",
+    "video widget flutter",
+    "stream video flutter",
+    "flutter remote video",
+    "play url video flutter"
+  ],
+  "slots": [
+    "video_url"
+  ],
+  "code": "import 'package:flutter/material.dart';\nimport 'package:video_player/video_player.dart';\nclass V extends StatefulWidget{const V({super.key});@override State<V> createState()=>_V();}\nclass _V extends State<V>{late VideoPlayerController c;\n  @override void initState(){super.initState();c=VideoPlayerController.networkUrl(Uri.parse('{{video_url}}'))..initialize().then((_){setState((){});c.play();});}\n  @override void dispose(){c.dispose();super.dispose();}\n  @override Widget build(BuildContext ctx)=>c.value.isInitialized?AspectRatio(aspectRatio:c.value.aspectRatio,child:VideoPlayer(c)):const Center(child:CircularProgressIndicator());}",
+  "language": "dart",
+  "deps": [
+    "video_player"
+  ],
+  "summary_zh": "Flutter video_player 播放遠端影片"
+}

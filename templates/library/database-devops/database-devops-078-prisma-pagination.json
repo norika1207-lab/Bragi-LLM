@@ -1,0 +1,23 @@
+{
+  "id": "database-devops-078-prisma-pagination",
+  "category": "database-devops/orm/prisma",
+  "intents_zh": [
+    "prisma 分頁",
+    "cursor 分頁",
+    "prisma skip take"
+  ],
+  "intents_en": [
+    "prisma pagination",
+    "cursor pagination",
+    "skip take"
+  ],
+  "slots": [
+    "model_name"
+  ],
+  "code": "export async function paginate(cursor?: number, take = 20) {\n  return prisma.{{model_name}}.findMany({\n    take,\n    skip: cursor ? 1 : 0,\n    cursor: cursor ? { id: cursor } : undefined,\n    orderBy: { id: 'asc' },\n  })\n}",
+  "language": "ts",
+  "deps": [
+    "@prisma/client"
+  ],
+  "summary_zh": "prisma cursor 分頁"
+}

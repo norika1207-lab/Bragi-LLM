@@ -1,0 +1,21 @@
+{
+  "id": "database-devops-156-gha-monorepo-pnpm",
+  "category": "database-devops/cicd/github-actions",
+  "intents_zh": [
+    "pnpm monorepo CI",
+    "pnpm workspace CI",
+    "turbo + pnpm"
+  ],
+  "intents_en": [
+    "pnpm monorepo ci",
+    "pnpm workspace ci",
+    "turbo pnpm"
+  ],
+  "slots": [
+    "pnpm_version"
+  ],
+  "code": "name: CI\non: [push, pull_request]\n\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - uses: pnpm/action-setup@v4\n        with: { version: {{pnpm_version}} }\n      - uses: actions/setup-node@v4\n        with:\n          node-version: '20'\n          cache: 'pnpm'\n      - run: pnpm install --frozen-lockfile\n      - run: pnpm -r lint\n      - run: pnpm -r test\n      - run: pnpm -r build",
+  "language": "yaml",
+  "deps": [],
+  "summary_zh": "GHA pnpm monorepo CI"
+}

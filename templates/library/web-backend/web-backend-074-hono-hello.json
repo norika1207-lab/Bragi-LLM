@@ -1,0 +1,27 @@
+{
+  "id": "web-backend-074-hono-hello",
+  "category": "web-backend/hono/basic",
+  "intents_zh": [
+    "hono 起手",
+    "Hono 最小 app",
+    "edge runtime hono",
+    "hono hello world",
+    "cloudflare worker hono"
+  ],
+  "intents_en": [
+    "minimal hono app",
+    "hono hello world",
+    "hono edge runtime",
+    "cloudflare worker hono",
+    "scaffold hono"
+  ],
+  "slots": [
+    "message"
+  ],
+  "code": "import { Hono } from 'hono';\n\nconst app = new Hono();\n\napp.get('/', (c) => c.json({ message: '{{message}}' }));\napp.get('/health', (c) => c.text('ok'));\n\nexport default app;",
+  "language": "ts",
+  "deps": [
+    "hono"
+  ],
+  "summary_zh": "Hono 最小 app"
+}

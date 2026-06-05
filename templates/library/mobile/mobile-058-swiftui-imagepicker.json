@@ -1,0 +1,27 @@
+{
+  "id": "mobile-058-swiftui-imagepicker",
+  "category": "mobile/swiftui/media",
+  "intents_zh": [
+    "SwiftUI 選圖",
+    "SwiftUI PhotosPicker",
+    "SwiftUI 相簿",
+    "選照片 SwiftUI",
+    "iOS photo picker",
+    "SwiftUI photo 挑圖",
+    "SwiftUI image picker"
+  ],
+  "intents_en": [
+    "swiftui PhotosPicker",
+    "swiftui image picker",
+    "pick photo swiftui",
+    "swiftui gallery picker",
+    "ios photo picker swiftui",
+    "choose image swiftui",
+    "photos picker example"
+  ],
+  "slots": [],
+  "code": "import SwiftUI\nimport PhotosUI\nstruct P:View{\n  @State var item:PhotosPickerItem?;@State var img:Image?\n  var body:some View{VStack{\n    PhotosPicker(\"Pick\",selection:$item,matching:.images)\n    if let img{img.resizable().scaledToFit().frame(height:240)}}.onChange(of:item){_,n in\n      Task{if let d=try?await n?.loadTransferable(type:Data.self),let ui=UIImage(data:d){img=Image(uiImage:ui)}}}}}",
+  "language": "swift",
+  "deps": [],
+  "summary_zh": "SwiftUI PhotosPicker 挑圖預覽"
+}

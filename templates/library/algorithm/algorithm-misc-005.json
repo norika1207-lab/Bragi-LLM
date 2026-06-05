@@ -1,0 +1,21 @@
+{
+  "id": "algorithm-misc-005",
+  "category": "algorithm/misc/median_two_heap",
+  "intents_zh": [
+    "資料流中位數",
+    "two heap median",
+    "給我 running median"
+  ],
+  "intents_en": [
+    "running median",
+    "stream median",
+    "two heap median"
+  ],
+  "slots": [
+    "class_name"
+  ],
+  "code": "import heapq\n\nclass {{class_name}}:\n    def __init__(self):\n        self.lo = []\n        self.hi = []\n    def add(self, x):\n        heapq.heappush(self.lo, -x)\n        heapq.heappush(self.hi, -heapq.heappop(self.lo))\n        if len(self.hi) > len(self.lo):\n            heapq.heappush(self.lo, -heapq.heappop(self.hi))\n    def median(self):\n        if len(self.lo) > len(self.hi):\n            return -self.lo[0]\n        return (-self.lo[0] + self.hi[0]) / 2",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "雙堆維護資料流中位數"
+}

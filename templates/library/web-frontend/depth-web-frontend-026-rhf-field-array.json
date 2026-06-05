@@ -1,0 +1,28 @@
+{
+  "id": "depth-web-frontend-026-rhf-field-array",
+  "category": "web-frontend/forms/react-hook-form",
+  "intents_zh": [
+    "useFieldArray 動態欄位",
+    "新增/刪除欄位列",
+    "表單陣列",
+    "RHF 動態 list",
+    "field array"
+  ],
+  "intents_en": [
+    "useFieldArray dynamic",
+    "add remove field rows",
+    "form array rhf",
+    "dynamic list form",
+    "field array"
+  ],
+  "slots": [
+    "form_name",
+    "field_name"
+  ],
+  "code": "'use client';\nimport { useForm, useFieldArray } from 'react-hook-form';\n\nexport function {{form_name}}() {\n  const { register, control, handleSubmit } = useForm({ defaultValues: { {{field_name}}: [{ value: '' }] } });\n  const { fields, append, remove } = useFieldArray({ control, name: '{{field_name}}' });\n  return (\n    <form onSubmit={handleSubmit(d => console.log(d))}>\n      {fields.map((f, i) => (\n        <div key={f.id}>\n          <input {...register(`{{field_name}}.${i}.value` as const)} />\n          <button type=\"button\" onClick={() => remove(i)}>x</button>\n        </div>\n      ))}\n      <button type=\"button\" onClick={() => append({ value: '' })}>+ 新增</button>\n      <button>送出</button>\n    </form>\n  );\n}",
+  "language": "tsx",
+  "deps": [
+    "react-hook-form"
+  ],
+  "summary_zh": "useFieldArray 動態欄位列表"
+}

@@ -1,0 +1,27 @@
+{
+  "id": "web-frontend-batch3-032-html-toast",
+  "category": "web-frontend/html/ui/toast",
+  "intents_zh": [
+    "HTML toast",
+    "vanilla 通知",
+    "靜態 snackbar",
+    "原生 toast",
+    "HTML+JS 浮動訊息",
+    "vanilla 訊息提示"
+  ],
+  "intents_en": [
+    "html toast",
+    "vanilla notification",
+    "static snackbar",
+    "raw toast",
+    "html js floating message",
+    "plain toast"
+  ],
+  "slots": [
+    "duration_ms"
+  ],
+  "code": "<div id=\"toasts\" class=\"toasts\"></div>\n<button onclick=\"toast('Saved!')\">Show</button>\n<script>\n  function toast(msg, type='info') {\n    const el = document.createElement('div');\n    el.className = 'toast ' + type;\n    el.textContent = msg;\n    document.getElementById('toasts').appendChild(el);\n    setTimeout(() => el.remove(), {{duration_ms}});\n  }\n</script>\n<style>\n  .toasts { position: fixed; top: 1rem; right: 1rem; display: flex; flex-direction: column; gap: .5rem; z-index: 9999; }\n  .toast { padding: .75rem 1rem; border-radius: 6px; background: #111; color: white; animation: slide .2s ease-out; }\n  @keyframes slide { from { transform: translateX(100%); opacity: 0; } }\n</style>",
+  "language": "html",
+  "deps": [],
+  "summary_zh": "vanilla JS 浮動 toast 通知"
+}

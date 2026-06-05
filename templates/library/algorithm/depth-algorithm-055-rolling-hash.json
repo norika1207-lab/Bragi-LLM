@@ -1,0 +1,31 @@
+{
+  "id": "depth-algorithm-055-rolling-hash",
+  "category": "algorithm/string/rolling-hash",
+  "intents_zh": [
+    "滾動哈希",
+    "rolling hash 模板",
+    "字串雙哈希",
+    "rabin karp 哈希",
+    "子串比較哈希",
+    "多項式哈希",
+    "string hash"
+  ],
+  "intents_en": [
+    "rolling hash",
+    "double hash string",
+    "Rabin Karp hash",
+    "polynomial string hash",
+    "substring hash compare",
+    "rolling hash template",
+    "hash string queries"
+  ],
+  "slots": [
+    "s",
+    "mod",
+    "base"
+  ],
+  "code": "def build_hash(s={{s}}, mod={{mod}}, base={{base}}):\n    n = len(s)\n    h = [0]*(n+1); pw = [1]*(n+1)\n    for i in range(n):\n        h[i+1] = (h[i]*base + ord(s[i])) % mod\n        pw[i+1] = pw[i]*base % mod\n    return h, pw\n\ndef get_hash(h, pw, l, r, mod):\n    return (h[r+1] - h[l]*pw[r-l+1]) % mod",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "多項式滾動哈希支援子串 O(1) 比對"
+}

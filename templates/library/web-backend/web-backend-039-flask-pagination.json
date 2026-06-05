@@ -1,0 +1,28 @@
+{
+  "id": "web-backend-039-flask-pagination",
+  "category": "web-backend/flask/rest",
+  "intents_zh": [
+    "flask 分頁",
+    "page + per_page",
+    "flask paginate",
+    "回傳分頁結果",
+    "sqlalchemy 分頁"
+  ],
+  "intents_en": [
+    "flask pagination",
+    "page per_page flask",
+    "paginate sqlalchemy",
+    "paginated list flask",
+    "list with paging flask"
+  ],
+  "slots": [
+    "model_name"
+  ],
+  "code": "from flask import request, jsonify\n\ndef paginated_query(query):\n    page = max(1, request.args.get('page', 1, type=int))\n    per_page = min(100, request.args.get('per_page', 20, type=int))\n    p = query.paginate(page=page, per_page=per_page, error_out=False)\n    return jsonify({\n        'data': [i.to_dict() if hasattr(i, 'to_dict') else str(i) for i in p.items],\n        'page': p.page,\n        'per_page': p.per_page,\n        'total': p.total,\n        'pages': p.pages\n    })",
+  "language": "py",
+  "deps": [
+    "flask",
+    "flask-sqlalchemy"
+  ],
+  "summary_zh": "Flask SQLAlchemy 分頁 helper"
+}

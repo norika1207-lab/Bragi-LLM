@@ -1,0 +1,27 @@
+{
+  "id": "web-frontend-batch1-032-color-picker",
+  "category": "web-frontend/react/inputs/color",
+  "intents_zh": [
+    "顏色選擇器",
+    "color picker React",
+    "native color input",
+    "選色元件",
+    "HTML color input",
+    "顏色選擇 + 顯示 hex"
+  ],
+  "intents_en": [
+    "color picker",
+    "react color input",
+    "native color picker",
+    "color selector",
+    "html color input",
+    "hex color picker"
+  ],
+  "slots": [
+    "component_name"
+  ],
+  "code": "import { useState } from 'react';\n\nexport default function {{component_name}}({ initial = '#3b82f6' }: { initial?: string }) {\n  const [c, setC] = useState(initial);\n  return (\n    <div className=\"inline-flex items-center gap-2\">\n      <input type=\"color\" value={c} onChange={(e) => setC(e.target.value)} />\n      <code>{c}</code>\n    </div>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "原生 color input 含 hex 顯示"
+}

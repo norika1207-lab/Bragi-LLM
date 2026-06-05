@@ -1,0 +1,28 @@
+{
+  "id": "depth-web-frontend-054-server-action-zod",
+  "category": "web-frontend/server/server-actions",
+  "intents_zh": [
+    "server action 加 zod 驗證",
+    "型別安全 action",
+    "safe-action",
+    "驗證失敗回 issue",
+    "action schema"
+  ],
+  "intents_en": [
+    "server action zod validation",
+    "typed server action",
+    "safe action",
+    "action validation",
+    "schema server action"
+  ],
+  "slots": [
+    "action_name"
+  ],
+  "code": "'use server';\nimport { z } from 'zod';\n\nconst schema = z.object({ title: z.string().min(1), priority: z.enum(['low','med','high']) });\n\nexport async function {{action_name}}(_: unknown, formData: FormData) {\n  const parsed = schema.safeParse({ title: formData.get('title'), priority: formData.get('priority') });\n  if (!parsed.success) return { ok: false, errors: parsed.error.flatten().fieldErrors };\n  await db.task.create({ data: parsed.data });\n  return { ok: true, errors: {} };\n}",
+  "language": "ts",
+  "deps": [
+    "zod",
+    "next"
+  ],
+  "summary_zh": "server action + zod 安全驗證"
+}

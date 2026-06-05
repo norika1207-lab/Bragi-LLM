@@ -1,0 +1,36 @@
+{
+  "id": "llm-tools-032-distillation-loop",
+  "category": "llm-tools/finetune/distillation",
+  "intents_zh": [
+    "distillation 蒸餾迴圈",
+    "knowledge distillation",
+    "老師學生蒸餾",
+    "KL loss 蒸餾",
+    "logits 蒸餾",
+    "distill script",
+    "蒸餾 baseline",
+    "teacher-student loop"
+  ],
+  "intents_en": [
+    "distillation loop",
+    "knowledge distillation",
+    "teacher student loop",
+    "kl distillation",
+    "logits distillation",
+    "distill script",
+    "minimal distillation",
+    "kd training"
+  ],
+  "slots": [
+    "teacher_model",
+    "student_model",
+    "temperature"
+  ],
+  "code": "import torch\nimport torch.nn.functional as F\nfrom transformers import AutoModelForCausalLM, AutoTokenizer\n\nteacher = AutoModelForCausalLM.from_pretrained(\"{{teacher_model}}\").eval()\nstudent = AutoModelForCausalLM.from_pretrained(\"{{student_model}}\").train()\ntok = AutoTokenizer.from_pretrained(\"{{student_model}}\")\nopt = torch.optim.AdamW(student.parameters(), lr=1e-5)\nT = {{temperature}}\n\ndef step(batch_texts: list[str]):\n    ids = tok(batch_texts, return_tensors=\"pt\", padding=True, truncation=True)\n    with torch.no_grad():\n        t_logits = teacher(**ids).logits\n    s_logits = student(**ids).logits\n    loss = F.kl_div(\n        F.log_softmax(s_logits / T, dim=-1),\n        F.softmax(t_logits / T, dim=-1),\n        reduction=\"batchmean\",\n    ) * (T * T)\n    opt.zero_grad(); loss.backward(); opt.step()\n    return loss.item()\n\nif __name__ == \"__main__\":\n    print(step([\"hello world\"]))",
+  "language": "py",
+  "deps": [
+    "transformers",
+    "torch"
+  ],
+  "summary_zh": "老師學生 logits 蒸餾訓練 step"
+}

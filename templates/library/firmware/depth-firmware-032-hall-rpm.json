@@ -1,0 +1,28 @@
+{
+  "id": "depth-firmware-032-hall-rpm",
+  "category": "firmware/sensor/hall",
+  "intents_zh": [
+    "霍爾感測器測轉速",
+    "RPM 量測",
+    "interrupt 算 RPM",
+    "車輪轉速",
+    "hall pulse count"
+  ],
+  "intents_en": [
+    "hall rpm sensor",
+    "measure rpm",
+    "isr count rpm",
+    "wheel speed",
+    "hall pulse count"
+  ],
+  "slots": [
+    "hall_pin",
+    "pulses_per_rev"
+  ],
+  "code": "volatile unsigned long pulses = 0;\nvoid IRAM_ATTR isr() { pulses++; }\nvoid setup() {\n    Serial.begin(115200);\n    pinMode({{hall_pin}}, INPUT_PULLUP);\n    attachInterrupt(digitalPinToInterrupt({{hall_pin}}), isr, FALLING);\n}\nvoid loop() {\n    delay(1000);\n    noInterrupts();\n    unsigned long p = pulses; pulses = 0;\n    interrupts();\n    float rpm = (p * 60.0f) / {{pulses_per_rev}};\n    Serial.printf(\"RPM=%.1f\\n\", rpm);\n}",
+  "language": "cpp",
+  "deps": [
+    "Arduino"
+  ],
+  "summary_zh": "用霍爾感測器中斷計數每秒脈衝換算 RPM"
+}

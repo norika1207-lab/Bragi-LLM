@@ -1,0 +1,23 @@
+{
+  "id": "system-cli-101-batch-curl-list",
+  "category": "system-cli/net/batch",
+  "intents_zh": [
+    "批次下載 URL 列表",
+    "wget 整個 list",
+    "平行下載"
+  ],
+  "intents_en": [
+    "batch download url list",
+    "wget list parallel",
+    "curl from file"
+  ],
+  "slots": [
+    "url_list",
+    "out_dir",
+    "jobs"
+  ],
+  "code": "#!/usr/bin/env bash\nset -euo pipefail\nmkdir -p \"{{out_dir}}\"\ncat \"{{url_list}}\" | xargs -n1 -P {{jobs}} -I{} bash -c '\n  url=\"{}\"; name=$(basename \"$url\")\n  curl -fsSL --retry 3 -o \"{{out_dir}}/$name\" \"$url\" && echo \"ok $name\" || echo \"fail $name\"\n'",
+  "language": "sh",
+  "deps": [],
+  "summary_zh": "平行批次下載 URL list"
+}

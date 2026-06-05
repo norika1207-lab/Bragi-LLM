@@ -1,0 +1,28 @@
+{
+  "id": "web-frontend-batch1-025-file-upload-progress",
+  "category": "web-frontend/react/file-upload/progress",
+  "intents_zh": [
+    "上傳進度條",
+    "file upload with progress",
+    "XHR 上傳進度",
+    "上傳百分比顯示",
+    "progress bar 上傳",
+    "上傳進度元件"
+  ],
+  "intents_en": [
+    "file upload progress",
+    "upload with progress bar",
+    "xhr upload progress",
+    "percent upload",
+    "upload bar component",
+    "track upload progress"
+  ],
+  "slots": [
+    "component_name",
+    "upload_url"
+  ],
+  "code": "import { useState } from 'react';\n\nexport default function {{component_name}}() {\n  const [pct, setPct] = useState(0);\n\n  function upload(file: File) {\n    const xhr = new XMLHttpRequest();\n    xhr.open('POST', '{{upload_url}}');\n    xhr.upload.onprogress = (e) => {\n      if (e.lengthComputable) setPct(Math.round((e.loaded / e.total) * 100));\n    };\n    const fd = new FormData();\n    fd.append('file', file);\n    xhr.send(fd);\n  }\n\n  return (\n    <div>\n      <input type=\"file\" onChange={(e) => e.target.files?.[0] && upload(e.target.files[0])} />\n      <div className=\"w-full h-2 bg-gray-200 mt-2 rounded\">\n        <div className=\"h-2 bg-blue-500 rounded\" style={{ width: `${pct}%` }} />\n      </div>\n      <div className=\"text-sm\">{pct}%</div>\n    </div>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "含 XHR 進度條的檔案上傳"
+}

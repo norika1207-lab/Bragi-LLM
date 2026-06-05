@@ -1,0 +1,22 @@
+{
+  "id": "system-cli-090-gzip-stream",
+  "category": "system-cli/file/compress",
+  "intents_zh": [
+    "python gzip 壓檔",
+    "串流壓縮",
+    "大檔 gzip"
+  ],
+  "intents_en": [
+    "gzip a large file python",
+    "stream gzip compression",
+    "python gzip example"
+  ],
+  "slots": [
+    "src_file",
+    "gz_file"
+  ],
+  "code": "import gzip, shutil\n\nwith open('{{src_file}}','rb') as fi, gzip.open('{{gz_file}}','wb', compresslevel=6) as fo:\n    shutil.copyfileobj(fi, fo, length=1<<20)\nprint('compressed -> {{gz_file}}')",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "串流 gzip 壓縮大檔"
+}

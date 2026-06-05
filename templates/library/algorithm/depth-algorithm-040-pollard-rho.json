@@ -1,0 +1,29 @@
+{
+  "id": "depth-algorithm-040-pollard-rho",
+  "category": "algorithm/math/pollard-rho",
+  "intents_zh": [
+    "Pollard rho 質因數分解",
+    "大數因式分解",
+    "pollard 算法",
+    "隨機因式分解",
+    "快速分解質因數",
+    "brent pollard rho",
+    "integer factorization"
+  ],
+  "intents_en": [
+    "Pollard rho factorization",
+    "big integer factorization",
+    "Pollard algorithm",
+    "random factoring",
+    "integer factorization Pollard",
+    "Brent Pollard rho",
+    "factor large numbers"
+  ],
+  "slots": [
+    "n"
+  ],
+  "code": "import math, random\n\ndef pollard_rho(n={{n}}):\n    if n % 2 == 0: return 2\n    while True:\n        x = random.randint(2, n-1); y = x\n        c = random.randint(1, n-1); d = 1\n        while d == 1:\n            x = (x*x + c) % n\n            y = (y*y + c) % n; y = (y*y + c) % n\n            d = math.gcd(abs(x-y), n)\n        if d != n: return d",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "Pollard rho 隨機算法分解大整數"
+}

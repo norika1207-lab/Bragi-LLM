@@ -1,0 +1,28 @@
+{
+  "id": "depth-web-frontend-004-suspense-fetch",
+  "category": "web-frontend/data-fetching/suspense",
+  "intents_zh": [
+    "React Suspense 抓資料",
+    "use() hook fetch",
+    "Suspense fallback",
+    "React 19 use",
+    "throw promise"
+  ],
+  "intents_en": [
+    "react suspense data fetch",
+    "use() hook react 19",
+    "suspense fallback",
+    "async component server",
+    "react 19 use promise"
+  ],
+  "slots": [
+    "component_name",
+    "endpoint"
+  ],
+  "code": "import { Suspense, use } from 'react';\n\nconst cache = new Map<string, Promise<any>>();\nfunction load(id: string) {\n  if (!cache.has(id)) cache.set(id, fetch(`{{endpoint}}/${id}`).then(r => r.json()));\n  return cache.get(id)!;\n}\n\nfunction Inner({ id }: { id: string }) {\n  const data = use(load(id));\n  return <pre>{JSON.stringify(data, null, 2)}</pre>;\n}\n\nexport function {{component_name}}({ id }: { id: string }) {\n  return <Suspense fallback={<div>loading…</div>}><Inner id={id} /></Suspense>;\n}",
+  "language": "tsx",
+  "deps": [
+    "react"
+  ],
+  "summary_zh": "React 19 use() + Suspense 抓資料"
+}

@@ -1,0 +1,34 @@
+{
+  "id": "llm-tools-126-anthropic-stop-sequences",
+  "category": "llm-tools/anthropic/stop",
+  "intents_zh": [
+    "claude stop sequences",
+    "anthropic 停止符",
+    "在某字串停下",
+    "claude 自訂 stop",
+    "stop_sequences 用法",
+    "Claude 截斷生成",
+    "控制 claude 結束",
+    "stop tokens"
+  ],
+  "intents_en": [
+    "claude stop sequences",
+    "anthropic stop tokens",
+    "custom stop string",
+    "stop_sequences usage",
+    "claude truncate at marker",
+    "control claude end",
+    "stop sequence example",
+    "anthropic halt token"
+  ],
+  "slots": [
+    "model_name",
+    "stop_token"
+  ],
+  "code": "import anthropic\n\nclient = anthropic.Anthropic()\n\ndef gen_until(prompt: str, stop: str = \"{{stop_token}}\") -> str:\n    msg = client.messages.create(\n        model=\"{{model_name}}\",\n        max_tokens=512,\n        stop_sequences=[stop],\n        messages=[{\"role\": \"user\", \"content\": prompt}],\n    )\n    return msg.content[0].text\n\nif __name__ == \"__main__\":\n    print(gen_until(\"List 3 fruits, then write END\"))",
+  "language": "py",
+  "deps": [
+    "anthropic"
+  ],
+  "summary_zh": "Claude stop_sequences 自訂終止"
+}

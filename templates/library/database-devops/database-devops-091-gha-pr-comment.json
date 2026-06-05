@@ -1,0 +1,21 @@
+{
+  "id": "database-devops-091-gha-pr-comment",
+  "category": "database-devops/cicd/github-actions",
+  "intents_zh": [
+    "GHA PR 自動留言",
+    "PR 加 comment",
+    "sticky comment"
+  ],
+  "intents_en": [
+    "github actions pr comment",
+    "auto comment pr",
+    "sticky comment"
+  ],
+  "slots": [
+    "comment_body"
+  ],
+  "code": "name: PR Comment\non:\n  pull_request:\n    types: [opened, synchronize]\n\njobs:\n  comment:\n    runs-on: ubuntu-latest\n    permissions: { pull-requests: write }\n    steps:\n      - uses: marocchino/sticky-pull-request-comment@v2\n        with:\n          header: ci-result\n          message: |\n            {{comment_body}}",
+  "language": "yaml",
+  "deps": [],
+  "summary_zh": "GHA PR sticky comment"
+}

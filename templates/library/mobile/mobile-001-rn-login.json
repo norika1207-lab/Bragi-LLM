@@ -1,0 +1,32 @@
+{
+  "id": "mobile-001-rn-login",
+  "category": "mobile/rn/auth",
+  "intents_zh": [
+    "RN 登入畫面",
+    "React Native 寫一個 login screen",
+    "幫我刻 RN 登入頁",
+    "RN email password 登入",
+    "用 React Native 做登入表單",
+    "RN auth 表單範本",
+    "給我 RN 登入 UI"
+  ],
+  "intents_en": [
+    "React Native login screen",
+    "RN email password form",
+    "build a login UI in React Native",
+    "RN sign in page",
+    "make a login form RN",
+    "react native auth screen",
+    "login template rn"
+  ],
+  "slots": [
+    "api_url"
+  ],
+  "code": "import React,{useState} from 'react';\nimport {View,TextInput,Button,Text,StyleSheet} from 'react-native';\nexport default function Login(){\n  const[e,setE]=useState('');const[p,setP]=useState('');const[m,setM]=useState('');\n  const submit=async()=>{\n    try{const r=await fetch('{{api_url}}/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:e,password:p})});\n    if(!r.ok)throw new Error('bad');setM('ok');}catch(x){setM('fail');}};\n  return(<View style={s.c}><TextInput style={s.i} placeholder='email' value={e} onChangeText={setE}/><TextInput style={s.i} placeholder='password' secureTextEntry value={p} onChangeText={setP}/><Button title='Login' onPress={submit}/><Text>{m}</Text></View>);}\nconst s=StyleSheet.create({c:{flex:1,justifyContent:'center',padding:24},i:{borderWidth:1,marginBottom:12,padding:8}});",
+  "language": "tsx",
+  "deps": [
+    "react",
+    "react-native"
+  ],
+  "summary_zh": "React Native email/password 登入畫面含後端 POST"
+}

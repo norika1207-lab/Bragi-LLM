@@ -1,0 +1,30 @@
+{
+  "id": "depth-algorithm-032-tarjan-scc",
+  "category": "algorithm/graph/scc",
+  "intents_zh": [
+    "Tarjan SCC",
+    "強連通分量",
+    "tarjan 算法",
+    "low link 強連通",
+    "DFS 強連通",
+    "SCC 模板",
+    "縮點 SCC"
+  ],
+  "intents_en": [
+    "Tarjan SCC",
+    "strongly connected components",
+    "low link algorithm",
+    "SCC template",
+    "DFS strongly connected",
+    "tarjan algorithm",
+    "graph SCC"
+  ],
+  "slots": [
+    "n",
+    "graph"
+  ],
+  "code": "def tarjan_scc(n={{n}}, g={{graph}}):\n    idx = [0]; stk = []; on_stack = [False]*n\n    index = [-1]*n; low = [0]*n; sccs = []\n    def strongconnect(v):\n        call = [(v, iter(g[v]))]\n        index[v] = low[v] = idx[0]; idx[0] += 1\n        stk.append(v); on_stack[v] = True\n        while call:\n            u, it = call[-1]\n            try:\n                w = next(it)\n                if index[w] == -1:\n                    index[w] = low[w] = idx[0]; idx[0] += 1\n                    stk.append(w); on_stack[w] = True\n                    call.append((w, iter(g[w])))\n                elif on_stack[w]:\n                    low[u] = min(low[u], index[w])\n            except StopIteration:\n                call.pop()\n                if call: low[call[-1][0]] = min(low[call[-1][0]], low[u])\n                if low[u] == index[u]:\n                    comp = []\n                    while True:\n                        x = stk.pop(); on_stack[x] = False; comp.append(x)\n                        if x == u: break\n                    sccs.append(comp)\n    for v in range(n):\n        if index[v] == -1: strongconnect(v)\n    return sccs",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "Tarjan 算法迭代版求強連通分量"
+}

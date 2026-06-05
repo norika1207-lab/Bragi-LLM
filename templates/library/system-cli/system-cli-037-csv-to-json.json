@@ -1,0 +1,22 @@
+{
+  "id": "system-cli-037-csv-to-json",
+  "category": "system-cli/data/csv",
+  "intents_zh": [
+    "CSV 轉 JSON",
+    "csv2json 小工具",
+    "表格轉 json array"
+  ],
+  "intents_en": [
+    "csv to json converter",
+    "convert csv into json array",
+    "csv2json script"
+  ],
+  "slots": [
+    "in_csv",
+    "out_json"
+  ],
+  "code": "import csv, json\n\nrows = []\nwith open('{{in_csv}}', newline='') as f:\n    for row in csv.DictReader(f):\n        rows.append(row)\n\nwith open('{{out_json}}', 'w') as f:\n    json.dump(rows, f, ensure_ascii=False, indent=2)\nprint(f'{len(rows)} rows -> {{out_json}}')",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "CSV 轉 JSON array"
+}

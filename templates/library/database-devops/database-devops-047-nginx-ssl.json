@@ -1,0 +1,21 @@
+{
+  "id": "database-devops-047-nginx-ssl",
+  "category": "database-devops/nginx/ssl",
+  "intents_zh": [
+    "nginx SSL 設定",
+    "HTTPS 加 certbot",
+    "443 設定範本"
+  ],
+  "intents_en": [
+    "nginx ssl config",
+    "https with certbot",
+    "443 listener"
+  ],
+  "slots": [
+    "server_name"
+  ],
+  "code": "server {\n  listen 80;\n  server_name {{server_name}};\n  return 301 https://$host$request_uri;\n}\n\nserver {\n  listen 443 ssl http2;\n  server_name {{server_name}};\n\n  ssl_certificate /etc/letsencrypt/live/{{server_name}}/fullchain.pem;\n  ssl_certificate_key /etc/letsencrypt/live/{{server_name}}/privkey.pem;\n  ssl_protocols TLSv1.2 TLSv1.3;\n  ssl_ciphers HIGH:!aNULL:!MD5;\n\n  location / {\n    proxy_pass http://127.0.0.1:3000;\n    proxy_set_header Host $host;\n    proxy_set_header X-Forwarded-Proto https;\n  }\n}",
+  "language": "nginx",
+  "deps": [],
+  "summary_zh": "nginx 443 SSL + 80 redirect"
+}

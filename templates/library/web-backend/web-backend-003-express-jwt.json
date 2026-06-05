@@ -1,0 +1,30 @@
+{
+  "id": "web-backend-003-express-jwt",
+  "category": "web-backend/express/auth",
+  "intents_zh": [
+    "Express JWT 驗證",
+    "幫我寫 JWT login + middleware",
+    "express 加 token 驗證",
+    "JWT 認證 middleware 範例",
+    "用 jsonwebtoken 做登入"
+  ],
+  "intents_en": [
+    "express JWT auth middleware",
+    "JWT login endpoint express",
+    "verify token middleware express",
+    "jsonwebtoken example",
+    "express bearer token auth"
+  ],
+  "slots": [
+    "secret_env",
+    "token_ttl",
+    "login_path"
+  ],
+  "code": "const express = require('express');\nconst jwt = require('jsonwebtoken');\nconst router = express.Router();\nconst SECRET = process.env.{{secret_env}};\n\nrouter.post('{{login_path}}', (req, res) => {\n  const { username, password } = req.body;\n  if (!username || !password) return res.status(400).json({ error: 'missing creds' });\n  const token = jwt.sign({ sub: username }, SECRET, { expiresIn: '{{token_ttl}}' });\n  res.json({ token });\n});\n\nfunction requireAuth(req, res, next) {\n  const h = req.headers.authorization || '';\n  const token = h.startsWith('Bearer ') ? h.slice(7) : null;\n  if (!token) return res.status(401).json({ error: 'no token' });\n  try { req.user = jwt.verify(token, SECRET); next(); }\n  catch { res.status(401).json({ error: 'bad token' }); }\n}\n\nmodule.exports = { router, requireAuth };",
+  "language": "js",
+  "deps": [
+    "express",
+    "jsonwebtoken"
+  ],
+  "summary_zh": "Express JWT 登入與保護 middleware"
+}

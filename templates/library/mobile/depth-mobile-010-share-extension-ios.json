@@ -1,0 +1,25 @@
+{
+  "id": "depth-mobile-010-share-extension-ios",
+  "category": "mobile/share/ios",
+  "intents_zh": [
+    "iOS Share Extension",
+    "分享延伸功能",
+    "ShareViewController",
+    "收進 App 的分享內容",
+    "NSExtensionItem 解析"
+  ],
+  "intents_en": [
+    "iOS Share Extension",
+    "share extension target",
+    "ShareViewController",
+    "receive shared content",
+    "NSExtensionItem"
+  ],
+  "slots": [
+    "allowed_types"
+  ],
+  "code": "import Social\nclass ShareViewController: SLComposeServiceViewController {\n  override func isContentValid() -> Bool { !contentText.isEmpty }\n  override func didSelectPost() {\n    let items = extensionContext?.inputItems as? [NSExtensionItem] ?? []\n    for item in items {\n      item.attachments?.forEach { att in\n        att.loadItem(forTypeIdentifier: \"{{allowed_types}}\") { data, _ in\n          // forward data to main app via App Group UserDefaults\n        }\n      }\n    }\n    extensionContext?.completeRequest(returningItems: nil)\n  }\n}",
+  "language": "swift",
+  "deps": [],
+  "summary_zh": "iOS 分享延伸 controller"
+}

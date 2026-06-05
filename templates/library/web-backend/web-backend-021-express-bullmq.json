@@ -1,0 +1,27 @@
+{
+  "id": "web-backend-021-express-bullmq",
+  "category": "web-backend/express/queue",
+  "intents_zh": [
+    "bullmq 任務佇列",
+    "加 worker 處理 background job",
+    "queue producer 範例",
+    "redis queue worker",
+    "async job queue"
+  ],
+  "intents_en": [
+    "bullmq worker",
+    "background job queue",
+    "redis job queue",
+    "async task worker",
+    "queue producer example"
+  ],
+  "slots": [
+    "queue_name"
+  ],
+  "code": "const { Queue, Worker } = require('bullmq');\nconst connection = { host: '127.0.0.1', port: 6379 };\n\nconst queue = new Queue('{{queue_name}}', { connection });\n\nconst worker = new Worker('{{queue_name}}', async (job) => {\n  console.log('processing', job.id, job.data);\n  // do work\n  return { ok: true };\n}, { connection });\n\nworker.on('failed', (job, err) => console.error('job failed', job?.id, err));\n\nmodule.exports = { queue };",
+  "language": "js",
+  "deps": [
+    "bullmq"
+  ],
+  "summary_zh": "BullMQ Redis 任務佇列"
+}

@@ -1,0 +1,26 @@
+{
+  "id": "depth-llm-tools-055-fallback-chain",
+  "category": "llm-tools/router/fallback",
+  "intents_zh": [
+    "模型 fallback 鏈",
+    "主壞次頂上",
+    "provider 故障切換",
+    "多 provider 容錯",
+    "降級呼叫"
+  ],
+  "intents_en": [
+    "model fallback chain",
+    "primary fail secondary",
+    "provider failover",
+    "multi-provider tolerance",
+    "degrade call"
+  ],
+  "slots": [
+    "providers",
+    "prompt"
+  ],
+  "code": "def fallback_call({{providers}}, {{prompt}}):\n    last = None\n    for p in {{providers}}:\n        try: return p({{prompt}})\n        except Exception as e: last = e\n    raise last",
+  "language": "python",
+  "deps": [],
+  "summary_zh": "依序試 provider 函數，全失敗才丟最後錯誤"
+}

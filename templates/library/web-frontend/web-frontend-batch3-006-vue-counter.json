@@ -1,0 +1,29 @@
+{
+  "id": "web-frontend-batch3-006-vue-counter",
+  "category": "web-frontend/vue/apps/counter",
+  "intents_zh": [
+    "Vue 計數器",
+    "Vue counter 元件",
+    "Vue 加減數字",
+    "Vue ref 計數",
+    "Vue 入門 counter",
+    "Vue 簡單計數"
+  ],
+  "intents_en": [
+    "vue counter",
+    "vue counter component",
+    "vue increment decrement",
+    "vue ref counter",
+    "vue hello counter",
+    "vue simple counter"
+  ],
+  "slots": [
+    "step"
+  ],
+  "code": "<script setup>\nimport { ref } from 'vue'\nconst count = ref(0)\nconst step = {{step}}\n</script>\n<template>\n  <div>\n    <button @click=\"count -= step\">-</button>\n    <span>{{ count }}</span>\n    <button @click=\"count += step\">+</button>\n  </div>\n</template>",
+  "language": "vue",
+  "deps": [
+    "vue"
+  ],
+  "summary_zh": "Vue 計數器最小範例"
+}

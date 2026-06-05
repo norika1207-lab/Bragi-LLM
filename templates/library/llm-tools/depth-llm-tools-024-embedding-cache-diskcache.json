@@ -1,0 +1,28 @@
+{
+  "id": "depth-llm-tools-024-embedding-cache-diskcache",
+  "category": "llm-tools/embedding/diskcache",
+  "intents_zh": [
+    "diskcache 存 embedding",
+    "裝飾器自動快取",
+    "embed 加 cache decorator",
+    "快取裝飾器",
+    "persistent func cache"
+  ],
+  "intents_en": [
+    "diskcache for embeddings",
+    "decorator auto cache",
+    "embed cache decorator",
+    "cache decorator",
+    "persistent func cache"
+  ],
+  "slots": [
+    "cache_dir",
+    "embed_fn"
+  ],
+  "code": "import diskcache, functools, hashlib\n\ncache = diskcache.Cache({{cache_dir}})\n\n@functools.wraps({{embed_fn}})\ndef cached_embed(text):\n    k = hashlib.sha256(text.encode()).hexdigest()\n    if k in cache: return cache[k]\n    v = {{embed_fn}}(text)\n    cache[k] = v\n    return v",
+  "language": "python",
+  "deps": [
+    "diskcache"
+  ],
+  "summary_zh": "diskcache 包 embed 函數，hash 命中直接回傳"
+}

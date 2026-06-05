@@ -1,0 +1,21 @@
+{
+  "id": "database-devops-095-sql-vacuum-analyze",
+  "category": "database-devops/sql/maintenance",
+  "intents_zh": [
+    "postgres vacuum analyze",
+    "維護 SQL",
+    "回收空間"
+  ],
+  "intents_en": [
+    "postgres vacuum analyze",
+    "db maintenance",
+    "reclaim space"
+  ],
+  "slots": [
+    "table"
+  ],
+  "code": "VACUUM (ANALYZE, VERBOSE) {{table}};\n\n-- full reclaim, locks table\n-- VACUUM FULL {{table}};\n\n-- view bloat\nSELECT schemaname, relname, n_dead_tup, n_live_tup\nFROM pg_stat_user_tables\nORDER BY n_dead_tup DESC\nLIMIT 20;",
+  "language": "sql",
+  "deps": [],
+  "summary_zh": "Postgres VACUUM ANALYZE 維護"
+}

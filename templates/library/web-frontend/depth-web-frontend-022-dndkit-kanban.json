@@ -1,0 +1,27 @@
+{
+  "id": "depth-web-frontend-022-dndkit-kanban",
+  "category": "web-frontend/dnd/dnd-kit",
+  "intents_zh": [
+    "dnd-kit 看板",
+    "多欄拖拉",
+    "跨欄移動 card",
+    "kanban dnd",
+    "欄位之間搬卡"
+  ],
+  "intents_en": [
+    "dnd-kit kanban",
+    "multi column drag",
+    "cross column move card",
+    "kanban board dnd",
+    "drag between columns"
+  ],
+  "slots": [
+    "board_name"
+  ],
+  "code": "'use client';\nimport { DndContext, DragOverEvent } from '@dnd-kit/core';\nimport { useState } from 'react';\n\ntype Cols = Record<string, string[]>;\nexport function {{board_name}}() {\n  const [cols, setCols] = useState<Cols>({ todo: ['t1'], doing: ['t2'], done: [] });\n  function onDragOver(e: DragOverEvent) {\n    const { active, over } = e; if (!over) return;\n    const from = Object.keys(cols).find(k => cols[k].includes(String(active.id)));\n    const to = String(over.id);\n    if (!from || from === to) return;\n    setCols(c => ({ ...c, [from]: c[from].filter(x => x !== active.id), [to]: [...c[to], String(active.id)] }));\n  }\n  return <DndContext onDragOver={onDragOver}>{/* render columns + draggable cards */}</DndContext>;\n}",
+  "language": "tsx",
+  "deps": [
+    "@dnd-kit/core"
+  ],
+  "summary_zh": "dnd-kit 看板跨欄搬卡骨架"
+}

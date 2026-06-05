@@ -1,0 +1,30 @@
+{
+  "id": "web-frontend-batch3-001-vue-login",
+  "category": "web-frontend/vue/forms/login",
+  "intents_zh": [
+    "寫一個 Vue 登入表單",
+    "Vue 3 login 元件",
+    "給我 Vue Composition API 的登入頁",
+    "Vue 帳密登入畫面",
+    "Vue setup script 寫 login form",
+    "用 Vue 做登入"
+  ],
+  "intents_en": [
+    "vue login form",
+    "vue 3 login component",
+    "login page vue composition api",
+    "vue setup script login",
+    "email password login vue",
+    "vue auth form"
+  ],
+  "slots": [
+    "component_name",
+    "submit_handler"
+  ],
+  "code": "<script setup>\nimport { ref } from 'vue'\nconst email = ref('')\nconst password = ref('')\nconst loading = ref(false)\nasync function {{submit_handler}}() {\n  loading.value = true\n  try {\n    await fetch('/api/login', {\n      method: 'POST',\n      headers: { 'Content-Type': 'application/json' },\n      body: JSON.stringify({ email: email.value, password: password.value })\n    })\n  } finally {\n    loading.value = false\n  }\n}\n</script>\n<template>\n  <form @submit.prevent=\"{{submit_handler}}\" class=\"login\">\n    <h2>{{component_name}}</h2>\n    <input v-model=\"email\" type=\"email\" placeholder=\"Email\" required />\n    <input v-model=\"password\" type=\"password\" placeholder=\"Password\" required />\n    <button :disabled=\"loading\">{{ loading ? '...' : 'Sign in' }}</button>\n  </form>\n</template>",
+  "language": "vue",
+  "deps": [
+    "vue"
+  ],
+  "summary_zh": "Vue 3 Composition API 登入表單，含 loading 狀態"
+}

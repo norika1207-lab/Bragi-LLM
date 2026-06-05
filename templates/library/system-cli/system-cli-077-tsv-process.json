@@ -1,0 +1,22 @@
+{
+  "id": "system-cli-077-tsv-process",
+  "category": "system-cli/data/tsv",
+  "intents_zh": [
+    "處理 TSV",
+    "tab 分隔過濾",
+    "tsv awk"
+  ],
+  "intents_en": [
+    "process tsv file",
+    "tab separated filter",
+    "awk on tsv"
+  ],
+  "slots": [
+    "tsv_file",
+    "col_idx"
+  ],
+  "code": "#!/usr/bin/env bash\nset -euo pipefail\n# print rows where col {{col_idx}} not empty, distinct\nawk -F'\\t' -v c={{col_idx}} 'NR==1 || ($c != \"\" && !seen[$c]++) {print}' \"{{tsv_file}}\"",
+  "language": "sh",
+  "deps": [],
+  "summary_zh": "awk 處理 TSV 去重"
+}

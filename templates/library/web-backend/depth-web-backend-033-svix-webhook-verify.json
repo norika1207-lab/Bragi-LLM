@@ -1,0 +1,28 @@
+{
+  "id": "depth-web-backend-033-svix-webhook-verify",
+  "category": "web-backend/webhook/svix",
+  "intents_zh": [
+    "Svix webhook 驗證",
+    "standard webhooks",
+    "svix Webhook.verify",
+    "通用 webhook signing",
+    "事件驗證 lib"
+  ],
+  "intents_en": [
+    "svix webhook verify",
+    "standard webhooks",
+    "svix verify",
+    "generic webhook signing",
+    "event verify lib"
+  ],
+  "slots": [
+    "secret"
+  ],
+  "code": "import { Webhook } from 'svix';\napp.post('/webhooks/svix', express.raw({ type: 'application/json' }), (req, res) => {\n  const wh = new Webhook('{{secret}}');\n  try {\n    const evt = wh.verify(req.body, req.headers);\n    handle(evt);\n    res.sendStatus(204);\n  } catch { res.sendStatus(400); }\n});",
+  "language": "js",
+  "deps": [
+    "svix",
+    "express"
+  ],
+  "summary_zh": "Svix Standard Webhooks 驗證"
+}

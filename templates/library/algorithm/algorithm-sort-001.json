@@ -1,0 +1,30 @@
+{
+  "id": "algorithm-sort-001",
+  "category": "algorithm/sort/quicksort",
+  "intents_zh": [
+    "快排",
+    "寫個 quicksort",
+    "快速排序 in-place",
+    "幫我寫快速排序",
+    "quicksort python",
+    "給我一個快排實作",
+    "快排遞迴版"
+  ],
+  "intents_en": [
+    "quicksort",
+    "write quicksort",
+    "in-place quicksort",
+    "quick sort recursive",
+    "give me quicksort",
+    "implement quicksort in python",
+    "quicksort algorithm"
+  ],
+  "slots": [
+    "fn_name",
+    "arr_name"
+  ],
+  "code": "def {{fn_name}}({{arr_name}}, lo=0, hi=None):\n    if hi is None:\n        hi = len({{arr_name}}) - 1\n    if lo >= hi:\n        return\n    pivot = {{arr_name}}[(lo + hi) // 2]\n    i, j = lo, hi\n    while i <= j:\n        while {{arr_name}}[i] < pivot:\n            i += 1\n        while {{arr_name}}[j] > pivot:\n            j -= 1\n        if i <= j:\n            {{arr_name}}[i], {{arr_name}}[j] = {{arr_name}}[j], {{arr_name}}[i]\n            i += 1\n            j -= 1\n    {{fn_name}}({{arr_name}}, lo, j)\n    {{fn_name}}({{arr_name}}, i, hi)\n    return {{arr_name}}",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "原地快速排序，Lomuto 中點 pivot"
+}

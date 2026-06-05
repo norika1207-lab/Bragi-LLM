@@ -1,0 +1,29 @@
+{
+  "id": "web-frontend-batch3-010-vue-progress",
+  "category": "web-frontend/vue/ui/progress",
+  "intents_zh": [
+    "Vue 進度條",
+    "Vue progress bar",
+    "Vue 百分比進度",
+    "Vue 動畫 progress",
+    "Vue 顯示百分比",
+    "Vue 上傳進度條"
+  ],
+  "intents_en": [
+    "vue progress bar",
+    "vue percentage progress",
+    "vue animated progress",
+    "vue upload progress",
+    "vue progress component",
+    "vue loading bar"
+  ],
+  "slots": [
+    "color"
+  ],
+  "code": "<script setup>\ndefineProps({ value: { type: Number, default: 0 }, max: { type: Number, default: 100 } })\n</script>\n<template>\n  <div class=\"bar\">\n    <div class=\"fill\" :style=\"{ width: (value/max*100) + '%' }\"></div>\n    <span>{{ Math.round(value/max*100) }}%</span>\n  </div>\n</template>\n<style scoped>\n.bar { position: relative; background: #eee; height: 20px; border-radius: 10px; overflow: hidden; }\n.fill { background: {{color}}; height: 100%; transition: width .3s; }\nspan { position: absolute; inset: 0; text-align: center; font-size: 12px; }\n</style>",
+  "language": "vue",
+  "deps": [
+    "vue"
+  ],
+  "summary_zh": "Vue 進度條元件含百分比顯示"
+}

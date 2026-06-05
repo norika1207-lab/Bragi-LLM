@@ -1,0 +1,23 @@
+{
+  "id": "database-devops-066-playwright-config",
+  "category": "database-devops/test/playwright",
+  "intents_zh": [
+    "playwright.config.ts",
+    "playwright 設定多瀏覽器",
+    "playwright baseURL"
+  ],
+  "intents_en": [
+    "playwright config",
+    "multi-browser playwright",
+    "playwright base url"
+  ],
+  "slots": [
+    "base_url"
+  ],
+  "code": "import { defineConfig, devices } from '@playwright/test'\n\nexport default defineConfig({\n  testDir: './tests',\n  fullyParallel: true,\n  retries: process.env.CI ? 2 : 0,\n  reporter: 'html',\n  use: {\n    baseURL: '{{base_url}}',\n    trace: 'on-first-retry',\n    screenshot: 'only-on-failure',\n  },\n  projects: [\n    { name: 'chromium', use: devices['Desktop Chrome'] },\n    { name: 'firefox', use: devices['Desktop Firefox'] },\n    { name: 'webkit', use: devices['Desktop Safari'] },\n  ],\n})",
+  "language": "ts",
+  "deps": [
+    "@playwright/test"
+  ],
+  "summary_zh": "playwright 多瀏覽器設定"
+}

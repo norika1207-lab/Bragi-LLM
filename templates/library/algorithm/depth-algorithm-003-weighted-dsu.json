@@ -1,0 +1,29 @@
+{
+  "id": "depth-algorithm-003-weighted-dsu",
+  "category": "algorithm/dsu/weighted",
+  "intents_zh": [
+    "帶權並查集",
+    "關係並查集",
+    "DSU 帶權差值",
+    "食物鏈題型",
+    "維護偏移量 DSU",
+    "加權路徑壓縮",
+    "relation union find"
+  ],
+  "intents_en": [
+    "weighted union find",
+    "DSU with weights",
+    "relation DSU",
+    "potential DSU",
+    "offset union find",
+    "weighted disjoint set",
+    "food chain DSU"
+  ],
+  "slots": [
+    "n"
+  ],
+  "code": "class WeightedDSU:\n    def __init__(self, n={{n}}):\n        self.p = list(range(n))\n        self.w = [0]*n\n    def find(self, x):\n        if self.p[x] == x: return x\n        r = self.find(self.p[x])\n        self.w[x] += self.w[self.p[x]]\n        self.p[x] = r\n        return r\n    def union(self, a, b, diff):\n        ra, rb = self.find(a), self.find(b)\n        if ra == rb: return self.w[a] - self.w[b] == diff\n        self.p[ra] = rb\n        self.w[ra] = self.w[b] + diff - self.w[a]\n        return True",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "維護元素間差值的帶權並查集"
+}

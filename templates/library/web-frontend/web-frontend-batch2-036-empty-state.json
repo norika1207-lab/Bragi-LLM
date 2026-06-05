@@ -1,0 +1,29 @@
+{
+  "id": "web-frontend-batch2-036-empty-state",
+  "category": "web-frontend/react/layout/empty-state",
+  "intents_zh": [
+    "空狀態",
+    "empty state",
+    "無資料畫面",
+    "空清單提示",
+    "沒有結果",
+    "placeholder 畫面"
+  ],
+  "intents_en": [
+    "empty state",
+    "no data view",
+    "empty list placeholder",
+    "no results screen",
+    "blank state",
+    "zero state"
+  ],
+  "slots": [
+    "title",
+    "desc",
+    "cta"
+  ],
+  "code": "export function EmptyState() {\n  return (\n    <div className=\"flex flex-col items-center justify-center py-16 text-center\">\n      <div className=\"mb-4 h-20 w-20 rounded-full bg-gray-100 flex items-center justify-center text-3xl\">📭</div>\n      <h3 className=\"mb-2 text-lg font-semibold\">{{title}}</h3>\n      <p className=\"mb-6 max-w-sm text-sm text-gray-600\">{{desc}}</p>\n      <button className=\"rounded-lg bg-black px-5 py-2 text-white\">{{cta}}</button>\n    </div>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "通用空狀態畫面"
+}

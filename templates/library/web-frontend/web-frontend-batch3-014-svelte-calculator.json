@@ -1,0 +1,29 @@
+{
+  "id": "web-frontend-batch3-014-svelte-calculator",
+  "category": "web-frontend/svelte/apps/calculator",
+  "intents_zh": [
+    "Svelte 計算機",
+    "Svelte calculator",
+    "Svelte 算術元件",
+    "Svelte 加減乘除",
+    "Svelte 數字鍵盤",
+    "Svelte calc widget"
+  ],
+  "intents_en": [
+    "svelte calculator",
+    "svelte arithmetic",
+    "svelte four operations",
+    "svelte calc widget",
+    "svelte number pad",
+    "svelte simple calculator"
+  ],
+  "slots": [
+    "title"
+  ],
+  "code": "<script>\n  let expr = '';\n  let result = '';\n  function press(k) { expr += k; }\n  function calc() {\n    try { result = String(Function('return ' + expr)()); }\n    catch { result = 'Err'; }\n  }\n  const keys = ['7','8','9','/','4','5','6','*','1','2','3','-','0','.','+'];\n</script>\n<h3>{{title}}</h3>\n<div>{expr || '0'} = {result}</div>\n<div class=\"keys\">\n  {#each keys as k}<button on:click={() => press(k)}>{k}</button>{/each}\n  <button on:click={() => { expr=''; result=''; }}>C</button>\n  <button on:click={calc}>=</button>\n</div>",
+  "language": "svelte",
+  "deps": [
+    "svelte"
+  ],
+  "summary_zh": "Svelte 簡易計算機"
+}

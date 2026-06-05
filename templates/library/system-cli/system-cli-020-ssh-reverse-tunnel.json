@@ -1,0 +1,23 @@
+{
+  "id": "system-cli-020-ssh-reverse-tunnel",
+  "category": "system-cli/ssh/tunnel",
+  "intents_zh": [
+    "SSH 反向隧道",
+    "暴露內網 service 給外網",
+    "ssh -R"
+  ],
+  "intents_en": [
+    "ssh reverse tunnel",
+    "expose local port via remote",
+    "ssh -R template"
+  ],
+  "slots": [
+    "remote_port",
+    "local_port",
+    "remote_host"
+  ],
+  "code": "#!/usr/bin/env bash\n# remote {{remote_host}}:{{remote_port}} -> local :{{local_port}}\nssh -N -R {{remote_port}}:localhost:{{local_port}} {{remote_host}}",
+  "language": "sh",
+  "deps": [],
+  "summary_zh": "SSH 反向隧道"
+}

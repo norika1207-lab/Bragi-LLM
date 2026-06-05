@@ -1,0 +1,27 @@
+{
+  "id": "algorithm-search-003",
+  "category": "algorithm/search/bfs",
+  "intents_zh": [
+    "BFS",
+    "廣度優先搜尋",
+    "給我 bfs",
+    "層次遍歷圖",
+    "最短步數 bfs",
+    "用 queue 走圖"
+  ],
+  "intents_en": [
+    "BFS",
+    "breadth first search",
+    "graph bfs",
+    "shortest unweighted path",
+    "bfs from source",
+    "level traversal"
+  ],
+  "slots": [
+    "fn_name"
+  ],
+  "code": "from collections import deque\n\ndef {{fn_name}}(graph, start):\n    visited = {start}\n    q = deque([start])\n    order = []\n    while q:\n        node = q.popleft()\n        order.append(node)\n        for nb in graph[node]:\n            if nb not in visited:\n                visited.add(nb)\n                q.append(nb)\n    return order",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "圖的 BFS 遍歷，回傳訪問順序"
+}

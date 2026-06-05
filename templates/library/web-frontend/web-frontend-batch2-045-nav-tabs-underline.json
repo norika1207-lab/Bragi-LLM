@@ -1,0 +1,27 @@
+{
+  "id": "web-frontend-batch2-045-nav-tabs-underline",
+  "category": "web-frontend/react/layout/nav-tabs-underline",
+  "intents_zh": [
+    "底線 tab",
+    "underline tabs",
+    "下劃線分頁",
+    "頁內導航",
+    "section tabs",
+    "filter tabs"
+  ],
+  "intents_en": [
+    "underline tabs",
+    "nav tabs",
+    "section tabs",
+    "filter tabs",
+    "page tabs",
+    "subnav tabs"
+  ],
+  "slots": [
+    "tabs"
+  ],
+  "code": "import { useState } from 'react';\n\nexport function UnderlineTabs() {\n  const tabs = {{tabs}};\n  const [active, setActive] = useState(tabs[0]);\n  return (\n    <div className=\"flex gap-6 border-b\">\n      {tabs.map((t) => (\n        <button key={t} onClick={() => setActive(t)}\n          className={`relative pb-3 text-sm font-medium ${active === t ? 'text-blue-600' : 'text-gray-500 hover:text-gray-900'}`}>\n          {t}\n          {active === t && <span className=\"absolute bottom-0 left-0 right-0 h-0.5 bg-blue-600\" />}\n        </button>\n      ))}\n    </div>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "下劃線樣式頁內 tab"
+}

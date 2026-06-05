@@ -1,0 +1,29 @@
+{
+  "id": "depth-algorithm-018-rpn-eval",
+  "category": "algorithm/parser/rpn-eval",
+  "intents_zh": [
+    "後綴表達式求值",
+    "RPN 求值",
+    "stack 計算 postfix",
+    "逆波蘭式計算",
+    "表達式 evaluator",
+    "postfix evaluation",
+    "RPN 計算器"
+  ],
+  "intents_en": [
+    "RPN evaluation",
+    "postfix evaluator",
+    "reverse polish notation eval",
+    "stack expression evaluation",
+    "compute postfix",
+    "RPN calculator",
+    "evaluate postfix tokens"
+  ],
+  "slots": [
+    "tokens"
+  ],
+  "code": "def eval_rpn(tokens={{tokens}}):\n    st = []\n    ops = {'+': lambda a,b: a+b, '-': lambda a,b: a-b,\n           '*': lambda a,b: a*b, '/': lambda a,b: a/b,\n           '^': lambda a,b: a**b}\n    for t in tokens:\n        if t in ops:\n            b = st.pop(); a = st.pop()\n            st.append(ops[t](a, b))\n        else:\n            st.append(float(t))\n    return st[0]",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "用堆疊計算後綴表達式結果"
+}

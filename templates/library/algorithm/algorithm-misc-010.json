@@ -1,0 +1,21 @@
+{
+  "id": "algorithm-misc-010",
+  "category": "algorithm/misc/n_queens",
+  "intents_zh": [
+    "N 皇后",
+    "n queens",
+    "給我 n queens"
+  ],
+  "intents_en": [
+    "N queens",
+    "n queens backtrack",
+    "queens problem"
+  ],
+  "slots": [
+    "fn_name"
+  ],
+  "code": "def {{fn_name}}(n):\n    res = []\n    def bt(row, cols, d1, d2, path):\n        if row == n:\n            res.append(path[:]); return\n        for c in range(n):\n            if c in cols or (row-c) in d1 or (row+c) in d2: continue\n            cols.add(c); d1.add(row-c); d2.add(row+c); path.append(c)\n            bt(row+1, cols, d1, d2, path)\n            cols.remove(c); d1.remove(row-c); d2.remove(row+c); path.pop()\n    bt(0, set(), set(), set(), [])\n    return res",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "N 皇后回溯所有解"
+}

@@ -1,0 +1,34 @@
+{
+  "id": "llm-tools-081-query-rewriter",
+  "category": "llm-tools/rag/query-rewrite",
+  "intents_zh": [
+    "query rewrite",
+    "查詢改寫器",
+    "擴充 query",
+    "rewrite question",
+    "multi-query 擴展",
+    "檢索 query 改寫",
+    "RAG query gen",
+    "產生子查詢"
+  ],
+  "intents_en": [
+    "query rewriter",
+    "multi-query expansion",
+    "rewrite question",
+    "query reformulation",
+    "retrieval query gen",
+    "generate sub-queries",
+    "query rephraser",
+    "question expansion"
+  ],
+  "slots": [
+    "model_name",
+    "n_queries"
+  ],
+  "code": "from openai import OpenAI\nimport json\n\nclient = OpenAI()\n\ndef rewrite(q: str) -> list[str]:\n    r = client.chat.completions.create(\n        model=\"{{model_name}}\",\n        response_format={\"type\": \"json_object\"},\n        messages=[\n            {\"role\": \"system\", \"content\": f'Output JSON: {{\"queries\": [...]}} with {{n_queries}} rephrasings.'},\n            {\"role\": \"user\", \"content\": q},\n        ],\n    )\n    return json.loads(r.choices[0].message.content)[\"queries\"]",
+  "language": "py",
+  "deps": [
+    "openai"
+  ],
+  "summary_zh": "LLM 產生多版本 query 改寫"
+}

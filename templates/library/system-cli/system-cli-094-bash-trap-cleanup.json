@@ -1,0 +1,21 @@
+{
+  "id": "system-cli-094-bash-trap-cleanup",
+  "category": "system-cli/shell/cleanup",
+  "intents_zh": [
+    "bash trap 清理 tempdir",
+    "script 結束自動清",
+    "exit cleanup"
+  ],
+  "intents_en": [
+    "bash trap cleanup",
+    "auto remove tempdir",
+    "exit handler shell"
+  ],
+  "slots": [
+    "work_block"
+  ],
+  "code": "#!/usr/bin/env bash\nset -euo pipefail\nTMP=$(mktemp -d)\ncleanup() {\n  rm -rf \"$TMP\"\n  echo \"cleaned $TMP\"\n}\ntrap cleanup EXIT INT TERM\n\necho \"workdir: $TMP\"\n{{work_block}}",
+  "language": "sh",
+  "deps": [],
+  "summary_zh": "trap EXIT 自動清 tempdir"
+}

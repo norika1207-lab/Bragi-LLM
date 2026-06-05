@@ -1,0 +1,29 @@
+{
+  "id": "web-frontend-batch4-026-not-found",
+  "category": "web-frontend/nextjs/app-router/not-found",
+  "intents_zh": [
+    "404 頁面",
+    "not-found.tsx",
+    "找不到頁面",
+    "App Router 404",
+    "自訂 404",
+    "Page not found 元件"
+  ],
+  "intents_en": [
+    "404 page",
+    "not-found.tsx",
+    "custom 404",
+    "app router not found",
+    "page not found component",
+    "missing page"
+  ],
+  "slots": [
+    "home_href"
+  ],
+  "code": "import Link from 'next/link';\n\nexport default function NotFound() {\n  return (\n    <main className=\"min-h-[60vh] flex flex-col items-center justify-center\">\n      <h1 className=\"text-5xl font-bold\">404</h1>\n      <p className=\"mt-2 text-gray-600\">Page not found</p>\n      <Link href=\"{{home_href}}\" className=\"mt-4 text-indigo-600\">Go home</Link>\n    </main>\n  );\n}",
+  "language": "tsx",
+  "deps": [
+    "next"
+  ],
+  "summary_zh": "App Router 自訂 404 not-found 頁"
+}

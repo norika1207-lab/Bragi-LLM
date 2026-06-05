@@ -1,0 +1,29 @@
+{
+  "id": "mobile-118-compose-bottomsheet",
+  "category": "mobile/compose/feedback",
+  "intents_zh": [
+    "Compose ModalBottomSheet",
+    "Compose 底部彈窗",
+    "Material3 bottom sheet Compose",
+    "Compose 彈出底部選單",
+    "Compose modal bottom",
+    "bottom sheet 範例 Compose",
+    "Compose bottom drawer"
+  ],
+  "intents_en": [
+    "compose ModalBottomSheet",
+    "material3 bottom sheet compose",
+    "compose bottom popup",
+    "compose modal bottom",
+    "bottom sheet example compose",
+    "jetpack compose bottom sheet",
+    "compose bottom drawer"
+  ],
+  "slots": [],
+  "code": "import androidx.compose.foundation.layout.padding\nimport androidx.compose.material3.*\nimport androidx.compose.runtime.*\nimport androidx.compose.ui.Modifier\nimport androidx.compose.ui.unit.dp\n@OptIn(ExperimentalMaterial3Api::class)\n@Composable\nfun BS(){\n  var show by remember{mutableStateOf(false)}\n  Button(onClick={show=true}){Text(\"Open\")}\n  if(show){ModalBottomSheet(onDismissRequest={show=false}){Column(Modifier.padding(24.dp)){Text(\"Pick option\");ListItem(headlineContent={Text(\"Share\")});ListItem(headlineContent={Text(\"Delete\")})}}}}",
+  "language": "kt",
+  "deps": [
+    "androidx.compose.material3"
+  ],
+  "summary_zh": "Compose ModalBottomSheet 彈出底部選單"
+}

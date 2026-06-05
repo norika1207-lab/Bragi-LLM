@@ -1,0 +1,27 @@
+{
+  "id": "web-backend-116-fastapi-dependency",
+  "category": "web-backend/fastapi/structure",
+  "intents_zh": [
+    "fastapi Depends 依賴注入",
+    "共用依賴 fastapi",
+    "global dependency",
+    "auth 依賴 fastapi",
+    "sub-dependency"
+  ],
+  "intents_en": [
+    "fastapi Depends",
+    "shared dependency fastapi",
+    "global dependency",
+    "auth dependency fastapi",
+    "sub-dependency"
+  ],
+  "slots": [
+    "api_key_header"
+  ],
+  "code": "from fastapi import Depends, HTTPException, Header, APIRouter\nimport os\n\ndef require_api_key(x_api_key: str = Header(alias='{{api_key_header}}')):\n    if x_api_key != os.environ.get('API_KEY'):\n        raise HTTPException(401, 'invalid api key')\n    return x_api_key\n\nrouter = APIRouter(dependencies=[Depends(require_api_key)])\n\n@router.get('/secret')\nasync def secret():\n    return {'data': 'hidden'}",
+  "language": "py",
+  "deps": [
+    "fastapi"
+  ],
+  "summary_zh": "FastAPI API key 依賴"
+}

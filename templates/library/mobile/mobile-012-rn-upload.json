@@ -1,0 +1,29 @@
+{
+  "id": "mobile-012-rn-upload",
+  "category": "mobile/rn/media",
+  "intents_zh": [
+    "RN 上傳照片",
+    "上傳圖片到後端 RN",
+    "React Native multipart upload",
+    "RN 傳檔到 server",
+    "RN form data 上傳圖",
+    "照片 POST RN",
+    "upload image rn"
+  ],
+  "intents_en": [
+    "rn photo upload",
+    "upload image multipart rn",
+    "react native send file",
+    "post image to server rn",
+    "rn formdata upload",
+    "upload picture backend rn",
+    "image upload api rn"
+  ],
+  "slots": [
+    "upload_url"
+  ],
+  "code": "export async function uploadPhoto(uri:string){\n  const fd=new FormData();\n  fd.append('file',{uri,name:'photo.jpg',type:'image/jpeg'} as any);\n  const r=await fetch('{{upload_url}}',{method:'POST',body:fd,headers:{'Content-Type':'multipart/form-data'}});\n  if(!r.ok)throw new Error('upload failed');\n  return await r.json();}",
+  "language": "ts",
+  "deps": [],
+  "summary_zh": "RN multipart 上傳本機照片"
+}

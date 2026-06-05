@@ -1,0 +1,30 @@
+{
+  "id": "depth-firmware-015-h-bridge-motor",
+  "category": "firmware/peripheral/motor",
+  "intents_zh": [
+    "H 橋驅動馬達",
+    "正反轉控制",
+    "L298N 馬達",
+    "雙向馬達",
+    "DRV8833 control"
+  ],
+  "intents_en": [
+    "h bridge motor",
+    "forward reverse motor",
+    "l298n drive",
+    "bidirectional motor",
+    "drv8833 control"
+  ],
+  "slots": [
+    "in1",
+    "in2",
+    "pwm_pin",
+    "speed"
+  ],
+  "code": "void motor_forward(int speed) {\n    digitalWrite({{in1}}, HIGH);\n    digitalWrite({{in2}}, LOW);\n    analogWrite({{pwm_pin}}, speed);\n}\nvoid motor_reverse(int speed) {\n    digitalWrite({{in1}}, LOW);\n    digitalWrite({{in2}}, HIGH);\n    analogWrite({{pwm_pin}}, speed);\n}\nvoid motor_stop() {\n    digitalWrite({{in1}}, LOW);\n    digitalWrite({{in2}}, LOW);\n}",
+  "language": "cpp",
+  "deps": [
+    "Arduino"
+  ],
+  "summary_zh": "H 橋雙向馬達控制函式組"
+}

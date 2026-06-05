@@ -1,0 +1,26 @@
+{
+  "id": "depth-web-backend-009-csrf-double-submit",
+  "category": "web-backend/security/csrf",
+  "intents_zh": [
+    "CSRF double submit cookie",
+    "無 session 的 CSRF 防護",
+    "SPA CSRF token",
+    "Express CSRF 中介層",
+    "cookie+header 雙提交"
+  ],
+  "intents_en": [
+    "csrf double submit cookie",
+    "sessionless csrf protection",
+    "spa csrf token",
+    "express csrf middleware",
+    "cookie header double submit"
+  ],
+  "slots": [],
+  "code": "function issueCsrf(req, res, next) {\n  if (!req.cookies['csrf']) {\n    const token = crypto.randomBytes(32).toString('hex');\n    res.cookie('csrf', token, { sameSite: 'lax', secure: true });\n    req.csrf = token;\n  }\n  next();\n}\nfunction verifyCsrf(req, res, next) {\n  const cookie = req.cookies['csrf'];\n  const header = req.get('x-csrf-token');\n  if (!cookie || cookie !== header) return res.status(403).send('csrf');\n  next();\n}",
+  "language": "js",
+  "deps": [
+    "express",
+    "cookie-parser"
+  ],
+  "summary_zh": "Double submit cookie 模式 CSRF"
+}

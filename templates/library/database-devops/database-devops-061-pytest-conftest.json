@@ -1,0 +1,22 @@
+{
+  "id": "database-devops-061-pytest-conftest",
+  "category": "database-devops/test/pytest",
+  "intents_zh": [
+    "conftest.py 範本",
+    "pytest 共用設定",
+    "DB fixture 全域"
+  ],
+  "intents_en": [
+    "conftest.py example",
+    "pytest shared config",
+    "global db fixture"
+  ],
+  "slots": [],
+  "code": "import pytest\nfrom sqlalchemy import create_engine\nfrom sqlalchemy.orm import sessionmaker\n\n@pytest.fixture(scope='session')\ndef engine():\n    return create_engine('sqlite:///:memory:')\n\n@pytest.fixture(scope='function')\ndef db(engine):\n    Session = sessionmaker(bind=engine)\n    session = Session()\n    yield session\n    session.rollback()\n    session.close()",
+  "language": "py",
+  "deps": [
+    "pytest",
+    "sqlalchemy"
+  ],
+  "summary_zh": "conftest.py 共用 DB fixture"
+}

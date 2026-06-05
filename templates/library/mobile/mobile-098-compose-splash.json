@@ -1,0 +1,29 @@
+{
+  "id": "mobile-098-compose-splash",
+  "category": "mobile/compose/launch",
+  "intents_zh": [
+    "Compose splash screen api",
+    "Android 12 splash",
+    "SplashScreen androidx",
+    "Compose 啟動畫面",
+    "installSplashScreen Kotlin",
+    "Android Compose splash",
+    "Compose 開頁"
+  ],
+  "intents_en": [
+    "compose splash screen api",
+    "android 12 SplashScreen",
+    "installSplashScreen kotlin",
+    "compose launch screen",
+    "androidx core splashscreen",
+    "compose startup screen",
+    "android splash compose"
+  ],
+  "slots": [],
+  "code": "import android.os.Bundle\nimport androidx.activity.ComponentActivity\nimport androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen\nclass MainActivity:ComponentActivity(){\n  override fun onCreate(s:Bundle?){\n    val splash=installSplashScreen()\n    super.onCreate(s)\n    var ready=false\n    splash.setKeepOnScreenCondition{!ready}\n    window.decorView.post{ready=true}}}",
+  "language": "kt",
+  "deps": [
+    "androidx.core:core-splashscreen"
+  ],
+  "summary_zh": "Android 12+ installSplashScreen 控制 keep"
+}

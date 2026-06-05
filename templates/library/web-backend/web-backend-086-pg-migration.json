@@ -1,0 +1,25 @@
+{
+  "id": "web-backend-086-pg-migration",
+  "category": "web-backend/db/migration",
+  "intents_zh": [
+    "raw sql migration",
+    "postgres migration 範例",
+    "建表 sql",
+    "up.sql + down.sql",
+    "db schema 變更"
+  ],
+  "intents_en": [
+    "raw sql migration",
+    "postgres migration example",
+    "create table sql",
+    "up down sql",
+    "schema change migration"
+  ],
+  "slots": [
+    "table_name"
+  ],
+  "code": "-- up.sql\nCREATE TABLE IF NOT EXISTS {{table_name}} (\n  id BIGSERIAL PRIMARY KEY,\n  name TEXT NOT NULL,\n  email TEXT UNIQUE NOT NULL,\n  created_at TIMESTAMPTZ NOT NULL DEFAULT now(),\n  updated_at TIMESTAMPTZ NOT NULL DEFAULT now()\n);\nCREATE INDEX IF NOT EXISTS idx_{{table_name}}_name ON {{table_name}}(name);\n\n-- down.sql\nDROP TABLE IF EXISTS {{table_name}};",
+  "language": "sql",
+  "deps": [],
+  "summary_zh": "Raw SQL up/down migration"
+}

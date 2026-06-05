@@ -1,0 +1,35 @@
+{
+  "id": "llm-tools-102-react-agent-langgraph",
+  "category": "llm-tools/langgraph/react",
+  "intents_zh": [
+    "langgraph react agent",
+    "prebuilt create_react_agent",
+    "langgraph 工具 agent",
+    "langgraph 一鍵 react",
+    "langgraph 範例 react",
+    "tool agent langgraph",
+    "快速建 react agent",
+    "langgraph prebuilt"
+  ],
+  "intents_en": [
+    "langgraph react agent",
+    "create_react_agent prebuilt",
+    "langgraph tool agent",
+    "quick react agent langgraph",
+    "langgraph example react",
+    "langgraph prebuilt",
+    "tool-using react agent",
+    "minimal langgraph react"
+  ],
+  "slots": [
+    "model_name"
+  ],
+  "code": "from langgraph.prebuilt import create_react_agent\nfrom langchain_openai import ChatOpenAI\nfrom langchain_core.tools import tool\n\n@tool\ndef get_weather(city: str) -> str:\n    \"\"\"Get weather of a city\"\"\"\n    return f\"{city}: 22C sunny\"\n\nagent = create_react_agent(ChatOpenAI(model=\"{{model_name}}\"), tools=[get_weather])\nout = agent.invoke({\"messages\": [(\"user\", \"weather in Taipei?\")]})\nprint(out[\"messages\"][-1].content)",
+  "language": "py",
+  "deps": [
+    "langgraph",
+    "langchain-openai",
+    "langchain-core"
+  ],
+  "summary_zh": "LangGraph prebuilt ReAct agent"
+}

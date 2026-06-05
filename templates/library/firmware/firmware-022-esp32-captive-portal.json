@@ -1,0 +1,28 @@
+{
+  "id": "firmware-022-esp32-captive-portal",
+  "category": "firmware/esp32/network",
+  "intents_zh": [
+    "captive portal",
+    "ESP32 設定頁",
+    "WiFi 設定入口",
+    "強制跳設定頁",
+    "DNS 重導入"
+  ],
+  "intents_en": [
+    "ESP32 captive portal",
+    "WiFi setup page",
+    "redirect all DNS",
+    "onboarding wifi portal",
+    "captive DNS hijack"
+  ],
+  "slots": [
+    "ap_name"
+  ],
+  "code": "#include <WiFi.h>\n#include <DNSServer.h>\n#include <WebServer.h>\nDNSServer dns;\nWebServer web(80);\n\nvoid setup() {\n  WiFi.softAP(\"{{ap_name}}\");\n  dns.start(53, \"*\", WiFi.softAPIP());\n  web.onNotFound([]() {\n    web.send(200, \"text/html\", \"<h1>Setup</h1><form><input name=ssid><input name=pw><button>save</button></form>\");\n  });\n  web.begin();\n}\n\nvoid loop() { dns.processNextRequest(); web.handleClient(); }",
+  "language": "ino",
+  "deps": [
+    "DNSServer",
+    "WebServer"
+  ],
+  "summary_zh": "ESP32 captive portal WiFi 設定入口"
+}

@@ -1,0 +1,27 @@
+{
+  "id": "depth-web-frontend-031-signature-pad",
+  "category": "web-frontend/media/signature",
+  "intents_zh": [
+    "簽名板",
+    "canvas 簽名",
+    "signature_pad",
+    "電子簽名",
+    "匯出簽名 PNG"
+  ],
+  "intents_en": [
+    "signature pad",
+    "canvas signature",
+    "signature_pad library",
+    "e-signature",
+    "export signature png"
+  ],
+  "slots": [
+    "component_name"
+  ],
+  "code": "'use client';\nimport SignaturePad from 'signature_pad';\nimport { useEffect, useRef } from 'react';\n\nexport function {{component_name}}({ onSave }: { onSave: (dataUrl: string) => void }) {\n  const ref = useRef<HTMLCanvasElement>(null);\n  const padRef = useRef<SignaturePad | null>(null);\n  useEffect(() => { padRef.current = new SignaturePad(ref.current!); }, []);\n  return (\n    <div>\n      <canvas ref={ref} width={400} height={160} style={{ border:'1px solid #ccc' }} />\n      <button onClick={() => padRef.current?.clear()}>清除</button>\n      <button onClick={() => onSave(padRef.current!.toDataURL('image/png'))}>儲存</button>\n    </div>\n  );\n}",
+  "language": "tsx",
+  "deps": [
+    "signature_pad"
+  ],
+  "summary_zh": "signature_pad 電子簽名板"
+}

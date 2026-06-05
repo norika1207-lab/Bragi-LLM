@@ -1,0 +1,28 @@
+{
+  "id": "depth-llm-tools-058-context-overflow-summarise",
+  "category": "llm-tools/context/overflow",
+  "intents_zh": [
+    "上下文滿了就摘要",
+    "auto-compact context",
+    "over-budget 自動壓縮",
+    "動態縮短歷史",
+    "壓縮 fallback"
+  ],
+  "intents_en": [
+    "auto summarise on overflow",
+    "auto-compact context",
+    "over-budget compress",
+    "dynamic history shrink",
+    "compression fallback"
+  ],
+  "slots": [
+    "messages",
+    "tokenizer",
+    "budget",
+    "summarise_fn"
+  ],
+  "code": "def auto_compact({{messages}}, {{tokenizer}}, {{budget}}, {{summarise_fn}}):\n    total = sum(len({{tokenizer}}.encode(m[\"content\"])) for m in {{messages}})\n    if total <= {{budget}}: return {{messages}}\n    head, tail = {{messages}}[:-6], {{messages}}[-6:]\n    digest = {{summarise_fn}}(\"\\n\".join(m[\"content\"] for m in head))\n    return [{\"role\": \"system\", \"content\": f\"Earlier: {digest}\"}] + tail",
+  "language": "python",
+  "deps": [],
+  "summary_zh": "context 超預算自動壓縮前段為摘要保留尾段對話"
+}

@@ -1,0 +1,28 @@
+{
+  "id": "algorithm-ml-003",
+  "category": "algorithm/ml/knn",
+  "intents_zh": [
+    "knn",
+    "k 近鄰",
+    "給我 knn 分類",
+    "sklearn knn"
+  ],
+  "intents_en": [
+    "knn",
+    "k nearest neighbors",
+    "knn classifier",
+    "sklearn knn"
+  ],
+  "slots": [
+    "X_train",
+    "y_train",
+    "X_test",
+    "k_val"
+  ],
+  "code": "from sklearn.neighbors import KNeighborsClassifier\n\nclf = KNeighborsClassifier(n_neighbors={{k_val}})\nclf.fit({{X_train}}, {{y_train}})\npred = clf.predict({{X_test}})\nprint(pred)",
+  "language": "py",
+  "deps": [
+    "scikit-learn"
+  ],
+  "summary_zh": "sklearn KNN 分類"
+}

@@ -1,0 +1,29 @@
+{
+  "id": "depth-web-frontend-039-recharts-line",
+  "category": "web-frontend/charts/recharts",
+  "intents_zh": [
+    "recharts 折線圖",
+    "趨勢圖 line chart",
+    "react 圖表",
+    "軸線圖",
+    "recharts 範例"
+  ],
+  "intents_en": [
+    "recharts line chart",
+    "trend chart react",
+    "react chart",
+    "line graph",
+    "recharts example"
+  ],
+  "slots": [
+    "component_name",
+    "x_key",
+    "y_key"
+  ],
+  "code": "'use client';\nimport { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from 'recharts';\n\nexport function {{component_name}}({ data }: { data: any[] }) {\n  return (\n    <ResponsiveContainer width=\"100%\" height={280}>\n      <LineChart data={data}>\n        <CartesianGrid strokeDasharray=\"3 3\" />\n        <XAxis dataKey=\"{{x_key}}\" />\n        <YAxis />\n        <Tooltip />\n        <Line type=\"monotone\" dataKey=\"{{y_key}}\" stroke=\"#0EA5E9\" strokeWidth={2} dot={false} />\n      </LineChart>\n    </ResponsiveContainer>\n  );\n}",
+  "language": "tsx",
+  "deps": [
+    "recharts"
+  ],
+  "summary_zh": "recharts 響應式折線圖"
+}

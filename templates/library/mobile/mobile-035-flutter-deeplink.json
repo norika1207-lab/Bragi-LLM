@@ -1,0 +1,29 @@
+{
+  "id": "mobile-035-flutter-deeplink",
+  "category": "mobile/flutter/nav",
+  "intents_zh": [
+    "Flutter deep link",
+    "flutter url scheme",
+    "flutter 處理深連結",
+    "app_links flutter",
+    "深連結監聽 flutter",
+    "flutter universal link",
+    "flutter app uri"
+  ],
+  "intents_en": [
+    "flutter deep link",
+    "flutter app_links",
+    "handle url scheme flutter",
+    "universal link flutter",
+    "app uri flutter",
+    "flutter deep linking",
+    "listen incoming links flutter"
+  ],
+  "slots": [],
+  "code": "import 'package:app_links/app_links.dart';\nclass DeepLink{\n  final _l=AppLinks();\n  Future<void> init(void Function(Uri)on)async{\n    final initial=await _l.getInitialAppLink();\n    if(initial!=null)on(initial);\n    _l.uriLinkStream.listen(on);}}",
+  "language": "dart",
+  "deps": [
+    "app_links"
+  ],
+  "summary_zh": "Flutter app_links 監聽 deep link"
+}

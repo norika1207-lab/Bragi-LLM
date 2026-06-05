@@ -1,0 +1,28 @@
+{
+  "id": "depth-web-frontend-023-tanstack-virtual-list",
+  "category": "web-frontend/virtualization/tanstack-virtual",
+  "intents_zh": [
+    "虛擬化列表",
+    "tanstack virtual",
+    "大量資料渲染",
+    "useVirtualizer",
+    "windowing"
+  ],
+  "intents_en": [
+    "virtual list react",
+    "tanstack virtual",
+    "useVirtualizer",
+    "windowed list",
+    "render large list"
+  ],
+  "slots": [
+    "item_count",
+    "row_height"
+  ],
+  "code": "'use client';\nimport { useVirtualizer } from '@tanstack/react-virtual';\nimport { useRef } from 'react';\n\nexport function VirtualList({ items }: { items: any[] }) {\n  const parent = useRef<HTMLDivElement>(null);\n  const v = useVirtualizer({ count: items.length || {{item_count}}, getScrollElement: () => parent.current, estimateSize: () => {{row_height}}, overscan: 8 });\n  return (\n    <div ref={parent} style={{ height: 400, overflow: 'auto' }}>\n      <div style={{ height: v.getTotalSize(), position: 'relative' }}>\n        {v.getVirtualItems().map(row => (\n          <div key={row.key} style={{ position: 'absolute', top: 0, transform: `translateY(${row.start}px)`, height: row.size, width: '100%' }}>\n            {items[row.index]?.label ?? row.index}\n          </div>\n        ))}\n      </div>\n    </div>\n  );\n}",
+  "language": "tsx",
+  "deps": [
+    "@tanstack/react-virtual"
+  ],
+  "summary_zh": "tanstack-virtual 虛擬化列表"
+}

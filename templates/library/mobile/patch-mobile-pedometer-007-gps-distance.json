@@ -1,0 +1,29 @@
+{
+  "id": "patch-mobile-pedometer-007-gps-distance",
+  "category": "mobile/health/gps-distance",
+  "intents_zh": [
+    "GPS 距離追蹤 hook",
+    "用 expo-location 算跑步距離",
+    "RN GPS 路徑長度",
+    "做個跑步距離計算器",
+    "定位距離累加",
+    "GPS 跑步追蹤"
+  ],
+  "intents_en": [
+    "GPS distance tracker with expo-location",
+    "compute running distance RN",
+    "live GPS path length",
+    "run tracker hook",
+    "haversine distance from GPS stream"
+  ],
+  "slots": [
+    "hook_name"
+  ],
+  "code": "import { useEffect, useState, useRef } from 'react';\nimport * as Location from 'expo-location';\n\nfunction haversine(a, b) {\n  const R = 6371000;\n  const toRad = d => (d * Math.PI) / 180;\n  const dLat = toRad(b.latitude - a.latitude);\n  const dLon = toRad(b.longitude - a.longitude);\n  const s = Math.sin(dLat / 2) ** 2 +\n    Math.cos(toRad(a.latitude)) * Math.cos(toRad(b.latitude)) * Math.sin(dLon / 2) ** 2;\n  return 2 * R * Math.asin(Math.sqrt(s));\n}\n\nexport function {{hook_name}}() {\n  const [meters, setMeters] = useState(0);\n  const last = useRef(null);\n\n  useEffect(() => {\n    let sub;\n    (async () => {\n      const { status } = await Location.requestForegroundPermissionsAsync();\n      if (status !== 'granted') return;\n      sub = await Location.watchPositionAsync(\n        { accuracy: Location.Accuracy.High, distanceInterval: 5 },\n        loc => {\n          const c = loc.coords;\n          if (last.current) setMeters(m => m + haversine(last.current, c));\n          last.current = c;\n        }\n      );\n    })();\n    return () => sub && sub.remove();\n  }, []);\n\n  return { meters, km: (meters / 1000).toFixed(2) };\n}",
+  "language": "ts",
+  "deps": [
+    "expo-location",
+    "react"
+  ],
+  "summary_zh": "expo-location GPS 距離累加 hook，回傳公尺與公里"
+}

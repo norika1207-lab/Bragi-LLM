@@ -1,0 +1,21 @@
+{
+  "id": "algorithm-misc-003",
+  "category": "algorithm/misc/lru_cache",
+  "intents_zh": [
+    "LRU cache",
+    "給我 LRU 實作",
+    "手刻 LRU"
+  ],
+  "intents_en": [
+    "LRU cache",
+    "manual LRU",
+    "LRU implementation"
+  ],
+  "slots": [
+    "class_name"
+  ],
+  "code": "from collections import OrderedDict\n\nclass {{class_name}}:\n    def __init__(self, capacity):\n        self.cap = capacity\n        self.cache = OrderedDict()\n    def get(self, key):\n        if key not in self.cache: return -1\n        self.cache.move_to_end(key)\n        return self.cache[key]\n    def put(self, key, value):\n        if key in self.cache:\n            self.cache.move_to_end(key)\n        self.cache[key] = value\n        if len(self.cache) > self.cap:\n            self.cache.popitem(last=False)",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "OrderedDict 實作 LRU cache"
+}

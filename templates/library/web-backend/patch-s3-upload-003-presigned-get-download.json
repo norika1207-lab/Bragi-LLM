@@ -1,0 +1,32 @@
+{
+  "id": "patch-s3-upload-003-presigned-get-download",
+  "category": "web-backend/download/presigned-get",
+  "intents_zh": [
+    "產生 S3 下載簽名網址",
+    "presigned GET URL",
+    "給檔案私有下載連結",
+    "短時效的 S3 下載 url",
+    "簽一個 getObject 給用戶下載",
+    "私有 bucket 的下載連結"
+  ],
+  "intents_en": [
+    "generate s3 presigned get url",
+    "signed download url for private object",
+    "presigned getObject aws sdk v3",
+    "temporary download link from s3",
+    "private bucket signed download",
+    "issue time-limited download link"
+  ],
+  "slots": [
+    "bucket_name",
+    "region",
+    "expires_seconds"
+  ],
+  "code": "import { S3Client, GetObjectCommand } from '@aws-sdk/client-s3';\nimport { getSignedUrl } from '@aws-sdk/s3-request-presigner';\n\nconst s3 = new S3Client({ region: '{{region}}' });\n\nexport async function createDownloadUrl(key: string, downloadFilename?: string) {\n  const cmd = new GetObjectCommand({\n    Bucket: '{{bucket_name}}',\n    Key: key,\n    ResponseContentDisposition: downloadFilename\n      ? `attachment; filename=\"${downloadFilename}\"`\n      : undefined,\n  });\n  return await getSignedUrl(s3, cmd, { expiresIn: {{expires_seconds}} });\n}",
+  "language": "ts",
+  "deps": [
+    "@aws-sdk/client-s3",
+    "@aws-sdk/s3-request-presigner"
+  ],
+  "summary_zh": "簽 presigned GET URL 給用戶下載私有檔案"
+}

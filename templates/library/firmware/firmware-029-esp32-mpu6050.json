@@ -1,0 +1,29 @@
+{
+  "id": "firmware-029-esp32-mpu6050",
+  "category": "firmware/esp32/sensor",
+  "intents_zh": [
+    "MPU6050 陀螺儀",
+    "加速度計讀取",
+    "IMU 感測",
+    "ESP32 MPU6050",
+    "姿態感測器"
+  ],
+  "intents_en": [
+    "MPU6050 IMU read",
+    "accelerometer gyroscope",
+    "ESP32 motion sensor",
+    "I2C MPU6050",
+    "6-axis IMU"
+  ],
+  "slots": [
+    "sda_pin",
+    "scl_pin"
+  ],
+  "code": "#include <Wire.h>\n#include <Adafruit_MPU6050.h>\n#include <Adafruit_Sensor.h>\nAdafruit_MPU6050 mpu;\n\nvoid setup() {\n  Serial.begin(115200);\n  Wire.begin({{sda_pin}}, {{scl_pin}});\n  if (!mpu.begin()) Serial.println(\"MPU6050 missing\");\n}\n\nvoid loop() {\n  sensors_event_t a, g, t;\n  mpu.getEvent(&a, &g, &t);\n  Serial.printf(\"ax=%.2f ay=%.2f az=%.2f\\n\", a.acceleration.x, a.acceleration.y, a.acceleration.z);\n  delay(200);\n}",
+  "language": "ino",
+  "deps": [
+    "Adafruit MPU6050",
+    "Adafruit Unified Sensor"
+  ],
+  "summary_zh": "MPU6050 加速度計讀取"
+}

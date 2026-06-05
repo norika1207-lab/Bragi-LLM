@@ -1,0 +1,29 @@
+{
+  "id": "mobile-066-swiftui-upload",
+  "category": "mobile/swiftui/media",
+  "intents_zh": [
+    "SwiftUI 上傳照片",
+    "Swift multipart upload",
+    "SwiftUI post image",
+    "Swift form data 上傳",
+    "iOS 上傳圖片",
+    "SwiftUI 傳檔到 server",
+    "Swift URLSession upload"
+  ],
+  "intents_en": [
+    "swift multipart upload",
+    "swiftui upload photo",
+    "post image swift",
+    "ios upload image",
+    "urlsession multipart swift",
+    "upload file swift",
+    "swiftui send photo"
+  ],
+  "slots": [
+    "upload_url"
+  ],
+  "code": "import Foundation\nfunc upload(data:Data) async throws -> Data{\n  let b=\"Boundary-\\(UUID().uuidString)\"\n  var req=URLRequest(url:URL(string:\"{{upload_url}}\")!);req.httpMethod=\"POST\"\n  req.setValue(\"multipart/form-data; boundary=\\(b)\",forHTTPHeaderField:\"Content-Type\")\n  var body=Data()\n  body.append(\"--\\(b)\\r\\nContent-Disposition: form-data; name=\\\"file\\\"; filename=\\\"u.jpg\\\"\\r\\nContent-Type: image/jpeg\\r\\n\\r\\n\".data(using:.utf8)!)\n  body.append(data);body.append(\"\\r\\n--\\(b)--\\r\\n\".data(using:.utf8)!)\n  let(d,_)=try await URLSession.shared.upload(for:req,from:body)\n  return d}",
+  "language": "swift",
+  "deps": [],
+  "summary_zh": "Swift URLSession multipart 上傳圖片"
+}

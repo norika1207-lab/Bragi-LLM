@@ -1,0 +1,24 @@
+{
+  "id": "depth-system-cli-046-diceware-passphrase",
+  "category": "system-cli/password/passphrase",
+  "intents_zh": [
+    "diceware 密語產生",
+    "好記長密碼",
+    "隨機字典片語",
+    "passphrase 產生器"
+  ],
+  "intents_en": [
+    "diceware passphrase",
+    "memorable long password",
+    "random dictionary phrase",
+    "passphrase generator"
+  ],
+  "slots": [
+    "word_count",
+    "separator"
+  ],
+  "code": "import secrets, urllib.request, re\n\nURL = \"https://www.eff.org/files/2016/07/18/eff_large_wordlist.txt\"\n\ndef load_words():\n    data = urllib.request.urlopen(URL).read().decode()\n    return [line.split('\\t')[1] for line in data.strip().splitlines()]\n\ndef passphrase(n={{word_count}}, sep=\"{{separator}}\"):\n    words = load_words()\n    return sep.join(secrets.choice(words) for _ in range(n))\n\nif __name__ == \"__main__\":\n    print(passphrase())",
+  "language": "python",
+  "deps": [],
+  "summary_zh": "diceware EFF 大字典產可記長 passphrase"
+}

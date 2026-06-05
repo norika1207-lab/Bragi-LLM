@@ -1,0 +1,27 @@
+{
+  "id": "web-frontend-batch2-040-card-list",
+  "category": "web-frontend/react/layout/card-list",
+  "intents_zh": [
+    "卡片列表",
+    "card list",
+    "直立卡片清單",
+    "list 卡片",
+    "內容卡片",
+    "項目卡片清單"
+  ],
+  "intents_en": [
+    "card list",
+    "stacked cards",
+    "item cards",
+    "content cards",
+    "vertical card list",
+    "card feed"
+  ],
+  "slots": [
+    "items"
+  ],
+  "code": "export function CardList() {\n  const items = {{items}};\n  return (\n    <div className=\"space-y-4\">\n      {items.map((it) => (\n        <div key={it.id} className=\"flex gap-4 rounded-lg border bg-white p-4 shadow-sm hover:shadow-md\">\n          <img src={it.image} alt=\"\" className=\"h-20 w-20 rounded object-cover\" />\n          <div className=\"flex-1\">\n            <h3 className=\"font-semibold\">{it.title}</h3>\n            <p className=\"text-sm text-gray-600\">{it.desc}</p>\n          </div>\n          <button className=\"self-start text-blue-600\">View</button>\n        </div>\n      ))}\n    </div>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "水平排列圖文卡片列表"
+}

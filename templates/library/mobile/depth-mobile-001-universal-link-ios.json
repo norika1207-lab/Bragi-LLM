@@ -1,0 +1,26 @@
+{
+  "id": "depth-mobile-001-universal-link-ios",
+  "category": "mobile/deeplink/universal",
+  "intents_zh": [
+    "iOS Universal Link 設定",
+    "處理 universal link",
+    "解析 universal link URL",
+    "SceneDelegate 接 universal link",
+    "iOS 深層連結"
+  ],
+  "intents_en": [
+    "iOS universal link handler",
+    "handle universal link",
+    "parse universal link",
+    "SceneDelegate continue user activity",
+    "iOS deep link"
+  ],
+  "slots": [
+    "host",
+    "path_prefix"
+  ],
+  "code": "// AppDelegate.swift\nfunc application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {\n    guard userActivity.activityType == NSUserActivityTypeBrowsingWeb,\n          let url = userActivity.webpageURL,\n          url.host == \"{{host}}\",\n          url.path.hasPrefix(\"{{path_prefix}}\") else { return false }\n    NotificationCenter.default.post(name: .didReceiveDeepLink, object: url)\n    return true\n}",
+  "language": "swift",
+  "deps": [],
+  "summary_zh": "iOS Universal Link 路由接收"
+}

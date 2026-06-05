@@ -1,0 +1,27 @@
+{
+  "id": "database-devops-018-sql-partial-index",
+  "category": "database-devops/sql/ddl",
+  "intents_zh": [
+    "部份索引",
+    "partial index",
+    "只 index 部分列",
+    "WHERE 條件索引"
+  ],
+  "intents_en": [
+    "partial index",
+    "conditional index",
+    "index subset of rows",
+    "where index"
+  ],
+  "slots": [
+    "index_name",
+    "table",
+    "col",
+    "status_col",
+    "status_val"
+  ],
+  "code": "CREATE INDEX {{index_name}}\nON {{table}} ({{col}})\nWHERE {{status_col}} = '{{status_val}}';",
+  "language": "sql",
+  "deps": [],
+  "summary_zh": "建立部份索引(有 WHERE)"
+}

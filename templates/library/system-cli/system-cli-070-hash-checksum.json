@@ -1,0 +1,22 @@
+{
+  "id": "system-cli-070-hash-checksum",
+  "category": "system-cli/file/hash",
+  "intents_zh": [
+    "生成檔案 sha256",
+    "資料夾 checksum",
+    "檔案完整性檢查"
+  ],
+  "intents_en": [
+    "sha256 of files",
+    "folder checksum manifest",
+    "integrity check"
+  ],
+  "slots": [
+    "scan_dir",
+    "manifest_file"
+  ],
+  "code": "import hashlib\nfrom pathlib import Path\n\ndef sha256(p):\n    h = hashlib.sha256()\n    with open(p,'rb') as f:\n        for c in iter(lambda: f.read(1<<20), b''):\n            h.update(c)\n    return h.hexdigest()\n\nwith open('{{manifest_file}}','w') as out:\n    for p in sorted(Path('{{scan_dir}}').rglob('*')):\n        if p.is_file():\n            out.write(f'{sha256(p)}  {p}\\n')\nprint('manifest done')",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "產生 sha256 manifest"
+}

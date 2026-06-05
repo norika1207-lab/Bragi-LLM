@@ -1,0 +1,28 @@
+{
+  "id": "web-backend-047-fastapi-crud",
+  "category": "web-backend/fastapi/rest",
+  "intents_zh": [
+    "fastapi CRUD",
+    "pydantic model + CRUD",
+    "fastapi 增刪改查",
+    "fastapi resource",
+    "REST endpoint fastapi"
+  ],
+  "intents_en": [
+    "fastapi crud",
+    "pydantic crud",
+    "scaffold rest fastapi",
+    "fastapi resource routes",
+    "CRUD with fastapi"
+  ],
+  "slots": [
+    "resource",
+    "model_name"
+  ],
+  "code": "from fastapi import APIRouter, HTTPException\nfrom pydantic import BaseModel\nfrom uuid import uuid4\n\nrouter = APIRouter()\nstore: dict[str, dict] = {}\n\nclass {{model_name}}(BaseModel):\n    name: str\n\n@router.get('/{{resource}}')\ndef list_items():\n    return list(store.values())\n\n@router.post('/{{resource}}', status_code=201)\ndef create(item: {{model_name}}):\n    iid = str(uuid4())\n    obj = {'id': iid, **item.model_dump()}\n    store[iid] = obj\n    return obj\n\n@router.get('/{{resource}}/{iid}')\ndef get_one(iid: str):\n    if iid not in store: raise HTTPException(404)\n    return store[iid]\n\n@router.put('/{{resource}}/{iid}')\ndef update(iid: str, item: {{model_name}}):\n    if iid not in store: raise HTTPException(404)\n    store[iid].update(item.model_dump())\n    return store[iid]\n\n@router.delete('/{{resource}}/{iid}', status_code=204)\ndef delete(iid: str):\n    store.pop(iid, None)",
+  "language": "py",
+  "deps": [
+    "fastapi"
+  ],
+  "summary_zh": "FastAPI CRUD 路由"
+}

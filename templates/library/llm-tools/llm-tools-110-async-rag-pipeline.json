@@ -1,0 +1,36 @@
+{
+  "id": "llm-tools-110-async-rag-pipeline",
+  "category": "llm-tools/rag/async-pipeline",
+  "intents_zh": [
+    "async RAG",
+    "非同步 RAG pipeline",
+    "async retriever + llm",
+    "async rag wrapper",
+    "await rag",
+    "並行 rag",
+    "async chain",
+    "await retrieve"
+  ],
+  "intents_en": [
+    "async rag pipeline",
+    "async retriever and llm",
+    "await rag",
+    "concurrent rag",
+    "async chain",
+    "async rag wrapper",
+    "minimal async rag",
+    "awaitable rag"
+  ],
+  "slots": [
+    "embed_model",
+    "model_name"
+  ],
+  "code": "import asyncio\nfrom openai import AsyncOpenAI\nfrom sentence_transformers import SentenceTransformer\nimport numpy as np\n\nemb = SentenceTransformer(\"{{embed_model}}\")\nllm = AsyncOpenAI()\nDOCS, VECS = [], None\n\ndef ingest(docs):\n    global DOCS, VECS\n    DOCS = docs\n    VECS = emb.encode(docs, normalize_embeddings=True)\n\nasync def answer(q: str) -> str:\n    qv = emb.encode([q], normalize_embeddings=True)\n    idx = np.argsort(-(VECS @ qv.T).flatten())[:4]\n    ctx = \"\\n\".join(DOCS[i] for i in idx)\n    r = await llm.chat.completions.create(model=\"{{model_name}}\",\n        messages=[{\"role\": \"user\", \"content\": f\"{ctx}\\nQ: {q}\"}])\n    return r.choices[0].message.content\n\nif __name__ == \"__main__\":\n    ingest([\"cats meow\", \"dogs bark\"])\n    print(asyncio.run(answer(\"what do cats say?\")))",
+  "language": "py",
+  "deps": [
+    "openai",
+    "sentence-transformers",
+    "numpy"
+  ],
+  "summary_zh": "非同步 RAG pipeline"
+}

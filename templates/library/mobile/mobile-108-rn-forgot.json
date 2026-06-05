@@ -1,0 +1,32 @@
+{
+  "id": "mobile-108-rn-forgot",
+  "category": "mobile/rn/auth",
+  "intents_zh": [
+    "RN 忘記密碼頁",
+    "React Native reset password",
+    "RN forgot password",
+    "RN 寄重設信",
+    "重設密碼 RN",
+    "RN reset email",
+    "RN 密碼遺忘"
+  ],
+  "intents_en": [
+    "rn forgot password screen",
+    "reset password rn",
+    "react native forgot password",
+    "rn send reset email",
+    "password reset rn",
+    "rn forgot email form",
+    "forgot pwd rn"
+  ],
+  "slots": [
+    "api_url"
+  ],
+  "code": "import React,{useState} from 'react';\nimport {View,TextInput,Button,Text} from 'react-native';\nexport default function Forgot(){\n  const[e,setE]=useState('');const[m,setM]=useState('');\n  const send=async()=>{try{const r=await fetch('{{api_url}}/forgot',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:e})});setM(r.ok?'sent':'err');}catch{setM('err');}};\n  return(<View style={{padding:24}}><TextInput placeholder='email' value={e} onChangeText={setE} style={{borderWidth:1,padding:8,marginBottom:12}}/><Button title='Send reset link' onPress={send}/><Text>{m}</Text></View>);}",
+  "language": "tsx",
+  "deps": [
+    "react",
+    "react-native"
+  ],
+  "summary_zh": "RN 忘記密碼表單寄重設信"
+}

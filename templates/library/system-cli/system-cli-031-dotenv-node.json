@@ -1,0 +1,23 @@
+{
+  "id": "system-cli-031-dotenv-node",
+  "category": "system-cli/config/dotenv",
+  "intents_zh": [
+    "node 讀 .env",
+    "dotenv js 載入",
+    "node dotenv 範本"
+  ],
+  "intents_en": [
+    "node dotenv load",
+    "js dotenv example",
+    "load env file node"
+  ],
+  "slots": [
+    "env_key"
+  ],
+  "code": "require('dotenv').config();\n\nconst {{env_key}} = process.env.{{env_key}};\nif (!{{env_key}}) {\n  console.error('missing {{env_key}}');\n  process.exit(1);\n}\n\nconsole.log('{{env_key}} loaded len', {{env_key}}.length);",
+  "language": "js",
+  "deps": [
+    "dotenv"
+  ],
+  "summary_zh": "node dotenv 載 env"
+}

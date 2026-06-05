@@ -1,0 +1,26 @@
+{
+  "id": "web-backend-136-fastapi-prometheus",
+  "category": "web-backend/fastapi/observability",
+  "intents_zh": [
+    "fastapi prometheus",
+    "加 /metrics fastapi",
+    "prometheus client python",
+    "instrumentation fastapi",
+    "fastapi 監控"
+  ],
+  "intents_en": [
+    "fastapi prometheus metrics",
+    "metrics endpoint fastapi",
+    "prometheus_client python",
+    "instrumentation fastapi",
+    "fastapi monitoring"
+  ],
+  "slots": [],
+  "code": "from fastapi import FastAPI, Request, Response\nfrom prometheus_client import Counter, Histogram, generate_latest, CONTENT_TYPE_LATEST\nimport time\n\napp = FastAPI()\nREQ_COUNT = Counter('http_requests_total', 'Total HTTP requests', ['method', 'path', 'status'])\nREQ_LAT = Histogram('http_request_latency_seconds', 'Request latency', ['method', 'path'])\n\n@app.middleware('http')\nasync def metrics_mw(request: Request, call_next):\n    start = time.time()\n    response = await call_next(request)\n    elapsed = time.time() - start\n    REQ_COUNT.labels(request.method, request.url.path, response.status_code).inc()\n    REQ_LAT.labels(request.method, request.url.path).observe(elapsed)\n    return response\n\n@app.get('/metrics')\nasync def metrics():\n    return Response(generate_latest(), media_type=CONTENT_TYPE_LATEST)",
+  "language": "py",
+  "deps": [
+    "fastapi",
+    "prometheus_client"
+  ],
+  "summary_zh": "FastAPI Prometheus metrics"
+}

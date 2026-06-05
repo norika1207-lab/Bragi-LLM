@@ -1,0 +1,22 @@
+{
+  "id": "algorithm-math-006",
+  "category": "algorithm/math/miller_rabin",
+  "intents_zh": [
+    "Miller-Rabin",
+    "質數測試",
+    "probabilistic prime",
+    "給我 miller rabin"
+  ],
+  "intents_en": [
+    "Miller-Rabin",
+    "primality test",
+    "probable prime test"
+  ],
+  "slots": [
+    "fn_name"
+  ],
+  "code": "import random\n\ndef {{fn_name}}(n, k=10):\n    if n < 2: return False\n    for p in (2,3,5,7,11,13,17,19,23):\n        if n % p == 0: return n == p\n    d = n - 1; r = 0\n    while d % 2 == 0:\n        d //= 2; r += 1\n    for _ in range(k):\n        a = random.randrange(2, n-1)\n        x = pow(a, d, n)\n        if x in (1, n-1): continue\n        for _ in range(r-1):\n            x = x*x % n\n            if x == n-1: break\n        else:\n            return False\n    return True",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "Miller-Rabin 機率質數測試"
+}

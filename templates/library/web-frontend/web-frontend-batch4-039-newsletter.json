@@ -1,0 +1,28 @@
+{
+  "id": "web-frontend-batch4-039-newsletter",
+  "category": "web-frontend/nextjs/landing/newsletter",
+  "intents_zh": [
+    "訂閱電子報",
+    "email 訂閱框",
+    "newsletter 表單",
+    "底部訂閱條",
+    "電子報 CTA",
+    "收 email 區塊"
+  ],
+  "intents_en": [
+    "newsletter signup",
+    "email subscribe form",
+    "newsletter cta",
+    "collect email block",
+    "subscribe band",
+    "mailing list signup"
+  ],
+  "slots": [
+    "headline_text",
+    "action_url"
+  ],
+  "code": "export default function NewsletterSignup() {\n  return (\n    <section className=\"py-12 bg-gray-50\">\n      <div className=\"max-w-md mx-auto text-center\">\n        <h3 className=\"text-xl font-semibold\">{{headline_text}}</h3>\n        <form action=\"{{action_url}}\" method=\"post\" className=\"mt-4 flex gap-2\">\n          <input name=\"email\" type=\"email\" required placeholder=\"you@example.com\" className=\"flex-1 border rounded px-3 py-2\" />\n          <button className=\"bg-indigo-600 text-white px-4 py-2 rounded\">Subscribe</button>\n        </form>\n      </div>\n    </section>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "電子報訂閱表單區塊"
+}

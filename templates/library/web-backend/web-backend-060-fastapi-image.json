@@ -1,0 +1,30 @@
+{
+  "id": "web-backend-060-fastapi-image",
+  "category": "web-backend/fastapi/image",
+  "intents_zh": [
+    "fastapi 圖片處理 pillow",
+    "resize 圖片 fastapi",
+    "縮圖 endpoint python",
+    "Pillow + fastapi",
+    "image transform fastapi"
+  ],
+  "intents_en": [
+    "fastapi image resize",
+    "pillow image fastapi",
+    "thumbnail endpoint fastapi",
+    "image processing fastapi",
+    "pillow transform"
+  ],
+  "slots": [
+    "max_width",
+    "format"
+  ],
+  "code": "from fastapi import APIRouter, UploadFile, File\nfrom fastapi.responses import Response\nfrom PIL import Image\nimport io\n\nrouter = APIRouter()\n\n@router.post('/resize')\nasync def resize(image: UploadFile = File(...)):\n    img = Image.open(io.BytesIO(await image.read()))\n    img.thumbnail(({{max_width}}, {{max_width}}))\n    buf = io.BytesIO()\n    img.save(buf, format='{{format}}', quality=80)\n    return Response(content=buf.getvalue(), media_type='image/{{format}}')",
+  "language": "py",
+  "deps": [
+    "fastapi",
+    "Pillow",
+    "python-multipart"
+  ],
+  "summary_zh": "FastAPI Pillow 縮圖"
+}

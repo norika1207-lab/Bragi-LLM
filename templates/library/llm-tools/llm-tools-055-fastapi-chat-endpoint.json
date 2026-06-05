@@ -1,0 +1,37 @@
+{
+  "id": "llm-tools-055-fastapi-chat-endpoint",
+  "category": "llm-tools/server/fastapi-chat",
+  "intents_zh": [
+    "fastapi chat endpoint",
+    "包個 chat api",
+    "fastapi 後端 GPT",
+    "寫 chat http 服務",
+    "REST chat",
+    "fastapi llm api",
+    "openai 套 http",
+    "chat backend"
+  ],
+  "intents_en": [
+    "fastapi chat endpoint",
+    "wrap chat http api",
+    "gpt backend service",
+    "rest chat api",
+    "fastapi llm api",
+    "openai over http",
+    "chat backend",
+    "minimal chat api"
+  ],
+  "slots": [
+    "model_name",
+    "port"
+  ],
+  "code": "from fastapi import FastAPI\nfrom pydantic import BaseModel\nfrom openai import OpenAI\nimport uvicorn\n\napp = FastAPI()\nclient = OpenAI()\n\nclass Req(BaseModel):\n    prompt: str\n\n@app.post(\"/chat\")\ndef chat(req: Req):\n    r = client.chat.completions.create(\n        model=\"{{model_name}}\",\n        messages=[{\"role\": \"user\", \"content\": req.prompt}],\n    )\n    return {\"reply\": r.choices[0].message.content}\n\nif __name__ == \"__main__\":\n    uvicorn.run(app, host=\"0.0.0.0\", port={{port}})",
+  "language": "py",
+  "deps": [
+    "fastapi",
+    "uvicorn",
+    "openai",
+    "pydantic"
+  ],
+  "summary_zh": "FastAPI /chat HTTP 端點"
+}

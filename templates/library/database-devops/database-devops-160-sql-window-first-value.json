@@ -1,0 +1,24 @@
+{
+  "id": "database-devops-160-sql-window-first-value",
+  "category": "database-devops/sql/windows",
+  "intents_zh": [
+    "FIRST_VALUE window",
+    "每組第一個值",
+    "window 取首列值"
+  ],
+  "intents_en": [
+    "first_value window",
+    "first per group",
+    "window first row value"
+  ],
+  "slots": [
+    "table",
+    "partition_col",
+    "order_col",
+    "value_col"
+  ],
+  "code": "SELECT *,\n  FIRST_VALUE({{value_col}}) OVER (\n    PARTITION BY {{partition_col}} ORDER BY {{order_col}}\n  ) AS first_val,\n  LAST_VALUE({{value_col}}) OVER (\n    PARTITION BY {{partition_col}} ORDER BY {{order_col}}\n    ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING\n  ) AS last_val\nFROM {{table}};",
+  "language": "sql",
+  "deps": [],
+  "summary_zh": "FIRST_VALUE / LAST_VALUE window"
+}

@@ -1,0 +1,19 @@
+{
+  "id": "database-devops-145-compose-mailhog",
+  "category": "database-devops/docker/compose",
+  "intents_zh": [
+    "compose mailhog 測 email",
+    "本地 SMTP 測試",
+    "攔截 email"
+  ],
+  "intents_en": [
+    "compose mailhog",
+    "local smtp test",
+    "intercept email"
+  ],
+  "slots": [],
+  "code": "services:\n  mailhog:\n    image: mailhog/mailhog\n    ports:\n      - \"1025:1025\"\n      - \"8025:8025\"",
+  "language": "yaml",
+  "deps": [],
+  "summary_zh": "compose MailHog 本地 SMTP 測試"
+}

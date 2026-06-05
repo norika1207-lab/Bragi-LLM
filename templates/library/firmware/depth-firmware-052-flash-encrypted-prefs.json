@@ -1,0 +1,28 @@
+{
+  "id": "depth-firmware-052-flash-encrypted-prefs",
+  "category": "firmware/security/prefs",
+  "intents_zh": [
+    "加密 NVS",
+    "保存 token 到 flash",
+    "secure preferences",
+    "WiFi 密碼加密",
+    "encrypted nvs"
+  ],
+  "intents_en": [
+    "encrypted nvs",
+    "store token flash",
+    "secure preferences",
+    "encrypt wifi password",
+    "nvs encryption"
+  ],
+  "slots": [
+    "key",
+    "secret"
+  ],
+  "code": "#include <Preferences.h>\nPreferences p;\np.begin(\"sec\", false);\np.putBytes(\"{{key}}\", \"{{secret}}\", strlen(\"{{secret}}\"));\nchar buf[64] = {0};\np.getBytes(\"{{key}}\", buf, sizeof(buf));\np.end();",
+  "language": "cpp",
+  "deps": [
+    "Preferences"
+  ],
+  "summary_zh": "Preferences 存放 secret bytes(配合 flash encryption 啟用後加密)"
+}

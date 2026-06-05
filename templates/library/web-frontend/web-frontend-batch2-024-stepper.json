@@ -1,0 +1,27 @@
+{
+  "id": "web-frontend-batch2-024-stepper",
+  "category": "web-frontend/react/layout/stepper",
+  "intents_zh": [
+    "步驟條",
+    "stepper",
+    "wizard 步驟",
+    "流程進度",
+    "多步驟導航",
+    "step indicator"
+  ],
+  "intents_en": [
+    "stepper",
+    "wizard steps",
+    "step indicator",
+    "multi-step nav",
+    "progress steps",
+    "flow stepper"
+  ],
+  "slots": [
+    "steps"
+  ],
+  "code": "import { useState } from 'react';\n\nexport function Stepper() {\n  const steps = {{steps}};\n  const [current, setCurrent] = useState(0);\n  return (\n    <div className=\"flex items-center\">\n      {steps.map((s, i) => (\n        <div key={i} className=\"flex items-center flex-1\">\n          <div className={`h-8 w-8 rounded-full flex items-center justify-center text-sm ${i <= current ? 'bg-blue-600 text-white' : 'bg-gray-200'}`}>\n            {i + 1}\n          </div>\n          <span className=\"ml-2 text-sm\">{s.label}</span>\n          {i < steps.length - 1 && <div className={`flex-1 h-0.5 mx-3 ${i < current ? 'bg-blue-600' : 'bg-gray-200'}`} />}\n        </div>\n      ))}\n    </div>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "水平步驟流程指示"
+}

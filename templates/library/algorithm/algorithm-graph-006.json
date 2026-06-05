@@ -1,0 +1,23 @@
+{
+  "id": "algorithm-graph-006",
+  "category": "algorithm/graph/bellman_ford",
+  "intents_zh": [
+    "Bellman-Ford",
+    "負權邊最短路",
+    "負環偵測",
+    "給我 bellman ford"
+  ],
+  "intents_en": [
+    "Bellman-Ford",
+    "negative edge shortest path",
+    "detect negative cycle",
+    "bellman ford algorithm"
+  ],
+  "slots": [
+    "fn_name"
+  ],
+  "code": "def {{fn_name}}(n, edges, src):\n    dist = [float('inf')] * n\n    dist[src] = 0\n    for _ in range(n - 1):\n        for u, v, w in edges:\n            if dist[u] + w < dist[v]:\n                dist[v] = dist[u] + w\n    for u, v, w in edges:\n        if dist[u] + w < dist[v]:\n            return None\n    return dist",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "Bellman-Ford 含負環偵測"
+}

@@ -1,0 +1,25 @@
+{
+  "id": "depth-mobile-011-share-target-android",
+  "category": "mobile/share/android",
+  "intents_zh": [
+    "Android share target",
+    "ACTION_SEND intent filter",
+    "接收分享內容",
+    "handle shared text",
+    "manifest share filter"
+  ],
+  "intents_en": [
+    "Android share target",
+    "ACTION_SEND filter",
+    "receive shared content",
+    "handle shared text",
+    "manifest share filter"
+  ],
+  "slots": [
+    "mime_type"
+  ],
+  "code": "<activity android:name=\".ShareActivity\" android:exported=\"true\">\n  <intent-filter>\n    <action android:name=\"android.intent.action.SEND\"/>\n    <category android:name=\"android.intent.category.DEFAULT\"/>\n    <data android:mimeType=\"{{mime_type}}\"/>\n  </intent-filter>\n</activity>",
+  "language": "xml",
+  "deps": [],
+  "summary_zh": "Android 接收分享 manifest"
+}

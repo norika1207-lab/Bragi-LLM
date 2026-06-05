@@ -1,0 +1,27 @@
+{
+  "id": "patch-firmware-input-006-ir-remote-decode",
+  "category": "firmware/input/ir",
+  "intents_zh": [
+    "紅外線遙控解碼",
+    "Arduino IR remote 接收",
+    "讀 NEC 紅外線訊號",
+    "IRremote 函式庫 decode",
+    "做一個 IR 接收器"
+  ],
+  "intents_en": [
+    "IR remote decode arduino",
+    "IRremote library receive",
+    "NEC protocol decode",
+    "infrared receiver arduino",
+    "decode tv remote signals"
+  ],
+  "slots": [
+    "ir_pin"
+  ],
+  "code": "#include <IRremote.hpp>\n\nconst int irPin = {{ir_pin}};\n\nvoid setup() {\n  Serial.begin(115200);\n  IrReceiver.begin(irPin, ENABLE_LED_FEEDBACK);\n}\n\nvoid loop() {\n  if (IrReceiver.decode()) {\n    Serial.print(\"proto=\");\n    Serial.print(IrReceiver.decodedIRData.protocol);\n    Serial.print(\" addr=0x\");\n    Serial.print(IrReceiver.decodedIRData.address, HEX);\n    Serial.print(\" cmd=0x\");\n    Serial.println(IrReceiver.decodedIRData.command, HEX);\n    IrReceiver.resume();\n  }\n}",
+  "language": "ino",
+  "deps": [
+    "IRremote"
+  ],
+  "summary_zh": "Arduino 用 IRremote 解碼紅外線遙控訊號印出 protocol 與 command"
+}

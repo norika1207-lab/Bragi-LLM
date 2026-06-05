@@ -1,0 +1,28 @@
+{
+  "id": "depth-web-backend-045-presigned-s3-put",
+  "category": "web-backend/storage/presigned",
+  "intents_zh": [
+    "S3 預簽 PUT URL",
+    "直傳 S3 不過後端",
+    "getSignedUrl PutObject",
+    "client 上傳預簽",
+    "presigned upload"
+  ],
+  "intents_en": [
+    "s3 presigned put url",
+    "direct upload to s3",
+    "getsignedurl putobject",
+    "client upload presigned",
+    "presigned upload"
+  ],
+  "slots": [
+    "bucket"
+  ],
+  "code": "import { getSignedUrl } from '@aws-sdk/s3-request-presigner';\nexport async function presignUpload(key, mime) {\n  const cmd = new PutObjectCommand({ Bucket: '{{bucket}}', Key: key, ContentType: mime });\n  return getSignedUrl(s3, cmd, { expiresIn: 900 });\n}",
+  "language": "ts",
+  "deps": [
+    "@aws-sdk/client-s3",
+    "@aws-sdk/s3-request-presigner"
+  ],
+  "summary_zh": "S3 預簽 PUT URL 直傳"
+}

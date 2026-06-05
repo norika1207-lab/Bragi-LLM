@@ -1,0 +1,33 @@
+{
+  "id": "llm-tools-054-cli-chat",
+  "category": "llm-tools/cli/chat",
+  "intents_zh": [
+    "寫個 CLI chat",
+    "terminal 對 GPT 聊天",
+    "cli chatbot 範本",
+    "命令列 chat",
+    "loop input -> gpt",
+    "終端機 chat",
+    "cli REPL",
+    "chat 命令列工具"
+  ],
+  "intents_en": [
+    "cli chat repl",
+    "terminal gpt chat",
+    "cli chatbot template",
+    "command line chat",
+    "interactive chat cli",
+    "gpt repl",
+    "chat shell",
+    "cli llm tool"
+  ],
+  "slots": [
+    "model_name"
+  ],
+  "code": "from openai import OpenAI\n\nclient = OpenAI()\nhistory = []\n\ndef main():\n    print(\"chat (ctrl-c to quit)\")\n    while True:\n        try:\n            q = input(\"> \").strip()\n        except (EOFError, KeyboardInterrupt):\n            break\n        if not q:\n            continue\n        history.append({\"role\": \"user\", \"content\": q})\n        r = client.chat.completions.create(model=\"{{model_name}}\", messages=history)\n        reply = r.choices[0].message.content\n        history.append({\"role\": \"assistant\", \"content\": reply})\n        print(reply)\n\nif __name__ == \"__main__\":\n    main()",
+  "language": "py",
+  "deps": [
+    "openai"
+  ],
+  "summary_zh": "命令列 chat REPL"
+}

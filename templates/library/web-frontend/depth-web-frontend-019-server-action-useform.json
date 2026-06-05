@@ -1,0 +1,28 @@
+{
+  "id": "depth-web-frontend-019-server-action-useform",
+  "category": "web-frontend/server/server-actions",
+  "intents_zh": [
+    "useFormState 用法",
+    "server action 回傳訊息",
+    "表單錯誤狀態",
+    "useFormStatus",
+    "Next 表單 pending"
+  ],
+  "intents_en": [
+    "useFormState example",
+    "server action error message",
+    "form pending state",
+    "useFormStatus",
+    "next form state"
+  ],
+  "slots": [
+    "action_name"
+  ],
+  "code": "'use client';\nimport { useFormState, useFormStatus } from 'react-dom';\nimport { {{action_name}} } from './actions';\n\nfunction Submit() {\n  const { pending } = useFormStatus();\n  return <button disabled={pending}>{pending ? '送出中…' : '送出'}</button>;\n}\n\nexport function Form() {\n  const [state, action] = useFormState({{action_name}}, { ok: false, message: '' });\n  return (\n    <form action={action}>\n      <input name=\"email\" type=\"email\" required />\n      {state.message && <p>{state.message}</p>}\n      <Submit />\n    </form>\n  );\n}",
+  "language": "tsx",
+  "deps": [
+    "next",
+    "react-dom"
+  ],
+  "summary_zh": "useFormState + useFormStatus 表單"
+}

@@ -1,0 +1,30 @@
+{
+  "id": "mobile-031-flutter-imagepicker",
+  "category": "mobile/flutter/media",
+  "intents_zh": [
+    "Flutter 選圖",
+    "flutter image picker",
+    "flutter 開相簿",
+    "選照片 flutter",
+    "flutter gallery 挑圖",
+    "image_picker 範例 flutter",
+    "flutter 選圖預覽"
+  ],
+  "intents_en": [
+    "flutter image picker",
+    "pick image flutter",
+    "flutter gallery picker",
+    "choose photo flutter",
+    "image_picker example",
+    "flutter pick from library",
+    "flutter select image"
+  ],
+  "slots": [],
+  "code": "import 'dart:io';\nimport 'package:flutter/material.dart';\nimport 'package:image_picker/image_picker.dart';\nclass P extends StatefulWidget{const P({super.key});@override State<P> createState()=>_P();}\nclass _P extends State<P>{File? f;\n  Future<void> pick()async{final r=await ImagePicker().pickImage(source:ImageSource.gallery);if(r!=null)setState(()=>f=File(r.path));}\n  @override Widget build(BuildContext c)=>Scaffold(body:Center(child:Column(mainAxisSize:MainAxisSize.min,children:[ElevatedButton(onPressed:pick,child:const Text('Pick')),if(f!=null)Image.file(f!,width:200,height:200)])));}",
+  "language": "dart",
+  "deps": [
+    "image_picker",
+    "flutter"
+  ],
+  "summary_zh": "Flutter image_picker 相簿挑圖預覽"
+}

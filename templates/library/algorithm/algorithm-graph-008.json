@@ -1,0 +1,25 @@
+{
+  "id": "algorithm-graph-008",
+  "category": "algorithm/graph/union_find",
+  "intents_zh": [
+    "並查集",
+    "Union Find",
+    "DSU",
+    "給我並查集",
+    "路徑壓縮"
+  ],
+  "intents_en": [
+    "union find",
+    "DSU",
+    "disjoint set",
+    "union find with path compression",
+    "write union find"
+  ],
+  "slots": [
+    "class_name"
+  ],
+  "code": "class {{class_name}}:\n    def __init__(self, n):\n        self.p = list(range(n))\n        self.r = [0]*n\n    def find(self, x):\n        while self.p[x] != x:\n            self.p[x] = self.p[self.p[x]]\n            x = self.p[x]\n        return x\n    def union(self, a, b):\n        ra, rb = self.find(a), self.find(b)\n        if ra == rb: return False\n        if self.r[ra] < self.r[rb]: ra, rb = rb, ra\n        self.p[rb] = ra\n        if self.r[ra] == self.r[rb]: self.r[ra] += 1\n        return True",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "並查集 + 路徑壓縮 + 按秩合併"
+}

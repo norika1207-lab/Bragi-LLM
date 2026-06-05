@@ -1,0 +1,28 @@
+{
+  "id": "depth-firmware-013-adc-averaging",
+  "category": "firmware/peripheral/adc",
+  "intents_zh": [
+    "ADC 多次取樣平均",
+    "降噪 ADC 讀值",
+    "oversampling ADC",
+    "平均濾波 ADC",
+    "ESP32 ADC 讀電壓"
+  ],
+  "intents_en": [
+    "adc averaging",
+    "oversample adc",
+    "smooth adc reading",
+    "mean filter adc",
+    "esp32 adc voltage"
+  ],
+  "slots": [
+    "adc_channel",
+    "samples"
+  ],
+  "code": "int sum = 0;\nfor (int i = 0; i < {{samples}}; i++) {\n    sum += analogRead({{adc_channel}});\n    delayMicroseconds(50);\n}\nint avg = sum / {{samples}};\nfloat volts = avg * (3.3f / 4095.0f);",
+  "language": "cpp",
+  "deps": [
+    "Arduino"
+  ],
+  "summary_zh": "ADC 多次取樣平均降噪並換算電壓"
+}

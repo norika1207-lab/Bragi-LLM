@@ -1,0 +1,21 @@
+{
+  "id": "database-devops-164-sql-conditional-update",
+  "category": "database-devops/sql/dml",
+  "intents_zh": [
+    "條件式 UPDATE",
+    "CASE WHEN update",
+    "批次按條件更新"
+  ],
+  "intents_en": [
+    "conditional update",
+    "case when update",
+    "batch conditional update"
+  ],
+  "slots": [
+    "table"
+  ],
+  "code": "UPDATE {{table}}\nSET status = CASE\n    WHEN total > 1000 THEN 'vip'\n    WHEN total > 100 THEN 'regular'\n    ELSE 'new'\n  END,\n  updated_at = NOW()\nWHERE status IS DISTINCT FROM CASE\n    WHEN total > 1000 THEN 'vip'\n    WHEN total > 100 THEN 'regular'\n    ELSE 'new'\n  END;",
+  "language": "sql",
+  "deps": [],
+  "summary_zh": "CASE WHEN 條件式批次 UPDATE"
+}

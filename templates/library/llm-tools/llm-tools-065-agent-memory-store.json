@@ -1,0 +1,32 @@
+{
+  "id": "llm-tools-065-agent-memory-store",
+  "category": "llm-tools/agent/memory",
+  "intents_zh": [
+    "agent 記憶體",
+    "persistent agent memory",
+    "sqlite chat history",
+    "agent 長期記憶",
+    "用 sqlite 存對話",
+    "memory store",
+    "記憶持久化",
+    "聊天記錄存檔"
+  ],
+  "intents_en": [
+    "agent memory store",
+    "persistent chat memory",
+    "sqlite chat history",
+    "long term agent memory",
+    "store conversations",
+    "memory persistence",
+    "chat log db",
+    "persistent llm memory"
+  ],
+  "slots": [
+    "db_path",
+    "table_name"
+  ],
+  "code": "import sqlite3, json, time\n\nconn = sqlite3.connect(\"{{db_path}}\")\nconn.execute(f\"\"\"\nCREATE TABLE IF NOT EXISTS {{table_name}} (\n    id INTEGER PRIMARY KEY AUTOINCREMENT,\n    session TEXT, role TEXT, content TEXT, ts REAL\n)\n\"\"\")\n\ndef save(session: str, role: str, content: str):\n    conn.execute(f\"INSERT INTO {{table_name}}(session,role,content,ts) VALUES (?,?,?,?)\",\n                 (session, role, content, time.time()))\n    conn.commit()\n\ndef load(session: str) -> list[dict]:\n    cur = conn.execute(f\"SELECT role,content FROM {{table_name}} WHERE session=? ORDER BY id\", (session,))\n    return [{\"role\": r, \"content\": c} for r, c in cur.fetchall()]",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "SQLite 持久化 agent 對話記憶體"
+}

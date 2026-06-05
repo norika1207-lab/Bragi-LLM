@@ -1,0 +1,21 @@
+{
+  "id": "database-devops-055-gha-deploy-cloudflare",
+  "category": "database-devops/cicd/github-actions",
+  "intents_zh": [
+    "GHA 部署 Cloudflare Pages",
+    "cloudflare pages CI",
+    "wrangler deploy"
+  ],
+  "intents_en": [
+    "github actions cloudflare pages",
+    "wrangler deploy",
+    "cloudflare ci"
+  ],
+  "slots": [
+    "project_name"
+  ],
+  "code": "name: Deploy Cloudflare Pages\non:\n  push: { branches: [main] }\n\njobs:\n  deploy:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-node@v4\n        with: { node-version: '20' }\n      - run: npm ci\n      - run: npm run build\n      - uses: cloudflare/wrangler-action@v3\n        with:\n          apiToken: ${{ secrets.CF_API_TOKEN }}\n          accountId: ${{ secrets.CF_ACCOUNT_ID }}\n          command: pages deploy dist --project-name={{project_name}}",
+  "language": "yaml",
+  "deps": [],
+  "summary_zh": "GHA 部署 Cloudflare Pages"
+}

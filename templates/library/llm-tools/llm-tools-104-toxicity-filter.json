@@ -1,0 +1,34 @@
+{
+  "id": "llm-tools-104-toxicity-filter",
+  "category": "llm-tools/safety/toxicity",
+  "intents_zh": [
+    "毒性過濾",
+    "toxicity classifier",
+    "用 transformers 偵測毒性",
+    "detoxify wrapper",
+    "攻擊性語言偵測",
+    "toxicity score",
+    "內容審核",
+    "毒性檢查"
+  ],
+  "intents_en": [
+    "toxicity filter",
+    "detect toxic text",
+    "detoxify wrapper",
+    "content moderation",
+    "offensive language detector",
+    "toxicity score",
+    "safety classifier",
+    "moderation pipeline"
+  ],
+  "slots": [
+    "model_id"
+  ],
+  "code": "from transformers import pipeline\n\nclf = pipeline(\"text-classification\", model=\"{{model_id}}\", top_k=None)\n\ndef toxicity(text: str) -> dict:\n    out = clf(text)[0]\n    return {x[\"label\"]: x[\"score\"] for x in out}\n\nif __name__ == \"__main__\":\n    print(toxicity(\"you are amazing\"))",
+  "language": "py",
+  "deps": [
+    "transformers",
+    "torch"
+  ],
+  "summary_zh": "transformers pipeline 毒性多標籤分類"
+}

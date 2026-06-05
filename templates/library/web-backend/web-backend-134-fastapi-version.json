@@ -1,0 +1,25 @@
+{
+  "id": "web-backend-134-fastapi-version",
+  "category": "web-backend/fastapi/versioning",
+  "intents_zh": [
+    "api versioning fastapi",
+    "/v1 /v2 router",
+    "fastapi 版本控制",
+    "版本化 api",
+    "fastapi 多版本"
+  ],
+  "intents_en": [
+    "api versioning fastapi",
+    "v1 v2 routers",
+    "fastapi version control",
+    "versioned api",
+    "multiple api versions"
+  ],
+  "slots": [],
+  "code": "from fastapi import APIRouter, FastAPI\n\nv1 = APIRouter(prefix='/v1', tags=['v1'])\nv2 = APIRouter(prefix='/v2', tags=['v2'])\n\n@v1.get('/hello')\nasync def hello_v1():\n    return {'version': 1, 'msg': 'hi'}\n\n@v2.get('/hello')\nasync def hello_v2():\n    return {'version': 2, 'msg': 'hello there', 'features': ['new']}\n\napp = FastAPI()\napp.include_router(v1)\napp.include_router(v2)",
+  "language": "py",
+  "deps": [
+    "fastapi"
+  ],
+  "summary_zh": "FastAPI 多版本 API"
+}

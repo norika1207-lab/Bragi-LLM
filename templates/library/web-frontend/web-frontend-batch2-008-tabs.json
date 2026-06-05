@@ -1,0 +1,27 @@
+{
+  "id": "web-frontend-batch2-008-tabs",
+  "category": "web-frontend/react/layout/tabs",
+  "intents_zh": [
+    "tabs 元件",
+    "頁籤切換",
+    "分頁切換",
+    "tab navigation",
+    "水平頁籤",
+    "切換面板"
+  ],
+  "intents_en": [
+    "tabs component",
+    "tab switcher",
+    "tab navigation",
+    "horizontal tabs",
+    "panel tabs",
+    "content tabs"
+  ],
+  "slots": [
+    "tabs_array"
+  ],
+  "code": "import { useState } from 'react';\n\nexport function Tabs() {\n  const tabs = {{tabs_array}};\n  const [active, setActive] = useState(tabs[0].id);\n  return (\n    <div>\n      <div className=\"flex border-b\">\n        {tabs.map((t) => (\n          <button key={t.id} onClick={() => setActive(t.id)}\n            className={`px-4 py-2 text-sm ${active === t.id ? 'border-b-2 border-blue-600 text-blue-600' : 'text-gray-600'}`}>\n            {t.label}\n          </button>\n        ))}\n      </div>\n      <div className=\"p-4\">\n        {tabs.find((t) => t.id === active)?.content}\n      </div>\n    </div>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "水平頁籤切換面板"
+}

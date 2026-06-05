@@ -1,0 +1,32 @@
+{
+  "id": "web-frontend-batch4-010-dashboard-page",
+  "category": "web-frontend/nextjs/app-router/dashboard",
+  "intents_zh": [
+    "儀表板頁面",
+    "dashboard 主頁",
+    "產生數據面板",
+    "KPI 卡片頁",
+    "後台首頁",
+    "管理 dashboard"
+  ],
+  "intents_en": [
+    "dashboard page",
+    "admin dashboard",
+    "kpi cards page",
+    "main dashboard",
+    "stats overview page",
+    "analytics dashboard"
+  ],
+  "slots": [
+    "metric_one_label",
+    "metric_one_value",
+    "metric_two_label",
+    "metric_two_value",
+    "metric_three_label",
+    "metric_three_value"
+  ],
+  "code": "export default function DashboardPage() {\n  const metrics = [\n    { label: '{{metric_one_label}}', value: '{{metric_one_value}}' },\n    { label: '{{metric_two_label}}', value: '{{metric_two_value}}' },\n    { label: '{{metric_three_label}}', value: '{{metric_three_value}}' },\n  ];\n  return (\n    <main className=\"p-8\">\n      <h1 className=\"text-2xl font-bold mb-6\">Dashboard</h1>\n      <div className=\"grid md:grid-cols-3 gap-4\">\n        {metrics.map((m) => (\n          <div key={m.label} className=\"rounded-xl border p-6\">\n            <p className=\"text-sm text-gray-500\">{m.label}</p>\n            <p className=\"text-3xl font-bold mt-2\">{m.value}</p>\n          </div>\n        ))}\n      </div>\n    </main>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "儀表板 KPI 三卡片頁"
+}

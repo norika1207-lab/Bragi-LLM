@@ -1,0 +1,21 @@
+{
+  "id": "algorithm-dp-014",
+  "category": "algorithm/dp/jump_game",
+  "intents_zh": [
+    "跳躍遊戲",
+    "jump game",
+    "給我 jump game"
+  ],
+  "intents_en": [
+    "jump game",
+    "can jump end",
+    "greedy jump"
+  ],
+  "slots": [
+    "fn_name"
+  ],
+  "code": "def {{fn_name}}(nums):\n    reach = 0\n    for i, n in enumerate(nums):\n        if i > reach: return False\n        reach = max(reach, i + n)\n    return True",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "貪心跳躍遊戲"
+}

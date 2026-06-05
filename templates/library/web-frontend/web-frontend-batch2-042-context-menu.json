@@ -1,0 +1,27 @@
+{
+  "id": "web-frontend-batch2-042-context-menu",
+  "category": "web-frontend/react/layout/context-menu",
+  "intents_zh": [
+    "右鍵選單",
+    "context menu",
+    "滑鼠右鍵",
+    "自訂右鍵",
+    "快捷選單",
+    "彈出選單"
+  ],
+  "intents_en": [
+    "context menu",
+    "right click menu",
+    "custom context menu",
+    "popup menu",
+    "mouse menu",
+    "contextual actions"
+  ],
+  "slots": [
+    "menu_items"
+  ],
+  "code": "import { useState } from 'react';\n\nexport function ContextMenu({ children }) {\n  const [pos, setPos] = useState<{ x: number; y: number } | null>(null);\n  const items = {{menu_items}};\n  return (\n    <div onContextMenu={(e) => { e.preventDefault(); setPos({ x: e.clientX, y: e.clientY }); }}>\n      {children}\n      {pos && (\n        <>\n          <div className=\"fixed inset-0\" onClick={() => setPos(null)} />\n          <ul style={{ top: pos.y, left: pos.x }} className=\"fixed z-50 w-48 rounded border bg-white py-1 shadow-lg\">\n            {items.map((it) => (\n              <li key={it.label} onClick={() => { it.action(); setPos(null); }}\n                className=\"cursor-pointer px-3 py-1.5 text-sm hover:bg-gray-100\">{it.label}</li>\n            ))}\n          </ul>\n        </>\n      )}\n    </div>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "自訂右鍵 context menu"
+}

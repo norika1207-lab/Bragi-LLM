@@ -1,0 +1,35 @@
+{
+  "id": "llm-tools-008-hf-transformers-load",
+  "category": "llm-tools/transformers/load",
+  "intents_zh": [
+    "transformers 載入模型",
+    "huggingface 模型載入",
+    "用 AutoModel 載入",
+    "HF pipeline 範例",
+    "載入 causal lm",
+    "transformers 基本用法",
+    "怎麼跑 HF 模型",
+    "load model 範例"
+  ],
+  "intents_en": [
+    "load model with transformers",
+    "huggingface AutoModel example",
+    "hf pipeline basic",
+    "load causal lm",
+    "transformers basic usage",
+    "load hf model",
+    "hf model inference",
+    "minimal transformers"
+  ],
+  "slots": [
+    "model_id",
+    "device"
+  ],
+  "code": "from transformers import AutoModelForCausalLM, AutoTokenizer\nimport torch\n\ntok = AutoTokenizer.from_pretrained(\"{{model_id}}\")\nmodel = AutoModelForCausalLM.from_pretrained(\n    \"{{model_id}}\",\n    torch_dtype=torch.bfloat16,\n    device_map=\"{{device}}\",\n)\n\ndef generate(prompt: str, max_new: int = 256) -> str:\n    ids = tok(prompt, return_tensors=\"pt\").to(model.device)\n    out = model.generate(**ids, max_new_tokens=max_new)\n    return tok.decode(out[0], skip_special_tokens=True)\n\nif __name__ == \"__main__\":\n    print(generate(\"Hello\"))",
+  "language": "py",
+  "deps": [
+    "transformers",
+    "torch"
+  ],
+  "summary_zh": "transformers 載入 causal LM 生成"
+}

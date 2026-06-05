@@ -1,0 +1,28 @@
+{
+  "id": "firmware-031-esp32-neopixel",
+  "category": "firmware/esp32/led",
+  "intents_zh": [
+    "NeoPixel 燈條",
+    "WS2812 控制",
+    "ESP32 RGB 燈",
+    "彩虹燈",
+    "Adafruit NeoPixel"
+  ],
+  "intents_en": [
+    "NeoPixel WS2812 ESP32",
+    "RGB LED strip",
+    "rainbow LED",
+    "Adafruit NeoPixel example",
+    "control LED strip"
+  ],
+  "slots": [
+    "data_pin",
+    "num_pixels"
+  ],
+  "code": "#include <Adafruit_NeoPixel.h>\nAdafruit_NeoPixel strip({{num_pixels}}, {{data_pin}}, NEO_GRB + NEO_KHZ800);\n\nvoid setup() {\n  strip.begin();\n  strip.show();\n}\n\nvoid loop() {\n  for (int i = 0; i < strip.numPixels(); i++) {\n    strip.setPixelColor(i, strip.ColorHSV((i * 65536L) / strip.numPixels()));\n  }\n  strip.show();\n  delay(50);\n}",
+  "language": "ino",
+  "deps": [
+    "Adafruit NeoPixel"
+  ],
+  "summary_zh": "NeoPixel WS2812 彩虹燈條"
+}

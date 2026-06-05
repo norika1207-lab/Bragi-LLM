@@ -1,0 +1,33 @@
+{
+  "id": "llm-tools-059-json-mode",
+  "category": "llm-tools/output/json-mode",
+  "intents_zh": [
+    "openai json mode",
+    "response_format json_object",
+    "強制 JSON 回應",
+    "JSON 模式輸出",
+    "結構化 JSON 不用 schema",
+    "openai 純 json",
+    "回 JSON",
+    "JSON only"
+  ],
+  "intents_en": [
+    "openai json mode",
+    "response_format json_object",
+    "force json response",
+    "plain json output",
+    "json only completion",
+    "openai pure json",
+    "json mode example",
+    "strict json output"
+  ],
+  "slots": [
+    "model_name"
+  ],
+  "code": "from openai import OpenAI\nimport json\n\nclient = OpenAI()\n\ndef as_json(prompt: str) -> dict:\n    r = client.chat.completions.create(\n        model=\"{{model_name}}\",\n        response_format={\"type\": \"json_object\"},\n        messages=[\n            {\"role\": \"system\", \"content\": \"Reply with valid JSON only.\"},\n            {\"role\": \"user\", \"content\": prompt},\n        ],\n    )\n    return json.loads(r.choices[0].message.content)\n\nif __name__ == \"__main__\":\n    print(as_json(\"give a {name, age}\"))",
+  "language": "py",
+  "deps": [
+    "openai"
+  ],
+  "summary_zh": "OpenAI json_object 模式"
+}

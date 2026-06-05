@@ -1,0 +1,28 @@
+{
+  "id": "firmware-032-esp32-spi-sdcard",
+  "category": "firmware/esp32/storage",
+  "intents_zh": [
+    "SD 卡讀寫",
+    "ESP32 SD card",
+    "SPI SD 模組",
+    "存 log 到 SD",
+    "檔案系統範例"
+  ],
+  "intents_en": [
+    "ESP32 SD card SPI",
+    "read write SD card",
+    "log to SD",
+    "SD library example",
+    "FAT filesystem"
+  ],
+  "slots": [
+    "cs_pin",
+    "filename"
+  ],
+  "code": "#include <SPI.h>\n#include <SD.h>\n\nvoid setup() {\n  Serial.begin(115200);\n  if (!SD.begin({{cs_pin}})) { Serial.println(\"mount fail\"); return; }\n  File f = SD.open(\"{{filename}}\", FILE_WRITE);\n  f.println(\"hello sd\");\n  f.close();\n  File r = SD.open(\"{{filename}}\");\n  while (r.available()) Serial.write(r.read());\n  r.close();\n}\n\nvoid loop() {}",
+  "language": "ino",
+  "deps": [
+    "SD"
+  ],
+  "summary_zh": "ESP32 透過 SPI 存取 SD 卡"
+}

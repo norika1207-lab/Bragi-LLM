@@ -1,0 +1,27 @@
+{
+  "id": "firmware-047-rpi-button",
+  "category": "firmware/rpi/gpio",
+  "intents_zh": [
+    "樹莓派讀按鈕",
+    "Pi GPIO input",
+    "RPi 按鈕",
+    "樹莓派按鈕中斷",
+    "Pi button event"
+  ],
+  "intents_en": [
+    "Raspberry Pi button read",
+    "Pi GPIO input pullup",
+    "RPi button event",
+    "interrupt button Pi",
+    "detect press Pi"
+  ],
+  "slots": [
+    "button_pin"
+  ],
+  "code": "import RPi.GPIO as GPIO\nimport time\n\nBTN = {{button_pin}}\nGPIO.setmode(GPIO.BCM)\nGPIO.setup(BTN, GPIO.IN, pull_up_down=GPIO.PUD_UP)\n\ndef cb(ch):\n    print('pressed', ch)\n\nGPIO.add_event_detect(BTN, GPIO.FALLING, callback=cb, bouncetime=200)\ntry:\n    while True:\n        time.sleep(1)\nexcept KeyboardInterrupt:\n    GPIO.cleanup()",
+  "language": "py",
+  "deps": [
+    "RPi.GPIO"
+  ],
+  "summary_zh": "樹莓派按鈕中斷偵測"
+}

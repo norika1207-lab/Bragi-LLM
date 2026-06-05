@@ -1,0 +1,29 @@
+{
+  "id": "depth-firmware-029-nvs-store",
+  "category": "firmware/storage/nvs",
+  "intents_zh": [
+    "NVS 儲存設定",
+    "ESP32 Preferences",
+    "存取 key value",
+    "保存到 flash",
+    "Preferences putString"
+  ],
+  "intents_en": [
+    "nvs store config",
+    "esp32 preferences",
+    "key value flash",
+    "persist setting",
+    "putstring nvs"
+  ],
+  "slots": [
+    "namespace",
+    "key",
+    "value"
+  ],
+  "code": "#include <Preferences.h>\nPreferences p;\np.begin(\"{{namespace}}\", false);\np.putString(\"{{key}}\", \"{{value}}\");\nString v = p.getString(\"{{key}}\", \"default\");\np.end();",
+  "language": "cpp",
+  "deps": [
+    "Preferences"
+  ],
+  "summary_zh": "用 Preferences 存讀 NVS key/value"
+}

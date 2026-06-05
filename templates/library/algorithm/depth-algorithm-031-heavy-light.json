@@ -1,0 +1,31 @@
+{
+  "id": "depth-algorithm-031-heavy-light",
+  "category": "algorithm/tree/heavy-light",
+  "intents_zh": [
+    "重鏈剖分",
+    "heavy light decomposition",
+    "樹鏈剖分",
+    "HLD 樹路徑查詢",
+    "樹上路徑線段樹",
+    "樹分解模板",
+    "路徑修改查詢"
+  ],
+  "intents_en": [
+    "heavy light decomposition",
+    "HLD tree path query",
+    "tree path decomposition",
+    "HLD template",
+    "path update tree",
+    "heavy chain decomposition",
+    "tree segment hld"
+  ],
+  "slots": [
+    "n",
+    "tree",
+    "root"
+  ],
+  "code": "def hld(n={{n}}, tree={{tree}}, root={{root}}):\n    parent = [-1]*n; depth = [0]*n; size = [1]*n; heavy = [-1]*n\n    order = [root]; stack = [root]; parent[root] = -1\n    while stack:\n        u = stack.pop()\n        for v in tree[u]:\n            if v != parent[u]:\n                parent[v] = u; depth[v] = depth[u]+1\n                order.append(v); stack.append(v)\n    for u in reversed(order):\n        mx = 0\n        for v in tree[u]:\n            if v != parent[u]:\n                size[u] += size[v]\n                if size[v] > mx: mx = size[v]; heavy[u] = v\n    head = list(range(n)); pos = [0]*n; cur = [0]\n    def dfs(u, h):\n        head[u] = h; pos[u] = cur[0]; cur[0] += 1\n        if heavy[u] != -1: dfs(heavy[u], h)\n        for v in tree[u]:\n            if v != parent[u] and v != heavy[u]: dfs(v, v)\n    dfs(root, root)\n    return parent, depth, head, pos",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "樹鏈剖分將樹路徑映射到線性區間"
+}

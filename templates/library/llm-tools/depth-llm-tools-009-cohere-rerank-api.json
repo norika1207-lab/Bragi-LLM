@@ -1,0 +1,31 @@
+{
+  "id": "depth-llm-tools-009-cohere-rerank-api",
+  "category": "llm-tools/retrieval/rerank-api",
+  "intents_zh": [
+    "Cohere rerank API",
+    "商用 reranker",
+    "遠端 rerank 服務",
+    "API rerank 包裝",
+    "rerank 雲端"
+  ],
+  "intents_en": [
+    "Cohere rerank API",
+    "managed reranker",
+    "remote rerank service",
+    "API rerank wrapper",
+    "cloud rerank"
+  ],
+  "slots": [
+    "api_key",
+    "model",
+    "query",
+    "docs",
+    "top_n"
+  ],
+  "code": "import cohere\n\ndef cohere_rerank({{api_key}}, {{model}}, {{query}}, {{docs}}, {{top_n}}=5):\n    co = cohere.Client({{api_key}})\n    r = co.rerank(model={{model}}, query={{query}}, documents={{docs}}, top_n={{top_n}})\n    return [({{docs}}[x.index], x.relevance_score) for x in r.results]",
+  "language": "python",
+  "deps": [
+    "cohere"
+  ],
+  "summary_zh": "Cohere rerank API 調用回傳 top-n 排序"
+}

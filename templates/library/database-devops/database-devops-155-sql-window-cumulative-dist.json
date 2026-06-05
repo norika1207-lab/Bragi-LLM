@@ -1,0 +1,22 @@
+{
+  "id": "database-devops-155-sql-window-cumulative-dist",
+  "category": "database-devops/sql/windows",
+  "intents_zh": [
+    "CUME_DIST 累積分佈",
+    "累積百分位",
+    "window cumulative"
+  ],
+  "intents_en": [
+    "cume_dist",
+    "cumulative distribution",
+    "window percentile"
+  ],
+  "slots": [
+    "table",
+    "order_col"
+  ],
+  "code": "SELECT *,\n  CUME_DIST() OVER (ORDER BY {{order_col}}) AS cdist,\n  PERCENT_RANK() OVER (ORDER BY {{order_col}}) AS prank\nFROM {{table}};",
+  "language": "sql",
+  "deps": [],
+  "summary_zh": "CUME_DIST / PERCENT_RANK 累積分佈"
+}

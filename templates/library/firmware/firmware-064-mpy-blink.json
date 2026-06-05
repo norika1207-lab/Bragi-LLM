@@ -1,0 +1,25 @@
+{
+  "id": "firmware-064-mpy-blink",
+  "category": "firmware/micropython/gpio",
+  "intents_zh": [
+    "MicroPython 閃 LED",
+    "ESP32 micropython 閃燈",
+    "mpy blink",
+    "Pin 範例",
+    "micropython hello"
+  ],
+  "intents_en": [
+    "MicroPython blink",
+    "ESP32 MicroPython LED",
+    "mpy Pin example",
+    "blink LED micropython",
+    "hello micropython"
+  ],
+  "slots": [
+    "led_pin"
+  ],
+  "code": "from machine import Pin\nimport time\n\nled = Pin({{led_pin}}, Pin.OUT)\nwhile True:\n    led.value(1)\n    time.sleep(0.5)\n    led.value(0)\n    time.sleep(0.5)",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "MicroPython 基本 LED 閃爍"
+}

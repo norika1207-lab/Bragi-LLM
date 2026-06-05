@@ -1,0 +1,27 @@
+{
+  "id": "depth-mobile-003-rn-linking",
+  "category": "mobile/deeplink/reactnative",
+  "intents_zh": [
+    "React Native Linking 監聽",
+    "RN 處理 deep link",
+    "getInitialURL",
+    "Linking addEventListener",
+    "跨平台深層連結"
+  ],
+  "intents_en": [
+    "React Native Linking listener",
+    "RN handle deep link",
+    "getInitialURL",
+    "Linking addEventListener",
+    "cross platform deep link"
+  ],
+  "slots": [
+    "route_handler"
+  ],
+  "code": "import { Linking } from 'react-native';\nimport { useEffect } from 'react';\n\nexport function useDeepLink() {\n  useEffect(() => {\n    Linking.getInitialURL().then(url => url && {{route_handler}}(url));\n    const sub = Linking.addEventListener('url', ({ url }) => {{route_handler}}(url));\n    return () => sub.remove();\n  }, []);\n}",
+  "language": "ts",
+  "deps": [
+    "react-native"
+  ],
+  "summary_zh": "RN deep link 監聽 hook"
+}

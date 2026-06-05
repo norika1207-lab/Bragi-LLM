@@ -1,0 +1,23 @@
+{
+  "id": "system-cli-022-rich-progress",
+  "category": "system-cli/python/progress",
+  "intents_zh": [
+    "python rich 進度條",
+    "終端 progress bar",
+    "rich 跑批次顯示"
+  ],
+  "intents_en": [
+    "python rich progress bar",
+    "terminal progress with rich",
+    "rich track loop"
+  ],
+  "slots": [
+    "item_var"
+  ],
+  "code": "from rich.progress import track\nimport time\n\ndef process({{item_var}}):\n    time.sleep(0.05)\n\nitems = list(range(200))\nfor {{item_var}} in track(items, description='Processing...'):\n    process({{item_var}})",
+  "language": "py",
+  "deps": [
+    "rich"
+  ],
+  "summary_zh": "rich track 進度條"
+}

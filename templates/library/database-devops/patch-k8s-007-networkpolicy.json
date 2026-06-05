@@ -1,0 +1,33 @@
+{
+  "id": "patch-k8s-007-networkpolicy",
+  "category": "database-devops/kubernetes/security",
+  "intents_zh": [
+    "寫 NetworkPolicy 限制 pod 流量",
+    "k8s 網路隔離規則",
+    "幫我做 networkpolicy 只放 namespace 內",
+    "我要鎖入站流量",
+    "k8s 防火牆 yaml"
+  ],
+  "intents_en": [
+    "create networkpolicy ingress restriction",
+    "k8s network isolation yaml",
+    "limit pod traffic same namespace",
+    "networkpolicy template",
+    "kubernetes firewall rule"
+  ],
+  "slots": [
+    "policy_name",
+    "namespace",
+    "target_label_key",
+    "target_label_value",
+    "allowed_namespace",
+    "allowed_port"
+  ],
+  "code": "apiVersion: networking.k8s.io/v1\nkind: NetworkPolicy\nmetadata:\n  name: {{policy_name}}\n  namespace: {{namespace}}\nspec:\n  podSelector:\n    matchLabels:\n      {{target_label_key}}: {{target_label_value}}\n  policyTypes:\n    - Ingress\n  ingress:\n    - from:\n        - namespaceSelector:\n            matchLabels:\n              kubernetes.io/metadata.name: {{allowed_namespace}}\n      ports:\n        - protocol: TCP\n          port: {{allowed_port}}\n",
+  "language": "yaml",
+  "deps": [
+    "kubernetes",
+    "cni-with-networkpolicy"
+  ],
+  "summary_zh": "NetworkPolicy 只放行指定 namespace 來源、指定 port 的入站流量"
+}

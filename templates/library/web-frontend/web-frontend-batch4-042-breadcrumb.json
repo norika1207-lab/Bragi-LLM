@@ -1,0 +1,29 @@
+{
+  "id": "web-frontend-batch4-042-breadcrumb",
+  "category": "web-frontend/react/components/breadcrumb",
+  "intents_zh": [
+    "麵包屑導覽",
+    "breadcrumb 元件",
+    "路徑導覽",
+    "tailwind 麵包屑",
+    "層級指示",
+    "page path nav"
+  ],
+  "intents_en": [
+    "breadcrumb component",
+    "path navigation",
+    "tailwind breadcrumb",
+    "page hierarchy nav",
+    "breadcrumb trail",
+    "crumbs"
+  ],
+  "slots": [
+    "crumb_one",
+    "crumb_two",
+    "crumb_three"
+  ],
+  "code": "export default function Breadcrumb() {\n  const items = ['{{crumb_one}}', '{{crumb_two}}', '{{crumb_three}}'];\n  return (\n    <nav className=\"text-sm text-gray-500\">\n      {items.map((c, i) => (\n        <span key={c}>\n          <a href=\"#\" className=\"hover:text-gray-900\">{c}</a>\n          {i < items.length - 1 && <span className=\"mx-2\">/</span>}\n        </span>\n      ))}\n    </nav>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "三層麵包屑導覽元件"
+}

@@ -1,0 +1,23 @@
+{
+  "id": "depth-system-cli-034-docker-container-top",
+  "category": "system-cli/docker/monitor",
+  "intents_zh": [
+    "docker ps 帶資源",
+    "容器 cpu mem 即時",
+    "docker stats 整理",
+    "容器 top 表"
+  ],
+  "intents_en": [
+    "docker ps with resources",
+    "container cpu mem live",
+    "docker stats pretty",
+    "container top"
+  ],
+  "slots": [],
+  "code": "#!/usr/bin/env bash\nset -euo pipefail\n\nwhile true; do\n  clear\n  printf \"%-20s %-15s %-10s %-12s %-20s\\n\" NAME STATE CPU% MEM IMAGE\n  echo \"----------------------------------------------------------------------\"\n  docker ps --format '{{.Names}}\\t{{.Status}}\\t{{.Image}}' | while IFS=$'\\t' read -r name status image; do\n    stats=$(docker stats \"$name\" --no-stream --format '{{.CPUPerc}}\\t{{.MemUsage}}' 2>/dev/null || echo \"-\\t-\")\n    cpu=$(echo \"$stats\" | cut -f1)\n    mem=$(echo \"$stats\" | cut -f2 | awk '{print $1}')\n    printf \"%-20s %-15s %-10s %-12s %-20s\\n\" \"$name\" \"${status:0:14}\" \"$cpu\" \"$mem\" \"$image\"\n  done\n  sleep 2\ndone",
+  "language": "bash",
+  "deps": [
+    "docker"
+  ],
+  "summary_zh": "docker 容器即時 top 表格"
+}

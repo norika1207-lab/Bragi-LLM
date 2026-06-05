@@ -1,0 +1,33 @@
+{
+  "id": "llm-tools-075-tgi-client",
+  "category": "llm-tools/client/tgi",
+  "intents_zh": [
+    "text-generation-inference 客戶端",
+    "HF TGI 呼叫",
+    "TGI client",
+    "huggingface_hub InferenceClient",
+    "TGI generate",
+    "TGI server query",
+    "TGI 包裝",
+    "HF inference client"
+  ],
+  "intents_en": [
+    "text-generation-inference client",
+    "tgi wrapper",
+    "huggingface inference client",
+    "tgi generate",
+    "tgi server query",
+    "hf inference client",
+    "minimal tgi",
+    "tgi http call"
+  ],
+  "slots": [
+    "tgi_url"
+  ],
+  "code": "from huggingface_hub import InferenceClient\n\nclient = InferenceClient(\"{{tgi_url}}\")\n\ndef generate(prompt: str, max_new: int = 256) -> str:\n    return client.text_generation(prompt, max_new_tokens=max_new)\n\nif __name__ == \"__main__\":\n    print(generate(\"hi\"))",
+  "language": "py",
+  "deps": [
+    "huggingface_hub"
+  ],
+  "summary_zh": "HF InferenceClient 呼叫 TGI"
+}

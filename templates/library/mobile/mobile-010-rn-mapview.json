@@ -1,0 +1,33 @@
+{
+  "id": "mobile-010-rn-mapview",
+  "category": "mobile/rn/map",
+  "intents_zh": [
+    "RN 地圖元件",
+    "React Native map view",
+    "RN 顯示地圖",
+    "react-native-maps 範例",
+    "RN 加 marker",
+    "地圖 marker RN",
+    "RN 顯示經緯度"
+  ],
+  "intents_en": [
+    "rn map view",
+    "react native maps",
+    "show map rn",
+    "map with marker rn",
+    "react-native-maps example",
+    "display map coordinates rn",
+    "mapview rn"
+  ],
+  "slots": [
+    "lat",
+    "lng",
+    "title"
+  ],
+  "code": "import React from 'react';\nimport MapView,{Marker} from 'react-native-maps';\nimport {StyleSheet,View} from 'react-native';\nexport default function M(){return(<View style={s.c}><MapView style={s.m} initialRegion={{latitude:{{lat}},longitude:{{lng}},latitudeDelta:0.05,longitudeDelta:0.05}}><Marker coordinate={{latitude:{{lat}},longitude:{{lng}}}} title='{{title}}'/></MapView></View>);}\nconst s=StyleSheet.create({c:{flex:1},m:{flex:1}});",
+  "language": "tsx",
+  "deps": [
+    "react-native-maps"
+  ],
+  "summary_zh": "react-native-maps 顯示地圖含 marker"
+}

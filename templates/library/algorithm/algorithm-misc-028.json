@@ -1,0 +1,21 @@
+{
+  "id": "algorithm-misc-028",
+  "category": "algorithm/misc/shuffle",
+  "intents_zh": [
+    "Fisher-Yates 洗牌",
+    "隨機打亂陣列",
+    "給我 shuffle"
+  ],
+  "intents_en": [
+    "Fisher-Yates shuffle",
+    "random shuffle",
+    "in place shuffle"
+  ],
+  "slots": [
+    "fn_name"
+  ],
+  "code": "import random\n\ndef {{fn_name}}(arr):\n    arr = list(arr)\n    for i in range(len(arr) - 1, 0, -1):\n        j = random.randint(0, i)\n        arr[i], arr[j] = arr[j], arr[i]\n    return arr",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "Fisher-Yates 洗牌"
+}

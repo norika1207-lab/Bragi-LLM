@@ -1,0 +1,27 @@
+{
+  "id": "web-backend-080-knex-migration",
+  "category": "web-backend/db/migration",
+  "intents_zh": [
+    "knex migration",
+    "建表 migration",
+    "knex up/down",
+    "資料表 schema migration",
+    "knex 範例"
+  ],
+  "intents_en": [
+    "knex migration up down",
+    "create table migration",
+    "schema migration knex",
+    "knex example",
+    "db migration knex"
+  ],
+  "slots": [
+    "table_name"
+  ],
+  "code": "exports.up = function (knex) {\n  return knex.schema.createTable('{{table_name}}', (t) => {\n    t.increments('id').primary();\n    t.string('name', 120).notNullable();\n    t.text('description').defaultTo('');\n    t.timestamp('created_at').defaultTo(knex.fn.now());\n    t.timestamp('updated_at').defaultTo(knex.fn.now());\n    t.index(['name']);\n  });\n};\n\nexports.down = function (knex) {\n  return knex.schema.dropTableIfExists('{{table_name}}');\n};",
+  "language": "js",
+  "deps": [
+    "knex"
+  ],
+  "summary_zh": "Knex up/down migration"
+}

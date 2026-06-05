@@ -1,0 +1,28 @@
+{
+  "id": "web-frontend-batch1-007-icon-button",
+  "category": "web-frontend/react/buttons/icon",
+  "intents_zh": [
+    "圖示按鈕",
+    "icon button React",
+    "只有 icon 的按鈕",
+    "圓形 icon 按鈕",
+    "tooltip icon button",
+    "給我 icon-only button"
+  ],
+  "intents_en": [
+    "icon button",
+    "icon only button",
+    "circular icon button",
+    "react icon button",
+    "button with icon",
+    "tooltip icon button"
+  ],
+  "slots": [
+    "component_name",
+    "aria_label"
+  ],
+  "code": "type Props = { onClick?: () => void; children: React.ReactNode };\n\nexport default function {{component_name}}({ onClick, children }: Props) {\n  return (\n    <button\n      onClick={onClick}\n      aria-label=\"{{aria_label}}\"\n      className=\"w-9 h-9 rounded-full flex items-center justify-center hover:bg-gray-100\"\n    >\n      {children}\n    </button>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "圓形 icon-only button 含 aria-label"
+}

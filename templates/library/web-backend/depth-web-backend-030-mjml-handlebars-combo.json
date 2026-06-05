@@ -1,0 +1,28 @@
+{
+  "id": "depth-web-backend-030-mjml-handlebars-combo",
+  "category": "web-backend/email/mjml-handlebars",
+  "intents_zh": [
+    "mjml + handlebars 變數",
+    "email 模板帶資料",
+    "render mjml with vars",
+    "信件動態內容",
+    "email 編譯流程"
+  ],
+  "intents_en": [
+    "mjml + handlebars vars",
+    "email template with data",
+    "render mjml vars",
+    "dynamic email body",
+    "email build pipeline"
+  ],
+  "slots": [
+    "template_path"
+  ],
+  "code": "import fs from 'node:fs';\nimport mjml2html from 'mjml';\nimport Handlebars from 'handlebars';\nconst raw = fs.readFileSync('{{template_path}}', 'utf8');\nconst tpl = Handlebars.compile(raw);\nexport function renderEmail(vars) {\n  const mjml = tpl(vars);\n  return mjml2html(mjml).html;\n}",
+  "language": "js",
+  "deps": [
+    "mjml",
+    "handlebars"
+  ],
+  "summary_zh": "先 handlebars 注入再 mjml 編譯"
+}

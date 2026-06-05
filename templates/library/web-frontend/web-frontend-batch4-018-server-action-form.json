@@ -1,0 +1,29 @@
+{
+  "id": "web-frontend-batch4-018-server-action-form",
+  "category": "web-frontend/nextjs/server-actions/form",
+  "intents_zh": [
+    "server action 表單",
+    "用 form action 提交",
+    "server function 處理表單",
+    "Next.js server actions",
+    "非 client 表單提交",
+    "action 寫入資料"
+  ],
+  "intents_en": [
+    "server action form",
+    "next.js server action",
+    "form action handler",
+    "action submit",
+    "server side form",
+    "mutation with action"
+  ],
+  "slots": [
+    "redirect_path"
+  ],
+  "code": "import { redirect } from 'next/navigation';\n\nasync function createItem(formData: FormData) {\n  'use server';\n  const name = formData.get('name')?.toString() ?? '';\n  console.log('create', name);\n  redirect('{{redirect_path}}');\n}\n\nexport default function NewItemPage() {\n  return (\n    <form action={createItem} className=\"p-6 space-y-3\">\n      <input name=\"name\" className=\"border rounded px-3 py-2\" />\n      <button className=\"bg-indigo-600 text-white px-4 py-2 rounded\">Create</button>\n    </form>\n  );\n}",
+  "language": "tsx",
+  "deps": [
+    "next"
+  ],
+  "summary_zh": "用 server action 處理表單再 redirect"
+}

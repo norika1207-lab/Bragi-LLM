@@ -1,0 +1,27 @@
+{
+  "id": "database-devops-038-compose-postgres",
+  "category": "database-devops/docker/compose",
+  "intents_zh": [
+    "docker compose postgres",
+    "起一個 postgres 容器",
+    "compose 加 pg",
+    "本地 postgres"
+  ],
+  "intents_en": [
+    "docker compose postgres",
+    "spin up postgres",
+    "local pg container",
+    "compose with pg"
+  ],
+  "slots": [
+    "pg_version",
+    "db_name",
+    "db_user",
+    "db_password",
+    "port"
+  ],
+  "code": "services:\n  postgres:\n    image: postgres:{{pg_version}}\n    restart: unless-stopped\n    environment:\n      POSTGRES_DB: {{db_name}}\n      POSTGRES_USER: {{db_user}}\n      POSTGRES_PASSWORD: {{db_password}}\n    ports:\n      - \"{{port}}:5432\"\n    volumes:\n      - pgdata:/var/lib/postgresql/data\n    healthcheck:\n      test: [\"CMD-SHELL\", \"pg_isready -U {{db_user}}\"]\n      interval: 5s\n      retries: 5\n\nvolumes:\n  pgdata:",
+  "language": "yaml",
+  "deps": [],
+  "summary_zh": "docker-compose postgres 服務"
+}

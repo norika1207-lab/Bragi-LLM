@@ -1,0 +1,27 @@
+{
+  "id": "web-backend-099-fastify-hello",
+  "category": "web-backend/fastify/basic",
+  "intents_zh": [
+    "fastify 最小 server",
+    "fastify hello",
+    "scaffold fastify",
+    "起 fastify app",
+    "fastify route 範例"
+  ],
+  "intents_en": [
+    "minimal fastify server",
+    "fastify hello world",
+    "scaffold fastify",
+    "fastify basic route",
+    "start fastify"
+  ],
+  "slots": [
+    "port"
+  ],
+  "code": "const fastify = require('fastify')({ logger: true });\n\nfastify.get('/', async () => ({ ok: true }));\nfastify.get('/health', async () => ({ status: 'ok' }));\n\nfastify.listen({ port: {{port}}, host: '0.0.0.0' })\n  .then(() => fastify.log.info('listening on {{port}}'))\n  .catch((err) => { fastify.log.error(err); process.exit(1); });",
+  "language": "js",
+  "deps": [
+    "fastify"
+  ],
+  "summary_zh": "Fastify 最小 server"
+}

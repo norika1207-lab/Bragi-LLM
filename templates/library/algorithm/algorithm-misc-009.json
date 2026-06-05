@@ -1,0 +1,21 @@
+{
+  "id": "algorithm-misc-009",
+  "category": "algorithm/misc/combinations",
+  "intents_zh": [
+    "組合",
+    "combinations 回溯",
+    "給我所有 C(n,k)"
+  ],
+  "intents_en": [
+    "all combinations",
+    "backtrack combinations",
+    "generate combinations"
+  ],
+  "slots": [
+    "fn_name"
+  ],
+  "code": "def {{fn_name}}(arr, k):\n    res = []\n    def bt(start, path):\n        if len(path) == k:\n            res.append(path[:]); return\n        for i in range(start, len(arr)):\n            path.append(arr[i])\n            bt(i+1, path)\n            path.pop()\n    bt(0, [])\n    return res",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "回溯產生所有 k 組合"
+}

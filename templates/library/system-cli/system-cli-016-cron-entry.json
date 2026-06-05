@@ -1,0 +1,22 @@
+{
+  "id": "system-cli-016-cron-entry",
+  "category": "system-cli/ops/cron",
+  "intents_zh": [
+    "crontab 範本",
+    "cron 排程命令",
+    "linux 定時備份"
+  ],
+  "intents_en": [
+    "crontab entry",
+    "cron schedule example",
+    "cron backup job"
+  ],
+  "slots": [
+    "schedule",
+    "command"
+  ],
+  "code": "# m h dom mon dow command\n{{schedule}} {{command}} >> /var/log/cron-job.log 2>&1",
+  "language": "sh",
+  "deps": [],
+  "summary_zh": "crontab 單行排程"
+}

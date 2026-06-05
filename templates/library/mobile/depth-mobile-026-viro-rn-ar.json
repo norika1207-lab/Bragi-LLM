@@ -1,0 +1,25 @@
+{
+  "id": "depth-mobile-026-viro-rn-ar",
+  "category": "mobile/ar/reactnative",
+  "intents_zh": [
+    "RN AR ViroReact",
+    "跨平台 AR",
+    "ViroARScene",
+    "ViroBox 放置",
+    "RN ARKit ARCore"
+  ],
+  "intents_en": [
+    "RN AR ViroReact",
+    "cross platform AR",
+    "ViroARScene",
+    "ViroBox place",
+    "RN ARKit ARCore"
+  ],
+  "slots": [],
+  "code": "import { ViroARScene, ViroBox, ViroMaterials } from '@viro-community/react-viro';\nexport const Scene = () => (\n  <ViroARScene>\n    <ViroBox position={[0, -0.5, -1]} scale={[0.3, 0.3, 0.3]} materials={['box']} />\n  </ViroARScene>\n);\nViroMaterials.createMaterials({ box: { diffuseColor: '#3478F6' } });",
+  "language": "tsx",
+  "deps": [
+    "@viro-community/react-viro"
+  ],
+  "summary_zh": "RN Viro AR 場景骨架"
+}

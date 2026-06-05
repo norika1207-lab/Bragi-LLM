@@ -1,0 +1,29 @@
+{
+  "id": "web-frontend-batch3-009-vue-toast",
+  "category": "web-frontend/vue/ui/toast",
+  "intents_zh": [
+    "Vue toast 通知",
+    "Vue 訊息提示",
+    "Vue snackbar",
+    "Vue 自動消失提示",
+    "Vue alert toast",
+    "Vue 浮動訊息"
+  ],
+  "intents_en": [
+    "vue toast",
+    "vue notification",
+    "vue snackbar",
+    "vue auto dismiss alert",
+    "vue toast message",
+    "vue floating alert"
+  ],
+  "slots": [
+    "duration_ms"
+  ],
+  "code": "<script setup>\nimport { ref } from 'vue'\nconst toasts = ref([])\nfunction show(msg, type = 'info') {\n  const id = Date.now() + Math.random()\n  toasts.value.push({ id, msg, type })\n  setTimeout(() => { toasts.value = toasts.value.filter(t => t.id !== id) }, {{duration_ms}})\n}\ndefineExpose({ show })\n</script>\n<template>\n  <div class=\"toasts\">\n    <div v-for=\"t in toasts\" :key=\"t.id\" :class=\"['toast', t.type]\">{{ t.msg }}</div>\n  </div>\n</template>\n<style scoped>\n.toasts { position: fixed; top: 1rem; right: 1rem; display: flex; flex-direction: column; gap: .5rem; }\n.toast { padding: .75rem 1rem; border-radius: 6px; background: #333; color: white; }\n.toast.error { background: #c33; }\n.toast.success { background: #393; }\n</style>",
+  "language": "vue",
+  "deps": [
+    "vue"
+  ],
+  "summary_zh": "Vue toast 通知元件自動消失"
+}

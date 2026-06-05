@@ -1,0 +1,27 @@
+{
+  "id": "web-backend-093-express-csrf",
+  "category": "web-backend/express/security",
+  "intents_zh": [
+    "express csrf 防護",
+    "csurf middleware",
+    "csrf token 範例",
+    "防 csrf express",
+    "加 csrf 保護"
+  ],
+  "intents_en": [
+    "express csrf protection",
+    "csurf middleware",
+    "csrf token example",
+    "prevent csrf express",
+    "csrf middleware setup"
+  ],
+  "slots": [],
+  "code": "const express = require('express');\nconst cookieParser = require('cookie-parser');\nconst csrf = require('csurf');\n\nconst app = express();\napp.use(cookieParser());\napp.use(express.urlencoded({ extended: false }));\n\nconst csrfProtection = csrf({ cookie: true });\n\napp.get('/form', csrfProtection, (req, res) => {\n  res.json({ csrfToken: req.csrfToken() });\n});\n\napp.post('/submit', csrfProtection, (req, res) => {\n  res.json({ ok: true });\n});",
+  "language": "js",
+  "deps": [
+    "express",
+    "cookie-parser",
+    "csurf"
+  ],
+  "summary_zh": "Express CSRF 防護"
+}

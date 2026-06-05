@@ -1,0 +1,27 @@
+{
+  "id": "web-frontend-batch1-022-date-range-picker",
+  "category": "web-frontend/react/date-pickers/range",
+  "intents_zh": [
+    "日期區間選擇",
+    "date range picker",
+    "起訖日期 input",
+    "起始結束日期",
+    "range date",
+    "選日期段"
+  ],
+  "intents_en": [
+    "date range picker",
+    "start end date input",
+    "date range selector",
+    "from to date",
+    "range date picker",
+    "two date inputs"
+  ],
+  "slots": [
+    "component_name"
+  ],
+  "code": "import { useState } from 'react';\n\nexport default function {{component_name}}() {\n  const [start, setStart] = useState('');\n  const [end, setEnd] = useState('');\n\n  return (\n    <div className=\"flex gap-2 items-center\">\n      <input type=\"date\" value={start} max={end || undefined} onChange={(e) => setStart(e.target.value)} className=\"border rounded px-2 py-1\" />\n      <span>to</span>\n      <input type=\"date\" value={end} min={start || undefined} onChange={(e) => setEnd(e.target.value)} className=\"border rounded px-2 py-1\" />\n    </div>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "起訖日期 range picker"
+}

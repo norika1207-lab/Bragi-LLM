@@ -1,0 +1,27 @@
+{
+  "id": "web-backend-008-express-ws",
+  "category": "web-backend/express/websocket",
+  "intents_zh": [
+    "express websocket chat",
+    "加 ws 即時聊天",
+    "broadcast 訊息給所有 client",
+    "websocket server 範例",
+    "express 結合 ws"
+  ],
+  "intents_en": [
+    "websocket chat server",
+    "ws broadcast example",
+    "realtime chat express",
+    "integrate ws with express",
+    "websocket server node"
+  ],
+  "slots": [
+    "ws_port"
+  ],
+  "code": "const WebSocket = require('ws');\nconst wss = new WebSocket.Server({ port: {{ws_port}} });\n\nwss.on('connection', (ws) => {\n  ws.on('message', (data) => {\n    const msg = data.toString();\n    wss.clients.forEach(c => {\n      if (c.readyState === WebSocket.OPEN) c.send(msg);\n    });\n  });\n  ws.send(JSON.stringify({ type: 'welcome' }));\n});\n\nconsole.log('ws on {{ws_port}}');",
+  "language": "js",
+  "deps": [
+    "ws"
+  ],
+  "summary_zh": "WebSocket 廣播聊天 server"
+}

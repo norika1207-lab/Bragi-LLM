@@ -1,0 +1,21 @@
+{
+  "id": "database-devops-132-gha-reusable-workflow",
+  "category": "database-devops/cicd/github-actions",
+  "intents_zh": [
+    "GHA 可重用 workflow",
+    "workflow_call 範本",
+    "共用 workflow"
+  ],
+  "intents_en": [
+    "github actions reusable workflow",
+    "workflow_call",
+    "shared workflow"
+  ],
+  "slots": [
+    "node_version"
+  ],
+  "code": "name: Reusable Test\non:\n  workflow_call:\n    inputs:\n      node-version:\n        required: false\n        type: string\n        default: '{{node_version}}'\n    secrets:\n      NPM_TOKEN:\n        required: false\n\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-node@v4\n        with: { node-version: ${{ inputs.node-version }} }\n      - run: npm ci && npm test",
+  "language": "yaml",
+  "deps": [],
+  "summary_zh": "GHA workflow_call 可重用 workflow"
+}

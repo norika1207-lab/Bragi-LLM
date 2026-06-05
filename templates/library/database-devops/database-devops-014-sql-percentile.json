@@ -1,0 +1,24 @@
+{
+  "id": "database-devops-014-sql-percentile",
+  "category": "database-devops/sql/aggregation",
+  "intents_zh": [
+    "百分位數",
+    "PERCENTILE_CONT",
+    "中位數",
+    "P95 延遲"
+  ],
+  "intents_en": [
+    "percentile",
+    "median",
+    "p95 latency",
+    "percentile_cont"
+  ],
+  "slots": [
+    "table",
+    "value_col"
+  ],
+  "code": "SELECT\n  PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY {{value_col}}) AS p50,\n  PERCENTILE_CONT(0.95) WITHIN GROUP (ORDER BY {{value_col}}) AS p95,\n  PERCENTILE_CONT(0.99) WITHIN GROUP (ORDER BY {{value_col}}) AS p99\nFROM {{table}};",
+  "language": "sql",
+  "deps": [],
+  "summary_zh": "算 P50/P95/P99 百分位數"
+}

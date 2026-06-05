@@ -1,0 +1,29 @@
+{
+  "id": "depth-algorithm-049-link-cut",
+  "category": "algorithm/tree/link-cut",
+  "intents_zh": [
+    "link cut tree",
+    "動態樹",
+    "LCT 模板",
+    "splay 動態樹",
+    "preferred path",
+    "動態連接查詢",
+    "tarjan link cut"
+  ],
+  "intents_en": [
+    "link cut tree",
+    "dynamic tree LCT",
+    "splay based LCT",
+    "preferred path tree",
+    "dynamic connectivity tree",
+    "LCT template",
+    "Tarjan link cut tree"
+  ],
+  "slots": [
+    "n"
+  ],
+  "code": "class LCT:\n    def __init__(self, n={{n}}):\n        self.p = [0]*(n+1); self.c = [[0,0] for _ in range(n+1)]\n        self.rev = [False]*(n+1)\n    def is_root(self, x):\n        p = self.p[x]\n        return self.c[p][0] != x and self.c[p][1] != x\n    def push(self, x):\n        if self.rev[x]:\n            l, r = self.c[x]\n            self.c[x] = [r, l]\n            if l: self.rev[l] ^= True\n            if r: self.rev[r] ^= True\n            self.rev[x] = False\n    def rotate(self, x):\n        p = self.p[x]; g = self.p[p]\n        k = 1 if self.c[p][1] == x else 0\n        if not self.is_root(p):\n            self.c[g][1 if self.c[g][1]==p else 0] = x\n        self.p[x] = g\n        self.c[p][k] = self.c[x][k^1]\n        if self.c[x][k^1]: self.p[self.c[x][k^1]] = p\n        self.c[x][k^1] = p; self.p[p] = x",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "基於 splay 的 link-cut tree 動態樹核心"
+}

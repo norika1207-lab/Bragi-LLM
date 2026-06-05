@@ -1,0 +1,29 @@
+{
+  "id": "mobile-085-compose-camera",
+  "category": "mobile/compose/media",
+  "intents_zh": [
+    "Compose 拍照",
+    "Compose camera intent",
+    "TakePicture Compose",
+    "Android Compose 拍張照",
+    "Compose takePicturePreview",
+    "Compose 相機 launcher",
+    "Compose camera capture"
+  ],
+  "intents_en": [
+    "compose camera intent",
+    "compose take picture",
+    "TakePicturePreview compose",
+    "compose camera launcher",
+    "android compose camera",
+    "compose shoot photo",
+    "capture image compose"
+  ],
+  "slots": [],
+  "code": "import android.graphics.Bitmap\nimport androidx.activity.compose.rememberLauncherForActivityResult\nimport androidx.activity.result.contract.ActivityResultContracts\nimport androidx.compose.foundation.Image\nimport androidx.compose.foundation.layout.Column\nimport androidx.compose.material3.Button\nimport androidx.compose.material3.Text\nimport androidx.compose.runtime.*\nimport androidx.compose.ui.graphics.asImageBitmap\n@Composable\nfun Cam(){\n  var bmp by remember{mutableStateOf<Bitmap?>(null)}\n  val l=rememberLauncherForActivityResult(ActivityResultContracts.TakePicturePreview()){bmp=it}\n  Column{Button(onClick={l.launch(null)}){Text(\"Shoot\")};bmp?.let{Image(bitmap=it.asImageBitmap(),contentDescription=null)}}}",
+  "language": "kt",
+  "deps": [
+    "androidx.activity:activity-compose"
+  ],
+  "summary_zh": "Compose TakePicturePreview 拍照預覽"
+}

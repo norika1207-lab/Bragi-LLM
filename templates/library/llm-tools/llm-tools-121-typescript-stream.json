@@ -1,0 +1,33 @@
+{
+  "id": "llm-tools-121-typescript-stream",
+  "category": "llm-tools/client/ts-stream",
+  "intents_zh": [
+    "ts openai 串流",
+    "node streaming chat",
+    "ts stream tokens",
+    "async iterator openai",
+    "node 串流回應",
+    "js openai stream",
+    "ts streaming wrapper",
+    "ts incremental output"
+  ],
+  "intents_en": [
+    "ts openai streaming",
+    "node streaming chat",
+    "ts stream tokens",
+    "async iterator openai",
+    "js openai stream",
+    "ts streaming wrapper",
+    "incremental output ts",
+    "node openai stream"
+  ],
+  "slots": [
+    "model_name"
+  ],
+  "code": "import OpenAI from \"openai\";\n\nconst client = new OpenAI();\n\nexport async function streamChat(prompt: string) {\n  const stream = await client.chat.completions.create({\n    model: \"{{model_name}}\",\n    messages: [{ role: \"user\", content: prompt }],\n    stream: true,\n  });\n  for await (const chunk of stream) {\n    const d = chunk.choices[0]?.delta?.content;\n    if (d) process.stdout.write(d);\n  }\n  process.stdout.write(\"\\n\");\n}\n\nstreamChat(\"tell me a joke\");",
+  "language": "ts",
+  "deps": [
+    "openai"
+  ],
+  "summary_zh": "Node.js OpenAI 串流逐 token 輸出"
+}

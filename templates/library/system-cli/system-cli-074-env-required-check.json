@@ -1,0 +1,21 @@
+{
+  "id": "system-cli-074-env-required-check",
+  "category": "system-cli/config/env",
+  "intents_zh": [
+    "檢查必要環境變數",
+    "missing env 提前報錯",
+    "env guard"
+  ],
+  "intents_en": [
+    "required env var check",
+    "fail fast on missing env",
+    "env guard script"
+  ],
+  "slots": [
+    "env_var_list"
+  ],
+  "code": "#!/usr/bin/env bash\nset -euo pipefail\nREQ=({{env_var_list}})\nmissing=()\nfor v in \"${REQ[@]}\"; do\n  if [[ -z \"${!v:-}\" ]]; then missing+=(\"$v\"); fi\ndone\nif (( ${#missing[@]} > 0 )); then\n  echo \"missing env: ${missing[*]}\" >&2; exit 1\nfi\necho 'env ok'",
+  "language": "sh",
+  "deps": [],
+  "summary_zh": "檢查必要 env 變數"
+}

@@ -1,0 +1,27 @@
+{
+  "id": "mobile-129-swiftui-haptic",
+  "category": "mobile/swiftui/feedback",
+  "intents_zh": [
+    "SwiftUI 震動",
+    "Swift haptic feedback",
+    "SwiftUI sensoryFeedback",
+    "iOS 觸覺回饋",
+    "Swift UIImpactFeedbackGenerator",
+    "SwiftUI 按鈕震動",
+    "haptic Swift"
+  ],
+  "intents_en": [
+    "swiftui haptic",
+    "swift haptic feedback",
+    "UIImpactFeedbackGenerator",
+    "ios haptic swift",
+    "sensoryFeedback swiftui",
+    "button vibration swift",
+    "swift tap feedback"
+  ],
+  "slots": [],
+  "code": "import SwiftUI\nimport UIKit\nstruct H:View{var body:some View{Button(\"Tap\"){UIImpactFeedbackGenerator(style:.medium).impactOccurred()}}}",
+  "language": "swift",
+  "deps": [],
+  "summary_zh": "Swift UIImpactFeedbackGenerator 觸覺回饋"
+}

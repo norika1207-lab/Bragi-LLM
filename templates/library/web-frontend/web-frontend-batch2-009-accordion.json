@@ -1,0 +1,27 @@
+{
+  "id": "web-frontend-batch2-009-accordion",
+  "category": "web-frontend/react/layout/accordion",
+  "intents_zh": [
+    "手風琴",
+    "accordion",
+    "可展開列表",
+    "FAQ 折疊",
+    "collapse 列表",
+    "摺疊面板"
+  ],
+  "intents_en": [
+    "accordion",
+    "collapsible list",
+    "FAQ accordion",
+    "expandable panels",
+    "collapse list",
+    "fold panels"
+  ],
+  "slots": [
+    "items_array"
+  ],
+  "code": "import { useState } from 'react';\n\nexport function Accordion() {\n  const items = {{items_array}};\n  const [open, setOpen] = useState<number | null>(null);\n  return (\n    <div className=\"divide-y rounded border\">\n      {items.map((it, i) => (\n        <div key={i}>\n          <button onClick={() => setOpen(open === i ? null : i)} className=\"flex w-full items-center justify-between px-4 py-3 text-left\">\n            <span className=\"font-medium\">{it.q}</span>\n            <span>{open === i ? '−' : '+'}</span>\n          </button>\n          {open === i && <div className=\"px-4 pb-4 text-sm text-gray-600\">{it.a}</div>}\n        </div>\n      ))}\n    </div>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "FAQ 樣式 accordion"
+}

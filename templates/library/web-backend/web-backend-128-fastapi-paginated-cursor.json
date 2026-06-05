@@ -1,0 +1,27 @@
+{
+  "id": "web-backend-128-fastapi-paginated-cursor",
+  "category": "web-backend/fastapi/rest",
+  "intents_zh": [
+    "fastapi cursor pagination",
+    "next cursor 分頁",
+    "keyset pagination",
+    "stream 大量資料",
+    "cursor base64 fastapi"
+  ],
+  "intents_en": [
+    "fastapi cursor pagination",
+    "keyset pagination",
+    "next cursor api",
+    "stream big dataset",
+    "cursor base64 fastapi"
+  ],
+  "slots": [
+    "table_name"
+  ],
+  "code": "from fastapi import APIRouter, Query\nfrom typing import Optional\nimport base64, json\n\nrouter = APIRouter()\n\ndef encode_cursor(last_id: int) -> str:\n    return base64.urlsafe_b64encode(json.dumps({'id': last_id}).encode()).decode()\n\ndef decode_cursor(c: str) -> int:\n    return json.loads(base64.urlsafe_b64decode(c.encode()))['id']\n\n@router.get('/{{table_name}}')\nasync def list_items(cursor: Optional[str] = None, limit: int = Query(20, le=100)):\n    after_id = decode_cursor(cursor) if cursor else 0\n    rows = []  # await db.fetch('SELECT * FROM {{table_name}} WHERE id > $1 ORDER BY id LIMIT $2', after_id, limit)\n    next_cursor = encode_cursor(rows[-1]['id']) if len(rows) == limit else None\n    return {'data': rows, 'next_cursor': next_cursor}",
+  "language": "py",
+  "deps": [
+    "fastapi"
+  ],
+  "summary_zh": "FastAPI cursor base64 分頁"
+}

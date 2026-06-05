@@ -1,0 +1,27 @@
+{
+  "id": "firmware-026-esp32-ble-scan",
+  "category": "firmware/esp32/ble",
+  "intents_zh": [
+    "ESP32 BLE 掃描",
+    "掃附近 BLE",
+    "central scan",
+    "ESP32 找裝置",
+    "發現 BLE peripheral"
+  ],
+  "intents_en": [
+    "ESP32 BLE scan",
+    "scan nearby BLE devices",
+    "BLE central scan",
+    "find BLE peripherals",
+    "BLEScan example"
+  ],
+  "slots": [
+    "scan_seconds"
+  ],
+  "code": "#include <BLEDevice.h>\n#include <BLEScan.h>\n\nvoid setup() {\n  Serial.begin(115200);\n  BLEDevice::init(\"\");\n  BLEScan* scan = BLEDevice::getScan();\n  scan->setActiveScan(true);\n  BLEScanResults res = scan->start({{scan_seconds}}, false);\n  for (int i = 0; i < res.getCount(); i++) {\n    BLEAdvertisedDevice d = res.getDevice(i);\n    Serial.printf(\"%s rssi=%d\\n\", d.getAddress().toString().c_str(), d.getRSSI());\n  }\n}\n\nvoid loop() {}",
+  "language": "ino",
+  "deps": [
+    "BLE"
+  ],
+  "summary_zh": "ESP32 掃描附近 BLE 裝置"
+}

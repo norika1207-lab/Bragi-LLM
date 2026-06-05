@@ -1,0 +1,26 @@
+{
+  "id": "firmware-078-arduino-multi-blink-millis",
+  "category": "firmware/arduino/patterns",
+  "intents_zh": [
+    "不用 delay 閃燈",
+    "millis 多工",
+    "Arduino 非阻塞閃燈",
+    "同時閃多顆 LED",
+    "blink without delay"
+  ],
+  "intents_en": [
+    "Arduino blink without delay",
+    "millis non-blocking blink",
+    "multi LED with millis",
+    "cooperative blink",
+    "async blink Arduino"
+  ],
+  "slots": [
+    "led_pin",
+    "period_ms"
+  ],
+  "code": "const int LED = {{led_pin}};\nconst unsigned long P = {{period_ms}};\nunsigned long last = 0;\nbool state = false;\n\nvoid setup() {\n  pinMode(LED, OUTPUT);\n}\n\nvoid loop() {\n  unsigned long now = millis();\n  if (now - last >= P) {\n    last = now;\n    state = !state;\n    digitalWrite(LED, state);\n  }\n}",
+  "language": "ino",
+  "deps": [],
+  "summary_zh": "Arduino 用 millis 非阻塞閃燈"
+}

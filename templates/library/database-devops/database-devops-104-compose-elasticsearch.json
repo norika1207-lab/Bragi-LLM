@@ -1,0 +1,21 @@
+{
+  "id": "database-devops-104-compose-elasticsearch",
+  "category": "database-devops/docker/compose",
+  "intents_zh": [
+    "compose elasticsearch",
+    "本地 ES + kibana",
+    "起 ES 容器"
+  ],
+  "intents_en": [
+    "compose elasticsearch",
+    "local es kibana",
+    "spin up es"
+  ],
+  "slots": [
+    "es_version"
+  ],
+  "code": "services:\n  elasticsearch:\n    image: elasticsearch:{{es_version}}\n    environment:\n      - discovery.type=single-node\n      - xpack.security.enabled=false\n      - ES_JAVA_OPTS=-Xms1g -Xmx1g\n    ports: [\"9200:9200\"]\n    volumes: [\"esdata:/usr/share/elasticsearch/data\"]\n\n  kibana:\n    image: kibana:{{es_version}}\n    ports: [\"5601:5601\"]\n    depends_on: [elasticsearch]\n\nvolumes:\n  esdata:",
+  "language": "yaml",
+  "deps": [],
+  "summary_zh": "compose Elasticsearch + Kibana"
+}

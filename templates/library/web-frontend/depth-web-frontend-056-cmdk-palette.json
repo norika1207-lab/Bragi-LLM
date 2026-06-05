@@ -1,0 +1,27 @@
+{
+  "id": "depth-web-frontend-056-cmdk-palette",
+  "category": "web-frontend/ui/command",
+  "intents_zh": [
+    "命令面板 cmdk",
+    "Cmd+K 搜尋",
+    "command palette",
+    "快速啟動 menu",
+    "cmdk react"
+  ],
+  "intents_en": [
+    "cmdk command palette",
+    "cmd+k search",
+    "quick launcher",
+    "command menu",
+    "cmdk react"
+  ],
+  "slots": [
+    "component_name"
+  ],
+  "code": "'use client';\nimport { Command } from 'cmdk';\nimport { useEffect, useState } from 'react';\n\nexport function {{component_name}}() {\n  const [open, setOpen] = useState(false);\n  useEffect(() => {\n    const onKey = (e: KeyboardEvent) => { if (e.key === 'k' && (e.metaKey || e.ctrlKey)) { e.preventDefault(); setOpen(o => !o); } };\n    document.addEventListener('keydown', onKey); return () => document.removeEventListener('keydown', onKey);\n  }, []);\n  return (\n    <Command.Dialog open={open} onOpenChange={setOpen} label=\"命令面板\">\n      <Command.Input placeholder=\"搜尋指令…\" />\n      <Command.List>\n        <Command.Empty>沒有結果</Command.Empty>\n        <Command.Item onSelect={() => location.assign('/settings')}>前往設定</Command.Item>\n        <Command.Item onSelect={() => location.assign('/profile')}>個人資料</Command.Item>\n      </Command.List>\n    </Command.Dialog>\n  );\n}",
+  "language": "tsx",
+  "deps": [
+    "cmdk"
+  ],
+  "summary_zh": "cmdk Cmd+K 命令面板"
+}

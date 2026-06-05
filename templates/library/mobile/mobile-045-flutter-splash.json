@@ -1,0 +1,32 @@
+{
+  "id": "mobile-045-flutter-splash",
+  "category": "mobile/flutter/launch",
+  "intents_zh": [
+    "Flutter splash screen",
+    "flutter 開頁",
+    "flutter_native_splash",
+    "Flutter 啟動 logo",
+    "flutter 啟動畫面",
+    "splash 設定 flutter",
+    "native splash flutter"
+  ],
+  "intents_en": [
+    "flutter splash screen",
+    "flutter_native_splash config",
+    "launch screen flutter",
+    "native splash flutter",
+    "splash setup flutter",
+    "initial screen flutter",
+    "app launch flutter"
+  ],
+  "slots": [
+    "bg_color",
+    "image_path"
+  ],
+  "code": "# pubspec.yaml — add this block then run: dart run flutter_native_splash:create\nflutter_native_splash:\n  color: \"{{bg_color}}\"\n  image: {{image_path}}\n  android_12:\n    color: \"{{bg_color}}\"\n    image: {{image_path}}\n  ios: true\n  android: true",
+  "language": "yaml",
+  "deps": [
+    "flutter_native_splash"
+  ],
+  "summary_zh": "flutter_native_splash 設定區塊"
+}

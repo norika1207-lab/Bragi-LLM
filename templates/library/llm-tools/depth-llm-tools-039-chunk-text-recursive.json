@@ -1,0 +1,29 @@
+{
+  "id": "depth-llm-tools-039-chunk-text-recursive",
+  "category": "llm-tools/chunking/recursive",
+  "intents_zh": [
+    "遞迴切塊文字",
+    "langchain recursive splitter",
+    "按分隔符切段",
+    "chunk overlap",
+    "文本分塊"
+  ],
+  "intents_en": [
+    "recursive text chunk",
+    "langchain recursive splitter",
+    "split by separator",
+    "chunk overlap",
+    "text chunking"
+  ],
+  "slots": [
+    "text",
+    "chunk_size",
+    "overlap"
+  ],
+  "code": "from langchain_text_splitters import RecursiveCharacterTextSplitter\n\nsplitter = RecursiveCharacterTextSplitter(\n    chunk_size={{chunk_size}},\n    chunk_overlap={{overlap}},\n    separators=[\"\\n\\n\", \"\\n\", \". \", \" \", \"\"],\n)\nchunks = splitter.split_text({{text}})",
+  "language": "python",
+  "deps": [
+    "langchain-text-splitters"
+  ],
+  "summary_zh": "langchain RecursiveCharacterTextSplitter 切段含 overlap"
+}

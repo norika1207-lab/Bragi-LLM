@@ -1,0 +1,29 @@
+{
+  "id": "mobile-069-swiftui-iap",
+  "category": "mobile/swiftui/iap",
+  "intents_zh": [
+    "SwiftUI StoreKit2 內購",
+    "Swift IAP 範例",
+    "SwiftUI 訂閱",
+    "iOS StoreKit 商品",
+    "Swift purchase product",
+    "內購 StoreKit2",
+    "Swift in app purchase"
+  ],
+  "intents_en": [
+    "StoreKit2 swift iap",
+    "swift in app purchase",
+    "swiftui subscription",
+    "ios StoreKit product",
+    "swift purchase product",
+    "storekit example",
+    "swiftui iap"
+  ],
+  "slots": [
+    "product_id"
+  ],
+  "code": "import StoreKit\nfunc buy() async throws -> Transaction? {\n  let prods=try await Product.products(for:[\"{{product_id}}\"])\n  guard let p=prods.first else{return nil}\n  let r=try await p.purchase()\n  if case .success(let v)=r,case .verified(let t)=v{await t.finish();return t}\n  return nil}",
+  "language": "swift",
+  "deps": [],
+  "summary_zh": "Swift StoreKit2 內購單品"
+}

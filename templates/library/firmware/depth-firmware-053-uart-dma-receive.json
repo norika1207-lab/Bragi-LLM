@@ -1,0 +1,30 @@
+{
+  "id": "depth-firmware-053-uart-dma-receive",
+  "category": "firmware/bus/uart",
+  "intents_zh": [
+    "UART event 接收",
+    "uart_driver_install",
+    "背景收 UART",
+    "非阻塞 UART",
+    "ESP-IDF UART"
+  ],
+  "intents_en": [
+    "uart event receive",
+    "uart_driver_install",
+    "background uart rx",
+    "nonblocking uart",
+    "esp-idf uart"
+  ],
+  "slots": [
+    "uart_num",
+    "tx_pin",
+    "rx_pin",
+    "baud"
+  ],
+  "code": "#include \"driver/uart.h\"\nuart_config_t cfg = { .baud_rate = {{baud}}, .data_bits = UART_DATA_8_BITS, .parity = UART_PARITY_DISABLE, .stop_bits = UART_STOP_BITS_1, .flow_ctrl = UART_HW_FLOWCTRL_DISABLE };\nuart_driver_install({{uart_num}}, 1024, 0, 0, NULL, 0);\nuart_param_config({{uart_num}}, &cfg);\nuart_set_pin({{uart_num}}, {{tx_pin}}, {{rx_pin}}, -1, -1);\nuint8_t buf[256];\nint n = uart_read_bytes({{uart_num}}, buf, sizeof(buf), pdMS_TO_TICKS(100));",
+  "language": "c",
+  "deps": [
+    "esp-idf"
+  ],
+  "summary_zh": "ESP-IDF UART driver 設定與非阻塞接收"
+}

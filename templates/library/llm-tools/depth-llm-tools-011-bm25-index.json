@@ -1,0 +1,29 @@
+{
+  "id": "depth-llm-tools-011-bm25-index",
+  "category": "llm-tools/retrieval/bm25",
+  "intents_zh": [
+    "建 BM25 索引",
+    "rank_bm25 建檢索",
+    "稀疏檢索",
+    "關鍵字檢索",
+    "BM25 查詢"
+  ],
+  "intents_en": [
+    "build BM25 index",
+    "rank_bm25 retrieval",
+    "sparse retrieval",
+    "keyword search",
+    "BM25 query"
+  ],
+  "slots": [
+    "corpus",
+    "query",
+    "top_k"
+  ],
+  "code": "from rank_bm25 import BM25Okapi\n\ntokenized = [doc.lower().split() for doc in {{corpus}}]\nbm25 = BM25Okapi(tokenized)\nscores = bm25.get_scores({{query}}.lower().split())\ntop = sorted(enumerate(scores), key=lambda x: -x[1])[:{{top_k}}]\nresults = [({{corpus}}[i], s) for i, s in top]",
+  "language": "python",
+  "deps": [
+    "rank_bm25"
+  ],
+  "summary_zh": "rank_bm25 建索引並查詢 top-k"
+}

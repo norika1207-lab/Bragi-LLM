@@ -1,0 +1,31 @@
+{
+  "id": "mobile-053-flutter-anim",
+  "category": "mobile/flutter/anim",
+  "intents_zh": [
+    "Flutter 淡入動畫",
+    "flutter AnimatedOpacity",
+    "flutter fade in",
+    "入場動畫 flutter",
+    "flutter 動畫元件",
+    "淡入 flutter",
+    "flutter animation 範例"
+  ],
+  "intents_en": [
+    "flutter fade in",
+    "AnimatedOpacity flutter",
+    "flutter entrance animation",
+    "flutter animation example",
+    "fade widget flutter",
+    "flutter opacity animation",
+    "animate fade flutter"
+  ],
+  "slots": [
+    "duration_ms"
+  ],
+  "code": "import 'package:flutter/material.dart';\nclass Fade extends StatefulWidget{final Widget child;const Fade({super.key,required this.child});@override State<Fade> createState()=>_F();}\nclass _F extends State<Fade>{double o=0;\n  @override void initState(){super.initState();WidgetsBinding.instance.addPostFrameCallback((_)=>setState(()=>o=1));}\n  @override Widget build(BuildContext c)=>AnimatedOpacity(opacity:o,duration:const Duration(milliseconds:{{duration_ms}}),child:widget.child);}",
+  "language": "dart",
+  "deps": [
+    "flutter"
+  ],
+  "summary_zh": "Flutter AnimatedOpacity 淡入包裝"
+}

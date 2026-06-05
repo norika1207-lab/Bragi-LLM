@@ -1,0 +1,22 @@
+{
+  "id": "database-devops-162-sql-temp-table",
+  "category": "database-devops/sql/basic",
+  "intents_zh": [
+    "臨時表 temp table",
+    "CREATE TEMP TABLE",
+    "暫存中間結果"
+  ],
+  "intents_en": [
+    "temp table",
+    "create temp table",
+    "intermediate results"
+  ],
+  "slots": [
+    "temp_name",
+    "query"
+  ],
+  "code": "CREATE TEMP TABLE {{temp_name}} ON COMMIT DROP AS\n{{query}};\n\nCREATE INDEX ON {{temp_name}} (id);\n\nSELECT * FROM {{temp_name}} WHERE ...;",
+  "language": "sql",
+  "deps": [],
+  "summary_zh": "建立臨時表暫存中間結果"
+}

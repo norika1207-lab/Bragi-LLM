@@ -1,0 +1,29 @@
+{
+  "id": "firmware-035-esp32-websocket-server",
+  "category": "firmware/esp32/network",
+  "intents_zh": [
+    "ESP32 WebSocket server",
+    "即時推送",
+    "WebSocketsServer 範例",
+    "雙向通訊",
+    "ws 伺服器"
+  ],
+  "intents_en": [
+    "ESP32 WebSocket server",
+    "real time push",
+    "WebSockets library",
+    "bidirectional ws",
+    "ws server example"
+  ],
+  "slots": [
+    "ssid",
+    "password",
+    "port"
+  ],
+  "code": "#include <WiFi.h>\n#include <WebSocketsServer.h>\nWebSocketsServer ws({{port}});\n\nvoid onEvent(uint8_t num, WStype_t type, uint8_t* p, size_t len) {\n  if (type == WStype_TEXT) ws.sendTXT(num, p, len);\n}\n\nvoid setup() {\n  WiFi.begin(\"{{ssid}}\", \"{{password}}\");\n  while (WiFi.status() != WL_CONNECTED) delay(300);\n  ws.begin();\n  ws.onEvent(onEvent);\n}\n\nvoid loop() { ws.loop(); }",
+  "language": "ino",
+  "deps": [
+    "WebSockets"
+  ],
+  "summary_zh": "ESP32 WebSocket echo 伺服器"
+}

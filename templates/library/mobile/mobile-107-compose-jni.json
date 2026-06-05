@@ -1,0 +1,30 @@
+{
+  "id": "mobile-107-compose-jni",
+  "category": "mobile/compose/native",
+  "intents_zh": [
+    "Android JNI Kotlin",
+    "Kotlin external fun",
+    "Android native bridge",
+    "Kotlin JNI 範例",
+    "Compose 呼叫 C++",
+    "JNI Kotlin function",
+    "Android NDK Kotlin"
+  ],
+  "intents_en": [
+    "android jni kotlin",
+    "kotlin external fun",
+    "native bridge kotlin",
+    "kotlin jni example",
+    "compose call cpp",
+    "android ndk kotlin",
+    "jni kotlin function"
+  ],
+  "slots": [
+    "lib_name",
+    "fn_name"
+  ],
+  "code": "class NativeBridge{\n  external fun {{fn_name}}(input:String):String\n  companion object{init{System.loadLibrary(\"{{lib_name}}\")}}}\n// cpp side: native-lib.cpp\n// extern \"C\" JNIEXPORT jstring JNICALL\n// Java_com_example_NativeBridge_{{fn_name}}(JNIEnv* env, jobject, jstring input) {\n//   const char* s = env->GetStringUTFChars(input, nullptr);\n//   std::string out = std::string(\"hello \") + s;\n//   env->ReleaseStringUTFChars(input, s);\n//   return env->NewStringUTF(out.c_str()); }",
+  "language": "kt",
+  "deps": [],
+  "summary_zh": "Kotlin external fun + JNI 呼叫 C++"
+}

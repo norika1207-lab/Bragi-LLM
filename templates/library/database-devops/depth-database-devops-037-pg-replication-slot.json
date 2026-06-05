@@ -1,0 +1,22 @@
+{
+  "id": "depth-database-devops-037-pg-replication-slot",
+  "category": "database-devops/postgres/replication",
+  "intents_zh": [
+    "建立 logical replication slot",
+    "CDC slot",
+    "wal2json"
+  ],
+  "intents_en": [
+    "create logical replication slot",
+    "CDC slot",
+    "wal2json"
+  ],
+  "slots": [
+    "slot_name",
+    "plugin"
+  ],
+  "code": "SELECT * FROM pg_create_logical_replication_slot('{{slot_name}}', '{{plugin}}');\n-- 消費\nSELECT lsn, xid, data\nFROM pg_logical_slot_get_changes('{{slot_name}}', NULL, NULL);\n-- 移除\n-- SELECT pg_drop_replication_slot('{{slot_name}}');",
+  "language": "sql",
+  "deps": [],
+  "summary_zh": "建 logical replication slot 做 CDC,消費後可 drop"
+}

@@ -1,0 +1,29 @@
+{
+  "id": "depth-firmware-019-soil-temp-humidity-station",
+  "category": "firmware/sensor/composite",
+  "intents_zh": [
+    "土壤溫濕度站",
+    "植物監測",
+    "DHT22 + 土壤濕度",
+    "環境感測組合",
+    "澆水監控"
+  ],
+  "intents_en": [
+    "soil temp humidity station",
+    "plant monitor",
+    "dht22 plus soil",
+    "composite env sensor",
+    "watering monitor"
+  ],
+  "slots": [
+    "dht_pin",
+    "soil_pin"
+  ],
+  "code": "#include <DHT.h>\nDHT dht({{dht_pin}}, DHT22);\nvoid setup() { Serial.begin(115200); dht.begin(); }\nvoid loop() {\n    float t = dht.readTemperature();\n    float h = dht.readHumidity();\n    int raw = analogRead({{soil_pin}});\n    float soil_pct = map(raw, 3000, 1000, 0, 100);\n    soil_pct = constrain(soil_pct, 0, 100);\n    Serial.printf(\"T=%.1f H=%.1f soil=%.0f%%\\n\", t, h, soil_pct);\n    delay(5000);\n}",
+  "language": "cpp",
+  "deps": [
+    "DHT sensor library",
+    "Adafruit Unified Sensor"
+  ],
+  "summary_zh": "DHT22 加類比土壤濕度組合監測站"
+}

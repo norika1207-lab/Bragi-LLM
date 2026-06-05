@@ -1,0 +1,28 @@
+{
+  "id": "web-backend-124-express-graphql-dataloader",
+  "category": "web-backend/express/graphql",
+  "intents_zh": [
+    "dataloader 解 N+1",
+    "graphql batch loader",
+    "加 dataloader",
+    "resolver batching",
+    "node dataloader 範例"
+  ],
+  "intents_en": [
+    "dataloader graphql",
+    "batch loader graphql",
+    "resolve N+1 dataloader",
+    "resolver batching",
+    "node dataloader example"
+  ],
+  "slots": [
+    "batch_table"
+  ],
+  "code": "const DataLoader = require('dataloader');\n\nfunction makeUserLoader(db) {\n  return new DataLoader(async (ids) => {\n    const rows = await db('{{batch_table}}').whereIn('id', ids);\n    const byId = new Map(rows.map(r => [r.id, r]));\n    return ids.map(id => byId.get(id) || null);\n  });\n}\n\nmodule.exports = { makeUserLoader };",
+  "language": "js",
+  "deps": [
+    "dataloader",
+    "knex"
+  ],
+  "summary_zh": "DataLoader N+1 batching"
+}

@@ -1,0 +1,29 @@
+{
+  "id": "depth-algorithm-060-suffix-array-sa-is",
+  "category": "algorithm/string/suffix-array",
+  "intents_zh": [
+    "後綴數組",
+    "suffix array 構建",
+    "倍增法 SA",
+    "SA height 數組",
+    "字串後綴排序",
+    "DC3 SA",
+    "SA 模板"
+  ],
+  "intents_en": [
+    "suffix array construction",
+    "doubling suffix array",
+    "SA height array",
+    "string suffix sort",
+    "suffix array template",
+    "SA-IS construction",
+    "build suffix array"
+  ],
+  "slots": [
+    "s"
+  ],
+  "code": "def suffix_array(s={{s}}):\n    s = s + '$'\n    n = len(s); sa = list(range(n))\n    rank = [ord(c) for c in s]; tmp = [0]*n; k = 1\n    while True:\n        def key(i):\n            return (rank[i], rank[i+k] if i+k < n else -1)\n        sa.sort(key=key)\n        tmp[sa[0]] = 0\n        for i in range(1, n):\n            tmp[sa[i]] = tmp[sa[i-1]] + (1 if key(sa[i]) != key(sa[i-1]) else 0)\n        rank = tmp[:]\n        if rank[sa[-1]] == n-1: break\n        k *= 2\n    return sa[1:]",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "倍增法 O(n log^2 n) 構建後綴數組"
+}

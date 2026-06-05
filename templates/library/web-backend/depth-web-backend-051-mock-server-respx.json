@@ -1,0 +1,29 @@
+{
+  "id": "depth-web-backend-051-mock-server-respx",
+  "category": "web-backend/testing/respx",
+  "intents_zh": [
+    "respx httpx mock",
+    "Python 攔截 HTTP",
+    "pytest fixture",
+    "async mock 回應",
+    "httpx 測試"
+  ],
+  "intents_en": [
+    "respx httpx mock",
+    "python intercept http",
+    "pytest fixture",
+    "async mock response",
+    "httpx testing"
+  ],
+  "slots": [
+    "host"
+  ],
+  "code": "import respx, httpx\n\n@respx.mock\nasync def test_call():\n    respx.get('{{host}}/ping').mock(return_value=httpx.Response(200, json={'ok': True}))\n    async with httpx.AsyncClient() as c:\n        r = await c.get('{{host}}/ping')\n    assert r.json()['ok']",
+  "language": "py",
+  "deps": [
+    "respx",
+    "httpx",
+    "pytest"
+  ],
+  "summary_zh": "respx mock httpx 請求"
+}

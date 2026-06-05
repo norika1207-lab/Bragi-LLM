@@ -1,0 +1,30 @@
+{
+  "id": "mobile-126-compose-location",
+  "category": "mobile/compose/location",
+  "intents_zh": [
+    "Android FusedLocation Kotlin",
+    "Compose 取定位",
+    "Kotlin location current",
+    "Android 當前位置 Compose",
+    "Play services location Kotlin",
+    "Compose 經緯度",
+    "Android fused location 範例"
+  ],
+  "intents_en": [
+    "android FusedLocation kotlin",
+    "compose get location",
+    "kotlin current location",
+    "android lat lng compose",
+    "play services location kotlin",
+    "compose user position",
+    "fused location example kotlin"
+  ],
+  "slots": [],
+  "code": "import android.annotation.SuppressLint\nimport android.content.Context\nimport com.google.android.gms.location.LocationServices\nimport kotlinx.coroutines.tasks.await\n@SuppressLint(\"MissingPermission\")\nsuspend fun currentLoc(ctx:Context):Pair<Double,Double>?{\n  val c=LocationServices.getFusedLocationProviderClient(ctx)\n  val l=c.lastLocation.await() ?: return null\n  return l.latitude to l.longitude}",
+  "language": "kt",
+  "deps": [
+    "com.google.android.gms:play-services-location",
+    "org.jetbrains.kotlinx:kotlinx-coroutines-play-services"
+  ],
+  "summary_zh": "Android FusedLocation Kotlin 取最後位置"
+}

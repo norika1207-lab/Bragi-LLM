@@ -1,0 +1,27 @@
+{
+  "id": "web-frontend-batch2-022-dark-mode-toggle",
+  "category": "web-frontend/react/theme/dark-mode-toggle",
+  "intents_zh": [
+    "暗色模式切換",
+    "dark mode toggle",
+    "深色模式按鈕",
+    "主題切換",
+    "日夜切換",
+    "theme switcher"
+  ],
+  "intents_en": [
+    "dark mode toggle",
+    "theme switcher",
+    "dark light toggle",
+    "color mode button",
+    "theme toggle",
+    "appearance switcher"
+  ],
+  "slots": [
+    "storage_key"
+  ],
+  "code": "import { useEffect, useState } from 'react';\n\nexport function DarkModeToggle() {\n  const [dark, setDark] = useState(false);\n  useEffect(() => {\n    const saved = localStorage.getItem('{{storage_key}}') === 'dark';\n    setDark(saved);\n    document.documentElement.classList.toggle('dark', saved);\n  }, []);\n  const toggle = () => {\n    const next = !dark;\n    setDark(next);\n    document.documentElement.classList.toggle('dark', next);\n    localStorage.setItem('{{storage_key}}', next ? 'dark' : 'light');\n  };\n  return (\n    <button onClick={toggle} className=\"rounded p-2 hover:bg-gray-100 dark:hover:bg-gray-800\" aria-label=\"Toggle dark mode\">\n      {dark ? '☀️' : '🌙'}\n    </button>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "localStorage 持久化的暗色模式切換"
+}

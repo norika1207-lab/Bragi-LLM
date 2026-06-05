@@ -1,0 +1,27 @@
+{
+  "id": "patch-s3-upload-008-browser-direct-put",
+  "category": "web-backend/upload/browser-direct",
+  "intents_zh": [
+    "前端用 fetch 直傳 S3 presigned",
+    "browser 直接 PUT 到 S3",
+    "client side 上傳到簽名網址",
+    "前端拿到 url 後怎麼 PUT",
+    "JS 上傳檔案到 presigned URL",
+    "前端直傳含進度"
+  ],
+  "intents_en": [
+    "browser fetch PUT to s3 presigned url",
+    "client side upload to presigned put",
+    "javascript direct upload to s3",
+    "xhr upload progress to presigned url",
+    "frontend put file to signed s3 url",
+    "browser to s3 upload with progress"
+  ],
+  "slots": [
+    "api_signing_endpoint"
+  ],
+  "code": "async function uploadFileToS3(file: File) {\n  const signRes = await fetch('{{api_signing_endpoint}}', {\n    method: 'POST',\n    headers: { 'Content-Type': 'application/json' },\n    body: JSON.stringify({ filename: file.name, contentType: file.type }),\n  });\n  const { url, key, headers } = await signRes.json();\n\n  await new Promise<void>((resolve, reject) => {\n    const xhr = new XMLHttpRequest();\n    xhr.open('PUT', url);\n    Object.entries(headers || {}).forEach(([k, v]) => xhr.setRequestHeader(k, v as string));\n    xhr.upload.onprogress = (e) => {\n      if (e.lengthComputable) console.log(`${Math.round((e.loaded / e.total) * 100)}%`);\n    };\n    xhr.onload = () => (xhr.status >= 200 && xhr.status < 300 ? resolve() : reject(new Error(`status ${xhr.status}`)));\n    xhr.onerror = () => reject(new Error('network error'));\n    xhr.send(file);\n  });\n\n  return { key };\n}",
+  "language": "ts",
+  "deps": [],
+  "summary_zh": "前端拿 presigned URL 後用 XHR 直傳 S3 並顯示進度"
+}

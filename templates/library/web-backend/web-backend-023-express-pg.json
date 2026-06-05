@@ -1,0 +1,27 @@
+{
+  "id": "web-backend-023-express-pg",
+  "category": "web-backend/express/db",
+  "intents_zh": [
+    "接 postgres",
+    "pg pool 連線",
+    "node 連 postgres",
+    "pg client 查詢",
+    "postgres connection pool"
+  ],
+  "intents_en": [
+    "postgres connection node",
+    "pg pool setup",
+    "node postgres client",
+    "query postgres",
+    "connect postgres pool"
+  ],
+  "slots": [
+    "pg_url_env"
+  ],
+  "code": "const { Pool } = require('pg');\n\nconst pool = new Pool({\n  connectionString: process.env.{{pg_url_env}},\n  max: 10,\n  idleTimeoutMillis: 30000\n});\n\nasync function query(text, params) {\n  const start = Date.now();\n  const res = await pool.query(text, params);\n  console.log('query', { text, ms: Date.now() - start, rows: res.rowCount });\n  return res;\n}\n\nmodule.exports = { pool, query };",
+  "language": "js",
+  "deps": [
+    "pg"
+  ],
+  "summary_zh": "node-postgres 連線池"
+}

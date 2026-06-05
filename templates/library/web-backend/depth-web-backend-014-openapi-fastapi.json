@@ -1,0 +1,27 @@
+{
+  "id": "depth-web-backend-014-openapi-fastapi",
+  "category": "web-backend/openapi/fastapi",
+  "intents_zh": [
+    "FastAPI 匯出 openapi.json",
+    "產生 swagger spec",
+    "FastAPI custom openapi",
+    "CI 輸出 spec",
+    "openapi 檔案"
+  ],
+  "intents_en": [
+    "fastapi export openapi.json",
+    "generate swagger spec",
+    "fastapi custom openapi",
+    "ci output spec",
+    "openapi file"
+  ],
+  "slots": [
+    "out_path"
+  ],
+  "code": "import json\nfrom fastapi.openapi.utils import get_openapi\n\nspec = get_openapi(title=app.title, version=app.version, routes=app.routes)\nwith open('{{out_path}}', 'w') as f:\n    json.dump(spec, f, indent=2)",
+  "language": "py",
+  "deps": [
+    "fastapi"
+  ],
+  "summary_zh": "FastAPI 匯出 openapi.json"
+}

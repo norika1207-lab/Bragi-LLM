@@ -1,0 +1,29 @@
+{
+  "id": "depth-algorithm-005-fenwick-range-update",
+  "category": "algorithm/bit/range-update",
+  "intents_zh": [
+    "區間更新單點查詢 BIT",
+    "差分 BIT",
+    "Fenwick 區間加",
+    "樹狀數組區間更新",
+    "雙 BIT 區間加區間和",
+    "range add point query",
+    "差分樹狀數組"
+  ],
+  "intents_en": [
+    "range update point query BIT",
+    "difference Fenwick",
+    "BIT range add",
+    "dual BIT range sum",
+    "range add range sum BIT",
+    "Fenwick range update",
+    "difference array BIT"
+  ],
+  "slots": [
+    "n"
+  ],
+  "code": "class RangeBIT:\n    def __init__(self, n={{n}}):\n        self.n = n\n        self.b1 = [0]*(n+2)\n        self.b2 = [0]*(n+2)\n    def _upd(self, b, i, v):\n        while i <= self.n:\n            b[i] += v\n            i += i & -i\n    def _qry(self, b, i):\n        s = 0\n        while i > 0:\n            s += b[i]\n            i -= i & -i\n        return s\n    def range_add(self, l, r, v):\n        self._upd(self.b1, l, v); self._upd(self.b1, r+1, -v)\n        self._upd(self.b2, l, v*(l-1)); self._upd(self.b2, r+1, -v*r)\n    def prefix(self, i):\n        return self._qry(self.b1, i)*i - self._qry(self.b2, i)\n    def range_sum(self, l, r):\n        return self.prefix(r) - self.prefix(l-1)",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "雙 BIT 實作區間加區間求和"
+}

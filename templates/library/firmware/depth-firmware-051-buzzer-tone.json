@@ -1,0 +1,29 @@
+{
+  "id": "depth-firmware-051-buzzer-tone",
+  "category": "firmware/peripheral/buzzer",
+  "intents_zh": [
+    "蜂鳴器播音",
+    "tone 函式",
+    "ESP32 ledc tone",
+    "beep 提示",
+    "旋律播放"
+  ],
+  "intents_en": [
+    "buzzer tone",
+    "play tone",
+    "ledc tone esp32",
+    "beep alert",
+    "play melody"
+  ],
+  "slots": [
+    "buzzer_pin",
+    "freq_hz",
+    "duration_ms"
+  ],
+  "code": "void beep(int pin, int f, int ms) {\n    ledcAttachPin(pin, 0);\n    ledcWriteTone(0, f);\n    delay(ms);\n    ledcWriteTone(0, 0);\n}\nvoid setup() {\n    ledcSetup(0, 2000, 8);\n    beep({{buzzer_pin}}, {{freq_hz}}, {{duration_ms}});\n}",
+  "language": "cpp",
+  "deps": [
+    "Arduino-ESP32"
+  ],
+  "summary_zh": "用 LEDC 在 ESP32 上發出蜂鳴音"
+}

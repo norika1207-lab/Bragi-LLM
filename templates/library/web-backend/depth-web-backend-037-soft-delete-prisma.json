@@ -1,0 +1,27 @@
+{
+  "id": "depth-web-backend-037-soft-delete-prisma",
+  "category": "web-backend/pattern/soft-delete",
+  "intents_zh": [
+    "Prisma soft delete middleware",
+    "攔截 delete 改 update",
+    "自動過濾 deletedAt",
+    "Prisma extension",
+    "邏輯刪除"
+  ],
+  "intents_en": [
+    "prisma soft delete middleware",
+    "intercept delete to update",
+    "auto filter deletedat",
+    "prisma extension",
+    "logical delete"
+  ],
+  "slots": [
+    "model"
+  ],
+  "code": "prisma.$use(async (params, next) => {\n  if (params.model === '{{model}}') {\n    if (params.action === 'delete') {\n      params.action = 'update';\n      params.args.data = { deletedAt: new Date() };\n    }\n    if (params.action === 'findMany') {\n      params.args.where = { ...params.args.where, deletedAt: null };\n    }\n  }\n  return next(params);\n});",
+  "language": "js",
+  "deps": [
+    "@prisma/client"
+  ],
+  "summary_zh": "Prisma middleware 攔截 delete 變軟刪除"
+}

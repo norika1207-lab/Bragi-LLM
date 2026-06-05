@@ -1,0 +1,27 @@
+{
+  "id": "depth-web-frontend-014-next-intl-setup",
+  "category": "web-frontend/i18n/next-intl",
+  "intents_zh": [
+    "next-intl 設定",
+    "Next.js 多語言",
+    "useTranslations",
+    "訊息檔 i18n",
+    "locale routing"
+  ],
+  "intents_en": [
+    "next-intl setup",
+    "nextjs i18n",
+    "useTranslations hook",
+    "locale messages",
+    "internationalization next"
+  ],
+  "slots": [
+    "namespace"
+  ],
+  "code": "// app/[locale]/page.tsx\nimport { useTranslations } from 'next-intl';\n\nexport default function Page() {\n  const t = useTranslations('{{namespace}}');\n  return (\n    <div>\n      <h1>{t('title')}</h1>\n      <p>{t('description')}</p>\n    </div>\n  );\n}",
+  "language": "tsx",
+  "deps": [
+    "next-intl"
+  ],
+  "summary_zh": "next-intl useTranslations 頁面"
+}

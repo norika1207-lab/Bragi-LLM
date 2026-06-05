@@ -1,0 +1,24 @@
+{
+  "id": "algorithm-ml-013",
+  "category": "algorithm/ml/confusion_matrix",
+  "intents_zh": [
+    "混淆矩陣",
+    "confusion matrix",
+    "評估分類器"
+  ],
+  "intents_en": [
+    "confusion matrix",
+    "sklearn confusion matrix",
+    "classification eval"
+  ],
+  "slots": [
+    "y_true",
+    "y_pred"
+  ],
+  "code": "from sklearn.metrics import confusion_matrix, classification_report\n\nprint(confusion_matrix({{y_true}}, {{y_pred}}))\nprint(classification_report({{y_true}}, {{y_pred}}))",
+  "language": "py",
+  "deps": [
+    "scikit-learn"
+  ],
+  "summary_zh": "混淆矩陣 + 分類報表"
+}

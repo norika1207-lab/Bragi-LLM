@@ -1,0 +1,23 @@
+{
+  "id": "depth-mobile-022-nfc-android",
+  "category": "mobile/nfc/android",
+  "intents_zh": [
+    "Android NFC 讀取",
+    "NfcAdapter foreground dispatch",
+    "NDEF message parse",
+    "onNewIntent NFC",
+    "NFC tag"
+  ],
+  "intents_en": [
+    "Android NFC read",
+    "NfcAdapter foreground dispatch",
+    "parse NDEF",
+    "onNewIntent NFC",
+    "NFC tag"
+  ],
+  "slots": [],
+  "code": "override fun onNewIntent(intent: Intent) {\n    super.onNewIntent(intent)\n    val raw = intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES) ?: return\n    val msgs = raw.map { it as NdefMessage }\n    msgs.flatMap { it.records.toList() }.forEach {\n        Log.d(\"NFC\", String(it.payload))\n    }\n}",
+  "language": "kotlin",
+  "deps": [],
+  "summary_zh": "Android NFC NDEF onNewIntent 解析"
+}

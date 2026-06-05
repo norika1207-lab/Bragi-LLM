@@ -1,0 +1,28 @@
+{
+  "id": "depth-web-backend-057-csv-stream-export",
+  "category": "web-backend/files/csv-stream",
+  "intents_zh": [
+    "大量資料 CSV 串流",
+    "逐 row 寫出 csv",
+    "Node stream csv export",
+    "邊查邊送",
+    "DB cursor to CSV"
+  ],
+  "intents_en": [
+    "large csv stream export",
+    "row by row csv write",
+    "node stream csv export",
+    "query while stream",
+    "db cursor csv"
+  ],
+  "slots": [
+    "filename"
+  ],
+  "code": "import { stringify } from 'csv-stringify';\napp.get('/export.csv', (req, res) => {\n  res.attachment('{{filename}}');\n  const stringifier = stringify({ header: true });\n  stringifier.pipe(res);\n  db.stream('SELECT id, name FROM users').on('data', (row) => stringifier.write(row))\n    .on('end', () => stringifier.end());\n});",
+  "language": "js",
+  "deps": [
+    "express",
+    "csv-stringify"
+  ],
+  "summary_zh": "DB cursor 串流匯出 CSV"
+}

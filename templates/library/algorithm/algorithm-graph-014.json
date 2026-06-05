@@ -1,0 +1,22 @@
+{
+  "id": "algorithm-graph-014",
+  "category": "algorithm/graph/bridges",
+  "intents_zh": [
+    "圖的橋",
+    "find bridges",
+    "Tarjan bridges",
+    "給我 bridges"
+  ],
+  "intents_en": [
+    "find bridges",
+    "graph bridges",
+    "Tarjan bridges"
+  ],
+  "slots": [
+    "fn_name"
+  ],
+  "code": "def {{fn_name}}(graph):\n    disc = {}\n    low = {}\n    bridges = []\n    timer = [0]\n    def dfs(u, parent):\n        disc[u] = low[u] = timer[0]; timer[0] += 1\n        for v in graph.get(u, []):\n            if v == parent: continue\n            if v in disc:\n                low[u] = min(low[u], disc[v])\n            else:\n                dfs(v, u)\n                low[u] = min(low[u], low[v])\n                if low[v] > disc[u]:\n                    bridges.append((u, v))\n    for u in graph:\n        if u not in disc:\n            dfs(u, None)\n    return bridges",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "Tarjan 找圖中所有橋"
+}

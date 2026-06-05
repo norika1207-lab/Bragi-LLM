@@ -1,0 +1,27 @@
+{
+  "id": "depth-web-backend-018-bullmq-producer",
+  "category": "web-backend/queue/bullmq",
+  "intents_zh": [
+    "BullMQ 加任務",
+    "Redis queue producer",
+    "延遲執行 job",
+    "背景任務排程入列",
+    "BullMQ 範例"
+  ],
+  "intents_en": [
+    "bullmq add job",
+    "redis queue producer",
+    "delayed job",
+    "background enqueue",
+    "bullmq example"
+  ],
+  "slots": [
+    "queue_name"
+  ],
+  "code": "import { Queue } from 'bullmq';\nconst queue = new Queue('{{queue_name}}', { connection: { host: 'localhost', port: 6379 } });\nawait queue.add('email', { to: 'a@b.com' }, { delay: 60_000, attempts: 3, backoff: { type: 'exponential', delay: 1000 } });",
+  "language": "js",
+  "deps": [
+    "bullmq"
+  ],
+  "summary_zh": "BullMQ producer 加延遲 job"
+}

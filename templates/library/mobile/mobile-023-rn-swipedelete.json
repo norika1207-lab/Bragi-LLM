@@ -1,0 +1,29 @@
+{
+  "id": "mobile-023-rn-swipedelete",
+  "category": "mobile/rn/list",
+  "intents_zh": [
+    "RN 滑動刪除",
+    "React Native swipe to delete",
+    "RN 列表左滑刪",
+    "swipe row delete RN",
+    "RN 滑掉一列",
+    "list swipe action RN",
+    "swipeable RN"
+  ],
+  "intents_en": [
+    "rn swipe to delete",
+    "swipeable row rn",
+    "react native swipe delete",
+    "swipe action list rn",
+    "delete on swipe rn",
+    "gesture handler swipe rn",
+    "rn list swipe"
+  ],
+  "slots": [],
+  "code": "import React from 'react';\nimport {Text,View,StyleSheet,Animated} from 'react-native';\nimport {Swipeable,GestureHandlerRootView} from 'react-native-gesture-handler';\nexport default function Row({label,onDel}:{label:string;onDel:()=>void}){\n  const right=()=>(<View style={s.del}><Text style={{color:'#fff'}}>Delete</Text></View>);\n  return(<GestureHandlerRootView><Swipeable renderRightActions={right} onSwipeableOpen={onDel}><View style={s.r}><Text>{label}</Text></View></Swipeable></GestureHandlerRootView>);}\nconst s=StyleSheet.create({r:{padding:16,backgroundColor:'#fff',borderBottomWidth:1,borderColor:'#eee'},del:{backgroundColor:'#e33',justifyContent:'center',alignItems:'center',width:80}});",
+  "language": "tsx",
+  "deps": [
+    "react-native-gesture-handler"
+  ],
+  "summary_zh": "RN Swipeable 左滑顯示刪除按鈕"
+}

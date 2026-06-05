@@ -1,0 +1,27 @@
+{
+  "id": "depth-web-backend-060-bullmq-flow",
+  "category": "web-backend/queue/bullmq-flow",
+  "intents_zh": [
+    "BullMQ flow producer",
+    "父子 job 鏈",
+    "子完成觸發父",
+    "FlowProducer",
+    "dependent jobs"
+  ],
+  "intents_en": [
+    "bullmq flow producer",
+    "parent child job chain",
+    "children before parent",
+    "flowproducer",
+    "dependent jobs"
+  ],
+  "slots": [
+    "queue"
+  ],
+  "code": "import { FlowProducer } from 'bullmq';\nconst flow = new FlowProducer({ connection: { host: 'localhost', port: 6379 } });\nawait flow.add({\n  name: 'aggregate', queueName: '{{queue}}', data: { jobId: 'agg-1' },\n  children: [\n    { name: 'fetch', queueName: '{{queue}}', data: { url: 'a' } },\n    { name: 'fetch', queueName: '{{queue}}', data: { url: 'b' } },\n  ],\n});",
+  "language": "js",
+  "deps": [
+    "bullmq"
+  ],
+  "summary_zh": "BullMQ FlowProducer 父子 job"
+}

@@ -1,0 +1,30 @@
+{
+  "id": "web-backend-140-fastapi-rate-redis",
+  "category": "web-backend/fastapi/middleware",
+  "intents_zh": [
+    "fastapi redis 限流",
+    "slowapi storage redis",
+    "共用 rate limit",
+    "分散式 throttle",
+    "fastapi cluster limit"
+  ],
+  "intents_en": [
+    "fastapi redis rate limit",
+    "slowapi storage redis",
+    "distributed throttle fastapi",
+    "shared rate limit",
+    "cluster aware limiter"
+  ],
+  "slots": [
+    "redis_url",
+    "rate"
+  ],
+  "code": "from fastapi import FastAPI, Request\nfrom slowapi import Limiter, _rate_limit_exceeded_handler\nfrom slowapi.errors import RateLimitExceeded\nfrom slowapi.util import get_remote_address\n\nlimiter = Limiter(key_func=get_remote_address, storage_uri='{{redis_url}}')\napp = FastAPI()\napp.state.limiter = limiter\napp.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)\n\n@app.get('/api')\n@limiter.limit('{{rate}}')\nasync def api(request: Request):\n    return {'ok': True}",
+  "language": "py",
+  "deps": [
+    "fastapi",
+    "slowapi",
+    "redis"
+  ],
+  "summary_zh": "FastAPI Redis-backed 分散式限流"
+}

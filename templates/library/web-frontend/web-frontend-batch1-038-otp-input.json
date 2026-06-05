@@ -1,0 +1,28 @@
+{
+  "id": "web-frontend-batch1-038-otp-input",
+  "category": "web-frontend/react/inputs/otp",
+  "intents_zh": [
+    "OTP 輸入框",
+    "驗證碼輸入元件",
+    "6 位數 code 輸入",
+    "React OTP input",
+    "one time password 輸入",
+    "驗證碼分格輸入"
+  ],
+  "intents_en": [
+    "otp input",
+    "verification code input",
+    "6 digit code input",
+    "one time password",
+    "react otp",
+    "pin code input"
+  ],
+  "slots": [
+    "component_name",
+    "digit_count"
+  ],
+  "code": "import { useRef, useState } from 'react';\n\nexport default function {{component_name}}() {\n  const len = {{digit_count}};\n  const [vals, setVals] = useState<string[]>(Array(len).fill(''));\n  const refs = useRef<(HTMLInputElement | null)[]>([]);\n\n  function set(i: number, v: string) {\n    const c = v.slice(-1);\n    const next = [...vals];\n    next[i] = c;\n    setVals(next);\n    if (c && i < len - 1) refs.current[i + 1]?.focus();\n  }\n\n  return (\n    <div className=\"flex gap-2\">\n      {vals.map((v, i) => (\n        <input\n          key={i}\n          ref={(el) => { refs.current[i] = el; }}\n          value={v}\n          onChange={(e) => set(i, e.target.value)}\n          className=\"w-10 h-12 text-center border rounded text-xl\"\n        />\n      ))}\n    </div>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "分格 OTP 驗證碼輸入框"
+}

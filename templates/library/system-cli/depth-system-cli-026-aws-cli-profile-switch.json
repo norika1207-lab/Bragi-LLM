@@ -1,0 +1,24 @@
+{
+  "id": "depth-system-cli-026-aws-cli-profile-switch",
+  "category": "system-cli/aws/wrapper",
+  "intents_zh": [
+    "AWS profile 快速切換",
+    "aws sso 自動 login",
+    "awsp 包裝",
+    "aws region 切換"
+  ],
+  "intents_en": [
+    "aws profile switch",
+    "aws sso auto login",
+    "awsp wrapper",
+    "aws region switch"
+  ],
+  "slots": [],
+  "code": "#!/usr/bin/env bash\n# awsp: pick profile + region via fzf, auto sso login\nset -euo pipefail\n\nprofile=$(aws configure list-profiles | fzf --prompt=\"profile> \" --height=40%)\n[ -z \"$profile\" ] && exit 0\n\nexport AWS_PROFILE=\"$profile\"\n\nif ! aws sts get-caller-identity >/dev/null 2>&1; then\n  echo \"sso login needed for $profile\"\n  aws sso login --profile \"$profile\"\nfi\n\nregion=$(aws configure get region --profile \"$profile\" || echo us-east-1)\necho \"export AWS_PROFILE=$profile\"\necho \"export AWS_REGION=$region\"\naws sts get-caller-identity",
+  "language": "bash",
+  "deps": [
+    "awscli",
+    "fzf"
+  ],
+  "summary_zh": "AWS profile fzf 切換並自動 sso login"
+}

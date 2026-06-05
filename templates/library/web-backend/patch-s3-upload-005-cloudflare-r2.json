@@ -1,0 +1,33 @@
+{
+  "id": "patch-s3-upload-005-cloudflare-r2",
+  "category": "web-backend/upload/cloudflare-r2",
+  "intents_zh": [
+    "上傳到 Cloudflare R2",
+    "R2 用 S3 SDK",
+    "Cloudflare R2 endpoint 設定",
+    "Node 傳檔到 R2",
+    "R2 presigned URL",
+    "R2 取代 S3 範例"
+  ],
+  "intents_en": [
+    "upload to cloudflare R2 with s3 sdk",
+    "R2 S3-compatible client config",
+    "cloudflare R2 putObject node",
+    "R2 presigned put url",
+    "use aws sdk for cloudflare R2",
+    "node cloudflare R2 upload example"
+  ],
+  "slots": [
+    "account_id",
+    "bucket_name",
+    "access_key_id",
+    "secret_access_key"
+  ],
+  "code": "import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';\nimport { getSignedUrl } from '@aws-sdk/s3-request-presigner';\n\nconst r2 = new S3Client({\n  region: 'auto',\n  endpoint: `https://{{account_id}}.r2.cloudflarestorage.com`,\n  credentials: {\n    accessKeyId: '{{access_key_id}}',\n    secretAccessKey: '{{secret_access_key}}',\n  },\n});\n\nexport async function putToR2(key: string, body: Buffer, contentType: string) {\n  await r2.send(new PutObjectCommand({\n    Bucket: '{{bucket_name}}',\n    Key: key,\n    Body: body,\n    ContentType: contentType,\n  }));\n}\n\nexport async function r2PresignedPut(key: string, contentType: string) {\n  const cmd = new PutObjectCommand({ Bucket: '{{bucket_name}}', Key: key, ContentType: contentType });\n  return await getSignedUrl(r2, cmd, { expiresIn: 600 });\n}",
+  "language": "ts",
+  "deps": [
+    "@aws-sdk/client-s3",
+    "@aws-sdk/s3-request-presigner"
+  ],
+  "summary_zh": "用 AWS SDK v3 連 Cloudflare R2 上傳跟簽 URL"
+}

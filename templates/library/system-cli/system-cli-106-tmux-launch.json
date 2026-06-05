@@ -1,0 +1,24 @@
+{
+  "id": "system-cli-106-tmux-launch",
+  "category": "system-cli/dev/tmux",
+  "intents_zh": [
+    "tmux session 一鍵起",
+    "開好幾個 pane",
+    "dev workspace tmux"
+  ],
+  "intents_en": [
+    "tmux launch session",
+    "dev workspace tmux",
+    "split panes script"
+  ],
+  "slots": [
+    "session_name",
+    "work_dir"
+  ],
+  "code": "#!/usr/bin/env bash\nset -euo pipefail\nS=\"{{session_name}}\"; D=\"{{work_dir}}\"\ntmux has-session -t \"$S\" 2>/dev/null && { tmux attach -t \"$S\"; exit 0; }\n\ntmux new-session -d -s \"$S\" -c \"$D\"\ntmux rename-window -t \"$S\":0 'edit'\ntmux send-keys -t \"$S\":0 'vim .' C-m\ntmux new-window -t \"$S\" -n 'server' -c \"$D\"\ntmux split-window -t \"$S\":1 -h -c \"$D\"\ntmux attach -t \"$S\"",
+  "language": "sh",
+  "deps": [
+    "tmux"
+  ],
+  "summary_zh": "tmux 一鍵工作區"
+}

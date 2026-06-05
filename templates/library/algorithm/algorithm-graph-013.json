@@ -1,0 +1,21 @@
+{
+  "id": "algorithm-graph-013",
+  "category": "algorithm/graph/grid_bfs",
+  "intents_zh": [
+    "格子 BFS",
+    "二維迷宮最短路",
+    "給我 grid bfs"
+  ],
+  "intents_en": [
+    "grid bfs",
+    "maze shortest path",
+    "2d bfs"
+  ],
+  "slots": [
+    "fn_name"
+  ],
+  "code": "from collections import deque\n\ndef {{fn_name}}(grid, start, end):\n    R, C = len(grid), len(grid[0])\n    q = deque([(start[0], start[1], 0)])\n    seen = {start}\n    while q:\n        r, c, d = q.popleft()\n        if (r, c) == end: return d\n        for dr, dc in ((-1,0),(1,0),(0,-1),(0,1)):\n            nr, nc = r+dr, c+dc\n            if 0<=nr<R and 0<=nc<C and grid[nr][nc] != '#' and (nr,nc) not in seen:\n                seen.add((nr,nc))\n                q.append((nr, nc, d+1))\n    return -1",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "二維迷宮 BFS 最短步數"
+}

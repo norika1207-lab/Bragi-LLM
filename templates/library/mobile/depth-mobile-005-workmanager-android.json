@@ -1,0 +1,28 @@
+{
+  "id": "depth-mobile-005-workmanager-android",
+  "category": "mobile/background/workmanager",
+  "intents_zh": [
+    "Android WorkManager",
+    "PeriodicWorkRequest",
+    "背景任務排程",
+    "Worker class",
+    "ExistingPeriodicWorkPolicy"
+  ],
+  "intents_en": [
+    "Android WorkManager",
+    "PeriodicWorkRequest",
+    "background job schedule",
+    "Worker class",
+    "ExistingPeriodicWorkPolicy"
+  ],
+  "slots": [
+    "worker_class",
+    "interval_min"
+  ],
+  "code": "val request = PeriodicWorkRequestBuilder<{{worker_class}}>({{interval_min}}, TimeUnit.MINUTES)\n    .setConstraints(Constraints.Builder().setRequiredNetworkType(NetworkType.CONNECTED).build())\n    .build()\nWorkManager.getInstance(context).enqueueUniquePeriodicWork(\n    \"{{worker_class}}\",\n    ExistingPeriodicWorkPolicy.KEEP,\n    request\n)",
+  "language": "kotlin",
+  "deps": [
+    "androidx.work:work-runtime-ktx"
+  ],
+  "summary_zh": "WorkManager 週期任務排程"
+}

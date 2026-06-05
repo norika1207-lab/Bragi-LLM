@@ -1,0 +1,31 @@
+{
+  "id": "firmware-019-esp32-mqtt-publish",
+  "category": "firmware/esp32/mqtt",
+  "intents_zh": [
+    "ESP32 MQTT 發布",
+    "publish 到 broker",
+    "MQTT 上傳資料",
+    "PubSubClient 範例",
+    "ESP32 推訊息"
+  ],
+  "intents_en": [
+    "ESP32 MQTT publish",
+    "send MQTT message",
+    "PubSubClient publish",
+    "publish to broker",
+    "MQTT sensor upload"
+  ],
+  "slots": [
+    "ssid",
+    "password",
+    "broker",
+    "topic",
+    "message"
+  ],
+  "code": "#include <WiFi.h>\n#include <PubSubClient.h>\nWiFiClient net;\nPubSubClient client(net);\n\nvoid setup() {\n  Serial.begin(115200);\n  WiFi.begin(\"{{ssid}}\", \"{{password}}\");\n  while (WiFi.status() != WL_CONNECTED) delay(300);\n  client.setServer(\"{{broker}}\", 1883);\n  while (!client.connect(\"esp32-client\")) delay(500);\n  client.publish(\"{{topic}}\", \"{{message}}\");\n}\n\nvoid loop() { client.loop(); }",
+  "language": "ino",
+  "deps": [
+    "PubSubClient"
+  ],
+  "summary_zh": "ESP32 透過 MQTT publish 訊息"
+}

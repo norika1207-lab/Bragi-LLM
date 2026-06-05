@@ -1,0 +1,26 @@
+{
+  "id": "firmware-082-arduino-relay",
+  "category": "firmware/arduino/actuator",
+  "intents_zh": [
+    "Arduino 繼電器",
+    "relay 控制",
+    "開關電器",
+    "relay module",
+    "控強電"
+  ],
+  "intents_en": [
+    "Arduino relay control",
+    "switch relay module",
+    "control AC device",
+    "relay on off",
+    "Arduino relay example"
+  ],
+  "slots": [
+    "relay_pin",
+    "interval"
+  ],
+  "code": "const int RELAY = {{relay_pin}};\n\nvoid setup() {\n  pinMode(RELAY, OUTPUT);\n}\n\nvoid loop() {\n  digitalWrite(RELAY, HIGH);\n  delay({{interval}});\n  digitalWrite(RELAY, LOW);\n  delay({{interval}});\n}",
+  "language": "ino",
+  "deps": [],
+  "summary_zh": "Arduino 繼電器週期開關"
+}

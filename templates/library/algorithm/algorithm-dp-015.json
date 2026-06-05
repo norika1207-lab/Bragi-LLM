@@ -1,0 +1,19 @@
+{
+  "id": "algorithm-dp-015",
+  "category": "algorithm/dp/longest_palindrome_subseq",
+  "intents_zh": [
+    "最長回文子序列",
+    "LPS dp"
+  ],
+  "intents_en": [
+    "longest palindromic subsequence",
+    "LPS dp"
+  ],
+  "slots": [
+    "fn_name"
+  ],
+  "code": "def {{fn_name}}(s):\n    n = len(s)\n    dp = [[0]*n for _ in range(n)]\n    for i in range(n): dp[i][i] = 1\n    for L in range(2, n+1):\n        for i in range(n - L + 1):\n            j = i + L - 1\n            if s[i] == s[j]:\n                dp[i][j] = (dp[i+1][j-1] if L > 2 else 0) + 2\n            else:\n                dp[i][j] = max(dp[i+1][j], dp[i][j-1])\n    return dp[0][n-1]",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "最長回文子序列長度"
+}

@@ -1,0 +1,23 @@
+{
+  "id": "algorithm-math-004",
+  "category": "algorithm/math/modpow",
+  "intents_zh": [
+    "快速冪",
+    "mod pow",
+    "給我 modpow",
+    "modular exponentiation"
+  ],
+  "intents_en": [
+    "modpow",
+    "fast exponentiation",
+    "modular exponentiation",
+    "power mod"
+  ],
+  "slots": [
+    "fn_name"
+  ],
+  "code": "def {{fn_name}}(base, exp, mod):\n    result = 1\n    base %= mod\n    while exp:\n        if exp & 1:\n            result = result * base % mod\n        base = base * base % mod\n        exp >>= 1\n    return result",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "模快速冪 O(log n)"
+}

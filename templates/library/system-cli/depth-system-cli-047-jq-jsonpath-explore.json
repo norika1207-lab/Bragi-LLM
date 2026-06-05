@@ -1,0 +1,25 @@
+{
+  "id": "depth-system-cli-047-jq-jsonpath-explore",
+  "category": "system-cli/json/explore",
+  "intents_zh": [
+    "jq 探索 JSON 路徑",
+    "列出所有 leaf path",
+    "jq 自動發現結構",
+    "JSON 結構探勘"
+  ],
+  "intents_en": [
+    "jq explore json paths",
+    "list all leaf paths",
+    "jq auto discover structure",
+    "json schema explore"
+  ],
+  "slots": [
+    "input_file"
+  ],
+  "code": "#!/usr/bin/env bash\nset -euo pipefail\n\nF=\"{{input_file}}\"\n\necho \"=== leaf paths with types ===\"\njq -r '\n  paths(scalars) as $p\n  | [($p | map(tostring) | join(\".\")), (getpath($p) | type)]\n  | @tsv\n' \"$F\" | sort -u\n\necho \"\"\necho \"=== sample values ===\"\njq -r '\n  paths(scalars) as $p\n  | [($p | map(tostring) | join(\".\")), (getpath($p) | tojson)]\n  | @tsv\n' \"$F\" | head -50",
+  "language": "bash",
+  "deps": [
+    "jq"
+  ],
+  "summary_zh": "jq 列 JSON 所有 leaf path + type + 樣本"
+}

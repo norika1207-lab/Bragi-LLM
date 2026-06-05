@@ -1,0 +1,33 @@
+{
+  "id": "llm-tools-036-llamaindex-rag",
+  "category": "llm-tools/llamaindex/rag",
+  "intents_zh": [
+    "llamaindex RAG",
+    "用 llamaindex 索引文件",
+    "llamaindex 範例",
+    "起一個 llamaindex",
+    "VectorStoreIndex 範例",
+    "llamaindex query engine",
+    "quick llamaindex",
+    "llamaindex doc qa"
+  ],
+  "intents_en": [
+    "llamaindex rag",
+    "vector store index example",
+    "llamaindex document qa",
+    "quick llamaindex",
+    "query engine example",
+    "llamaindex scaffold",
+    "minimal llamaindex",
+    "doc qa llamaindex"
+  ],
+  "slots": [
+    "docs_dir"
+  ],
+  "code": "from llama_index.core import VectorStoreIndex, SimpleDirectoryReader\n\ndocs = SimpleDirectoryReader(\"{{docs_dir}}\").load_data()\nindex = VectorStoreIndex.from_documents(docs)\nqe = index.as_query_engine()\n\nif __name__ == \"__main__\":\n    print(qe.query(\"summarize the docs\"))",
+  "language": "py",
+  "deps": [
+    "llama-index"
+  ],
+  "summary_zh": "LlamaIndex 目錄索引 + query engine"
+}

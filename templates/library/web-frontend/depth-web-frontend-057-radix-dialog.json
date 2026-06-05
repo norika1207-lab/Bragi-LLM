@@ -1,0 +1,27 @@
+{
+  "id": "depth-web-frontend-057-radix-dialog",
+  "category": "web-frontend/ui/dialog",
+  "intents_zh": [
+    "Radix Dialog",
+    "無障礙對話框",
+    "Modal 元件 react",
+    "Radix UI dialog",
+    "按 ESC 關閉"
+  ],
+  "intents_en": [
+    "radix dialog",
+    "accessible modal",
+    "react dialog component",
+    "radix ui",
+    "esc close modal"
+  ],
+  "slots": [
+    "component_name"
+  ],
+  "code": "'use client';\nimport * as Dialog from '@radix-ui/react-dialog';\n\nexport function {{component_name}}({ trigger, title, children }: { trigger: React.ReactNode; title: string; children: React.ReactNode }) {\n  return (\n    <Dialog.Root>\n      <Dialog.Trigger asChild>{trigger}</Dialog.Trigger>\n      <Dialog.Portal>\n        <Dialog.Overlay className=\"fixed inset-0 bg-black/40\" />\n        <Dialog.Content className=\"fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white p-6 rounded-xl shadow-xl w-[420px]\">\n          <Dialog.Title className=\"font-medium mb-2\">{title}</Dialog.Title>\n          {children}\n          <Dialog.Close className=\"mt-4 px-3 py-1 border rounded\">關閉</Dialog.Close>\n        </Dialog.Content>\n      </Dialog.Portal>\n    </Dialog.Root>\n  );\n}",
+  "language": "tsx",
+  "deps": [
+    "@radix-ui/react-dialog"
+  ],
+  "summary_zh": "Radix 無障礙對話框包裝"
+}

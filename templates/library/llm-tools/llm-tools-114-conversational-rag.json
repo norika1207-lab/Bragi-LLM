@@ -1,0 +1,36 @@
+{
+  "id": "llm-tools-114-conversational-rag",
+  "category": "llm-tools/rag/conversational",
+  "intents_zh": [
+    "對話式 RAG",
+    "多輪 RAG",
+    "rag + chat history",
+    "conversational rag",
+    "跟向量庫聊天",
+    "多輪知識檢索",
+    "chat rag",
+    "follow-up RAG"
+  ],
+  "intents_en": [
+    "conversational rag",
+    "multi-turn rag",
+    "rag with chat history",
+    "chat over docs",
+    "conversational retrieval",
+    "follow-up rag",
+    "interactive rag",
+    "chat rag wrapper"
+  ],
+  "slots": [
+    "model_name",
+    "embed_model"
+  ],
+  "code": "from openai import OpenAI\nfrom sentence_transformers import SentenceTransformer\nimport numpy as np\n\nclient = OpenAI()\nemb = SentenceTransformer(\"{{embed_model}}\")\nhistory, DOCS, VECS = [], [], None\n\ndef ingest(docs):\n    global DOCS, VECS\n    DOCS = docs; VECS = emb.encode(docs, normalize_embeddings=True)\n\ndef ask(q: str) -> str:\n    qv = emb.encode([q], normalize_embeddings=True)\n    ctx = \"\\n\".join(DOCS[i] for i in np.argsort(-(VECS @ qv.T).flatten())[:3])\n    history.append({\"role\": \"user\", \"content\": f\"Ctx:\\n{ctx}\\n\\n{q}\"})\n    r = client.chat.completions.create(model=\"{{model_name}}\", messages=history)\n    reply = r.choices[0].message.content\n    history.append({\"role\": \"assistant\", \"content\": reply})\n    return reply",
+  "language": "py",
+  "deps": [
+    "openai",
+    "sentence-transformers",
+    "numpy"
+  ],
+  "summary_zh": "帶歷史的對話式 RAG"
+}

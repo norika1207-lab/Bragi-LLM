@@ -1,0 +1,28 @@
+{
+  "id": "web-frontend-batch4-016-server-component-fetch",
+  "category": "web-frontend/nextjs/server-component/fetch",
+  "intents_zh": [
+    "server component 抓資料",
+    "RSC 直接 fetch",
+    "非同步伺服器元件",
+    "async page 拉 API",
+    "SSR 取得列表",
+    "server side 渲染清單"
+  ],
+  "intents_en": [
+    "server component fetch",
+    "async rsc data",
+    "ssr list page",
+    "server fetch list",
+    "async server component",
+    "rsc with api"
+  ],
+  "slots": [
+    "api_url",
+    "item_field"
+  ],
+  "code": "export default async function ListPage() {\n  const res = await fetch('{{api_url}}', { next: { revalidate: 60 } });\n  const items: any[] = await res.json();\n  return (\n    <ul className=\"p-6 space-y-2\">\n      {items.map((it, i) => (\n        <li key={i} className=\"border-b py-2\">{it.{{item_field}}}</li>\n      ))}\n    </ul>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "Async server component fetch 加 ISR"
+}

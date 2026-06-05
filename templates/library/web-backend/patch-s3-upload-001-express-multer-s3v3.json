@@ -1,0 +1,35 @@
+{
+  "id": "patch-s3-upload-001-express-multer-s3v3",
+  "category": "web-backend/upload/express-multer-s3",
+  "intents_zh": [
+    "Express 用 multer 上傳到 S3",
+    "Node 收檔直接丟 S3",
+    "express multer 接檔案上傳 S3 v3",
+    "後端接 multipart/form-data 存 S3",
+    "我要寫一個上傳 API 存到 S3",
+    "Express 上傳檔案到 AWS S3"
+  ],
+  "intents_en": [
+    "Express endpoint to upload file to S3",
+    "multer with aws sdk v3 s3 upload",
+    "node express receive file save to s3",
+    "upload multipart to s3 via express",
+    "implement file upload api to s3",
+    "express multer s3 v3 example",
+    "stream uploaded file to s3"
+  ],
+  "slots": [
+    "bucket_name",
+    "region",
+    "route_path",
+    "field_name"
+  ],
+  "code": "import express from 'express';\nimport multer from 'multer';\nimport { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';\nimport { randomUUID } from 'crypto';\n\nconst app = express();\nconst upload = multer({ storage: multer.memoryStorage(), limits: { fileSize: 20 * 1024 * 1024 } });\nconst s3 = new S3Client({ region: '{{region}}' });\n\napp.post('{{route_path}}', upload.single('{{field_name}}'), async (req, res) => {\n  if (!req.file) return res.status(400).json({ error: 'no file' });\n  const key = `uploads/${Date.now()}-${randomUUID()}-${req.file.originalname}`;\n  await s3.send(new PutObjectCommand({\n    Bucket: '{{bucket_name}}',\n    Key: key,\n    Body: req.file.buffer,\n    ContentType: req.file.mimetype,\n  }));\n  res.json({ key, bucket: '{{bucket_name}}' });\n});\n\napp.listen(3000);",
+  "language": "ts",
+  "deps": [
+    "express",
+    "multer",
+    "@aws-sdk/client-s3"
+  ],
+  "summary_zh": "Express + multer 接 multipart 上傳並用 AWS SDK v3 推到 S3"
+}

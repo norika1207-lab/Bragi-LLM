@@ -1,0 +1,21 @@
+{
+  "id": "system-cli-056-curl-healthcheck",
+  "category": "system-cli/net/healthcheck",
+  "intents_zh": [
+    "curl 健康檢查",
+    "API healthcheck script",
+    "檢查 http 200"
+  ],
+  "intents_en": [
+    "curl healthcheck",
+    "http health probe",
+    "verify endpoint 200"
+  ],
+  "slots": [
+    "url"
+  ],
+  "code": "#!/usr/bin/env bash\nset -euo pipefail\nURL=\"{{url}}\"\n\ncode=$(curl -s -o /tmp/hc.body -w '%{http_code}' --max-time 10 \"$URL\" || echo 000)\nif [[ \"$code\" != \"200\" ]]; then\n  echo \"unhealthy ($code)\" >&2\n  head -c 500 /tmp/hc.body >&2; echo\n  exit 1\nfi\necho 'ok 200'",
+  "language": "sh",
+  "deps": [],
+  "summary_zh": "curl 200 健康檢查"
+}

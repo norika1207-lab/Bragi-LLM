@@ -1,0 +1,33 @@
+{
+  "id": "llm-tools-122-typescript-anthropic",
+  "category": "llm-tools/client/ts-anthropic",
+  "intents_zh": [
+    "ts anthropic",
+    "node claude sdk",
+    "ts claude wrapper",
+    "用 ts 接 Claude",
+    "anthropic typescript",
+    "node anthropic",
+    "ts claude 範例",
+    "js claude"
+  ],
+  "intents_en": [
+    "ts anthropic client",
+    "node claude sdk",
+    "ts claude wrapper",
+    "typescript claude example",
+    "anthropic ts",
+    "node anthropic",
+    "js claude",
+    "minimal ts claude"
+  ],
+  "slots": [
+    "model_name"
+  ],
+  "code": "import Anthropic from \"@anthropic-ai/sdk\";\n\nconst client = new Anthropic();\n\nexport async function chat(prompt: string): Promise<string> {\n  const msg = await client.messages.create({\n    model: \"{{model_name}}\",\n    max_tokens: 512,\n    messages: [{ role: \"user\", content: prompt }],\n  });\n  const block = msg.content[0];\n  return block.type === \"text\" ? block.text : \"\";\n}\n\nchat(\"hi\").then(console.log);",
+  "language": "ts",
+  "deps": [
+    "@anthropic-ai/sdk"
+  ],
+  "summary_zh": "TypeScript Anthropic Claude 客戶端"
+}

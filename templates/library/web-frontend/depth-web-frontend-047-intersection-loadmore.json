@@ -1,0 +1,27 @@
+{
+  "id": "depth-web-frontend-047-intersection-loadmore",
+  "category": "web-frontend/data-fetching/pagination",
+  "intents_zh": [
+    "IntersectionObserver 載入",
+    "哨兵元素 load more",
+    "scroll bottom 抓更多",
+    "useInView 觸發",
+    "無限滾動觸發"
+  ],
+  "intents_en": [
+    "intersection observer load more",
+    "sentinel infinite scroll",
+    "scroll to bottom fetch",
+    "useInView trigger",
+    "auto load more"
+  ],
+  "slots": [
+    "hook_name"
+  ],
+  "code": "'use client';\nimport { useEffect, useRef } from 'react';\n\nexport function {{hook_name}}(onIntersect: () => void) {\n  const ref = useRef<HTMLDivElement>(null);\n  useEffect(() => {\n    const el = ref.current; if (!el) return;\n    const io = new IntersectionObserver(([e]) => { if (e.isIntersecting) onIntersect(); }, { rootMargin: '200px' });\n    io.observe(el);\n    return () => io.disconnect();\n  }, [onIntersect]);\n  return ref;\n}",
+  "language": "tsx",
+  "deps": [
+    "react"
+  ],
+  "summary_zh": "哨兵觸發載入更多 hook"
+}

@@ -1,0 +1,36 @@
+{
+  "id": "llm-tools-080-hyde-retrieval",
+  "category": "llm-tools/rag/hyde",
+  "intents_zh": [
+    "HyDE 檢索",
+    "hypothetical document embedding",
+    "HyDE 範例",
+    "先 LLM 生答再檢索",
+    "HyDE pipeline",
+    "retrieval hyde",
+    "以假答檢索",
+    "hyde rag"
+  ],
+  "intents_en": [
+    "hyde retrieval",
+    "hypothetical document embedding",
+    "hyde example",
+    "draft answer then retrieve",
+    "hyde rag",
+    "retrieval hyde",
+    "hyde pipeline",
+    "generate-then-retrieve"
+  ],
+  "slots": [
+    "model_name",
+    "embed_model"
+  ],
+  "code": "from sentence_transformers import SentenceTransformer\nfrom openai import OpenAI\nimport numpy as np\n\nllm = OpenAI()\nemb = SentenceTransformer(\"{{embed_model}}\")\n\ndef hyde(question: str, corpus: list[str], k: int = 4) -> list[str]:\n    draft = llm.chat.completions.create(\n        model=\"{{model_name}}\",\n        messages=[{\"role\": \"user\", \"content\": f\"Write a hypothetical answer to: {question}\"}],\n    ).choices[0].message.content\n    qv = emb.encode([draft], normalize_embeddings=True)\n    cv = emb.encode(corpus, normalize_embeddings=True)\n    idx = np.argsort(-(cv @ qv.T).flatten())[:k]\n    return [corpus[i] for i in idx]",
+  "language": "py",
+  "deps": [
+    "openai",
+    "sentence-transformers",
+    "numpy"
+  ],
+  "summary_zh": "HyDE 先生答後以答檢索"
+}

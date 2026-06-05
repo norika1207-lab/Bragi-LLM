@@ -1,0 +1,28 @@
+{
+  "id": "depth-mobile-012-share-rn",
+  "category": "mobile/share/reactnative",
+  "intents_zh": [
+    "RN Share API",
+    "跨平台分享",
+    "Share.share",
+    "分享文字到其他 App",
+    "share message"
+  ],
+  "intents_en": [
+    "RN Share API",
+    "cross platform share",
+    "Share.share",
+    "share text to other apps",
+    "share message"
+  ],
+  "slots": [
+    "message",
+    "share_url"
+  ],
+  "code": "import { Share } from 'react-native';\nawait Share.share({ message: '{{message}}', url: '{{share_url}}' }, { dialogTitle: 'Share' });",
+  "language": "ts",
+  "deps": [
+    "react-native"
+  ],
+  "summary_zh": "RN 分享面板"
+}

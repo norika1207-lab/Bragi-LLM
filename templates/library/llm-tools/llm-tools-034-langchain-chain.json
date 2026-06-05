@@ -1,0 +1,34 @@
+{
+  "id": "llm-tools-034-langchain-chain",
+  "category": "llm-tools/langchain/chain",
+  "intents_zh": [
+    "langchain LCEL 鏈",
+    "用 langchain 串 prompt",
+    "langchain runnable",
+    "prompt | llm | parser",
+    "langchain 範例",
+    "LCEL pipeline",
+    "langchain chain",
+    "快速起 langchain"
+  ],
+  "intents_en": [
+    "langchain lcel chain",
+    "langchain runnable",
+    "prompt llm parser pipe",
+    "langchain example",
+    "quick langchain",
+    "lcel pipeline",
+    "langchain compose",
+    "minimal langchain"
+  ],
+  "slots": [
+    "model_name"
+  ],
+  "code": "from langchain_openai import ChatOpenAI\nfrom langchain_core.prompts import ChatPromptTemplate\nfrom langchain_core.output_parsers import StrOutputParser\n\nprompt = ChatPromptTemplate.from_messages([(\"system\", \"You are helpful.\"), (\"user\", \"{q}\")])\nllm = ChatOpenAI(model=\"{{model_name}}\")\nchain = prompt | llm | StrOutputParser()\n\nif __name__ == \"__main__\":\n    print(chain.invoke({\"q\": \"hello\"}))",
+  "language": "py",
+  "deps": [
+    "langchain-openai",
+    "langchain-core"
+  ],
+  "summary_zh": "LangChain LCEL prompt+llm+parser 鏈"
+}

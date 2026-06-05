@@ -1,0 +1,21 @@
+{
+  "id": "database-devops-169-prisma-multifile-schema",
+  "category": "database-devops/orm/prisma",
+  "intents_zh": [
+    "prisma 多檔 schema",
+    "prisma schema folder",
+    "拆 prisma schema"
+  ],
+  "intents_en": [
+    "prisma multi-file schema",
+    "prisma schema folder",
+    "split prisma schema"
+  ],
+  "slots": [],
+  "code": "// schema.prisma (root)\ngenerator client {\n  provider        = \"prisma-client-js\"\n  previewFeatures = [\"prismaSchemaFolder\"]\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\n// prisma/schema/user.prisma\nmodel User {\n  id    Int    @id @default(autoincrement())\n  email String @unique\n  posts Post[]\n}\n\n// prisma/schema/post.prisma\nmodel Post {\n  id       Int    @id @default(autoincrement())\n  authorId Int\n  author   User   @relation(fields: [authorId], references: [id])\n}",
+  "language": "prisma",
+  "deps": [
+    "prisma"
+  ],
+  "summary_zh": "prisma 多檔 schema 拆分"
+}

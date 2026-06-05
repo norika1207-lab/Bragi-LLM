@@ -1,0 +1,32 @@
+{
+  "id": "depth-algorithm-020-a-star",
+  "category": "algorithm/search/astar",
+  "intents_zh": [
+    "A star 算法",
+    "A* 啟發式搜索",
+    "曼哈頓啟發式尋路",
+    "最短路 A star",
+    "網格 A star",
+    "heuristic search",
+    "A* 模板"
+  ],
+  "intents_en": [
+    "A star algorithm",
+    "heuristic search A*",
+    "A* pathfinding",
+    "grid A star",
+    "Manhattan heuristic",
+    "A star template",
+    "best first heuristic"
+  ],
+  "slots": [
+    "start",
+    "goal",
+    "neighbors_fn",
+    "heuristic_fn"
+  ],
+  "code": "import heapq\n\ndef a_star(start={{start}}, goal={{goal}}, neighbors={{neighbors_fn}}, h={{heuristic_fn}}):\n    open_set = [(h(start, goal), 0, start, None)]\n    came = {}; g_score = {start: 0}\n    while open_set:\n        f, g, cur, parent = heapq.heappop(open_set)\n        if cur in came: continue\n        came[cur] = parent\n        if cur == goal:\n            path = [cur]\n            while came[path[-1]] is not None: path.append(came[path[-1]])\n            return path[::-1], g\n        for nb, w in neighbors(cur):\n            ng = g + w\n            if ng < g_score.get(nb, float('inf')):\n                g_score[nb] = ng\n                heapq.heappush(open_set, (ng + h(nb, goal), ng, nb, cur))\n    return None, float('inf')",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "A* 啟發式最短路徑搜索通用模板"
+}

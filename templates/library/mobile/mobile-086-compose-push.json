@@ -1,0 +1,29 @@
+{
+  "id": "mobile-086-compose-push",
+  "category": "mobile/compose/push",
+  "intents_zh": [
+    "Compose 推播權限",
+    "Android 13 通知權限",
+    "Compose POST_NOTIFICATIONS",
+    "Compose request notification",
+    "Android Compose push perm",
+    "Compose 推播權限請求",
+    "FCM 註冊 Kotlin"
+  ],
+  "intents_en": [
+    "compose notification permission",
+    "android 13 POST_NOTIFICATIONS",
+    "compose request notification permission",
+    "android compose push permission",
+    "notification permission kotlin",
+    "compose notification setup",
+    "fcm permission compose"
+  ],
+  "slots": [],
+  "code": "import android.Manifest\nimport android.os.Build\nimport androidx.activity.compose.rememberLauncherForActivityResult\nimport androidx.activity.result.contract.ActivityResultContracts\nimport androidx.compose.material3.Button\nimport androidx.compose.material3.Text\nimport androidx.compose.runtime.Composable\n@Composable\nfun AskNotif(){\n  val l=rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()){}\n  Button(onClick={if(Build.VERSION.SDK_INT>=33)l.launch(Manifest.permission.POST_NOTIFICATIONS)}){Text(\"Allow notifications\")}}",
+  "language": "kt",
+  "deps": [
+    "androidx.activity:activity-compose"
+  ],
+  "summary_zh": "Compose Android 13 推播權限請求"
+}

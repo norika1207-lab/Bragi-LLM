@@ -1,0 +1,24 @@
+{
+  "id": "depth-database-devops-041-pg-backup-pgbackrest",
+  "category": "database-devops/postgres/backup",
+  "intents_zh": [
+    "pgbackrest 設定",
+    "incremental 備份",
+    "point in time recovery"
+  ],
+  "intents_en": [
+    "pgbackrest config",
+    "incremental backup",
+    "PITR"
+  ],
+  "slots": [
+    "stash_path",
+    "cluster_name"
+  ],
+  "code": "[global]\nrepo1-path={{stash_path}}\nrepo1-retention-full=2\nrepo1-retention-diff=7\nstart-fast=y\ncompress-type=zst\n\n[{{cluster_name}}]\npg1-path=/var/lib/postgresql/16/main\npg1-port=5432",
+  "language": "ini",
+  "deps": [
+    "pgbackrest"
+  ],
+  "summary_zh": "pgbackrest 設定,保留 2 full + 7 diff,zst 壓縮"
+}

@@ -1,0 +1,25 @@
+{
+  "id": "depth-system-cli-035-docker-cleanup",
+  "category": "system-cli/docker/cleanup",
+  "intents_zh": [
+    "docker 清理腳本",
+    "清 dangling image",
+    "清舊 volume",
+    "docker 空間回收"
+  ],
+  "intents_en": [
+    "docker cleanup script",
+    "prune dangling images",
+    "remove old volumes",
+    "docker disk reclaim"
+  ],
+  "slots": [
+    "age_hours"
+  ],
+  "code": "#!/usr/bin/env bash\nset -euo pipefail\n\necho \"=== before ===\"; docker system df\n\ndocker container prune -f --filter \"until={{age_hours}}h\"\ndocker image prune -af --filter \"until={{age_hours}}h\"\ndocker volume ls -qf dangling=true | xargs -r docker volume rm\ndocker network prune -f\ndocker builder prune -af --filter \"unused-for={{age_hours}}h\"\n\necho \"=== after ===\"; docker system df",
+  "language": "bash",
+  "deps": [
+    "docker"
+  ],
+  "summary_zh": "docker 安全清理含 age filter"
+}

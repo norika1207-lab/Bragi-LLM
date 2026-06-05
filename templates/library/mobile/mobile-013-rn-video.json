@@ -1,0 +1,31 @@
+{
+  "id": "mobile-013-rn-video",
+  "category": "mobile/rn/media",
+  "intents_zh": [
+    "RN 播放影片",
+    "React Native video player",
+    "expo-av 播片",
+    "RN 影片元件",
+    "影片播放 RN",
+    "video 元件 RN",
+    "播 mp4 RN"
+  ],
+  "intents_en": [
+    "rn video player",
+    "react native play video",
+    "expo-av video",
+    "video component rn",
+    "play mp4 rn",
+    "video playback rn",
+    "stream video rn"
+  ],
+  "slots": [
+    "video_url"
+  ],
+  "code": "import React,{useRef} from 'react';\nimport {Video,ResizeMode} from 'expo-av';\nimport {View,Button} from 'react-native';\nexport default function V(){\n  const ref=useRef<Video>(null);\n  return(<View style={{flex:1}}><Video ref={ref} source={{uri:'{{video_url}}'}} useNativeControls resizeMode={ResizeMode.CONTAIN} style={{flex:1}}/><Button title='Play' onPress={()=>ref.current?.playAsync()}/></View>);}",
+  "language": "tsx",
+  "deps": [
+    "expo-av"
+  ],
+  "summary_zh": "expo-av 播放遠端影片含原生控制條"
+}

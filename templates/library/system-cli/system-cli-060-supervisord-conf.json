@@ -1,0 +1,23 @@
+{
+  "id": "system-cli-060-supervisord-conf",
+  "category": "system-cli/daemon/supervisord",
+  "intents_zh": [
+    "supervisor 設定",
+    "supervisord 跑服務",
+    "托管 python script"
+  ],
+  "intents_en": [
+    "supervisord program config",
+    "run with supervisor",
+    "supervisord template"
+  ],
+  "slots": [
+    "program_name",
+    "command",
+    "user_name"
+  ],
+  "code": "[program:{{program_name}}]\ncommand={{command}}\nautostart=true\nautorestart=true\nstartsecs=5\nstartretries=3\nuser={{user_name}}\nstdout_logfile=/var/log/{{program_name}}.log\nstderr_logfile=/var/log/{{program_name}}.err\nenvironment=PYTHONUNBUFFERED=\"1\"",
+  "language": "conf",
+  "deps": [],
+  "summary_zh": "supervisord program 區段"
+}

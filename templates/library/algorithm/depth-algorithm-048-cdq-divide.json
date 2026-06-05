@@ -1,0 +1,29 @@
+{
+  "id": "depth-algorithm-048-cdq-divide",
+  "category": "algorithm/divide/cdq",
+  "intents_zh": [
+    "CDQ 分治",
+    "三維偏序",
+    "cdq 分治模板",
+    "離線分治 cdq",
+    "逆序對 cdq",
+    "二維逆序對",
+    "三維逆序對"
+  ],
+  "intents_en": [
+    "CDQ divide and conquer",
+    "three dimensional partial order",
+    "cdq template",
+    "offline divide conquer",
+    "inversion count cdq",
+    "2D inversion",
+    "3D dominance counting"
+  ],
+  "slots": [
+    "points"
+  ],
+  "code": "def cdq(points={{points}}):\n    points.sort(key=lambda p: (p[0], p[1], p[2]))\n    n = len(points); ans = [0]*n\n    def solve(l, r):\n        if r - l <= 1: return\n        m = (l+r)//2\n        solve(l, m); solve(m, r)\n        left = sorted(points[l:m], key=lambda p: p[1])\n        right = sorted(points[m:r], key=lambda p: p[1])\n        bit = [0]*(max(p[2] for p in points)+2)\n        def upd(i, v):\n            while i < len(bit): bit[i] += v; i += i & -i\n        def qry(i):\n            s = 0\n            while i > 0: s += bit[i]; i -= i & -i\n            return s\n        i = 0\n        for rp in right:\n            while i < len(left) and left[i][1] <= rp[1]:\n                upd(left[i][2]+1, 1); i += 1\n            ans[points.index(rp)] += qry(rp[2]+1)\n        for j in range(i): upd(left[j][2]+1, -1)\n    solve(0, n)\n    return ans",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "CDQ 分治處理三維偏序計數"
+}

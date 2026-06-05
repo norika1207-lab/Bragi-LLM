@@ -1,0 +1,26 @@
+{
+  "id": "depth-system-cli-005-fzf-git-branch",
+  "category": "system-cli/selector/fzf",
+  "intents_zh": [
+    "fzf 切 git 分支",
+    "互動選分支 checkout",
+    "fzf 包 git branch",
+    "快速切換分支",
+    "fzf branch preview"
+  ],
+  "intents_en": [
+    "fzf git branch switch",
+    "interactive checkout",
+    "fzf wrap git branch",
+    "fast branch switcher",
+    "fzf branch preview"
+  ],
+  "slots": [],
+  "code": "#!/usr/bin/env bash\nset -euo pipefail\n\nbranch=$(git branch --all --color=never \\\n  | grep -v HEAD \\\n  | sed 's/^[* ] //;s|remotes/origin/||' \\\n  | sort -u \\\n  | fzf --preview 'git log --oneline --color=always -20 {}' --height=60%)\n\n[ -n \"$branch\" ] && git checkout \"$branch\"",
+  "language": "bash",
+  "deps": [
+    "fzf",
+    "git"
+  ],
+  "summary_zh": "fzf 互動切換 git 分支含 log preview"
+}

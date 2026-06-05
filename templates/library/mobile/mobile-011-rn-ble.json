@@ -1,0 +1,31 @@
+{
+  "id": "mobile-011-rn-ble",
+  "category": "mobile/rn/ble",
+  "intents_zh": [
+    "RN BLE 掃描",
+    "React Native 藍牙掃描",
+    "掃藍牙裝置 RN",
+    "react-native-ble-plx 範例",
+    "RN ble 設備列表",
+    "藍芽周邊掃描 RN",
+    "BLE scan RN"
+  ],
+  "intents_en": [
+    "RN BLE scan",
+    "react native bluetooth scan",
+    "ble-plx example",
+    "scan bluetooth devices rn",
+    "bluetooth peripherals rn",
+    "ble scanner rn",
+    "react native bluetooth"
+  ],
+  "slots": [
+    "scan_seconds"
+  ],
+  "code": "import {BleManager,Device} from 'react-native-ble-plx';\nconst mgr=new BleManager();\nexport function scanBle(onFound:(d:Device)=>void){\n  const seen=new Set<string>();\n  mgr.startDeviceScan(null,null,(err,d)=>{if(err||!d)return;if(seen.has(d.id))return;seen.add(d.id);onFound(d);});\n  setTimeout(()=>mgr.stopDeviceScan(),{{scan_seconds}}*1000);}",
+  "language": "ts",
+  "deps": [
+    "react-native-ble-plx"
+  ],
+  "summary_zh": "ble-plx 掃描周邊藍牙裝置 N 秒"
+}

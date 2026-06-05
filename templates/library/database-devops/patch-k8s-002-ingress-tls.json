@@ -1,0 +1,37 @@
+{
+  "id": "patch-k8s-002-ingress-tls",
+  "category": "database-devops/kubernetes/networking",
+  "intents_zh": [
+    "寫一個 ingress 含 TLS 設定",
+    "k8s ingress 加 https 憑證",
+    "幫我配 ingress 跟 cert-manager",
+    "我要 ingress tls 模板",
+    "ingress 走 https 怎麼寫",
+    "弄個 ingress 帶 letsencrypt"
+  ],
+  "intents_en": [
+    "create ingress with TLS",
+    "k8s ingress https cert-manager",
+    "ingress yaml with tls termination",
+    "letsencrypt ingress template",
+    "https ingress for kubernetes",
+    "generate ingress with certificate"
+  ],
+  "slots": [
+    "ingress_name",
+    "namespace",
+    "host",
+    "service_name",
+    "service_port",
+    "tls_secret_name",
+    "cluster_issuer"
+  ],
+  "code": "apiVersion: networking.k8s.io/v1\nkind: Ingress\nmetadata:\n  name: {{ingress_name}}\n  namespace: {{namespace}}\n  annotations:\n    cert-manager.io/cluster-issuer: {{cluster_issuer}}\n    nginx.ingress.kubernetes.io/ssl-redirect: \"true\"\nspec:\n  ingressClassName: nginx\n  tls:\n    - hosts:\n        - {{host}}\n      secretName: {{tls_secret_name}}\n  rules:\n    - host: {{host}}\n      http:\n        paths:\n          - path: /\n            pathType: Prefix\n            backend:\n              service:\n                name: {{service_name}}\n                port:\n                  number: {{service_port}}\n",
+  "language": "yaml",
+  "deps": [
+    "kubernetes",
+    "ingress-nginx",
+    "cert-manager"
+  ],
+  "summary_zh": "Ingress 走 cert-manager 自動簽 TLS 憑證、走 nginx ingress class"
+}

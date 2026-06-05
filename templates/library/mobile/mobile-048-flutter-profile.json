@@ -1,0 +1,33 @@
+{
+  "id": "mobile-048-flutter-profile",
+  "category": "mobile/flutter/profile",
+  "intents_zh": [
+    "Flutter 個人頁",
+    "flutter profile screen",
+    "flutter user profile",
+    "個人檔案 flutter",
+    "flutter 我的頁",
+    "頭像 bio flutter",
+    "flutter account page"
+  ],
+  "intents_en": [
+    "flutter profile screen",
+    "flutter user profile",
+    "profile ui flutter",
+    "my page flutter",
+    "flutter avatar bio",
+    "flutter account screen",
+    "profile template flutter"
+  ],
+  "slots": [
+    "avatar_url",
+    "name",
+    "bio"
+  ],
+  "code": "import 'package:flutter/material.dart';\nclass P extends StatelessWidget{const P({super.key});\n  @override Widget build(BuildContext c)=>Scaffold(body:Center(child:Column(mainAxisSize:MainAxisSize.min,children:[CircleAvatar(radius:60,backgroundImage:NetworkImage('{{avatar_url}}')),const SizedBox(height:12),const Text('{{name}}',style:TextStyle(fontSize:20,fontWeight:FontWeight.w600)),const SizedBox(height:8),const Padding(padding:EdgeInsets.symmetric(horizontal:24),child:Text('{{bio}}',textAlign:TextAlign.center))])));}",
+  "language": "dart",
+  "deps": [
+    "flutter"
+  ],
+  "summary_zh": "Flutter 個人檔案頁含頭像 bio"
+}

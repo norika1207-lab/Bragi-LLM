@@ -1,0 +1,24 @@
+{
+  "id": "algorithm-ml-015",
+  "category": "algorithm/ml/decision_tree",
+  "intents_zh": [
+    "決策樹",
+    "decision tree",
+    "sklearn 決策樹"
+  ],
+  "intents_en": [
+    "decision tree",
+    "sklearn DT",
+    "decision tree classifier"
+  ],
+  "slots": [
+    "X_train",
+    "y_train"
+  ],
+  "code": "from sklearn.tree import DecisionTreeClassifier\n\nclf = DecisionTreeClassifier(max_depth=5, random_state=0)\nclf.fit({{X_train}}, {{y_train}})\nprint('train acc:', clf.score({{X_train}}, {{y_train}}))",
+  "language": "py",
+  "deps": [
+    "scikit-learn"
+  ],
+  "summary_zh": "sklearn 決策樹分類"
+}

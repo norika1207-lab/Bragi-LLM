@@ -1,0 +1,28 @@
+{
+  "id": "depth-web-frontend-027-file-picker-preview",
+  "category": "web-frontend/media/file-picker",
+  "intents_zh": [
+    "檔案上傳預覽",
+    "圖片預覽 picker",
+    "input file 縮圖",
+    "拖曳上傳預覽",
+    "ObjectURL 預覽"
+  ],
+  "intents_en": [
+    "file input preview",
+    "image preview picker",
+    "drag drop upload preview",
+    "object url preview",
+    "upload thumbnail"
+  ],
+  "slots": [
+    "component_name",
+    "accept"
+  ],
+  "code": "'use client';\nimport { useState } from 'react';\n\nexport function {{component_name}}() {\n  const [previews, setPreviews] = useState<{ url: string; name: string }[]>([]);\n  function onPick(e: React.ChangeEvent<HTMLInputElement>) {\n    const files = Array.from(e.target.files ?? []);\n    setPreviews(files.map(f => ({ url: URL.createObjectURL(f), name: f.name })));\n  }\n  return (\n    <div>\n      <input type=\"file\" accept=\"{{accept}}\" multiple onChange={onPick} />\n      <div style={{ display:'flex', gap:8, flexWrap:'wrap' }}>\n        {previews.map(p => (\n          <figure key={p.url}><img src={p.url} alt={p.name} style={{ width:120, height:120, objectFit:'cover' }} /><figcaption>{p.name}</figcaption></figure>\n        ))}\n      </div>\n    </div>\n  );\n}",
+  "language": "tsx",
+  "deps": [
+    "react"
+  ],
+  "summary_zh": "檔案多選 + 縮圖預覽"
+}

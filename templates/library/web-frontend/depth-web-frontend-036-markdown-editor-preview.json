@@ -1,0 +1,28 @@
+{
+  "id": "depth-web-frontend-036-markdown-editor-preview",
+  "category": "web-frontend/editors/markdown",
+  "intents_zh": [
+    "Markdown 編輯器加預覽",
+    "左寫右看 markdown",
+    "react-markdown 預覽",
+    "md editor",
+    "即時 markdown"
+  ],
+  "intents_en": [
+    "markdown editor preview",
+    "split markdown editor",
+    "react-markdown preview",
+    "live markdown",
+    "md editor"
+  ],
+  "slots": [
+    "component_name"
+  ],
+  "code": "'use client';\nimport ReactMarkdown from 'react-markdown';\nimport remarkGfm from 'remark-gfm';\nimport { useState } from 'react';\n\nexport function {{component_name}}({ initial = '' }: { initial?: string }) {\n  const [md, setMd] = useState(initial);\n  return (\n    <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:12 }}>\n      <textarea value={md} onChange={e => setMd(e.target.value)} style={{ minHeight:320, fontFamily:'monospace' }} />\n      <article className=\"prose\"><ReactMarkdown remarkPlugins={[remarkGfm]}>{md}</ReactMarkdown></article>\n    </div>\n  );\n}",
+  "language": "tsx",
+  "deps": [
+    "react-markdown",
+    "remark-gfm"
+  ],
+  "summary_zh": "Markdown 雙欄即時預覽編輯器"
+}

@@ -1,0 +1,29 @@
+{
+  "id": "web-backend-129-express-fts",
+  "category": "web-backend/express/search",
+  "intents_zh": [
+    "postgres 全文搜尋",
+    "express tsvector 查詢",
+    "fts search api",
+    "ts_rank 排序",
+    "node 全文搜尋"
+  ],
+  "intents_en": [
+    "postgres full text search",
+    "express tsvector query",
+    "FTS search api",
+    "ts_rank ranking",
+    "node full text search"
+  ],
+  "slots": [
+    "table_name",
+    "search_col"
+  ],
+  "code": "const { pool } = require('./db');\nconst express = require('express');\nconst router = express.Router();\n\nrouter.get('/search', async (req, res) => {\n  const q = (req.query.q || '').trim();\n  if (!q) return res.json({ data: [] });\n  const { rows } = await pool.query(`\n    SELECT *, ts_rank(to_tsvector('simple', {{search_col}}), plainto_tsquery('simple', $1)) AS rank\n    FROM {{table_name}}\n    WHERE to_tsvector('simple', {{search_col}}) @@ plainto_tsquery('simple', $1)\n    ORDER BY rank DESC LIMIT 50\n  `, [q]);\n  res.json({ data: rows });\n});\n\nmodule.exports = router;",
+  "language": "js",
+  "deps": [
+    "express",
+    "pg"
+  ],
+  "summary_zh": "Express Postgres FTS 搜尋"
+}

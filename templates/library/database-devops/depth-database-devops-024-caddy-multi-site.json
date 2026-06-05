@@ -1,0 +1,26 @@
+{
+  "id": "depth-database-devops-024-caddy-multi-site",
+  "category": "database-devops/proxy/caddy",
+  "intents_zh": [
+    "Caddy 多站點",
+    "共用 snippet",
+    "caddyfile import"
+  ],
+  "intents_en": [
+    "Caddy multi-site",
+    "shared snippet",
+    "caddyfile import"
+  ],
+  "slots": [
+    "site_a",
+    "upstream_a",
+    "site_b",
+    "upstream_b"
+  ],
+  "code": "(common) {\n    encode gzip\n    header Strict-Transport-Security \"max-age=31536000\"\n}\n\n{{site_a}} {\n    import common\n    reverse_proxy {{upstream_a}}\n}\n\n{{site_b}} {\n    import common\n    reverse_proxy {{upstream_b}}\n}",
+  "language": "caddyfile",
+  "deps": [
+    "caddy"
+  ],
+  "summary_zh": "Caddy 多站點共用 snippet 區塊"
+}

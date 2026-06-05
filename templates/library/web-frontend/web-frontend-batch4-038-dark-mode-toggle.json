@@ -1,0 +1,27 @@
+{
+  "id": "web-frontend-batch4-038-dark-mode-toggle",
+  "category": "web-frontend/react/components/dark-mode",
+  "intents_zh": [
+    "深色模式切換",
+    "dark mode toggle",
+    "tailwind dark",
+    "theme 切換按鈕",
+    "html class dark",
+    "切換主題"
+  ],
+  "intents_en": [
+    "dark mode toggle",
+    "tailwind dark mode",
+    "theme toggle button",
+    "html class dark",
+    "switch theme",
+    "light dark switch"
+  ],
+  "slots": [],
+  "code": "'use client';\nimport { useEffect, useState } from 'react';\n\nexport default function DarkModeToggle() {\n  const [dark, setDark] = useState(false);\n  useEffect(() => {\n    document.documentElement.classList.toggle('dark', dark);\n  }, [dark]);\n  return (\n    <button onClick={() => setDark(!dark)} className=\"px-3 py-1 border rounded\">\n      {dark ? 'Light' : 'Dark'}\n    </button>\n  );\n}",
+  "language": "tsx",
+  "deps": [
+    "react"
+  ],
+  "summary_zh": "切換 html.dark 類別的深色模式按鈕"
+}

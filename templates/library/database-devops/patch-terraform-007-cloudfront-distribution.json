@@ -1,0 +1,35 @@
+{
+  "id": "patch-terraform-007-cloudfront-distribution",
+  "category": "database-devops/terraform/aws-cdn",
+  "intents_zh": [
+    "terraform 部署 cloudfront 接 s3 origin",
+    "tf 設定 CDN 給 static website",
+    "用 terraform 開 cloudfront distribution",
+    "幫我寫 s3 + cloudfront 靜態站範本",
+    "Terraform CloudFront 加 OAC 存取 S3",
+    "tf 起 cdn 加快靜態檔分發",
+    "cloudfront origin s3 tf 範例"
+  ],
+  "intents_en": [
+    "terraform cloudfront distribution with s3 origin",
+    "cdn for static site in tf",
+    "cloudfront oac s3 terraform",
+    "deploy aws cloudfront with terraform",
+    "s3 static site cdn module tf",
+    "provision cloudfront in front of s3 bucket",
+    "tf cloudfront distribution config"
+  ],
+  "slots": [
+    "distribution_comment",
+    "s3_bucket_domain",
+    "origin_id",
+    "default_root"
+  ],
+  "code": "resource \"aws_cloudfront_origin_access_control\" \"this\" {\n  name                              = \"{{origin_id}}-oac\"\n  origin_access_control_origin_type = \"s3\"\n  signing_behavior                  = \"always\"\n  signing_protocol                  = \"sigv4\"\n}\n\nresource \"aws_cloudfront_distribution\" \"this\" {\n  enabled             = true\n  is_ipv6_enabled     = true\n  comment             = \"{{distribution_comment}}\"\n  default_root_object = \"{{default_root}}\"\n\n  origin {\n    domain_name              = \"{{s3_bucket_domain}}\"\n    origin_id                = \"{{origin_id}}\"\n    origin_access_control_id = aws_cloudfront_origin_access_control.this.id\n  }\n\n  default_cache_behavior {\n    target_origin_id       = \"{{origin_id}}\"\n    viewer_protocol_policy = \"redirect-to-https\"\n    allowed_methods        = [\"GET\", \"HEAD\"]\n    cached_methods         = [\"GET\", \"HEAD\"]\n    compress               = true\n\n    forwarded_values {\n      query_string = false\n      cookies { forward = \"none\" }\n    }\n\n    min_ttl     = 0\n    default_ttl = 3600\n    max_ttl     = 86400\n  }\n\n  restrictions {\n    geo_restriction { restriction_type = \"none\" }\n  }\n\n  viewer_certificate {\n    cloudfront_default_certificate = true\n  }\n}",
+  "language": "hcl",
+  "deps": [
+    "terraform",
+    "hashicorp/aws"
+  ],
+  "summary_zh": "Terraform 部署 CloudFront 分發以 OAC 串接 S3 靜態網站。"
+}

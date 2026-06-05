@@ -1,0 +1,21 @@
+{
+  "id": "system-cli-010-bash-getopts",
+  "category": "system-cli/shell/bash",
+  "intents_zh": [
+    "bash 解析參數 getopts",
+    "shell script 接 flag",
+    "bash CLI 骨架"
+  ],
+  "intents_en": [
+    "bash getopts template",
+    "shell script with flags",
+    "bash CLI skeleton"
+  ],
+  "slots": [
+    "script_name"
+  ],
+  "code": "#!/usr/bin/env bash\nset -euo pipefail\n\nusage() { echo \"usage: {{script_name}} [-i input] [-o output] [-v]\"; exit 1; }\n\ninput=\"\"; output=\"\"; verbose=0\nwhile getopts \":i:o:vh\" opt; do\n  case \"$opt\" in\n    i) input=\"$OPTARG\" ;;\n    o) output=\"$OPTARG\" ;;\n    v) verbose=1 ;;\n    h|*) usage ;;\n  esac\ndone\n\n[[ -z \"$input\" || -z \"$output\" ]] && usage\n[[ $verbose -eq 1 ]] && echo \"in=$input out=$output\"\ncp \"$input\" \"$output\"",
+  "language": "sh",
+  "deps": [],
+  "summary_zh": "bash getopts 解析旗標"
+}

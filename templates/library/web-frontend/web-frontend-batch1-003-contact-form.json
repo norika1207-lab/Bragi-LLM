@@ -1,0 +1,28 @@
+{
+  "id": "web-frontend-batch1-003-contact-form",
+  "category": "web-frontend/react/forms/contact",
+  "intents_zh": [
+    "聯絡我們表單",
+    "contact form React",
+    "給我 contact us 表單",
+    "發送訊息表單",
+    "客服聯絡 form",
+    "name email message 表單"
+  ],
+  "intents_en": [
+    "contact us form",
+    "contact form react",
+    "feedback form",
+    "message form",
+    "get in touch form",
+    "name email message form"
+  ],
+  "slots": [
+    "component_name",
+    "endpoint"
+  ],
+  "code": "import { useState } from 'react';\n\nexport default function {{component_name}}() {\n  const [data, setData] = useState({ name: '', email: '', message: '' });\n  const [sent, setSent] = useState(false);\n\n  async function onSubmit(e: React.FormEvent) {\n    e.preventDefault();\n    await fetch('{{endpoint}}', {\n      method: 'POST',\n      headers: { 'Content-Type': 'application/json' },\n      body: JSON.stringify(data),\n    });\n    setSent(true);\n  }\n\n  if (sent) return <p>Thanks, we will get back to you.</p>;\n\n  return (\n    <form onSubmit={onSubmit}>\n      <input value={data.name} onChange={(e) => setData({ ...data, name: e.target.value })} placeholder=\"Name\" required />\n      <input type=\"email\" value={data.email} onChange={(e) => setData({ ...data, email: e.target.value })} placeholder=\"Email\" required />\n      <textarea value={data.message} onChange={(e) => setData({ ...data, message: e.target.value })} placeholder=\"Message\" required />\n      <button type=\"submit\">Send</button>\n    </form>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "聯絡我們表單含送出後感謝態"
+}

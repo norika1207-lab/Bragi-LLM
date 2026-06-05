@@ -1,0 +1,22 @@
+{
+  "id": "depth-database-devops-043-pg-row-level-security",
+  "category": "database-devops/postgres/security",
+  "intents_zh": [
+    "postgres RLS 範例",
+    "row level security policy",
+    "多租戶隔離"
+  ],
+  "intents_en": [
+    "postgres RLS example",
+    "row level security policy",
+    "multi-tenant isolation"
+  ],
+  "slots": [
+    "table_name",
+    "tenant_col"
+  ],
+  "code": "ALTER TABLE {{table_name}} ENABLE ROW LEVEL SECURITY;\n\nCREATE POLICY tenant_isolation ON {{table_name}}\n  USING ({{tenant_col}} = current_setting('app.tenant_id')::int);\n\n-- 應用層每次連線後:\n-- SET app.tenant_id = 42;",
+  "language": "sql",
+  "deps": [],
+  "summary_zh": "用 RLS + session GUC 做多租戶隔離"
+}

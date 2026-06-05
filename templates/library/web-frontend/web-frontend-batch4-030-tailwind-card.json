@@ -1,0 +1,29 @@
+{
+  "id": "web-frontend-batch4-030-tailwind-card",
+  "category": "web-frontend/react/components/card",
+  "intents_zh": [
+    "卡片元件",
+    "tailwind card",
+    "產品卡",
+    "商品卡片",
+    "圖文卡",
+    "reusable card 元件"
+  ],
+  "intents_en": [
+    "card component",
+    "tailwind card",
+    "product card",
+    "image card",
+    "reusable card",
+    "content card"
+  ],
+  "slots": [
+    "card_title",
+    "card_body",
+    "card_image"
+  ],
+  "code": "export default function Card() {\n  return (\n    <div className=\"max-w-sm rounded-xl overflow-hidden shadow-md bg-white\">\n      <img src=\"{{card_image}}\" alt=\"\" className=\"w-full h-48 object-cover\" />\n      <div className=\"p-4\">\n        <h3 className=\"text-lg font-semibold\">{{card_title}}</h3>\n        <p className=\"text-gray-600 mt-2 text-sm\">{{card_body}}</p>\n      </div>\n    </div>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "圖文卡片元件"
+}

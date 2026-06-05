@@ -1,0 +1,25 @@
+{
+  "id": "web-backend-071-koa-middleware",
+  "category": "web-backend/koa/middleware",
+  "intents_zh": [
+    "koa 自訂 middleware",
+    "加 logger middleware koa",
+    "koa response time",
+    "koa context middleware",
+    "async middleware koa"
+  ],
+  "intents_en": [
+    "koa custom middleware",
+    "koa logger middleware",
+    "koa response time",
+    "koa context middleware",
+    "async middleware koa"
+  ],
+  "slots": [],
+  "code": "async function responseTime(ctx, next) {\n  const start = Date.now();\n  await next();\n  const ms = Date.now() - start;\n  ctx.set('X-Response-Time', `${ms}ms`);\n}\n\nasync function logger(ctx, next) {\n  await next();\n  const rt = ctx.response.get('X-Response-Time');\n  console.log(`${ctx.method} ${ctx.url} ${ctx.status} - ${rt}`);\n}\n\nmodule.exports = { responseTime, logger };",
+  "language": "js",
+  "deps": [
+    "koa"
+  ],
+  "summary_zh": "Koa response-time + logger middleware"
+}

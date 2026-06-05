@@ -1,0 +1,22 @@
+{
+  "id": "system-cli-121-bash-arg-help",
+  "category": "system-cli/shell/args",
+  "intents_zh": [
+    "bash --help 自動印 usage",
+    "help text 範本",
+    "script usage block"
+  ],
+  "intents_en": [
+    "bash --help text",
+    "script usage block",
+    "print usage shell"
+  ],
+  "slots": [
+    "script_name",
+    "usage_lines"
+  ],
+  "code": "#!/usr/bin/env bash\nset -euo pipefail\nusage() {\n  cat <<EOF\nUsage: {{script_name}} [options] <target>\n\nOptions:\n  -h, --help     show this help\n{{usage_lines}}\nEOF\n}\n[[ \"${1:-}\" == \"-h\" || \"${1:-}\" == \"--help\" ]] && { usage; exit 0; }\n[[ $# -lt 1 ]] && { usage; exit 1; }\necho \"target=$1\"",
+  "language": "sh",
+  "deps": [],
+  "summary_zh": "bash 標準 --help 區塊"
+}

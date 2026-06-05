@@ -1,0 +1,26 @@
+{
+  "id": "depth-system-cli-054-tmux-session-restore",
+  "category": "system-cli/tmux/session",
+  "intents_zh": [
+    "tmux session 自動還原",
+    "專案 tmux 多 pane 啟動",
+    "tmuxinator 替代腳本",
+    "tmux 配置開發環境"
+  ],
+  "intents_en": [
+    "tmux session restore",
+    "project tmux multi pane",
+    "tmuxinator alternative",
+    "tmux dev environment"
+  ],
+  "slots": [
+    "session_name",
+    "project_dir"
+  ],
+  "code": "#!/usr/bin/env bash\nset -euo pipefail\n\nS=\"{{session_name}}\"\nD=\"{{project_dir}}\"\n\ntmux has-session -t \"$S\" 2>/dev/null && { tmux attach -t \"$S\"; exit 0; }\n\ntmux new-session -d -s \"$S\" -c \"$D\" -n editor\ntmux send-keys -t \"$S:editor\" 'nvim .' C-m\n\ntmux new-window -t \"$S\" -n server -c \"$D\"\ntmux send-keys -t \"$S:server\" 'npm run dev' C-m\n\ntmux new-window -t \"$S\" -n shell -c \"$D\"\ntmux split-window -t \"$S:shell\" -h -c \"$D\"\ntmux send-keys -t \"$S:shell.0\" 'git status' C-m\n\ntmux select-window -t \"$S:editor\"\ntmux attach -t \"$S\"",
+  "language": "bash",
+  "deps": [
+    "tmux"
+  ],
+  "summary_zh": "tmux 專案 session 多 window 自動建好"
+}

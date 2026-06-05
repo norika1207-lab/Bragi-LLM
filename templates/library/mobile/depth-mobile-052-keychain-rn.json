@@ -1,0 +1,27 @@
+{
+  "id": "depth-mobile-052-keychain-rn",
+  "category": "mobile/secure-storage/keychain-rn",
+  "intents_zh": [
+    "RN react-native-keychain",
+    "跨平台安全儲存",
+    "setGenericPassword",
+    "getGenericPassword",
+    "store token RN"
+  ],
+  "intents_en": [
+    "RN react-native-keychain",
+    "cross platform secure storage",
+    "setGenericPassword",
+    "getGenericPassword",
+    "store token RN"
+  ],
+  "slots": [
+    "service"
+  ],
+  "code": "import * as Keychain from 'react-native-keychain';\nawait Keychain.setGenericPassword('user', token, {\n  service: '{{service}}',\n  accessible: Keychain.ACCESSIBLE.WHEN_UNLOCKED_THIS_DEVICE_ONLY,\n});\nconst creds = await Keychain.getGenericPassword({ service: '{{service}}' });",
+  "language": "ts",
+  "deps": [
+    "react-native-keychain"
+  ],
+  "summary_zh": "RN keychain 跨平台安全儲存"
+}

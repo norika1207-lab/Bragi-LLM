@@ -1,0 +1,31 @@
+{
+  "id": "patch-mobile-pedometer-005-workout-timer",
+  "category": "mobile/health/workout-timer",
+  "intents_zh": [
+    "健身計時器 React Native",
+    "做個 workout 計時 hook",
+    "間歇訓練倒數",
+    "運動秒錶 component",
+    "Tabata 計時器",
+    "做訓練用計時器"
+  ],
+  "intents_en": [
+    "workout timer React Native",
+    "interval training countdown",
+    "stopwatch component for exercise",
+    "Tabata timer hook",
+    "fitness session timer"
+  ],
+  "slots": [
+    "component_name",
+    "work_seconds",
+    "rest_seconds"
+  ],
+  "code": "import React, { useEffect, useState, useRef } from 'react';\nimport { View, Text, TouchableOpacity, StyleSheet } from 'react-native';\n\nexport default function {{component_name}}() {\n  const [phase, setPhase] = useState('work');\n  const [left, setLeft] = useState({{work_seconds}});\n  const [running, setRunning] = useState(false);\n  const ref = useRef(null);\n\n  useEffect(() => {\n    if (!running) return;\n    ref.current = setInterval(() => {\n      setLeft(s => {\n        if (s > 1) return s - 1;\n        setPhase(p => (p === 'work' ? 'rest' : 'work'));\n        return phase === 'work' ? {{rest_seconds}} : {{work_seconds}};\n      });\n    }, 1000);\n    return () => clearInterval(ref.current);\n  }, [running, phase]);\n\n  return (\n    <View style={styles.box}>\n      <Text style={styles.phase}>{phase.toUpperCase()}</Text>\n      <Text style={styles.time}>{left}s</Text>\n      <TouchableOpacity style={styles.btn} onPress={() => setRunning(r => !r)}>\n        <Text style={styles.btnTxt}>{running ? 'Pause' : 'Start'}</Text>\n      </TouchableOpacity>\n    </View>\n  );\n}\nconst styles = StyleSheet.create({\n  box: { alignItems: 'center', padding: 32 },\n  phase: { fontSize: 18, color: '#666' },\n  time: { fontSize: 72, fontWeight: '800', marginVertical: 12 },\n  btn: { backgroundColor: '#111', paddingHorizontal: 32, paddingVertical: 12, borderRadius: 24 },\n  btnTxt: { color: '#fff', fontSize: 16 }\n});",
+  "language": "tsx",
+  "deps": [
+    "react-native",
+    "react"
+  ],
+  "summary_zh": "間歇訓練 work/rest 切換計時器，可暫停繼續"
+}

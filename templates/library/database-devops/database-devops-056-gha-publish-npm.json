@@ -1,0 +1,19 @@
+{
+  "id": "database-devops-056-gha-publish-npm",
+  "category": "database-devops/cicd/github-actions",
+  "intents_zh": [
+    "GHA 發佈 npm",
+    "tag 自動發 npm",
+    "publish workflow"
+  ],
+  "intents_en": [
+    "github actions npm publish",
+    "auto publish on tag",
+    "npm release workflow"
+  ],
+  "slots": [],
+  "code": "name: Publish npm\non:\n  push:\n    tags: ['v*']\n\njobs:\n  publish:\n    runs-on: ubuntu-latest\n    permissions:\n      contents: read\n      id-token: write\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-node@v4\n        with:\n          node-version: '20'\n          registry-url: 'https://registry.npmjs.org'\n      - run: npm ci\n      - run: npm test\n      - run: npm publish --provenance --access public\n        env:\n          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}",
+  "language": "yaml",
+  "deps": [],
+  "summary_zh": "GHA tag 觸發 npm publish"
+}

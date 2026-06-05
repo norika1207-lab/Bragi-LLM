@@ -1,0 +1,24 @@
+{
+  "id": "system-cli-033-yaml-config-load",
+  "category": "system-cli/config/yaml",
+  "intents_zh": [
+    "python 讀 yaml 設定",
+    "yaml config 載入",
+    "PyYAML 範本"
+  ],
+  "intents_en": [
+    "python yaml config",
+    "load yaml settings",
+    "PyYAML example"
+  ],
+  "slots": [
+    "config_path",
+    "key_name"
+  ],
+  "code": "import yaml\nfrom pathlib import Path\n\ncfg = yaml.safe_load(Path('{{config_path}}').read_text())\n\nval = cfg.get('{{key_name}}')\nif val is None:\n    raise SystemExit(f'missing {{key_name}} in {{config_path}}')\nprint('{{key_name}} =', val)",
+  "language": "py",
+  "deps": [
+    "PyYAML"
+  ],
+  "summary_zh": "PyYAML 讀 config"
+}

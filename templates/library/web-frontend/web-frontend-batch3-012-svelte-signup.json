@@ -1,0 +1,29 @@
+{
+  "id": "web-frontend-batch3-012-svelte-signup",
+  "category": "web-frontend/svelte/forms/signup",
+  "intents_zh": [
+    "Svelte 註冊表單",
+    "Svelte sign up",
+    "Svelte 註冊元件",
+    "Svelte 新會員",
+    "Svelte register form",
+    "Svelte 註冊含驗證"
+  ],
+  "intents_en": [
+    "svelte signup form",
+    "svelte register component",
+    "svelte create account",
+    "svelte sign up with validation",
+    "svelte new user form",
+    "svelte registration"
+  ],
+  "slots": [
+    "endpoint"
+  ],
+  "code": "<script>\n  let name = '', email = '', pwd = '', pwd2 = '';\n  $: match = pwd === pwd2 && pwd.length > 0;\n  async function submit() {\n    if (!match) return;\n    await fetch('{{endpoint}}', {\n      method: 'POST',\n      headers: { 'Content-Type': 'application/json' },\n      body: JSON.stringify({ name, email, password: pwd })\n    });\n  }\n</script>\n<form on:submit|preventDefault={submit}>\n  <input bind:value={name} placeholder=\"Name\" required />\n  <input bind:value={email} type=\"email\" placeholder=\"Email\" required />\n  <input bind:value={pwd} type=\"password\" placeholder=\"Password\" required />\n  <input bind:value={pwd2} type=\"password\" placeholder=\"Confirm\" required />\n  {#if pwd2 && !match}<p>Passwords do not match</p>{/if}\n  <button disabled={!match}>Create account</button>\n</form>",
+  "language": "svelte",
+  "deps": [
+    "svelte"
+  ],
+  "summary_zh": "Svelte 註冊表單含密碼匹配驗證"
+}

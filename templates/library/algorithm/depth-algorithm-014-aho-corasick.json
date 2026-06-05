@@ -1,0 +1,30 @@
+{
+  "id": "depth-algorithm-014-aho-corasick",
+  "category": "algorithm/string/aho-corasick",
+  "intents_zh": [
+    "AC 自動機",
+    "Aho Corasick",
+    "多模式串匹配",
+    "trie fail 指針",
+    "多串匹配模板",
+    "AC 自動機建構",
+    "關鍵字過濾"
+  ],
+  "intents_en": [
+    "Aho Corasick automaton",
+    "multi pattern matching",
+    "trie with fail links",
+    "AC automaton template",
+    "keyword filter Aho",
+    "AC build query",
+    "multiple string matching"
+  ],
+  "slots": [
+    "patterns",
+    "text"
+  ],
+  "code": "from collections import deque\n\ndef aho_corasick(patterns={{patterns}}, text={{text}}):\n    trie = [{}]\n    fail = [0]\n    out = [[]]\n    for i, p in enumerate(patterns):\n        node = 0\n        for c in p:\n            if c not in trie[node]:\n                trie.append({}); fail.append(0); out.append([])\n                trie[node][c] = len(trie)-1\n            node = trie[node][c]\n        out[node].append(i)\n    q = deque()\n    for c, nxt in trie[0].items():\n        fail[nxt] = 0; q.append(nxt)\n    while q:\n        u = q.popleft()\n        for c, v in trie[u].items():\n            f = fail[u]\n            while f and c not in trie[f]: f = fail[f]\n            fail[v] = trie[f].get(c, 0) if trie[f].get(c, 0) != v else 0\n            out[v] += out[fail[v]]\n            q.append(v)\n    matches = []; node = 0\n    for i, c in enumerate(text):\n        while node and c not in trie[node]: node = fail[node]\n        node = trie[node].get(c, 0)\n        for pid in out[node]:\n            matches.append((i - len(patterns[pid]) + 1, pid))\n    return matches",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "Aho Corasick 多模式串匹配自動機"
+}

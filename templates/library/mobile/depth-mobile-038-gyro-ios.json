@@ -1,0 +1,25 @@
+{
+  "id": "depth-mobile-038-gyro-ios",
+  "category": "mobile/sensors/gyro-ios",
+  "intents_zh": [
+    "iOS gyroscope",
+    "CMMotionManager gyro",
+    "startGyroUpdates",
+    "角速度 xyz",
+    "旋轉感測"
+  ],
+  "intents_en": [
+    "iOS gyroscope",
+    "CMMotionManager gyro",
+    "startGyroUpdates",
+    "angular velocity",
+    "rotation sensor"
+  ],
+  "slots": [
+    "hz"
+  ],
+  "code": "let mm = CMMotionManager()\nmm.gyroUpdateInterval = 1.0 / Double({{hz}})\nmm.startGyroUpdates(to: .main) { data, _ in\n  guard let r = data?.rotationRate else { return }\n  print(r.x, r.y, r.z)\n}",
+  "language": "swift",
+  "deps": [],
+  "summary_zh": "iOS 陀螺儀取樣"
+}

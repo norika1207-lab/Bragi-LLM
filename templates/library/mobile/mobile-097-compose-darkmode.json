@@ -1,0 +1,29 @@
+{
+  "id": "mobile-097-compose-darkmode",
+  "category": "mobile/compose/theme",
+  "intents_zh": [
+    "Compose dark theme",
+    "Compose isSystemInDarkTheme",
+    "Compose 深色模式",
+    "Compose theme switch",
+    "Material3 dark light",
+    "Compose 跟隨系統",
+    "Compose colorScheme dark"
+  ],
+  "intents_en": [
+    "compose dark theme",
+    "compose isSystemInDarkTheme",
+    "compose theme switching",
+    "material3 dark light",
+    "compose follow system theme",
+    "compose colorScheme dark",
+    "jetpack compose dark mode"
+  ],
+  "slots": [],
+  "code": "import androidx.compose.foundation.isSystemInDarkTheme\nimport androidx.compose.material3.*\nimport androidx.compose.runtime.Composable\n@Composable\nfun AppTheme(content:@Composable()->Unit){\n  val dark=isSystemInDarkTheme()\n  val scheme=if(dark)darkColorScheme()else lightColorScheme()\n  MaterialTheme(colorScheme=scheme,content=content)}",
+  "language": "kt",
+  "deps": [
+    "androidx.compose.material3"
+  ],
+  "summary_zh": "Compose Material3 跟隨系統 dark/light"
+}

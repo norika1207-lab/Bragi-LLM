@@ -1,0 +1,29 @@
+{
+  "id": "web-backend-070-koa-hello",
+  "category": "web-backend/koa/basic",
+  "intents_zh": [
+    "koa 起手",
+    "最小 koa app",
+    "koa hello world",
+    "koa 基本",
+    "koa 監聽 port"
+  ],
+  "intents_en": [
+    "minimal koa app",
+    "koa hello world",
+    "scaffold koa",
+    "basic koa server",
+    "koa listen port"
+  ],
+  "slots": [
+    "port",
+    "message"
+  ],
+  "code": "const Koa = require('koa');\nconst Router = require('@koa/router');\nconst app = new Koa();\nconst router = new Router();\n\nrouter.get('/', (ctx) => {\n  ctx.body = { message: '{{message}}' };\n});\n\napp.use(router.routes()).use(router.allowedMethods());\napp.listen({{port}}, () => console.log('koa on {{port}}'));",
+  "language": "js",
+  "deps": [
+    "koa",
+    "@koa/router"
+  ],
+  "summary_zh": "Koa 最小可運作 app"
+}

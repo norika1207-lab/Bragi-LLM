@@ -1,0 +1,32 @@
+{
+  "id": "web-frontend-batch4-040-stat-section",
+  "category": "web-frontend/nextjs/landing/stats",
+  "intents_zh": [
+    "數據統計區",
+    "KPI 統計欄",
+    "social proof 數字",
+    "tailwind stats",
+    "公司數字",
+    "landing 數據條"
+  ],
+  "intents_en": [
+    "stats section",
+    "kpi numbers band",
+    "social proof stats",
+    "tailwind stats",
+    "company numbers",
+    "landing stats"
+  ],
+  "slots": [
+    "stat_one_label",
+    "stat_one_value",
+    "stat_two_label",
+    "stat_two_value",
+    "stat_three_label",
+    "stat_three_value"
+  ],
+  "code": "export default function Stats() {\n  const stats = [\n    { v: '{{stat_one_value}}', l: '{{stat_one_label}}' },\n    { v: '{{stat_two_value}}', l: '{{stat_two_label}}' },\n    { v: '{{stat_three_value}}', l: '{{stat_three_label}}' },\n  ];\n  return (\n    <section className=\"py-16 bg-indigo-600 text-white\">\n      <div className=\"max-w-4xl mx-auto grid grid-cols-3 gap-6 text-center\">\n        {stats.map((s) => (\n          <div key={s.l}>\n            <p className=\"text-4xl font-bold\">{s.v}</p>\n            <p className=\"mt-1 text-sm opacity-80\">{s.l}</p>\n          </div>\n        ))}\n      </div>\n    </section>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "三組統計數字展示區"
+}

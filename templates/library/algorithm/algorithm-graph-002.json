@@ -1,0 +1,25 @@
+{
+  "id": "algorithm-graph-002",
+  "category": "algorithm/graph/astar",
+  "intents_zh": [
+    "A*",
+    "A star 演算法",
+    "啟發式搜尋",
+    "給我 astar",
+    "路徑搜尋 A*"
+  ],
+  "intents_en": [
+    "A*",
+    "A star",
+    "heuristic search",
+    "pathfinding A*",
+    "write astar"
+  ],
+  "slots": [
+    "fn_name"
+  ],
+  "code": "import heapq\n\ndef {{fn_name}}(graph, start, goal, h):\n    open_set = [(h(start, goal), 0, start, [start])]\n    seen = {}\n    while open_set:\n        f, g, u, path = heapq.heappop(open_set)\n        if u == goal:\n            return path, g\n        if u in seen and seen[u] <= g:\n            continue\n        seen[u] = g\n        for v, w in graph[u]:\n            ng = g + w\n            heapq.heappush(open_set, (ng + h(v, goal), ng, v, path + [v]))\n    return None, float('inf')",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "A* 啟發式最短路徑"
+}

@@ -1,0 +1,27 @@
+{
+  "id": "web-frontend-batch1-006-primary-button",
+  "category": "web-frontend/react/buttons/primary",
+  "intents_zh": [
+    "主要按鈕元件",
+    "primary button React",
+    "給我可重用 button",
+    "Tailwind 主按鈕",
+    "React Button 元件",
+    "帶 loading 的按鈕"
+  ],
+  "intents_en": [
+    "primary button component",
+    "reusable react button",
+    "tailwind button",
+    "button with loading",
+    "react button component",
+    "action button"
+  ],
+  "slots": [
+    "component_name"
+  ],
+  "code": "type Props = {\n  children: React.ReactNode;\n  onClick?: () => void;\n  loading?: boolean;\n  disabled?: boolean;\n  type?: 'button' | 'submit';\n};\n\nexport default function {{component_name}}({ children, onClick, loading, disabled, type = 'button' }: Props) {\n  return (\n    <button\n      type={type}\n      onClick={onClick}\n      disabled={disabled || loading}\n      className=\"px-4 py-2 rounded bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50\"\n    >\n      {loading ? 'Loading...' : children}\n    </button>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "Tailwind primary button 含 loading/disabled"
+}

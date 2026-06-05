@@ -1,0 +1,27 @@
+{
+  "id": "depth-web-frontend-042-svelte-store",
+  "category": "web-frontend/state/svelte",
+  "intents_zh": [
+    "Svelte writable store",
+    "狀態管理 svelte",
+    "derived store",
+    "auto subscribe $",
+    "svelte 共享狀態"
+  ],
+  "intents_en": [
+    "svelte writable store",
+    "svelte state",
+    "derived store",
+    "auto subscribe $",
+    "svelte shared state"
+  ],
+  "slots": [
+    "store_name"
+  ],
+  "code": "// stores/{{store_name}}.ts\nimport { writable, derived } from 'svelte/store';\n\nexport const {{store_name}} = writable(0);\nexport const doubled = derived({{store_name}}, ($v) => $v * 2);\nexport const inc = () => {{store_name}}.update((v) => v + 1);\n\n// component:\n// <script>import { {{store_name}}, doubled, inc } from './stores/{{store_name}}'</script>\n// <button on:click={inc}>{$ {{store_name}} } ({$doubled})</button>",
+  "language": "ts",
+  "deps": [
+    "svelte"
+  ],
+  "summary_zh": "Svelte writable + derived store"
+}

@@ -1,0 +1,31 @@
+{
+  "id": "llm-tools-024-tool-registry",
+  "category": "llm-tools/agent/tool-registry",
+  "intents_zh": [
+    "工具註冊表",
+    "tool registry",
+    "管理 agent 工具",
+    "tool decorator",
+    "用 decorator 註冊 tool",
+    "tool catalog",
+    "可呼叫工具集",
+    "tool 列表"
+  ],
+  "intents_en": [
+    "tool registry",
+    "agent tool catalog",
+    "tool decorator",
+    "register callable",
+    "tool dispatcher",
+    "function dispatch",
+    "registered tools",
+    "tool inventory"
+  ],
+  "slots": [
+    "registry_name"
+  ],
+  "code": "from dataclasses import dataclass\nfrom typing import Callable\n\n@dataclass\nclass Tool:\n    name: str\n    desc: str\n    fn: Callable\n\n{{registry_name}}: dict[str, Tool] = {}\n\ndef tool(desc: str):\n    def deco(fn: Callable):\n        {{registry_name}}[fn.__name__] = Tool(fn.__name__, desc, fn)\n        return fn\n    return deco\n\n@tool(\"add two numbers\")\ndef add(a: int, b: int) -> int:\n    return a + b\n\ndef call(name: str, **kw):\n    return {{registry_name}}[name].fn(**kw)\n\nif __name__ == \"__main__\":\n    print(call(\"add\", a=1, b=2))",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "裝飾器型 agent 工具註冊表"
+}

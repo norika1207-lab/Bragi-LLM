@@ -1,0 +1,34 @@
+{
+  "id": "llm-tools-111-router-classifier",
+  "category": "llm-tools/router/llm-router",
+  "intents_zh": [
+    "LLM 路由分類器",
+    "便宜 vs 強模型路由",
+    "model router",
+    "route to small or large",
+    "router 分流",
+    "cost-aware routing",
+    "小模型先看再升級",
+    "query 路由"
+  ],
+  "intents_en": [
+    "llm router",
+    "cheap vs strong model router",
+    "route to small or big llm",
+    "cost-aware routing",
+    "query router",
+    "model dispatcher",
+    "two-tier llm router",
+    "route classifier"
+  ],
+  "slots": [
+    "small_model",
+    "big_model"
+  ],
+  "code": "from openai import OpenAI\n\nclient = OpenAI()\n\ndef classify_difficulty(q: str) -> str:\n    r = client.chat.completions.create(\n        model=\"{{small_model}}\",\n        messages=[{\"role\": \"user\",\n                   \"content\": f\"Reply HARD or EASY only:\\n{q}\"}],\n    )\n    return \"hard\" if \"HARD\" in r.choices[0].message.content.upper() else \"easy\"\n\ndef route(q: str) -> str:\n    model = \"{{big_model}}\" if classify_difficulty(q) == \"hard\" else \"{{small_model}}\"\n    r = client.chat.completions.create(model=model, messages=[{\"role\": \"user\", \"content\": q}])\n    return r.choices[0].message.content",
+  "language": "py",
+  "deps": [
+    "openai"
+  ],
+  "summary_zh": "小模型先判難度再路由大模型"
+}

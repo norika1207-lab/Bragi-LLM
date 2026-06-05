@@ -1,0 +1,29 @@
+{
+  "id": "web-frontend-batch3-018-svelte-dropdown",
+  "category": "web-frontend/svelte/ui/dropdown",
+  "intents_zh": [
+    "Svelte dropdown",
+    "Svelte 下拉選單",
+    "Svelte custom select",
+    "Svelte 選項清單",
+    "Svelte 點外面關閉",
+    "Svelte menu 元件"
+  ],
+  "intents_en": [
+    "svelte dropdown",
+    "svelte custom select",
+    "svelte click outside menu",
+    "svelte option list",
+    "svelte menu component",
+    "svelte select widget"
+  ],
+  "slots": [
+    "options_prop"
+  ],
+  "code": "<script>\n  import { onMount, onDestroy } from 'svelte';\n  export let {{options_prop}} = [];\n  let open = false, selected = null, root;\n  function onClick(e) { if (root && !root.contains(e.target)) open = false; }\n  onMount(() => document.addEventListener('click', onClick));\n  onDestroy(() => document.removeEventListener('click', onClick));\n</script>\n<div bind:this={root}>\n  <button on:click={() => open = !open}>{selected || 'Select'}</button>\n  {#if open}\n    <ul>\n      {#each {{options_prop}} as o}\n        <li on:click={() => { selected = o; open = false; }}>{o}</li>\n      {/each}\n    </ul>\n  {/if}\n</div>",
+  "language": "svelte",
+  "deps": [
+    "svelte"
+  ],
+  "summary_zh": "Svelte 自定 dropdown 含外部點擊關閉"
+}

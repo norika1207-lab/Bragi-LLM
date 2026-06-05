@@ -1,0 +1,25 @@
+{
+  "id": "depth-llm-tools-051-tool-trace-logger",
+  "category": "llm-tools/observability/trace",
+  "intents_zh": [
+    "tool 使用 trace 記錄",
+    "LLM 呼叫追蹤",
+    "jsonl trace log",
+    "agent step 紀錄",
+    "observability log"
+  ],
+  "intents_en": [
+    "tool use trace log",
+    "LLM call tracing",
+    "jsonl trace log",
+    "agent step record",
+    "observability log"
+  ],
+  "slots": [
+    "trace_path"
+  ],
+  "code": "import json, time, uuid, pathlib\n\nclass Tracer:\n    def __init__(self, p={{trace_path}}):\n        self.p = pathlib.Path(p); self.run = str(uuid.uuid4())\n    def event(self, kind, **data):\n        rec = {\"run\": self.run, \"ts\": time.time(), \"kind\": kind, **data}\n        with self.p.open(\"a\") as f: f.write(json.dumps(rec) + \"\\n\")",
+  "language": "python",
+  "deps": [],
+  "summary_zh": "逐筆把 LLM/tool 事件寫 jsonl trace，標 run id 串連"
+}

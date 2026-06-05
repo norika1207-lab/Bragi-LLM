@@ -1,0 +1,28 @@
+{
+  "id": "web-frontend-batch3-036-html-hero",
+  "category": "web-frontend/html/sections/hero",
+  "intents_zh": [
+    "落地頁 hero section",
+    "HTML hero 區塊",
+    "首頁大標",
+    "landing page 開頭",
+    "hero banner",
+    "CTA 區塊"
+  ],
+  "intents_en": [
+    "html hero section",
+    "landing page hero",
+    "hero banner",
+    "page header section",
+    "cta hero",
+    "main banner"
+  ],
+  "slots": [
+    "headline",
+    "cta_text"
+  ],
+  "code": "<section class=\"hero\">\n  <h1>{{headline}}</h1>\n  <p>Build, ship, and scale faster than ever before.</p>\n  <a href=\"#start\" class=\"cta\">{{cta_text}}</a>\n</section>\n<style>\n  .hero { padding: 6rem 2rem; text-align: center; background: linear-gradient(135deg, #6366f1, #8b5cf6); color: white; }\n  .hero h1 { font-size: 3rem; margin: 0 0 1rem; }\n  .hero p { font-size: 1.25rem; opacity: .9; margin: 0 0 2rem; }\n  .cta { display: inline-block; padding: .9rem 2rem; background: white; color: #6366f1; border-radius: 999px; font-weight: 600; text-decoration: none; }\n</style>",
+  "language": "html",
+  "deps": [],
+  "summary_zh": "漸層 hero section 含 CTA"
+}

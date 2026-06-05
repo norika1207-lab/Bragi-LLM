@@ -1,0 +1,23 @@
+{
+  "id": "database-devops-100-sql-anti-join",
+  "category": "database-devops/sql/joins",
+  "intents_zh": [
+    "反連接 anti join",
+    "NOT EXISTS 沒有對應的",
+    "只要左表有的"
+  ],
+  "intents_en": [
+    "anti join",
+    "not exists",
+    "rows without match"
+  ],
+  "slots": [
+    "left_table",
+    "right_table",
+    "key"
+  ],
+  "code": "SELECT l.*\nFROM {{left_table}} l\nWHERE NOT EXISTS (\n  SELECT 1\n  FROM {{right_table}} r\n  WHERE r.{{key}} = l.{{key}}\n);",
+  "language": "sql",
+  "deps": [],
+  "summary_zh": "NOT EXISTS 反連接撈無配對列"
+}

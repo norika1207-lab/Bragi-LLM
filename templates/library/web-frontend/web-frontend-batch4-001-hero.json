@@ -1,0 +1,30 @@
+{
+  "id": "web-frontend-batch4-001-hero",
+  "category": "web-frontend/nextjs/landing/hero",
+  "intents_zh": [
+    "做一個 Next.js Tailwind 的 hero 區塊",
+    "幫我寫 landing page 首屏",
+    "需要一個帶 CTA 按鈕的 hero",
+    "產生英雄區塊含標題副標",
+    "給我一個漸層背景的首屏",
+    "寫個首頁開頭的大標區"
+  ],
+  "intents_en": [
+    "create a Next.js hero section",
+    "build a landing hero with CTA",
+    "tailwind hero block",
+    "make a top hero banner",
+    "hero with gradient background",
+    "landing page above-the-fold"
+  ],
+  "slots": [
+    "headline",
+    "subheadline",
+    "cta_text",
+    "cta_href"
+  ],
+  "code": "export default function Hero() {\n  return (\n    <section className=\"relative bg-gradient-to-br from-indigo-50 to-white py-24\">\n      <div className=\"mx-auto max-w-5xl px-6 text-center\">\n        <h1 className=\"text-5xl font-bold tracking-tight text-gray-900\">{{headline}}</h1>\n        <p className=\"mt-6 text-lg text-gray-600\">{{subheadline}}</p>\n        <a href=\"{{cta_href}}\" className=\"mt-8 inline-block rounded-lg bg-indigo-600 px-6 py-3 text-white hover:bg-indigo-700\">\n          {{cta_text}}\n        </a>\n      </div>\n    </section>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "漸層背景首屏 hero 含主標副標與 CTA 按鈕"
+}

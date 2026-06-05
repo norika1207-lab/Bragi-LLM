@@ -1,0 +1,24 @@
+{
+  "id": "depth-database-devops-003-pg-advisory-lock",
+  "category": "database-devops/postgres/locking",
+  "intents_zh": [
+    "postgres advisory lock",
+    "應用層分散式鎖",
+    "pg_try_advisory_lock 範例",
+    "跨節點互斥"
+  ],
+  "intents_en": [
+    "postgres advisory lock",
+    "app level distributed lock",
+    "pg_try_advisory_lock example",
+    "cross node mutex"
+  ],
+  "slots": [
+    "lock_key",
+    "work_sql"
+  ],
+  "code": "BEGIN;\nSELECT pg_try_advisory_xact_lock({{lock_key}}) AS got_lock;\nDO $$\nBEGIN\n  IF (SELECT pg_try_advisory_xact_lock({{lock_key}})) THEN\n    {{work_sql}};\n  ELSE\n    RAISE NOTICE 'lock busy, skip';\n  END IF;\nEND $$;\nCOMMIT;",
+  "language": "sql",
+  "deps": [],
+  "summary_zh": "用 pg advisory lock 做應用層互斥,交易結束自動釋放"
+}

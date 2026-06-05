@@ -1,0 +1,29 @@
+{
+  "id": "depth-algorithm-007-segtree-lazy",
+  "category": "algorithm/segtree/lazy",
+  "intents_zh": [
+    "線段樹懶標記",
+    "lazy propagation",
+    "區間加區間求和線段樹",
+    "延遲標記下推",
+    "segment tree lazy",
+    "區間更新模板",
+    "lazy segtree"
+  ],
+  "intents_en": [
+    "segment tree lazy propagation",
+    "lazy segtree range add range sum",
+    "lazy tag pushdown",
+    "range update segtree",
+    "interval tree lazy",
+    "write lazy segment tree",
+    "lazy propagation template"
+  ],
+  "slots": [
+    "n"
+  ],
+  "code": "class LazySeg:\n    def __init__(self, n={{n}}):\n        self.n = n\n        self.t = [0]*(4*n)\n        self.lz = [0]*(4*n)\n    def push(self, p, l, r):\n        if self.lz[p]:\n            m = (l+r)//2\n            self.t[2*p] += self.lz[p]*(m-l+1); self.lz[2*p] += self.lz[p]\n            self.t[2*p+1] += self.lz[p]*(r-m); self.lz[2*p+1] += self.lz[p]\n            self.lz[p] = 0\n    def update(self, ql, qr, v, p=1, l=0, r=None):\n        if r is None: r = self.n-1\n        if ql <= l and r <= qr:\n            self.t[p] += v*(r-l+1); self.lz[p] += v; return\n        self.push(p, l, r); m = (l+r)//2\n        if ql <= m: self.update(ql,qr,v,2*p,l,m)\n        if qr > m: self.update(ql,qr,v,2*p+1,m+1,r)\n        self.t[p] = self.t[2*p] + self.t[2*p+1]\n    def query(self, ql, qr, p=1, l=0, r=None):\n        if r is None: r = self.n-1\n        if ql <= l and r <= qr: return self.t[p]\n        self.push(p, l, r); m = (l+r)//2; s = 0\n        if ql <= m: s += self.query(ql,qr,2*p,l,m)\n        if qr > m: s += self.query(ql,qr,2*p+1,m+1,r)\n        return s",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "懶標記線段樹支援區間加與區間求和"
+}

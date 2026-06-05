@@ -1,0 +1,24 @@
+{
+  "id": "system-cli-089-shutil-copy-progress",
+  "category": "system-cli/file/copy",
+  "intents_zh": [
+    "大檔複製顯示進度",
+    "python copy with progress",
+    "cp 顯示百分比"
+  ],
+  "intents_en": [
+    "copy big file with progress",
+    "python copy progress bar",
+    "large file cp progress"
+  ],
+  "slots": [
+    "src_path",
+    "dst_path"
+  ],
+  "code": "import os, shutil\nfrom tqdm import tqdm\n\nsrc = '{{src_path}}'; dst = '{{dst_path}}'\nsize = os.path.getsize(src)\nwith open(src,'rb') as fi, open(dst,'wb') as fo, tqdm(total=size, unit='B', unit_scale=True) as bar:\n    while True:\n        chunk = fi.read(1<<20)\n        if not chunk: break\n        fo.write(chunk); bar.update(len(chunk))",
+  "language": "py",
+  "deps": [
+    "tqdm"
+  ],
+  "summary_zh": "複製大檔 + tqdm 進度"
+}

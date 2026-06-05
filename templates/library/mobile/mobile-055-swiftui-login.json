@@ -1,0 +1,29 @@
+{
+  "id": "mobile-055-swiftui-login",
+  "category": "mobile/swiftui/auth",
+  "intents_zh": [
+    "SwiftUI 登入畫面",
+    "SwiftUI login view",
+    "幫我刻 SwiftUI auth",
+    "SwiftUI email password 登入",
+    "iOS 登入表單 SwiftUI",
+    "SwiftUI signin",
+    "Swift 登入 UI"
+  ],
+  "intents_en": [
+    "swiftui login view",
+    "swiftui email password login",
+    "swiftui auth form",
+    "swiftui sign in",
+    "ios login template",
+    "swiftui login screen",
+    "swift login ui"
+  ],
+  "slots": [
+    "api_url"
+  ],
+  "code": "import SwiftUI\nstruct LoginView:View{\n  @State var email=\"\";@State var pwd=\"\";@State var msg=\"\"\n  var body:some View{\n    VStack{TextField(\"email\",text:$email).textFieldStyle(.roundedBorder)\n      SecureField(\"password\",text:$pwd).textFieldStyle(.roundedBorder)\n      Button(\"Login\"){Task{await go()}}\n      Text(msg)}.padding()}\n  func go()async{\n    var req=URLRequest(url:URL(string:\"{{api_url}}/login\")!)\n    req.httpMethod=\"POST\";req.setValue(\"application/json\",forHTTPHeaderField:\"Content-Type\")\n    req.httpBody=try?JSONEncoder().encode([\"email\":email,\"password\":pwd])\n    do{let(_,r)=try await URLSession.shared.data(for:req)\n      msg=(r as?HTTPURLResponse)?.statusCode==200 ?\"ok\":\"fail\"}catch{msg=\"err\"}}}",
+  "language": "swift",
+  "deps": [],
+  "summary_zh": "SwiftUI 登入畫面 POST 後端"
+}

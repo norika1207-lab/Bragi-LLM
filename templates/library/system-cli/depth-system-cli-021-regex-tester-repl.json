@@ -1,0 +1,21 @@
+{
+  "id": "depth-system-cli-021-regex-tester-repl",
+  "category": "system-cli/regex/repl",
+  "intents_zh": [
+    "regex 互動測試 REPL",
+    "Python 正則 REPL",
+    "即時測 regex",
+    "regex 命中高亮"
+  ],
+  "intents_en": [
+    "regex tester repl",
+    "python regex repl",
+    "live regex test",
+    "highlight matches regex"
+  ],
+  "slots": [],
+  "code": "import re, sys\n\nprint(\"regex repl. type :pattern <re>, :text <str>, :run, :quit\")\npattern, text = None, \"\"\nwhile True:\n    try: line = input(\"> \")\n    except EOFError: break\n    if line.startswith(\":pattern \"): pattern = line[9:]\n    elif line.startswith(\":text \"): text = line[6:]\n    elif line == \":quit\": break\n    elif line == \":run\":\n        if not pattern: print(\"no pattern\"); continue\n        try:\n            r = re.compile(pattern)\n            ms = list(r.finditer(text))\n            print(f\"{len(ms)} matches\")\n            for m in ms: print(f\"  span={m.span()} groups={m.groups()} -> {m.group()!r}\")\n        except re.error as e: print(f\"err: {e}\")\n    else: print(\"unknown cmd\")",
+  "language": "python",
+  "deps": [],
+  "summary_zh": "互動 regex REPL 即時編譯顯示命中"
+}

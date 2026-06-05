@@ -1,0 +1,29 @@
+{
+  "id": "mobile-102-compose-chat",
+  "category": "mobile/compose/chat",
+  "intents_zh": [
+    "Compose 聊天泡泡",
+    "Compose 訊息列表",
+    "Compose chat ui",
+    "Compose 對話畫面",
+    "聊天泡泡 Compose",
+    "Compose message bubble",
+    "Compose 簡易聊天"
+  ],
+  "intents_en": [
+    "compose chat bubble",
+    "compose message list",
+    "compose conversation",
+    "compose chat ui",
+    "message bubble compose",
+    "simple chat compose",
+    "jetpack compose chat"
+  ],
+  "slots": [],
+  "code": "import androidx.compose.foundation.background\nimport androidx.compose.foundation.layout.*\nimport androidx.compose.foundation.lazy.LazyColumn\nimport androidx.compose.foundation.lazy.items\nimport androidx.compose.foundation.shape.RoundedCornerShape\nimport androidx.compose.material3.*\nimport androidx.compose.runtime.Composable\nimport androidx.compose.ui.Alignment\nimport androidx.compose.ui.Modifier\nimport androidx.compose.ui.draw.clip\nimport androidx.compose.ui.graphics.Color\nimport androidx.compose.ui.unit.dp\ndata class Msg(val text:String,val mine:Boolean)\n@Composable\nfun Chat(msgs:List<Msg>){LazyColumn(Modifier.fillMaxSize().padding(8.dp)){items(msgs){m->Row(Modifier.fillMaxWidth(),horizontalArrangement=if(m.mine)Arrangement.End else Arrangement.Start){Text(m.text,Modifier.clip(RoundedCornerShape(14.dp)).background(if(m.mine)Color(0xFF0A84FF)else Color(0xFFEEEEEE)).padding(10.dp),color=if(m.mine)Color.White else Color.Black)}}}}",
+  "language": "kt",
+  "deps": [
+    "androidx.compose.material3"
+  ],
+  "summary_zh": "Compose 聊天泡泡列表左右對齊"
+}

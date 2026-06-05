@@ -1,0 +1,26 @@
+{
+  "id": "depth-system-cli-043-caddy-reverse-proxy",
+  "category": "system-cli/proxy/caddy",
+  "intents_zh": [
+    "Caddy reverse proxy 設定",
+    "Caddyfile 範本",
+    "自動 HTTPS 代理",
+    "Caddy path rewrite"
+  ],
+  "intents_en": [
+    "caddy reverse proxy",
+    "caddyfile template",
+    "auto https proxy",
+    "caddy path rewrite"
+  ],
+  "slots": [
+    "domain",
+    "upstream"
+  ],
+  "code": "# Caddyfile\n{{domain}} {\n    encode gzip zstd\n    log {\n        output file /var/log/caddy/{{domain}}.log\n        format json\n    }\n\n    handle_path /api/* {\n        reverse_proxy {{upstream}} {\n            header_up X-Real-IP {remote_host}\n            header_up X-Forwarded-Proto {scheme}\n        }\n    }\n\n    handle {\n        root * /var/www/{{domain}}\n        try_files {path} /index.html\n        file_server\n    }\n}",
+  "language": "caddyfile",
+  "deps": [
+    "caddy"
+  ],
+  "summary_zh": "Caddyfile API proxy + SPA fallback + JSON log"
+}

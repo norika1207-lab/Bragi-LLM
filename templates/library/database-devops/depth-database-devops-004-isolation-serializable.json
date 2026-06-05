@@ -1,0 +1,24 @@
+{
+  "id": "depth-database-devops-004-isolation-serializable",
+  "category": "database-devops/postgres/transactions",
+  "intents_zh": [
+    "serializable 交易範例",
+    "postgres 隔離等級",
+    "避免 phantom read",
+    "SSI 範例"
+  ],
+  "intents_en": [
+    "serializable transaction example",
+    "postgres isolation level",
+    "avoid phantom reads",
+    "SSI example"
+  ],
+  "slots": [
+    "query_a",
+    "query_b"
+  ],
+  "code": "-- session 1\nBEGIN ISOLATION LEVEL SERIALIZABLE;\n{{query_a}};\n-- session 2 也跑 SERIALIZABLE 改同一份 row set\nBEGIN ISOLATION LEVEL SERIALIZABLE;\n{{query_b}};\nCOMMIT;\n-- session 1 commit 時若衝突會 raise SQLSTATE 40001, 應用層應重試",
+  "language": "sql",
+  "deps": [],
+  "summary_zh": "SERIALIZABLE 交易,衝突時 40001 由 app 層重跑"
+}

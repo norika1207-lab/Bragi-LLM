@@ -1,0 +1,27 @@
+{
+  "id": "web-backend-084-redis-cache",
+  "category": "web-backend/cache",
+  "intents_zh": [
+    "redis cache wrapper",
+    "加快取 layer",
+    "get or set redis",
+    "node 接 redis",
+    "cache helper"
+  ],
+  "intents_en": [
+    "redis cache wrapper",
+    "cache layer node",
+    "get or set redis",
+    "node redis client",
+    "cache helper"
+  ],
+  "slots": [
+    "default_ttl_sec"
+  ],
+  "code": "const { createClient } = require('redis');\nconst client = createClient({ url: process.env.REDIS_URL });\nclient.connect().catch(console.error);\n\nasync function getOrSet(key, ttl, loader) {\n  const hit = await client.get(key);\n  if (hit) return JSON.parse(hit);\n  const value = await loader();\n  await client.set(key, JSON.stringify(value), { EX: ttl || {{default_ttl_sec}} });\n  return value;\n}\n\nmodule.exports = { client, getOrSet };",
+  "language": "js",
+  "deps": [
+    "redis"
+  ],
+  "summary_zh": "Redis get-or-set 快取 helper"
+}

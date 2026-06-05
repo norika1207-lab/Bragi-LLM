@@ -1,0 +1,28 @@
+{
+  "id": "web-frontend-batch1-017-radio-group",
+  "category": "web-frontend/react/radios/group",
+  "intents_zh": [
+    "radio 群組",
+    "單選元件",
+    "radio button 群組",
+    "React radio group",
+    "單選按鈕列表",
+    "radio list 元件"
+  ],
+  "intents_en": [
+    "radio group",
+    "react radio group",
+    "radio button list",
+    "single choice radio",
+    "radio buttons component",
+    "exclusive choice"
+  ],
+  "slots": [
+    "component_name",
+    "group_name"
+  ],
+  "code": "import { useState } from 'react';\n\ntype Props = { options: { label: string; value: string }[] };\n\nexport default function {{component_name}}({ options }: Props) {\n  const [value, setValue] = useState(options[0]?.value);\n  return (\n    <div>\n      {options.map((o) => (\n        <label key={o.value} className=\"block\">\n          <input\n            type=\"radio\"\n            name=\"{{group_name}}\"\n            value={o.value}\n            checked={value === o.value}\n            onChange={(e) => setValue(e.target.value)}\n          />\n          <span className=\"ml-2\">{o.label}</span>\n        </label>\n      ))}\n    </div>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "radio button 單選群組"
+}

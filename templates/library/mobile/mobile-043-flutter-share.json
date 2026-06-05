@@ -1,0 +1,31 @@
+{
+  "id": "mobile-043-flutter-share",
+  "category": "mobile/flutter/share",
+  "intents_zh": [
+    "Flutter share_plus",
+    "flutter 分享",
+    "flutter 系統分享",
+    "share text flutter",
+    "flutter share sheet",
+    "分享文字 flutter",
+    "flutter share plus 範例"
+  ],
+  "intents_en": [
+    "flutter share_plus",
+    "flutter share sheet",
+    "share text flutter",
+    "flutter native share",
+    "share content flutter",
+    "flutter share api",
+    "share dialog flutter"
+  ],
+  "slots": [
+    "message"
+  ],
+  "code": "import 'package:share_plus/share_plus.dart';\nFuture<void> shareIt()async{\n  await Share.share('{{message}}');}",
+  "language": "dart",
+  "deps": [
+    "share_plus"
+  ],
+  "summary_zh": "Flutter share_plus 系統分享文字"
+}

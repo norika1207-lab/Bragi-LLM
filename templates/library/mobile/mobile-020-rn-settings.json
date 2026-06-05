@@ -1,0 +1,32 @@
+{
+  "id": "mobile-020-rn-settings",
+  "category": "mobile/rn/settings",
+  "intents_zh": [
+    "RN 設定頁",
+    "React Native settings screen",
+    "RN 開關列表",
+    "設定畫面 RN",
+    "RN preferences page",
+    "switch 列表 RN",
+    "設定 UI RN"
+  ],
+  "intents_en": [
+    "rn settings screen",
+    "react native preferences",
+    "settings list rn",
+    "toggle list rn",
+    "app settings ui rn",
+    "preferences ui rn",
+    "rn settings template"
+  ],
+  "slots": [
+    "row1_label",
+    "row2_label"
+  ],
+  "code": "import React,{useState} from 'react';\nimport {View,Text,Switch,StyleSheet} from 'react-native';\nconst Row=({l,v,o}:{l:string;v:boolean;o:(x:boolean)=>void})=>(<View style={s.r}><Text>{l}</Text><Switch value={v} onValueChange={o}/></View>);\nexport default function S(){\n  const[a,setA]=useState(false);const[b,setB]=useState(true);\n  return(<View style={s.c}><Row l='{{row1_label}}' v={a} o={setA}/><Row l='{{row2_label}}' v={b} o={setB}/></View>);}\nconst s=StyleSheet.create({c:{flex:1,padding:16},r:{flexDirection:'row',justifyContent:'space-between',paddingVertical:12,borderBottomWidth:1,borderColor:'#eee'}});",
+  "language": "tsx",
+  "deps": [
+    "react-native"
+  ],
+  "summary_zh": "RN 兩列 Switch 設定頁"
+}

@@ -1,0 +1,30 @@
+{
+  "id": "patch-sql-index-009-explain-annotated",
+  "category": "database-devops/explain/diagnosis",
+  "intents_zh": [
+    "EXPLAIN 怎麼看",
+    "查詢計畫解讀",
+    "看 buffers 跟 cost",
+    "判斷有沒有用到 index",
+    "explain analyze 報告",
+    "看 plan 找瓶頸"
+  ],
+  "intents_en": [
+    "read explain analyze output",
+    "interpret query plan",
+    "diagnose slow query plan",
+    "buffers and cost meaning",
+    "annotated explain example",
+    "check if index is used"
+  ],
+  "slots": [
+    "table_name",
+    "where_column"
+  ],
+  "code": "-- Capture full plan with timing, buffers, and verbose output\nEXPLAIN (ANALYZE, BUFFERS, VERBOSE, SETTINGS, FORMAT TEXT)\nSELECT *\nFROM {{table_name}}\nWHERE {{where_column}} = $1;\n\n-- Reading the plan top-down:\n--   Seq Scan       => no index used, full table read\n--   Index Scan     => index hit, but still fetches heap\n--   Index Only Scan=> best case, no heap fetch (needs VACUUM fresh)\n--   Bitmap Heap+Index Scan => many matching rows, range scan style\n--   Rows Removed by Filter: N => index not selective enough\n--   Buffers: shared hit=A read=B => B = cache miss, the real cost\n--   actual time=X..Y rows=R loops=L => total = (Y-X) * L ms\n-- Estimate vs actual rows off by >10x => run ANALYZE {{table_name}}",
+  "language": "sql",
+  "deps": [
+    "postgresql>=12"
+  ],
+  "summary_zh": "EXPLAIN ANALYZE 各節點解讀指南，標出 seq scan、buffers、estimate 偏差等訊號"
+}

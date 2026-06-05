@@ -1,0 +1,24 @@
+{
+  "id": "database-devops-166-sql-jsonb-update",
+  "category": "database-devops/sql/postgres",
+  "intents_zh": [
+    "jsonb 欄位更新",
+    "jsonb_set 範本",
+    "只改某個 key"
+  ],
+  "intents_en": [
+    "jsonb update",
+    "jsonb_set example",
+    "update single key"
+  ],
+  "slots": [
+    "table",
+    "jsonb_col",
+    "key",
+    "value"
+  ],
+  "code": "UPDATE {{table}}\nSET {{jsonb_col}} = jsonb_set(\n  COALESCE({{jsonb_col}}, '{}'::jsonb),\n  '{{{{key}}}}',\n  to_jsonb('{{value}}'::text),\n  true\n)\nWHERE id = $1;",
+  "language": "sql",
+  "deps": [],
+  "summary_zh": "jsonb_set 更新 jsonb 內某 key"
+}

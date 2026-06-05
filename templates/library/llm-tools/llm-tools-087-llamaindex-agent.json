@@ -1,0 +1,34 @@
+{
+  "id": "llm-tools-087-llamaindex-agent",
+  "category": "llm-tools/llamaindex/agent",
+  "intents_zh": [
+    "llamaindex agent",
+    "function agent",
+    "llamaindex tools",
+    "用 llamaindex 寫 agent",
+    "FunctionAgent 範例",
+    "llamaindex tool calling",
+    "llamaindex 工具呼叫",
+    "li agent"
+  ],
+  "intents_en": [
+    "llamaindex agent",
+    "llamaindex function agent",
+    "llamaindex tools",
+    "build agent llamaindex",
+    "functionagent example",
+    "llamaindex tool calling",
+    "minimal llamaindex agent",
+    "li agent scaffold"
+  ],
+  "slots": [
+    "model_name"
+  ],
+  "code": "from llama_index.core.agent.workflow import FunctionAgent\nfrom llama_index.llms.openai import OpenAI\n\ndef multiply(a: int, b: int) -> int:\n    \"\"\"Multiply two numbers.\"\"\"\n    return a * b\n\nagent = FunctionAgent(\n    tools=[multiply],\n    llm=OpenAI(model=\"{{model_name}}\"),\n    system_prompt=\"You are a calculator.\",\n)\n\nimport asyncio\nprint(asyncio.run(agent.run(\"what is 6 * 7?\")))",
+  "language": "py",
+  "deps": [
+    "llama-index",
+    "llama-index-llms-openai"
+  ],
+  "summary_zh": "LlamaIndex FunctionAgent 工具呼叫"
+}

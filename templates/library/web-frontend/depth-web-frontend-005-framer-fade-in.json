@@ -1,0 +1,27 @@
+{
+  "id": "depth-web-frontend-005-framer-fade-in",
+  "category": "web-frontend/animation/framer-motion",
+  "intents_zh": [
+    "framer-motion 淡入",
+    "元件進場動畫",
+    "motion.div fade",
+    "initial animate",
+    "exit 動畫"
+  ],
+  "intents_en": [
+    "framer motion fade in",
+    "mount animation",
+    "motion div initial animate",
+    "exit animation",
+    "enter transition"
+  ],
+  "slots": [
+    "component_name"
+  ],
+  "code": "import { motion } from 'framer-motion';\n\nexport function {{component_name}}({ children }: { children: React.ReactNode }) {\n  return (\n    <motion.div\n      initial={{ opacity: 0, y: 8 }}\n      animate={{ opacity: 1, y: 0 }}\n      exit={{ opacity: 0, y: -8 }}\n      transition={{ duration: 0.25, ease: 'easeOut' }}\n    >\n      {children}\n    </motion.div>\n  );\n}",
+  "language": "tsx",
+  "deps": [
+    "framer-motion"
+  ],
+  "summary_zh": "framer-motion 元件淡入動畫包裝"
+}

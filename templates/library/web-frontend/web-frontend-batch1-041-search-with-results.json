@@ -1,0 +1,28 @@
+{
+  "id": "web-frontend-batch1-041-search-with-results",
+  "category": "web-frontend/react/search/results-list",
+  "intents_zh": [
+    "搜尋結果列表",
+    "search + results 元件",
+    "搜尋並顯示結果",
+    "loading 態搜尋",
+    "API search with list",
+    "查詢列表元件"
+  ],
+  "intents_en": [
+    "search with results",
+    "search results list",
+    "search box with list",
+    "loading search",
+    "api search list",
+    "search and display"
+  ],
+  "slots": [
+    "component_name",
+    "api_url"
+  ],
+  "code": "import { useState } from 'react';\n\nexport default function {{component_name}}() {\n  const [q, setQ] = useState('');\n  const [items, setItems] = useState<any[]>([]);\n  const [loading, setLoading] = useState(false);\n\n  async function search() {\n    setLoading(true);\n    const r = await fetch(`{{api_url}}?q=${encodeURIComponent(q)}`);\n    setItems(await r.json());\n    setLoading(false);\n  }\n\n  return (\n    <div>\n      <form onSubmit={(e) => { e.preventDefault(); search(); }}>\n        <input value={q} onChange={(e) => setQ(e.target.value)} className=\"border rounded px-2 py-1\" />\n        <button type=\"submit\">Search</button>\n      </form>\n      {loading ? <p>Loading...</p> : <ul>{items.map((it, i) => <li key={i}>{it.title}</li>)}</ul>}\n    </div>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "搜尋表單帶 loading 與結果列表"
+}

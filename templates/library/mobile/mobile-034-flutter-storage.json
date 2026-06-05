@@ -1,0 +1,31 @@
+{
+  "id": "mobile-034-flutter-storage",
+  "category": "mobile/flutter/storage",
+  "intents_zh": [
+    "Flutter SharedPreferences",
+    "flutter 本地存儲",
+    "flutter key value 存",
+    "Flutter 持久化",
+    "存設定 flutter",
+    "local storage flutter",
+    "prefs flutter"
+  ],
+  "intents_en": [
+    "flutter SharedPreferences",
+    "flutter local storage",
+    "persist value flutter",
+    "key value flutter",
+    "flutter save settings",
+    "prefs example flutter",
+    "flutter persistent store"
+  ],
+  "slots": [
+    "pref_key"
+  ],
+  "code": "import 'package:shared_preferences/shared_preferences.dart';\nFuture<void> save(String v)async{final p=await SharedPreferences.getInstance();await p.setString('{{pref_key}}',v);}\nFuture<String?> load()async{final p=await SharedPreferences.getInstance();return p.getString('{{pref_key}}');}\nFuture<void> clear()async{final p=await SharedPreferences.getInstance();await p.remove('{{pref_key}}');}",
+  "language": "dart",
+  "deps": [
+    "shared_preferences"
+  ],
+  "summary_zh": "Flutter SharedPreferences 包裝"
+}

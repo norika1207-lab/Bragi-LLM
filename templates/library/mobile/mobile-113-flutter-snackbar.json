@@ -1,0 +1,31 @@
+{
+  "id": "mobile-113-flutter-snackbar",
+  "category": "mobile/flutter/feedback",
+  "intents_zh": [
+    "Flutter SnackBar",
+    "flutter 跳訊息",
+    "flutter show snackbar",
+    "Flutter 提示訊息",
+    "ScaffoldMessenger snackbar",
+    "flutter 短訊息",
+    "flutter toast 替代"
+  ],
+  "intents_en": [
+    "flutter SnackBar",
+    "flutter show snackbar",
+    "ScaffoldMessenger snackbar",
+    "flutter brief message",
+    "flutter toast alternative",
+    "snackbar example flutter",
+    "flutter alert short"
+  ],
+  "slots": [
+    "text"
+  ],
+  "code": "import 'package:flutter/material.dart';\nvoid showSnack(BuildContext c){\n  ScaffoldMessenger.of(c).showSnackBar(const SnackBar(content:Text('{{text}}')));}",
+  "language": "dart",
+  "deps": [
+    "flutter"
+  ],
+  "summary_zh": "Flutter ScaffoldMessenger 跳 SnackBar"
+}

@@ -1,0 +1,23 @@
+{
+  "id": "database-devops-136-prisma-migrate-dev",
+  "category": "database-devops/migration/prisma",
+  "intents_zh": [
+    "prisma migrate dev",
+    "建立 prisma migration",
+    "prisma 部署 migration"
+  ],
+  "intents_en": [
+    "prisma migrate dev",
+    "create prisma migration",
+    "prisma deploy migration"
+  ],
+  "slots": [
+    "migration_name"
+  ],
+  "code": "#!/usr/bin/env bash\nset -euo pipefail\n\n# Dev: create + apply\nnpx prisma migrate dev --name {{migration_name}}\n\n# Generate client\nnpx prisma generate\n\n# Prod: apply only\n# npx prisma migrate deploy\n\n# Reset (DANGER)\n# npx prisma migrate reset --force",
+  "language": "sh",
+  "deps": [
+    "prisma"
+  ],
+  "summary_zh": "prisma migrate 工作流指令"
+}

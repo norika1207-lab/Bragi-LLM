@@ -1,0 +1,30 @@
+{
+  "id": "web-backend-006-express-upload",
+  "category": "web-backend/express/upload",
+  "intents_zh": [
+    "express 檔案上傳",
+    "用 multer 收檔",
+    "多檔上傳 endpoint",
+    "儲存上傳檔案到 disk",
+    "express form-data 上傳"
+  ],
+  "intents_en": [
+    "file upload express multer",
+    "handle file upload",
+    "multer disk storage",
+    "multiple file upload endpoint",
+    "express form-data upload"
+  ],
+  "slots": [
+    "upload_dir",
+    "field_name",
+    "max_size_mb"
+  ],
+  "code": "const express = require('express');\nconst multer = require('multer');\nconst path = require('path');\n\nconst storage = multer.diskStorage({\n  destination: '{{upload_dir}}',\n  filename: (req, file, cb) => cb(null, Date.now() + path.extname(file.originalname))\n});\nconst upload = multer({ storage, limits: { fileSize: {{max_size_mb}} * 1024 * 1024 } });\n\nconst router = express.Router();\nrouter.post('/upload', upload.array('{{field_name}}'), (req, res) => {\n  res.json({ files: req.files.map(f => ({ name: f.filename, size: f.size })) });\n});\n\nmodule.exports = router;",
+  "language": "js",
+  "deps": [
+    "express",
+    "multer"
+  ],
+  "summary_zh": "Express multer 多檔上傳"
+}

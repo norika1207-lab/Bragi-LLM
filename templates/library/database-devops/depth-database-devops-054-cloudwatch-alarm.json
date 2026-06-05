@@ -1,0 +1,25 @@
+{
+  "id": "depth-database-devops-054-cloudwatch-alarm",
+  "category": "database-devops/aws/monitoring",
+  "intents_zh": [
+    "CloudWatch alarm boto3",
+    "CPU 高告警",
+    "建告警"
+  ],
+  "intents_en": [
+    "CloudWatch alarm boto3",
+    "high CPU alarm",
+    "create alarm"
+  ],
+  "slots": [
+    "alarm_name",
+    "instance_id",
+    "threshold"
+  ],
+  "code": "import boto3\ncw = boto3.client('cloudwatch')\ncw.put_metric_alarm(\n    AlarmName='{{alarm_name}}',\n    ComparisonOperator='GreaterThanThreshold',\n    EvaluationPeriods=3,\n    MetricName='CPUUtilization',\n    Namespace='AWS/EC2',\n    Period=60,\n    Statistic='Average',\n    Threshold={{threshold}},\n    Dimensions=[{'Name':'InstanceId','Value':'{{instance_id}}'}],\n    AlarmActions=[],\n)",
+  "language": "py",
+  "deps": [
+    "boto3"
+  ],
+  "summary_zh": "boto3 建 EC2 CPU CloudWatch alarm"
+}

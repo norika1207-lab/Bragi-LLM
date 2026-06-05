@@ -1,0 +1,27 @@
+{
+  "id": "web-frontend-batch1-027-image-preview",
+  "category": "web-frontend/react/file-upload/image-preview",
+  "intents_zh": [
+    "圖片預覽元件",
+    "image preview React",
+    "選圖即時預覽",
+    "上傳前預覽圖片",
+    "file 預覽縮圖",
+    "preview before upload"
+  ],
+  "intents_en": [
+    "image preview",
+    "preview before upload",
+    "file preview thumbnail",
+    "react image preview",
+    "image picker preview",
+    "local image preview"
+  ],
+  "slots": [
+    "component_name"
+  ],
+  "code": "import { useState } from 'react';\n\nexport default function {{component_name}}() {\n  const [url, setUrl] = useState<string | null>(null);\n\n  function onChange(e: React.ChangeEvent<HTMLInputElement>) {\n    const f = e.target.files?.[0];\n    if (!f) return;\n    setUrl(URL.createObjectURL(f));\n  }\n\n  return (\n    <div>\n      <input type=\"file\" accept=\"image/*\" onChange={onChange} />\n      {url && <img src={url} alt=\"preview\" className=\"mt-2 max-w-xs rounded\" />}\n    </div>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "選圖即時預覽元件"
+}

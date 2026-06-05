@@ -1,0 +1,21 @@
+{
+  "id": "database-devops-106-dockerfile-bun",
+  "category": "database-devops/docker/dockerfile",
+  "intents_zh": [
+    "Bun Dockerfile",
+    "bun 容器化",
+    "bun app docker"
+  ],
+  "intents_en": [
+    "bun dockerfile",
+    "containerize bun",
+    "bun docker"
+  ],
+  "slots": [
+    "port"
+  ],
+  "code": "FROM oven/bun:1-alpine AS deps\nWORKDIR /app\nCOPY package.json bun.lockb ./\nRUN bun install --frozen-lockfile --production\n\nFROM oven/bun:1-alpine\nWORKDIR /app\nCOPY --from=deps /app/node_modules ./node_modules\nCOPY . .\nEXPOSE {{port}}\nCMD [\"bun\", \"run\", \"start\"]",
+  "language": "dockerfile",
+  "deps": [],
+  "summary_zh": "Bun runtime Dockerfile"
+}

@@ -1,0 +1,22 @@
+{
+  "id": "system-cli-081-throttle-rate",
+  "category": "system-cli/reliability/throttle",
+  "intents_zh": [
+    "python 限速 rate limit",
+    "每秒幾次 throttle",
+    "API 呼叫限速"
+  ],
+  "intents_en": [
+    "python rate limiter",
+    "throttle calls per second",
+    "client side rate limit"
+  ],
+  "slots": [
+    "calls_per_sec",
+    "fn_name"
+  ],
+  "code": "import time, threading\n\nclass RateLimiter:\n    def __init__(self, per_sec):\n        self.interval = 1.0 / per_sec\n        self.lock = threading.Lock()\n        self.next = 0.0\n    def __call__(self):\n        with self.lock:\n            now = time.monotonic()\n            wait = self.next - now\n            if wait > 0: time.sleep(wait)\n            self.next = max(now, self.next) + self.interval\n\nrl = RateLimiter({{calls_per_sec}})\ndef {{fn_name}}(i):\n    rl(); print(time.monotonic(), i)\n\nfor i in range(10): {{fn_name}}(i)",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "執行緒安全 rate limiter"
+}

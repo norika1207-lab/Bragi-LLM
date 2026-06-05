@@ -1,0 +1,29 @@
+{
+  "id": "firmware-021-esp32-webserver",
+  "category": "firmware/esp32/network",
+  "intents_zh": [
+    "ESP32 架網頁",
+    "內建 web server",
+    "用瀏覽器控制 ESP32",
+    "WebServer 範例",
+    "本機 HTTP 服務"
+  ],
+  "intents_en": [
+    "ESP32 web server",
+    "serve HTTP page from ESP32",
+    "control ESP32 via browser",
+    "WebServer library",
+    "onboard web UI"
+  ],
+  "slots": [
+    "ssid",
+    "password",
+    "led_pin"
+  ],
+  "code": "#include <WiFi.h>\n#include <WebServer.h>\nWebServer server(80);\nconst int LED = {{led_pin}};\n\nvoid setup() {\n  pinMode(LED, OUTPUT);\n  WiFi.begin(\"{{ssid}}\", \"{{password}}\");\n  while (WiFi.status() != WL_CONNECTED) delay(300);\n  server.on(\"/on\", []() { digitalWrite(LED, HIGH); server.send(200, \"text/plain\", \"on\"); });\n  server.on(\"/off\", []() { digitalWrite(LED, LOW); server.send(200, \"text/plain\", \"off\"); });\n  server.begin();\n}\n\nvoid loop() { server.handleClient(); }",
+  "language": "ino",
+  "deps": [
+    "WebServer"
+  ],
+  "summary_zh": "ESP32 內建 web server 提供 LED 控制端點"
+}

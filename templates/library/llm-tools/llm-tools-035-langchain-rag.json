@@ -1,0 +1,35 @@
+{
+  "id": "llm-tools-035-langchain-rag",
+  "category": "llm-tools/langchain/rag",
+  "intents_zh": [
+    "langchain RAG",
+    "langchain 向量檢索鏈",
+    "langchain retriever",
+    "用 langchain 做 RAG",
+    "retriever | prompt | llm",
+    "RAG with langchain",
+    "langchain qa chain",
+    "langchain 範例 rag"
+  ],
+  "intents_en": [
+    "langchain rag chain",
+    "langchain retriever pipeline",
+    "rag with langchain",
+    "langchain qa chain",
+    "retriever prompt llm",
+    "rag example langchain",
+    "langchain document qa",
+    "minimal langchain rag"
+  ],
+  "slots": [
+    "model_name"
+  ],
+  "code": "from langchain_community.vectorstores import FAISS\nfrom langchain_openai import ChatOpenAI, OpenAIEmbeddings\nfrom langchain_core.prompts import ChatPromptTemplate\nfrom langchain_core.output_parsers import StrOutputParser\nfrom langchain_core.runnables import RunnablePassthrough\n\nemb = OpenAIEmbeddings()\nvs = FAISS.from_texts([\"earth is round\", \"sun is hot\"], emb)\nretriever = vs.as_retriever(search_kwargs={\"k\": 2})\nprompt = ChatPromptTemplate.from_template(\"Context: {ctx}\\nQ: {q}\")\nllm = ChatOpenAI(model=\"{{model_name}}\")\n\nchain = {\"ctx\": retriever, \"q\": RunnablePassthrough()} | prompt | llm | StrOutputParser()\nprint(chain.invoke(\"what shape is earth?\"))",
+  "language": "py",
+  "deps": [
+    "langchain-community",
+    "langchain-openai",
+    "faiss-cpu"
+  ],
+  "summary_zh": "LangChain FAISS + retriever RAG 鏈"
+}

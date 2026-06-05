@@ -1,0 +1,23 @@
+{
+  "id": "system-cli-126-jsonl-to-csv",
+  "category": "system-cli/data/jsonl",
+  "intents_zh": [
+    "jsonl 轉 csv",
+    "ndjson 變表格",
+    "jsonl flatten 輸出 csv"
+  ],
+  "intents_en": [
+    "jsonl to csv",
+    "ndjson to spreadsheet",
+    "convert jsonl into csv"
+  ],
+  "slots": [
+    "in_jsonl",
+    "out_csv",
+    "fields"
+  ],
+  "code": "import json, csv\n\nfields = {{fields}}\nwith open('{{in_jsonl}}') as fi, open('{{out_csv}}','w', newline='') as fo:\n    writer = csv.DictWriter(fo, fieldnames=fields)\n    writer.writeheader()\n    for line in fi:\n        line = line.strip()\n        if not line: continue\n        obj = json.loads(line)\n        writer.writerow({k: obj.get(k, '') for k in fields})\nprint('done -> {{out_csv}}')",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "jsonl 攤平成 csv"
+}

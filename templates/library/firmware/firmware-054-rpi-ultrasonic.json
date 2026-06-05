@@ -1,0 +1,28 @@
+{
+  "id": "firmware-054-rpi-ultrasonic",
+  "category": "firmware/rpi/sensor",
+  "intents_zh": [
+    "樹莓派超音波",
+    "Pi HC-SR04",
+    "gpiozero DistanceSensor",
+    "Pi 測距",
+    "ultrasonic Pi"
+  ],
+  "intents_en": [
+    "Raspberry Pi ultrasonic",
+    "Pi HC-SR04",
+    "gpiozero DistanceSensor",
+    "measure distance Pi",
+    "ultrasonic Pi sensor"
+  ],
+  "slots": [
+    "echo_pin",
+    "trig_pin"
+  ],
+  "code": "from gpiozero import DistanceSensor\nfrom time import sleep\n\ns = DistanceSensor(echo={{echo_pin}}, trigger={{trig_pin}})\nwhile True:\n    print('cm=', s.distance * 100)\n    sleep(0.5)",
+  "language": "py",
+  "deps": [
+    "gpiozero"
+  ],
+  "summary_zh": "Raspberry Pi gpiozero 超音波測距"
+}

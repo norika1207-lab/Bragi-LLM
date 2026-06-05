@@ -1,0 +1,28 @@
+{
+  "id": "web-backend-131-fastapi-db-async",
+  "category": "web-backend/fastapi/db",
+  "intents_zh": [
+    "asyncpg 連線池 fastapi",
+    "純 SQL fastapi",
+    "async postgres pool",
+    "fastapi raw query",
+    "fastapi + asyncpg"
+  ],
+  "intents_en": [
+    "asyncpg pool fastapi",
+    "raw sql fastapi",
+    "async postgres fastapi",
+    "fastapi raw query",
+    "fastapi asyncpg connection"
+  ],
+  "slots": [
+    "dsn"
+  ],
+  "code": "import asyncpg\nfrom fastapi import FastAPI\n\napp = FastAPI()\n\n@app.on_event('startup')\nasync def startup():\n    app.state.pool = await asyncpg.create_pool('{{dsn}}', min_size=2, max_size=10)\n\n@app.on_event('shutdown')\nasync def shutdown():\n    await app.state.pool.close()\n\nasync def fetch_all(query: str, *args):\n    async with app.state.pool.acquire() as con:\n        return [dict(r) for r in await con.fetch(query, *args)]",
+  "language": "py",
+  "deps": [
+    "fastapi",
+    "asyncpg"
+  ],
+  "summary_zh": "FastAPI asyncpg pool"
+}

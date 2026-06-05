@@ -1,0 +1,33 @@
+{
+  "id": "llm-tools-099-bm25-index",
+  "category": "llm-tools/search/bm25",
+  "intents_zh": [
+    "bm25 索引",
+    "關鍵字檢索",
+    "BM25Okapi 範例",
+    "稀疏檢索",
+    "BM25 baseline",
+    "用 rank_bm25",
+    "BM25 search",
+    "keyword 檢索"
+  ],
+  "intents_en": [
+    "bm25 index",
+    "keyword search baseline",
+    "bm25okapi example",
+    "sparse retrieval",
+    "rank_bm25 usage",
+    "keyword retrieval",
+    "bm25 search",
+    "lexical search"
+  ],
+  "slots": [
+    "top_k"
+  ],
+  "code": "from rank_bm25 import BM25Okapi\n\nclass BM25:\n    def __init__(self, docs: list[str]):\n        self.docs = docs\n        self.bm25 = BM25Okapi([d.lower().split() for d in docs])\n\n    def search(self, q: str, k: int = {{top_k}}):\n        scores = self.bm25.get_scores(q.lower().split())\n        order = sorted(range(len(scores)), key=lambda i: -scores[i])[:k]\n        return [(self.docs[i], float(scores[i])) for i in order]\n\nif __name__ == \"__main__\":\n    b = BM25([\"the cat sat\", \"a dog ran\", \"cats are cute\"])\n    print(b.search(\"cat\"))",
+  "language": "py",
+  "deps": [
+    "rank-bm25"
+  ],
+  "summary_zh": "rank_bm25 關鍵字檢索"
+}

@@ -1,0 +1,28 @@
+{
+  "id": "web-frontend-batch2-026-split-pane",
+  "category": "web-frontend/react/layout/split-pane",
+  "intents_zh": [
+    "分隔窗格",
+    "split pane",
+    "可拖曳分欄",
+    "resizable 雙欄",
+    "拖動分隔線",
+    "panel resizer"
+  ],
+  "intents_en": [
+    "split pane",
+    "resizable panels",
+    "draggable divider",
+    "panel splitter",
+    "resizer layout",
+    "drag divider"
+  ],
+  "slots": [
+    "left_content",
+    "right_content"
+  ],
+  "code": "import { useState, useRef } from 'react';\n\nexport function SplitPane() {\n  const [w, setW] = useState(50);\n  const dragging = useRef(false);\n  return (\n    <div className=\"flex h-screen select-none\" onMouseMove={(e) => {\n      if (!dragging.current) return;\n      setW((e.clientX / window.innerWidth) * 100);\n    }} onMouseUp={() => (dragging.current = false)}>\n      <div style={{ width: `${w}%` }} className=\"overflow-auto border-r p-4\">{{left_content}}</div>\n      <div onMouseDown={() => (dragging.current = true)} className=\"w-1 cursor-col-resize bg-gray-200 hover:bg-blue-500\" />\n      <div className=\"flex-1 overflow-auto p-4\">{{right_content}}</div>\n    </div>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "可拖曳分隔線雙欄"
+}

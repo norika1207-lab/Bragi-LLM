@@ -1,0 +1,22 @@
+{
+  "id": "system-cli-116-bash-arg-default",
+  "category": "system-cli/shell/args",
+  "intents_zh": [
+    "bash 位置參數 default",
+    "參數沒給給預設",
+    "positional default"
+  ],
+  "intents_en": [
+    "bash positional default",
+    "fallback arg shell",
+    "default param bash"
+  ],
+  "slots": [
+    "arg_name",
+    "default_val"
+  ],
+  "code": "#!/usr/bin/env bash\nset -euo pipefail\n{{arg_name}}=\"${1:-{{default_val}}}\"\nshift || true\necho \"{{arg_name}}=${{{arg_name}}}\"",
+  "language": "sh",
+  "deps": [],
+  "summary_zh": "bash 位置參數預設值"
+}

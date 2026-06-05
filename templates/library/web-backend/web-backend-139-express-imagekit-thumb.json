@@ -1,0 +1,28 @@
+{
+  "id": "web-backend-139-express-imagekit-thumb",
+  "category": "web-backend/express/image",
+  "intents_zh": [
+    "express 縮圖 cache",
+    "產生 thumbnail 並存檔",
+    "sharp 多尺寸",
+    "image resize cache",
+    "縮圖 endpoint with cache"
+  ],
+  "intents_en": [
+    "express thumbnail cache",
+    "sharp multi size",
+    "image resize cache",
+    "thumbnail endpoint cache",
+    "generate thumb express"
+  ],
+  "slots": [
+    "cache_dir"
+  ],
+  "code": "const sharp = require('sharp');\nconst fs = require('fs');\nconst path = require('path');\nconst express = require('express');\nconst router = express.Router();\n\nrouter.get('/thumb/:size/:name', async (req, res) => {\n  const size = Math.min(2048, parseInt(req.params.size) || 256);\n  const cachePath = path.join('{{cache_dir}}', `${size}-${req.params.name}`);\n  if (fs.existsSync(cachePath)) return res.sendFile(path.resolve(cachePath));\n  const src = path.join('uploads', req.params.name);\n  if (!fs.existsSync(src)) return res.status(404).end();\n  await sharp(src).resize(size, size, { fit: 'inside' }).toFile(cachePath);\n  res.sendFile(path.resolve(cachePath));\n});\n\nmodule.exports = router;",
+  "language": "js",
+  "deps": [
+    "express",
+    "sharp"
+  ],
+  "summary_zh": "Express sharp 縮圖快取"
+}

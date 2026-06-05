@@ -1,0 +1,27 @@
+{
+  "id": "algorithm-ml-004",
+  "category": "algorithm/ml/naive_bayes",
+  "intents_zh": [
+    "朴素貝氏",
+    "naive bayes",
+    "Gaussian NB",
+    "給我 naive bayes"
+  ],
+  "intents_en": [
+    "naive bayes",
+    "Gaussian NB",
+    "sklearn naive bayes",
+    "NB classifier"
+  ],
+  "slots": [
+    "X_train",
+    "y_train",
+    "X_test"
+  ],
+  "code": "from sklearn.naive_bayes import GaussianNB\n\nclf = GaussianNB()\nclf.fit({{X_train}}, {{y_train}})\npred = clf.predict({{X_test}})\nprob = clf.predict_proba({{X_test}})\nprint(pred[:10])",
+  "language": "py",
+  "deps": [
+    "scikit-learn"
+  ],
+  "summary_zh": "高斯朴素貝氏分類"
+}

@@ -1,0 +1,27 @@
+{
+  "id": "web-frontend-batch3-027-html-table",
+  "category": "web-frontend/html/ui/table",
+  "intents_zh": [
+    "HTML 簡單表格",
+    "靜態 table",
+    "HTML 資料表",
+    "CSS 美化 table",
+    "條紋 table",
+    "vanilla table"
+  ],
+  "intents_en": [
+    "html simple table",
+    "static table",
+    "html data table",
+    "striped table",
+    "css table style",
+    "vanilla table"
+  ],
+  "slots": [
+    "caption"
+  ],
+  "code": "<table>\n  <caption>{{caption}}</caption>\n  <thead>\n    <tr><th>Name</th><th>Email</th><th>Role</th></tr>\n  </thead>\n  <tbody>\n    <tr><td>Alice</td><td>alice@example.com</td><td>Admin</td></tr>\n    <tr><td>Bob</td><td>bob@example.com</td><td>User</td></tr>\n    <tr><td>Carol</td><td>carol@example.com</td><td>User</td></tr>\n  </tbody>\n</table>\n<style>\n  table { border-collapse: collapse; width: 100%; }\n  th, td { padding: .6rem; border-bottom: 1px solid #ddd; text-align: left; }\n  thead { background: #f3f4f6; }\n  tbody tr:nth-child(even) { background: #fafafa; }\n  caption { font-weight: 600; padding: .5rem; }\n</style>",
+  "language": "html",
+  "deps": [],
+  "summary_zh": "HTML 條紋表格含 caption"
+}

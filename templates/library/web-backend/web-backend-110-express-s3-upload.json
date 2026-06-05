@@ -1,0 +1,31 @@
+{
+  "id": "web-backend-110-express-s3-upload",
+  "category": "web-backend/express/storage",
+  "intents_zh": [
+    "s3 presigned url",
+    "express 產生 s3 上傳 url",
+    "aws-sdk upload",
+    "直接上傳 s3",
+    "s3 putObject url"
+  ],
+  "intents_en": [
+    "s3 presigned upload url",
+    "express s3 upload",
+    "aws-sdk presign",
+    "direct s3 upload",
+    "s3 putObject signed url"
+  ],
+  "slots": [
+    "bucket",
+    "region",
+    "key_prefix"
+  ],
+  "code": "const { S3Client, PutObjectCommand } = require('@aws-sdk/client-s3');\nconst { getSignedUrl } = require('@aws-sdk/s3-request-presigner');\nconst express = require('express');\nconst router = express.Router();\n\nconst s3 = new S3Client({ region: '{{region}}' });\n\nrouter.post('/presign', async (req, res) => {\n  const { filename, contentType } = req.body;\n  const key = `{{key_prefix}}/${Date.now()}-${filename}`;\n  const cmd = new PutObjectCommand({ Bucket: '{{bucket}}', Key: key, ContentType: contentType });\n  const url = await getSignedUrl(s3, cmd, { expiresIn: 300 });\n  res.json({ url, key });\n});\n\nmodule.exports = router;",
+  "language": "js",
+  "deps": [
+    "@aws-sdk/client-s3",
+    "@aws-sdk/s3-request-presigner",
+    "express"
+  ],
+  "summary_zh": "Express S3 presigned upload URL"
+}

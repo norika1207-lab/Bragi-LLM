@@ -1,0 +1,32 @@
+{
+  "id": "mobile-008-rn-deeplink",
+  "category": "mobile/rn/nav",
+  "intents_zh": [
+    "RN deep link",
+    "React Native 深層連結",
+    "RN 開 url scheme",
+    "app link RN",
+    "深連結處理 RN",
+    "RN linking",
+    "universal link RN"
+  ],
+  "intents_en": [
+    "RN deep link",
+    "react native linking",
+    "url scheme rn",
+    "handle deep link rn",
+    "app links rn",
+    "universal links rn",
+    "deep linking config rn"
+  ],
+  "slots": [
+    "scheme",
+    "host"
+  ],
+  "code": "import {Linking} from 'react-native';\nimport {useEffect} from 'react';\nexport function useDeepLink(handler:(path:string)=>void){\n  useEffect(()=>{\n    const parse=(u:string|null)=>{if(!u)return;const m=u.match(/{{scheme}}:\\/\\/{{host}}\\/(.*)/);if(m)handler(m[1]);};\n    Linking.getInitialURL().then(parse);\n    const sub=Linking.addEventListener('url',e=>parse(e.url));\n    return()=>sub.remove();\n  },[handler]);}",
+  "language": "ts",
+  "deps": [
+    "react-native"
+  ],
+  "summary_zh": "RN deep link hook 解析 scheme://host/path"
+}

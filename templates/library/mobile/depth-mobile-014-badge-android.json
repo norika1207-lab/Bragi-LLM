@@ -1,0 +1,27 @@
+{
+  "id": "depth-mobile-014-badge-android",
+  "category": "mobile/badge/android",
+  "intents_zh": [
+    "Android shortcut badge",
+    "ShortcutBadger",
+    "桌面紅點",
+    "setNotificationCount",
+    "unread badge"
+  ],
+  "intents_en": [
+    "Android shortcut badge",
+    "ShortcutBadger",
+    "launcher badge",
+    "setNotificationCount",
+    "unread badge"
+  ],
+  "slots": [
+    "count"
+  ],
+  "code": "// Use NotificationCompat with setNumber for native badging (Android 8+)\nval notification = NotificationCompat.Builder(this, channelId)\n    .setContentTitle(\"New messages\")\n    .setSmallIcon(R.drawable.ic_msg)\n    .setNumber({{count}})\n    .build()\nNotificationManagerCompat.from(this).notify(1, notification)",
+  "language": "kotlin",
+  "deps": [
+    "androidx.core:core-ktx"
+  ],
+  "summary_zh": "Android badge 透過通知 setNumber"
+}

@@ -1,0 +1,28 @@
+{
+  "id": "depth-web-backend-046-presigned-s3-get",
+  "category": "web-backend/storage/presigned",
+  "intents_zh": [
+    "S3 預簽下載 URL",
+    "短期 GetObject 連結",
+    "限時下載",
+    "getSignedUrl GetObject",
+    "臨時授權連結"
+  ],
+  "intents_en": [
+    "s3 presigned download url",
+    "short lived getobject link",
+    "time limited download",
+    "getsignedurl getobject",
+    "temporary access link"
+  ],
+  "slots": [
+    "bucket"
+  ],
+  "code": "export async function presignDownload(key, expires = 300) {\n  const cmd = new GetObjectCommand({ Bucket: '{{bucket}}', Key: key });\n  return getSignedUrl(s3, cmd, { expiresIn: expires });\n}",
+  "language": "ts",
+  "deps": [
+    "@aws-sdk/client-s3",
+    "@aws-sdk/s3-request-presigner"
+  ],
+  "summary_zh": "S3 預簽 GET URL 限時下載"
+}

@@ -1,0 +1,28 @@
+{
+  "id": "depth-database-devops-016-argocd-app",
+  "category": "database-devops/gitops/argocd",
+  "intents_zh": [
+    "ArgoCD Application yaml",
+    "GitOps 應用宣告",
+    "自動同步 manifest",
+    "argocd app crd"
+  ],
+  "intents_en": [
+    "ArgoCD Application yaml",
+    "GitOps app manifest",
+    "auto sync manifest",
+    "argocd app crd"
+  ],
+  "slots": [
+    "app_name",
+    "repo_url",
+    "path",
+    "dest_namespace"
+  ],
+  "code": "apiVersion: argoproj.io/v1alpha1\nkind: Application\nmetadata:\n  name: {{app_name}}\n  namespace: argocd\nspec:\n  project: default\n  source:\n    repoURL: {{repo_url}}\n    targetRevision: HEAD\n    path: {{path}}\n  destination:\n    server: https://kubernetes.default.svc\n    namespace: {{dest_namespace}}\n  syncPolicy:\n    automated:\n      prune: true\n      selfHeal: true\n    syncOptions:\n      - CreateNamespace=true",
+  "language": "yaml",
+  "deps": [
+    "argocd"
+  ],
+  "summary_zh": "ArgoCD Application,自動同步、自癒、剪除"
+}

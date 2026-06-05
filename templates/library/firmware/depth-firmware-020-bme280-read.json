@@ -1,0 +1,29 @@
+{
+  "id": "depth-firmware-020-bme280-read",
+  "category": "firmware/sensor/env",
+  "intents_zh": [
+    "BME280 讀值",
+    "氣壓溫濕度",
+    "環境感測 I2C",
+    "Bosch 感測器",
+    "海拔估計"
+  ],
+  "intents_en": [
+    "bme280 read",
+    "pressure temp humidity",
+    "env sensor i2c",
+    "bosch sensor",
+    "altitude estimate"
+  ],
+  "slots": [
+    "sea_level_hpa"
+  ],
+  "code": "#include <Adafruit_BME280.h>\nAdafruit_BME280 bme;\nvoid setup() { Serial.begin(115200); bme.begin(0x76); }\nvoid loop() {\n    Serial.printf(\"T=%.1f P=%.1f H=%.1f alt=%.1f\\n\",\n        bme.readTemperature(),\n        bme.readPressure() / 100.0F,\n        bme.readHumidity(),\n        bme.readAltitude({{sea_level_hpa}}));\n    delay(2000);\n}",
+  "language": "cpp",
+  "deps": [
+    "Adafruit BME280 Library",
+    "Adafruit Unified Sensor",
+    "Wire"
+  ],
+  "summary_zh": "讀 BME280 溫度氣壓濕度並估算海拔"
+}

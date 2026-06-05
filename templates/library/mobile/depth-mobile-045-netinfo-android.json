@@ -1,0 +1,23 @@
+{
+  "id": "depth-mobile-045-netinfo-android",
+  "category": "mobile/network/monitor-android",
+  "intents_zh": [
+    "Android ConnectivityManager",
+    "NetworkCallback",
+    "onAvailable onLost",
+    "Wi-Fi cellular detect",
+    "網路監聽"
+  ],
+  "intents_en": [
+    "Android ConnectivityManager",
+    "NetworkCallback",
+    "onAvailable onLost",
+    "Wi-Fi cellular detect",
+    "network monitor"
+  ],
+  "slots": [],
+  "code": "val cm = getSystemService(ConnectivityManager::class.java)\ncm.registerDefaultNetworkCallback(object : ConnectivityManager.NetworkCallback() {\n    override fun onAvailable(network: Network) {\n        val caps = cm.getNetworkCapabilities(network)\n        val kind = when {\n            caps?.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) == true -> \"wifi\"\n            caps?.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) == true -> \"cellular\"\n            else -> \"other\"\n        }\n        Log.d(\"NET\", \"online $kind\")\n    }\n    override fun onLost(network: Network) { Log.d(\"NET\", \"offline\") }\n})",
+  "language": "kotlin",
+  "deps": [],
+  "summary_zh": "Android ConnectivityManager 監聽"
+}

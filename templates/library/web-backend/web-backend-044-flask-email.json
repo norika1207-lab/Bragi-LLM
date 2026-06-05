@@ -1,0 +1,30 @@
+{
+  "id": "web-backend-044-flask-email",
+  "category": "web-backend/flask/email",
+  "intents_zh": [
+    "flask 寄信",
+    "flask-mail 範例",
+    "SMTP 寄信 python",
+    "發送通知信 flask",
+    "email service flask"
+  ],
+  "intents_en": [
+    "flask send email",
+    "flask-mail example",
+    "smtp email python",
+    "notification email flask",
+    "email service flask"
+  ],
+  "slots": [
+    "smtp_host",
+    "smtp_port",
+    "from_address"
+  ],
+  "code": "from flask import Flask\nfrom flask_mail import Mail, Message\n\napp = Flask(__name__)\napp.config.update(\n    MAIL_SERVER='{{smtp_host}}',\n    MAIL_PORT={{smtp_port}},\n    MAIL_USE_TLS=True,\n    MAIL_USERNAME=__import__('os').environ.get('SMTP_USER'),\n    MAIL_PASSWORD=__import__('os').environ.get('SMTP_PASS'),\n    MAIL_DEFAULT_SENDER='{{from_address}}'\n)\nmail = Mail(app)\n\ndef send(to, subject, body):\n    with app.app_context():\n        mail.send(Message(subject=subject, recipients=[to], body=body))",
+  "language": "py",
+  "deps": [
+    "flask",
+    "flask-mail"
+  ],
+  "summary_zh": "Flask-Mail SMTP 寄信"
+}

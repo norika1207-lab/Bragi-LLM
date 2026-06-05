@@ -1,0 +1,26 @@
+{
+  "id": "firmware-010-arduino-soil-moisture",
+  "category": "firmware/arduino/sensor",
+  "intents_zh": [
+    "土壤濕度感測",
+    "soil moisture",
+    "澆水提醒",
+    "植物乾了沒",
+    "土壤水分讀取"
+  ],
+  "intents_en": [
+    "soil moisture sensor",
+    "plant water level",
+    "capacitive soil sensor",
+    "Arduino soil sensor read",
+    "irrigation trigger"
+  ],
+  "slots": [
+    "sensor_pin",
+    "dry_threshold"
+  ],
+  "code": "const int SENSOR_PIN = {{sensor_pin}};\nconst int DRY = {{dry_threshold}};\n\nvoid setup() {\n  Serial.begin(115200);\n}\n\nvoid loop() {\n  int v = analogRead(SENSOR_PIN);\n  Serial.print(\"soil=\"); Serial.print(v);\n  Serial.println(v > DRY ? \" DRY\" : \" OK\");\n  delay(1000);\n}",
+  "language": "ino",
+  "deps": [],
+  "summary_zh": "土壤濕度感測器讀取與乾燥判斷"
+}

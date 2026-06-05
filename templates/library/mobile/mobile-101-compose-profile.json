@@ -1,0 +1,34 @@
+{
+  "id": "mobile-101-compose-profile",
+  "category": "mobile/compose/profile",
+  "intents_zh": [
+    "Compose 個人頁",
+    "Compose profile screen",
+    "Compose user profile",
+    "Compose 我的頁",
+    "Compose 頭像 bio",
+    "Compose account ui",
+    "Compose profile template"
+  ],
+  "intents_en": [
+    "compose profile screen",
+    "compose user profile",
+    "compose my page",
+    "compose avatar bio",
+    "compose account ui",
+    "jetpack compose profile",
+    "profile screen compose"
+  ],
+  "slots": [
+    "avatar_url",
+    "name",
+    "bio"
+  ],
+  "code": "import androidx.compose.foundation.layout.*\nimport androidx.compose.foundation.shape.CircleShape\nimport androidx.compose.material3.Text\nimport androidx.compose.runtime.Composable\nimport androidx.compose.ui.Alignment\nimport androidx.compose.ui.Modifier\nimport androidx.compose.ui.draw.clip\nimport androidx.compose.ui.unit.dp\nimport coil.compose.AsyncImage\n@Composable\nfun P(){Column(Modifier.fillMaxSize().padding(24.dp),horizontalAlignment=Alignment.CenterHorizontally){\n  AsyncImage(model=\"{{avatar_url}}\",contentDescription=null,modifier=Modifier.size(120.dp).clip(CircleShape))\n  Spacer(Modifier.height(12.dp));Text(\"{{name}}\");Spacer(Modifier.height(8.dp));Text(\"{{bio}}\")}}",
+  "language": "kt",
+  "deps": [
+    "io.coil-kt:coil-compose",
+    "androidx.compose.material3"
+  ],
+  "summary_zh": "Compose 個人檔案頁含頭像 bio"
+}

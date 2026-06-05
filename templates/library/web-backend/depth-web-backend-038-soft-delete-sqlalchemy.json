@@ -1,0 +1,25 @@
+{
+  "id": "depth-web-backend-038-soft-delete-sqlalchemy",
+  "category": "web-backend/pattern/soft-delete",
+  "intents_zh": [
+    "SQLAlchemy 軟刪除",
+    "mixin deleted_at",
+    "查詢預設過濾",
+    "Python ORM 軟刪除",
+    "soft delete base"
+  ],
+  "intents_en": [
+    "sqlalchemy soft delete",
+    "mixin deleted_at",
+    "default query filter",
+    "python orm soft delete",
+    "soft delete base"
+  ],
+  "slots": [],
+  "code": "from datetime import datetime\nfrom sqlalchemy import Column, DateTime\n\nclass SoftDeleteMixin:\n    deleted_at = Column(DateTime, nullable=True)\n    def soft_delete(self, session):\n        self.deleted_at = datetime.utcnow()\n        session.add(self)",
+  "language": "py",
+  "deps": [
+    "sqlalchemy"
+  ],
+  "summary_zh": "SQLAlchemy 軟刪除 mixin"
+}

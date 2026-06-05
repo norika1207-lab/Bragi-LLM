@@ -1,0 +1,27 @@
+{
+  "id": "web-frontend-batch1-013-select-basic",
+  "category": "web-frontend/react/selects/basic",
+  "intents_zh": [
+    "下拉選單",
+    "select 元件",
+    "React select 基本",
+    "options 下拉",
+    "選擇器元件",
+    "native select wrapper"
+  ],
+  "intents_en": [
+    "select dropdown",
+    "react select component",
+    "basic select",
+    "native select wrapper",
+    "dropdown component",
+    "options select"
+  ],
+  "slots": [
+    "component_name"
+  ],
+  "code": "type Props = {\n  value: string;\n  onChange: (v: string) => void;\n  options: { label: string; value: string }[];\n};\n\nexport default function {{component_name}}({ value, onChange, options }: Props) {\n  return (\n    <select\n      value={value}\n      onChange={(e) => onChange(e.target.value)}\n      className=\"px-3 py-2 border rounded bg-white\"\n    >\n      {options.map((o) => (\n        <option key={o.value} value={o.value}>{o.label}</option>\n      ))}\n    </select>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "基本 native select 包裝元件"
+}

@@ -1,0 +1,23 @@
+{
+  "id": "system-cli-076-csv-deduplicate",
+  "category": "system-cli/data/csv",
+  "intents_zh": [
+    "CSV 去重複列",
+    "用某欄當 key 去重",
+    "CSV unique"
+  ],
+  "intents_en": [
+    "dedupe csv rows",
+    "csv unique by column",
+    "csv deduplicate"
+  ],
+  "slots": [
+    "in_csv",
+    "out_csv",
+    "key_col"
+  ],
+  "code": "import csv\n\nseen = set(); kept = []\nwith open('{{in_csv}}', newline='') as f:\n    reader = csv.DictReader(f); fields = reader.fieldnames\n    for row in reader:\n        k = row['{{key_col}}']\n        if k in seen: continue\n        seen.add(k); kept.append(row)\n\nwith open('{{out_csv}}','w', newline='') as f:\n    w = csv.DictWriter(f, fieldnames=fields); w.writeheader(); w.writerows(kept)\nprint(f'{len(kept)} unique rows')",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "CSV 依 key 去重"
+}

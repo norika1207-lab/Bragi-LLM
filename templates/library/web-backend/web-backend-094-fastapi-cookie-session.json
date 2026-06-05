@@ -1,0 +1,28 @@
+{
+  "id": "web-backend-094-fastapi-cookie-session",
+  "category": "web-backend/fastapi/auth",
+  "intents_zh": [
+    "fastapi session cookie",
+    "SessionMiddleware",
+    "starlette session",
+    "fastapi 存 session",
+    "加 cookie session"
+  ],
+  "intents_en": [
+    "fastapi session middleware",
+    "starlette session",
+    "cookie session fastapi",
+    "store session fastapi",
+    "SessionMiddleware example"
+  ],
+  "slots": [
+    "secret_env"
+  ],
+  "code": "from fastapi import FastAPI, Request\nfrom starlette.middleware.sessions import SessionMiddleware\nimport os\n\napp = FastAPI()\napp.add_middleware(SessionMiddleware, secret_key=os.environ['{{secret_env}}'], same_site='lax', https_only=False)\n\n@app.post('/login')\ndef login(request: Request, username: str):\n    request.session['user'] = username\n    return {'ok': True}\n\n@app.get('/me')\ndef me(request: Request):\n    return {'user': request.session.get('user')}\n\n@app.post('/logout')\ndef logout(request: Request):\n    request.session.clear()\n    return {'ok': True}",
+  "language": "py",
+  "deps": [
+    "fastapi",
+    "itsdangerous"
+  ],
+  "summary_zh": "FastAPI Starlette SessionMiddleware"
+}

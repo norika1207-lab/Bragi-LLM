@@ -1,0 +1,20 @@
+{
+  "id": "algorithm-misc-011",
+  "category": "algorithm/misc/sudoku_solver",
+  "intents_zh": [
+    "數獨求解",
+    "sudoku solver",
+    "給我數獨"
+  ],
+  "intents_en": [
+    "sudoku solver",
+    "solve sudoku backtrack"
+  ],
+  "slots": [
+    "fn_name"
+  ],
+  "code": "def {{fn_name}}(board):\n    def find():\n        for i in range(9):\n            for j in range(9):\n                if board[i][j] == 0: return (i, j)\n        return None\n    def ok(r, c, v):\n        for i in range(9):\n            if board[r][i] == v or board[i][c] == v: return False\n        br, bc = 3*(r//3), 3*(c//3)\n        for i in range(br, br+3):\n            for j in range(bc, bc+3):\n                if board[i][j] == v: return False\n        return True\n    def bt():\n        spot = find()\n        if not spot: return True\n        r, c = spot\n        for v in range(1, 10):\n            if ok(r, c, v):\n                board[r][c] = v\n                if bt(): return True\n                board[r][c] = 0\n        return False\n    bt()\n    return board",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "回溯數獨求解"
+}

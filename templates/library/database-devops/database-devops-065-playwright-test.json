@@ -1,0 +1,24 @@
+{
+  "id": "database-devops-065-playwright-test",
+  "category": "database-devops/test/playwright",
+  "intents_zh": [
+    "playwright 測試範本",
+    "e2e 測試",
+    "playwright 點按鈕"
+  ],
+  "intents_en": [
+    "playwright test",
+    "e2e test",
+    "playwright click button"
+  ],
+  "slots": [
+    "page_url",
+    "button_text"
+  ],
+  "code": "import { test, expect } from '@playwright/test'\n\ntest.beforeEach(async ({ page }) => {\n  await page.goto('{{page_url}}')\n})\n\ntest('clicks button and verifies', async ({ page }) => {\n  await page.getByRole('button', { name: '{{button_text}}' }).click()\n  await expect(page.getByText('Success')).toBeVisible()\n})\n\ntest('form submission', async ({ page }) => {\n  await page.fill('input[name=email]', 'a@b.com')\n  await page.fill('input[name=password]', 'secret')\n  await page.click('text=Sign in')\n  await expect(page).toHaveURL(/dashboard/)\n})",
+  "language": "ts",
+  "deps": [
+    "@playwright/test"
+  ],
+  "summary_zh": "playwright e2e 基本範本"
+}

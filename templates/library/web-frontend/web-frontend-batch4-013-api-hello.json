@@ -1,0 +1,29 @@
+{
+  "id": "web-frontend-batch4-013-api-hello",
+  "category": "web-frontend/nextjs/api/hello",
+  "intents_zh": [
+    "最簡單的 API route",
+    "產生 hello world API",
+    "Next.js app router API",
+    "route handler 範例",
+    "GET 端點",
+    "JSON 回應 API"
+  ],
+  "intents_en": [
+    "hello world api route",
+    "next.js route handler",
+    "simple GET endpoint",
+    "app router api",
+    "json api route",
+    "basic api"
+  ],
+  "slots": [
+    "greeting"
+  ],
+  "code": "import { NextResponse } from 'next/server';\n\nexport async function GET() {\n  return NextResponse.json({ message: '{{greeting}}' });\n}",
+  "language": "ts",
+  "deps": [
+    "next"
+  ],
+  "summary_zh": "App Router GET API 回 JSON"
+}

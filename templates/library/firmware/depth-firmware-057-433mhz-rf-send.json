@@ -1,0 +1,29 @@
+{
+  "id": "depth-firmware-057-433mhz-rf-send",
+  "category": "firmware/radio/rf433",
+  "intents_zh": [
+    "433MHz RF 發送",
+    "RCSwitch send",
+    "遙控插座開關",
+    "RF transmitter",
+    "重播碼"
+  ],
+  "intents_en": [
+    "433mhz rf send",
+    "rcswitch send",
+    "wireless socket control",
+    "rf transmitter",
+    "replay code"
+  ],
+  "slots": [
+    "tx_pin",
+    "code",
+    "bits"
+  ],
+  "code": "#include <RCSwitch.h>\nRCSwitch sw = RCSwitch();\nvoid setup() {\n    sw.enableTransmit({{tx_pin}});\n    sw.setProtocol(1);\n    sw.send({{code}}, {{bits}});\n}\nvoid loop() {}",
+  "language": "cpp",
+  "deps": [
+    "rc-switch"
+  ],
+  "summary_zh": "RCSwitch 發送 433MHz 遙控碼"
+}

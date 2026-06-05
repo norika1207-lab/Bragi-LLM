@@ -1,0 +1,21 @@
+{
+  "id": "algorithm-graph-017",
+  "category": "algorithm/graph/course_schedule",
+  "intents_zh": [
+    "課程表",
+    "course schedule",
+    "拓撲判可修完"
+  ],
+  "intents_en": [
+    "course schedule",
+    "can finish courses",
+    "topo cycle"
+  ],
+  "slots": [
+    "fn_name"
+  ],
+  "code": "from collections import defaultdict, deque\n\ndef {{fn_name}}(num_courses, prerequisites):\n    g = defaultdict(list)\n    indeg = [0]*num_courses\n    for a, b in prerequisites:\n        g[b].append(a)\n        indeg[a] += 1\n    q = deque([i for i in range(num_courses) if indeg[i] == 0])\n    taken = 0\n    while q:\n        u = q.popleft(); taken += 1\n        for v in g[u]:\n            indeg[v] -= 1\n            if indeg[v] == 0: q.append(v)\n    return taken == num_courses",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "拓撲排序判可否修完所有課"
+}

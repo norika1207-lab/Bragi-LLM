@@ -1,0 +1,30 @@
+{
+  "id": "depth-firmware-014-pwm-motor",
+  "category": "firmware/peripheral/pwm",
+  "intents_zh": [
+    "PWM 控制馬達",
+    "LEDC 馬達轉速",
+    "直流馬達調速",
+    "ESP32 PWM 輸出",
+    "ledcWrite 馬達"
+  ],
+  "intents_en": [
+    "pwm motor control",
+    "dc motor speed",
+    "ledc esp32",
+    "pwm output",
+    "ledcwrite motor"
+  ],
+  "slots": [
+    "pwm_pin",
+    "channel",
+    "freq_hz",
+    "duty"
+  ],
+  "code": "ledcSetup({{channel}}, {{freq_hz}}, 8);\nledcAttachPin({{pwm_pin}}, {{channel}});\nledcWrite({{channel}}, {{duty}});  // 0-255",
+  "language": "cpp",
+  "deps": [
+    "Arduino-ESP32"
+  ],
+  "summary_zh": "用 LEDC PWM 通道控制直流馬達轉速"
+}

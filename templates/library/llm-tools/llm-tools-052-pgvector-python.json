@@ -1,0 +1,35 @@
+{
+  "id": "llm-tools-052-pgvector-python",
+  "category": "llm-tools/vectordb/pgvector-python",
+  "intents_zh": [
+    "pgvector python 範例",
+    "psycopg 寫入向量",
+    "python 查 pgvector",
+    "insert embedding postgres",
+    "pgvector 查詢",
+    "用 python 操作 pgvector",
+    "psycopg vector",
+    "postgres embedding 查"
+  ],
+  "intents_en": [
+    "pgvector python",
+    "psycopg insert embedding",
+    "query pgvector from python",
+    "python postgres vector",
+    "psycopg vector",
+    "pgvector client python",
+    "pgvector minimal python",
+    "pg embedding query"
+  ],
+  "slots": [
+    "table_name",
+    "dsn"
+  ],
+  "code": "import psycopg\nfrom pgvector.psycopg import register_vector\n\nconn = psycopg.connect(\"{{dsn}}\", autocommit=True)\nregister_vector(conn)\n\ndef insert(content: str, vec):\n    conn.execute(\"INSERT INTO {{table_name}} (content, embedding) VALUES (%s, %s)\", (content, vec))\n\ndef search(vec, k=5):\n    cur = conn.execute(\n        \"SELECT id, content FROM {{table_name}} ORDER BY embedding <=> %s LIMIT %s\",\n        (vec, k),\n    )\n    return cur.fetchall()",
+  "language": "py",
+  "deps": [
+    "psycopg",
+    "pgvector"
+  ],
+  "summary_zh": "psycopg + pgvector 向量寫入查詢"
+}

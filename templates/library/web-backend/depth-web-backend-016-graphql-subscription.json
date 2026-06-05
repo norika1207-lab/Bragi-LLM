@@ -1,0 +1,28 @@
+{
+  "id": "depth-web-backend-016-graphql-subscription",
+  "category": "web-backend/graphql/subscription",
+  "intents_zh": [
+    "GraphQL 訂閱",
+    "graphql-ws subscription",
+    "Apollo subscription",
+    "推播訊息訂閱",
+    "ws 即時資料"
+  ],
+  "intents_en": [
+    "graphql subscription",
+    "graphql-ws subscription",
+    "apollo subscription",
+    "push message subscribe",
+    "realtime ws data"
+  ],
+  "slots": [
+    "event_name"
+  ],
+  "code": "import { PubSub } from 'graphql-subscriptions';\nconst pubsub = new PubSub();\nexport const resolvers = {\n  Mutation: {\n    post: (_, { text }) => { pubsub.publish('{{event_name}}', { onPost: { text } }); return { text }; }\n  },\n  Subscription: {\n    onPost: { subscribe: () => pubsub.asyncIterator(['{{event_name}}']) }\n  }\n};",
+  "language": "js",
+  "deps": [
+    "graphql-subscriptions",
+    "graphql-ws"
+  ],
+  "summary_zh": "GraphQL PubSub subscription resolver"
+}

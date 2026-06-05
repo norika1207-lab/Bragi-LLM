@@ -1,0 +1,26 @@
+{
+  "id": "depth-mobile-034-tts-android",
+  "category": "mobile/speech/tts-android",
+  "intents_zh": [
+    "Android TextToSpeech",
+    "setLanguage",
+    "speak utterance",
+    "TTS init listener",
+    "語音朗讀"
+  ],
+  "intents_en": [
+    "Android TextToSpeech",
+    "setLanguage",
+    "speak utterance",
+    "TTS init listener",
+    "text to speech"
+  ],
+  "slots": [
+    "text",
+    "lang_code"
+  ],
+  "code": "private lateinit var tts: TextToSpeech\ntts = TextToSpeech(this) { status ->\n    if (status == TextToSpeech.SUCCESS) {\n        tts.language = Locale.forLanguageTag(\"{{lang_code}}\")\n        tts.speak(\"{{text}}\", TextToSpeech.QUEUE_FLUSH, null, \"id1\")\n    }\n}",
+  "language": "kotlin",
+  "deps": [],
+  "summary_zh": "Android TextToSpeech 朗讀"
+}

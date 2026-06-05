@@ -1,0 +1,27 @@
+{
+  "id": "depth-system-cli-057-systemd-user-service",
+  "category": "system-cli/systemd/user",
+  "intents_zh": [
+    "systemd user service 範本",
+    "使用者層級常駐",
+    "非 root 服務 unit",
+    "systemd --user 啟動"
+  ],
+  "intents_en": [
+    "systemd user service template",
+    "user level daemon",
+    "non root service unit",
+    "systemd --user enable"
+  ],
+  "slots": [
+    "service_name",
+    "exec_path",
+    "working_dir"
+  ],
+  "code": "# ~/.config/systemd/user/{{service_name}}.service\n[Unit]\nDescription={{service_name}}\nAfter=network-online.target\n\n[Service]\nType=simple\nWorkingDirectory={{working_dir}}\nExecStart={{exec_path}}\nRestart=on-failure\nRestartSec=5\nStandardOutput=append:%h/.local/state/{{service_name}}.log\nStandardError=inherit\nEnvironment=NODE_ENV=production\n\n[Install]\nWantedBy=default.target\n\n# enable:\n#   systemctl --user daemon-reload\n#   systemctl --user enable --now {{service_name}}\n#   loginctl enable-linger $USER",
+  "language": "ini",
+  "deps": [
+    "systemd"
+  ],
+  "summary_zh": "systemd user service unit + linger 提示"
+}

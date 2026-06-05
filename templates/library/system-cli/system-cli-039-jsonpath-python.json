@@ -1,0 +1,24 @@
+{
+  "id": "system-cli-039-jsonpath-python",
+  "category": "system-cli/data/jsonpath",
+  "intents_zh": [
+    "python jsonpath 查詢",
+    "jsonpath-ng 範本",
+    "深層 json 取值"
+  ],
+  "intents_en": [
+    "python jsonpath query",
+    "jsonpath-ng example",
+    "deep json extraction"
+  ],
+  "slots": [
+    "json_file",
+    "path_expr"
+  ],
+  "code": "import json\nfrom jsonpath_ng import parse\n\ndata = json.load(open('{{json_file}}'))\nexpr = parse('{{path_expr}}')\nfor m in expr.find(data):\n    print(m.value)",
+  "language": "py",
+  "deps": [
+    "jsonpath-ng"
+  ],
+  "summary_zh": "jsonpath-ng 路徑查詢"
+}

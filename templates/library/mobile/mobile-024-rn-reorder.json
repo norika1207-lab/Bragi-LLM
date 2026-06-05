@@ -1,0 +1,29 @@
+{
+  "id": "mobile-024-rn-reorder",
+  "category": "mobile/rn/list",
+  "intents_zh": [
+    "RN 拖曳排序",
+    "drag to reorder RN",
+    "React Native sortable list",
+    "RN 列表拖動順序",
+    "draggable flatlist RN",
+    "拖拉重排 RN",
+    "reorder list RN"
+  ],
+  "intents_en": [
+    "rn drag to reorder",
+    "draggable flatlist rn",
+    "sortable list rn",
+    "reorder items rn",
+    "drag reorder list rn",
+    "react native sortable",
+    "move items rn list"
+  ],
+  "slots": [],
+  "code": "import React,{useState} from 'react';\nimport {Text,View,StyleSheet} from 'react-native';\nimport DraggableFlatList,{RenderItemParams} from 'react-native-draggable-flatlist';\ntype T={key:string;label:string};\nexport default function R({initial}:{initial:T[]}){\n  const[data,setData]=useState(initial);\n  const render=({item,drag,isActive}:RenderItemParams<T>)=>(<View style={[s.r,isActive&&{backgroundColor:'#eef'}]} onTouchStart={drag}><Text>{item.label}</Text></View>);\n  return(<DraggableFlatList data={data} onDragEnd={({data})=>setData(data)} keyExtractor={i=>i.key} renderItem={render}/>);}\nconst s=StyleSheet.create({r:{padding:16,borderBottomWidth:1,borderColor:'#eee'}});",
+  "language": "tsx",
+  "deps": [
+    "react-native-draggable-flatlist"
+  ],
+  "summary_zh": "RN 可拖曳重排的清單"
+}

@@ -1,0 +1,32 @@
+{
+  "id": "mobile-047-flutter-settings",
+  "category": "mobile/flutter/settings",
+  "intents_zh": [
+    "Flutter 設定頁",
+    "flutter SwitchListTile",
+    "flutter 開關設定",
+    "設定畫面 flutter",
+    "flutter preferences ui",
+    "flutter settings list",
+    "flutter 偏好頁"
+  ],
+  "intents_en": [
+    "flutter settings page",
+    "SwitchListTile flutter",
+    "flutter preferences ui",
+    "settings screen flutter",
+    "flutter toggle list",
+    "preferences page flutter",
+    "flutter app settings"
+  ],
+  "slots": [
+    "row1",
+    "row2"
+  ],
+  "code": "import 'package:flutter/material.dart';\nclass S extends StatefulWidget{const S({super.key});@override State<S> createState()=>_S();}\nclass _S extends State<S>{bool a=false;bool b=true;\n  @override Widget build(BuildContext c)=>Scaffold(appBar:AppBar(title:const Text('Settings')),body:ListView(children:[SwitchListTile(title:const Text('{{row1}}'),value:a,onChanged:(v)=>setState(()=>a=v)),SwitchListTile(title:const Text('{{row2}}'),value:b,onChanged:(v)=>setState(()=>b=v))]));}",
+  "language": "dart",
+  "deps": [
+    "flutter"
+  ],
+  "summary_zh": "Flutter SwitchListTile 設定頁"
+}

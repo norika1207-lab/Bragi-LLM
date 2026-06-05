@@ -1,0 +1,29 @@
+{
+  "id": "depth-system-cli-003-bubbletea-app",
+  "category": "system-cli/tui/bubbletea",
+  "intents_zh": [
+    "Go bubbletea TUI",
+    "charmbracelet 終端介面",
+    "Elm 風 Go TUI",
+    "bubbletea Model Update View",
+    "Go 終端機 app",
+    "bubbletea 範本"
+  ],
+  "intents_en": [
+    "go bubbletea TUI",
+    "charm terminal app",
+    "Elm style TUI",
+    "bubbletea model update view",
+    "go terminal",
+    "bubbletea starter"
+  ],
+  "slots": [
+    "initial_text"
+  ],
+  "code": "package main\n\nimport (\n\t\"fmt\"\n\ttea \"github.com/charmbracelet/bubbletea\"\n)\n\ntype model struct{ text string; n int }\n\nfunc (m model) Init() tea.Cmd { return nil }\n\nfunc (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {\n\tif k, ok := msg.(tea.KeyMsg); ok {\n\t\tswitch k.String() {\n\t\tcase \"q\", \"ctrl+c\": return m, tea.Quit\n\t\tcase \" \": m.n++\n\t\t}\n\t}\n\treturn m, nil\n}\n\nfunc (m model) View() string { return fmt.Sprintf(\"%s\\nspace: %d, q to quit\\n\", m.text, m.n) }\n\nfunc main() { tea.NewProgram(model{text: \"{{initial_text}}\"}).Run() }",
+  "language": "go",
+  "deps": [
+    "github.com/charmbracelet/bubbletea"
+  ],
+  "summary_zh": "bubbletea Elm 架構 Go TUI 計數器"
+}

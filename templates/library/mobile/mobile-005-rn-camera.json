@@ -1,0 +1,29 @@
+{
+  "id": "mobile-005-rn-camera",
+  "category": "mobile/rn/media",
+  "intents_zh": [
+    "RN 開相機拍照",
+    "React Native camera capture",
+    "用 RN 拍張照",
+    "RN 相機元件",
+    "expo camera 拍照",
+    "RN 拍照存檔",
+    "camera 範本 RN"
+  ],
+  "intents_en": [
+    "rn camera capture",
+    "react native take photo",
+    "expo camera shoot",
+    "rn open camera",
+    "capture image rn",
+    "camera component rn",
+    "take picture rn"
+  ],
+  "slots": [],
+  "code": "import React,{useRef,useState} from 'react';\nimport {Button,View,Image} from 'react-native';\nimport {CameraView,useCameraPermissions} from 'expo-camera';\nexport default function Cam(){\n  const[p,req]=useCameraPermissions();const ref=useRef<CameraView>(null);const[u,setU]=useState<string|null>(null);\n  if(!p)return null;\n  if(!p.granted)return(<View><Button title='allow' onPress={req}/></View>);\n  const shoot=async()=>{const r=await ref.current?.takePictureAsync();if(r)setU(r.uri);};\n  return(<View style={{flex:1}}>{u?<Image source={{uri:u}} style={{flex:1}}/>:<CameraView ref={ref} style={{flex:1}}/>}<Button title='shoot' onPress={shoot}/></View>);}",
+  "language": "tsx",
+  "deps": [
+    "expo-camera"
+  ],
+  "summary_zh": "Expo Camera 預覽並拍一張照片"
+}

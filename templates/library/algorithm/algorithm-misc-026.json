@@ -1,0 +1,21 @@
+{
+  "id": "algorithm-misc-026",
+  "category": "algorithm/misc/min_stack",
+  "intents_zh": [
+    "最小棧",
+    "min stack O(1)",
+    "給我 min stack"
+  ],
+  "intents_en": [
+    "min stack",
+    "O(1) min stack",
+    "stack with getMin"
+  ],
+  "slots": [
+    "class_name"
+  ],
+  "code": "class {{class_name}}:\n    def __init__(self):\n        self.s = []\n        self.m = []\n    def push(self, x):\n        self.s.append(x)\n        self.m.append(x if not self.m else min(x, self.m[-1]))\n    def pop(self):\n        self.m.pop()\n        return self.s.pop()\n    def top(self):\n        return self.s[-1]\n    def get_min(self):\n        return self.m[-1]",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "輔助棧實作 O(1) getMin"
+}

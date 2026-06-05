@@ -1,0 +1,21 @@
+{
+  "id": "system-cli-052-tail-follow",
+  "category": "system-cli/logging/tail",
+  "intents_zh": [
+    "python 跟 tail log",
+    "follow 檔尾",
+    "real-time log 讀取"
+  ],
+  "intents_en": [
+    "python tail -f",
+    "follow log file",
+    "realtime log reader"
+  ],
+  "slots": [
+    "log_path"
+  ],
+  "code": "import time\nfrom pathlib import Path\n\ndef tail_f(path):\n    with open(path) as f:\n        f.seek(0, 2)\n        while True:\n            line = f.readline()\n            if not line:\n                time.sleep(0.2); continue\n            yield line.rstrip('\\n')\n\nfor line in tail_f('{{log_path}}'):\n    print(line)",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "python 模擬 tail -f"
+}

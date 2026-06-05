@@ -1,0 +1,26 @@
+{
+  "id": "database-devops-010-sql-correlated-subquery",
+  "category": "database-devops/sql/subquery",
+  "intents_zh": [
+    "相關子查詢",
+    "correlated subquery 範本",
+    "每列對應的最大值",
+    "跟自己比的子查詢"
+  ],
+  "intents_en": [
+    "correlated subquery",
+    "per-row subquery",
+    "exists subquery",
+    "reference outer table"
+  ],
+  "slots": [
+    "outer_table",
+    "inner_table",
+    "outer_key",
+    "inner_key"
+  ],
+  "code": "SELECT o.*\nFROM {{outer_table}} o\nWHERE EXISTS (\n  SELECT 1\n  FROM {{inner_table}} i\n  WHERE i.{{inner_key}} = o.{{outer_key}}\n);",
+  "language": "sql",
+  "deps": [],
+  "summary_zh": "相關子查詢用 EXISTS"
+}

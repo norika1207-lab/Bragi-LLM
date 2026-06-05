@@ -1,0 +1,24 @@
+{
+  "id": "database-devops-105-sql-window-frame",
+  "category": "database-devops/sql/windows",
+  "intents_zh": [
+    "滑動視窗平均",
+    "window frame ROWS",
+    "移動平均 N 筆"
+  ],
+  "intents_en": [
+    "moving average",
+    "window frame rows",
+    "sliding window avg"
+  ],
+  "slots": [
+    "table",
+    "order_col",
+    "value_col",
+    "window_size"
+  ],
+  "code": "SELECT *,\n  AVG({{value_col}}) OVER (\n    ORDER BY {{order_col}}\n    ROWS BETWEEN {{window_size}} PRECEDING AND CURRENT ROW\n  ) AS moving_avg\nFROM {{table}};",
+  "language": "sql",
+  "deps": [],
+  "summary_zh": "window frame 滑動平均"
+}

@@ -1,0 +1,28 @@
+{
+  "id": "web-backend-123-fastapi-sentry",
+  "category": "web-backend/fastapi/observability",
+  "intents_zh": [
+    "fastapi sentry",
+    "python sentry init",
+    "錯誤上報 fastapi",
+    "sentry asgi",
+    "fastapi error tracking"
+  ],
+  "intents_en": [
+    "fastapi sentry",
+    "sentry init python",
+    "error reporting fastapi",
+    "sentry asgi middleware",
+    "fastapi error tracking"
+  ],
+  "slots": [
+    "dsn_env"
+  ],
+  "code": "import sentry_sdk\nfrom sentry_sdk.integrations.asgi import SentryAsgiMiddleware\nfrom fastapi import FastAPI\nimport os\n\nsentry_sdk.init(dsn=os.environ['{{dsn_env}}'], traces_sample_rate=0.1)\n\napp = FastAPI()\napp.add_middleware(SentryAsgiMiddleware)",
+  "language": "py",
+  "deps": [
+    "fastapi",
+    "sentry-sdk"
+  ],
+  "summary_zh": "FastAPI Sentry 整合"
+}

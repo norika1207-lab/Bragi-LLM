@@ -1,0 +1,28 @@
+{
+  "id": "depth-web-frontend-043-svelte-query",
+  "category": "web-frontend/data-fetching/svelte",
+  "intents_zh": [
+    "@tanstack/svelte-query",
+    "Svelte 資料抓取",
+    "createQuery svelte",
+    "SvelteKit query",
+    "svelte cache"
+  ],
+  "intents_en": [
+    "svelte-query createQuery",
+    "tanstack svelte-query",
+    "svelte data fetch",
+    "sveltekit query",
+    "svelte cache fetch"
+  ],
+  "slots": [
+    "query_key",
+    "endpoint"
+  ],
+  "code": "<script lang=\"ts\">\n  import { createQuery } from '@tanstack/svelte-query';\n  const query = createQuery({\n    queryKey: ['{{query_key}}'],\n    queryFn: async () => (await fetch('{{endpoint}}')).json(),\n  });\n</script>\n\n{#if $query.isPending}<p>loading…</p>\n{:else if $query.error}<p>{$query.error.message}</p>\n{:else}<pre>{JSON.stringify($query.data, null, 2)}</pre>{/if}",
+  "language": "svelte",
+  "deps": [
+    "@tanstack/svelte-query"
+  ],
+  "summary_zh": "svelte-query 抓資料"
+}

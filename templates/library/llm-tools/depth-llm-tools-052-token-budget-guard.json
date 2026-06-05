@@ -1,0 +1,29 @@
+{
+  "id": "depth-llm-tools-052-token-budget-guard",
+  "category": "llm-tools/tokens/guard",
+  "intents_zh": [
+    "token 預算守門",
+    "超出就拒絕",
+    "prompt 預算檢查",
+    "token guard",
+    "防超量保護"
+  ],
+  "intents_en": [
+    "token budget guard",
+    "reject when exceeds",
+    "prompt budget check",
+    "token guard",
+    "overflow protection"
+  ],
+  "slots": [
+    "enc",
+    "prompt",
+    "budget"
+  ],
+  "code": "def guard({{enc}}, {{prompt}}, {{budget}}):\n    n = len({{enc}}.encode({{prompt}}))\n    if n > {{budget}}:\n        raise ValueError(f\"Prompt {n} tokens exceeds budget {{{budget}}}\")\n    return n",
+  "language": "python",
+  "deps": [
+    "tiktoken"
+  ],
+  "summary_zh": "在呼叫 LLM 前檢查 prompt token 是否超出預算"
+}

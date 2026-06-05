@@ -1,0 +1,29 @@
+{
+  "id": "algorithm-sort-002",
+  "category": "algorithm/sort/mergesort",
+  "intents_zh": [
+    "合併排序",
+    "mergesort 寫一個",
+    "歸併排序 python",
+    "merge sort 遞迴",
+    "給我 mergesort",
+    "穩定排序 merge",
+    "分治排序"
+  ],
+  "intents_en": [
+    "merge sort",
+    "write mergesort",
+    "recursive merge sort",
+    "stable sort via merge",
+    "mergesort implementation",
+    "divide and conquer sort",
+    "python mergesort"
+  ],
+  "slots": [
+    "fn_name"
+  ],
+  "code": "def {{fn_name}}(arr):\n    if len(arr) <= 1:\n        return arr\n    mid = len(arr) // 2\n    left = {{fn_name}}(arr[:mid])\n    right = {{fn_name}}(arr[mid:])\n    out, i, j = [], 0, 0\n    while i < len(left) and j < len(right):\n        if left[i] <= right[j]:\n            out.append(left[i]); i += 1\n        else:\n            out.append(right[j]); j += 1\n    out.extend(left[i:]); out.extend(right[j:])\n    return out",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "穩定的歸併排序，回傳新陣列"
+}

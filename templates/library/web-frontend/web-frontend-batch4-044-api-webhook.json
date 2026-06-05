@@ -1,0 +1,29 @@
+{
+  "id": "web-frontend-batch4-044-api-webhook",
+  "category": "web-frontend/nextjs/api/webhook",
+  "intents_zh": [
+    "接收 webhook",
+    "webhook 驗章 route",
+    "Next.js webhook",
+    "POST 端點接外部",
+    "stripe webhook 樣板",
+    "webhook handler"
+  ],
+  "intents_en": [
+    "webhook receiver",
+    "webhook signature verify",
+    "next.js webhook",
+    "stripe webhook template",
+    "third party webhook",
+    "incoming hook"
+  ],
+  "slots": [
+    "secret_header"
+  ],
+  "code": "import { NextResponse } from 'next/server';\nimport crypto from 'crypto';\n\nexport async function POST(req: Request) {\n  const body = await req.text();\n  const sig = req.headers.get('{{secret_header}}') ?? '';\n  const expected = crypto.createHmac('sha256', process.env.WEBHOOK_SECRET ?? '').update(body).digest('hex');\n  if (sig !== expected) {\n    return NextResponse.json({ error: 'bad signature' }, { status: 401 });\n  }\n  return NextResponse.json({ ok: true });\n}",
+  "language": "ts",
+  "deps": [
+    "next"
+  ],
+  "summary_zh": "驗證 HMAC 簽章的 webhook 接收端點"
+}

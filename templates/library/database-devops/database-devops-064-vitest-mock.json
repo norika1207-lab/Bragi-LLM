@@ -1,0 +1,23 @@
+{
+  "id": "database-devops-064-vitest-mock",
+  "category": "database-devops/test/vitest",
+  "intents_zh": [
+    "vitest mock 模組",
+    "vi.mock 範本",
+    "mock fetch vitest"
+  ],
+  "intents_en": [
+    "vitest mock module",
+    "vi.mock example",
+    "mock fetch vitest"
+  ],
+  "slots": [
+    "module_to_mock"
+  ],
+  "code": "import { describe, it, expect, vi, beforeEach } from 'vitest'\n\nvi.mock('{{module_to_mock}}', () => ({\n  fetchUser: vi.fn(async () => ({ id: 1, name: 'Alice' })),\n}))\n\nimport { fetchUser } from '{{module_to_mock}}'\n\ndescribe('mocked', () => {\n  beforeEach(() => vi.clearAllMocks())\n\n  it('uses mocked impl', async () => {\n    const u = await fetchUser()\n    expect(u.name).toBe('Alice')\n    expect(fetchUser).toHaveBeenCalledOnce()\n  })\n})",
+  "language": "ts",
+  "deps": [
+    "vitest"
+  ],
+  "summary_zh": "vitest 模組 mock 範本"
+}

@@ -1,0 +1,31 @@
+{
+  "id": "mobile-111-compose-permission",
+  "category": "mobile/compose/perm",
+  "intents_zh": [
+    "Compose 權限請求",
+    "Compose runtime permission",
+    "Compose request permission",
+    "Android Kotlin permission Compose",
+    "accompanist permissions",
+    "Compose 拍照權限",
+    "Compose 麥克風權限"
+  ],
+  "intents_en": [
+    "compose runtime permission",
+    "compose request permission",
+    "android compose permission",
+    "accompanist permissions compose",
+    "camera permission compose",
+    "mic permission compose",
+    "compose ask permission"
+  ],
+  "slots": [
+    "permission"
+  ],
+  "code": "import android.Manifest\nimport androidx.activity.compose.rememberLauncherForActivityResult\nimport androidx.activity.result.contract.ActivityResultContracts\nimport androidx.compose.material3.Button\nimport androidx.compose.material3.Text\nimport androidx.compose.runtime.*\n@Composable\nfun Ask(){\n  var granted by remember{mutableStateOf(false)}\n  val l=rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()){granted=it}\n  Button(onClick={l.launch(\"{{permission}}\")}){Text(if(granted)\"granted\" else \"request\")}}",
+  "language": "kt",
+  "deps": [
+    "androidx.activity:activity-compose"
+  ],
+  "summary_zh": "Compose runtime 權限請求按鈕"
+}

@@ -1,0 +1,27 @@
+{
+  "id": "web-backend-103-express-router-mount",
+  "category": "web-backend/express/structure",
+  "intents_zh": [
+    "express router 拆分",
+    "app.use router 範例",
+    "模組化 express",
+    "mount api routes",
+    "express 結構化"
+  ],
+  "intents_en": [
+    "express router mount",
+    "modular express",
+    "app.use router example",
+    "mount api routes",
+    "express structure"
+  ],
+  "slots": [
+    "api_prefix"
+  ],
+  "code": "const express = require('express');\nconst app = express();\napp.use(express.json());\n\napp.use('{{api_prefix}}/users', require('./routes/users'));\napp.use('{{api_prefix}}/posts', require('./routes/posts'));\napp.use('{{api_prefix}}/auth', require('./routes/auth'));\n\nmodule.exports = app;",
+  "language": "js",
+  "deps": [
+    "express"
+  ],
+  "summary_zh": "Express 多 router 掛載"
+}

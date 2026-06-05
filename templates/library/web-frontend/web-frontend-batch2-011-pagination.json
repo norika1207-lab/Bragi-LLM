@@ -1,0 +1,27 @@
+{
+  "id": "web-frontend-batch2-011-pagination",
+  "category": "web-frontend/react/layout/pagination",
+  "intents_zh": [
+    "分頁元件",
+    "pagination",
+    "頁碼導航",
+    "下一頁上一頁",
+    "頁數選擇器",
+    "分頁列"
+  ],
+  "intents_en": [
+    "pagination",
+    "page navigation",
+    "page selector",
+    "prev next pagination",
+    "page numbers",
+    "paginator"
+  ],
+  "slots": [
+    "total_pages"
+  ],
+  "code": "import { useState } from 'react';\n\nexport function Pagination() {\n  const total = {{total_pages}};\n  const [page, setPage] = useState(1);\n  return (\n    <div className=\"flex items-center gap-1\">\n      <button onClick={() => setPage(Math.max(1, page - 1))} disabled={page === 1} className=\"rounded border px-3 py-1 disabled:opacity-50\">Prev</button>\n      {Array.from({ length: total }, (_, i) => i + 1).map((n) => (\n        <button key={n} onClick={() => setPage(n)}\n          className={`rounded px-3 py-1 ${page === n ? 'bg-blue-600 text-white' : 'border'}`}>\n          {n}\n        </button>\n      ))}\n      <button onClick={() => setPage(Math.min(total, page + 1))} disabled={page === total} className=\"rounded border px-3 py-1 disabled:opacity-50\">Next</button>\n    </div>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "頁碼分頁元件"
+}

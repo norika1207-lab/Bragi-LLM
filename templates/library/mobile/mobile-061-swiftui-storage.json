@@ -1,0 +1,30 @@
+{
+  "id": "mobile-061-swiftui-storage",
+  "category": "mobile/swiftui/storage",
+  "intents_zh": [
+    "SwiftUI UserDefaults",
+    "SwiftUI AppStorage",
+    "SwiftUI 本地存",
+    "Swift 持久化",
+    "SwiftUI key value 存",
+    "儲存設定 SwiftUI",
+    "SwiftUI prefs"
+  ],
+  "intents_en": [
+    "swiftui AppStorage",
+    "userdefaults swift",
+    "persist swiftui",
+    "key value storage swiftui",
+    "swift save settings",
+    "swiftui prefs",
+    "local storage swift"
+  ],
+  "slots": [
+    "key",
+    "default_val"
+  ],
+  "code": "import SwiftUI\nstruct PrefView:View{\n  @AppStorage(\"{{key}}\") var value:String=\"{{default_val}}\"\n  var body:some View{VStack{TextField(\"value\",text:$value).textFieldStyle(.roundedBorder);Text(\"saved: \\(value)\")}.padding()}}",
+  "language": "swift",
+  "deps": [],
+  "summary_zh": "SwiftUI @AppStorage UserDefaults"
+}

@@ -1,0 +1,27 @@
+{
+  "id": "firmware-076-cpy-button",
+  "category": "firmware/circuitpython/input",
+  "intents_zh": [
+    "CircuitPython 按鈕",
+    "cpy digitalio input",
+    "按鈕讀取 cpy",
+    "cpy 偵測按下",
+    "circuitpython button"
+  ],
+  "intents_en": [
+    "CircuitPython button",
+    "digitalio input cpy",
+    "read button circuitpython",
+    "detect press cpy",
+    "cpy switch"
+  ],
+  "slots": [
+    "button_name"
+  ],
+  "code": "import board\nimport digitalio\nimport time\n\nbtn = digitalio.DigitalInOut(board.{{button_name}})\nbtn.direction = digitalio.Direction.INPUT\nbtn.pull = digitalio.Pull.UP\nwhile True:\n    if not btn.value:\n        print('pressed')\n    time.sleep(0.05)",
+  "language": "py",
+  "deps": [
+    "adafruit-circuitpython-board"
+  ],
+  "summary_zh": "CircuitPython 按鈕輸入偵測"
+}

@@ -1,0 +1,29 @@
+{
+  "id": "web-frontend-batch4-035-search-input",
+  "category": "web-frontend/react/components/search",
+  "intents_zh": [
+    "搜尋輸入框",
+    "debounce search",
+    "搜尋元件",
+    "onChange 搜尋",
+    "tailwind 搜尋",
+    "input filter"
+  ],
+  "intents_en": [
+    "search input",
+    "debounce search",
+    "search component",
+    "oninput filter",
+    "tailwind search",
+    "input search bar"
+  ],
+  "slots": [
+    "placeholder_text"
+  ],
+  "code": "'use client';\nimport { useState } from 'react';\n\nexport default function SearchBar({ onSearch }: { onSearch?: (q: string) => void }) {\n  const [q, setQ] = useState('');\n  return (\n    <input\n      value={q}\n      onChange={(e) => { setQ(e.target.value); onSearch?.(e.target.value); }}\n      placeholder=\"{{placeholder_text}}\"\n      className=\"w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500\"\n    />\n  );\n}",
+  "language": "tsx",
+  "deps": [
+    "react"
+  ],
+  "summary_zh": "受控搜尋輸入框"
+}

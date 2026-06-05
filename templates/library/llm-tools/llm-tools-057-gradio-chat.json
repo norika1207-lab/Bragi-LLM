@@ -1,0 +1,34 @@
+{
+  "id": "llm-tools-057-gradio-chat",
+  "category": "llm-tools/ui/gradio",
+  "intents_zh": [
+    "gradio chat UI",
+    "gradio ChatInterface",
+    "快速 chat web 介面",
+    "gr.ChatInterface 範例",
+    "用 gradio 起 demo",
+    "chat web app",
+    "gradio LLM demo",
+    "快速試模型 UI"
+  ],
+  "intents_en": [
+    "gradio chat ui",
+    "gradio chatinterface example",
+    "quick chat web ui",
+    "gradio llm demo",
+    "minimal chat ui",
+    "gradio chatbot",
+    "try llm gradio",
+    "chat web app"
+  ],
+  "slots": [
+    "model_name"
+  ],
+  "code": "import gradio as gr\nfrom openai import OpenAI\n\nclient = OpenAI()\n\ndef chat(msg, history):\n    msgs = [{\"role\": \"user\" if i % 2 == 0 else \"assistant\", \"content\": m} for i, m in enumerate(sum(history, []))]\n    msgs.append({\"role\": \"user\", \"content\": msg})\n    r = client.chat.completions.create(model=\"{{model_name}}\", messages=msgs)\n    return r.choices[0].message.content\n\ngr.ChatInterface(chat).launch()",
+  "language": "py",
+  "deps": [
+    "gradio",
+    "openai"
+  ],
+  "summary_zh": "Gradio ChatInterface 快速 chat UI"
+}

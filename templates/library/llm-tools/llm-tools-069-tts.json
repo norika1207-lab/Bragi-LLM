@@ -1,0 +1,35 @@
+{
+  "id": "llm-tools-069-tts",
+  "category": "llm-tools/audio/tts",
+  "intents_zh": [
+    "openai tts",
+    "文字轉語音",
+    "產生語音檔",
+    "tts 範本",
+    "用 openai 合成語音",
+    "語音合成",
+    "tts wrapper",
+    "產 mp3"
+  ],
+  "intents_en": [
+    "openai tts",
+    "text to speech",
+    "generate speech file",
+    "tts wrapper",
+    "openai synthesis",
+    "minimal tts",
+    "produce mp3",
+    "speak text"
+  ],
+  "slots": [
+    "voice_name",
+    "model_name",
+    "output_path"
+  ],
+  "code": "from openai import OpenAI\n\nclient = OpenAI()\n\ndef tts(text: str, out: str = \"{{output_path}}\"):\n    r = client.audio.speech.create(\n        model=\"{{model_name}}\",\n        voice=\"{{voice_name}}\",\n        input=text,\n    )\n    with open(out, \"wb\") as f:\n        f.write(r.read())\n\nif __name__ == \"__main__\":\n    tts(\"hello world\")",
+  "language": "py",
+  "deps": [
+    "openai"
+  ],
+  "summary_zh": "OpenAI TTS 文字轉語音"
+}

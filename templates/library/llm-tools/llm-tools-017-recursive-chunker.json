@@ -1,0 +1,34 @@
+{
+  "id": "llm-tools-017-recursive-chunker",
+  "category": "llm-tools/rag/recursive-chunker",
+  "intents_zh": [
+    "遞迴切塊",
+    "按段落切",
+    "langchain recursive splitter",
+    "層級切文",
+    "保留語義切塊",
+    "recursive 切",
+    "用標點切",
+    "smart chunker"
+  ],
+  "intents_en": [
+    "recursive text splitter",
+    "split by separators",
+    "langchain recursive splitter",
+    "hierarchical chunking",
+    "semantic-aware chunker",
+    "smart chunker",
+    "paragraph splitter",
+    "layered chunking"
+  ],
+  "slots": [
+    "chunk_size",
+    "overlap"
+  ],
+  "code": "from langchain_text_splitters import RecursiveCharacterTextSplitter\n\nsplitter = RecursiveCharacterTextSplitter(\n    chunk_size={{chunk_size}},\n    chunk_overlap={{overlap}},\n    separators=[\"\\n\\n\", \"\\n\", \". \", \" \", \"\"],\n)\n\ndef chunk(text: str) -> list[str]:\n    return splitter.split_text(text)\n\nif __name__ == \"__main__\":\n    print(len(chunk(\"hello. \" * 500)))",
+  "language": "py",
+  "deps": [
+    "langchain-text-splitters"
+  ],
+  "summary_zh": "langchain 遞迴字元切塊器"
+}

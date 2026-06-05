@@ -1,0 +1,28 @@
+{
+  "id": "web-backend-045-flask-celery",
+  "category": "web-backend/flask/queue",
+  "intents_zh": [
+    "flask + celery",
+    "background task celery",
+    "worker queue python",
+    "非同步任務 flask",
+    "celery task 範例"
+  ],
+  "intents_en": [
+    "flask celery worker",
+    "background task celery",
+    "async task flask",
+    "celery queue python",
+    "celery example flask"
+  ],
+  "slots": [
+    "broker_url"
+  ],
+  "code": "from celery import Celery\n\ncelery = Celery('app', broker='{{broker_url}}', backend='{{broker_url}}')\n\n@celery.task(name='send_email_task')\ndef send_email_task(to: str, subject: str, body: str):\n    # do slow work here\n    print(f'sending to {to}: {subject}')\n    return {'ok': True}\n\n# enqueue from flask:\n# send_email_task.delay('a@b.com', 'hi', 'body')",
+  "language": "py",
+  "deps": [
+    "celery",
+    "redis"
+  ],
+  "summary_zh": "Celery 背景任務"
+}

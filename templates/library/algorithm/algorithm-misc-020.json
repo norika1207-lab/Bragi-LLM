@@ -1,0 +1,20 @@
+{
+  "id": "algorithm-misc-020",
+  "category": "algorithm/misc/merge_intervals",
+  "intents_zh": [
+    "合併區間",
+    "merge intervals",
+    "給我 merge intervals"
+  ],
+  "intents_en": [
+    "merge intervals",
+    "interval merge"
+  ],
+  "slots": [
+    "fn_name"
+  ],
+  "code": "def {{fn_name}}(intervals):\n    if not intervals: return []\n    intervals.sort()\n    out = [intervals[0]]\n    for s, e in intervals[1:]:\n        if s <= out[-1][1]:\n            out[-1][1] = max(out[-1][1], e)\n        else:\n            out.append([s, e])\n    return out",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "排序後合併重疊區間"
+}

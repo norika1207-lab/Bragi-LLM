@@ -1,0 +1,25 @@
+{
+  "id": "system-cli-080-curl-post-json",
+  "category": "system-cli/net/curl",
+  "intents_zh": [
+    "curl 送 json POST",
+    "API 測試 curl",
+    "發 json 到 endpoint"
+  ],
+  "intents_en": [
+    "curl post json",
+    "test api with curl",
+    "curl json payload"
+  ],
+  "slots": [
+    "url",
+    "field_a",
+    "field_b"
+  ],
+  "code": "#!/usr/bin/env bash\nset -euo pipefail\ncurl -fsSL -X POST \"{{url}}\" \\\n  -H 'Content-Type: application/json' \\\n  -H \"Authorization: Bearer ${API_TOKEN:?missing}\" \\\n  -d \"$(jq -n --arg a \"$1\" --arg b \"$2\" '{ {{field_a}}: $a, {{field_b}}: $b }')\" \\\n  | jq .",
+  "language": "sh",
+  "deps": [
+    "jq"
+  ],
+  "summary_zh": "curl POST json + jq pretty"
+}

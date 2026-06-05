@@ -1,0 +1,33 @@
+{
+  "id": "llm-tools-115-agent-supervisor",
+  "category": "llm-tools/agent/supervisor",
+  "intents_zh": [
+    "multi-agent supervisor",
+    "主管 agent 派工",
+    "supervisor pattern",
+    "協調多個子 agent",
+    "router agent",
+    "agent dispatcher",
+    "主管模式",
+    "manager agent"
+  ],
+  "intents_en": [
+    "supervisor agent",
+    "multi agent supervisor",
+    "manager agent",
+    "agent dispatcher",
+    "router agent",
+    "supervisor pattern",
+    "coordinator agent",
+    "orchestrator agent"
+  ],
+  "slots": [
+    "model_name"
+  ],
+  "code": "from openai import OpenAI\nimport re\n\nclient = OpenAI()\nAGENTS = {\n    \"math\": lambda q: f\"math: {eval(q)}\",\n    \"echo\": lambda q: f\"echo: {q}\",\n}\n\ndef supervise(q: str) -> str:\n    r = client.chat.completions.create(\n        model=\"{{model_name}}\",\n        messages=[{\"role\": \"user\",\n                   \"content\": f\"Route to one of {list(AGENTS)}. Reply: AGENT:<name> ARGS:<args>\\nQ: {q}\"}],\n    )\n    m = re.search(r\"AGENT:(\\w+)\\s+ARGS:(.+)\", r.choices[0].message.content)\n    if not m: return \"no route\"\n    return AGENTS[m.group(1)](m.group(2).strip())",
+  "language": "py",
+  "deps": [
+    "openai"
+  ],
+  "summary_zh": "supervisor 路由到子 agent"
+}

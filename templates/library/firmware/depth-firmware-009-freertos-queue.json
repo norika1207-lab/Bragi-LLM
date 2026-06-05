@@ -1,0 +1,28 @@
+{
+  "id": "depth-firmware-009-freertos-queue",
+  "category": "firmware/rtos/queue",
+  "intents_zh": [
+    "FreeRTOS queue 用法",
+    "ISR 送 queue",
+    "task 收 queue",
+    "xQueueSend 範例",
+    "queue 通訊"
+  ],
+  "intents_en": [
+    "freertos queue",
+    "isr send queue",
+    "task receive queue",
+    "xqueuesend example",
+    "queue ipc"
+  ],
+  "slots": [
+    "queue_len",
+    "item_type"
+  ],
+  "code": "QueueHandle_t q = xQueueCreate({{queue_len}}, sizeof({{item_type}}));\n\n// producer\n{{item_type}} v = 42;\nxQueueSend(q, &v, portMAX_DELAY);\n\n// consumer\n{{item_type}} got;\nif (xQueueReceive(q, &got, pdMS_TO_TICKS(1000)) == pdTRUE) {\n    ESP_LOGI(\"Q\", \"got %d\", (int)got);\n}",
+  "language": "c",
+  "deps": [
+    "esp-idf"
+  ],
+  "summary_zh": "建立 FreeRTOS queue 並做 producer/consumer 收送"
+}

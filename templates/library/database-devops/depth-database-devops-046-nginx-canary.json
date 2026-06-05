@@ -1,0 +1,25 @@
+{
+  "id": "depth-database-devops-046-nginx-canary",
+  "category": "database-devops/proxy/nginx",
+  "intents_zh": [
+    "nginx canary 切流",
+    "split_clients 灰度",
+    "按比例分流"
+  ],
+  "intents_en": [
+    "nginx canary",
+    "split_clients gray release",
+    "percentage based routing"
+  ],
+  "slots": [
+    "canary_pct",
+    "stable_upstream",
+    "canary_upstream"
+  ],
+  "code": "split_clients \"${remote_addr}${http_user_agent}\" $variant {\n    {{canary_pct}}%  canary;\n    *                stable;\n}\n\nupstream stable { server {{stable_upstream}}; }\nupstream canary { server {{canary_upstream}}; }\n\nserver {\n    listen 80;\n    location / {\n        proxy_pass http://$variant;\n    }\n}",
+  "language": "conf",
+  "deps": [
+    "nginx"
+  ],
+  "summary_zh": "nginx split_clients 做按比例 canary 灰度"
+}

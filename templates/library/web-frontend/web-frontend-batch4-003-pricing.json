@@ -1,0 +1,32 @@
+{
+  "id": "web-frontend-batch4-003-pricing",
+  "category": "web-frontend/nextjs/landing/pricing",
+  "intents_zh": [
+    "做一個定價表",
+    "三種方案的 pricing 區塊",
+    "產生訂閱方案卡片",
+    "tailwind 定價頁",
+    "SaaS 價格表",
+    "月費年費對照"
+  ],
+  "intents_en": [
+    "pricing table three tiers",
+    "saas pricing section",
+    "subscription plan cards",
+    "tailwind pricing",
+    "plan comparison block",
+    "tier pricing"
+  ],
+  "slots": [
+    "plan_basic_name",
+    "plan_basic_price",
+    "plan_pro_name",
+    "plan_pro_price",
+    "plan_enterprise_name",
+    "plan_enterprise_price"
+  ],
+  "code": "export default function Pricing() {\n  const plans = [\n    { name: '{{plan_basic_name}}', price: '{{plan_basic_price}}', highlight: false },\n    { name: '{{plan_pro_name}}', price: '{{plan_pro_price}}', highlight: true },\n    { name: '{{plan_enterprise_name}}', price: '{{plan_enterprise_price}}', highlight: false },\n  ];\n  return (\n    <section className=\"py-20\">\n      <div className=\"mx-auto max-w-5xl px-6 grid md:grid-cols-3 gap-6\">\n        {plans.map((p) => (\n          <div key={p.name} className={`rounded-2xl p-8 border ${p.highlight ? 'border-indigo-600 shadow-lg' : 'border-gray-200'}`}>\n            <h3 className=\"text-lg font-semibold\">{p.name}</h3>\n            <p className=\"mt-4 text-4xl font-bold\">{p.price}</p>\n            <button className=\"mt-6 w-full rounded-lg bg-indigo-600 text-white py-2\">Choose</button>\n          </div>\n        ))}\n      </div>\n    </section>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "三層訂閱方案定價卡"
+}

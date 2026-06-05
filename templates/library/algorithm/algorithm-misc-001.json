@@ -1,0 +1,22 @@
+{
+  "id": "algorithm-misc-001",
+  "category": "algorithm/misc/reservoir_sample",
+  "intents_zh": [
+    "蓄水池抽樣",
+    "reservoir sampling",
+    "給我 reservoir",
+    "streaming 抽樣"
+  ],
+  "intents_en": [
+    "reservoir sampling",
+    "stream sampling",
+    "reservoir algorithm"
+  ],
+  "slots": [
+    "fn_name"
+  ],
+  "code": "import random\n\ndef {{fn_name}}(stream, k):\n    reservoir = []\n    for i, item in enumerate(stream):\n        if i < k:\n            reservoir.append(item)\n        else:\n            j = random.randint(0, i)\n            if j < k:\n                reservoir[j] = item\n    return reservoir",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "蓄水池 k 樣本抽樣"
+}

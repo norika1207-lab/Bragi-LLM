@@ -1,0 +1,21 @@
+{
+  "id": "algorithm-string-006",
+  "category": "algorithm/string/anagram_group",
+  "intents_zh": [
+    "字母異位詞分組",
+    "group anagrams",
+    "給我 anagram 分組"
+  ],
+  "intents_en": [
+    "group anagrams",
+    "anagram grouping",
+    "sort by anagram"
+  ],
+  "slots": [
+    "fn_name"
+  ],
+  "code": "from collections import defaultdict\n\ndef {{fn_name}}(strs):\n    groups = defaultdict(list)\n    for s in strs:\n        groups[''.join(sorted(s))].append(s)\n    return list(groups.values())",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "字母異位詞分組"
+}

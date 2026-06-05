@@ -1,0 +1,28 @@
+{
+  "id": "firmware-036-esp32-gps-tinygps",
+  "category": "firmware/esp32/sensor",
+  "intents_zh": [
+    "GPS 解析",
+    "TinyGPSPlus 範例",
+    "NEO-6M 模組",
+    "ESP32 GPS",
+    "抓經緯度"
+  ],
+  "intents_en": [
+    "ESP32 GPS parser",
+    "TinyGPSPlus example",
+    "NEO-6M GPS",
+    "read lat lon",
+    "NMEA parsing"
+  ],
+  "slots": [
+    "rx_pin",
+    "tx_pin"
+  ],
+  "code": "#include <TinyGPSPlus.h>\n#include <HardwareSerial.h>\nTinyGPSPlus gps;\nHardwareSerial GPSSerial(2);\n\nvoid setup() {\n  Serial.begin(115200);\n  GPSSerial.begin(9600, SERIAL_8N1, {{rx_pin}}, {{tx_pin}});\n}\n\nvoid loop() {\n  while (GPSSerial.available()) gps.encode(GPSSerial.read());\n  if (gps.location.isUpdated()) {\n    Serial.printf(\"%.6f, %.6f\\n\", gps.location.lat(), gps.location.lng());\n  }\n}",
+  "language": "ino",
+  "deps": [
+    "TinyGPSPlus"
+  ],
+  "summary_zh": "ESP32 GPS NMEA 解析經緯度"
+}

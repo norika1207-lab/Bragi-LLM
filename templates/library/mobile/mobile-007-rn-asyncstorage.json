@@ -1,0 +1,31 @@
+{
+  "id": "mobile-007-rn-asyncstorage",
+  "category": "mobile/rn/storage",
+  "intents_zh": [
+    "RN 本地存儲",
+    "AsyncStorage 範例",
+    "RN 存資料到本機",
+    "key value 存 RN",
+    "RN 持久化",
+    "存設定 RN",
+    "RN local storage"
+  ],
+  "intents_en": [
+    "RN AsyncStorage",
+    "local storage rn",
+    "persist data rn",
+    "key value store rn",
+    "save settings rn",
+    "async storage example",
+    "rn save load"
+  ],
+  "slots": [
+    "storage_key"
+  ],
+  "code": "import AsyncStorage from '@react-native-async-storage/async-storage';\nexport async function save(v:string){await AsyncStorage.setItem('{{storage_key}}',v);}\nexport async function load():Promise<string|null>{return await AsyncStorage.getItem('{{storage_key}}');}\nexport async function clear(){await AsyncStorage.removeItem('{{storage_key}}');}",
+  "language": "ts",
+  "deps": [
+    "@react-native-async-storage/async-storage"
+  ],
+  "summary_zh": "AsyncStorage 包裝 save/load/clear"
+}

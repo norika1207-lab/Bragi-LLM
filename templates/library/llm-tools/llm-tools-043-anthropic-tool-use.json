@@ -1,0 +1,34 @@
+{
+  "id": "llm-tools-043-anthropic-tool-use",
+  "category": "llm-tools/anthropic/tool-use",
+  "intents_zh": [
+    "Claude tool use",
+    "anthropic 工具呼叫",
+    "claude function calling",
+    "tool_use 範例",
+    "Claude 工具迴圈",
+    "anthropic tools",
+    "claude 給工具",
+    "claude agentic"
+  ],
+  "intents_en": [
+    "claude tool use",
+    "anthropic function calling",
+    "claude tool example",
+    "tool_use loop",
+    "claude tools",
+    "anthropic agent",
+    "claude tool wrapper",
+    "claude agentic loop"
+  ],
+  "slots": [
+    "model_name",
+    "tool_name"
+  ],
+  "code": "import anthropic\n\nclient = anthropic.Anthropic()\n\ntools = [{\n    \"name\": \"{{tool_name}}\",\n    \"description\": \"echo input\",\n    \"input_schema\": {\"type\": \"object\", \"properties\": {\"x\": {\"type\": \"string\"}}, \"required\": [\"x\"]},\n}]\n\ndef call(prompt: str):\n    msg = client.messages.create(\n        model=\"{{model_name}}\",\n        max_tokens=512,\n        tools=tools,\n        messages=[{\"role\": \"user\", \"content\": prompt}],\n    )\n    for block in msg.content:\n        if block.type == \"tool_use\":\n            return block.name, block.input\n    return None, None",
+  "language": "py",
+  "deps": [
+    "anthropic"
+  ],
+  "summary_zh": "Claude tool_use 工具呼叫"
+}

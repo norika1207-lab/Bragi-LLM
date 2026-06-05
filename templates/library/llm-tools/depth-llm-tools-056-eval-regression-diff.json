@@ -1,0 +1,26 @@
+{
+  "id": "depth-llm-tools-056-eval-regression-diff",
+  "category": "llm-tools/eval/regression",
+  "intents_zh": [
+    "評測回歸比較",
+    "新舊版本分數差",
+    "regression detect",
+    "model drift 偵測",
+    "版本比對"
+  ],
+  "intents_en": [
+    "eval regression diff",
+    "old vs new score",
+    "regression detect",
+    "model drift check",
+    "version diff"
+  ],
+  "slots": [
+    "baseline",
+    "candidate"
+  ],
+  "code": "def regression_diff({{baseline}}, {{candidate}}):\n    diffs = []\n    for k in {{baseline}}:\n        b, c = {{baseline}}[k], {{candidate}}.get(k)\n        if c is None: continue\n        diffs.append((k, c - b))\n    regressions = [d for d in diffs if d[1] < -0.02]\n    return diffs, regressions",
+  "language": "python",
+  "deps": [],
+  "summary_zh": "對照新舊 eval 分數，跌超過 2 點的標為 regression"
+}

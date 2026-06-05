@@ -1,0 +1,29 @@
+{
+  "id": "depth-mobile-017-notifee-rn",
+  "category": "mobile/notifications/notifee",
+  "intents_zh": [
+    "RN notifee 本地通知",
+    "跨平台排程通知",
+    "createTriggerNotification",
+    "TimestampTrigger",
+    "notifee channel"
+  ],
+  "intents_en": [
+    "RN notifee local notification",
+    "cross platform schedule",
+    "createTriggerNotification",
+    "TimestampTrigger",
+    "notifee channel"
+  ],
+  "slots": [
+    "title",
+    "body",
+    "timestamp_ms"
+  ],
+  "code": "import notifee, { TriggerType } from '@notifee/react-native';\n\nconst channelId = await notifee.createChannel({ id: 'default', name: 'Default' });\nawait notifee.createTriggerNotification(\n  { title: '{{title}}', body: '{{body}}', android: { channelId } },\n  { type: TriggerType.TIMESTAMP, timestamp: {{timestamp_ms}} }\n);",
+  "language": "ts",
+  "deps": [
+    "@notifee/react-native"
+  ],
+  "summary_zh": "notifee 跨平台排程通知"
+}

@@ -1,0 +1,34 @@
+{
+  "id": "llm-tools-045-reranker",
+  "category": "llm-tools/rag/reranker",
+  "intents_zh": [
+    "cross-encoder reranker",
+    "重排序檢索結果",
+    "reranker 範例",
+    "用 cross-encoder 重排",
+    "reranker model",
+    "SBERT cross-encoder",
+    "rerank top-k",
+    "二階段檢索"
+  ],
+  "intents_en": [
+    "cross-encoder reranker",
+    "rerank retrieval results",
+    "reranker example",
+    "sbert cross encoder",
+    "second stage rerank",
+    "reranker wrapper",
+    "two stage retrieval",
+    "rerank top-k"
+  ],
+  "slots": [
+    "model_id",
+    "top_k"
+  ],
+  "code": "from sentence_transformers import CrossEncoder\n\nmodel = CrossEncoder(\"{{model_id}}\")\n\ndef rerank(query: str, candidates: list[str]) -> list[tuple[str, float]]:\n    pairs = [(query, c) for c in candidates]\n    scores = model.predict(pairs).tolist()\n    ranked = sorted(zip(candidates, scores), key=lambda x: -x[1])\n    return ranked[:{{top_k}}]\n\nif __name__ == \"__main__\":\n    print(rerank(\"cat\", [\"a kitten\", \"a truck\", \"feline pet\"]))",
+  "language": "py",
+  "deps": [
+    "sentence-transformers"
+  ],
+  "summary_zh": "CrossEncoder 候選文件重排序"
+}

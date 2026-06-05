@@ -1,0 +1,21 @@
+{
+  "id": "system-cli-032-env-switcher",
+  "category": "system-cli/config/env",
+  "intents_zh": [
+    "環境切換 script",
+    "dev/staging/prod 切換",
+    "env switcher 工具"
+  ],
+  "intents_en": [
+    "env switcher script",
+    "switch between environments",
+    "dev staging prod switch"
+  ],
+  "slots": [
+    "env_dir"
+  ],
+  "code": "#!/usr/bin/env bash\nset -euo pipefail\nENV_NAME=\"${1:-}\"\nDIR=\"{{env_dir}}\"\n\nif [[ -z \"$ENV_NAME\" ]]; then\n  echo \"usage: $0 <dev|staging|prod>\"; exit 1\nfi\n\nSRC=\"$DIR/.env.$ENV_NAME\"\n[[ -f \"$SRC\" ]] || { echo \"no $SRC\"; exit 1; }\n\nln -sf \"$SRC\" \"$DIR/.env\"\necho \"switched to $ENV_NAME ($(readlink $DIR/.env))\"",
+  "language": "sh",
+  "deps": [],
+  "summary_zh": "symlink 切換 .env"
+}

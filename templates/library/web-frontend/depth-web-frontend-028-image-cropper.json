@@ -1,0 +1,27 @@
+{
+  "id": "depth-web-frontend-028-image-cropper",
+  "category": "web-frontend/media/image-cropper",
+  "intents_zh": [
+    "圖片裁切器",
+    "react-easy-crop",
+    "頭像裁切",
+    "crop image canvas",
+    "裁切輸出 blob"
+  ],
+  "intents_en": [
+    "image cropper react",
+    "react-easy-crop",
+    "avatar crop",
+    "crop to blob",
+    "canvas crop"
+  ],
+  "slots": [
+    "component_name"
+  ],
+  "code": "'use client';\nimport Cropper from 'react-easy-crop';\nimport { useState } from 'react';\n\nexport function {{component_name}}({ src, onDone }: { src: string; onDone: (area: any) => void }) {\n  const [crop, setCrop] = useState({ x: 0, y: 0 });\n  const [zoom, setZoom] = useState(1);\n  return (\n    <div style={{ position:'relative', width:'100%', height:320 }}>\n      <Cropper\n        image={src}\n        crop={crop}\n        zoom={zoom}\n        aspect={1}\n        onCropChange={setCrop}\n        onZoomChange={setZoom}\n        onCropComplete={(_, area) => onDone(area)}\n      />\n    </div>\n  );\n}",
+  "language": "tsx",
+  "deps": [
+    "react-easy-crop"
+  ],
+  "summary_zh": "react-easy-crop 正方形頭像裁切"
+}

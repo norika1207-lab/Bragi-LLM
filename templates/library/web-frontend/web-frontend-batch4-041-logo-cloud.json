@@ -1,0 +1,30 @@
+{
+  "id": "web-frontend-batch4-041-logo-cloud",
+  "category": "web-frontend/nextjs/landing/logo-cloud",
+  "intents_zh": [
+    "客戶 logo 牆",
+    "合作夥伴 logo",
+    "信任條",
+    "trusted by 區",
+    "品牌 logo 排版",
+    "落地頁 logo cloud"
+  ],
+  "intents_en": [
+    "logo cloud",
+    "trusted by section",
+    "customer logos",
+    "partner logos",
+    "brand logo row",
+    "logo strip"
+  ],
+  "slots": [
+    "logo_one",
+    "logo_two",
+    "logo_three",
+    "logo_four"
+  ],
+  "code": "export default function LogoCloud() {\n  const logos = ['{{logo_one}}', '{{logo_two}}', '{{logo_three}}', '{{logo_four}}'];\n  return (\n    <section className=\"py-12\">\n      <p className=\"text-center text-sm text-gray-500\">Trusted by teams at</p>\n      <div className=\"mt-6 flex justify-center gap-10 flex-wrap\">\n        {logos.map((src) => (\n          <img key={src} src={src} alt=\"\" className=\"h-8 opacity-70 grayscale\" />\n        ))}\n      </div>\n    </section>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "客戶 logo 信任條"
+}

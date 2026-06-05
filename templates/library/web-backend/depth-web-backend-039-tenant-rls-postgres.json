@@ -1,0 +1,27 @@
+{
+  "id": "depth-web-backend-039-tenant-rls-postgres",
+  "category": "web-backend/multi-tenancy/rls",
+  "intents_zh": [
+    "Postgres row-level security",
+    "多租戶 RLS policy",
+    "tenant_id 隔離",
+    "set_config 帶 tenant",
+    "RLS 啟用"
+  ],
+  "intents_en": [
+    "postgres row level security",
+    "multi tenant rls policy",
+    "tenant_id isolation",
+    "set_config tenant",
+    "enable rls"
+  ],
+  "slots": [
+    "table"
+  ],
+  "code": "ALTER TABLE {{table}} ENABLE ROW LEVEL SECURITY;\nCREATE POLICY tenant_isolation ON {{table}}\n  USING (tenant_id = current_setting('app.tenant_id')::uuid);\n-- in app:\n-- SET LOCAL app.tenant_id = '...';",
+  "language": "sql",
+  "deps": [
+    "postgresql"
+  ],
+  "summary_zh": "Postgres RLS 多租戶隔離"
+}

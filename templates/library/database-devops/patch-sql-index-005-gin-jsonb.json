@@ -1,0 +1,31 @@
+{
+  "id": "patch-sql-index-005-gin-jsonb",
+  "category": "database-devops/index/gin-jsonb",
+  "intents_zh": [
+    "JSONB 欄位加 index",
+    "GIN index 怎麼建",
+    "jsonb 查詢慢",
+    "@> 操作子索引",
+    "JSON 內鍵查詢加速",
+    "jsonb_path_ops 用法"
+  ],
+  "intents_en": [
+    "gin index for jsonb column",
+    "speed up jsonb containment query",
+    "index json field postgres",
+    "gin jsonb_path_ops",
+    "jsonb @> operator index",
+    "json key search index"
+  ],
+  "slots": [
+    "table_name",
+    "jsonb_column",
+    "index_name"
+  ],
+  "code": "-- GIN index for JSONB containment queries (@>, ?, ?&, ?|)\n-- jsonb_path_ops is smaller and faster but only supports @>\nCREATE INDEX CONCURRENTLY IF NOT EXISTS {{index_name}}\n  ON {{table_name}}\n  USING GIN ({{jsonb_column}} jsonb_path_ops);\n\n-- Containment query (hits jsonb_path_ops index)\nEXPLAIN ANALYZE\nSELECT *\nFROM {{table_name}}\nWHERE {{jsonb_column}} @> '{\"status\": \"active\"}'::jsonb;\n\n-- For ? / ?& / ?| operators, use default opclass instead:\n-- USING GIN ({{jsonb_column}})",
+  "language": "sql",
+  "deps": [
+    "postgresql>=10"
+  ],
+  "summary_zh": "替 JSONB 欄位建 GIN index 加速 containment 查詢，jsonb_path_ops 較省空間"
+}

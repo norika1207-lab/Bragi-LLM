@@ -1,0 +1,28 @@
+{
+  "id": "firmware-060-stm32-pwm-timer",
+  "category": "firmware/stm32/pwm",
+  "intents_zh": [
+    "STM32 PWM",
+    "TIM PWM 輸出",
+    "HAL_TIM_PWM_Start",
+    "stm32 控制亮度",
+    "定時器 PWM"
+  ],
+  "intents_en": [
+    "STM32 PWM TIM",
+    "HAL_TIM_PWM_Start",
+    "timer PWM output",
+    "fade LED PWM STM32",
+    "CCR duty cycle"
+  ],
+  "slots": [
+    "tim_handle",
+    "channel"
+  ],
+  "code": "#include \"main.h\"\nextern TIM_HandleTypeDef {{tim_handle}};\n\nint main(void) {\n  HAL_Init(); SystemClock_Config(); MX_GPIO_Init(); MX_TIM3_Init();\n  HAL_TIM_PWM_Start(&{{tim_handle}}, {{channel}});\n  uint32_t d = 0;\n  while (1) {\n    __HAL_TIM_SET_COMPARE(&{{tim_handle}}, {{channel}}, d);\n    d = (d + 10) % 1000;\n    HAL_Delay(20);\n  }\n}",
+  "language": "c",
+  "deps": [
+    "STM32 HAL"
+  ],
+  "summary_zh": "STM32 TIM PWM 漸變輸出"
+}

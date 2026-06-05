@@ -1,0 +1,21 @@
+{
+  "id": "algorithm-misc-021",
+  "category": "algorithm/misc/meeting_rooms",
+  "intents_zh": [
+    "會議室數量",
+    "meeting rooms ii",
+    "給我會議室"
+  ],
+  "intents_en": [
+    "meeting rooms ii",
+    "min meeting rooms",
+    "heap meeting rooms"
+  ],
+  "slots": [
+    "fn_name"
+  ],
+  "code": "import heapq\n\ndef {{fn_name}}(intervals):\n    if not intervals: return 0\n    intervals.sort(key=lambda x: x[0])\n    heap = [intervals[0][1]]\n    for s, e in intervals[1:]:\n        if heap[0] <= s:\n            heapq.heappop(heap)\n        heapq.heappush(heap, e)\n    return len(heap)",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "heap 解最少會議室數"
+}

@@ -1,0 +1,28 @@
+{
+  "id": "patch-firmware-input-008-hall-limit-switch",
+  "category": "firmware/input/sensor",
+  "intents_zh": [
+    "霍爾感測器讀取",
+    "limit switch 限位開關",
+    "Hall sensor 偵測磁鐵",
+    "讀 A3144 霍爾",
+    "做轉速計用霍爾",
+    "限位開關防彈跳"
+  ],
+  "intents_en": [
+    "hall sensor read arduino",
+    "limit switch debounce",
+    "A3144 hall detect magnet",
+    "tachometer hall pulse count",
+    "endstop limit switch read"
+  ],
+  "slots": [
+    "hall_pin",
+    "limit_pin",
+    "debounce_ms"
+  ],
+  "code": "const int hallPin = {{hall_pin}};\nconst int limitPin = {{limit_pin}};\nconst unsigned long debounceMs = {{debounce_ms}};\nvolatile unsigned long pulseCount = 0;\nvolatile unsigned long lastPulse = 0;\n\nvoid IRAM_ATTR onHall() {\n  unsigned long now = millis();\n  if (now - lastPulse > debounceMs) {\n    pulseCount++;\n    lastPulse = now;\n  }\n}\n\nvoid setup() {\n  Serial.begin(115200);\n  pinMode(hallPin, INPUT_PULLUP);\n  pinMode(limitPin, INPUT_PULLUP);\n  attachInterrupt(digitalPinToInterrupt(hallPin), onHall, FALLING);\n}\n\nvoid loop() {\n  bool limitHit = digitalRead(limitPin) == LOW;\n  Serial.print(\"pulses=\"); Serial.print(pulseCount);\n  Serial.print(\" limit=\"); Serial.println(limitHit ? 1 : 0);\n  delay(500);\n}",
+  "language": "ino",
+  "deps": [],
+  "summary_zh": "用中斷讀霍爾感測器脈衝並輪詢限位開關狀態，含 millis 去抖"
+}

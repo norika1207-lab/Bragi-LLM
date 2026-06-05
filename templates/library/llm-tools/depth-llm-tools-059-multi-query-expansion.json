@@ -1,0 +1,27 @@
+{
+  "id": "depth-llm-tools-059-multi-query-expansion",
+  "category": "llm-tools/retrieval/query-expand",
+  "intents_zh": [
+    "多 query 擴展檢索",
+    "LLM 生變體查詢",
+    "query rewriting",
+    "multi-query retrieval",
+    "查詢擴展"
+  ],
+  "intents_en": [
+    "multi-query expansion",
+    "LLM generate query variants",
+    "query rewriting",
+    "multi-query retrieval",
+    "query expansion"
+  ],
+  "slots": [
+    "llm_call",
+    "query",
+    "n"
+  ],
+  "code": "def expand({{llm_call}}, {{query}}, {{n}}=4):\n    p = f\"Rewrite this query in {{{n}}} different ways. One per line. Query: {{{query}}}\"\n    out = {{llm_call}}(p)\n    return [{{query}}] + [l.strip(\"- 0123456789.\").strip() for l in out.splitlines() if l.strip()]",
+  "language": "python",
+  "deps": [],
+  "summary_zh": "請 LLM 生 N 個查詢變體加上原 query 一起檢索"
+}

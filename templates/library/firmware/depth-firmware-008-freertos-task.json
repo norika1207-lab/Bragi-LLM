@@ -1,0 +1,30 @@
+{
+  "id": "depth-firmware-008-freertos-task",
+  "category": "firmware/rtos/task",
+  "intents_zh": [
+    "建立 FreeRTOS task",
+    "xTaskCreate 範例",
+    "固定 core 建 task",
+    "背景任務 ESP32",
+    "建週期 task"
+  ],
+  "intents_en": [
+    "create freertos task",
+    "xtaskcreate example",
+    "pin task to core",
+    "background task esp32",
+    "periodic task"
+  ],
+  "slots": [
+    "task_name",
+    "stack_size",
+    "priority",
+    "core_id"
+  ],
+  "code": "void {{task_name}}_task(void *arg) {\n    TickType_t last = xTaskGetTickCount();\n    while (1) {\n        // work here\n        vTaskDelayUntil(&last, pdMS_TO_TICKS(100));\n    }\n}\nxTaskCreatePinnedToCore({{task_name}}_task, \"{{task_name}}\", {{stack_size}}, NULL, {{priority}}, NULL, {{core_id}});",
+  "language": "c",
+  "deps": [
+    "esp-idf"
+  ],
+  "summary_zh": "建立週期性 FreeRTOS task 並釘到指定 core"
+}

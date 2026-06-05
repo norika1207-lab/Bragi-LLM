@@ -1,0 +1,24 @@
+{
+  "id": "system-cli-114-pdf-extract-text",
+  "category": "system-cli/data/pdf",
+  "intents_zh": [
+    "PDF 抽文字",
+    "批次 pdf to txt",
+    "pypdf 取文字"
+  ],
+  "intents_en": [
+    "pdf extract text",
+    "batch pdf to txt",
+    "pypdf text extract"
+  ],
+  "slots": [
+    "pdf_dir",
+    "out_dir"
+  ],
+  "code": "from pypdf import PdfReader\nfrom pathlib import Path\n\nout = Path('{{out_dir}}'); out.mkdir(parents=True, exist_ok=True)\nfor pdf in Path('{{pdf_dir}}').glob('*.pdf'):\n    text = '\\n'.join(p.extract_text() or '' for p in PdfReader(str(pdf)).pages)\n    (out / (pdf.stem + '.txt')).write_text(text)\n    print(pdf.name, '->', pdf.stem + '.txt')",
+  "language": "py",
+  "deps": [
+    "pypdf"
+  ],
+  "summary_zh": "批次 pdf 抽文字"
+}

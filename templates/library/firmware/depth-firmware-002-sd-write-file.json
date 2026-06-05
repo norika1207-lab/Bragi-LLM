@@ -1,0 +1,28 @@
+{
+  "id": "depth-firmware-002-sd-write-file",
+  "category": "firmware/storage/sd",
+  "intents_zh": [
+    "寫檔到 SD 卡",
+    "SD 卡 fprintf",
+    "附加 log 到 SD",
+    "SD 卡寫入文字",
+    "紀錄到 SD"
+  ],
+  "intents_en": [
+    "write file to sd",
+    "append log sd",
+    "fprintf sd card",
+    "log to sd",
+    "sd write text"
+  ],
+  "slots": [
+    "path",
+    "line"
+  ],
+  "code": "FILE *f = fopen(\"{{path}}\", \"a\");\nif (!f) { ESP_LOGE(\"SD\", \"open fail\"); return; }\nfprintf(f, \"%lld,{{line}}\\n\", esp_timer_get_time());\nfclose(f);",
+  "language": "c",
+  "deps": [
+    "esp-idf"
+  ],
+  "summary_zh": "附加寫入一行帶 timestamp 的紀錄到 SD"
+}

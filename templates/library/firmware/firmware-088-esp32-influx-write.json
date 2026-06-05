@@ -1,0 +1,34 @@
+{
+  "id": "firmware-088-esp32-influx-write",
+  "category": "firmware/esp32/network",
+  "intents_zh": [
+    "ESP32 寫 InfluxDB",
+    "time series 上傳",
+    "ESP32 InfluxDB v2",
+    "sensor 存 influx",
+    "ESP32 數據庫"
+  ],
+  "intents_en": [
+    "ESP32 InfluxDB write",
+    "InfluxDB v2 client ESP32",
+    "push sensor to influx",
+    "ESP32 time series upload",
+    "influx line protocol"
+  ],
+  "slots": [
+    "ssid",
+    "password",
+    "influx_url",
+    "org",
+    "bucket",
+    "token",
+    "measurement",
+    "value"
+  ],
+  "code": "#include <WiFi.h>\n#include <HTTPClient.h>\n\nvoid setup() {\n  Serial.begin(115200);\n  WiFi.begin(\"{{ssid}}\", \"{{password}}\");\n  while (WiFi.status() != WL_CONNECTED) delay(300);\n  HTTPClient http;\n  String url = String(\"{{influx_url}}/api/v2/write?org={{org}}&bucket={{bucket}}\");\n  http.begin(url);\n  http.addHeader(\"Authorization\", \"Token {{token}}\");\n  http.addHeader(\"Content-Type\", \"text/plain\");\n  int code = http.POST(String(\"{{measurement}} value={{value}}\"));\n  Serial.println(code);\n  http.end();\n}\n\nvoid loop() {}",
+  "language": "ino",
+  "deps": [
+    "HTTPClient"
+  ],
+  "summary_zh": "ESP32 用 line protocol 寫入 InfluxDB v2"
+}

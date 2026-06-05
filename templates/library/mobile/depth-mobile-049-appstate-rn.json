@@ -1,0 +1,25 @@
+{
+  "id": "depth-mobile-049-appstate-rn",
+  "category": "mobile/lifecycle/reactnative",
+  "intents_zh": [
+    "RN AppState",
+    "active background inactive",
+    "AppState.addEventListener",
+    "跨平台生命週期",
+    "app 切換偵測"
+  ],
+  "intents_en": [
+    "RN AppState",
+    "active background inactive",
+    "AppState.addEventListener",
+    "cross platform lifecycle",
+    "app switch"
+  ],
+  "slots": [],
+  "code": "import { AppState } from 'react-native';\nimport { useEffect, useRef } from 'react';\nexport function useAppState(onChange: (s: string) => void) {\n  const ref = useRef(AppState.currentState);\n  useEffect(() => {\n    const sub = AppState.addEventListener('change', next => { onChange(next); ref.current = next; });\n    return () => sub.remove();\n  }, []);\n}",
+  "language": "ts",
+  "deps": [
+    "react-native"
+  ],
+  "summary_zh": "RN AppState 生命週期 hook"
+}

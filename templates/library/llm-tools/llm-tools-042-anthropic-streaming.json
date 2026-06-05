@@ -1,0 +1,33 @@
+{
+  "id": "llm-tools-042-anthropic-streaming",
+  "category": "llm-tools/anthropic/streaming",
+  "intents_zh": [
+    "Claude 串流",
+    "anthropic streaming",
+    "Claude 逐 token",
+    "stream claude messages",
+    "claude async stream",
+    "串流 Claude 回應",
+    "Claude SSE",
+    "Claude stream wrapper"
+  ],
+  "intents_en": [
+    "claude streaming",
+    "anthropic stream messages",
+    "claude token stream",
+    "stream claude response",
+    "claude async streaming",
+    "stream claude wrapper",
+    "anthropic sse",
+    "incremental claude"
+  ],
+  "slots": [
+    "model_name"
+  ],
+  "code": "import anthropic\n\nclient = anthropic.Anthropic()\n\ndef stream_chat(prompt: str):\n    with client.messages.stream(\n        model=\"{{model_name}}\",\n        max_tokens=512,\n        messages=[{\"role\": \"user\", \"content\": prompt}],\n    ) as stream:\n        for text in stream.text_stream:\n            print(text, end=\"\", flush=True)\n    print()\n\nif __name__ == \"__main__\":\n    stream_chat(\"tell me a joke\")",
+  "language": "py",
+  "deps": [
+    "anthropic"
+  ],
+  "summary_zh": "Anthropic Claude 串流 text_stream"
+}

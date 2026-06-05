@@ -1,0 +1,21 @@
+{
+  "id": "database-devops-144-sql-cast-types",
+  "category": "database-devops/sql/basic",
+  "intents_zh": [
+    "SQL 型別轉換",
+    "cast 用法",
+    "::類型 簡寫"
+  ],
+  "intents_en": [
+    "sql cast type",
+    ":: type shorthand",
+    "convert type"
+  ],
+  "slots": [
+    "table"
+  ],
+  "code": "SELECT\n  CAST(created_at AS DATE) AS day,\n  amount::numeric(10, 2) AS amount_money,\n  user_id::text AS user_id_str,\n  to_char(created_at, 'YYYY-MM-DD HH24:MI') AS formatted\nFROM {{table}};",
+  "language": "sql",
+  "deps": [],
+  "summary_zh": "SQL 各種型別轉換寫法"
+}

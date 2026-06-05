@@ -1,0 +1,35 @@
+{
+  "id": "llm-tools-009-hf-pipeline",
+  "category": "llm-tools/transformers/pipeline",
+  "intents_zh": [
+    "HF pipeline 一行起",
+    "transformers pipeline 範例",
+    "快速用 pipeline 跑",
+    "text-generation pipeline",
+    "怎麼用 pipeline 做生成",
+    "pipeline 基本用法",
+    "HF 一鍵生成",
+    "pipeline 包裝"
+  ],
+  "intents_en": [
+    "hf pipeline one liner",
+    "transformers pipeline example",
+    "text-generation pipeline",
+    "quick pipeline usage",
+    "pipeline basic",
+    "one-line generation",
+    "hf inference pipeline",
+    "minimal pipeline"
+  ],
+  "slots": [
+    "task_name",
+    "model_id"
+  ],
+  "code": "from transformers import pipeline\n\npipe = pipeline(\"{{task_name}}\", model=\"{{model_id}}\", device_map=\"auto\")\n\ndef run(text: str):\n    return pipe(text)\n\nif __name__ == \"__main__\":\n    print(run(\"hello world\"))",
+  "language": "py",
+  "deps": [
+    "transformers",
+    "torch"
+  ],
+  "summary_zh": "transformers pipeline 快速推論"
+}

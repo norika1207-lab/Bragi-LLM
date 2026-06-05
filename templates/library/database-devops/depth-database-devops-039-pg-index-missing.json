@@ -1,0 +1,19 @@
+{
+  "id": "depth-database-devops-039-pg-index-missing",
+  "category": "database-devops/postgres/tuning",
+  "intents_zh": [
+    "找缺失 index",
+    "seq scan 多的表",
+    "index 建議"
+  ],
+  "intents_en": [
+    "find missing index",
+    "tables with high seq scan",
+    "index suggestion"
+  ],
+  "slots": [],
+  "code": "SELECT relname,\n       seq_scan,\n       idx_scan,\n       seq_tup_read,\n       idx_tup_fetch,\n       n_live_tup\nFROM pg_stat_user_tables\nWHERE seq_scan > idx_scan\n  AND n_live_tup > 10000\nORDER BY seq_tup_read DESC\nLIMIT 20;",
+  "language": "sql",
+  "deps": [],
+  "summary_zh": "列出 seq_scan 多於 idx_scan 且資料量大的表"
+}

@@ -1,0 +1,27 @@
+{
+  "id": "depth-system-cli-044-ngrok-script",
+  "category": "system-cli/network/tunnel",
+  "intents_zh": [
+    "ngrok 啟動腳本",
+    "本機開外網 tunnel",
+    "cloudflared tunnel 替代",
+    "暫時公開 port"
+  ],
+  "intents_en": [
+    "ngrok start script",
+    "expose local to internet",
+    "cloudflared tunnel alt",
+    "temporary public port"
+  ],
+  "slots": [
+    "local_port",
+    "subdomain"
+  ],
+  "code": "#!/usr/bin/env bash\nset -euo pipefail\n\nPORT={{local_port}}\n\nif command -v cloudflared >/dev/null; then\n  cloudflared tunnel --url \"http://localhost:$PORT\"\nelif command -v ngrok >/dev/null; then\n  ngrok http \"$PORT\" --subdomain {{subdomain}} --log stdout\nelse\n  echo \"install ngrok or cloudflared\"; exit 1\nfi",
+  "language": "bash",
+  "deps": [
+    "ngrok",
+    "cloudflared"
+  ],
+  "summary_zh": "本機 port 公開 tunnel 自動選工具"
+}

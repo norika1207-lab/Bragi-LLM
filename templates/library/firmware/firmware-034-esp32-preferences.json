@@ -1,0 +1,29 @@
+{
+  "id": "firmware-034-esp32-preferences",
+  "category": "firmware/esp32/storage",
+  "intents_zh": [
+    "ESP32 Preferences",
+    "NVS 儲存",
+    "存 WiFi 設定",
+    "非揮發儲存",
+    "ESP32 偏好設定"
+  ],
+  "intents_en": [
+    "ESP32 Preferences library",
+    "NVS storage",
+    "save settings ESP32",
+    "persistent key value",
+    "store wifi credentials"
+  ],
+  "slots": [
+    "namespace",
+    "key",
+    "value"
+  ],
+  "code": "#include <Preferences.h>\nPreferences prefs;\n\nvoid setup() {\n  Serial.begin(115200);\n  prefs.begin(\"{{namespace}}\", false);\n  prefs.putString(\"{{key}}\", \"{{value}}\");\n  String got = prefs.getString(\"{{key}}\", \"\");\n  Serial.println(got);\n  prefs.end();\n}\n\nvoid loop() {}",
+  "language": "ino",
+  "deps": [
+    "Preferences"
+  ],
+  "summary_zh": "ESP32 Preferences NVS 鍵值儲存"
+}

@@ -1,0 +1,28 @@
+{
+  "id": "depth-llm-tools-044-pairwise-judge",
+  "category": "llm-tools/eval/pairwise",
+  "intents_zh": [
+    "成對 prompt 比較",
+    "哪個答案較好",
+    "pairwise judge",
+    "prompt 對決",
+    "arena 比較"
+  ],
+  "intents_en": [
+    "pairwise prompt compare",
+    "which answer better",
+    "pairwise judge",
+    "prompt duel",
+    "arena comparison"
+  ],
+  "slots": [
+    "judge_call",
+    "q",
+    "a",
+    "b"
+  ],
+  "code": "def pairwise({{judge_call}}, {{q}}, {{a}}, {{b}}):\n    p = f\"Question: {{{q}}}\\nA: {{{a}}}\\nB: {{{b}}}\\nWhich is better? Reply only A, B, or TIE.\"\n    return {{judge_call}}(p).strip().upper()",
+  "language": "python",
+  "deps": [],
+  "summary_zh": "判官回 A/B/TIE 做成對比較評分"
+}

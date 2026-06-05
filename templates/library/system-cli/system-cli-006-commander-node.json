@@ -1,0 +1,26 @@
+{
+  "id": "system-cli-006-commander-node",
+  "category": "system-cli/node/commander",
+  "intents_zh": [
+    "node 用 commander 寫 CLI",
+    "commander.js 範本",
+    "js CLI option 解析",
+    "node 命令列工具骨架"
+  ],
+  "intents_en": [
+    "commander.js CLI",
+    "node CLI with commander",
+    "js command line parser",
+    "commander option parsing"
+  ],
+  "slots": [
+    "bin_name",
+    "option_a"
+  ],
+  "code": "#!/usr/bin/env node\nconst { Command } = require('commander');\nconst program = new Command();\n\nprogram\n  .name('{{bin_name}}')\n  .description('{{bin_name}} CLI')\n  .version('0.1.0')\n  .option('--{{option_a}} <value>', '{{option_a}} input')\n  .option('-v, --verbose', 'verbose output')\n  .action((opts) => {\n    if (opts.verbose) console.error('opts', opts);\n    console.log(`{{bin_name}} got: ${opts.{{option_a}}}`);\n  });\n\nprogram.parse();",
+  "language": "js",
+  "deps": [
+    "commander"
+  ],
+  "summary_zh": "commander.js 單命令 CLI"
+}

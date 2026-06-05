@@ -1,0 +1,30 @@
+{
+  "id": "depth-firmware-005-mdns-advertise",
+  "category": "firmware/network/mdns",
+  "intents_zh": [
+    "mDNS 廣播",
+    "Bonjour 服務",
+    "ESP32 mDNS 註冊",
+    "廣告 HTTP 服務",
+    "區網發現裝置"
+  ],
+  "intents_en": [
+    "mdns advertise",
+    "bonjour service",
+    "esp32 mdns register",
+    "advertise http",
+    "lan discovery"
+  ],
+  "slots": [
+    "hostname",
+    "service_name",
+    "port"
+  ],
+  "code": "#include \"mdns.h\"\nmdns_init();\nmdns_hostname_set(\"{{hostname}}\");\nmdns_instance_name_set(\"{{service_name}}\");\nmdns_service_add(NULL, \"_http\", \"_tcp\", {{port}}, NULL, 0);",
+  "language": "c",
+  "deps": [
+    "esp-idf",
+    "mdns"
+  ],
+  "summary_zh": "註冊 mDNS hostname 並廣告 HTTP 服務"
+}

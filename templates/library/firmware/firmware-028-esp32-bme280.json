@@ -1,0 +1,30 @@
+{
+  "id": "firmware-028-esp32-bme280",
+  "category": "firmware/esp32/sensor",
+  "intents_zh": [
+    "BME280 溫溼度氣壓",
+    "I2C BME280",
+    "環境感測",
+    "ESP32 BME280 範例",
+    "氣壓計"
+  ],
+  "intents_en": [
+    "BME280 sensor read",
+    "temperature humidity pressure",
+    "I2C BME280 ESP32",
+    "Bosch BME280",
+    "weather sensor"
+  ],
+  "slots": [
+    "sda_pin",
+    "scl_pin",
+    "i2c_addr"
+  ],
+  "code": "#include <Wire.h>\n#include <Adafruit_BME280.h>\nAdafruit_BME280 bme;\n\nvoid setup() {\n  Serial.begin(115200);\n  Wire.begin({{sda_pin}}, {{scl_pin}});\n  if (!bme.begin({{i2c_addr}})) Serial.println(\"BME280 not found\");\n}\n\nvoid loop() {\n  Serial.printf(\"T=%.2f H=%.2f P=%.2f\\n\", bme.readTemperature(), bme.readHumidity(), bme.readPressure() / 100.0);\n  delay(2000);\n}",
+  "language": "ino",
+  "deps": [
+    "Adafruit BME280 Library",
+    "Adafruit Unified Sensor"
+  ],
+  "summary_zh": "BME280 透過 I2C 讀取溫溼度氣壓"
+}

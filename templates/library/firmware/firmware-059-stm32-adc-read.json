@@ -1,0 +1,27 @@
+{
+  "id": "firmware-059-stm32-adc-read",
+  "category": "firmware/stm32/adc",
+  "intents_zh": [
+    "STM32 ADC 讀值",
+    "HAL_ADC_GetValue",
+    "stm32 類比輸入",
+    "adc 讀一次",
+    "stm32 量電壓"
+  ],
+  "intents_en": [
+    "STM32 ADC read",
+    "HAL_ADC_GetValue example",
+    "STM32 analog input",
+    "single conversion ADC",
+    "STM32 voltage read"
+  ],
+  "slots": [
+    "adc_handle"
+  ],
+  "code": "#include \"main.h\"\nextern ADC_HandleTypeDef {{adc_handle}};\n\nuint32_t read_adc(void) {\n  HAL_ADC_Start(&{{adc_handle}});\n  HAL_ADC_PollForConversion(&{{adc_handle}}, HAL_MAX_DELAY);\n  uint32_t v = HAL_ADC_GetValue(&{{adc_handle}});\n  HAL_ADC_Stop(&{{adc_handle}});\n  return v;\n}\n\nint main(void) {\n  HAL_Init(); SystemClock_Config(); MX_GPIO_Init(); MX_ADC1_Init();\n  while (1) { (void)read_adc(); HAL_Delay(100); }\n}",
+  "language": "c",
+  "deps": [
+    "STM32 HAL"
+  ],
+  "summary_zh": "STM32 ADC 單次轉換讀值"
+}

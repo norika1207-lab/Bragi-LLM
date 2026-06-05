@@ -1,0 +1,29 @@
+{
+  "id": "mobile-067-swiftui-video",
+  "category": "mobile/swiftui/media",
+  "intents_zh": [
+    "SwiftUI VideoPlayer",
+    "SwiftUI 播影片",
+    "SwiftUI AVKit",
+    "SwiftUI video 元件",
+    "播 mp4 SwiftUI",
+    "SwiftUI 播 url",
+    "iOS video swift"
+  ],
+  "intents_en": [
+    "swiftui VideoPlayer",
+    "AVKit swiftui",
+    "play video swiftui",
+    "swiftui mp4",
+    "swiftui stream video",
+    "ios video player swift",
+    "video widget swiftui"
+  ],
+  "slots": [
+    "video_url"
+  ],
+  "code": "import SwiftUI\nimport AVKit\nstruct V:View{\n  let player=AVPlayer(url:URL(string:\"{{video_url}}\")!)\n  var body:some View{VideoPlayer(player:player).onAppear{player.play()}}}",
+  "language": "swift",
+  "deps": [],
+  "summary_zh": "SwiftUI AVKit VideoPlayer 播遠端影片"
+}

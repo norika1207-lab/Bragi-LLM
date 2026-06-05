@@ -1,0 +1,29 @@
+{
+  "id": "mobile-072-swiftui-splash",
+  "category": "mobile/swiftui/launch",
+  "intents_zh": [
+    "SwiftUI splash 畫面",
+    "SwiftUI 啟動畫面替代",
+    "SwiftUI launch overlay",
+    "iOS 開頁 SwiftUI",
+    "SwiftUI 開場 logo",
+    "splash overlay SwiftUI",
+    "SwiftUI 啟動 view"
+  ],
+  "intents_en": [
+    "swiftui splash overlay",
+    "swiftui launch view",
+    "ios splash swiftui",
+    "swiftui startup screen",
+    "launch overlay swiftui",
+    "app launch swiftui",
+    "splash view swiftui"
+  ],
+  "slots": [
+    "delay_sec"
+  ],
+  "code": "import SwiftUI\nstruct Splash<C:View>:View{\n  @State var done=false;let content:()->C\n  var body:some View{ZStack{if done{content()}else{Color.black.overlay(Text(\"hi\").foregroundColor(.white))}}.task{try?await Task.sleep(nanoseconds:UInt64({{delay_sec}}*1_000_000_000));done=true}}}",
+  "language": "swift",
+  "deps": [],
+  "summary_zh": "SwiftUI 啟動 overlay 延遲切主畫面"
+}

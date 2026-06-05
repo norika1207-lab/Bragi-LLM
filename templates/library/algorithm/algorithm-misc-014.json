@@ -1,0 +1,20 @@
+{
+  "id": "algorithm-misc-014",
+  "category": "algorithm/misc/spiral_matrix",
+  "intents_zh": [
+    "螺旋矩陣",
+    "spiral order",
+    "給我 spiral order"
+  ],
+  "intents_en": [
+    "spiral matrix order",
+    "spiral traversal"
+  ],
+  "slots": [
+    "fn_name"
+  ],
+  "code": "def {{fn_name}}(matrix):\n    res = []\n    while matrix:\n        res += matrix.pop(0)\n        matrix = list(zip(*matrix))[::-1]\n        matrix = [list(r) for r in matrix]\n    return res",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "螺旋順序遍歷矩陣"
+}

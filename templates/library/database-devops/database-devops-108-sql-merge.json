@@ -1,0 +1,23 @@
+{
+  "id": "database-devops-108-sql-merge",
+  "category": "database-devops/sql/dml",
+  "intents_zh": [
+    "SQL MERGE 語法",
+    "postgres 15+ merge",
+    "批次 upsert merge"
+  ],
+  "intents_en": [
+    "sql merge statement",
+    "postgres 15 merge",
+    "batch upsert merge"
+  ],
+  "slots": [
+    "target",
+    "source",
+    "key"
+  ],
+  "code": "MERGE INTO {{target}} t\nUSING {{source}} s\nON t.{{key}} = s.{{key}}\nWHEN MATCHED THEN\n  UPDATE SET value = s.value, updated_at = NOW()\nWHEN NOT MATCHED THEN\n  INSERT ({{key}}, value, created_at)\n  VALUES (s.{{key}}, s.value, NOW());",
+  "language": "sql",
+  "deps": [],
+  "summary_zh": "SQL MERGE 批次 upsert"
+}

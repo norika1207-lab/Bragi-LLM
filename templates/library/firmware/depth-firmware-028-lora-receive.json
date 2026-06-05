@@ -1,0 +1,27 @@
+{
+  "id": "depth-firmware-028-lora-receive",
+  "category": "firmware/radio/lora",
+  "intents_zh": [
+    "LoRa 接收",
+    "SX1276 receive",
+    "onReceive callback",
+    "LoRa.parsePacket",
+    "收長距離訊號"
+  ],
+  "intents_en": [
+    "lora receive",
+    "sx1276 rx",
+    "onreceive callback",
+    "lora parsepacket",
+    "long range receive"
+  ],
+  "slots": [
+    "freq_hz"
+  ],
+  "code": "#include <LoRa.h>\nvoid setup() {\n    Serial.begin(115200);\n    LoRa.setPins(5, 14, 26);\n    LoRa.begin({{freq_hz}});\n}\nvoid loop() {\n    int packetSize = LoRa.parsePacket();\n    if (packetSize) {\n        String s;\n        while (LoRa.available()) s += (char)LoRa.read();\n        Serial.printf(\"rx (%d dBm): %s\\n\", LoRa.packetRssi(), s.c_str());\n    }\n}",
+  "language": "cpp",
+  "deps": [
+    "LoRa"
+  ],
+  "summary_zh": "輪詢 LoRa parsePacket 收訊並印 RSSI"
+}

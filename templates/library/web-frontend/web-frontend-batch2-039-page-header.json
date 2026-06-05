@@ -1,0 +1,28 @@
+{
+  "id": "web-frontend-batch2-039-page-header",
+  "category": "web-frontend/react/layout/page-header",
+  "intents_zh": [
+    "頁面標題列",
+    "page header",
+    "頁首區塊",
+    "內頁 header",
+    "標題加按鈕",
+    "頁面頂部"
+  ],
+  "intents_en": [
+    "page header",
+    "content header",
+    "page title bar",
+    "title with actions",
+    "section header",
+    "page heading"
+  ],
+  "slots": [
+    "title",
+    "subtitle"
+  ],
+  "code": "export function PageHeader({ actions }) {\n  return (\n    <div className=\"flex items-start justify-between border-b pb-4 mb-6\">\n      <div>\n        <h1 className=\"text-2xl font-bold\">{{title}}</h1>\n        <p className=\"mt-1 text-sm text-gray-600\">{{subtitle}}</p>\n      </div>\n      <div className=\"flex gap-2\">{actions}</div>\n    </div>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "內頁標題列含右側操作"
+}

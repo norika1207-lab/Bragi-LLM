@@ -1,0 +1,27 @@
+{
+  "id": "web-frontend-batch2-041-stat-cards",
+  "category": "web-frontend/react/layout/stat-cards",
+  "intents_zh": [
+    "統計卡片",
+    "KPI 卡",
+    "儀表板數字",
+    "metric 卡",
+    "stat 區塊",
+    "數據卡片"
+  ],
+  "intents_en": [
+    "stat cards",
+    "KPI cards",
+    "metric cards",
+    "dashboard stats",
+    "number cards",
+    "summary cards"
+  ],
+  "slots": [
+    "stats"
+  ],
+  "code": "export function Stats() {\n  const stats = {{stats}};\n  return (\n    <div className=\"grid gap-4 sm:grid-cols-2 lg:grid-cols-4\">\n      {stats.map((s) => (\n        <div key={s.label} className=\"rounded-lg border bg-white p-5\">\n          <div className=\"text-sm text-gray-600\">{s.label}</div>\n          <div className=\"mt-2 text-3xl font-bold\">{s.value}</div>\n          <div className={`mt-1 text-xs ${s.delta >= 0 ? 'text-green-600' : 'text-red-600'}`}>\n            {s.delta >= 0 ? '↑' : '↓'} {Math.abs(s.delta)}%\n          </div>\n        </div>\n      ))}\n    </div>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "儀表板 KPI 統計卡"
+}

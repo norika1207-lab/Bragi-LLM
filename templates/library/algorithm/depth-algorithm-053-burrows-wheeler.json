@@ -1,0 +1,29 @@
+{
+  "id": "depth-algorithm-053-burrows-wheeler",
+  "category": "algorithm/string/bwt",
+  "intents_zh": [
+    "BWT 變換",
+    "burrows wheeler 變換",
+    "壓縮預處理",
+    "bwt 構建",
+    "逆 BWT",
+    "字串旋轉排序",
+    "BWT 模板"
+  ],
+  "intents_en": [
+    "Burrows Wheeler transform",
+    "BWT construction",
+    "compression preprocessing",
+    "inverse BWT",
+    "rotation sort BWT",
+    "BWT template",
+    "bwt encode decode"
+  ],
+  "slots": [
+    "s"
+  ],
+  "code": "def bwt_encode(s={{s}}):\n    s = s + '$'\n    rots = sorted(s[i:] + s[:i] for i in range(len(s)))\n    return ''.join(r[-1] for r in rots)\n\ndef bwt_decode(bwt):\n    n = len(bwt)\n    table = [''] * n\n    for _ in range(n):\n        table = sorted(bwt[i] + table[i] for i in range(n))\n    for row in table:\n        if row.endswith('$'): return row[:-1]",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "Burrows Wheeler 變換編碼與還原"
+}

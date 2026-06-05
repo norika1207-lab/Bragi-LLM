@@ -1,0 +1,28 @@
+{
+  "id": "firmware-069-mpy-bme280",
+  "category": "firmware/micropython/sensor",
+  "intents_zh": [
+    "mpy BME280",
+    "micropython 溫溼度氣壓",
+    "mpy 環境感測",
+    "ESP32 mpy BME280",
+    "BME280 範例 mpy"
+  ],
+  "intents_en": [
+    "MicroPython BME280",
+    "mpy temperature humidity pressure",
+    "ESP32 BME280 micropython",
+    "read BME280 mpy",
+    "bme280 sensor micropython"
+  ],
+  "slots": [
+    "sda_pin",
+    "scl_pin"
+  ],
+  "code": "from machine import Pin, I2C\nimport bme280\n\ni2c = I2C(0, sda=Pin({{sda_pin}}), scl=Pin({{scl_pin}}))\nbme = bme280.BME280(i2c=i2c)\nprint(bme.values)",
+  "language": "py",
+  "deps": [
+    "micropython-bme280"
+  ],
+  "summary_zh": "MicroPython BME280 環境感測讀取"
+}

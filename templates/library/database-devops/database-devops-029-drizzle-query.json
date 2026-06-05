@@ -1,0 +1,26 @@
+{
+  "id": "database-devops-029-drizzle-query",
+  "category": "database-devops/orm/drizzle",
+  "intents_zh": [
+    "Drizzle 查詢",
+    "drizzle select where",
+    "drizzle client query"
+  ],
+  "intents_en": [
+    "drizzle query",
+    "drizzle select where",
+    "drizzle client usage"
+  ],
+  "slots": [
+    "table_var",
+    "filter_field",
+    "filter_value"
+  ],
+  "code": "import { drizzle } from 'drizzle-orm/node-postgres'\nimport { eq } from 'drizzle-orm'\nimport { Pool } from 'pg'\nimport { {{table_var}} } from './schema'\n\nconst pool = new Pool({ connectionString: process.env.DATABASE_URL })\nexport const db = drizzle(pool)\n\nexport async function list() {\n  return db.select().from({{table_var}}).where(eq({{table_var}}.{{filter_field}}, '{{filter_value}}'))\n}",
+  "language": "ts",
+  "deps": [
+    "drizzle-orm",
+    "pg"
+  ],
+  "summary_zh": "Drizzle 查詢 where 過濾"
+}

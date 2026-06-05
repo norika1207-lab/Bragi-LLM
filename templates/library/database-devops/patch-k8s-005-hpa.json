@@ -1,0 +1,33 @@
+{
+  "id": "patch-k8s-005-hpa",
+  "category": "database-devops/kubernetes/autoscaling",
+  "intents_zh": [
+    "寫 HorizontalPodAutoscaler 模板",
+    "k8s hpa 設 cpu 自動擴縮",
+    "幫我做自動擴容的 hpa",
+    "我要根據 CPU 擴 pod",
+    "hpa v2 yaml 範例"
+  ],
+  "intents_en": [
+    "create HPA for deployment",
+    "horizontal pod autoscaler yaml",
+    "k8s autoscale by cpu memory",
+    "hpa v2 template",
+    "autoscaling manifest"
+  ],
+  "slots": [
+    "hpa_name",
+    "namespace",
+    "target_deployment",
+    "min_replicas",
+    "max_replicas",
+    "cpu_target_percent"
+  ],
+  "code": "apiVersion: autoscaling/v2\nkind: HorizontalPodAutoscaler\nmetadata:\n  name: {{hpa_name}}\n  namespace: {{namespace}}\nspec:\n  scaleTargetRef:\n    apiVersion: apps/v1\n    kind: Deployment\n    name: {{target_deployment}}\n  minReplicas: {{min_replicas}}\n  maxReplicas: {{max_replicas}}\n  metrics:\n    - type: Resource\n      resource:\n        name: cpu\n        target:\n          type: Utilization\n          averageUtilization: {{cpu_target_percent}}\n",
+  "language": "yaml",
+  "deps": [
+    "kubernetes",
+    "metrics-server"
+  ],
+  "summary_zh": "HPA v2 依 CPU 利用率自動擴縮 Deployment 的 replica 數"
+}

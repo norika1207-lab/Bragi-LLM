@@ -1,0 +1,31 @@
+{
+  "id": "mobile-120-flutter-webview",
+  "category": "mobile/flutter/web",
+  "intents_zh": [
+    "Flutter webview",
+    "flutter 嵌網頁",
+    "flutter webview_flutter",
+    "Flutter 內嵌瀏覽器",
+    "flutter 顯示 html",
+    "flutter open url web",
+    "flutter webview 範例"
+  ],
+  "intents_en": [
+    "flutter webview",
+    "webview_flutter",
+    "flutter embed web",
+    "flutter open url web",
+    "flutter inapp browser",
+    "flutter webview example",
+    "embed html flutter"
+  ],
+  "slots": [
+    "page_url"
+  ],
+  "code": "import 'package:flutter/material.dart';\nimport 'package:webview_flutter/webview_flutter.dart';\nclass W extends StatefulWidget{const W({super.key});@override State<W> createState()=>_W();}\nclass _W extends State<W>{late final WebViewController c=WebViewController()..setJavaScriptMode(JavaScriptMode.unrestricted)..loadRequest(Uri.parse('{{page_url}}'));\n  @override Widget build(BuildContext ctx)=>WebViewWidget(controller:c);}",
+  "language": "dart",
+  "deps": [
+    "webview_flutter"
+  ],
+  "summary_zh": "Flutter webview_flutter 嵌頁面"
+}

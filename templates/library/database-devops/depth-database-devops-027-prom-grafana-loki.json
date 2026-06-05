@@ -1,0 +1,23 @@
+{
+  "id": "depth-database-devops-027-prom-grafana-loki",
+  "category": "database-devops/observability/stack",
+  "intents_zh": [
+    "Prometheus + Grafana + Loki compose",
+    "可觀測性三件套",
+    "本機 observability stack"
+  ],
+  "intents_en": [
+    "Prometheus Grafana Loki compose",
+    "observability stack",
+    "local monitoring stack"
+  ],
+  "slots": [
+    "grafana_password"
+  ],
+  "code": "services:\n  prometheus:\n    image: prom/prometheus\n    volumes: ['./prometheus.yml:/etc/prometheus/prometheus.yml']\n    ports: ['9090:9090']\n  loki:\n    image: grafana/loki\n    ports: ['3100:3100']\n    command: -config.file=/etc/loki/local-config.yaml\n  promtail:\n    image: grafana/promtail\n    volumes: ['/var/log:/var/log', './promtail.yml:/etc/promtail/config.yml']\n    command: -config.file=/etc/promtail/config.yml\n  grafana:\n    image: grafana/grafana\n    ports: ['3000:3000']\n    environment:\n      GF_SECURITY_ADMIN_PASSWORD: {{grafana_password}}\n    depends_on: [prometheus, loki]",
+  "language": "yaml",
+  "deps": [
+    "docker-compose"
+  ],
+  "summary_zh": "compose 一鍵起 Prometheus + Loki + Promtail + Grafana"
+}

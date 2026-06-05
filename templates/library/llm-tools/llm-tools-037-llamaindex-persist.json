@@ -1,0 +1,34 @@
+{
+  "id": "llm-tools-037-llamaindex-persist",
+  "category": "llm-tools/llamaindex/persist",
+  "intents_zh": [
+    "llamaindex 持久化",
+    "存 index 到磁碟",
+    "load_index_from_storage",
+    "llamaindex 載入索引",
+    "persist index",
+    "llamaindex 儲存讀回",
+    "store context",
+    "llamaindex 快取"
+  ],
+  "intents_en": [
+    "llamaindex persist",
+    "save index to disk",
+    "load_index_from_storage",
+    "reload llamaindex",
+    "persist storage context",
+    "llamaindex cache",
+    "store and load index",
+    "llamaindex save"
+  ],
+  "slots": [
+    "persist_dir",
+    "docs_dir"
+  ],
+  "code": "from llama_index.core import VectorStoreIndex, SimpleDirectoryReader, StorageContext, load_index_from_storage\nimport os\n\nif os.path.exists(\"{{persist_dir}}\"):\n    sc = StorageContext.from_defaults(persist_dir=\"{{persist_dir}}\")\n    index = load_index_from_storage(sc)\nelse:\n    docs = SimpleDirectoryReader(\"{{docs_dir}}\").load_data()\n    index = VectorStoreIndex.from_documents(docs)\n    index.storage_context.persist(\"{{persist_dir}}\")\n\nprint(index.as_query_engine().query(\"hi\"))",
+  "language": "py",
+  "deps": [
+    "llama-index"
+  ],
+  "summary_zh": "LlamaIndex 索引持久化與重載"
+}

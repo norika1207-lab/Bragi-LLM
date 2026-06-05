@@ -1,0 +1,28 @@
+{
+  "id": "firmware-033-esp32-ds3231-rtc",
+  "category": "firmware/esp32/rtc",
+  "intents_zh": [
+    "DS3231 RTC",
+    "ESP32 即時時鐘",
+    "硬體時鐘讀取",
+    "RTClib 範例",
+    "時間模組"
+  ],
+  "intents_en": [
+    "DS3231 RTC ESP32",
+    "real time clock read",
+    "RTClib library",
+    "I2C RTC",
+    "get current time DS3231"
+  ],
+  "slots": [
+    "sda_pin",
+    "scl_pin"
+  ],
+  "code": "#include <Wire.h>\n#include <RTClib.h>\nRTC_DS3231 rtc;\n\nvoid setup() {\n  Serial.begin(115200);\n  Wire.begin({{sda_pin}}, {{scl_pin}});\n  if (!rtc.begin()) Serial.println(\"RTC missing\");\n  if (rtc.lostPower()) rtc.adjust(DateTime(F(__DATE__), F(__TIME__)));\n}\n\nvoid loop() {\n  DateTime now = rtc.now();\n  Serial.printf(\"%04d-%02d-%02d %02d:%02d:%02d\\n\", now.year(), now.month(), now.day(), now.hour(), now.minute(), now.second());\n  delay(1000);\n}",
+  "language": "ino",
+  "deps": [
+    "RTClib"
+  ],
+  "summary_zh": "DS3231 硬體 RTC 讀取時間"
+}

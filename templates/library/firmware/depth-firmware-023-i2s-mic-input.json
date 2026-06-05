@@ -1,0 +1,30 @@
+{
+  "id": "depth-firmware-023-i2s-mic-input",
+  "category": "firmware/audio/i2s",
+  "intents_zh": [
+    "I2S 麥克風輸入",
+    "INMP441 採音",
+    "錄音 ESP32",
+    "音訊取樣 I2S",
+    "採麥克風"
+  ],
+  "intents_en": [
+    "i2s mic input",
+    "inmp441 record",
+    "esp32 audio capture",
+    "i2s sample audio",
+    "mic read"
+  ],
+  "slots": [
+    "bck_pin",
+    "ws_pin",
+    "data_pin",
+    "sample_rate"
+  ],
+  "code": "#include \"driver/i2s.h\"\ni2s_config_t cfg = {\n    .mode = (i2s_mode_t)(I2S_MODE_MASTER | I2S_MODE_RX),\n    .sample_rate = {{sample_rate}},\n    .bits_per_sample = I2S_BITS_PER_SAMPLE_32BIT,\n    .channel_format = I2S_CHANNEL_FMT_ONLY_LEFT,\n    .communication_format = I2S_COMM_FORMAT_STAND_I2S,\n    .dma_buf_count = 4, .dma_buf_len = 1024,\n};\ni2s_pin_config_t pins = { .bck_io_num = {{bck_pin}}, .ws_io_num = {{ws_pin}}, .data_out_num = -1, .data_in_num = {{data_pin}} };\ni2s_driver_install(I2S_NUM_0, &cfg, 0, NULL);\ni2s_set_pin(I2S_NUM_0, &pins);\nint32_t buf[512]; size_t br;\ni2s_read(I2S_NUM_0, buf, sizeof(buf), &br, portMAX_DELAY);",
+  "language": "c",
+  "deps": [
+    "esp-idf"
+  ],
+  "summary_zh": "用 I2S 從數位麥克風讀取 32-bit 採樣"
+}

@@ -1,0 +1,28 @@
+{
+  "id": "depth-web-backend-052-prism-mock",
+  "category": "web-backend/testing/prism",
+  "intents_zh": [
+    "Prism 啟動 mock server",
+    "OpenAPI 範本 mock",
+    "CLI 啟動 mock",
+    "contract test 用 Prism",
+    "產生 mock API"
+  ],
+  "intents_en": [
+    "prism start mock server",
+    "openapi based mock",
+    "cli launch mock",
+    "contract test prism",
+    "spin up mock api"
+  ],
+  "slots": [
+    "spec_path",
+    "port"
+  ],
+  "code": "# package.json script\n# \"mock\": \"prism mock {{spec_path}} -p {{port}}\"\nnpx @stoplight/prism-cli mock {{spec_path}} -p {{port}}",
+  "language": "sh",
+  "deps": [
+    "@stoplight/prism-cli"
+  ],
+  "summary_zh": "Prism 用 OpenAPI 起 mock server"
+}

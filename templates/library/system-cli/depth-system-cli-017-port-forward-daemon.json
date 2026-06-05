@@ -1,0 +1,27 @@
+{
+  "id": "depth-system-cli-017-port-forward-daemon",
+  "category": "system-cli/network/port-forward",
+  "intents_zh": [
+    "TCP port forwarding 常駐",
+    "socat port 轉發",
+    "埠轉發 daemon 腳本",
+    "systemd port forward"
+  ],
+  "intents_en": [
+    "tcp port forwarding daemon",
+    "socat port forward",
+    "port forward service",
+    "systemd port forward"
+  ],
+  "slots": [
+    "local_port",
+    "remote_host",
+    "remote_port"
+  ],
+  "code": "#!/usr/bin/env bash\n# usage: ./fwd.sh   or  install as systemd service\nset -euo pipefail\n\nwhile true; do\n  echo \"[$(date -Is)] forwarding :{{local_port}} -> {{remote_host}}:{{remote_port}}\"\n  socat -d TCP-LISTEN:{{local_port}},reuseaddr,fork \\\n        TCP:{{remote_host}}:{{remote_port}} || true\n  echo \"socat exited, restart in 3s\"; sleep 3\ndone",
+  "language": "bash",
+  "deps": [
+    "socat"
+  ],
+  "summary_zh": "socat port forward 常駐自我重啟"
+}

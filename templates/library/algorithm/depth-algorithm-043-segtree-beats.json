@@ -1,0 +1,29 @@
+{
+  "id": "depth-algorithm-043-segtree-beats",
+  "category": "algorithm/segtree/beats",
+  "intents_zh": [
+    "吉如一線段樹",
+    "segment tree beats",
+    "區間取 min 求和",
+    "Ji Driver Segment Tree",
+    "區間 chmin chmax",
+    "線段樹 beats 模板",
+    "區間 min 更新"
+  ],
+  "intents_en": [
+    "segment tree beats",
+    "Ji Driver Segment Tree",
+    "range chmin chmax sum",
+    "beats template",
+    "segment tree beats range min",
+    "Ji Ruyi segtree",
+    "beats range update"
+  ],
+  "slots": [
+    "arr"
+  ],
+  "code": "INF = float('inf')\nclass Beats:\n    def __init__(self, a={{arr}}):\n        n = len(a); self.n = n\n        self.mx = [0]*(4*n); self.mx2 = [-INF]*(4*n); self.cnt = [0]*(4*n)\n        self.sum = [0]*(4*n)\n        self.build(1, 0, n-1, a)\n    def build(self, p, l, r, a):\n        if l == r:\n            self.mx[p] = a[l]; self.mx2[p] = -INF; self.cnt[p] = 1; self.sum[p] = a[l]; return\n        m = (l+r)//2\n        self.build(2*p, l, m, a); self.build(2*p+1, m+1, r, a)\n        self.pull(p)\n    def pull(self, p):\n        L, R = 2*p, 2*p+1\n        self.sum[p] = self.sum[L] + self.sum[R]\n        if self.mx[L] == self.mx[R]:\n            self.mx[p] = self.mx[L]; self.cnt[p] = self.cnt[L]+self.cnt[R]\n            self.mx2[p] = max(self.mx2[L], self.mx2[R])\n        elif self.mx[L] > self.mx[R]:\n            self.mx[p] = self.mx[L]; self.cnt[p] = self.cnt[L]\n            self.mx2[p] = max(self.mx2[L], self.mx[R])\n        else:\n            self.mx[p] = self.mx[R]; self.cnt[p] = self.cnt[R]\n            self.mx2[p] = max(self.mx[L], self.mx2[R])",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "吉如一線段樹 beats 結構支援區間取 min 操作"
+}

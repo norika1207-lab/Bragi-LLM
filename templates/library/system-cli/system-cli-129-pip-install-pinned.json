@@ -1,0 +1,21 @@
+{
+  "id": "system-cli-129-pip-install-pinned",
+  "category": "system-cli/build/python",
+  "intents_zh": [
+    "產生 pinned requirements",
+    "pip freeze 鎖版本",
+    "requirements.lock"
+  ],
+  "intents_en": [
+    "pin requirements with pip",
+    "freeze deps locked",
+    "requirements.lock script"
+  ],
+  "slots": [
+    "lock_file"
+  ],
+  "code": "#!/usr/bin/env bash\nset -euo pipefail\npython -m venv .venv\n. .venv/bin/activate\npip install --upgrade pip\npip install -r requirements.txt\npip freeze | grep -vE '^(pip|setuptools|wheel)==' > \"{{lock_file}}\"\necho \"locked -> {{lock_file}}\"",
+  "language": "sh",
+  "deps": [],
+  "summary_zh": "venv + pip freeze 鎖版本"
+}

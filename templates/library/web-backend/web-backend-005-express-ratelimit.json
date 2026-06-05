@@ -1,0 +1,29 @@
+{
+  "id": "web-backend-005-express-ratelimit",
+  "category": "web-backend/express/middleware",
+  "intents_zh": [
+    "express rate limit",
+    "加個限流 middleware",
+    "防止 API 被打爆",
+    "限制每分鐘請求數",
+    "express-rate-limit 用法"
+  ],
+  "intents_en": [
+    "express rate limit middleware",
+    "throttle requests express",
+    "express-rate-limit example",
+    "limit requests per minute",
+    "API throttling"
+  ],
+  "slots": [
+    "window_ms",
+    "max_requests",
+    "route_prefix"
+  ],
+  "code": "const rateLimit = require('express-rate-limit');\n\nconst limiter = rateLimit({\n  windowMs: {{window_ms}},\n  max: {{max_requests}},\n  standardHeaders: true,\n  legacyHeaders: false,\n  message: { error: 'too many requests' }\n});\n\nmodule.exports = (app) => app.use('{{route_prefix}}', limiter);",
+  "language": "js",
+  "deps": [
+    "express-rate-limit"
+  ],
+  "summary_zh": "Express 限流 middleware"
+}

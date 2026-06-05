@@ -1,0 +1,27 @@
+{
+  "id": "web-backend-029-express-logger",
+  "category": "web-backend/express/middleware",
+  "intents_zh": [
+    "express logger",
+    "加 morgan log",
+    "pino structured log",
+    "request log middleware",
+    "記錄 http 請求"
+  ],
+  "intents_en": [
+    "express logger middleware",
+    "morgan example",
+    "pino http logger",
+    "request log",
+    "structured log express"
+  ],
+  "slots": [],
+  "code": "const pinoHttp = require('pino-http');\nconst pino = require('pino');\n\nconst logger = pino({\n  level: process.env.LOG_LEVEL || 'info',\n  transport: process.env.NODE_ENV === 'production' ? undefined : { target: 'pino-pretty' }\n});\n\nmodule.exports = {\n  logger,\n  middleware: pinoHttp({ logger })\n};",
+  "language": "js",
+  "deps": [
+    "pino",
+    "pino-http",
+    "pino-pretty"
+  ],
+  "summary_zh": "Pino structured request logger"
+}

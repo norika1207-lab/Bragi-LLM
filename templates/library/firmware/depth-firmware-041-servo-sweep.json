@@ -1,0 +1,27 @@
+{
+  "id": "depth-firmware-041-servo-sweep",
+  "category": "firmware/peripheral/servo",
+  "intents_zh": [
+    "伺服馬達掃描",
+    "servo sweep",
+    "SG90 控制",
+    "角度 0-180",
+    "Servo lib"
+  ],
+  "intents_en": [
+    "servo sweep",
+    "control sg90",
+    "angle servo",
+    "servo lib",
+    "servo position"
+  ],
+  "slots": [
+    "servo_pin"
+  ],
+  "code": "#include <ESP32Servo.h>\nServo sv;\nvoid setup() { sv.attach({{servo_pin}}); }\nvoid loop() {\n    for (int a = 0; a <= 180; a += 2) { sv.write(a); delay(15); }\n    for (int a = 180; a >= 0; a -= 2) { sv.write(a); delay(15); }\n}",
+  "language": "cpp",
+  "deps": [
+    "ESP32Servo"
+  ],
+  "summary_zh": "ESP32Servo 在 0-180 度往復掃描"
+}

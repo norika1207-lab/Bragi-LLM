@@ -1,0 +1,23 @@
+{
+  "id": "database-devops-098-playwright-fixtures",
+  "category": "database-devops/test/playwright",
+  "intents_zh": [
+    "playwright 登入 fixture",
+    "共用認證 state",
+    "storageState 範本"
+  ],
+  "intents_en": [
+    "playwright auth fixture",
+    "shared login state",
+    "storageState example"
+  ],
+  "slots": [
+    "login_url"
+  ],
+  "code": "import { test as base } from '@playwright/test'\n\nexport const test = base.extend<{}, { account: { email: string } }>({\n  account: [async ({ browser }, use) => {\n    const page = await browser.newPage()\n    await page.goto('{{login_url}}')\n    await page.fill('input[name=email]', 'test@example.com')\n    await page.fill('input[name=password]', 'secret')\n    await page.click('button[type=submit]')\n    await page.context().storageState({ path: 'auth.json' })\n    await use({ email: 'test@example.com' })\n  }, { scope: 'worker' }],\n})",
+  "language": "ts",
+  "deps": [
+    "@playwright/test"
+  ],
+  "summary_zh": "playwright worker-scope 登入 fixture"
+}

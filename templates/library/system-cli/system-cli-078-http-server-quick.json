@@ -1,0 +1,22 @@
+{
+  "id": "system-cli-078-http-server-quick",
+  "category": "system-cli/net/http",
+  "intents_zh": [
+    "快速起 http server 看檔",
+    "python -m http.server",
+    "靜態檔案分享"
+  ],
+  "intents_en": [
+    "quick http file server",
+    "python http.server one liner",
+    "share static files"
+  ],
+  "slots": [
+    "port",
+    "root_dir"
+  ],
+  "code": "#!/usr/bin/env bash\ncd \"{{root_dir}}\"\npython3 -m http.server {{port}} --bind 127.0.0.1",
+  "language": "sh",
+  "deps": [],
+  "summary_zh": "python 內建靜態 server"
+}

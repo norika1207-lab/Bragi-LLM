@@ -1,0 +1,26 @@
+{
+  "id": "depth-system-cli-051-aws-cloudwatch-tail",
+  "category": "system-cli/aws/logs",
+  "intents_zh": [
+    "aws logs tail",
+    "CloudWatch log follow",
+    "跨 log group tail",
+    "aws cloudwatch 即時"
+  ],
+  "intents_en": [
+    "aws logs tail",
+    "cloudwatch log follow",
+    "cross log group tail",
+    "aws cloudwatch live"
+  ],
+  "slots": [
+    "log_group",
+    "filter_pattern"
+  ],
+  "code": "#!/usr/bin/env bash\nset -euo pipefail\n\naws logs tail \"{{log_group}}\" \\\n  --follow \\\n  --since 5m \\\n  --format short \\\n  --filter-pattern '{{filter_pattern}}' \\\n  | while IFS= read -r line; do\n      if echo \"$line\" | grep -qiE 'error|exception|fail'; then\n        printf \"\\x1b[31m%s\\x1b[0m\\n\" \"$line\"\n      else\n        echo \"$line\"\n      fi\n    done",
+  "language": "bash",
+  "deps": [
+    "awscli"
+  ],
+  "summary_zh": "aws logs tail follow 含錯誤紅標"
+}

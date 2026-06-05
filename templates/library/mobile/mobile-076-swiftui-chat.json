@@ -1,0 +1,27 @@
+{
+  "id": "mobile-076-swiftui-chat",
+  "category": "mobile/swiftui/chat",
+  "intents_zh": [
+    "SwiftUI chat 泡泡",
+    "SwiftUI 訊息列表",
+    "SwiftUI 聊天 UI",
+    "聊天泡泡 SwiftUI",
+    "SwiftUI message bubble",
+    "SwiftUI 對話畫面",
+    "SwiftUI 簡易聊天"
+  ],
+  "intents_en": [
+    "swiftui chat bubble",
+    "swiftui message list",
+    "swiftui conversation",
+    "chat ui swiftui",
+    "message bubbles swiftui",
+    "simple chat swiftui",
+    "swiftui chat screen"
+  ],
+  "slots": [],
+  "code": "import SwiftUI\nstruct Msg:Identifiable{let id=UUID();let text:String;let mine:Bool}\nstruct Chat:View{let msgs:[Msg]\n  var body:some View{ScrollView{VStack(spacing:6){ForEach(msgs){m in\n    HStack{if m.mine{Spacer()};Text(m.text).padding(10).background(m.mine ?Color.blue:Color(.systemGray5)).foregroundColor(m.mine ?.white:.primary).cornerRadius(14);if !m.mine{Spacer()}}}}.padding()}}}",
+  "language": "swift",
+  "deps": [],
+  "summary_zh": "SwiftUI 聊天泡泡左右對齊"
+}

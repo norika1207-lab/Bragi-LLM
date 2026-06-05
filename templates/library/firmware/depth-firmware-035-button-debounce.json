@@ -1,0 +1,28 @@
+{
+  "id": "depth-firmware-035-button-debounce",
+  "category": "firmware/input/button",
+  "intents_zh": [
+    "按鈕去彈跳",
+    "debounce 按鍵",
+    "軟體濾彈跳",
+    "button stable read",
+    "short long press"
+  ],
+  "intents_en": [
+    "button debounce",
+    "software debounce",
+    "stable button read",
+    "press detect",
+    "filter bounces"
+  ],
+  "slots": [
+    "btn_pin",
+    "debounce_ms"
+  ],
+  "code": "int last_state = HIGH;\nint stable_state = HIGH;\nunsigned long last_change = 0;\nvoid setup() { pinMode({{btn_pin}}, INPUT_PULLUP); Serial.begin(115200); }\nvoid loop() {\n    int r = digitalRead({{btn_pin}});\n    if (r != last_state) { last_change = millis(); last_state = r; }\n    if (millis() - last_change > {{debounce_ms}} && r != stable_state) {\n        stable_state = r;\n        if (stable_state == LOW) Serial.println(\"pressed\");\n    }\n}",
+  "language": "cpp",
+  "deps": [
+    "Arduino"
+  ],
+  "summary_zh": "軟體 debounce 過濾按鈕彈跳並偵測按下"
+}

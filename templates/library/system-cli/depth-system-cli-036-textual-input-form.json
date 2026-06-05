@@ -1,0 +1,25 @@
+{
+  "id": "depth-system-cli-036-textual-input-form",
+  "category": "system-cli/tui/textual",
+  "intents_zh": [
+    "textual 表單輸入",
+    "TUI Input 元件",
+    "textual 多欄位 form",
+    "textual submit 按鈕"
+  ],
+  "intents_en": [
+    "textual input form",
+    "tui input widget",
+    "textual multi field form",
+    "textual submit button"
+  ],
+  "slots": [
+    "form_title"
+  ],
+  "code": "from textual.app import App, ComposeResult\nfrom textual.containers import Vertical\nfrom textual.widgets import Header, Footer, Input, Button, Label\n\nclass FormApp(App):\n    def compose(self) -> ComposeResult:\n        yield Header()\n        with Vertical():\n            yield Label(\"{{form_title}}\")\n            yield Input(placeholder=\"name\", id=\"name\")\n            yield Input(placeholder=\"email\", id=\"email\")\n            yield Button(\"submit\", variant=\"primary\", id=\"submit\")\n            yield Label(\"\", id=\"out\")\n        yield Footer()\n\n    def on_button_pressed(self, _):\n        n = self.query_one(\"#name\", Input).value\n        e = self.query_one(\"#email\", Input).value\n        self.query_one(\"#out\", Label).update(f\"got: {n} <{e}>\")\n\nFormApp().run()",
+  "language": "python",
+  "deps": [
+    "textual"
+  ],
+  "summary_zh": "textual 多欄位表單 submit 顯示結果"
+}

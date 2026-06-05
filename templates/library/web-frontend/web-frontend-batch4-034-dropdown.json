@@ -1,0 +1,31 @@
+{
+  "id": "web-frontend-batch4-034-dropdown",
+  "category": "web-frontend/react/components/dropdown",
+  "intents_zh": [
+    "下拉選單",
+    "dropdown menu",
+    "tailwind menu",
+    "按鈕展開選單",
+    "useState 控制 dropdown",
+    "menu 元件"
+  ],
+  "intents_en": [
+    "dropdown menu",
+    "tailwind dropdown",
+    "button menu",
+    "usestate dropdown",
+    "menu popover",
+    "select menu"
+  ],
+  "slots": [
+    "trigger_label",
+    "item_one",
+    "item_two"
+  ],
+  "code": "'use client';\nimport { useState } from 'react';\n\nexport default function Dropdown() {\n  const [open, setOpen] = useState(false);\n  return (\n    <div className=\"relative inline-block\">\n      <button onClick={() => setOpen(!open)} className=\"px-3 py-1 border rounded\">{{trigger_label}}</button>\n      {open && (\n        <ul className=\"absolute mt-1 w-40 bg-white border rounded shadow\">\n          <li className=\"px-3 py-2 hover:bg-gray-100\">{{item_one}}</li>\n          <li className=\"px-3 py-2 hover:bg-gray-100\">{{item_two}}</li>\n        </ul>\n      )}\n    </div>\n  );\n}",
+  "language": "tsx",
+  "deps": [
+    "react"
+  ],
+  "summary_zh": "按鈕觸發的 dropdown 選單"
+}

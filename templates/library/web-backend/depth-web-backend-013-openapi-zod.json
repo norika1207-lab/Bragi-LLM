@@ -1,0 +1,26 @@
+{
+  "id": "depth-web-backend-013-openapi-zod",
+  "category": "web-backend/openapi/zod",
+  "intents_zh": [
+    "zod 自動產 OpenAPI",
+    "zod-to-openapi",
+    "schema 一次寫到處用",
+    "spec 自動生成",
+    "Express OpenAPI"
+  ],
+  "intents_en": [
+    "zod generate openapi",
+    "zod-to-openapi",
+    "single source schema",
+    "auto spec generation",
+    "express openapi"
+  ],
+  "slots": [],
+  "code": "import { OpenAPIRegistry, OpenApiGeneratorV3 } from '@asteasolutions/zod-to-openapi';\nimport { z } from 'zod';\nconst registry = new OpenAPIRegistry();\nconst User = registry.register('User', z.object({ id: z.string(), name: z.string() }));\nregistry.registerPath({\n  method: 'get', path: '/users/{id}', summary: 'Get user',\n  request: { params: z.object({ id: z.string() }) },\n  responses: { 200: { description: 'ok', content: { 'application/json': { schema: User } } } }\n});\nconst doc = new OpenApiGeneratorV3(registry.definitions).generateDocument({ openapi: '3.0.0', info: { title: 'api', version: '1' } });",
+  "language": "ts",
+  "deps": [
+    "@asteasolutions/zod-to-openapi",
+    "zod"
+  ],
+  "summary_zh": "zod schema 自動生 OpenAPI"
+}

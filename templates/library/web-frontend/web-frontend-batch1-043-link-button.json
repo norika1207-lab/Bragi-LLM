@@ -1,0 +1,27 @@
+{
+  "id": "web-frontend-batch1-043-link-button",
+  "category": "web-frontend/react/buttons/link",
+  "intents_zh": [
+    "link 風格按鈕",
+    "button looks like link",
+    "link button React",
+    "純文字按鈕",
+    "底線連結 button",
+    "text button"
+  ],
+  "intents_en": [
+    "link style button",
+    "button as link",
+    "link button",
+    "text button",
+    "underlined link button",
+    "react text button"
+  ],
+  "slots": [
+    "component_name"
+  ],
+  "code": "type Props = { children: React.ReactNode; onClick?: () => void };\n\nexport default function {{component_name}}({ children, onClick }: Props) {\n  return (\n    <button onClick={onClick} className=\"text-blue-600 underline hover:text-blue-800\">\n      {children}\n    </button>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "link 樣式的 button 元件"
+}

@@ -1,0 +1,34 @@
+{
+  "id": "llm-tools-050-pinecone-client",
+  "category": "llm-tools/vectordb/pinecone",
+  "intents_zh": [
+    "pinecone 起步",
+    "pinecone 寫入查詢",
+    "pinecone python",
+    "用 pinecone 存向量",
+    "pinecone CRUD",
+    "pinecone serverless",
+    "minimal pinecone",
+    "pinecone 範例"
+  ],
+  "intents_en": [
+    "pinecone getting started",
+    "pinecone python client",
+    "pinecone insert and query",
+    "pinecone basic crud",
+    "pinecone serverless",
+    "minimal pinecone",
+    "pinecone scaffold",
+    "pinecone example"
+  ],
+  "slots": [
+    "index_name",
+    "dim"
+  ],
+  "code": "from pinecone import Pinecone, ServerlessSpec\nimport os\n\npc = Pinecone(api_key=os.environ[\"PINECONE_API_KEY\"])\n\nif \"{{index_name}}\" not in [i.name for i in pc.list_indexes()]:\n    pc.create_index(\n        name=\"{{index_name}}\",\n        dimension={{dim}},\n        metric=\"cosine\",\n        spec=ServerlessSpec(cloud=\"aws\", region=\"us-east-1\"),\n    )\n\nindex = pc.Index(\"{{index_name}}\")\n\ndef upsert(items):\n    index.upsert(vectors=items)\n\ndef query(vec, k=5):\n    return index.query(vector=vec, top_k=k, include_metadata=True)",
+  "language": "py",
+  "deps": [
+    "pinecone"
+  ],
+  "summary_zh": "Pinecone serverless index 建立與查詢"
+}

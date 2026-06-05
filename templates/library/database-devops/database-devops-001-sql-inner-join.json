@@ -1,0 +1,32 @@
+{
+  "id": "database-devops-001-sql-inner-join",
+  "category": "database-devops/sql/joins",
+  "intents_zh": [
+    "寫個 inner join 撈 {{table_a}} 跟 {{table_b}}",
+    "內連接兩張表",
+    "SQL 把訂單跟用戶 join 起來",
+    "給我 inner join 範本",
+    "兩表內連接怎麼寫",
+    "join 兩張表只要交集"
+  ],
+  "intents_en": [
+    "inner join two tables",
+    "write a basic inner join",
+    "join orders with users",
+    "sql inner join template",
+    "combine two tables on key",
+    "intersection join"
+  ],
+  "slots": [
+    "table_a",
+    "table_b",
+    "key_a",
+    "key_b",
+    "col1",
+    "col2"
+  ],
+  "code": "SELECT a.{{col1}}, b.{{col2}}\nFROM {{table_a}} AS a\nINNER JOIN {{table_b}} AS b\n  ON a.{{key_a}} = b.{{key_b}};",
+  "language": "sql",
+  "deps": [],
+  "summary_zh": "兩表 inner join 基本範本"
+}

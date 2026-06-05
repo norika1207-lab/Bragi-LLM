@@ -1,0 +1,30 @@
+{
+  "id": "web-backend-092-express-cookie-jwt",
+  "category": "web-backend/express/auth",
+  "intents_zh": [
+    "httpOnly cookie 存 token",
+    "cookie auth express",
+    "set cookie jwt",
+    "clearCookie logout",
+    "jwt 放 cookie"
+  ],
+  "intents_en": [
+    "httpOnly cookie jwt",
+    "cookie auth express",
+    "set cookie jwt",
+    "clearCookie logout",
+    "store jwt in cookie"
+  ],
+  "slots": [
+    "cookie_name",
+    "ttl_sec"
+  ],
+  "code": "const express = require('express');\nconst jwt = require('jsonwebtoken');\nconst router = express.Router();\n\nrouter.post('/login', (req, res) => {\n  const token = jwt.sign({ sub: req.body.username }, process.env.JWT_SECRET, { expiresIn: '{{ttl_sec}}s' });\n  res.cookie('{{cookie_name}}', token, {\n    httpOnly: true,\n    secure: process.env.NODE_ENV === 'production',\n    sameSite: 'lax',\n    maxAge: {{ttl_sec}} * 1000\n  }).json({ ok: true });\n});\n\nrouter.post('/logout', (req, res) => {\n  res.clearCookie('{{cookie_name}}').json({ ok: true });\n});\n\nmodule.exports = router;",
+  "language": "js",
+  "deps": [
+    "express",
+    "jsonwebtoken",
+    "cookie-parser"
+  ],
+  "summary_zh": "Express httpOnly cookie JWT 登入"
+}

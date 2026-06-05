@@ -1,0 +1,25 @@
+{
+  "id": "depth-llm-tools-057-stream-collector",
+  "category": "llm-tools/streaming/collect",
+  "intents_zh": [
+    "收集串流為完整字串",
+    "串流結果合併",
+    "串流 buffer 收集",
+    "stream to string",
+    "串流落地"
+  ],
+  "intents_en": [
+    "collect stream into string",
+    "stream merge",
+    "stream buffer collect",
+    "stream to string",
+    "stream finalise"
+  ],
+  "slots": [
+    "stream"
+  ],
+  "code": "def collect({{stream}}):\n    buf = []\n    for chunk in {{stream}}: buf.append(chunk)\n    return \"\".join(buf)",
+  "language": "python",
+  "deps": [],
+  "summary_zh": "把串流 chunk 累積成單一字串回傳"
+}

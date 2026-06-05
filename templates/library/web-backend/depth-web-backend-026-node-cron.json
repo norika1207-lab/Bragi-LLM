@@ -1,0 +1,27 @@
+{
+  "id": "depth-web-backend-026-node-cron",
+  "category": "web-backend/scheduler/node-cron",
+  "intents_zh": [
+    "node-cron 定時",
+    "Node 週期任務",
+    "cron expression",
+    "背景排程器",
+    "定時清理"
+  ],
+  "intents_en": [
+    "node-cron schedule",
+    "node periodic task",
+    "cron expression",
+    "background scheduler",
+    "periodic cleanup"
+  ],
+  "slots": [
+    "expr"
+  ],
+  "code": "import cron from 'node-cron';\ncron.schedule('{{expr}}', async () => {\n  try { await runCleanup(); } catch (e) { console.error(e); }\n}, { timezone: 'Asia/Taipei' });",
+  "language": "js",
+  "deps": [
+    "node-cron"
+  ],
+  "summary_zh": "node-cron 排程任務"
+}

@@ -1,0 +1,29 @@
+{
+  "id": "depth-algorithm-013-suffix-automaton",
+  "category": "algorithm/string/sam",
+  "intents_zh": [
+    "後綴自動機",
+    "SAM 構建",
+    "suffix automaton",
+    "子串自動機",
+    "O(n) 構建 SAM",
+    "計算不同子串數",
+    "後綴自動機模板"
+  ],
+  "intents_en": [
+    "suffix automaton",
+    "SAM construction",
+    "build suffix automaton",
+    "distinct substring count",
+    "online suffix automaton",
+    "SAM template",
+    "linear suffix automaton"
+  ],
+  "slots": [
+    "s"
+  ],
+  "code": "class SAM:\n    def __init__(self, s={{s}}):\n        self.nodes = [{'next': {}, 'link': -1, 'len': 0}]\n        self.last = 0\n        for c in s: self.extend(c)\n    def extend(self, c):\n        cur = len(self.nodes)\n        self.nodes.append({'next': {}, 'link': -1, 'len': self.nodes[self.last]['len']+1})\n        p = self.last\n        while p != -1 and c not in self.nodes[p]['next']:\n            self.nodes[p]['next'][c] = cur\n            p = self.nodes[p]['link']\n        if p == -1:\n            self.nodes[cur]['link'] = 0\n        else:\n            q = self.nodes[p]['next'][c]\n            if self.nodes[p]['len']+1 == self.nodes[q]['len']:\n                self.nodes[cur]['link'] = q\n            else:\n                clone = len(self.nodes)\n                self.nodes.append({'next': dict(self.nodes[q]['next']), 'link': self.nodes[q]['link'], 'len': self.nodes[p]['len']+1})\n                while p != -1 and self.nodes[p]['next'].get(c) == q:\n                    self.nodes[p]['next'][c] = clone\n                    p = self.nodes[p]['link']\n                self.nodes[q]['link'] = clone\n                self.nodes[cur]['link'] = clone\n        self.last = cur",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "線性構建後綴自動機支援子串操作"
+}

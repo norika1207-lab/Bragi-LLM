@@ -1,0 +1,24 @@
+{
+  "id": "database-devops-127-jest-async",
+  "category": "database-devops/test/jest",
+  "intents_zh": [
+    "jest async test",
+    "測試 Promise",
+    "jest resolves rejects"
+  ],
+  "intents_en": [
+    "jest async test",
+    "test promise",
+    "jest resolves rejects"
+  ],
+  "slots": [
+    "fn_name",
+    "module_path"
+  ],
+  "code": "import { {{fn_name}} } from '{{module_path}}'\n\ndescribe('{{fn_name}} async', () => {\n  it('resolves with data', async () => {\n    await expect({{fn_name}}('ok')).resolves.toEqual({ status: 'ok' })\n  })\n\n  it('rejects on bad input', async () => {\n    await expect({{fn_name}}('')).rejects.toThrow(/required/)\n  })\n})",
+  "language": "ts",
+  "deps": [
+    "jest"
+  ],
+  "summary_zh": "jest async Promise 測試"
+}

@@ -1,0 +1,33 @@
+{
+  "id": "llm-tools-116-prompt-optimization",
+  "category": "llm-tools/optimize/prompt",
+  "intents_zh": [
+    "prompt 自動優化",
+    "LLM 改寫 prompt",
+    "auto-prompt 優化",
+    "prompt rewriter",
+    "自動產生更好 prompt",
+    "meta-prompt",
+    "prompt 自動調",
+    "optimize my prompt"
+  ],
+  "intents_en": [
+    "auto prompt optimization",
+    "prompt rewriter",
+    "llm meta prompt",
+    "optimize prompt automatically",
+    "prompt tuning llm",
+    "improve prompt with llm",
+    "meta prompt rewriter",
+    "prompt refiner"
+  ],
+  "slots": [
+    "model_name"
+  ],
+  "code": "from openai import OpenAI\n\nclient = OpenAI()\n\nMETA = (\"Rewrite the following prompt to be clearer, more specific, and produce better answers. \"\n        \"Only output the new prompt.\")\n\ndef optimize(prompt: str) -> str:\n    r = client.chat.completions.create(\n        model=\"{{model_name}}\",\n        messages=[{\"role\": \"system\", \"content\": META},\n                  {\"role\": \"user\", \"content\": prompt}],\n    )\n    return r.choices[0].message.content.strip()\n\nif __name__ == \"__main__\":\n    print(optimize(\"tell me about cats\"))",
+  "language": "py",
+  "deps": [
+    "openai"
+  ],
+  "summary_zh": "用 LLM 自動改寫優化 prompt"
+}

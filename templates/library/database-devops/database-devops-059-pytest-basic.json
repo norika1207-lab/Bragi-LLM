@@ -1,0 +1,24 @@
+{
+  "id": "database-devops-059-pytest-basic",
+  "category": "database-devops/test/pytest",
+  "intents_zh": [
+    "pytest 基本範本",
+    "python 單元測試",
+    "pytest 測試函式"
+  ],
+  "intents_en": [
+    "pytest basic",
+    "python unit test",
+    "pytest function"
+  ],
+  "slots": [
+    "function_under_test",
+    "module_path"
+  ],
+  "code": "import pytest\nfrom {{module_path}} import {{function_under_test}}\n\n@pytest.mark.parametrize('inp,expected', [\n    (1, 2),\n    (2, 4),\n    (3, 6),\n])\ndef test_{{function_under_test}}(inp, expected):\n    assert {{function_under_test}}(inp) == expected\n\ndef test_{{function_under_test}}_raises():\n    with pytest.raises(ValueError):\n        {{function_under_test}}(None)",
+  "language": "py",
+  "deps": [
+    "pytest"
+  ],
+  "summary_zh": "pytest 參數化測試 + 例外測試"
+}

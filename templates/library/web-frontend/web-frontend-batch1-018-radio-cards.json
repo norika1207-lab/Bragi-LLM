@@ -1,0 +1,27 @@
+{
+  "id": "web-frontend-batch1-018-radio-cards",
+  "category": "web-frontend/react/radios/cards",
+  "intents_zh": [
+    "卡片 radio 選擇",
+    "plan 選擇卡",
+    "付款方式卡片選",
+    "card 風格 radio",
+    "選方案 UI",
+    "卡式單選"
+  ],
+  "intents_en": [
+    "radio cards",
+    "plan picker cards",
+    "card style radio",
+    "payment method cards",
+    "select card option",
+    "tile radio"
+  ],
+  "slots": [
+    "component_name"
+  ],
+  "code": "import { useState } from 'react';\n\ntype Plan = { id: string; title: string; price: string };\ntype Props = { plans: Plan[] };\n\nexport default function {{component_name}}({ plans }: Props) {\n  const [picked, setPicked] = useState(plans[0]?.id);\n  return (\n    <div className=\"grid grid-cols-3 gap-3\">\n      {plans.map((p) => (\n        <button\n          key={p.id}\n          onClick={() => setPicked(p.id)}\n          className={`p-4 border rounded text-left ${picked === p.id ? 'border-blue-500 bg-blue-50' : ''}`}\n        >\n          <div className=\"font-bold\">{p.title}</div>\n          <div>{p.price}</div>\n        </button>\n      ))}\n    </div>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "卡片式單選方案選擇器"
+}

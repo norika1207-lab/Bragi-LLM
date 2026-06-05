@@ -1,0 +1,25 @@
+{
+  "id": "firmware-091-arduino-keypad",
+  "category": "firmware/arduino/input",
+  "intents_zh": [
+    "4x4 keypad",
+    "Arduino 數字鍵盤",
+    "keypad 範例",
+    "矩陣按鍵",
+    "按鍵掃描"
+  ],
+  "intents_en": [
+    "Arduino 4x4 keypad",
+    "matrix keypad scanning",
+    "Keypad library example",
+    "numeric keypad input",
+    "4x3 keypad Arduino"
+  ],
+  "slots": [],
+  "code": "#include <Keypad.h>\nconst byte ROWS = 4, COLS = 4;\nchar keys[ROWS][COLS] = {\n  {'1','2','3','A'},{'4','5','6','B'},{'7','8','9','C'},{'*','0','#','D'}\n};\nbyte rowPins[ROWS] = {9,8,7,6};\nbyte colPins[COLS] = {5,4,3,2};\nKeypad kp = Keypad(makeKeymap(keys), rowPins, colPins, ROWS, COLS);\n\nvoid setup() { Serial.begin(115200); }\nvoid loop() {\n  char k = kp.getKey();\n  if (k) Serial.println(k);\n}",
+  "language": "ino",
+  "deps": [
+    "Keypad"
+  ],
+  "summary_zh": "Arduino 4x4 矩陣鍵盤掃描"
+}

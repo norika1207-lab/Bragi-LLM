@@ -1,0 +1,29 @@
+{
+  "id": "web-backend-119-fastapi-cron-aps",
+  "category": "web-backend/fastapi/jobs",
+  "intents_zh": [
+    "fastapi APScheduler",
+    "python cron job",
+    "定時任務 fastapi",
+    "背景排程 python",
+    "schedule daily python"
+  ],
+  "intents_en": [
+    "fastapi APScheduler",
+    "python cron job",
+    "scheduled task fastapi",
+    "background schedule python",
+    "daily job python"
+  ],
+  "slots": [
+    "cron_expr",
+    "job_name"
+  ],
+  "code": "from apscheduler.schedulers.asyncio import AsyncIOScheduler\nfrom apscheduler.triggers.cron import CronTrigger\nfrom fastapi import FastAPI\n\napp = FastAPI()\nscheduler = AsyncIOScheduler()\n\nasync def {{job_name}}():\n    print('job ran')\n\n@app.on_event('startup')\nasync def startup():\n    scheduler.add_job({{job_name}}, CronTrigger.from_crontab('{{cron_expr}}'))\n    scheduler.start()\n\n@app.on_event('shutdown')\nasync def shutdown():\n    scheduler.shutdown(wait=False)",
+  "language": "py",
+  "deps": [
+    "fastapi",
+    "apscheduler"
+  ],
+  "summary_zh": "FastAPI APScheduler 排程"
+}

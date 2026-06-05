@@ -1,0 +1,27 @@
+{
+  "id": "web-frontend-batch3-041-html-footer",
+  "category": "web-frontend/html/layout/footer",
+  "intents_zh": [
+    "網站 footer",
+    "頁尾",
+    "HTML footer 元件",
+    "多欄頁尾",
+    "版權 footer",
+    "底部連結"
+  ],
+  "intents_en": [
+    "website footer",
+    "html footer",
+    "multi column footer",
+    "copyright footer",
+    "bottom links",
+    "site footer"
+  ],
+  "slots": [
+    "company_name"
+  ],
+  "code": "<footer class=\"site-footer\">\n  <div class=\"cols\">\n    <div>\n      <h4>{{company_name}}</h4>\n      <p>Building better tools for builders.</p>\n    </div>\n    <div>\n      <h5>Product</h5>\n      <a href=\"#\">Features</a><a href=\"#\">Pricing</a><a href=\"#\">Docs</a>\n    </div>\n    <div>\n      <h5>Company</h5>\n      <a href=\"#\">About</a><a href=\"#\">Blog</a><a href=\"#\">Careers</a>\n    </div>\n    <div>\n      <h5>Legal</h5>\n      <a href=\"#\">Privacy</a><a href=\"#\">Terms</a>\n    </div>\n  </div>\n  <p class=\"copy\">&copy; 2026 {{company_name}}. All rights reserved.</p>\n</footer>\n<style>\n  .site-footer { background: #111; color: #ccc; padding: 3rem 2rem 1rem; font-family: system-ui; }\n  .site-footer .cols { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 2rem; max-width: 1200px; margin: 0 auto; }\n  .site-footer h4, .site-footer h5 { color: white; margin: 0 0 .75rem; }\n  .site-footer a { display: block; color: #ccc; text-decoration: none; padding: .25rem 0; }\n  .site-footer .copy { text-align: center; margin-top: 2rem; padding-top: 1rem; border-top: 1px solid #333; }\n</style>",
+  "language": "html",
+  "deps": [],
+  "summary_zh": "多欄網站 footer 含連結與版權"
+}

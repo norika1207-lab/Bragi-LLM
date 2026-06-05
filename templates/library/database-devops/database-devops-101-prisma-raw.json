@@ -1,0 +1,23 @@
+{
+  "id": "database-devops-101-prisma-raw",
+  "category": "database-devops/orm/prisma",
+  "intents_zh": [
+    "prisma $queryRaw",
+    "prisma 原生 SQL",
+    "prisma 跑 raw query"
+  ],
+  "intents_en": [
+    "prisma $queryRaw",
+    "prisma raw sql",
+    "execute raw query"
+  ],
+  "slots": [
+    "table"
+  ],
+  "code": "import { Prisma } from '@prisma/client'\n\nexport async function topUsers(limit: number) {\n  return prisma.$queryRaw<Array<{ id: number; total: bigint }>>`\n    SELECT user_id AS id, COUNT(*) AS total\n    FROM ${Prisma.raw('{{table}}')}\n    GROUP BY user_id\n    ORDER BY total DESC\n    LIMIT ${limit}\n  `\n}",
+  "language": "ts",
+  "deps": [
+    "@prisma/client"
+  ],
+  "summary_zh": "prisma $queryRaw 帶參數"
+}

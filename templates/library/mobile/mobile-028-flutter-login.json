@@ -1,0 +1,32 @@
+{
+  "id": "mobile-028-flutter-login",
+  "category": "mobile/flutter/auth",
+  "intents_zh": [
+    "Flutter 登入頁",
+    "flutter login screen",
+    "幫我刻 flutter auth UI",
+    "Flutter email 密碼登入",
+    "flutter signin form",
+    "Flutter 登入表單",
+    "Dart 登入畫面"
+  ],
+  "intents_en": [
+    "flutter login screen",
+    "flutter email password form",
+    "flutter signin ui",
+    "build login flutter",
+    "flutter auth form",
+    "flutter login template",
+    "dart login page"
+  ],
+  "slots": [
+    "api_url"
+  ],
+  "code": "import 'package:flutter/material.dart';\nimport 'package:http/http.dart' as http;\nimport 'dart:convert';\nclass Login extends StatefulWidget{const Login({super.key});@override State<Login> createState()=>_L();}\nclass _L extends State<Login>{final e=TextEditingController();final p=TextEditingController();String m='';\n  Future<void> go()async{final r=await http.post(Uri.parse('{{api_url}}/login'),headers:{'Content-Type':'application/json'},body:jsonEncode({'email':e.text,'password':p.text}));setState(()=>m=r.statusCode==200?'ok':'fail');}\n  @override Widget build(BuildContext c)=>Scaffold(body:Padding(padding:const EdgeInsets.all(24),child:Column(mainAxisAlignment:MainAxisAlignment.center,children:[TextField(controller:e,decoration:const InputDecoration(labelText:'email')),TextField(controller:p,obscureText:true,decoration:const InputDecoration(labelText:'password')),ElevatedButton(onPressed:go,child:const Text('Login')),Text(m)])));}",
+  "language": "dart",
+  "deps": [
+    "http",
+    "flutter"
+  ],
+  "summary_zh": "Flutter 登入表單 POST 後端"
+}

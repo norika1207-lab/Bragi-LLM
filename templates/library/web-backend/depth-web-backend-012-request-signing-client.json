@@ -1,0 +1,25 @@
+{
+  "id": "depth-web-backend-012-request-signing-client",
+  "category": "web-backend/security/signing",
+  "intents_zh": [
+    "client 端產生簽名",
+    "HMAC sign 工具",
+    "axios interceptor 加簽",
+    "Node SDK 簽請求",
+    "加簽 helper"
+  ],
+  "intents_en": [
+    "client side sign request",
+    "hmac signing util",
+    "axios interceptor sign",
+    "node sdk sign",
+    "sign helper"
+  ],
+  "slots": [
+    "secret"
+  ],
+  "code": "export function sign(method, path, body) {\n  const ts = Math.floor(Date.now() / 1000);\n  const payload = `${ts}.${method}.${path}.${JSON.stringify(body)}`;\n  const sig = crypto.createHmac('sha256', '{{secret}}').update(payload).digest('hex');\n  return { 'x-timestamp': String(ts), 'x-signature': sig };\n}",
+  "language": "js",
+  "deps": [],
+  "summary_zh": "Client 產生 HMAC 簽名 header"
+}

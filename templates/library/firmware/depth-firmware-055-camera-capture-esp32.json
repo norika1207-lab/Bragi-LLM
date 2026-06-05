@@ -1,0 +1,27 @@
+{
+  "id": "depth-firmware-055-camera-capture-esp32",
+  "category": "firmware/camera/esp32cam",
+  "intents_zh": [
+    "ESP32-CAM 拍照",
+    "esp_camera_fb_get",
+    "存 jpeg 到 SD",
+    "camera init",
+    "拍照存檔"
+  ],
+  "intents_en": [
+    "esp32-cam capture",
+    "esp_camera_fb_get",
+    "save jpeg sd",
+    "camera init",
+    "take photo"
+  ],
+  "slots": [
+    "jpeg_quality"
+  ],
+  "code": "#include \"esp_camera.h\"\ncamera_config_t c = { /* set pins per board */ };\nc.pixel_format = PIXFORMAT_JPEG;\nc.frame_size = FRAMESIZE_VGA;\nc.jpeg_quality = {{jpeg_quality}};\nc.fb_count = 1;\nesp_camera_init(&c);\ncamera_fb_t *fb = esp_camera_fb_get();\nFILE *f = fopen(\"/sdcard/p.jpg\", \"wb\");\nfwrite(fb->buf, 1, fb->len, f);\nfclose(f);\nesp_camera_fb_return(fb);",
+  "language": "c",
+  "deps": [
+    "esp32-camera"
+  ],
+  "summary_zh": "ESP32-CAM 抓 JPEG frame 並存到 SD 卡"
+}

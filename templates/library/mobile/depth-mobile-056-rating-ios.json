@@ -1,0 +1,23 @@
+{
+  "id": "depth-mobile-056-rating-ios",
+  "category": "mobile/rating/ios",
+  "intents_zh": [
+    "iOS SKStoreReviewController",
+    "in-app rating prompt",
+    "請求 App Store 評分",
+    "requestReview",
+    "store review"
+  ],
+  "intents_en": [
+    "iOS SKStoreReviewController",
+    "in-app rating",
+    "request App Store review",
+    "requestReview",
+    "store review"
+  ],
+  "slots": [],
+  "code": "import StoreKit\nif let scene = UIApplication.shared.connectedScenes.first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene {\n  SKStoreReviewController.requestReview(in: scene)\n}",
+  "language": "swift",
+  "deps": [],
+  "summary_zh": "iOS App Store 內評分請求"
+}

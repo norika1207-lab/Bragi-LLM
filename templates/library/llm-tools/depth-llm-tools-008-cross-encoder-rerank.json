@@ -1,0 +1,30 @@
+{
+  "id": "depth-llm-tools-008-cross-encoder-rerank",
+  "category": "llm-tools/retrieval/rerank",
+  "intents_zh": [
+    "cross-encoder 重排",
+    "BGE reranker",
+    "用 ms-marco 模型 rerank",
+    "檢索後重排",
+    "reranker 整合"
+  ],
+  "intents_en": [
+    "cross-encoder rerank",
+    "BGE reranker",
+    "ms-marco rerank",
+    "post-retrieval rerank",
+    "reranker integration"
+  ],
+  "slots": [
+    "model_name",
+    "query",
+    "candidates",
+    "top_k"
+  ],
+  "code": "from sentence_transformers import CrossEncoder\n\ndef rerank({{model_name}}, {{query}}, {{candidates}}, {{top_k}}=5):\n    ce = CrossEncoder({{model_name}})\n    pairs = [[{{query}}, c] for c in {{candidates}}]\n    scores = ce.predict(pairs)\n    ranked = sorted(zip({{candidates}}, scores), key=lambda x: -x[1])\n    return ranked[:{{top_k}}]",
+  "language": "python",
+  "deps": [
+    "sentence-transformers"
+  ],
+  "summary_zh": "cross-encoder 重排候選文件取 top-k"
+}

@@ -1,0 +1,28 @@
+{
+  "id": "web-backend-102-flask-blueprint",
+  "category": "web-backend/flask/structure",
+  "intents_zh": [
+    "flask blueprint 範例",
+    "拆分 flask app 結構",
+    "flask 模組化",
+    "blueprint url_prefix",
+    "flask register blueprint"
+  ],
+  "intents_en": [
+    "flask blueprint example",
+    "modular flask app",
+    "blueprint url_prefix",
+    "register blueprint",
+    "split flask routes"
+  ],
+  "slots": [
+    "blueprint_name",
+    "url_prefix"
+  ],
+  "code": "# {{blueprint_name}}.py\nfrom flask import Blueprint, jsonify\n\nbp = Blueprint('{{blueprint_name}}', __name__, url_prefix='{{url_prefix}}')\n\n@bp.get('/ping')\ndef ping():\n    return jsonify(ok=True, mod='{{blueprint_name}}')\n\n# app.py\n# from {{blueprint_name}} import bp\n# app.register_blueprint(bp)",
+  "language": "py",
+  "deps": [
+    "flask"
+  ],
+  "summary_zh": "Flask Blueprint 模組化"
+}

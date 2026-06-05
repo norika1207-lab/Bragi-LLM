@@ -1,0 +1,34 @@
+{
+  "id": "llm-tools-073-openai-files-fine-tune",
+  "category": "llm-tools/openai/finetune",
+  "intents_zh": [
+    "openai fine-tune 上傳",
+    "submit fine-tune job",
+    "openai 微調",
+    "gpt-4o-mini fine-tune",
+    "上傳 jsonl 微調",
+    "openai finetune script",
+    "fine-tune api",
+    "客製微調"
+  ],
+  "intents_en": [
+    "openai fine-tune upload",
+    "submit fine-tune job",
+    "openai finetune script",
+    "gpt-4o-mini fine tune",
+    "upload jsonl finetune",
+    "finetune api",
+    "custom finetune",
+    "gpt finetune"
+  ],
+  "slots": [
+    "jsonl_path",
+    "base_model"
+  ],
+  "code": "from openai import OpenAI\n\nclient = OpenAI()\n\nf = client.files.create(file=open(\"{{jsonl_path}}\", \"rb\"), purpose=\"fine-tune\")\njob = client.fine_tuning.jobs.create(training_file=f.id, model=\"{{base_model}}\")\nprint(\"job id:\", job.id, \"status:\", job.status)",
+  "language": "py",
+  "deps": [
+    "openai"
+  ],
+  "summary_zh": "提交 OpenAI fine-tuning job"
+}

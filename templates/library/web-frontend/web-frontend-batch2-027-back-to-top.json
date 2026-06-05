@@ -1,0 +1,27 @@
+{
+  "id": "web-frontend-batch2-027-back-to-top",
+  "category": "web-frontend/react/layout/back-to-top",
+  "intents_zh": [
+    "回到頂部按鈕",
+    "back to top",
+    "捲動回頂",
+    "scroll top",
+    "返回頂部",
+    "頁面置頂按鈕"
+  ],
+  "intents_en": [
+    "back to top button",
+    "scroll to top",
+    "floating top button",
+    "return to top",
+    "page top button",
+    "scroll top FAB"
+  ],
+  "slots": [
+    "threshold_px"
+  ],
+  "code": "import { useEffect, useState } from 'react';\n\nexport function BackToTop() {\n  const [show, setShow] = useState(false);\n  useEffect(() => {\n    const h = () => setShow(window.scrollY > {{threshold_px}});\n    window.addEventListener('scroll', h);\n    return () => window.removeEventListener('scroll', h);\n  }, []);\n  if (!show) return null;\n  return (\n    <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}\n      className=\"fixed bottom-6 right-6 rounded-full bg-black p-3 text-white shadow-lg hover:bg-gray-800\">\n      ↑\n    </button>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "捲動超過閾值才出現的回頂按鈕"
+}

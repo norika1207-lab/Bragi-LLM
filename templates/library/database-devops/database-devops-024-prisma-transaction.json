@@ -1,0 +1,24 @@
+{
+  "id": "database-devops-024-prisma-transaction",
+  "category": "database-devops/orm/prisma",
+  "intents_zh": [
+    "prisma 交易",
+    "prisma $transaction",
+    "原子寫入 prisma"
+  ],
+  "intents_en": [
+    "prisma transaction",
+    "prisma $transaction",
+    "atomic prisma writes"
+  ],
+  "slots": [
+    "model_a",
+    "model_b"
+  ],
+  "code": "import { PrismaClient } from '@prisma/client'\nconst prisma = new PrismaClient()\n\nexport async function transfer(fromId: number, toId: number, amount: number) {\n  return prisma.$transaction(async (tx) => {\n    await tx.{{model_a}}.update({ where: { id: fromId }, data: { balance: { decrement: amount } } })\n    await tx.{{model_b}}.update({ where: { id: toId }, data: { balance: { increment: amount } } })\n  })\n}",
+  "language": "ts",
+  "deps": [
+    "@prisma/client"
+  ],
+  "summary_zh": "Prisma $transaction 原子寫入"
+}

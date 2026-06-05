@@ -1,0 +1,27 @@
+{
+  "id": "web-frontend-batch3-023-html-todo",
+  "category": "web-frontend/html/apps/todo",
+  "intents_zh": [
+    "純 HTML todo",
+    "vanilla JS 待辦清單",
+    "沒 framework todo",
+    "靜態 todo app",
+    "HTML+JS 待辦",
+    "原生 todo list"
+  ],
+  "intents_en": [
+    "plain html todo",
+    "vanilla js todo",
+    "no framework todo",
+    "static todo app",
+    "html js task list",
+    "raw todo list"
+  ],
+  "slots": [
+    "storage_key"
+  ],
+  "code": "<!DOCTYPE html>\n<html><head><meta charset=\"utf-8\"><title>Todo</title></head>\n<body>\n  <input id=\"draft\" placeholder=\"New task\">\n  <button id=\"add\">Add</button>\n  <ul id=\"list\"></ul>\n  <script>\n    const KEY = '{{storage_key}}';\n    let items = JSON.parse(localStorage.getItem(KEY) || '[]');\n    const list = document.getElementById('list');\n    function render() {\n      list.innerHTML = '';\n      items.forEach(t => {\n        const li = document.createElement('li');\n        li.textContent = t.text;\n        if (t.done) li.style.textDecoration = 'line-through';\n        li.onclick = () => { t.done = !t.done; save(); };\n        list.appendChild(li);\n      });\n    }\n    function save() { localStorage.setItem(KEY, JSON.stringify(items)); render(); }\n    document.getElementById('add').onclick = () => {\n      const v = document.getElementById('draft').value.trim();\n      if (!v) return;\n      items.push({ text: v, done: false });\n      document.getElementById('draft').value = '';\n      save();\n    };\n    render();\n  </script>\n</body></html>",
+  "language": "html",
+  "deps": [],
+  "summary_zh": "純 HTML + vanilla JS 待辦清單"
+}

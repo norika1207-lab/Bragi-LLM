@@ -1,0 +1,27 @@
+{
+  "id": "web-frontend-batch3-030-html-dropdown",
+  "category": "web-frontend/html/ui/dropdown",
+  "intents_zh": [
+    "HTML dropdown",
+    "details summary 下拉",
+    "原生選單",
+    "vanilla dropdown",
+    "HTML 折疊選單",
+    "CSS dropdown"
+  ],
+  "intents_en": [
+    "html dropdown",
+    "details summary dropdown",
+    "native menu",
+    "vanilla dropdown",
+    "html collapsible menu",
+    "css dropdown"
+  ],
+  "slots": [
+    "label"
+  ],
+  "code": "<details class=\"dd\">\n  <summary>{{label}}</summary>\n  <ul>\n    <li><a href=\"#\">Option 1</a></li>\n    <li><a href=\"#\">Option 2</a></li>\n    <li><a href=\"#\">Option 3</a></li>\n  </ul>\n</details>\n<style>\n  .dd { position: relative; display: inline-block; }\n  .dd summary { cursor: pointer; padding: .5rem 1rem; background: #f3f4f6; border-radius: 4px; list-style: none; }\n  .dd ul { position: absolute; top: 100%; left: 0; background: white; border: 1px solid #ddd; min-width: 160px; margin: 0; padding: .25rem 0; list-style: none; }\n  .dd li a { display: block; padding: .5rem 1rem; text-decoration: none; color: #111; }\n  .dd li a:hover { background: #f3f4f6; }\n</style>",
+  "language": "html",
+  "deps": [],
+  "summary_zh": "原生 details summary dropdown 選單"
+}

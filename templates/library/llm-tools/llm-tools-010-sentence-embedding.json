@@ -1,0 +1,33 @@
+{
+  "id": "llm-tools-010-sentence-embedding",
+  "category": "llm-tools/embedding/sentence-transformers",
+  "intents_zh": [
+    "sentence-transformers 嵌入",
+    "用 SBERT 算 embedding",
+    "句子向量化",
+    "sentence embedding 範例",
+    "怎麼算句子相似度",
+    "SBERT 包裝",
+    "embedding model 使用",
+    "embed 一段話"
+  ],
+  "intents_en": [
+    "sentence-transformers embed",
+    "sbert embedding example",
+    "sentence vectorization",
+    "compute sentence similarity",
+    "embed text with sbert",
+    "sentence embedding wrapper",
+    "sbert usage",
+    "encode sentences"
+  ],
+  "slots": [
+    "model_id"
+  ],
+  "code": "from sentence_transformers import SentenceTransformer\nimport numpy as np\n\nmodel = SentenceTransformer(\"{{model_id}}\")\n\ndef embed(texts: list[str]) -> np.ndarray:\n    return model.encode(texts, normalize_embeddings=True)\n\nif __name__ == \"__main__\":\n    v = embed([\"hello\", \"world\"])\n    print(v.shape)",
+  "language": "py",
+  "deps": [
+    "sentence-transformers"
+  ],
+  "summary_zh": "sentence-transformers 句子嵌入"
+}

@@ -1,0 +1,28 @@
+{
+  "id": "depth-web-backend-021-rabbitmq-consumer",
+  "category": "web-backend/queue/rabbitmq",
+  "intents_zh": [
+    "RabbitMQ consumer",
+    "amqplib consume + ack",
+    "prefetch 流控",
+    "消費者範例",
+    "訊息確認"
+  ],
+  "intents_en": [
+    "rabbitmq consumer",
+    "amqplib consume ack",
+    "prefetch flow control",
+    "worker example",
+    "message ack"
+  ],
+  "slots": [
+    "url",
+    "queue"
+  ],
+  "code": "const conn = await amqp.connect('{{url}}');\nconst ch = await conn.createChannel();\nawait ch.assertQueue('{{queue}}', { durable: true });\nch.prefetch(10);\nch.consume('{{queue}}', async (msg) => {\n  try { await handle(JSON.parse(msg.content.toString())); ch.ack(msg); }\n  catch { ch.nack(msg, false, false); }\n});",
+  "language": "js",
+  "deps": [
+    "amqplib"
+  ],
+  "summary_zh": "RabbitMQ consumer + prefetch + ack"
+}

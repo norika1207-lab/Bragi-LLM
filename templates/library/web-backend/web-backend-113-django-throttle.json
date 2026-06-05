@@ -1,0 +1,28 @@
+{
+  "id": "web-backend-113-django-throttle",
+  "category": "web-backend/django/middleware",
+  "intents_zh": [
+    "DRF throttle",
+    "drf 限流",
+    "UserRateThrottle 設定",
+    "API 限制次數 drf",
+    "django rest throttle"
+  ],
+  "intents_en": [
+    "DRF throttle setup",
+    "drf rate limit",
+    "UserRateThrottle config",
+    "limit api drf",
+    "django rest throttle"
+  ],
+  "slots": [
+    "rate"
+  ],
+  "code": "# settings.py\nREST_FRAMEWORK = {\n    'DEFAULT_THROTTLE_CLASSES': [\n        'rest_framework.throttling.AnonRateThrottle',\n        'rest_framework.throttling.UserRateThrottle',\n    ],\n    'DEFAULT_THROTTLE_RATES': {\n        'anon': '20/min',\n        'user': '{{rate}}'\n    }\n}",
+  "language": "py",
+  "deps": [
+    "django",
+    "djangorestframework"
+  ],
+  "summary_zh": "DRF 限流設定"
+}

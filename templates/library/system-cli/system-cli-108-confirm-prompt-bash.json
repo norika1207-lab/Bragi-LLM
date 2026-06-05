@@ -1,0 +1,21 @@
+{
+  "id": "system-cli-108-confirm-prompt-bash",
+  "category": "system-cli/shell/interactive",
+  "intents_zh": [
+    "bash 確認 y/n",
+    "危險動作前問一下",
+    "shell confirm"
+  ],
+  "intents_en": [
+    "bash confirm yes no",
+    "ask before destructive",
+    "shell prompt y/n"
+  ],
+  "slots": [
+    "action_desc"
+  ],
+  "code": "confirm() {\n  read -rp \"$1 [y/N] \" ans\n  [[ \"$ans\" == \"y\" || \"$ans\" == \"Y\" ]]\n}\n\nif ! confirm \"about to {{action_desc}}, continue?\"; then\n  echo 'aborted'; exit 1\nfi\necho 'continuing'",
+  "language": "sh",
+  "deps": [],
+  "summary_zh": "bash y/N 確認函式"
+}

@@ -1,0 +1,29 @@
+{
+  "id": "mobile-103-compose-swipe",
+  "category": "mobile/compose/list",
+  "intents_zh": [
+    "Compose SwipeToDismiss",
+    "Compose 滑動刪除",
+    "Compose list swipe delete",
+    "Compose 左滑刪除",
+    "SwipeToDismissBox 範例",
+    "Compose swipe row",
+    "Compose 拖掉一列"
+  ],
+  "intents_en": [
+    "compose SwipeToDismissBox",
+    "compose swipe to delete",
+    "compose list swipe delete",
+    "compose swipe row",
+    "SwipeToDismiss example",
+    "compose delete on swipe",
+    "jetpack compose swipe"
+  ],
+  "slots": [],
+  "code": "import androidx.compose.foundation.background\nimport androidx.compose.foundation.layout.*\nimport androidx.compose.foundation.lazy.LazyColumn\nimport androidx.compose.foundation.lazy.items\nimport androidx.compose.material3.*\nimport androidx.compose.runtime.*\nimport androidx.compose.ui.Modifier\nimport androidx.compose.ui.graphics.Color\nimport androidx.compose.ui.unit.dp\n@OptIn(ExperimentalMaterial3Api::class)\n@Composable\nfun L(){\n  var items by remember{mutableStateOf(List(10){\"row $it\"})}\n  LazyColumn{items(items,key={it}){x->\n    val st=rememberSwipeToDismissBoxState(confirmValueChange={if(it!=SwipeToDismissBoxValue.Settled){items=items-x;true}else false})\n    SwipeToDismissBox(state=st,backgroundContent={Box(Modifier.fillMaxSize().background(Color.Red))}){ListItem(headlineContent={Text(x)})}}}}",
+  "language": "kt",
+  "deps": [
+    "androidx.compose.material3"
+  ],
+  "summary_zh": "Compose SwipeToDismissBox 滑動刪除"
+}

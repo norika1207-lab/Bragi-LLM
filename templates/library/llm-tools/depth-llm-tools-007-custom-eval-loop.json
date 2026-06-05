@@ -1,0 +1,27 @@
+{
+  "id": "depth-llm-tools-007-custom-eval-loop",
+  "category": "llm-tools/eval/custom",
+  "intents_zh": [
+    "自製 eval loop",
+    "批次跑題目",
+    "計算正確率",
+    "資料集評測",
+    "eval 框架"
+  ],
+  "intents_en": [
+    "custom eval loop",
+    "batch run questions",
+    "accuracy compute",
+    "dataset eval",
+    "eval framework"
+  ],
+  "slots": [
+    "dataset",
+    "predict_fn",
+    "metric_fn"
+  ],
+  "code": "def evaluate({{dataset}}, {{predict_fn}}, {{metric_fn}}):\n    scores = []\n    for ex in {{dataset}}:\n        pred = {{predict_fn}}(ex[\"input\"])\n        scores.append({{metric_fn}}(pred, ex[\"target\"]))\n    return sum(scores) / len(scores), scores",
+  "language": "python",
+  "deps": [],
+  "summary_zh": "通用 eval 迴圈，回傳平均分與逐題分數"
+}

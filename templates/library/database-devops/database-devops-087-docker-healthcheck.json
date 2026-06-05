@@ -1,0 +1,21 @@
+{
+  "id": "database-devops-087-docker-healthcheck",
+  "category": "database-devops/docker/dockerfile",
+  "intents_zh": [
+    "Dockerfile HEALTHCHECK",
+    "容器健康檢查",
+    "HEALTHCHECK curl"
+  ],
+  "intents_en": [
+    "dockerfile healthcheck",
+    "container healthcheck",
+    "healthcheck curl"
+  ],
+  "slots": [
+    "port"
+  ],
+  "code": "HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \\\n  CMD wget --no-verbose --tries=1 --spider http://localhost:{{port}}/health || exit 1",
+  "language": "dockerfile",
+  "deps": [],
+  "summary_zh": "Dockerfile HEALTHCHECK 指令"
+}

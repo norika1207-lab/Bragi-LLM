@@ -1,0 +1,32 @@
+{
+  "id": "mobile-054-flutter-channel",
+  "category": "mobile/flutter/native",
+  "intents_zh": [
+    "Flutter MethodChannel",
+    "flutter 原生橋接",
+    "flutter 呼叫 native",
+    "platform channel flutter",
+    "flutter android native call",
+    "flutter ios swift call",
+    "原生通道 flutter"
+  ],
+  "intents_en": [
+    "flutter MethodChannel",
+    "flutter platform channel",
+    "call native from flutter",
+    "flutter native bridge",
+    "platform channel example",
+    "flutter swift bridge",
+    "invoke native flutter"
+  ],
+  "slots": [
+    "channel_name",
+    "method_name"
+  ],
+  "code": "import 'package:flutter/services.dart';\nclass Native{\n  static const _ch=MethodChannel('{{channel_name}}');\n  static Future<String> {{method_name}}(String arg)async{\n    final r=await _ch.invokeMethod<String>('{{method_name}}',{'arg':arg});\n    return r??'';}}",
+  "language": "dart",
+  "deps": [
+    "flutter"
+  ],
+  "summary_zh": "Flutter MethodChannel 呼叫原生方法"
+}

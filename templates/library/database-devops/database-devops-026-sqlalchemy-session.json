@@ -1,0 +1,23 @@
+{
+  "id": "database-devops-026-sqlalchemy-session",
+  "category": "database-devops/orm/sqlalchemy",
+  "intents_zh": [
+    "SQLAlchemy session",
+    "建立 engine 跟 session",
+    "sessionmaker"
+  ],
+  "intents_en": [
+    "sqlalchemy session",
+    "engine sessionmaker",
+    "db session setup"
+  ],
+  "slots": [
+    "db_url"
+  ],
+  "code": "from sqlalchemy import create_engine\nfrom sqlalchemy.orm import sessionmaker\n\nengine = create_engine('{{db_url}}', pool_pre_ping=True, pool_size=10)\nSessionLocal = sessionmaker(bind=engine, autocommit=False, autoflush=False)\n\ndef get_db():\n    db = SessionLocal()\n    try:\n        yield db\n    finally:\n        db.close()",
+  "language": "py",
+  "deps": [
+    "sqlalchemy"
+  ],
+  "summary_zh": "SQLAlchemy engine + session 設定"
+}

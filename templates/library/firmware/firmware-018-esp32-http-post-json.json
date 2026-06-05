@@ -1,0 +1,30 @@
+{
+  "id": "firmware-018-esp32-http-post-json",
+  "category": "firmware/esp32/network",
+  "intents_zh": [
+    "ESP32 POST JSON",
+    "送 JSON 到 server",
+    "ESP32 上傳資料",
+    "HTTP POST 範例",
+    "REST POST 範例"
+  ],
+  "intents_en": [
+    "ESP32 HTTP POST JSON",
+    "send JSON to API",
+    "POST sensor data",
+    "HTTPClient POST",
+    "upload data ESP32"
+  ],
+  "slots": [
+    "ssid",
+    "password",
+    "url",
+    "payload"
+  ],
+  "code": "#include <WiFi.h>\n#include <HTTPClient.h>\n\nvoid setup() {\n  Serial.begin(115200);\n  WiFi.begin(\"{{ssid}}\", \"{{password}}\");\n  while (WiFi.status() != WL_CONNECTED) delay(300);\n  HTTPClient http;\n  http.begin(\"{{url}}\");\n  http.addHeader(\"Content-Type\", \"application/json\");\n  int code = http.POST(String(\"{{payload}}\"));\n  Serial.printf(\"code=%d\\n\", code);\n  http.end();\n}\n\nvoid loop() {}",
+  "language": "ino",
+  "deps": [
+    "HTTPClient"
+  ],
+  "summary_zh": "ESP32 HTTP POST JSON 到 API"
+}

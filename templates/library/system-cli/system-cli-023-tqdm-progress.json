@@ -1,0 +1,23 @@
+{
+  "id": "system-cli-023-tqdm-progress",
+  "category": "system-cli/python/progress",
+  "intents_zh": [
+    "tqdm 進度條",
+    "python 跑迴圈顯示進度",
+    "tqdm 範本"
+  ],
+  "intents_en": [
+    "tqdm progress bar",
+    "python loop progress",
+    "tqdm template"
+  ],
+  "slots": [
+    "item_var"
+  ],
+  "code": "from tqdm import tqdm\nimport time\n\nfor {{item_var}} in tqdm(range(100), desc='work'):\n    time.sleep(0.01)",
+  "language": "py",
+  "deps": [
+    "tqdm"
+  ],
+  "summary_zh": "tqdm 標準進度條"
+}

@@ -1,0 +1,29 @@
+{
+  "id": "firmware-017-esp32-http-get",
+  "category": "firmware/esp32/network",
+  "intents_zh": [
+    "ESP32 HTTP GET",
+    "發 API 請求",
+    "抓網頁",
+    "HTTPClient 範例",
+    "ESP32 呼叫 REST"
+  ],
+  "intents_en": [
+    "ESP32 HTTP GET request",
+    "call REST API from ESP32",
+    "HTTPClient example",
+    "fetch URL on ESP32",
+    "HTTP client"
+  ],
+  "slots": [
+    "ssid",
+    "password",
+    "url"
+  ],
+  "code": "#include <WiFi.h>\n#include <HTTPClient.h>\n\nvoid setup() {\n  Serial.begin(115200);\n  WiFi.begin(\"{{ssid}}\", \"{{password}}\");\n  while (WiFi.status() != WL_CONNECTED) delay(300);\n  HTTPClient http;\n  http.begin(\"{{url}}\");\n  int code = http.GET();\n  if (code > 0) Serial.println(http.getString());\n  http.end();\n}\n\nvoid loop() {}",
+  "language": "ino",
+  "deps": [
+    "HTTPClient"
+  ],
+  "summary_zh": "ESP32 HTTP GET 請求並印出回應"
+}

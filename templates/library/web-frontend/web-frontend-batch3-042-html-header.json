@@ -1,0 +1,27 @@
+{
+  "id": "web-frontend-batch3-042-html-header",
+  "category": "web-frontend/html/layout/header",
+  "intents_zh": [
+    "網站 header",
+    "頁首",
+    "HTML header 元件",
+    "頂部標誌列",
+    "logo + 按鈕",
+    "site header"
+  ],
+  "intents_en": [
+    "website header",
+    "html header",
+    "top bar",
+    "logo header",
+    "site header",
+    "page header"
+  ],
+  "slots": [
+    "site_title"
+  ],
+  "code": "<header class=\"site-header\">\n  <div class=\"brand\">\n    <img src=\"https://via.placeholder.com/32\" alt=\"\">\n    <strong>{{site_title}}</strong>\n  </div>\n  <div class=\"actions\">\n    <a href=\"#login\">Log in</a>\n    <a href=\"#signup\" class=\"primary\">Sign up</a>\n  </div>\n</header>\n<style>\n  .site-header { display: flex; align-items: center; justify-content: space-between; padding: 1rem 2rem; border-bottom: 1px solid #e5e7eb; font-family: system-ui; }\n  .brand { display: flex; align-items: center; gap: .5rem; }\n  .actions { display: flex; gap: 1rem; align-items: center; }\n  .actions a { text-decoration: none; color: #111; }\n  .actions .primary { background: #111; color: white; padding: .5rem 1rem; border-radius: 6px; }\n</style>",
+  "language": "html",
+  "deps": [],
+  "summary_zh": "簡潔 site header 含 logo 與 CTA"
+}

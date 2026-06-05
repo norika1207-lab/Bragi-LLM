@@ -1,0 +1,26 @@
+{
+  "id": "depth-llm-tools-031-model-picker-cost",
+  "category": "llm-tools/router/cost",
+  "intents_zh": [
+    "按成本選模型",
+    "便宜模型優先",
+    "品質 floor 加成本路由",
+    "cost-aware router",
+    "預算路由"
+  ],
+  "intents_en": [
+    "pick model by cost",
+    "cheap first selection",
+    "quality floor plus cost",
+    "cost-aware router",
+    "budget routing"
+  ],
+  "slots": [
+    "candidates",
+    "quality_floor"
+  ],
+  "code": "def pick_by_cost({{candidates}}, {{quality_floor}}):\n    ok = [c for c in {{candidates}} if c[\"quality\"] >= {{quality_floor}}]\n    return min(ok, key=lambda c: c[\"cost_per_1k\"]) if ok else None",
+  "language": "python",
+  "deps": [],
+  "summary_zh": "品質達 floor 的候選中挑單價最低的模型"
+}

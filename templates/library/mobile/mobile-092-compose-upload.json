@@ -1,0 +1,31 @@
+{
+  "id": "mobile-092-compose-upload",
+  "category": "mobile/compose/media",
+  "intents_zh": [
+    "Kotlin OkHttp 上傳圖",
+    "Compose 上傳照片",
+    "Android multipart upload Kotlin",
+    "Compose post image",
+    "OkHttp multipart 範例",
+    "Kotlin 傳檔到 server",
+    "Compose 上傳檔案"
+  ],
+  "intents_en": [
+    "kotlin okhttp upload",
+    "compose upload photo",
+    "android multipart kotlin",
+    "compose post image",
+    "okhttp multipart example",
+    "kotlin upload to server",
+    "compose file upload"
+  ],
+  "slots": [
+    "upload_url"
+  ],
+  "code": "import okhttp3.*\nimport okhttp3.MediaType.Companion.toMediaTypeOrNull\nimport okhttp3.RequestBody.Companion.asRequestBody\nimport java.io.File\nfun upload(path:String):String{\n  val f=File(path)\n  val body=MultipartBody.Builder().setType(MultipartBody.FORM).addFormDataPart(\"file\",f.name,f.asRequestBody(\"image/jpeg\".toMediaTypeOrNull())).build()\n  val r=OkHttpClient().newCall(Request.Builder().url(\"{{upload_url}}\").post(body).build()).execute()\n  return r.body?.string() ?: \"\"}",
+  "language": "kt",
+  "deps": [
+    "com.squareup.okhttp3:okhttp"
+  ],
+  "summary_zh": "Kotlin OkHttp multipart 上傳檔案"
+}

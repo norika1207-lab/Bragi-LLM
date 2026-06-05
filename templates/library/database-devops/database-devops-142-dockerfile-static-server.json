@@ -1,0 +1,19 @@
+{
+  "id": "database-devops-142-dockerfile-static-server",
+  "category": "database-devops/docker/dockerfile",
+  "intents_zh": [
+    "caddy 靜態 server Dockerfile",
+    "caddy file server",
+    "static container"
+  ],
+  "intents_en": [
+    "caddy static server dockerfile",
+    "caddy file server",
+    "static container"
+  ],
+  "slots": [],
+  "code": "FROM caddy:alpine\nCOPY ./dist /srv\nCOPY Caddyfile /etc/caddy/Caddyfile\nEXPOSE 80\nCMD [\"caddy\", \"run\", \"--config\", \"/etc/caddy/Caddyfile\", \"--adapter\", \"caddyfile\"]",
+  "language": "dockerfile",
+  "deps": [],
+  "summary_zh": "Caddy 靜態檔案 server"
+}

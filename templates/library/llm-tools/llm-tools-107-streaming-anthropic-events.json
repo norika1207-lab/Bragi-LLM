@@ -1,0 +1,33 @@
+{
+  "id": "llm-tools-107-streaming-anthropic-events",
+  "category": "llm-tools/anthropic/events",
+  "intents_zh": [
+    "anthropic 串流事件",
+    "claude raw event stream",
+    "stream event handler",
+    "Claude event-based stream",
+    "串流事件處理",
+    "claude on_event",
+    "anthropic 細粒度 stream",
+    "claude event types"
+  ],
+  "intents_en": [
+    "anthropic stream events",
+    "claude raw event stream",
+    "stream event handler",
+    "fine grained claude stream",
+    "handle stream events claude",
+    "claude event-based stream",
+    "anthropic event types",
+    "stream events example"
+  ],
+  "slots": [
+    "model_name"
+  ],
+  "code": "import anthropic\n\nclient = anthropic.Anthropic()\n\ndef stream_events(prompt: str):\n    with client.messages.stream(\n        model=\"{{model_name}}\",\n        max_tokens=512,\n        messages=[{\"role\": \"user\", \"content\": prompt}],\n    ) as s:\n        for event in s:\n            if event.type == \"content_block_delta\":\n                print(event.delta.text, end=\"\", flush=True)\n            elif event.type == \"message_stop\":\n                print()\n\nif __name__ == \"__main__\":\n    stream_events(\"hi\")",
+  "language": "py",
+  "deps": [
+    "anthropic"
+  ],
+  "summary_zh": "Claude 串流原始事件處理"
+}

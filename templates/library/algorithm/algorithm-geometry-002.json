@@ -1,0 +1,21 @@
+{
+  "id": "algorithm-geometry-002",
+  "category": "algorithm/geometry/segment_intersect",
+  "intents_zh": [
+    "線段相交",
+    "segment intersection",
+    "給我兩線段是否相交"
+  ],
+  "intents_en": [
+    "segment intersection",
+    "line segment intersect",
+    "check segments cross"
+  ],
+  "slots": [
+    "fn_name"
+  ],
+  "code": "def {{fn_name}}(p1, p2, p3, p4):\n    def ccw(a, b, c):\n        return (b[0]-a[0])*(c[1]-a[1]) - (b[1]-a[1])*(c[0]-a[0])\n    d1 = ccw(p3, p4, p1)\n    d2 = ccw(p3, p4, p2)\n    d3 = ccw(p1, p2, p3)\n    d4 = ccw(p1, p2, p4)\n    if ((d1>0 and d2<0) or (d1<0 and d2>0)) and ((d3>0 and d4<0) or (d3<0 and d4>0)):\n        return True\n    return False",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "判斷兩線段是否相交"
+}

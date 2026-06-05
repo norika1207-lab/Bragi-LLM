@@ -1,0 +1,20 @@
+{
+  "id": "algorithm-math-011",
+  "category": "algorithm/math/lcm",
+  "intents_zh": [
+    "最小公倍數",
+    "lcm",
+    "給我 lcm"
+  ],
+  "intents_en": [
+    "lcm",
+    "least common multiple"
+  ],
+  "slots": [
+    "fn_name"
+  ],
+  "code": "from math import gcd\n\ndef {{fn_name}}(a, b):\n    return a // gcd(a, b) * b",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "最小公倍數"
+}

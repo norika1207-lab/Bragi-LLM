@@ -1,0 +1,27 @@
+{
+  "id": "depth-web-frontend-055-toast-sonner",
+  "category": "web-frontend/ui/toast",
+  "intents_zh": [
+    "sonner toast 通知",
+    "訊息提示",
+    "Toaster 設定",
+    "成功失敗訊息",
+    "toast react"
+  ],
+  "intents_en": [
+    "sonner toast",
+    "notification toast",
+    "Toaster setup",
+    "success error message",
+    "toast react"
+  ],
+  "slots": [
+    "app_name"
+  ],
+  "code": "'use client';\nimport { Toaster, toast } from 'sonner';\n\nexport function {{app_name}}Root({ children }: { children: React.ReactNode }) {\n  return (\n    <>\n      {children}\n      <Toaster position=\"top-right\" richColors closeButton />\n    </>\n  );\n}\n\nexport const notify = {\n  ok: (m: string) => toast.success(m),\n  err: (m: string) => toast.error(m),\n  load: (p: Promise<any>, msgs: { loading: string; success: string; error: string }) => toast.promise(p, msgs),\n};",
+  "language": "tsx",
+  "deps": [
+    "sonner"
+  ],
+  "summary_zh": "sonner toast 全域通知 + promise"
+}

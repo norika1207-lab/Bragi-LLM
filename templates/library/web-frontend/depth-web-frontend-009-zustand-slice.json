@@ -1,0 +1,27 @@
+{
+  "id": "depth-web-frontend-009-zustand-slice",
+  "category": "web-frontend/state/zustand",
+  "intents_zh": [
+    "zustand slice 模式",
+    "切分大型 store",
+    "combine slices",
+    "模組化狀態",
+    "zustand 多 slice"
+  ],
+  "intents_en": [
+    "zustand slice pattern",
+    "combine slices",
+    "modular store",
+    "split zustand store",
+    "large store organization"
+  ],
+  "slots": [
+    "slice_name"
+  ],
+  "code": "import { create, StateCreator } from 'zustand';\n\ntype {{slice_name}}Slice = { count: number; inc: () => void };\nconst create{{slice_name}}: StateCreator<{{slice_name}}Slice> = (set) => ({\n  count: 0,\n  inc: () => set((s) => ({ count: s.count + 1 })),\n});\n\nexport const useStore = create<{{slice_name}}Slice>()((...a) => ({\n  ...create{{slice_name}}(...a),\n}));",
+  "language": "ts",
+  "deps": [
+    "zustand"
+  ],
+  "summary_zh": "zustand 切 slice 組合大型 store"
+}

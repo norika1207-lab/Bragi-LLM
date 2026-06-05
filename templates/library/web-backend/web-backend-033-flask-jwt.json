@@ -1,0 +1,29 @@
+{
+  "id": "web-backend-033-flask-jwt",
+  "category": "web-backend/flask/auth",
+  "intents_zh": [
+    "flask JWT 登入",
+    "flask-jwt-extended 範例",
+    "flask token 驗證",
+    "加保護 endpoint",
+    "JWT decorator flask"
+  ],
+  "intents_en": [
+    "flask jwt auth",
+    "flask-jwt-extended example",
+    "jwt protected route flask",
+    "token verify flask",
+    "login + jwt flask"
+  ],
+  "slots": [
+    "secret_env",
+    "token_ttl_min"
+  ],
+  "code": "from flask import Flask, request, jsonify\nfrom flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity\nfrom datetime import timedelta\nimport os\n\napp = Flask(__name__)\napp.config['JWT_SECRET_KEY'] = os.environ['{{secret_env}}']\napp.config['JWT_ACCESS_TOKEN_EXPIRES'] = timedelta(minutes={{token_ttl_min}})\njwt = JWTManager(app)\n\n@app.post('/login')\ndef login():\n    data = request.get_json() or {}\n    if not data.get('username') or not data.get('password'):\n        return jsonify(error='missing creds'), 400\n    return jsonify(token=create_access_token(identity=data['username']))\n\n@app.get('/me')\n@jwt_required()\ndef me():\n    return jsonify(user=get_jwt_identity())",
+  "language": "py",
+  "deps": [
+    "flask",
+    "flask-jwt-extended"
+  ],
+  "summary_zh": "Flask JWT 登入與保護"
+}

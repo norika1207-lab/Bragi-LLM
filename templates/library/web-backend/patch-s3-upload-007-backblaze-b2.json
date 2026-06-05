@@ -1,0 +1,32 @@
+{
+  "id": "patch-s3-upload-007-backblaze-b2",
+  "category": "web-backend/upload/backblaze-b2",
+  "intents_zh": [
+    "Backblaze B2 上傳",
+    "B2 用 S3 相容 API",
+    "Backblaze 省錢替代 S3",
+    "node 傳檔到 B2",
+    "B2 endpoint 設定",
+    "B2 presigned URL"
+  ],
+  "intents_en": [
+    "upload to backblaze b2 via s3 api",
+    "b2 s3-compatible endpoint config",
+    "node backblaze b2 upload",
+    "cheap s3 alternative b2 sdk",
+    "b2 presigned put url",
+    "aws sdk v3 with backblaze"
+  ],
+  "slots": [
+    "b2_region",
+    "bucket_name",
+    "key_id",
+    "application_key"
+  ],
+  "code": "import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';\n\nconst b2 = new S3Client({\n  region: '{{b2_region}}',\n  endpoint: `https://s3.{{b2_region}}.backblazeb2.com`,\n  credentials: {\n    accessKeyId: '{{key_id}}',\n    secretAccessKey: '{{application_key}}',\n  },\n});\n\nexport async function b2Upload(key: string, body: Buffer | Uint8Array, contentType: string) {\n  await b2.send(new PutObjectCommand({\n    Bucket: '{{bucket_name}}',\n    Key: key,\n    Body: body,\n    ContentType: contentType,\n  }));\n  return { bucket: '{{bucket_name}}', key };\n}",
+  "language": "ts",
+  "deps": [
+    "@aws-sdk/client-s3"
+  ],
+  "summary_zh": "透過 S3 相容 API 把檔案丟上 Backblaze B2"
+}

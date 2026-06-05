@@ -1,0 +1,30 @@
+{
+  "id": "patch-mobile-pedometer-008-water-intake",
+  "category": "mobile/health/water-intake",
+  "intents_zh": [
+    "喝水追蹤元件",
+    "做個 water tracker 畫面",
+    "今日飲水量 UI",
+    "杯數計數器",
+    "RN 喝水提醒卡",
+    "飲水目標進度"
+  ],
+  "intents_en": [
+    "water intake tracker UI",
+    "daily hydration counter",
+    "cups of water component",
+    "RN water tracking card",
+    "hydration goal progress"
+  ],
+  "slots": [
+    "component_name",
+    "goal_cups"
+  ],
+  "code": "import React, { useState } from 'react';\nimport { View, Text, TouchableOpacity, StyleSheet } from 'react-native';\n\nexport default function {{component_name}}() {\n  const goal = {{goal_cups}};\n  const [cups, setCups] = useState(0);\n  return (\n    <View style={styles.box}>\n      <Text style={styles.title}>Water Intake</Text>\n      <View style={styles.row}>\n        {Array.from({ length: goal }).map((_, i) => (\n          <TouchableOpacity key={i} onPress={() => setCups(i + 1)}>\n            <Text style={[styles.cup, i < cups && styles.full]}>💧</Text>\n          </TouchableOpacity>\n        ))}\n      </View>\n      <Text style={styles.count}>{cups} / {goal} cups</Text>\n      <TouchableOpacity onPress={() => setCups(0)}><Text style={styles.reset}>Reset</Text></TouchableOpacity>\n    </View>\n  );\n}\nconst styles = StyleSheet.create({\n  box: { padding: 20, alignItems: 'center' },\n  title: { fontSize: 18, fontWeight: '600', marginBottom: 12 },\n  row: { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center' },\n  cup: { fontSize: 32, opacity: 0.25, margin: 4 },\n  full: { opacity: 1 },\n  count: { marginTop: 12, fontSize: 16 },\n  reset: { marginTop: 8, color: '#3b82f6' }\n});",
+  "language": "tsx",
+  "deps": [
+    "react-native",
+    "react"
+  ],
+  "summary_zh": "每日飲水杯數追蹤元件，點杯子記錄、可重設"
+}

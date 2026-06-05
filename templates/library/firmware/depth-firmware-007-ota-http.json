@@ -1,0 +1,27 @@
+{
+  "id": "depth-firmware-007-ota-http",
+  "category": "firmware/ota/http",
+  "intents_zh": [
+    "從 HTTP 做 OTA",
+    "下載韌體更新",
+    "esp_https_ota",
+    "遠端更新韌體",
+    "抓 bin 升級"
+  ],
+  "intents_en": [
+    "ota from http",
+    "esp_https_ota",
+    "download firmware update",
+    "remote firmware update",
+    "pull bin upgrade"
+  ],
+  "slots": [
+    "fw_url"
+  ],
+  "code": "#include \"esp_https_ota.h\"\nesp_http_client_config_t http_cfg = {\n    .url = \"{{fw_url}}\",\n    .cert_pem = NULL,\n    .timeout_ms = 10000,\n};\nesp_https_ota_config_t ota_cfg = { .http_config = &http_cfg };\nif (esp_https_ota(&ota_cfg) == ESP_OK) {\n    ESP_LOGI(\"OTA\", \"done, restarting\");\n    esp_restart();\n}",
+  "language": "c",
+  "deps": [
+    "esp-idf"
+  ],
+  "summary_zh": "從 HTTP/HTTPS URL 拉取 bin 完成 OTA 並重啟"
+}

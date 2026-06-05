@@ -1,0 +1,31 @@
+{
+  "id": "patch-sql-index-010-index-advisor",
+  "category": "database-devops/index/advisor",
+  "intents_zh": [
+    "找出該加哪些 index",
+    "index advisor 查詢",
+    "從 pg_stat_statements 找慢查詢",
+    "missing index 偵測",
+    "unused index 清單",
+    "索引健檢"
+  ],
+  "intents_en": [
+    "index advisor pattern",
+    "find missing indexes",
+    "unused index report",
+    "pg_stat_statements top queries",
+    "suggest indexes from workload",
+    "index health check"
+  ],
+  "slots": [
+    "min_calls",
+    "min_mean_ms"
+  ],
+  "code": "-- 1) Top slow query candidates that may need new indexes\nSELECT\n  substring(query, 1, 120) AS query_snippet,\n  calls,\n  round(mean_exec_time::numeric, 2) AS mean_ms,\n  round(total_exec_time::numeric, 0) AS total_ms,\n  rows\nFROM pg_stat_statements\nWHERE calls >= {{min_calls}}\n  AND mean_exec_time >= {{min_mean_ms}}\nORDER BY total_exec_time DESC\nLIMIT 20;\n\n-- 2) Unused indexes (drop candidates, ignore freshly-created ones)\nSELECT\n  schemaname, relname AS table_name, indexrelname AS index_name,\n  pg_size_pretty(pg_relation_size(indexrelid)) AS size,\n  idx_scan\nFROM pg_stat_user_indexes\nWHERE idx_scan = 0\n  AND indexrelname NOT LIKE '%_pkey'\nORDER BY pg_relation_size(indexrelid) DESC;\n\n-- 3) Tables with high seq scan ratio (missing index suspects)\nSELECT\n  relname AS table_name,\n  seq_scan, idx_scan,\n  seq_tup_read, idx_tup_fetch,\n  round(100.0 * seq_scan / nullif(seq_scan + idx_scan, 0), 1) AS seq_pct\nFROM pg_stat_user_tables\nWHERE seq_scan + idx_scan > 0\nORDER BY seq_tup_read DESC\nLIMIT 20;",
+  "language": "sql",
+  "deps": [
+    "postgresql>=12",
+    "pg_stat_statements"
+  ],
+  "summary_zh": "三段式索引健檢:慢查詢 top 榜、未用索引清單、seq scan 比例高的表"
+}

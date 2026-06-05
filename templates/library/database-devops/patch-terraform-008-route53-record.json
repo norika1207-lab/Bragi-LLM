@@ -1,0 +1,35 @@
+{
+  "id": "patch-terraform-008-route53-record",
+  "category": "database-devops/terraform/aws-dns",
+  "intents_zh": [
+    "terraform 加 route53 A 記錄指向 cloudfront",
+    "tf 設定 dns 記錄到 elb",
+    "用 terraform 建 route53 alias record",
+    "route53 加一筆 CNAME 範本",
+    "幫我寫 tf 把 domain 接到 cloudfront",
+    "Terraform Route53 alias 範例",
+    "tf dns A record point to alb"
+  ],
+  "intents_en": [
+    "terraform route53 alias record to cloudfront",
+    "add dns record in tf pointing to elb",
+    "route53 cname record terraform",
+    "alias record for cloudfront distribution tf",
+    "terraform create route53 a record",
+    "map domain to alb terraform",
+    "tf dns record module"
+  ],
+  "slots": [
+    "zone_id",
+    "record_name",
+    "alias_target_dns",
+    "alias_target_zone_id"
+  ],
+  "code": "resource \"aws_route53_record\" \"this\" {\n  zone_id = \"{{zone_id}}\"\n  name    = \"{{record_name}}\"\n  type    = \"A\"\n\n  alias {\n    name                   = \"{{alias_target_dns}}\"\n    zone_id                = \"{{alias_target_zone_id}}\"\n    evaluate_target_health = false\n  }\n}",
+  "language": "hcl",
+  "deps": [
+    "terraform",
+    "hashicorp/aws"
+  ],
+  "summary_zh": "Terraform 建立 Route53 alias A 記錄指向 CloudFront 或 ALB。"
+}

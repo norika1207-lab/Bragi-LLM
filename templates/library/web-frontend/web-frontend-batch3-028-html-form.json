@@ -1,0 +1,27 @@
+{
+  "id": "web-frontend-batch3-028-html-form",
+  "category": "web-frontend/html/forms/contact",
+  "intents_zh": [
+    "HTML 聯絡表單",
+    "contact form",
+    "靜態表單",
+    "HTML 留言表單",
+    "HTML 寄信表單",
+    "vanilla form"
+  ],
+  "intents_en": [
+    "html contact form",
+    "static contact form",
+    "html message form",
+    "vanilla form",
+    "html email form",
+    "feedback form"
+  ],
+  "slots": [
+    "form_action"
+  ],
+  "code": "<form action=\"{{form_action}}\" method=\"POST\" class=\"contact\">\n  <label>Name<input name=\"name\" required></label>\n  <label>Email<input name=\"email\" type=\"email\" required></label>\n  <label>Subject<input name=\"subject\" required></label>\n  <label>Message<textarea name=\"message\" rows=\"5\" required></textarea></label>\n  <button type=\"submit\">Send</button>\n</form>\n<style>\n  .contact { display: flex; flex-direction: column; gap: .75rem; max-width: 480px; }\n  .contact label { display: flex; flex-direction: column; gap: .25rem; font-size: .9rem; }\n  .contact input, .contact textarea { padding: .5rem; border: 1px solid #ccc; border-radius: 4px; }\n  .contact button { padding: .6rem; background: #111; color: white; border: 0; border-radius: 4px; cursor: pointer; }\n</style>",
+  "language": "html",
+  "deps": [],
+  "summary_zh": "HTML 聯絡表單含基本樣式"
+}

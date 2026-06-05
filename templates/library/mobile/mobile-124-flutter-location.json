@@ -1,0 +1,29 @@
+{
+  "id": "mobile-124-flutter-location",
+  "category": "mobile/flutter/location",
+  "intents_zh": [
+    "Flutter geolocator",
+    "flutter 取定位",
+    "flutter 當前位置",
+    "flutter GPS 座標",
+    "geolocator 範例 flutter",
+    "flutter location 經緯度",
+    "flutter user position"
+  ],
+  "intents_en": [
+    "flutter geolocator",
+    "flutter current location",
+    "flutter gps coordinates",
+    "get position flutter",
+    "geolocator example flutter",
+    "flutter user location",
+    "flutter lat lng"
+  ],
+  "slots": [],
+  "code": "import 'package:geolocator/geolocator.dart';\nFuture<Position?> here()async{\n  if(!await Geolocator.isLocationServiceEnabled())return null;\n  var p=await Geolocator.checkPermission();\n  if(p==LocationPermission.denied)p=await Geolocator.requestPermission();\n  if(p==LocationPermission.denied||p==LocationPermission.deniedForever)return null;\n  return await Geolocator.getCurrentPosition();}",
+  "language": "dart",
+  "deps": [
+    "geolocator"
+  ],
+  "summary_zh": "Flutter geolocator 取得當前位置"
+}

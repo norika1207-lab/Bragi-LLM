@@ -1,0 +1,29 @@
+{
+  "id": "web-frontend-batch3-013-svelte-todo",
+  "category": "web-frontend/svelte/apps/todo",
+  "intents_zh": [
+    "Svelte todo",
+    "Svelte 待辦清單",
+    "Svelte task app",
+    "Svelte 任務列表",
+    "Svelte 簡單 todo",
+    "Svelte 增刪 todo"
+  ],
+  "intents_en": [
+    "svelte todo list",
+    "svelte task app",
+    "svelte simple todo",
+    "svelte add remove tasks",
+    "svelte checklist",
+    "svelte to-do component"
+  ],
+  "slots": [
+    "storage_key"
+  ],
+  "code": "<script>\n  import { onMount } from 'svelte';\n  let items = [];\n  let draft = '';\n  onMount(() => {\n    const raw = localStorage.getItem('{{storage_key}}');\n    if (raw) items = JSON.parse(raw);\n  });\n  $: localStorage.setItem('{{storage_key}}', JSON.stringify(items));\n  function add() {\n    if (!draft.trim()) return;\n    items = [...items, { id: Date.now(), text: draft, done: false }];\n    draft = '';\n  }\n</script>\n<input bind:value={draft} on:keyup={e => e.key === 'Enter' && add()} placeholder=\"New task\" />\n<ul>\n  {#each items as t (t.id)}\n    <li>\n      <input type=\"checkbox\" bind:checked={t.done} />\n      <span class:done={t.done}>{t.text}</span>\n      <button on:click={() => items = items.filter(x => x.id !== t.id)}>x</button>\n    </li>\n  {/each}\n</ul>",
+  "language": "svelte",
+  "deps": [
+    "svelte"
+  ],
+  "summary_zh": "Svelte 待辦清單含 localStorage"
+}

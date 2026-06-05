@@ -1,0 +1,34 @@
+{
+  "id": "llm-tools-038-batch-inference",
+  "category": "llm-tools/inference/batch",
+  "intents_zh": [
+    "批次推論",
+    "batch inference",
+    "async 批量 openai",
+    "平行呼叫 LLM",
+    "批次 chat",
+    "async gather",
+    "批跑 prompt",
+    "並行 LLM 呼叫"
+  ],
+  "intents_en": [
+    "batch inference",
+    "async batch openai",
+    "parallel llm calls",
+    "run prompts batch",
+    "async gather completions",
+    "concurrent llm",
+    "fan-out llm",
+    "batch chat"
+  ],
+  "slots": [
+    "model_name",
+    "concurrency"
+  ],
+  "code": "import asyncio\nfrom openai import AsyncOpenAI\n\nclient = AsyncOpenAI()\nsem = asyncio.Semaphore({{concurrency}})\n\nasync def one(prompt: str) -> str:\n    async with sem:\n        r = await client.chat.completions.create(\n            model=\"{{model_name}}\",\n            messages=[{\"role\": \"user\", \"content\": prompt}],\n        )\n        return r.choices[0].message.content\n\nasync def batch(prompts: list[str]):\n    return await asyncio.gather(*[one(p) for p in prompts])\n\nif __name__ == \"__main__\":\n    print(asyncio.run(batch([\"hi\", \"hello\", \"hey\"])))",
+  "language": "py",
+  "deps": [
+    "openai"
+  ],
+  "summary_zh": "asyncio 並行批次 OpenAI 推論"
+}

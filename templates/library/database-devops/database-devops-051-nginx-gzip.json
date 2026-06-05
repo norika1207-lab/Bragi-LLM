@@ -1,0 +1,19 @@
+{
+  "id": "database-devops-051-nginx-gzip",
+  "category": "database-devops/nginx/perf",
+  "intents_zh": [
+    "nginx gzip 壓縮",
+    "開 gzip 加速",
+    "壓縮回應"
+  ],
+  "intents_en": [
+    "nginx gzip",
+    "enable compression",
+    "compress responses"
+  ],
+  "slots": [],
+  "code": "gzip on;\ngzip_vary on;\ngzip_min_length 1024;\ngzip_proxied any;\ngzip_comp_level 6;\ngzip_types\n  text/plain\n  text/css\n  text/xml\n  application/json\n  application/javascript\n  application/xml+rss\n  image/svg+xml;",
+  "language": "nginx",
+  "deps": [],
+  "summary_zh": "nginx 開啟 gzip 壓縮"
+}

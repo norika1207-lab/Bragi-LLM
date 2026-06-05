@@ -1,0 +1,28 @@
+{
+  "id": "depth-web-backend-002-sse-fastapi",
+  "category": "web-backend/sse/fastapi",
+  "intents_zh": [
+    "FastAPI SSE",
+    "Python async SSE",
+    "sse-starlette 範例",
+    "FastAPI 串流事件",
+    "非同步推播"
+  ],
+  "intents_en": [
+    "fastapi sse",
+    "python async sse",
+    "sse-starlette example",
+    "fastapi stream events",
+    "async push"
+  ],
+  "slots": [
+    "path"
+  ],
+  "code": "from sse_starlette.sse import EventSourceResponse\nimport asyncio\n\n@app.get('{{path}}')\nasync def stream(request):\n    async def gen():\n        while True:\n            if await request.is_disconnected():\n                break\n            yield {'event': 'tick', 'data': str(asyncio.get_event_loop().time())}\n            await asyncio.sleep(1)\n    return EventSourceResponse(gen())",
+  "language": "py",
+  "deps": [
+    "fastapi",
+    "sse-starlette"
+  ],
+  "summary_zh": "FastAPI 用 sse-starlette 推 SSE"
+}

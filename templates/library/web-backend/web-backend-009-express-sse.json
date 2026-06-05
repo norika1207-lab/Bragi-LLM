@@ -1,0 +1,28 @@
+{
+  "id": "web-backend-009-express-sse",
+  "category": "web-backend/express/streaming",
+  "intents_zh": [
+    "express SSE 串流",
+    "Server-Sent Events 範例",
+    "推播事件給 client",
+    "SSE endpoint",
+    "實作 event-stream"
+  ],
+  "intents_en": [
+    "server-sent events express",
+    "SSE endpoint",
+    "stream events to client",
+    "text/event-stream example",
+    "push updates SSE"
+  ],
+  "slots": [
+    "interval_ms",
+    "event_name"
+  ],
+  "code": "const express = require('express');\nconst router = express.Router();\n\nrouter.get('/stream', (req, res) => {\n  res.set({\n    'Content-Type': 'text/event-stream',\n    'Cache-Control': 'no-cache',\n    'Connection': 'keep-alive'\n  });\n  res.flushHeaders();\n  const t = setInterval(() => {\n    res.write(`event: {{event_name}}\\ndata: ${JSON.stringify({ ts: Date.now() })}\\n\\n`);\n  }, {{interval_ms}});\n  req.on('close', () => clearInterval(t));\n});\n\nmodule.exports = router;",
+  "language": "js",
+  "deps": [
+    "express"
+  ],
+  "summary_zh": "Express Server-Sent Events 串流"
+}

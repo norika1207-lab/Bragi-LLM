@@ -1,0 +1,27 @@
+{
+  "id": "depth-web-backend-008-range-download",
+  "category": "web-backend/files/range",
+  "intents_zh": [
+    "HTTP Range 部分下載",
+    "支援續傳的串流",
+    "video 206 partial",
+    "range header 處理",
+    "斷點下載"
+  ],
+  "intents_en": [
+    "http range partial download",
+    "resumable streaming",
+    "video 206 partial",
+    "range header handling",
+    "byte range serve"
+  ],
+  "slots": [
+    "path"
+  ],
+  "code": "app.get('/video', (req, res) => {\n  const { size } = fs.statSync('{{path}}');\n  const range = req.headers.range;\n  if (!range) return fs.createReadStream('{{path}}').pipe(res.status(200));\n  const [s, e] = range.replace('bytes=', '').split('-');\n  const start = Number(s); const end = e ? Number(e) : size - 1;\n  res.status(206).set({\n    'Content-Range': `bytes ${start}-${end}/${size}`,\n    'Accept-Ranges': 'bytes',\n    'Content-Length': end - start + 1,\n    'Content-Type': 'video/mp4',\n  });\n  fs.createReadStream('{{path}}', { start, end }).pipe(res);\n});",
+  "language": "js",
+  "deps": [
+    "express"
+  ],
+  "summary_zh": "支援 Range 206 partial 串流"
+}

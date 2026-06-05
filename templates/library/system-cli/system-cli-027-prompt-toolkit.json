@@ -1,0 +1,23 @@
+{
+  "id": "system-cli-027-prompt-toolkit",
+  "category": "system-cli/python/interactive",
+  "intents_zh": [
+    "互動式輸入提示",
+    "python 問使用者選項",
+    "prompt_toolkit 選單"
+  ],
+  "intents_en": [
+    "interactive prompt python",
+    "prompt_toolkit menu",
+    "ask user choice"
+  ],
+  "slots": [
+    "question"
+  ],
+  "code": "from prompt_toolkit import prompt\nfrom prompt_toolkit.completion import WordCompleter\n\nchoices = ['dev', 'staging', 'prod']\ncompleter = WordCompleter(choices, ignore_case=True)\n\nans = prompt('{{question}}: ', completer=completer)\nif ans not in choices:\n    print('invalid'); raise SystemExit(1)\nprint(f'selected {ans}')",
+  "language": "py",
+  "deps": [
+    "prompt_toolkit"
+  ],
+  "summary_zh": "prompt_toolkit 自動補全問答"
+}

@@ -1,0 +1,35 @@
+{
+  "id": "llm-tools-018-semantic-search",
+  "category": "llm-tools/rag/semantic-search",
+  "intents_zh": [
+    "語義搜尋",
+    "semantic search 函式",
+    "embed + 相似度",
+    "cosine 搜尋",
+    "top-k 語義檢索",
+    "給我語義搜尋",
+    "semantic 查詢",
+    "query 最相似"
+  ],
+  "intents_en": [
+    "semantic search",
+    "cosine similarity search",
+    "top-k semantic retrieval",
+    "embed and search",
+    "similarity ranker",
+    "semantic query",
+    "most similar function",
+    "retrieval ranker"
+  ],
+  "slots": [
+    "embed_model",
+    "top_k"
+  ],
+  "code": "from sentence_transformers import SentenceTransformer\nimport numpy as np\n\nmodel = SentenceTransformer(\"{{embed_model}}\")\n\ndef search(query: str, corpus: list[str]) -> list[tuple[str, float]]:\n    qv = model.encode([query], normalize_embeddings=True)\n    cv = model.encode(corpus, normalize_embeddings=True)\n    sims = (cv @ qv.T).flatten()\n    idx = np.argsort(-sims)[:{{top_k}}]\n    return [(corpus[i], float(sims[i])) for i in idx]\n\nif __name__ == \"__main__\":\n    print(search(\"cat\", [\"a dog\", \"a kitten\", \"a car\"]))",
+  "language": "py",
+  "deps": [
+    "sentence-transformers",
+    "numpy"
+  ],
+  "summary_zh": "以餘弦相似度做 top-k 語義搜尋"
+}

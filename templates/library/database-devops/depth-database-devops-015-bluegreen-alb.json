@@ -1,0 +1,28 @@
+{
+  "id": "depth-database-devops-015-bluegreen-alb",
+  "category": "database-devops/aws/deploy",
+  "intents_zh": [
+    "ALB 藍綠部署",
+    "切流量到新 target group",
+    "weighted forward",
+    "ALB blue green"
+  ],
+  "intents_en": [
+    "ALB blue green deploy",
+    "weighted target group",
+    "shift traffic ALB",
+    "blue green via load balancer"
+  ],
+  "slots": [
+    "listener_arn",
+    "blue_tg",
+    "green_tg",
+    "green_weight"
+  ],
+  "code": "aws elbv2 modify-listener \\\n  --listener-arn {{listener_arn}} \\\n  --default-actions '[{\n    \"Type\":\"forward\",\n    \"ForwardConfig\":{\n      \"TargetGroups\":[\n        {\"TargetGroupArn\":\"{{blue_tg}}\",\"Weight\":'\"$((100-{{green_weight}}))\"'},\n        {\"TargetGroupArn\":\"{{green_tg}}\",\"Weight\":{{green_weight}}}\n      ]\n    }\n  }]'",
+  "language": "sh",
+  "deps": [
+    "aws-cli"
+  ],
+  "summary_zh": "用 ALB weighted forward 漸進切到 green TG"
+}

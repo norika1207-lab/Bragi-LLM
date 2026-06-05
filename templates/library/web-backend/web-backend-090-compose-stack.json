@@ -1,0 +1,26 @@
+{
+  "id": "web-backend-090-compose-stack",
+  "category": "web-backend/deploy",
+  "intents_zh": [
+    "docker compose 範例",
+    "app + postgres + redis",
+    "compose stack",
+    "本機開發 compose",
+    "docker-compose.yml"
+  ],
+  "intents_en": [
+    "docker compose example",
+    "app postgres redis stack",
+    "compose stack",
+    "local dev compose",
+    "docker-compose.yml"
+  ],
+  "slots": [
+    "app_port",
+    "db_password"
+  ],
+  "code": "version: '3.9'\nservices:\n  app:\n    build: .\n    ports:\n      - '{{app_port}}:{{app_port}}'\n    environment:\n      DATABASE_URL: postgres://app:{{db_password}}@db:5432/app\n      REDIS_URL: redis://redis:6379\n    depends_on: [db, redis]\n  db:\n    image: postgres:16-alpine\n    environment:\n      POSTGRES_USER: app\n      POSTGRES_PASSWORD: {{db_password}}\n      POSTGRES_DB: app\n    volumes: ['pgdata:/var/lib/postgresql/data']\n  redis:\n    image: redis:7-alpine\nvolumes:\n  pgdata:",
+  "language": "yaml",
+  "deps": [],
+  "summary_zh": "App + Postgres + Redis 開發 stack"
+}

@@ -1,0 +1,22 @@
+{
+  "id": "database-devops-074-gha-cron",
+  "category": "database-devops/cicd/github-actions",
+  "intents_zh": [
+    "GHA 排程 workflow",
+    "定時跑 cron",
+    "每日跑一次 job"
+  ],
+  "intents_en": [
+    "github actions cron",
+    "scheduled workflow",
+    "daily job"
+  ],
+  "slots": [
+    "cron_expr",
+    "script"
+  ],
+  "code": "name: Scheduled\non:\n  schedule:\n    - cron: '{{cron_expr}}'\n  workflow_dispatch:\n\njobs:\n  run:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-node@v4\n        with: { node-version: '20' }\n      - run: npm ci\n      - run: {{script}}",
+  "language": "yaml",
+  "deps": [],
+  "summary_zh": "GHA 定時排程 workflow"
+}

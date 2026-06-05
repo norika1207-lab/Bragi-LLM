@@ -1,0 +1,21 @@
+{
+  "id": "system-cli-026-ansi-color-bash",
+  "category": "system-cli/shell/output",
+  "intents_zh": [
+    "bash 上色 echo",
+    "shell ANSI 顏色",
+    "終端彩色輸出"
+  ],
+  "intents_en": [
+    "bash ANSI color codes",
+    "colored echo in shell",
+    "terminal colors bash"
+  ],
+  "slots": [
+    "msg"
+  ],
+  "code": "#!/usr/bin/env bash\nRED='\\033[0;31m'; GRN='\\033[0;32m'; YEL='\\033[1;33m'; CYA='\\033[0;36m'; NC='\\033[0m'\n\ninfo() { printf \"${CYA}[i]${NC} %s\\n\" \"$1\"; }\nok()   { printf \"${GRN}[ok]${NC} %s\\n\" \"$1\"; }\nwarn() { printf \"${YEL}[!]${NC} %s\\n\" \"$1\"; }\nerr()  { printf \"${RED}[x]${NC} %s\\n\" \"$1\" >&2; }\n\ninfo \"{{msg}}\"\nok \"all green\"",
+  "language": "sh",
+  "deps": [],
+  "summary_zh": "bash ANSI 顏色函式"
+}

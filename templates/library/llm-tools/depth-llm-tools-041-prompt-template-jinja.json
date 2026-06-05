@@ -1,0 +1,28 @@
+{
+  "id": "depth-llm-tools-041-prompt-template-jinja",
+  "category": "llm-tools/prompt-mgmt/jinja",
+  "intents_zh": [
+    "Jinja prompt 模板",
+    "變數填入 prompt",
+    "prompt 模板渲染",
+    "template engine prompt",
+    "參數化 prompt"
+  ],
+  "intents_en": [
+    "Jinja prompt template",
+    "variable fill prompt",
+    "prompt template render",
+    "template engine prompt",
+    "parametric prompt"
+  ],
+  "slots": [
+    "template_str",
+    "vars"
+  ],
+  "code": "from jinja2 import Environment, StrictUndefined\n\nenv = Environment(undefined=StrictUndefined)\nrendered = env.from_string({{template_str}}).render(**{{vars}})",
+  "language": "python",
+  "deps": [
+    "jinja2"
+  ],
+  "summary_zh": "用 Jinja StrictUndefined 渲染 prompt，缺變數會炸"
+}

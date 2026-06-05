@@ -1,0 +1,28 @@
+{
+  "id": "web-backend-022-express-sqlite",
+  "category": "web-backend/express/db",
+  "intents_zh": [
+    "接 sqlite",
+    "better-sqlite3 連線",
+    "node sqlite 範例",
+    "本機 db 用 sqlite",
+    "建表 + query"
+  ],
+  "intents_en": [
+    "sqlite connection node",
+    "better-sqlite3 example",
+    "local db sqlite",
+    "create table sqlite",
+    "node sqlite query"
+  ],
+  "slots": [
+    "db_path",
+    "table_name"
+  ],
+  "code": "const Database = require('better-sqlite3');\nconst db = new Database('{{db_path}}');\n\ndb.exec(`\n  CREATE TABLE IF NOT EXISTS {{table_name}} (\n    id INTEGER PRIMARY KEY AUTOINCREMENT,\n    name TEXT NOT NULL,\n    created_at TEXT DEFAULT CURRENT_TIMESTAMP\n  );\n`);\n\nconst insert = db.prepare('INSERT INTO {{table_name}} (name) VALUES (?)');\nconst list = db.prepare('SELECT * FROM {{table_name}} ORDER BY id DESC LIMIT 100');\n\nmodule.exports = { db, insert, list };",
+  "language": "js",
+  "deps": [
+    "better-sqlite3"
+  ],
+  "summary_zh": "better-sqlite3 本機資料庫"
+}

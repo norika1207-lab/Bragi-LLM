@@ -1,0 +1,29 @@
+{
+  "id": "web-backend-059-fastapi-grpc",
+  "category": "web-backend/fastapi/rpc",
+  "intents_zh": [
+    "python grpc server",
+    "grpcio server",
+    "加 rpc endpoint python",
+    "proto + python grpc",
+    "async grpc"
+  ],
+  "intents_en": [
+    "python grpc server",
+    "grpcio server example",
+    "rpc server python",
+    "proto python grpc",
+    "async grpc python"
+  ],
+  "slots": [
+    "grpc_port",
+    "service_class"
+  ],
+  "code": "import grpc\nfrom concurrent import futures\n# import your_pb2, your_pb2_grpc\n\nclass {{service_class}}:  # (your_pb2_grpc.YourServiceServicer)\n    def Echo(self, request, context):\n        # return your_pb2.EchoReply(message='echo: ' + request.message)\n        return None\n\ndef serve():\n    server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))\n    # your_pb2_grpc.add_YourServiceServicer_to_server({{service_class}}(), server)\n    server.add_insecure_port('[::]:{{grpc_port}}')\n    server.start()\n    server.wait_for_termination()\n\nif __name__ == '__main__':\n    serve()",
+  "language": "py",
+  "deps": [
+    "grpcio",
+    "grpcio-tools"
+  ],
+  "summary_zh": "Python gRPC server 骨架"
+}

@@ -1,0 +1,27 @@
+{
+  "id": "firmware-092-esp32-camera-capture",
+  "category": "firmware/esp32/camera",
+  "intents_zh": [
+    "ESP32-CAM 拍照",
+    "esp_camera 範例",
+    "ESP32 影像擷取",
+    "AI Thinker 拍照",
+    "esp32 camera framebuffer"
+  ],
+  "intents_en": [
+    "ESP32-CAM capture",
+    "esp_camera framebuffer",
+    "AI Thinker camera example",
+    "take photo ESP32-CAM",
+    "esp32 image capture"
+  ],
+  "slots": [
+    "frame_size"
+  ],
+  "code": "#include \"esp_camera.h\"\n#include \"camera_pins.h\"\n\nvoid setup() {\n  Serial.begin(115200);\n  camera_config_t c = {};\n  c.ledc_channel = LEDC_CHANNEL_0; c.ledc_timer = LEDC_TIMER_0;\n  c.pin_d0=Y2_GPIO_NUM; c.pin_d1=Y3_GPIO_NUM; c.pin_d2=Y4_GPIO_NUM; c.pin_d3=Y5_GPIO_NUM;\n  c.pin_d4=Y6_GPIO_NUM; c.pin_d5=Y7_GPIO_NUM; c.pin_d6=Y8_GPIO_NUM; c.pin_d7=Y9_GPIO_NUM;\n  c.pin_xclk=XCLK_GPIO_NUM; c.pin_pclk=PCLK_GPIO_NUM; c.pin_vsync=VSYNC_GPIO_NUM;\n  c.pin_href=HREF_GPIO_NUM; c.pin_sccb_sda=SIOD_GPIO_NUM; c.pin_sccb_scl=SIOC_GPIO_NUM;\n  c.pin_pwdn=PWDN_GPIO_NUM; c.pin_reset=RESET_GPIO_NUM;\n  c.xclk_freq_hz=20000000; c.pixel_format=PIXFORMAT_JPEG;\n  c.frame_size={{frame_size}}; c.jpeg_quality=12; c.fb_count=1;\n  esp_camera_init(&c);\n  camera_fb_t* fb = esp_camera_fb_get();\n  Serial.println(fb->len);\n  esp_camera_fb_return(fb);\n}\n\nvoid loop() {}",
+  "language": "ino",
+  "deps": [
+    "esp32-camera"
+  ],
+  "summary_zh": "ESP32-CAM 擷取單張 JPEG"
+}

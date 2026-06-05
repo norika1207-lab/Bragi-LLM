@@ -1,0 +1,27 @@
+{
+  "id": "algorithm-ml-007",
+  "category": "algorithm/ml/logistic_regression",
+  "intents_zh": [
+    "邏輯回歸",
+    "logistic regression",
+    "sklearn 二分類",
+    "給我 logreg"
+  ],
+  "intents_en": [
+    "logistic regression",
+    "binary classifier sklearn",
+    "logreg",
+    "sklearn logistic"
+  ],
+  "slots": [
+    "X_train",
+    "y_train",
+    "X_test"
+  ],
+  "code": "from sklearn.linear_model import LogisticRegression\n\nclf = LogisticRegression(max_iter=1000)\nclf.fit({{X_train}}, {{y_train}})\npred = clf.predict({{X_test}})\nprob = clf.predict_proba({{X_test}})\nprint(pred[:10], prob[:3])",
+  "language": "py",
+  "deps": [
+    "scikit-learn"
+  ],
+  "summary_zh": "sklearn 邏輯回歸二分類"
+}

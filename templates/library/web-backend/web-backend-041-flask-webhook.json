@@ -1,0 +1,28 @@
+{
+  "id": "web-backend-041-flask-webhook",
+  "category": "web-backend/flask/webhook",
+  "intents_zh": [
+    "flask webhook",
+    "驗證 webhook 簽章 flask",
+    "github webhook flask",
+    "收 stripe webhook",
+    "hmac verify flask"
+  ],
+  "intents_en": [
+    "flask webhook receiver",
+    "verify webhook signature flask",
+    "github webhook flask",
+    "stripe webhook flask",
+    "hmac verify endpoint"
+  ],
+  "slots": [
+    "secret_env",
+    "header_name"
+  ],
+  "code": "from flask import Flask, request, abort, jsonify\nimport hmac, hashlib, os\n\napp = Flask(__name__)\n\n@app.post('/webhook')\ndef webhook():\n    sig = request.headers.get('{{header_name}}', '')\n    expected = hmac.new(os.environ['{{secret_env}}'].encode(), request.data, hashlib.sha256).hexdigest()\n    if not hmac.compare_digest(sig, expected):\n        abort(401)\n    event = request.get_json(silent=True) or {}\n    return jsonify(received=True, type=event.get('type'))",
+  "language": "py",
+  "deps": [
+    "flask"
+  ],
+  "summary_zh": "Flask HMAC webhook 接收"
+}

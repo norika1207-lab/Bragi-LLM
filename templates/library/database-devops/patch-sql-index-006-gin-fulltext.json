@@ -1,0 +1,32 @@
+{
+  "id": "patch-sql-index-006-gin-fulltext",
+  "category": "database-devops/index/gin-fulltext",
+  "intents_zh": [
+    "全文搜尋加 index",
+    "tsvector GIN 索引",
+    "postgres full text search",
+    "中英文混合搜尋索引",
+    "to_tsvector 建索引",
+    "全文檢索慢"
+  ],
+  "intents_en": [
+    "full text search gin index",
+    "tsvector index postgres",
+    "speed up to_tsvector query",
+    "fts index with weights",
+    "search column gin index",
+    "websearch_to_tsquery index"
+  ],
+  "slots": [
+    "table_name",
+    "text_column",
+    "index_name",
+    "language_config"
+  ],
+  "code": "-- GIN index on generated tsvector for full-text search\n-- Use STORED generated column so index stays consistent\nALTER TABLE {{table_name}}\n  ADD COLUMN IF NOT EXISTS search_vec tsvector\n  GENERATED ALWAYS AS (to_tsvector('{{language_config}}', coalesce({{text_column}}, ''))) STORED;\n\nCREATE INDEX CONCURRENTLY IF NOT EXISTS {{index_name}}\n  ON {{table_name}} USING GIN (search_vec);\n\n-- Matching query\nEXPLAIN ANALYZE\nSELECT *, ts_rank(search_vec, q) AS rank\nFROM {{table_name}}, websearch_to_tsquery('{{language_config}}', $1) q\nWHERE search_vec @@ q\nORDER BY rank DESC\nLIMIT 20;",
+  "language": "sql",
+  "deps": [
+    "postgresql>=12"
+  ],
+  "summary_zh": "用 generated tsvector 欄位加 GIN index 建全文搜尋，含 ts_rank 排序"
+}

@@ -1,0 +1,27 @@
+{
+  "id": "depth-firmware-010-freertos-semaphore",
+  "category": "firmware/rtos/semaphore",
+  "intents_zh": [
+    "FreeRTOS semaphore",
+    "binary semaphore ISR",
+    "互斥鎖 mutex",
+    "ISR 喚醒 task",
+    "xSemaphoreGiveFromISR"
+  ],
+  "intents_en": [
+    "freertos semaphore",
+    "binary semaphore isr",
+    "mutex protect",
+    "wake task from isr",
+    "semaphore give isr"
+  ],
+  "slots": [
+    "isr_pin"
+  ],
+  "code": "SemaphoreHandle_t sem;\n\nvoid IRAM_ATTR isr(void *arg) {\n    BaseType_t hpw = pdFALSE;\n    xSemaphoreGiveFromISR(sem, &hpw);\n    if (hpw) portYIELD_FROM_ISR();\n}\n\nvoid worker(void *arg) {\n    while (1) {\n        if (xSemaphoreTake(sem, portMAX_DELAY)) {\n            // handle event\n        }\n    }\n}\n\nsem = xSemaphoreCreateBinary();\nxTaskCreate(worker, \"w\", 4096, NULL, 5, NULL);\ngpio_isr_handler_add({{isr_pin}}, isr, NULL);",
+  "language": "c",
+  "deps": [
+    "esp-idf"
+  ],
+  "summary_zh": "用 binary semaphore 從 ISR 喚醒處理 task"
+}

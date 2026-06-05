@@ -1,0 +1,23 @@
+{
+  "id": "depth-database-devops-007-slow-query-log",
+  "category": "database-devops/postgres/observability",
+  "intents_zh": [
+    "postgres 慢查詢 log",
+    "log_min_duration_statement",
+    "抓 slow query",
+    "auto_explain"
+  ],
+  "intents_en": [
+    "postgres slow query log",
+    "log_min_duration_statement",
+    "capture slow query",
+    "auto_explain"
+  ],
+  "slots": [
+    "ms_threshold"
+  ],
+  "code": "ALTER SYSTEM SET log_min_duration_statement = '{{ms_threshold}}ms';\nALTER SYSTEM SET log_line_prefix = '%m [%p] %u@%d ';\nALTER SYSTEM SET shared_preload_libraries = 'auto_explain';\nALTER SYSTEM SET auto_explain.log_min_duration = '{{ms_threshold}}ms';\nALTER SYSTEM SET auto_explain.log_analyze = on;\nALTER SYSTEM SET auto_explain.log_buffers = on;\nSELECT pg_reload_conf();",
+  "language": "sql",
+  "deps": [],
+  "summary_zh": "開啟慢查詢 log 與 auto_explain 自動 EXPLAIN"
+}

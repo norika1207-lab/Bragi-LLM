@@ -1,0 +1,29 @@
+{
+  "id": "mobile-094-compose-audiorec",
+  "category": "mobile/compose/media",
+  "intents_zh": [
+    "Android MediaRecorder Kotlin",
+    "Compose 錄音",
+    "Kotlin 麥克風錄音",
+    "Android 錄音檔 Kotlin",
+    "Compose voice memo",
+    "MediaRecorder 範例 Kotlin",
+    "錄音 Kotlin"
+  ],
+  "intents_en": [
+    "android MediaRecorder kotlin",
+    "compose record audio",
+    "kotlin mic recording",
+    "android record sound",
+    "compose voice memo",
+    "MediaRecorder example",
+    "kotlin audio recorder"
+  ],
+  "slots": [
+    "file_path"
+  ],
+  "code": "import android.media.MediaRecorder\nimport android.os.Build\nclass Rec(ctx:android.content.Context){\n  private val r=if(Build.VERSION.SDK_INT>=31)MediaRecorder(ctx)else @Suppress(\"DEPRECATION\")MediaRecorder()\n  fun start(){r.setAudioSource(MediaRecorder.AudioSource.MIC);r.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);r.setAudioEncoder(MediaRecorder.AudioEncoder.AAC);r.setOutputFile(\"{{file_path}}\");r.prepare();r.start()}\n  fun stop(){r.stop();r.release()}}",
+  "language": "kt",
+  "deps": [],
+  "summary_zh": "Android MediaRecorder Kotlin 錄音存檔"
+}

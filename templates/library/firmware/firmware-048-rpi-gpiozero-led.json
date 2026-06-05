@@ -1,0 +1,27 @@
+{
+  "id": "firmware-048-rpi-gpiozero-led",
+  "category": "firmware/rpi/gpio",
+  "intents_zh": [
+    "gpiozero LED",
+    "Pi gpiozero 範例",
+    "新版 Pi GPIO",
+    "gpiozero blink",
+    "樹莓派簡易 LED"
+  ],
+  "intents_en": [
+    "gpiozero LED blink",
+    "Raspberry Pi gpiozero example",
+    "modern Pi GPIO library",
+    "gpiozero pwm",
+    "easy LED Pi"
+  ],
+  "slots": [
+    "led_pin"
+  ],
+  "code": "from gpiozero import LED\nfrom time import sleep\n\nled = LED({{led_pin}})\nwhile True:\n    led.on()\n    sleep(0.5)\n    led.off()\n    sleep(0.5)",
+  "language": "py",
+  "deps": [
+    "gpiozero"
+  ],
+  "summary_zh": "Raspberry Pi gpiozero 閃 LED"
+}

@@ -1,0 +1,34 @@
+{
+  "id": "llm-tools-070-langgraph-agent",
+  "category": "llm-tools/langgraph/agent",
+  "intents_zh": [
+    "langgraph agent",
+    "stategraph 範例",
+    "langgraph 起步",
+    "用 langgraph 寫 agent",
+    "graph-based agent",
+    "langgraph node",
+    "langgraph minimal",
+    "langgraph workflow"
+  ],
+  "intents_en": [
+    "langgraph agent",
+    "stategraph example",
+    "langgraph getting started",
+    "graph based agent",
+    "langgraph workflow",
+    "minimal langgraph",
+    "langgraph nodes",
+    "build agent langgraph"
+  ],
+  "slots": [
+    "model_name"
+  ],
+  "code": "from langgraph.graph import StateGraph, END\nfrom langchain_openai import ChatOpenAI\nfrom typing import TypedDict\n\nllm = ChatOpenAI(model=\"{{model_name}}\")\n\nclass S(TypedDict):\n    q: str\n    a: str\n\ndef think(s: S) -> S:\n    s[\"a\"] = llm.invoke(s[\"q\"]).content\n    return s\n\ng = StateGraph(S)\ng.add_node(\"think\", think)\ng.set_entry_point(\"think\")\ng.add_edge(\"think\", END)\napp = g.compile()\n\nprint(app.invoke({\"q\": \"hello\", \"a\": \"\"}))",
+  "language": "py",
+  "deps": [
+    "langgraph",
+    "langchain-openai"
+  ],
+  "summary_zh": "LangGraph StateGraph 最小 agent"
+}

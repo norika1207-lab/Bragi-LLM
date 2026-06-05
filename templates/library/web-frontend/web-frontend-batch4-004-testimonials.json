@@ -1,0 +1,30 @@
+{
+  "id": "web-frontend-batch4-004-testimonials",
+  "category": "web-frontend/nextjs/landing/testimonials",
+  "intents_zh": [
+    "放客戶見證",
+    "產生 testimonial 區塊",
+    "用戶評論卡片",
+    "客戶推薦語",
+    "social proof 區",
+    "引言加頭像列表"
+  ],
+  "intents_en": [
+    "testimonials section",
+    "customer reviews block",
+    "social proof quotes",
+    "user testimonial cards",
+    "review grid",
+    "quotes with avatars"
+  ],
+  "slots": [
+    "quote_one",
+    "author_one",
+    "quote_two",
+    "author_two"
+  ],
+  "code": "export default function Testimonials() {\n  return (\n    <section className=\"py-20 bg-gray-50\">\n      <div className=\"mx-auto max-w-4xl px-6 grid md:grid-cols-2 gap-8\">\n        <figure className=\"p-6 bg-white rounded-xl shadow\">\n          <blockquote className=\"text-gray-700\">\"{{quote_one}}\"</blockquote>\n          <figcaption className=\"mt-4 text-sm text-gray-500\">{{author_one}}</figcaption>\n        </figure>\n        <figure className=\"p-6 bg-white rounded-xl shadow\">\n          <blockquote className=\"text-gray-700\">\"{{quote_two}}\"</blockquote>\n          <figcaption className=\"mt-4 text-sm text-gray-500\">{{author_two}}</figcaption>\n        </figure>\n      </div>\n    </section>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "雙欄客戶見證引言"
+}

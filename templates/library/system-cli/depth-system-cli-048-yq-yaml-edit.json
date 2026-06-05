@@ -1,0 +1,27 @@
+{
+  "id": "depth-system-cli-048-yq-yaml-edit",
+  "category": "system-cli/yaml/edit",
+  "intents_zh": [
+    "yq 編輯 yaml",
+    "yq 設定值",
+    "yaml in-place 修改",
+    "yq merge"
+  ],
+  "intents_en": [
+    "yq edit yaml",
+    "yq set value",
+    "yaml in place edit",
+    "yq merge"
+  ],
+  "slots": [
+    "yaml_file",
+    "key_path",
+    "new_value"
+  ],
+  "code": "#!/usr/bin/env bash\nset -euo pipefail\n\nF=\"{{yaml_file}}\"\ncp \"$F\" \"$F.bak\"\n\nyq -i '{{key_path}} = \"{{new_value}}\"' \"$F\"\n\necho \"=== diff ===\"\ndiff \"$F.bak\" \"$F\" || true",
+  "language": "bash",
+  "deps": [
+    "yq"
+  ],
+  "summary_zh": "yq in-place 改 yaml 並輸出 diff"
+}

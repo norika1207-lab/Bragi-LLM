@@ -1,0 +1,30 @@
+{
+  "id": "web-frontend-batch1-035-codemirror-editor",
+  "category": "web-frontend/react/code-editor/codemirror",
+  "intents_zh": [
+    "CodeMirror 編輯器",
+    "輕量 code editor",
+    "React codemirror 包裝",
+    "程式碼輸入框",
+    "CodeMirror 6 React",
+    "語法高亮 editor"
+  ],
+  "intents_en": [
+    "codemirror editor",
+    "lightweight code editor",
+    "react codemirror wrapper",
+    "codemirror 6 react",
+    "syntax highlight editor",
+    "code input field"
+  ],
+  "slots": [
+    "component_name"
+  ],
+  "code": "import CodeMirror from '@uiw/react-codemirror';\nimport { javascript } from '@codemirror/lang-javascript';\nimport { useState } from 'react';\n\nexport default function {{component_name}}({ initial = '' }: { initial?: string }) {\n  const [code, setCode] = useState(initial);\n  return (\n    <CodeMirror\n      value={code}\n      height=\"300px\"\n      extensions={[javascript()]}\n      onChange={(v) => setCode(v)}\n    />\n  );\n}",
+  "language": "tsx",
+  "deps": [
+    "@uiw/react-codemirror",
+    "@codemirror/lang-javascript"
+  ],
+  "summary_zh": "CodeMirror 6 React 包裝 with JS 語法"
+}

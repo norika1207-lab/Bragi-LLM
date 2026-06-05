@@ -1,0 +1,28 @@
+{
+  "id": "web-frontend-batch1-002-signup-form",
+  "category": "web-frontend/react/forms/signup",
+  "intents_zh": [
+    "註冊表單 React",
+    "sign up 元件",
+    "新用戶註冊 form",
+    "給我 React 註冊頁",
+    "email 註冊含確認密碼",
+    "三欄位註冊表單"
+  ],
+  "intents_en": [
+    "react signup form",
+    "registration form",
+    "sign up component",
+    "create account form",
+    "new user form",
+    "email signup with confirm"
+  ],
+  "slots": [
+    "component_name",
+    "submit_url"
+  ],
+  "code": "import { useState } from 'react';\n\nexport default function {{component_name}}() {\n  const [form, setForm] = useState({ email: '', password: '', confirm: '' });\n  const [err, setErr] = useState('');\n\n  function update<K extends keyof typeof form>(k: K, v: string) {\n    setForm({ ...form, [k]: v });\n  }\n\n  async function onSubmit(e: React.FormEvent) {\n    e.preventDefault();\n    if (form.password !== form.confirm) {\n      setErr('Passwords do not match');\n      return;\n    }\n    await fetch('{{submit_url}}', {\n      method: 'POST',\n      headers: { 'Content-Type': 'application/json' },\n      body: JSON.stringify({ email: form.email, password: form.password }),\n    });\n  }\n\n  return (\n    <form onSubmit={onSubmit}>\n      <input type=\"email\" value={form.email} onChange={(e) => update('email', e.target.value)} required />\n      <input type=\"password\" value={form.password} onChange={(e) => update('password', e.target.value)} required />\n      <input type=\"password\" value={form.confirm} onChange={(e) => update('confirm', e.target.value)} required />\n      {err && <p>{err}</p>}\n      <button type=\"submit\">Create account</button>\n    </form>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "React 註冊表單含密碼確認校驗"
+}

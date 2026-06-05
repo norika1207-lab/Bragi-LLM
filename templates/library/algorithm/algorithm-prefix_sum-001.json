@@ -1,0 +1,21 @@
+{
+  "id": "algorithm-prefix_sum-001",
+  "category": "algorithm/prefix_sum/build",
+  "intents_zh": [
+    "前綴和",
+    "prefix sum",
+    "給我 prefix sum"
+  ],
+  "intents_en": [
+    "prefix sum",
+    "build prefix sum",
+    "range sum prefix"
+  ],
+  "slots": [
+    "fn_name"
+  ],
+  "code": "def {{fn_name}}(arr):\n    ps = [0]*(len(arr)+1)\n    for i, x in enumerate(arr):\n        ps[i+1] = ps[i] + x\n    def range_sum(l, r):\n        return ps[r+1] - ps[l]\n    return ps, range_sum",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "前綴和 + 區間和 closure"
+}

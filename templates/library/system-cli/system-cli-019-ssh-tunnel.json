@@ -1,0 +1,24 @@
+{
+  "id": "system-cli-019-ssh-tunnel",
+  "category": "system-cli/ssh/tunnel",
+  "intents_zh": [
+    "SSH 隧道轉發 port",
+    "本機 forward 到遠端 DB",
+    "ssh -L 範本"
+  ],
+  "intents_en": [
+    "ssh local port forward",
+    "ssh tunnel template",
+    "forward db port over ssh"
+  ],
+  "slots": [
+    "local_port",
+    "remote_host",
+    "remote_port",
+    "jump_host"
+  ],
+  "code": "#!/usr/bin/env bash\n# forward localhost:{{local_port}} -> {{remote_host}}:{{remote_port}} via {{jump_host}}\nssh -N -L {{local_port}}:{{remote_host}}:{{remote_port}} {{jump_host}}",
+  "language": "sh",
+  "deps": [],
+  "summary_zh": "SSH 本地 port forward"
+}

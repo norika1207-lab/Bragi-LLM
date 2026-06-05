@@ -1,0 +1,21 @@
+{
+  "id": "algorithm-graph-015",
+  "category": "algorithm/graph/word_ladder",
+  "intents_zh": [
+    "word ladder",
+    "單字接龍 bfs",
+    "給我 word ladder"
+  ],
+  "intents_en": [
+    "word ladder",
+    "shortest transformation",
+    "word ladder bfs"
+  ],
+  "slots": [
+    "fn_name"
+  ],
+  "code": "from collections import deque\n\ndef {{fn_name}}(begin, end, word_list):\n    words = set(word_list)\n    if end not in words: return 0\n    q = deque([(begin, 1)])\n    while q:\n        w, d = q.popleft()\n        if w == end: return d\n        for i in range(len(w)):\n            for c in 'abcdefghijklmnopqrstuvwxyz':\n                nw = w[:i] + c + w[i+1:]\n                if nw in words:\n                    words.remove(nw)\n                    q.append((nw, d+1))\n    return 0",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "BFS 單字接龍最短轉換步數"
+}

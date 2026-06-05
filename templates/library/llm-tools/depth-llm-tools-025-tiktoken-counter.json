@@ -1,0 +1,28 @@
+{
+  "id": "depth-llm-tools-025-tiktoken-counter",
+  "category": "llm-tools/tokens/tiktoken",
+  "intents_zh": [
+    "tiktoken 算 token",
+    "計算 prompt token 數",
+    "OpenAI tokenizer",
+    "訊息 token 統計",
+    "token 計數器"
+  ],
+  "intents_en": [
+    "tiktoken count tokens",
+    "compute prompt tokens",
+    "OpenAI tokenizer",
+    "message token count",
+    "token counter"
+  ],
+  "slots": [
+    "model",
+    "text"
+  ],
+  "code": "import tiktoken\n\nenc = tiktoken.encoding_for_model({{model}})\nn_tokens = len(enc.encode({{text}}))",
+  "language": "python",
+  "deps": [
+    "tiktoken"
+  ],
+  "summary_zh": "tiktoken 對指定 model 編碼算 token 數"
+}

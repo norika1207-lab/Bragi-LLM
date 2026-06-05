@@ -1,0 +1,29 @@
+{
+  "id": "web-backend-011-express-search",
+  "category": "web-backend/express/search",
+  "intents_zh": [
+    "express 搜尋 endpoint",
+    "加 q query 模糊搜尋",
+    "like 查詢 api",
+    "全文搜尋 endpoint",
+    "filter + search"
+  ],
+  "intents_en": [
+    "search endpoint express",
+    "fuzzy search api",
+    "full text search route",
+    "query string search",
+    "express search with filter"
+  ],
+  "slots": [
+    "table_name",
+    "search_column"
+  ],
+  "code": "const express = require('express');\nconst router = express.Router();\n\nrouter.get('/search', async (req, res) => {\n  const q = (req.query.q || '').trim();\n  if (!q) return res.json({ data: [] });\n  const rows = await db('{{table_name}}')\n    .whereILike('{{search_column}}', `%${q}%`)\n    .limit(50);\n  res.json({ data: rows, q });\n});\n\nmodule.exports = router;",
+  "language": "js",
+  "deps": [
+    "express",
+    "knex"
+  ],
+  "summary_zh": "Express ILIKE 模糊搜尋 endpoint"
+}

@@ -1,0 +1,23 @@
+{
+  "id": "system-cli-124-print-banner",
+  "category": "system-cli/python/output",
+  "intents_zh": [
+    "python pyfiglet banner",
+    "CLI 啟動 ASCII art",
+    "酷炫 banner"
+  ],
+  "intents_en": [
+    "pyfiglet banner",
+    "ascii art banner cli",
+    "print startup banner"
+  ],
+  "slots": [
+    "app_name"
+  ],
+  "code": "from pyfiglet import Figlet\n\nf = Figlet(font='slant')\nprint(f.renderText('{{app_name}}'))\nprint('  v0.1.0  ready')",
+  "language": "py",
+  "deps": [
+    "pyfiglet"
+  ],
+  "summary_zh": "pyfiglet 啟動 banner"
+}

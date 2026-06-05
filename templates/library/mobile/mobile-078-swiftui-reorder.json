@@ -1,0 +1,27 @@
+{
+  "id": "mobile-078-swiftui-reorder",
+  "category": "mobile/swiftui/list",
+  "intents_zh": [
+    "SwiftUI list 拖拉重排",
+    "SwiftUI onMove",
+    "SwiftUI sortable list",
+    "SwiftUI 重排 list",
+    "拖曳順序 SwiftUI",
+    "SwiftUI list move",
+    "SwiftUI editMode 重排"
+  ],
+  "intents_en": [
+    "swiftui list onMove",
+    "swiftui reorder list",
+    "sortable list swiftui",
+    "drag reorder swiftui",
+    "editMode swiftui list",
+    "swiftui list move",
+    "swiftui sort by drag"
+  ],
+  "slots": [],
+  "code": "import SwiftUI\nstruct R:View{@State var items=[\"alpha\",\"beta\",\"gamma\",\"delta\"]\n  var body:some View{NavigationStack{List{ForEach(items,id:\\.self){Text($0)}.onMove{from,to in items.move(fromOffsets:from,toOffset:to)}}.toolbar{EditButton()}}}}",
+  "language": "swift",
+  "deps": [],
+  "summary_zh": "SwiftUI List onMove + EditButton 重排"
+}

@@ -1,0 +1,25 @@
+{
+  "id": "web-backend-012-express-errorhandler",
+  "category": "web-backend/express/middleware",
+  "intents_zh": [
+    "express 全域錯誤處理",
+    "錯誤 middleware",
+    "catch all error handler",
+    "統一錯誤格式",
+    "async error wrapper"
+  ],
+  "intents_en": [
+    "global error handler express",
+    "express error middleware",
+    "async error wrapper",
+    "unified error response",
+    "catch all error route"
+  ],
+  "slots": [],
+  "code": "function asyncHandler(fn) {\n  return (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next);\n}\n\nfunction errorHandler(err, req, res, next) {\n  console.error(err);\n  const status = err.status || 500;\n  res.status(status).json({\n    error: err.message || 'internal error',\n    code: err.code || 'INTERNAL'\n  });\n}\n\nmodule.exports = { asyncHandler, errorHandler };",
+  "language": "js",
+  "deps": [
+    "express"
+  ],
+  "summary_zh": "Express async wrapper + 全域錯誤處理"
+}

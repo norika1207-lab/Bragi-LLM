@@ -1,0 +1,28 @@
+{
+  "id": "depth-llm-tools-043-eval-llm-judge",
+  "category": "llm-tools/eval/llm-judge",
+  "intents_zh": [
+    "LLM-as-judge 評分",
+    "用模型評另一模型",
+    "judge prompt",
+    "成對比較評估",
+    "model judge"
+  ],
+  "intents_en": [
+    "LLM-as-judge scoring",
+    "model judging another",
+    "judge prompt",
+    "pairwise comparison eval",
+    "model judge"
+  ],
+  "slots": [
+    "judge_call",
+    "question",
+    "answer",
+    "reference"
+  ],
+  "code": "def llm_judge({{judge_call}}, {{question}}, {{answer}}, {{reference}}):\n    p = f\"Question: {{{question}}}\\nReference: {{{reference}}}\\nAnswer: {{{answer}}}\\nScore 1-5 the answer's correctness. Reply with just the number.\"\n    out = {{judge_call}}(p).strip()\n    try: return int(out[0])\n    except: return 0",
+  "language": "python",
+  "deps": [],
+  "summary_zh": "請 judge 模型對答案打 1-5 分對照 reference"
+}

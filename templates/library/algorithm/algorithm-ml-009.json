@@ -1,0 +1,23 @@
+{
+  "id": "algorithm-ml-009",
+  "category": "algorithm/ml/softmax",
+  "intents_zh": [
+    "softmax",
+    "softmax 數值穩定",
+    "給我 softmax"
+  ],
+  "intents_en": [
+    "softmax",
+    "numerically stable softmax",
+    "softmax numpy"
+  ],
+  "slots": [
+    "fn_name"
+  ],
+  "code": "import numpy as np\n\ndef {{fn_name}}(x, axis=-1):\n    x = np.asarray(x, dtype=float)\n    x = x - np.max(x, axis=axis, keepdims=True)\n    e = np.exp(x)\n    return e / e.sum(axis=axis, keepdims=True)",
+  "language": "py",
+  "deps": [
+    "numpy"
+  ],
+  "summary_zh": "數值穩定 softmax"
+}

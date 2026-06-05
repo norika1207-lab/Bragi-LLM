@@ -1,0 +1,28 @@
+{
+  "id": "depth-firmware-001-sd-card-mount",
+  "category": "firmware/storage/sd",
+  "intents_zh": [
+    "掛載 SD 卡",
+    "SPI SD 卡初始化",
+    "ESP32 SD 卡 mount",
+    "讀取 SD 卡",
+    "SD 卡 SPI 介面"
+  ],
+  "intents_en": [
+    "mount sd card",
+    "init sd over spi",
+    "esp32 sd mount",
+    "read sd card",
+    "sd spi setup"
+  ],
+  "slots": [
+    "cs_pin",
+    "mount_point"
+  ],
+  "code": "#include \"esp_vfs_fat.h\"\n#include \"sdmmc_cmd.h\"\n#include \"driver/sdspi_host.h\"\n\nsdmmc_host_t host = SDSPI_HOST_DEFAULT();\nsdspi_device_config_t slot = SDSPI_DEVICE_CONFIG_DEFAULT();\nslot.gpio_cs = {{cs_pin}};\nesp_vfs_fat_sdmmc_mount_config_t mcfg = { .format_if_mount_failed = false, .max_files = 5 };\nsdmmc_card_t *card;\nesp_vfs_fat_sdspi_mount(\"{{mount_point}}\", &host, &slot, &mcfg, &card);",
+  "language": "c",
+  "deps": [
+    "esp-idf"
+  ],
+  "summary_zh": "ESP-IDF 透過 SPI 掛載 SD 卡到 VFS"
+}

@@ -1,0 +1,28 @@
+{
+  "id": "depth-firmware-039-ds18b20-onewire",
+  "category": "firmware/sensor/onewire",
+  "intents_zh": [
+    "DS18B20 讀溫度",
+    "OneWire 溫度感測",
+    "DallasTemperature",
+    "防水溫度探頭",
+    "1-wire 匯流排"
+  ],
+  "intents_en": [
+    "ds18b20 read temp",
+    "onewire temperature",
+    "dallastemperature",
+    "waterproof temp probe",
+    "1-wire bus"
+  ],
+  "slots": [
+    "onewire_pin"
+  ],
+  "code": "#include <OneWire.h>\n#include <DallasTemperature.h>\nOneWire ow({{onewire_pin}});\nDallasTemperature s(&ow);\nvoid setup() { Serial.begin(115200); s.begin(); }\nvoid loop() {\n    s.requestTemperatures();\n    Serial.println(s.getTempCByIndex(0));\n    delay(1000);\n}",
+  "language": "cpp",
+  "deps": [
+    "OneWire",
+    "DallasTemperature"
+  ],
+  "summary_zh": "DS18B20 OneWire 讀取攝氏溫度"
+}

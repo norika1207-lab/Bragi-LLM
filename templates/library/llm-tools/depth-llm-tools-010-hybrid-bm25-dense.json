@@ -1,0 +1,27 @@
+{
+  "id": "depth-llm-tools-010-hybrid-bm25-dense",
+  "category": "llm-tools/retrieval/hybrid",
+  "intents_zh": [
+    "BM25 加 dense 混合檢索",
+    "RRF 融合",
+    "稀疏密集合並",
+    "hybrid search",
+    "檢索融合分數"
+  ],
+  "intents_en": [
+    "BM25 plus dense hybrid",
+    "RRF fusion",
+    "sparse dense merge",
+    "hybrid search",
+    "retrieval score fusion"
+  ],
+  "slots": [
+    "bm25_results",
+    "dense_results",
+    "k"
+  ],
+  "code": "def rrf_fuse({{bm25_results}}, {{dense_results}}, {{k}}=60):\n    scores = {}\n    for rank, doc_id in enumerate({{bm25_results}}):\n        scores[doc_id] = scores.get(doc_id, 0) + 1.0 / ({{k}} + rank)\n    for rank, doc_id in enumerate({{dense_results}}):\n        scores[doc_id] = scores.get(doc_id, 0) + 1.0 / ({{k}} + rank)\n    return sorted(scores.items(), key=lambda x: -x[1])",
+  "language": "python",
+  "deps": [],
+  "summary_zh": "Reciprocal Rank Fusion 把 BM25 與 dense 排序合併"
+}

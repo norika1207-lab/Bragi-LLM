@@ -1,0 +1,33 @@
+{
+  "id": "web-frontend-batch4-002-features",
+  "category": "web-frontend/nextjs/landing/features",
+  "intents_zh": [
+    "寫一個三欄功能展示",
+    "產生 features 區塊",
+    "需要圖示加說明的特色卡",
+    "做產品特色三格",
+    "feature grid 用 tailwind",
+    "落地頁功能列表"
+  ],
+  "intents_en": [
+    "features section with 3 columns",
+    "feature grid tailwind",
+    "product highlights block",
+    "icon feature cards",
+    "landing features list",
+    "three-column features"
+  ],
+  "slots": [
+    "section_title",
+    "feature_one_title",
+    "feature_one_desc",
+    "feature_two_title",
+    "feature_two_desc",
+    "feature_three_title",
+    "feature_three_desc"
+  ],
+  "code": "export default function Features() {\n  const items = [\n    { title: '{{feature_one_title}}', desc: '{{feature_one_desc}}' },\n    { title: '{{feature_two_title}}', desc: '{{feature_two_desc}}' },\n    { title: '{{feature_three_title}}', desc: '{{feature_three_desc}}' },\n  ];\n  return (\n    <section className=\"py-20 bg-white\">\n      <div className=\"mx-auto max-w-6xl px-6\">\n        <h2 className=\"text-3xl font-bold text-center mb-12\">{{section_title}}</h2>\n        <div className=\"grid md:grid-cols-3 gap-8\">\n          {items.map((f) => (\n            <div key={f.title} className=\"p-6 rounded-xl border border-gray-100 shadow-sm\">\n              <h3 className=\"text-xl font-semibold\">{f.title}</h3>\n              <p className=\"mt-2 text-gray-600\">{f.desc}</p>\n            </div>\n          ))}\n        </div>\n      </div>\n    </section>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "三欄產品特色區塊"
+}

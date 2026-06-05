@@ -1,0 +1,27 @@
+{
+  "id": "depth-mobile-055-biometric-rn",
+  "category": "mobile/biometric/reactnative",
+  "intents_zh": [
+    "RN biometrics",
+    "react-native-biometrics",
+    "simplePrompt",
+    "跨平台指紋臉部",
+    "RN 生物辨識"
+  ],
+  "intents_en": [
+    "RN biometrics",
+    "react-native-biometrics",
+    "simplePrompt",
+    "cross platform biometric",
+    "RN face fingerprint"
+  ],
+  "slots": [
+    "prompt_message"
+  ],
+  "code": "import ReactNativeBiometrics from 'react-native-biometrics';\nconst rnBio = new ReactNativeBiometrics();\nconst { available } = await rnBio.isSensorAvailable();\nif (available) {\n  const { success } = await rnBio.simplePrompt({ promptMessage: '{{prompt_message}}' });\n  console.log('auth', success);\n}",
+  "language": "ts",
+  "deps": [
+    "react-native-biometrics"
+  ],
+  "summary_zh": "RN 生物辨識簡易 prompt"
+}

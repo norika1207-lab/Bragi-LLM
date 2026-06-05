@@ -1,0 +1,28 @@
+{
+  "id": "web-backend-035-flask-upload",
+  "category": "web-backend/flask/upload",
+  "intents_zh": [
+    "flask 檔案上傳",
+    "flask multipart upload",
+    "儲存 upload 到 disk",
+    "flask receive file",
+    "限制檔案大小"
+  ],
+  "intents_en": [
+    "flask file upload",
+    "flask multipart",
+    "save uploaded file flask",
+    "upload size limit flask",
+    "receive file flask"
+  ],
+  "slots": [
+    "upload_dir",
+    "max_size_mb"
+  ],
+  "code": "from flask import Flask, request, jsonify\nfrom werkzeug.utils import secure_filename\nimport os\n\napp = Flask(__name__)\napp.config['MAX_CONTENT_LENGTH'] = {{max_size_mb}} * 1024 * 1024\nUPLOAD_DIR = '{{upload_dir}}'\nos.makedirs(UPLOAD_DIR, exist_ok=True)\n\n@app.post('/upload')\ndef upload():\n    f = request.files.get('file')\n    if not f: return jsonify(error='no file'), 400\n    name = secure_filename(f.filename)\n    path = os.path.join(UPLOAD_DIR, name)\n    f.save(path)\n    return jsonify(filename=name, size=os.path.getsize(path))",
+  "language": "py",
+  "deps": [
+    "flask"
+  ],
+  "summary_zh": "Flask 安全檔案上傳"
+}

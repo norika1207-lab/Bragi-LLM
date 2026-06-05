@@ -1,0 +1,27 @@
+{
+  "id": "web-frontend-batch2-035-pricing-table",
+  "category": "web-frontend/react/layout/pricing-table",
+  "intents_zh": [
+    "定價表",
+    "pricing table",
+    "方案比較",
+    "訂閱方案",
+    "價格卡片",
+    "plan 比較"
+  ],
+  "intents_en": [
+    "pricing table",
+    "plan comparison",
+    "pricing cards",
+    "subscription tiers",
+    "price plans",
+    "pricing section"
+  ],
+  "slots": [
+    "plans"
+  ],
+  "code": "export function Pricing() {\n  const plans = {{plans}};\n  return (\n    <div className=\"grid gap-6 md:grid-cols-3\">\n      {plans.map((p) => (\n        <div key={p.name} className={`rounded-2xl border p-8 ${p.featured ? 'border-blue-600 shadow-lg' : ''}`}>\n          <h3 className=\"text-lg font-semibold\">{p.name}</h3>\n          <div className=\"my-4 text-4xl font-bold\">${p.price}<span className=\"text-base text-gray-500\">/mo</span></div>\n          <ul className=\"mb-6 space-y-2 text-sm\">\n            {p.features.map((f) => <li key={f}>✓ {f}</li>)}\n          </ul>\n          <button className={`w-full rounded-lg py-2 ${p.featured ? 'bg-blue-600 text-white' : 'border'}`}>Choose {p.name}</button>\n        </div>\n      ))}\n    </div>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "三欄訂閱方案比較表"
+}

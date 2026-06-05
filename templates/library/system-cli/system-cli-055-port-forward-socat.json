@@ -1,0 +1,25 @@
+{
+  "id": "system-cli-055-port-forward-socat",
+  "category": "system-cli/net/port",
+  "intents_zh": [
+    "socat 轉發 port",
+    "本機 port 轉到遠端",
+    "tcp port forwarder"
+  ],
+  "intents_en": [
+    "socat port forward",
+    "tcp forwarder",
+    "forward port via socat"
+  ],
+  "slots": [
+    "listen_port",
+    "target_host",
+    "target_port"
+  ],
+  "code": "#!/usr/bin/env bash\nset -euo pipefail\n# forward localhost:{{listen_port}} -> {{target_host}}:{{target_port}}\nexec socat -d -d \\\n  TCP-LISTEN:{{listen_port}},reuseaddr,fork \\\n  TCP:{{target_host}}:{{target_port}}",
+  "language": "sh",
+  "deps": [
+    "socat"
+  ],
+  "summary_zh": "socat TCP port 轉發"
+}

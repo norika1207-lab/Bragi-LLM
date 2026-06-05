@@ -1,0 +1,28 @@
+{
+  "id": "algorithm-search-001",
+  "category": "algorithm/search/binary",
+  "intents_zh": [
+    "二分搜",
+    "binary search",
+    "給我 binary search",
+    "二元搜尋找索引",
+    "有序陣列搜尋",
+    "二分查找"
+  ],
+  "intents_en": [
+    "binary search",
+    "binsearch",
+    "find in sorted array",
+    "write binary search",
+    "bsearch index"
+  ],
+  "slots": [
+    "fn_name",
+    "arr_name",
+    "target_name"
+  ],
+  "code": "def {{fn_name}}({{arr_name}}, {{target_name}}):\n    lo, hi = 0, len({{arr_name}}) - 1\n    while lo <= hi:\n        mid = (lo + hi) // 2\n        if {{arr_name}}[mid] == {{target_name}}:\n            return mid\n        if {{arr_name}}[mid] < {{target_name}}:\n            lo = mid + 1\n        else:\n            hi = mid - 1\n    return -1",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "經典二分搜，找不到回 -1"
+}

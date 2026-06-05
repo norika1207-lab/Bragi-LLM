@@ -1,0 +1,27 @@
+{
+  "id": "web-frontend-batch2-030-popover",
+  "category": "web-frontend/react/layout/popover",
+  "intents_zh": [
+    "popover",
+    "彈出小卡",
+    "點擊彈窗",
+    "資訊彈出",
+    "floating popover",
+    "小卡片提示"
+  ],
+  "intents_en": [
+    "popover",
+    "click popup",
+    "floating card",
+    "info popover",
+    "menu popover",
+    "trigger popover"
+  ],
+  "slots": [
+    "popover_content"
+  ],
+  "code": "import { useState } from 'react';\n\nexport function Popover({ trigger }) {\n  const [open, setOpen] = useState(false);\n  return (\n    <div className=\"relative inline-block\">\n      <button onClick={() => setOpen(!open)}>{trigger}</button>\n      {open && (\n        <>\n          <div className=\"fixed inset-0\" onClick={() => setOpen(false)} />\n          <div className=\"absolute left-0 top-full z-10 mt-2 w-64 rounded-lg border bg-white p-4 shadow-lg\">\n            {{popover_content}}\n          </div>\n        </>\n      )}\n    </div>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "點擊觸發的 popover 小卡"
+}

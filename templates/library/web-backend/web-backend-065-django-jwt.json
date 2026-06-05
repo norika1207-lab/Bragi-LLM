@@ -1,0 +1,27 @@
+{
+  "id": "web-backend-065-django-jwt",
+  "category": "web-backend/django/auth",
+  "intents_zh": [
+    "django simplejwt",
+    "DRF + jwt 認證",
+    "加 token endpoint django",
+    "jwt + refresh django",
+    "保護 endpoint DRF"
+  ],
+  "intents_en": [
+    "django simplejwt",
+    "DRF jwt auth",
+    "token endpoint django",
+    "jwt refresh django",
+    "protected api django"
+  ],
+  "slots": [],
+  "code": "# settings.py snippet\nREST_FRAMEWORK = {\n    'DEFAULT_AUTHENTICATION_CLASSES': (\n        'rest_framework_simplejwt.authentication.JWTAuthentication',\n    )\n}\n\n# urls.py\nfrom django.urls import path\nfrom rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView\n\nurlpatterns = [\n    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),\n    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),\n]",
+  "language": "py",
+  "deps": [
+    "django",
+    "djangorestframework",
+    "djangorestframework-simplejwt"
+  ],
+  "summary_zh": "DRF SimpleJWT token + refresh"
+}

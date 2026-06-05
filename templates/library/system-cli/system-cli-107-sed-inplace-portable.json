@@ -1,0 +1,23 @@
+{
+  "id": "system-cli-107-sed-inplace-portable",
+  "category": "system-cli/text/sed",
+  "intents_zh": [
+    "跨平台 sed -i",
+    "mac linux sed 兼容",
+    "原地取代"
+  ],
+  "intents_en": [
+    "portable sed in place",
+    "mac linux sed compat",
+    "sed inplace cross platform"
+  ],
+  "slots": [
+    "file",
+    "pattern",
+    "replacement"
+  ],
+  "code": "#!/usr/bin/env bash\nset -euo pipefail\nFILE=\"{{file}}\"\nif [[ \"$(uname)\" == \"Darwin\" ]]; then\n  sed -i '' \"s|{{pattern}}|{{replacement}}|g\" \"$FILE\"\nelse\n  sed -i \"s|{{pattern}}|{{replacement}}|g\" \"$FILE\"\nfi",
+  "language": "sh",
+  "deps": [],
+  "summary_zh": "跨平台 sed -i"
+}

@@ -1,0 +1,31 @@
+{
+  "id": "mobile-039-flutter-upload",
+  "category": "mobile/flutter/media",
+  "intents_zh": [
+    "Flutter 上傳照片",
+    "flutter multipart upload",
+    "flutter post 圖片",
+    "上傳檔案 flutter",
+    "flutter http multipart",
+    "照片上傳後端 flutter",
+    "flutter file upload"
+  ],
+  "intents_en": [
+    "flutter upload photo",
+    "flutter multipart upload",
+    "flutter post image",
+    "flutter file upload",
+    "upload to server flutter",
+    "multipart request flutter",
+    "send photo flutter"
+  ],
+  "slots": [
+    "upload_url"
+  ],
+  "code": "import 'package:http/http.dart' as http;\nFuture<void> upload(String path)async{\n  final req=http.MultipartRequest('POST',Uri.parse('{{upload_url}}'));\n  req.files.add(await http.MultipartFile.fromPath('file',path));\n  final r=await req.send();\n  if(r.statusCode>=300)throw Exception('upload failed');}",
+  "language": "dart",
+  "deps": [
+    "http"
+  ],
+  "summary_zh": "Flutter multipart 上傳檔案"
+}

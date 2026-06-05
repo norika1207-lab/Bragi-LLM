@@ -1,0 +1,26 @@
+{
+  "id": "firmware-037-esp32-touch-wakeup",
+  "category": "firmware/esp32/power",
+  "intents_zh": [
+    "觸控喚醒 ESP32",
+    "touch wakeup deep sleep",
+    "摸醒 ESP32",
+    "低功耗觸控",
+    "ESP32 touch wake"
+  ],
+  "intents_en": [
+    "ESP32 touch wakeup from deep sleep",
+    "wake on touch",
+    "low power touch",
+    "touchpad wakeup",
+    "sleep until touch"
+  ],
+  "slots": [
+    "touch_pin",
+    "threshold"
+  ],
+  "code": "#include <esp_sleep.h>\n\nvoid setup() {\n  Serial.begin(115200);\n  esp_sleep_get_wakeup_cause();\n  touchAttachInterrupt(T0, []() {}, {{threshold}});\n  esp_sleep_enable_touchpad_wakeup();\n  delay(500);\n  esp_deep_sleep_start();\n}\n\nvoid loop() {}",
+  "language": "ino",
+  "deps": [],
+  "summary_zh": "ESP32 觸控喚醒深層睡眠"
+}

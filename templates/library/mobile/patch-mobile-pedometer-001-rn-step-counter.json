@@ -1,0 +1,35 @@
+{
+  "id": "patch-mobile-pedometer-001-rn-step-counter",
+  "category": "mobile/health/step-counter",
+  "intents_zh": [
+    "做一個 React Native 計步器",
+    "用 expo-pedometer 顯示今日步數",
+    "RN 接 pedometer API",
+    "手機步數計算元件",
+    "幫我寫個今日步數畫面",
+    "expo 計步功能",
+    "做個步數追蹤 component"
+  ],
+  "intents_en": [
+    "build a step counter in React Native",
+    "use expo-pedometer for today's steps",
+    "RN pedometer integration",
+    "daily steps screen",
+    "step tracker component",
+    "expo step counting",
+    "show step count today"
+  ],
+  "slots": [
+    "component_name",
+    "goal_steps",
+    "accent_color"
+  ],
+  "code": "import React, { useEffect, useState } from 'react';\nimport { View, Text, StyleSheet } from 'react-native';\nimport { Pedometer } from 'expo-sensors';\n\nexport default function {{component_name}}() {\n  const [steps, setSteps] = useState(0);\n  const goal = {{goal_steps}};\n\n  useEffect(() => {\n    const start = new Date();\n    start.setHours(0, 0, 0, 0);\n    Pedometer.getStepCountAsync(start, new Date())\n      .then(r => setSteps(r.steps))\n      .catch(() => setSteps(0));\n    const sub = Pedometer.watchStepCount(r => setSteps(s => s + r.steps));\n    return () => sub && sub.remove();\n  }, []);\n\n  const pct = Math.min(100, Math.round((steps / goal) * 100));\n  return (\n    <View style={styles.box}>\n      <Text style={styles.num}>{steps}</Text>\n      <Text style={styles.sub}>/ {goal} steps ({pct}%)</Text>\n    </View>\n  );\n}\nconst styles = StyleSheet.create({\n  box: { padding: 24, alignItems: 'center' },\n  num: { fontSize: 56, fontWeight: '700', color: '{{accent_color}}' },\n  sub: { fontSize: 14, color: '#666', marginTop: 4 }\n});",
+  "language": "tsx",
+  "deps": [
+    "expo-sensors",
+    "react-native",
+    "react"
+  ],
+  "summary_zh": "React Native + expo-pedometer 今日步數元件，含目標進度百分比"
+}

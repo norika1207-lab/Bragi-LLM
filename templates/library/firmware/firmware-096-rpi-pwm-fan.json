@@ -1,0 +1,28 @@
+{
+  "id": "firmware-096-rpi-pwm-fan",
+  "category": "firmware/rpi/actuator",
+  "intents_zh": [
+    "樹莓派風扇 PWM",
+    "Pi 控制風扇",
+    "gpiozero PWMOutputDevice",
+    "Pi 散熱",
+    "Pi fan control"
+  ],
+  "intents_en": [
+    "Raspberry Pi PWM fan",
+    "gpiozero PWMOutputDevice",
+    "control fan Pi",
+    "Pi cooling fan",
+    "PWM speed Pi"
+  ],
+  "slots": [
+    "fan_pin",
+    "duty"
+  ],
+  "code": "from gpiozero import PWMOutputDevice\nimport time\n\nfan = PWMOutputDevice({{fan_pin}}, frequency=25000)\nfan.value = {{duty}}\ntry:\n    while True:\n        time.sleep(1)\nexcept KeyboardInterrupt:\n    fan.off()",
+  "language": "py",
+  "deps": [
+    "gpiozero"
+  ],
+  "summary_zh": "Raspberry Pi PWM 控制風扇轉速"
+}

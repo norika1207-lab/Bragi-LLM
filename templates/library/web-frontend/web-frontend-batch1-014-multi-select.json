@@ -1,0 +1,27 @@
+{
+  "id": "web-frontend-batch1-014-multi-select",
+  "category": "web-frontend/react/selects/multi",
+  "intents_zh": [
+    "多選下拉",
+    "multi select React",
+    "checkbox 下拉",
+    "複選 select",
+    "多選元件",
+    "multi-select dropdown"
+  ],
+  "intents_en": [
+    "multi select",
+    "react multi select",
+    "checkbox dropdown",
+    "multiple selection",
+    "multi pick component",
+    "react select multiple"
+  ],
+  "slots": [
+    "component_name"
+  ],
+  "code": "import { useState } from 'react';\n\ntype Props = { options: string[]; onChange?: (v: string[]) => void };\n\nexport default function {{component_name}}({ options, onChange }: Props) {\n  const [selected, setSelected] = useState<string[]>([]);\n\n  function toggle(o: string) {\n    const next = selected.includes(o) ? selected.filter((x) => x !== o) : [...selected, o];\n    setSelected(next);\n    onChange?.(next);\n  }\n\n  return (\n    <div className=\"border rounded p-2\">\n      {options.map((o) => (\n        <label key={o} className=\"block\">\n          <input type=\"checkbox\" checked={selected.includes(o)} onChange={() => toggle(o)} />\n          <span className=\"ml-2\">{o}</span>\n        </label>\n      ))}\n    </div>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "checkbox-based 多選元件"
+}

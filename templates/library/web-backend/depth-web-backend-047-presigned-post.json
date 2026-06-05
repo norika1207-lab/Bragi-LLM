@@ -1,0 +1,27 @@
+{
+  "id": "depth-web-backend-047-presigned-post",
+  "category": "web-backend/storage/presigned-post",
+  "intents_zh": [
+    "S3 presigned POST policy",
+    "限制檔案大小上傳",
+    "表單欄位上傳",
+    "createPresignedPost",
+    "client form upload"
+  ],
+  "intents_en": [
+    "s3 presigned post policy",
+    "constrain file size upload",
+    "form fields upload",
+    "createpresignedpost",
+    "client form upload"
+  ],
+  "slots": [
+    "bucket"
+  ],
+  "code": "import { createPresignedPost } from '@aws-sdk/s3-presigned-post';\nexport function presignedPost(key) {\n  return createPresignedPost(s3, {\n    Bucket: '{{bucket}}', Key: key,\n    Conditions: [['content-length-range', 0, 10 * 1024 * 1024]],\n    Expires: 600,\n  });\n}",
+  "language": "ts",
+  "deps": [
+    "@aws-sdk/s3-presigned-post"
+  ],
+  "summary_zh": "S3 presigned POST 含大小限制"
+}

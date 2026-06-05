@@ -1,0 +1,21 @@
+{
+  "id": "database-devops-150-gha-self-hosted",
+  "category": "database-devops/cicd/github-actions",
+  "intents_zh": [
+    "GHA self-hosted runner",
+    "自架 runner workflow",
+    "跑在自己機器"
+  ],
+  "intents_en": [
+    "github actions self-hosted runner",
+    "custom runner workflow",
+    "run on own machine"
+  ],
+  "slots": [
+    "label"
+  ],
+  "code": "name: Self-hosted\non: [workflow_dispatch]\n\njobs:\n  build:\n    runs-on: [self-hosted, linux, {{label}}]\n    steps:\n      - uses: actions/checkout@v4\n      - run: |\n          echo \"running on $(hostname)\"\n          uname -a",
+  "language": "yaml",
+  "deps": [],
+  "summary_zh": "GHA self-hosted runner workflow"
+}

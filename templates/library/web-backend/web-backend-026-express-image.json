@@ -1,0 +1,30 @@
+{
+  "id": "web-backend-026-express-image",
+  "category": "web-backend/express/image",
+  "intents_zh": [
+    "sharp 圖片處理",
+    "縮圖 endpoint",
+    "resize image express",
+    "裁切圖片",
+    "image transform api"
+  ],
+  "intents_en": [
+    "image resize sharp",
+    "thumbnail endpoint",
+    "image processing express",
+    "sharp transform image",
+    "image resize api"
+  ],
+  "slots": [
+    "max_width",
+    "format"
+  ],
+  "code": "const express = require('express');\nconst sharp = require('sharp');\nconst multer = require('multer');\nconst upload = multer({ storage: multer.memoryStorage() });\nconst router = express.Router();\n\nrouter.post('/resize', upload.single('image'), async (req, res) => {\n  try {\n    const out = await sharp(req.file.buffer)\n      .resize({ width: {{max_width}}, withoutEnlargement: true })\n      .toFormat('{{format}}', { quality: 80 })\n      .toBuffer();\n    res.set('Content-Type', 'image/{{format}}').send(out);\n  } catch (e) {\n    res.status(400).json({ error: e.message });\n  }\n});\n\nmodule.exports = router;",
+  "language": "js",
+  "deps": [
+    "express",
+    "sharp",
+    "multer"
+  ],
+  "summary_zh": "Sharp 縮圖 endpoint"
+}

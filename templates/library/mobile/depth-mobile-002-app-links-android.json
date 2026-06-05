@@ -1,0 +1,26 @@
+{
+  "id": "depth-mobile-002-app-links-android",
+  "category": "mobile/deeplink/applinks",
+  "intents_zh": [
+    "Android App Links",
+    "intent filter 深層連結",
+    "autoVerify 設定",
+    "Activity 接 deep link",
+    "解析 intent data"
+  ],
+  "intents_en": [
+    "Android app links",
+    "intent filter deep link",
+    "autoVerify manifest",
+    "Activity deep link",
+    "parse intent data"
+  ],
+  "slots": [
+    "host",
+    "scheme"
+  ],
+  "code": "<activity android:name=\".DeepLinkActivity\" android:exported=\"true\">\n  <intent-filter android:autoVerify=\"true\">\n    <action android:name=\"android.intent.action.VIEW\"/>\n    <category android:name=\"android.intent.category.DEFAULT\"/>\n    <category android:name=\"android.intent.category.BROWSABLE\"/>\n    <data android:scheme=\"{{scheme}}\" android:host=\"{{host}}\"/>\n  </intent-filter>\n</activity>",
+  "language": "xml",
+  "deps": [],
+  "summary_zh": "Android App Links manifest 配置"
+}

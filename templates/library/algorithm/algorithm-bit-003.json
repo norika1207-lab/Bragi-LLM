@@ -1,0 +1,21 @@
+{
+  "id": "algorithm-bit-003",
+  "category": "algorithm/bit/power_of_two",
+  "intents_zh": [
+    "判斷 2 的冪",
+    "is power of two",
+    "給我 is_power_of_2"
+  ],
+  "intents_en": [
+    "check power of two",
+    "is power of 2",
+    "bit trick power of two"
+  ],
+  "slots": [
+    "fn_name"
+  ],
+  "code": "def {{fn_name}}(n):\n    return n > 0 and (n & (n - 1)) == 0",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "判斷是否為 2 的冪"
+}

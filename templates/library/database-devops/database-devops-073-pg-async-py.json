@@ -1,0 +1,23 @@
+{
+  "id": "database-devops-073-pg-async-py",
+  "category": "database-devops/connection/postgres",
+  "intents_zh": [
+    "asyncpg 連線池",
+    "python async pg",
+    "asyncpg pool"
+  ],
+  "intents_en": [
+    "asyncpg pool",
+    "python async postgres",
+    "asyncpg connection"
+  ],
+  "slots": [
+    "db_url"
+  ],
+  "code": "import asyncpg\nimport os\n\npool = None\n\nasync def get_pool():\n    global pool\n    if pool is None:\n        pool = await asyncpg.create_pool('{{db_url}}', min_size=2, max_size=20)\n    return pool\n\nasync def fetch_all(query: str, *args):\n    p = await get_pool()\n    async with p.acquire() as conn:\n        return await conn.fetch(query, *args)",
+  "language": "py",
+  "deps": [
+    "asyncpg"
+  ],
+  "summary_zh": "asyncpg 連線池基本封裝"
+}

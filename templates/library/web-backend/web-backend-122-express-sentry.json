@@ -1,0 +1,28 @@
+{
+  "id": "web-backend-122-express-sentry",
+  "category": "web-backend/express/observability",
+  "intents_zh": [
+    "express sentry 整合",
+    "錯誤上報 sentry",
+    "加 sentry middleware",
+    "express tracing sentry",
+    "sentry init node"
+  ],
+  "intents_en": [
+    "express sentry integration",
+    "error reporting sentry",
+    "sentry middleware express",
+    "sentry tracing express",
+    "sentry init node"
+  ],
+  "slots": [
+    "dsn_env"
+  ],
+  "code": "const Sentry = require('@sentry/node');\nconst express = require('express');\n\nSentry.init({\n  dsn: process.env.{{dsn_env}},\n  tracesSampleRate: 0.1\n});\n\nconst app = express();\napp.use(Sentry.Handlers.requestHandler());\napp.use(Sentry.Handlers.tracingHandler());\n// routes here\napp.use(Sentry.Handlers.errorHandler());\n\nmodule.exports = app;",
+  "language": "js",
+  "deps": [
+    "@sentry/node",
+    "express"
+  ],
+  "summary_zh": "Express Sentry 錯誤上報"
+}

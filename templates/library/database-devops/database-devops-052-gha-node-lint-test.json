@@ -1,0 +1,21 @@
+{
+  "id": "database-devops-052-gha-node-lint-test",
+  "category": "database-devops/cicd/github-actions",
+  "intents_zh": [
+    "GitHub Actions node lint + test",
+    "node CI workflow",
+    "PR 自動跑 test"
+  ],
+  "intents_en": [
+    "github actions node ci",
+    "lint test workflow",
+    "pr ci node"
+  ],
+  "slots": [
+    "node_version"
+  ],
+  "code": "name: CI\non:\n  push:\n    branches: [main]\n  pull_request:\n\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-node@v4\n        with:\n          node-version: '{{node_version}}'\n          cache: 'npm'\n      - run: npm ci\n      - run: npm run lint\n      - run: npm test -- --coverage\n      - uses: codecov/codecov-action@v4",
+  "language": "yaml",
+  "deps": [],
+  "summary_zh": "GitHub Actions node lint + test workflow"
+}

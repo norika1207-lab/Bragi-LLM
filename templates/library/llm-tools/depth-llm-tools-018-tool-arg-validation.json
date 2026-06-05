@@ -1,0 +1,28 @@
+{
+  "id": "depth-llm-tools-018-tool-arg-validation",
+  "category": "llm-tools/tool-use/validation",
+  "intents_zh": [
+    "tool 參數驗證",
+    "pydantic 驗 function args",
+    "JSON schema 驗證",
+    "拒絕無效呼叫",
+    "tool 安全檢查"
+  ],
+  "intents_en": [
+    "tool argument validation",
+    "pydantic validate function args",
+    "JSON schema validate",
+    "reject invalid call",
+    "tool safety check"
+  ],
+  "slots": [
+    "schema",
+    "args_json"
+  ],
+  "code": "import json, jsonschema\n\ndef validate_call({{schema}}, {{args_json}}):\n    try:\n        args = json.loads({{args_json}})\n        jsonschema.validate(args, {{schema}})\n        return args, None\n    except (json.JSONDecodeError, jsonschema.ValidationError) as e:\n        return None, str(e)",
+  "language": "python",
+  "deps": [
+    "jsonschema"
+  ],
+  "summary_zh": "用 JSON schema 驗 tool call 參數，錯就回錯給模型重試"
+}

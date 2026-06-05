@@ -1,0 +1,22 @@
+{
+  "id": "system-cli-128-bash-array-loop",
+  "category": "system-cli/shell/loops",
+  "intents_zh": [
+    "bash array 跑 loop",
+    "批次處理 server list",
+    "bash for over array"
+  ],
+  "intents_en": [
+    "bash loop array",
+    "iterate list bash",
+    "for over hosts shell"
+  ],
+  "slots": [
+    "array_name",
+    "action_cmd"
+  ],
+  "code": "#!/usr/bin/env bash\nset -euo pipefail\n{{array_name}}=(\"host-a\" \"host-b\" \"host-c\")\nfor h in \"${{{array_name}}[@]}\"; do\n  echo \"==> $h\"\n  {{action_cmd}} \"$h\" || echo \"  failed $h\"\ndone",
+  "language": "sh",
+  "deps": [],
+  "summary_zh": "bash array for 迴圈"
+}

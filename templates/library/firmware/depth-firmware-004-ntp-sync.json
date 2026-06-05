@@ -1,0 +1,28 @@
+{
+  "id": "depth-firmware-004-ntp-sync",
+  "category": "firmware/network/ntp",
+  "intents_zh": [
+    "NTP 對時",
+    "ESP32 同步時間",
+    "SNTP 啟動",
+    "設定時區並對時",
+    "抓網路時間"
+  ],
+  "intents_en": [
+    "ntp time sync",
+    "esp32 sntp",
+    "sync time ntp",
+    "set timezone ntp",
+    "fetch network time"
+  ],
+  "slots": [
+    "ntp_server",
+    "tz_string"
+  ],
+  "code": "#include \"esp_sntp.h\"\nesp_sntp_setoperatingmode(SNTP_OPMODE_POLL);\nesp_sntp_setservername(0, \"{{ntp_server}}\");\nesp_sntp_init();\nsetenv(\"TZ\", \"{{tz_string}}\", 1);\ntzset();\ntime_t now; struct tm ti;\nint retry = 0;\nwhile (sntp_get_sync_status() != SNTP_SYNC_STATUS_COMPLETED && ++retry < 20) vTaskDelay(pdMS_TO_TICKS(500));\ntime(&now); localtime_r(&now, &ti);",
+  "language": "c",
+  "deps": [
+    "esp-idf"
+  ],
+  "summary_zh": "啟動 SNTP 並等待對時完成,設定本地時區"
+}

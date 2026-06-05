@@ -1,0 +1,23 @@
+{
+  "id": "system-cli-122-systemd-env-file",
+  "category": "system-cli/ops/systemd",
+  "intents_zh": [
+    "systemd EnvironmentFile",
+    "service 載 env",
+    "unit 引入 .env"
+  ],
+  "intents_en": [
+    "systemd EnvironmentFile",
+    "load env into unit",
+    "unit reading env file"
+  ],
+  "slots": [
+    "service_name",
+    "env_path",
+    "exec_path"
+  ],
+  "code": "[Unit]\nDescription={{service_name}}\nAfter=network.target\n\n[Service]\nType=simple\nEnvironmentFile={{env_path}}\nExecStart={{exec_path}}\nRestart=on-failure\n\n[Install]\nWantedBy=multi-user.target",
+  "language": "ini",
+  "deps": [],
+  "summary_zh": "systemd EnvironmentFile 載 env"
+}

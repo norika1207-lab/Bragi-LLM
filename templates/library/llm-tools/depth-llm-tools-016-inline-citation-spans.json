@@ -1,0 +1,26 @@
+{
+  "id": "depth-llm-tools-016-inline-citation-spans",
+  "category": "llm-tools/retrieval/citation-span",
+  "intents_zh": [
+    "逐句引用 span",
+    "句子級 citation",
+    "Anthropic citation 風格",
+    "span 範圍標註",
+    "句段來源"
+  ],
+  "intents_en": [
+    "per-sentence citation spans",
+    "sentence-level citation",
+    "Anthropic citation style",
+    "span annotation",
+    "sentence sources"
+  ],
+  "slots": [
+    "sentences",
+    "source_ids"
+  ],
+  "code": "def span_cite({{sentences}}, {{source_ids}}):\n    out = []\n    for sent, sids in zip({{sentences}}, {{source_ids}}):\n        tag = \",\".join(f\"[{s}]\" for s in sids)\n        out.append(f\"{sent} {tag}\")\n    return \" \".join(out)",
+  "language": "python",
+  "deps": [],
+  "summary_zh": "逐句附上來源 id tag，模仿 Anthropic citation 樣式"
+}

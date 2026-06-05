@@ -1,0 +1,23 @@
+{
+  "id": "depth-database-devops-051-k8s-network-policy",
+  "category": "database-devops/k8s/security",
+  "intents_zh": [
+    "NetworkPolicy 限制",
+    "只允許同 namespace",
+    "deny all default"
+  ],
+  "intents_en": [
+    "NetworkPolicy restrict",
+    "allow same namespace only",
+    "default deny all"
+  ],
+  "slots": [
+    "app_label"
+  ],
+  "code": "apiVersion: networking.k8s.io/v1\nkind: NetworkPolicy\nmetadata: { name: default-deny }\nspec:\n  podSelector: {}\n  policyTypes: [Ingress, Egress]\n---\napiVersion: networking.k8s.io/v1\nkind: NetworkPolicy\nmetadata: { name: allow-{{app_label}} }\nspec:\n  podSelector:\n    matchLabels: { app: {{app_label}} }\n  ingress:\n    - from:\n        - podSelector: {}\n  egress:\n    - to:\n        - podSelector: {}",
+  "language": "yaml",
+  "deps": [
+    "kubernetes"
+  ],
+  "summary_zh": "先 default deny 再開同 namespace 內互通"
+}

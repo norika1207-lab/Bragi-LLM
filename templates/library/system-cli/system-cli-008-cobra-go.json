@@ -1,0 +1,24 @@
+{
+  "id": "system-cli-008-cobra-go",
+  "category": "system-cli/go/cobra",
+  "intents_zh": [
+    "go 用 cobra 寫 CLI",
+    "cobra root 命令範本",
+    "golang CLI 骨架"
+  ],
+  "intents_en": [
+    "cobra CLI template",
+    "go cobra root command",
+    "golang CLI skeleton"
+  ],
+  "slots": [
+    "tool_name",
+    "flag_name"
+  ],
+  "code": "package main\n\nimport (\n\t\"fmt\"\n\t\"os\"\n\n\t\"github.com/spf13/cobra\"\n)\n\nfunc main() {\n\tvar {{flag_name}} string\n\trootCmd := &cobra.Command{\n\t\tUse:   \"{{tool_name}}\",\n\t\tShort: \"{{tool_name}} CLI\",\n\t\tRun: func(cmd *cobra.Command, args []string) {\n\t\t\tfmt.Printf(\"{{tool_name}} got %s\\n\", {{flag_name}})\n\t\t},\n\t}\n\trootCmd.Flags().StringVar(&{{flag_name}}, \"{{flag_name}}\", \"\", \"{{flag_name}} value\")\n\tif err := rootCmd.Execute(); err != nil {\n\t\tos.Exit(1)\n\t}\n}",
+  "language": "go",
+  "deps": [
+    "github.com/spf13/cobra"
+  ],
+  "summary_zh": "cobra root 命令 + flag"
+}

@@ -1,0 +1,28 @@
+{
+  "id": "depth-llm-tools-022-openai-batch-api",
+  "category": "llm-tools/batch/openai-api",
+  "intents_zh": [
+    "OpenAI batch API",
+    "上傳 jsonl 跑批",
+    "非同步批次端點",
+    "50% 折扣批跑",
+    "batch job 提交"
+  ],
+  "intents_en": [
+    "OpenAI batch API",
+    "upload jsonl batch",
+    "async batch endpoint",
+    "50pct discount batch",
+    "submit batch job"
+  ],
+  "slots": [
+    "client",
+    "jsonl_path"
+  ],
+  "code": "f = {{client}}.files.create(file=open({{jsonl_path}}, \"rb\"), purpose=\"batch\")\nbatch = {{client}}.batches.create(\n    input_file_id=f.id,\n    endpoint=\"/v1/chat/completions\",\n    completion_window=\"24h\",\n)\nprint(batch.id, batch.status)",
+  "language": "python",
+  "deps": [
+    "openai"
+  ],
+  "summary_zh": "OpenAI batch API 上傳 jsonl 並提交 24h 批跑"
+}

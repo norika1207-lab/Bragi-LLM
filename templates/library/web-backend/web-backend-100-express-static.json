@@ -1,0 +1,28 @@
+{
+  "id": "web-backend-100-express-static",
+  "category": "web-backend/express/static",
+  "intents_zh": [
+    "express 服務靜態檔",
+    "static folder express",
+    "host frontend express",
+    "express public dir",
+    "serve html express"
+  ],
+  "intents_en": [
+    "express static files",
+    "serve static folder",
+    "host frontend express",
+    "express public dir",
+    "serve html express"
+  ],
+  "slots": [
+    "public_dir",
+    "mount_path"
+  ],
+  "code": "const express = require('express');\nconst path = require('path');\nconst app = express();\n\napp.use('{{mount_path}}', express.static(path.join(__dirname, '{{public_dir}}'), {\n  maxAge: '7d',\n  etag: true,\n  index: 'index.html'\n}));\n\nmodule.exports = app;",
+  "language": "js",
+  "deps": [
+    "express"
+  ],
+  "summary_zh": "Express 靜態檔案 host"
+}

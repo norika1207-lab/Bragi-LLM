@@ -1,0 +1,23 @@
+{
+  "id": "depth-database-devops-058-pg-partition-range",
+  "category": "database-devops/postgres/schema",
+  "intents_zh": [
+    "postgres range 分區",
+    "按月分區",
+    "declarative partition"
+  ],
+  "intents_en": [
+    "postgres range partition",
+    "monthly partition",
+    "declarative partition"
+  ],
+  "slots": [
+    "table_name",
+    "date_col",
+    "year_month"
+  ],
+  "code": "CREATE TABLE {{table_name}} (\n    id BIGSERIAL,\n    {{date_col}} DATE NOT NULL,\n    payload JSONB\n) PARTITION BY RANGE ({{date_col}});\n\nCREATE TABLE {{table_name}}_{{year_month}}\nPARTITION OF {{table_name}}\nFOR VALUES FROM ('{{year_month}}-01') TO ('{{year_month}}-01'::date + INTERVAL '1 month');\n\nCREATE INDEX ON {{table_name}}_{{year_month}} ({{date_col}});",
+  "language": "sql",
+  "deps": [],
+  "summary_zh": "以日期欄做 range partition,按月切分子表"
+}

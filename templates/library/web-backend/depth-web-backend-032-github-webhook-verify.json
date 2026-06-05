@@ -1,0 +1,27 @@
+{
+  "id": "depth-web-backend-032-github-webhook-verify",
+  "category": "web-backend/webhook/github",
+  "intents_zh": [
+    "GitHub webhook 簽章驗證",
+    "x-hub-signature-256",
+    "HMAC sha256 比對",
+    "GitHub event handler",
+    "timingSafeEqual"
+  ],
+  "intents_en": [
+    "github webhook verify",
+    "x-hub-signature-256",
+    "hmac sha256 compare",
+    "github event handler",
+    "timing safe equal"
+  ],
+  "slots": [
+    "secret"
+  ],
+  "code": "app.post('/webhooks/github', express.raw({ type: 'application/json' }), (req, res) => {\n  const sig = req.get('x-hub-signature-256') || '';\n  const expected = 'sha256=' + crypto.createHmac('sha256', '{{secret}}').update(req.body).digest('hex');\n  if (sig.length !== expected.length || !crypto.timingSafeEqual(Buffer.from(sig), Buffer.from(expected))) {\n    return res.status(401).send('bad sig');\n  }\n  res.sendStatus(200);\n});",
+  "language": "js",
+  "deps": [
+    "express"
+  ],
+  "summary_zh": "GitHub webhook HMAC-256 驗章"
+}

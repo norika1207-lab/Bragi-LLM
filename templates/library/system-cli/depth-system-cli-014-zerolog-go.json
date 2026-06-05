@@ -1,0 +1,25 @@
+{
+  "id": "depth-system-cli-014-zerolog-go",
+  "category": "system-cli/logging/zerolog",
+  "intents_zh": [
+    "Go zerolog 設定",
+    "Go 結構化 log",
+    "zerolog console writer",
+    "Go JSON 日誌"
+  ],
+  "intents_en": [
+    "go zerolog setup",
+    "go structured log",
+    "zerolog console",
+    "go json log"
+  ],
+  "slots": [
+    "service_name"
+  ],
+  "code": "package main\n\nimport (\n\t\"os\"\n\t\"time\"\n\t\"github.com/rs/zerolog\"\n\t\"github.com/rs/zerolog/log\"\n)\n\nfunc init() {\n\tzerolog.TimeFieldFormat = time.RFC3339Nano\n\tif os.Getenv(\"ENV\") == \"dev\" {\n\t\tlog.Logger = log.Output(zerolog.ConsoleWriter{Out: os.Stderr, TimeFormat: \"15:04:05\"})\n\t}\n\tlog.Logger = log.With().Str(\"svc\", \"{{service_name}}\").Caller().Logger()\n}\n\nfunc main() {\n\tlog.Info().Str(\"user\", \"alice\").Int(\"id\", 42).Msg(\"login\")\n\tlog.Warn().Err(os.ErrNotExist).Msg(\"missing file\")\n}",
+  "language": "go",
+  "deps": [
+    "github.com/rs/zerolog"
+  ],
+  "summary_zh": "zerolog Go 結構化 log dev console prod JSON"
+}

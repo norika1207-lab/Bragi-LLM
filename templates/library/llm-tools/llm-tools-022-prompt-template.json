@@ -1,0 +1,33 @@
+{
+  "id": "llm-tools-022-prompt-template",
+  "category": "llm-tools/prompt/template",
+  "intents_zh": [
+    "prompt 模板",
+    "prompt templating",
+    "用 jinja 寫 prompt",
+    "prompt 變數注入",
+    "prompt 渲染",
+    "template engine",
+    "prompt 工廠",
+    "format prompt"
+  ],
+  "intents_en": [
+    "prompt template",
+    "jinja prompt rendering",
+    "prompt variable injection",
+    "prompt factory",
+    "format prompt",
+    "prompt builder",
+    "template engine for prompts",
+    "render prompt"
+  ],
+  "slots": [
+    "template_name"
+  ],
+  "code": "from jinja2 import Template\n\nTEMPLATES = {\n    \"{{template_name}}\": Template(\"You are {{'{{'}}role{{'}}'}}.\\nUser: {{'{{'}}query{{'}}'}}\\nAnswer:\"),\n}\n\ndef render(name: str, **vars) -> str:\n    return TEMPLATES[name].render(**vars)\n\nif __name__ == \"__main__\":\n    print(render(\"{{template_name}}\", role=\"helper\", query=\"hi\"))",
+  "language": "py",
+  "deps": [
+    "jinja2"
+  ],
+  "summary_zh": "以 jinja2 管理 prompt 模板"
+}

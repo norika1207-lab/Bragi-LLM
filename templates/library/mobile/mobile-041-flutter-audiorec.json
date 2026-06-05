@@ -1,0 +1,31 @@
+{
+  "id": "mobile-041-flutter-audiorec",
+  "category": "mobile/flutter/media",
+  "intents_zh": [
+    "Flutter 錄音",
+    "flutter record audio",
+    "flutter 麥克風錄製",
+    "Flutter 錄音檔",
+    "record 套件 flutter",
+    "flutter voice recorder",
+    "錄聲音 flutter"
+  ],
+  "intents_en": [
+    "flutter audio record",
+    "flutter record package",
+    "mic recording flutter",
+    "flutter voice memo",
+    "record audio file flutter",
+    "flutter audio recorder",
+    "flutter sound recording"
+  ],
+  "slots": [
+    "file_path"
+  ],
+  "code": "import 'package:record/record.dart';\nfinal rec=AudioRecorder();\nFuture<void> start()async{\n  if(await rec.hasPermission()){await rec.start(const RecordConfig(),path:'{{file_path}}');}}\nFuture<String?> stop()async=>await rec.stop();",
+  "language": "dart",
+  "deps": [
+    "record"
+  ],
+  "summary_zh": "Flutter record 套件錄音"
+}

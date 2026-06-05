@@ -1,0 +1,28 @@
+{
+  "id": "web-frontend-batch3-037-html-pricing",
+  "category": "web-frontend/html/cards/pricing",
+  "intents_zh": [
+    "定價卡片",
+    "pricing card HTML",
+    "訂閱方案卡",
+    "SaaS 定價",
+    "HTML 價格卡",
+    "plan card"
+  ],
+  "intents_en": [
+    "pricing card",
+    "subscription plan card",
+    "saas pricing",
+    "html price card",
+    "plan card",
+    "tier card"
+  ],
+  "slots": [
+    "plan_name",
+    "price"
+  ],
+  "code": "<div class=\"pricing\">\n  <h3>{{plan_name}}</h3>\n  <div class=\"price\"><span>$</span>{{price}}<small>/mo</small></div>\n  <ul>\n    <li>Unlimited projects</li>\n    <li>Priority support</li>\n    <li>Custom domain</li>\n    <li>Team collaboration</li>\n  </ul>\n  <button>Get started</button>\n</div>\n<style>\n  .pricing { border: 1px solid #e5e7eb; border-radius: 12px; padding: 2rem; max-width: 320px; text-align: center; font-family: system-ui; }\n  .pricing h3 { margin: 0 0 1rem; }\n  .price { font-size: 3rem; font-weight: 700; margin-bottom: 1.5rem; }\n  .price span { font-size: 1.5rem; vertical-align: top; }\n  .price small { font-size: 1rem; color: #6b7280; font-weight: 400; }\n  .pricing ul { list-style: none; padding: 0; text-align: left; margin: 0 0 1.5rem; }\n  .pricing li { padding: .4rem 0; }\n  .pricing button { width: 100%; padding: .75rem; background: #111; color: white; border: 0; border-radius: 6px; cursor: pointer; }\n</style>",
+  "language": "html",
+  "deps": [],
+  "summary_zh": "訂閱方案定價卡片"
+}

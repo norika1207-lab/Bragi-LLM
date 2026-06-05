@@ -1,0 +1,27 @@
+{
+  "id": "web-frontend-batch2-006-dialog-confirm",
+  "category": "web-frontend/react/layout/dialog-confirm",
+  "intents_zh": [
+    "確認對話框",
+    "刪除確認 dialog",
+    "危險操作確認",
+    "alert dialog",
+    "yes/no 對話框",
+    "二次確認"
+  ],
+  "intents_en": [
+    "confirm dialog",
+    "delete confirmation",
+    "destructive confirm",
+    "alert dialog",
+    "yes/no prompt",
+    "confirmation prompt"
+  ],
+  "slots": [
+    "message"
+  ],
+  "code": "import { useState } from 'react';\n\nexport function ConfirmDialog({ onConfirm }) {\n  const [open, setOpen] = useState(false);\n  return (\n    <>\n      <button onClick={() => setOpen(true)} className=\"rounded bg-red-600 px-4 py-2 text-white\">Delete</button>\n      {open && (\n        <div className=\"fixed inset-0 z-50 flex items-center justify-center bg-black/50\">\n          <div className=\"w-full max-w-sm rounded-lg bg-white p-6\">\n            <h3 className=\"mb-2 text-lg font-semibold\">Are you sure?</h3>\n            <p className=\"mb-6 text-sm text-gray-600\">{{message}}</p>\n            <div className=\"flex justify-end gap-2\">\n              <button onClick={() => setOpen(false)} className=\"rounded border px-4 py-2\">Cancel</button>\n              <button onClick={() => { onConfirm(); setOpen(false); }} className=\"rounded bg-red-600 px-4 py-2 text-white\">Delete</button>\n            </div>\n          </div>\n        </div>\n      )}\n    </>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "危險操作確認 dialog"
+}

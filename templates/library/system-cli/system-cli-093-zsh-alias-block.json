@@ -1,0 +1,21 @@
+{
+  "id": "system-cli-093-zsh-alias-block",
+  "category": "system-cli/shell/zsh",
+  "intents_zh": [
+    "zshrc 常用 alias",
+    "好用 alias 一鍵",
+    "個人 alias 包"
+  ],
+  "intents_en": [
+    "zshrc useful aliases",
+    "handy alias bundle",
+    "personal zsh aliases"
+  ],
+  "slots": [
+    "project_dir"
+  ],
+  "code": "# personal aliases\nalias ll='ls -lah'\nalias gs='git status -sb'\nalias gd='git diff'\nalias gl='git log --oneline -20'\nalias pj='cd {{project_dir}}'\nalias serve='python3 -m http.server 8000'\nalias myip='curl -s https://api.ipify.org && echo'\nalias ports='lsof -nP -iTCP -sTCP:LISTEN | column -t'",
+  "language": "sh",
+  "deps": [],
+  "summary_zh": "zshrc 常用 alias 包"
+}

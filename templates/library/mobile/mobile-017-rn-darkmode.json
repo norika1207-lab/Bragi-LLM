@@ -1,0 +1,29 @@
+{
+  "id": "mobile-017-rn-darkmode",
+  "category": "mobile/rn/theme",
+  "intents_zh": [
+    "RN 深色模式",
+    "React Native dark mode",
+    "RN 跟隨系統主題",
+    "useColorScheme RN",
+    "暗色模式 RN",
+    "RN theme switch",
+    "RN appearance"
+  ],
+  "intents_en": [
+    "rn dark mode",
+    "react native dark theme",
+    "useColorScheme rn",
+    "follow system theme rn",
+    "appearance api rn",
+    "rn theming",
+    "dark light toggle rn"
+  ],
+  "slots": [],
+  "code": "import React from 'react';\nimport {useColorScheme,View,Text,StyleSheet} from 'react-native';\nexport default function Themed(){\n  const c=useColorScheme();\n  const bg=c==='dark'?'#111':'#fff';const fg=c==='dark'?'#fff':'#111';\n  return(<View style={[s.c,{backgroundColor:bg}]}><Text style={{color:fg}}>scheme: {c}</Text></View>);}\nconst s=StyleSheet.create({c:{flex:1,alignItems:'center',justifyContent:'center'}});",
+  "language": "tsx",
+  "deps": [
+    "react-native"
+  ],
+  "summary_zh": "RN useColorScheme 跟隨系統 dark mode"
+}

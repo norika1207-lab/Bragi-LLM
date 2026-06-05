@@ -1,0 +1,34 @@
+{
+  "id": "llm-tools-001-openai-client",
+  "category": "llm-tools/client/openai",
+  "intents_zh": [
+    "寫個 OpenAI client 包裝",
+    "包一層 OpenAI 呼叫",
+    "給我 OpenAI SDK 基本用法",
+    "openai chat completion 範例",
+    "幫我寫個 GPT-4 呼叫的 wrapper",
+    "openai api 怎麼接",
+    "快速接 GPT-4o",
+    "幫我做個 openai chat 函式"
+  ],
+  "intents_en": [
+    "wrap OpenAI client",
+    "openai chat completion example",
+    "basic GPT-4 wrapper",
+    "call gpt-4o api",
+    "openai sdk boilerplate",
+    "openai chat function",
+    "quick openai client",
+    "minimal openai wrapper"
+  ],
+  "slots": [
+    "model_name",
+    "system_prompt"
+  ],
+  "code": "from openai import OpenAI\n\nclient = OpenAI()\n\ndef chat(user_msg: str) -> str:\n    resp = client.chat.completions.create(\n        model=\"{{model_name}}\",\n        messages=[\n            {\"role\": \"system\", \"content\": \"{{system_prompt}}\"},\n            {\"role\": \"user\", \"content\": user_msg},\n        ],\n    )\n    return resp.choices[0].message.content\n\nif __name__ == \"__main__\":\n    print(chat(\"hello\"))",
+  "language": "py",
+  "deps": [
+    "openai"
+  ],
+  "summary_zh": "OpenAI chat completion 最小包裝"
+}

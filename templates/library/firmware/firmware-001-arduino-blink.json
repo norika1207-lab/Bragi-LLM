@@ -1,0 +1,28 @@
+{
+  "id": "firmware-001-arduino-blink",
+  "category": "firmware/arduino/gpio",
+  "intents_zh": [
+    "Arduino LED 閃爍",
+    "幫我寫一個閃燈程式",
+    "Arduino blink 範例",
+    "板子上接 LED 怎麼讓它一閃一閃",
+    "給我最基本的 Arduino 範例",
+    "新手第一個 Arduino"
+  ],
+  "intents_en": [
+    "Arduino blink LED",
+    "basic LED blink sketch",
+    "make an LED flash on Arduino",
+    "hello world for Arduino",
+    "simple blink example",
+    "blink built-in LED"
+  ],
+  "slots": [
+    "led_pin",
+    "delay_ms"
+  ],
+  "code": "const int LED_PIN = {{led_pin}};\n\nvoid setup() {\n  pinMode(LED_PIN, OUTPUT);\n}\n\nvoid loop() {\n  digitalWrite(LED_PIN, HIGH);\n  delay({{delay_ms}});\n  digitalWrite(LED_PIN, LOW);\n  delay({{delay_ms}});\n}",
+  "language": "ino",
+  "deps": [],
+  "summary_zh": "Arduino 基本 LED 閃爍範例"
+}

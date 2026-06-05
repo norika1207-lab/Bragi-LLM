@@ -1,0 +1,28 @@
+{
+  "id": "web-backend-020-express-cron",
+  "category": "web-backend/express/jobs",
+  "intents_zh": [
+    "node cron job",
+    "加排程任務",
+    "每天跑一次",
+    "node-cron 範例",
+    "定時任務"
+  ],
+  "intents_en": [
+    "node cron job",
+    "scheduled task example",
+    "node-cron sample",
+    "daily job",
+    "cron schedule node"
+  ],
+  "slots": [
+    "cron_expr",
+    "job_name"
+  ],
+  "code": "const cron = require('node-cron');\n\ncron.schedule('{{cron_expr}}', async () => {\n  console.log('[{{job_name}}] running at', new Date().toISOString());\n  try {\n    // job body here\n  } catch (e) {\n    console.error('[{{job_name}}] failed', e);\n  }\n});\n\nconsole.log('cron {{job_name}} registered');",
+  "language": "js",
+  "deps": [
+    "node-cron"
+  ],
+  "summary_zh": "node-cron 定時任務"
+}

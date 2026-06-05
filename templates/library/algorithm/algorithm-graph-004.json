@@ -1,0 +1,25 @@
+{
+  "id": "algorithm-graph-004",
+  "category": "algorithm/graph/mst_kruskal",
+  "intents_zh": [
+    "最小生成樹",
+    "Kruskal",
+    "MST",
+    "給我 kruskal",
+    "聯通分量並查集"
+  ],
+  "intents_en": [
+    "MST",
+    "Kruskal",
+    "minimum spanning tree",
+    "union-find MST",
+    "kruskal algorithm"
+  ],
+  "slots": [
+    "fn_name"
+  ],
+  "code": "def {{fn_name}}(n, edges):\n    parent = list(range(n))\n    def find(x):\n        while parent[x] != x:\n            parent[x] = parent[parent[x]]\n            x = parent[x]\n        return x\n    mst, total = [], 0\n    for w, u, v in sorted(edges):\n        ru, rv = find(u), find(v)\n        if ru != rv:\n            parent[ru] = rv\n            mst.append((u, v, w))\n            total += w\n    return mst, total",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "Kruskal MST + Union-Find"
+}

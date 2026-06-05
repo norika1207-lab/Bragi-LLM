@@ -1,0 +1,21 @@
+{
+  "id": "depth-database-devops-010-pg-stat-locks",
+  "category": "database-devops/postgres/observability",
+  "intents_zh": [
+    "pg 看誰卡住",
+    "blocking query",
+    "查 lock 等待",
+    "kill blocker"
+  ],
+  "intents_en": [
+    "postgres who is blocking",
+    "blocking query",
+    "lock wait query",
+    "find blocker pid"
+  ],
+  "slots": [],
+  "code": "SELECT\n  blocked.pid    AS blocked_pid,\n  blocked.query  AS blocked_query,\n  blocking.pid   AS blocking_pid,\n  blocking.query AS blocking_query,\n  age(now(), blocked.query_start) AS waited\nFROM pg_stat_activity blocked\nJOIN pg_stat_activity blocking\n  ON blocking.pid = ANY(pg_blocking_pids(blocked.pid))\nWHERE NOT blocked.pid = blocking.pid;",
+  "language": "sql",
+  "deps": [],
+  "summary_zh": "列出 blocked / blocking PID 與 SQL 對照"
+}

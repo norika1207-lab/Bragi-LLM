@@ -1,0 +1,29 @@
+{
+  "id": "depth-llm-tools-046-vllm-openai-compat",
+  "category": "llm-tools/serving/vllm",
+  "intents_zh": [
+    "vLLM OpenAI 相容伺服",
+    "本地起 vllm server",
+    "OSS 模型 OpenAI 介面",
+    "vllm serve",
+    "本機 endpoint"
+  ],
+  "intents_en": [
+    "vLLM OpenAI compatible",
+    "local vllm server",
+    "OSS model OpenAI API",
+    "vllm serve",
+    "local endpoint"
+  ],
+  "slots": [
+    "model",
+    "port"
+  ],
+  "code": "# Launch:\n# vllm serve {{model}} --port {{port}} --api-key local\nimport openai\nclient = openai.OpenAI(base_url=f\"http://localhost:{{{port}}}/v1\", api_key=\"local\")\nr = client.chat.completions.create(model={{model}}, messages=[{\"role\":\"user\",\"content\":\"hi\"}])",
+  "language": "python",
+  "deps": [
+    "vllm",
+    "openai"
+  ],
+  "summary_zh": "vllm serve 起本地 OpenAI 相容端點再用 openai client 呼叫"
+}

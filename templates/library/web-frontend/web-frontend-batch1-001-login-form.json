@@ -1,0 +1,28 @@
+{
+  "id": "web-frontend-batch1-001-login-form",
+  "category": "web-frontend/react/forms/login",
+  "intents_zh": [
+    "寫一個 React 登入表單",
+    "給我登入頁的 form",
+    "做一個 email 密碼登入",
+    "React login form 範本",
+    "登入畫面元件",
+    "email + password 登入元件"
+  ],
+  "intents_en": [
+    "react login form",
+    "email password login",
+    "build a login form",
+    "login component react",
+    "sign in form",
+    "auth login form"
+  ],
+  "slots": [
+    "component_name",
+    "submit_url"
+  ],
+  "code": "import { useState } from 'react';\n\nexport default function {{component_name}}() {\n  const [email, setEmail] = useState('');\n  const [password, setPassword] = useState('');\n  const [error, setError] = useState('');\n  const [loading, setLoading] = useState(false);\n\n  async function onSubmit(e: React.FormEvent) {\n    e.preventDefault();\n    setLoading(true);\n    setError('');\n    try {\n      const res = await fetch('{{submit_url}}', {\n        method: 'POST',\n        headers: { 'Content-Type': 'application/json' },\n        body: JSON.stringify({ email, password }),\n      });\n      if (!res.ok) throw new Error('Login failed');\n    } catch (err: any) {\n      setError(err.message);\n    } finally {\n      setLoading(false);\n    }\n  }\n\n  return (\n    <form onSubmit={onSubmit}>\n      <input type=\"email\" value={email} onChange={(e) => setEmail(e.target.value)} required />\n      <input type=\"password\" value={password} onChange={(e) => setPassword(e.target.value)} required />\n      {error && <p>{error}</p>}\n      <button type=\"submit\" disabled={loading}>{loading ? '...' : 'Sign in'}</button>\n    </form>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "React email/password 登入表單 with loading 與錯誤態"
+}

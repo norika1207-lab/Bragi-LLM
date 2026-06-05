@@ -1,0 +1,23 @@
+{
+  "id": "system-cli-095-tail-grep-alert",
+  "category": "system-cli/logging/alert",
+  "intents_zh": [
+    "tail log 抓關鍵字告警",
+    "發現 ERROR 通知",
+    "log monitor"
+  ],
+  "intents_en": [
+    "tail log alert on keyword",
+    "watch log for errors",
+    "log monitor shell"
+  ],
+  "slots": [
+    "log_file",
+    "keyword",
+    "alert_cmd"
+  ],
+  "code": "#!/usr/bin/env bash\nset -euo pipefail\ntail -n0 -F \"{{log_file}}\" | while read -r line; do\n  if echo \"$line\" | grep -qE '{{keyword}}'; then\n    echo \"[ALERT] $line\"\n    {{alert_cmd}}\n  fi\ndone",
+  "language": "sh",
+  "deps": [],
+  "summary_zh": "tail -F 抓關鍵字告警"
+}

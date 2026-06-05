@@ -1,0 +1,30 @@
+{
+  "id": "firmware-099-esp32-ha-discovery",
+  "category": "firmware/esp32/integration",
+  "intents_zh": [
+    "Home Assistant 自動探索",
+    "MQTT discovery",
+    "ESP32 接 HA",
+    "HA sensor 自動加入",
+    "HA MQTT 整合"
+  ],
+  "intents_en": [
+    "Home Assistant MQTT discovery",
+    "ESP32 HA integration",
+    "auto discover sensor HA",
+    "Home Assistant config_topic",
+    "HA MQTT sensor publish"
+  ],
+  "slots": [
+    "ssid",
+    "password",
+    "broker",
+    "sensor_id"
+  ],
+  "code": "#include <WiFi.h>\n#include <PubSubClient.h>\nWiFiClient net; PubSubClient mqtt(net);\n\nvoid setup() {\n  Serial.begin(115200);\n  WiFi.begin(\"{{ssid}}\", \"{{password}}\");\n  while (WiFi.status() != WL_CONNECTED) delay(300);\n  mqtt.setServer(\"{{broker}}\", 1883);\n  while (!mqtt.connect(\"{{sensor_id}}\")) delay(500);\n  String cfgTopic = String(\"homeassistant/sensor/{{sensor_id}}/config\");\n  String stTopic = String(\"home/{{sensor_id}}/state\");\n  String cfg = String(\"{\\\"name\\\":\\\"{{sensor_id}}\\\",\\\"state_topic\\\":\\\"\") + stTopic + \"\\\",\\\"unit_of_measurement\\\":\\\"C\\\"}\";\n  mqtt.publish(cfgTopic.c_str(), cfg.c_str(), true);\n  mqtt.publish(stTopic.c_str(), \"23.5\");\n}\n\nvoid loop() { mqtt.loop(); }",
+  "language": "ino",
+  "deps": [
+    "PubSubClient"
+  ],
+  "summary_zh": "ESP32 透過 MQTT discovery 自動加入 Home Assistant"
+}

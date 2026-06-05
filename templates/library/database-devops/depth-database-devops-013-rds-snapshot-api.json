@@ -1,0 +1,26 @@
+{
+  "id": "depth-database-devops-013-rds-snapshot-api",
+  "category": "database-devops/aws/rds",
+  "intents_zh": [
+    "RDS 用 API 拍快照",
+    "boto3 snapshot",
+    "定時備份 RDS",
+    "create-db-snapshot"
+  ],
+  "intents_en": [
+    "RDS snapshot via API",
+    "boto3 create snapshot",
+    "schedule RDS backup",
+    "create-db-snapshot"
+  ],
+  "slots": [
+    "db_instance_id",
+    "snapshot_prefix"
+  ],
+  "code": "import boto3, datetime\nrds = boto3.client('rds')\nsnap_id = f\"{{snapshot_prefix}}-\" + datetime.datetime.utcnow().strftime('%Y%m%d-%H%M%S')\nresp = rds.create_db_snapshot(\n    DBSnapshotIdentifier=snap_id,\n    DBInstanceIdentifier='{{db_instance_id}}',\n    Tags=[{'Key': 'auto', 'Value': 'true'}]\n)\nprint('snapshot started:', resp['DBSnapshot']['DBSnapshotIdentifier'])",
+  "language": "py",
+  "deps": [
+    "boto3"
+  ],
+  "summary_zh": "boto3 拍 RDS snapshot,id 帶 timestamp"
+}

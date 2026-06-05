@@ -1,0 +1,29 @@
+{
+  "id": "mobile-083-compose-pullrefresh",
+  "category": "mobile/compose/list",
+  "intents_zh": [
+    "Compose pull to refresh",
+    "Compose 下拉刷新",
+    "Compose PullToRefreshBox",
+    "Compose 列表刷新",
+    "下拉重整 Compose",
+    "Compose refresh list",
+    "pull refresh Compose"
+  ],
+  "intents_en": [
+    "compose pull to refresh",
+    "compose PullToRefreshBox",
+    "compose list refresh",
+    "jetpack compose refresh",
+    "pull down refresh compose",
+    "compose lazycolumn refresh",
+    "compose swipe refresh"
+  ],
+  "slots": [],
+  "code": "import androidx.compose.foundation.lazy.LazyColumn\nimport androidx.compose.foundation.lazy.items\nimport androidx.compose.material3.*\nimport androidx.compose.material3.pulltorefresh.PullToRefreshBox\nimport androidx.compose.runtime.*\nimport kotlinx.coroutines.delay\n@OptIn(ExperimentalMaterial3Api::class)\n@Composable\nfun R(){\n  var items by remember{mutableStateOf(List(20){\"row $it\"})}\n  var refreshing by remember{mutableStateOf(false)}\n  PullToRefreshBox(isRefreshing=refreshing,onRefresh={refreshing=true;kotlinx.coroutines.GlobalScope.launchWhenever{delay(800);items=List(20){\"row $it ${System.currentTimeMillis()%100}\"};refreshing=false}}){LazyColumn{items(items){ListItem(headlineContent={Text(it)})}}}}",
+  "language": "kt",
+  "deps": [
+    "androidx.compose.material3"
+  ],
+  "summary_zh": "Compose PullToRefreshBox 包 LazyColumn"
+}

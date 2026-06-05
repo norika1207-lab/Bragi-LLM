@@ -1,0 +1,33 @@
+{
+  "id": "patch-s3-upload-002-presigned-put-url",
+  "category": "web-backend/upload/presigned-put",
+  "intents_zh": [
+    "產生 S3 presigned PUT URL",
+    "前端直傳 S3 的簽名網址",
+    "後端發 presigned upload url 給 client",
+    "簽一個 putObject 的網址",
+    "browser 直接 PUT 上 S3 的 signed url",
+    "給前端的 S3 上傳簽名"
+  ],
+  "intents_en": [
+    "generate s3 presigned put url",
+    "signed url for direct browser upload to s3",
+    "presigned put object aws sdk v3",
+    "issue upload url to client",
+    "browser to s3 direct upload signed url",
+    "create presigned PUT for s3"
+  ],
+  "slots": [
+    "bucket_name",
+    "region",
+    "expires_seconds",
+    "key_prefix"
+  ],
+  "code": "import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';\nimport { getSignedUrl } from '@aws-sdk/s3-request-presigner';\nimport { randomUUID } from 'crypto';\n\nconst s3 = new S3Client({ region: '{{region}}' });\n\nexport async function createUploadUrl(filename: string, contentType: string) {\n  const key = `{{key_prefix}}/${Date.now()}-${randomUUID()}-${filename}`;\n  const cmd = new PutObjectCommand({\n    Bucket: '{{bucket_name}}',\n    Key: key,\n    ContentType: contentType,\n  });\n  const url = await getSignedUrl(s3, cmd, { expiresIn: {{expires_seconds}} });\n  return { url, key, method: 'PUT', headers: { 'Content-Type': contentType } };\n}",
+  "language": "ts",
+  "deps": [
+    "@aws-sdk/client-s3",
+    "@aws-sdk/s3-request-presigner"
+  ],
+  "summary_zh": "後端簽 presigned PUT URL 讓瀏覽器直傳 S3"
+}

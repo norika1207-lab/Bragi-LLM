@@ -1,0 +1,28 @@
+{
+  "id": "web-frontend-batch3-040-html-product-card",
+  "category": "web-frontend/html/cards/product",
+  "intents_zh": [
+    "商品卡",
+    "product card",
+    "電商商品卡",
+    "產品展示卡",
+    "購物車商品",
+    "HTML shop card"
+  ],
+  "intents_en": [
+    "product card",
+    "ecommerce card",
+    "shop item card",
+    "product display",
+    "html store card",
+    "item card"
+  ],
+  "slots": [
+    "product_name",
+    "price"
+  ],
+  "code": "<div class=\"product\">\n  <img src=\"https://picsum.photos/300\" alt=\"\">\n  <h3>{{product_name}}</h3>\n  <p class=\"price\">${{price}}</p>\n  <button>Add to cart</button>\n</div>\n<style>\n  .product { width: 240px; border: 1px solid #e5e7eb; border-radius: 12px; padding: 1rem; text-align: center; font-family: system-ui; transition: transform .2s; }\n  .product:hover { transform: translateY(-4px); box-shadow: 0 8px 16px rgba(0,0,0,.08); }\n  .product img { width: 100%; border-radius: 8px; }\n  .product h3 { margin: .75rem 0 .25rem; font-size: 1rem; }\n  .product .price { font-weight: 700; color: #111; margin: 0 0 .75rem; }\n  .product button { width: 100%; padding: .6rem; background: #111; color: white; border: 0; border-radius: 6px; cursor: pointer; }\n</style>",
+  "language": "html",
+  "deps": [],
+  "summary_zh": "電商商品卡含 hover 動畫"
+}

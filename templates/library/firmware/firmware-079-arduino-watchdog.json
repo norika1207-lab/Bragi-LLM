@@ -1,0 +1,23 @@
+{
+  "id": "firmware-079-arduino-watchdog",
+  "category": "firmware/arduino/system",
+  "intents_zh": [
+    "Arduino watchdog",
+    "看門狗 reset",
+    "AVR wdt 範例",
+    "防當機自動重開",
+    "watchdog timer"
+  ],
+  "intents_en": [
+    "Arduino watchdog timer",
+    "AVR wdt example",
+    "auto reset on hang",
+    "wdt_enable",
+    "watchdog reset Arduino"
+  ],
+  "slots": [],
+  "code": "#include <avr/wdt.h>\n\nvoid setup() {\n  Serial.begin(115200);\n  wdt_enable(WDTO_4S);\n}\n\nvoid loop() {\n  wdt_reset();\n  Serial.println(\"alive\");\n  delay(1000);\n}",
+  "language": "ino",
+  "deps": [],
+  "summary_zh": "Arduino AVR watchdog 防當機"
+}

@@ -1,0 +1,27 @@
+{
+  "id": "firmware-090-esp32-ble-uart",
+  "category": "firmware/esp32/ble",
+  "intents_zh": [
+    "ESP32 BLE UART",
+    "Nordic UART service",
+    "BLE 序列",
+    "手機透過 BLE 傳字串",
+    "NUS 範例"
+  ],
+  "intents_en": [
+    "ESP32 BLE UART NUS",
+    "Nordic UART service",
+    "BLE serial bridge",
+    "BLE text from phone",
+    "NUS characteristic"
+  ],
+  "slots": [
+    "device_name"
+  ],
+  "code": "#include <BLEDevice.h>\n#include <BLEServer.h>\n#include <BLEUtils.h>\n\n#define SVC \"6E400001-B5A3-F393-E0A9-E50E24DCCA9E\"\n#define RX \"6E400002-B5A3-F393-E0A9-E50E24DCCA9E\"\n#define TX \"6E400003-B5A3-F393-E0A9-E50E24DCCA9E\"\n\nclass RxCB : public BLECharacteristicCallbacks {\n  void onWrite(BLECharacteristic* c) override {\n    Serial.println(c->getValue().c_str());\n  }\n};\n\nvoid setup() {\n  Serial.begin(115200);\n  BLEDevice::init(\"{{device_name}}\");\n  auto srv = BLEDevice::createServer();\n  auto svc = srv->createService(SVC);\n  auto rx = svc->createCharacteristic(RX, BLECharacteristic::PROPERTY_WRITE);\n  rx->setCallbacks(new RxCB());\n  svc->createCharacteristic(TX, BLECharacteristic::PROPERTY_NOTIFY);\n  svc->start();\n  BLEDevice::getAdvertising()->start();\n}\n\nvoid loop() { delay(1000); }",
+  "language": "ino",
+  "deps": [
+    "BLE"
+  ],
+  "summary_zh": "ESP32 BLE Nordic UART service"
+}

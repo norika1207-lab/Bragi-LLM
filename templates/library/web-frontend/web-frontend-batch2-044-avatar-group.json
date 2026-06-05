@@ -1,0 +1,28 @@
+{
+  "id": "web-frontend-batch2-044-avatar-group",
+  "category": "web-frontend/react/layout/avatar-group",
+  "intents_zh": [
+    "頭像群組",
+    "avatar group",
+    "重疊頭像",
+    "成員頭像列",
+    "團隊頭像",
+    "協作者頭像"
+  ],
+  "intents_en": [
+    "avatar group",
+    "stacked avatars",
+    "overlapping avatars",
+    "team avatars",
+    "member avatars",
+    "collaborator avatars"
+  ],
+  "slots": [
+    "users",
+    "max_show"
+  ],
+  "code": "export function AvatarGroup() {\n  const users = {{users}};\n  const max = {{max_show}};\n  const shown = users.slice(0, max);\n  const rest = users.length - max;\n  return (\n    <div className=\"flex -space-x-2\">\n      {shown.map((u) => (\n        <img key={u.id} src={u.avatar} alt={u.name}\n          className=\"h-8 w-8 rounded-full border-2 border-white object-cover\" />\n      ))}\n      {rest > 0 && (\n        <div className=\"flex h-8 w-8 items-center justify-center rounded-full border-2 border-white bg-gray-200 text-xs font-medium\">\n          +{rest}\n        </div>\n      )}\n    </div>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "重疊頭像群組含 +N 溢出"
+}

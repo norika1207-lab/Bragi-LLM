@@ -1,0 +1,25 @@
+{
+  "id": "depth-system-cli-049-direnv-template",
+  "category": "system-cli/env/direnv",
+  "intents_zh": [
+    "direnv 進目錄自動載 env",
+    "direnv .envrc 範本",
+    "Python venv direnv",
+    "direnv layout python"
+  ],
+  "intents_en": [
+    "direnv auto load env",
+    "direnv envrc template",
+    "direnv python venv",
+    "direnv layout python"
+  ],
+  "slots": [
+    "python_version"
+  ],
+  "code": "# .envrc\nstrict_env\n\nlayout python python{{python_version}}\n\ndotenv_if_exists .env\ndotenv_if_exists .env.local\n\nexport PROJECT_ROOT=$(pwd)\nexport PYTHONPATH=\"$PROJECT_ROOT/src:${PYTHONPATH:-}\"\n\npath_add PATH \"$PROJECT_ROOT/bin\"\n\nlog_status \"loaded $(basename $PROJECT_ROOT)\"",
+  "language": "bash",
+  "deps": [
+    "direnv"
+  ],
+  "summary_zh": "direnv .envrc 自動 venv + env 載入"
+}

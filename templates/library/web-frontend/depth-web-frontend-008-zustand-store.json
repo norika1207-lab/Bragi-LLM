@@ -1,0 +1,28 @@
+{
+  "id": "depth-web-frontend-008-zustand-store",
+  "category": "web-frontend/state/zustand",
+  "intents_zh": [
+    "zustand 建 store",
+    "全域狀態 zustand",
+    "create 函式 store",
+    "zustand persist",
+    "小型狀態管理"
+  ],
+  "intents_en": [
+    "zustand create store",
+    "global state zustand",
+    "zustand basic",
+    "persist middleware",
+    "lightweight state"
+  ],
+  "slots": [
+    "store_name",
+    "field"
+  ],
+  "code": "import { create } from 'zustand';\nimport { persist } from 'zustand/middleware';\n\ntype State = { {{field}}: number; inc: () => void; reset: () => void };\n\nexport const use{{store_name}} = create<State>()(\n  persist(\n    (set) => ({\n      {{field}}: 0,\n      inc: () => set((s) => ({ {{field}}: s.{{field}} + 1 })),\n      reset: () => set({ {{field}}: 0 }),\n    }),\n    { name: '{{store_name}}' }\n  )\n);",
+  "language": "ts",
+  "deps": [
+    "zustand"
+  ],
+  "summary_zh": "zustand persist store 範本"
+}

@@ -1,0 +1,33 @@
+{
+  "id": "llm-tools-047-html-loader",
+  "category": "llm-tools/ingest/html",
+  "intents_zh": [
+    "抓網頁文字",
+    "html to text",
+    "trafilatura 抽文",
+    "網頁正文抽取",
+    "用 readability 抓文",
+    "scrape web",
+    "HTML 清洗",
+    "抓 url 內文"
+  ],
+  "intents_en": [
+    "scrape web content",
+    "html to text",
+    "trafilatura extract",
+    "readability main text",
+    "fetch url body",
+    "html cleanup",
+    "web ingest",
+    "extract article"
+  ],
+  "slots": [
+    "url"
+  ],
+  "code": "import trafilatura\n\ndef fetch_text(url: str = \"{{url}}\") -> str | None:\n    html = trafilatura.fetch_url(url)\n    if not html:\n        return None\n    return trafilatura.extract(html, include_comments=False, include_tables=False)\n\nif __name__ == \"__main__\":\n    print(fetch_text()[:500])",
+  "language": "py",
+  "deps": [
+    "trafilatura"
+  ],
+  "summary_zh": "trafilatura 抓網頁主文"
+}

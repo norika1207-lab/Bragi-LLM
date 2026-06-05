@@ -1,0 +1,25 @@
+{
+  "id": "algorithm-search-004",
+  "category": "algorithm/search/dfs",
+  "intents_zh": [
+    "DFS",
+    "深度優先搜尋",
+    "遞迴 dfs",
+    "給我 dfs",
+    "用 stack 走圖"
+  ],
+  "intents_en": [
+    "DFS",
+    "depth first search",
+    "recursive dfs",
+    "graph dfs",
+    "dfs traversal"
+  ],
+  "slots": [
+    "fn_name"
+  ],
+  "code": "def {{fn_name}}(graph, start):\n    visited, order = set(), []\n    def dfs(u):\n        visited.add(u)\n        order.append(u)\n        for v in graph[u]:\n            if v not in visited:\n                dfs(v)\n    dfs(start)\n    return order",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "遞迴版 DFS"
+}

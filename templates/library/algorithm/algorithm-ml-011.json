@@ -1,0 +1,26 @@
+{
+  "id": "algorithm-ml-011",
+  "category": "algorithm/ml/pca",
+  "intents_zh": [
+    "PCA",
+    "降維",
+    "主成分分析",
+    "sklearn pca"
+  ],
+  "intents_en": [
+    "PCA",
+    "principal component analysis",
+    "sklearn pca",
+    "dimensionality reduction"
+  ],
+  "slots": [
+    "data_var",
+    "n_components"
+  ],
+  "code": "from sklearn.decomposition import PCA\n\npca = PCA(n_components={{n_components}})\nreduced = pca.fit_transform({{data_var}})\nprint('explained variance:', pca.explained_variance_ratio_)\nprint('shape:', reduced.shape)",
+  "language": "py",
+  "deps": [
+    "scikit-learn"
+  ],
+  "summary_zh": "sklearn PCA 降維"
+}

@@ -1,0 +1,27 @@
+{
+  "id": "firmware-011-arduino-ir-remote",
+  "category": "firmware/arduino/input",
+  "intents_zh": [
+    "紅外線遙控",
+    "IR receiver",
+    "接收遙控器訊號",
+    "IRremote 範例",
+    "解 IR code"
+  ],
+  "intents_en": [
+    "IR remote receiver",
+    "decode infrared remote",
+    "IRremote library",
+    "Arduino IR codes",
+    "TSOP receiver"
+  ],
+  "slots": [
+    "ir_pin"
+  ],
+  "code": "#include <IRremote.hpp>\nconst int IR_PIN = {{ir_pin}};\n\nvoid setup() {\n  Serial.begin(115200);\n  IrReceiver.begin(IR_PIN, ENABLE_LED_FEEDBACK);\n}\n\nvoid loop() {\n  if (IrReceiver.decode()) {\n    Serial.print(\"code=0x\");\n    Serial.println(IrReceiver.decodedIRData.decodedRawData, HEX);\n    IrReceiver.resume();\n  }\n}",
+  "language": "ino",
+  "deps": [
+    "IRremote"
+  ],
+  "summary_zh": "Arduino 紅外線遙控接收與解碼"
+}

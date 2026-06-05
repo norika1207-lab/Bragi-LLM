@@ -1,0 +1,29 @@
+{
+  "id": "firmware-062-stm32-spi-transfer",
+  "category": "firmware/stm32/spi",
+  "intents_zh": [
+    "STM32 SPI 傳輸",
+    "HAL_SPI_TransmitReceive",
+    "stm32 SPI 範例",
+    "SPI 全雙工",
+    "STM32 SPI 寫讀"
+  ],
+  "intents_en": [
+    "STM32 SPI TransmitReceive",
+    "HAL SPI full duplex",
+    "SPI byte transfer STM32",
+    "HAL_SPI_TransmitReceive example",
+    "STM32 SPI read write"
+  ],
+  "slots": [
+    "spi_handle",
+    "cs_port",
+    "cs_pin"
+  ],
+  "code": "#include \"main.h\"\nextern SPI_HandleTypeDef {{spi_handle}};\n\nuint8_t spi_xchg(uint8_t out) {\n  uint8_t in = 0;\n  HAL_GPIO_WritePin({{cs_port}}, {{cs_pin}}, GPIO_PIN_RESET);\n  HAL_SPI_TransmitReceive(&{{spi_handle}}, &out, &in, 1, HAL_MAX_DELAY);\n  HAL_GPIO_WritePin({{cs_port}}, {{cs_pin}}, GPIO_PIN_SET);\n  return in;\n}",
+  "language": "c",
+  "deps": [
+    "STM32 HAL"
+  ],
+  "summary_zh": "STM32 SPI 單 byte 全雙工交換"
+}

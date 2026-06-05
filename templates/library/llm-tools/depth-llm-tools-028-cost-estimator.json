@@ -1,0 +1,27 @@
+{
+  "id": "depth-llm-tools-028-cost-estimator",
+  "category": "llm-tools/cost/estimator",
+  "intents_zh": [
+    "LLM 成本估算",
+    "input + output 計價",
+    "按模型算花費",
+    "美元成本估",
+    "定價計算器"
+  ],
+  "intents_en": [
+    "LLM cost estimator",
+    "input plus output pricing",
+    "per-model spend",
+    "USD cost estimate",
+    "pricing calculator"
+  ],
+  "slots": [
+    "model",
+    "in_tokens",
+    "out_tokens"
+  ],
+  "code": "PRICES = {\n    \"gpt-4o\": (2.50, 10.00),\n    \"gpt-4o-mini\": (0.15, 0.60),\n    \"claude-3-5-sonnet\": (3.00, 15.00),\n    \"claude-3-5-haiku\": (0.80, 4.00),\n}\n\ndef estimate({{model}}, {{in_tokens}}, {{out_tokens}}):\n    pin, pout = PRICES[{{model}}]\n    return ({{in_tokens}} * pin + {{out_tokens}} * pout) / 1_000_000",
+  "language": "python",
+  "deps": [],
+  "summary_zh": "按 per-million-token 定價算單次呼叫美元成本"
+}

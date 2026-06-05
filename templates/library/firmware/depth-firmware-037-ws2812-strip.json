@@ -1,0 +1,28 @@
+{
+  "id": "depth-firmware-037-ws2812-strip",
+  "category": "firmware/display/ws2812",
+  "intents_zh": [
+    "WS2812 燈條",
+    "NeoPixel 動畫",
+    "rainbow LED",
+    "RGB 燈帶",
+    "FastLED hue"
+  ],
+  "intents_en": [
+    "ws2812 strip",
+    "neopixel animate",
+    "rainbow led",
+    "rgb strip",
+    "fastled hue"
+  ],
+  "slots": [
+    "led_pin",
+    "num_leds"
+  ],
+  "code": "#include <FastLED.h>\n#define N {{num_leds}}\nCRGB leds[N];\nvoid setup() { FastLED.addLeds<WS2812, {{led_pin}}, GRB>(leds, N); }\nvoid loop() {\n    static uint8_t hue = 0;\n    for (int i = 0; i < N; i++) leds[i] = CHSV(hue + i*4, 255, 200);\n    FastLED.show();\n    hue++;\n    delay(20);\n}",
+  "language": "cpp",
+  "deps": [
+    "FastLED"
+  ],
+  "summary_zh": "FastLED 跑 rainbow 動畫於 WS2812 燈條"
+}

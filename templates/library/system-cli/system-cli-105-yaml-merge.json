@@ -1,0 +1,25 @@
+{
+  "id": "system-cli-105-yaml-merge",
+  "category": "system-cli/config/yaml",
+  "intents_zh": [
+    "合併兩個 yaml",
+    "yaml deep merge",
+    "環境覆寫 yaml"
+  ],
+  "intents_en": [
+    "merge two yaml files",
+    "yaml deep merge",
+    "override yaml with env"
+  ],
+  "slots": [
+    "base_yaml",
+    "override_yaml",
+    "out_yaml"
+  ],
+  "code": "import yaml\nfrom pathlib import Path\n\ndef deep_merge(a, b):\n    if isinstance(a, dict) and isinstance(b, dict):\n        out = dict(a)\n        for k, v in b.items():\n            out[k] = deep_merge(a.get(k), v) if k in a else v\n        return out\n    return b\n\nbase = yaml.safe_load(Path('{{base_yaml}}').read_text())\nover = yaml.safe_load(Path('{{override_yaml}}').read_text())\nmerged = deep_merge(base, over)\nPath('{{out_yaml}}').write_text(yaml.safe_dump(merged, sort_keys=False))\nprint('merged -> {{out_yaml}}')",
+  "language": "py",
+  "deps": [
+    "PyYAML"
+  ],
+  "summary_zh": "yaml 深度合併"
+}

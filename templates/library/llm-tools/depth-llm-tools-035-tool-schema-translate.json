@@ -1,0 +1,25 @@
+{
+  "id": "depth-llm-tools-035-tool-schema-translate",
+  "category": "llm-tools/schema/tools",
+  "intents_zh": [
+    "tool schema 跨家轉換",
+    "function -> tool 包裝",
+    "OpenAI tool 轉 Anthropic",
+    "tool definition 翻譯",
+    "function calling 格式轉換"
+  ],
+  "intents_en": [
+    "tool schema cross-provider",
+    "function to tool wrap",
+    "OpenAI tool to Anthropic",
+    "tool def translate",
+    "function calling format convert"
+  ],
+  "slots": [
+    "openai_tools"
+  ],
+  "code": "def tools_to_anthropic({{openai_tools}}):\n    return [{\n        \"name\": t[\"function\"][\"name\"],\n        \"description\": t[\"function\"].get(\"description\", \"\"),\n        \"input_schema\": t[\"function\"][\"parameters\"],\n    } for t in {{openai_tools}}]",
+  "language": "python",
+  "deps": [],
+  "summary_zh": "OpenAI tools 陣列轉成 Anthropic tools 結構"
+}

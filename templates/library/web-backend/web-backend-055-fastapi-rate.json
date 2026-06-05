@@ -1,0 +1,28 @@
+{
+  "id": "web-backend-055-fastapi-rate",
+  "category": "web-backend/fastapi/middleware",
+  "intents_zh": [
+    "fastapi rate limit",
+    "slowapi 限流",
+    "throttle fastapi",
+    "限制 ip 請求",
+    "fastapi 防爆"
+  ],
+  "intents_en": [
+    "fastapi rate limit",
+    "slowapi example",
+    "throttle fastapi",
+    "ip limit fastapi",
+    "limit per minute fastapi"
+  ],
+  "slots": [
+    "rate"
+  ],
+  "code": "from fastapi import FastAPI, Request\nfrom slowapi import Limiter, _rate_limit_exceeded_handler\nfrom slowapi.errors import RateLimitExceeded\nfrom slowapi.util import get_remote_address\n\nlimiter = Limiter(key_func=get_remote_address)\napp = FastAPI()\napp.state.limiter = limiter\napp.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)\n\n@app.get('/api/data')\n@limiter.limit('{{rate}}')\nasync def data(request: Request):\n    return {'ok': True}",
+  "language": "py",
+  "deps": [
+    "fastapi",
+    "slowapi"
+  ],
+  "summary_zh": "FastAPI slowapi 限流"
+}

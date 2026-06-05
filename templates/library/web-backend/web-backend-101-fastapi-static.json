@@ -1,0 +1,28 @@
+{
+  "id": "web-backend-101-fastapi-static",
+  "category": "web-backend/fastapi/static",
+  "intents_zh": [
+    "fastapi static files",
+    "host 靜態檔",
+    "StaticFiles fastapi",
+    "serve frontend fastapi",
+    "public dir fastapi"
+  ],
+  "intents_en": [
+    "fastapi static files",
+    "StaticFiles example",
+    "serve frontend fastapi",
+    "public folder fastapi",
+    "host static fastapi"
+  ],
+  "slots": [
+    "public_dir",
+    "mount_path"
+  ],
+  "code": "from fastapi import FastAPI\nfrom fastapi.staticfiles import StaticFiles\n\napp = FastAPI()\napp.mount('{{mount_path}}', StaticFiles(directory='{{public_dir}}', html=True), name='static')",
+  "language": "py",
+  "deps": [
+    "fastapi"
+  ],
+  "summary_zh": "FastAPI StaticFiles 掛載"
+}

@@ -1,0 +1,33 @@
+{
+  "id": "depth-algorithm-019-simulated-annealing",
+  "category": "algorithm/optimization/sa",
+  "intents_zh": [
+    "模擬退火",
+    "simulated annealing",
+    "SA 優化",
+    "隨機鄰域搜索",
+    "退火溫度衰減",
+    "連續優化 SA",
+    "模擬退火求極值"
+  ],
+  "intents_en": [
+    "simulated annealing",
+    "SA optimization",
+    "random neighbour search",
+    "annealing schedule",
+    "continuous optimization SA",
+    "SA template",
+    "metropolis acceptance"
+  ],
+  "slots": [
+    "x0",
+    "cost_fn",
+    "T0",
+    "alpha",
+    "iters"
+  ],
+  "code": "import math, random\n\ndef simulated_annealing(x={{x0}}, cost={{cost_fn}}, T={{T0}}, alpha={{alpha}}, iters={{iters}}):\n    best = x; best_c = cost(x); cur_c = best_c\n    for _ in range(iters):\n        nx = [xi + random.gauss(0, T) for xi in x]\n        nc = cost(nx)\n        if nc < cur_c or random.random() < math.exp(-(nc - cur_c)/max(T, 1e-9)):\n            x = nx; cur_c = nc\n            if nc < best_c: best = nx; best_c = nc\n        T *= alpha\n    return best, best_c",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "模擬退火連續變量優化模板"
+}

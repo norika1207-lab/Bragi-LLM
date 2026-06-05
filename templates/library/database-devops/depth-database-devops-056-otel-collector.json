@@ -1,0 +1,24 @@
+{
+  "id": "depth-database-devops-056-otel-collector",
+  "category": "database-devops/observability/otel",
+  "intents_zh": [
+    "otel collector config",
+    "gateway pipeline",
+    "exporter 多目的地"
+  ],
+  "intents_en": [
+    "otel collector config",
+    "gateway pipeline",
+    "multi exporter"
+  ],
+  "slots": [
+    "jaeger_endpoint",
+    "prom_endpoint"
+  ],
+  "code": "receivers:\n  otlp:\n    protocols: { grpc: {}, http: {} }\n\nprocessors:\n  batch: {}\n  memory_limiter: { check_interval: 1s, limit_mib: 400 }\n\nexporters:\n  otlp/jaeger:\n    endpoint: {{jaeger_endpoint}}\n    tls: { insecure: true }\n  prometheusremotewrite:\n    endpoint: {{prom_endpoint}}\n\nservice:\n  pipelines:\n    traces:\n      receivers: [otlp]\n      processors: [memory_limiter, batch]\n      exporters: [otlp/jaeger]\n    metrics:\n      receivers: [otlp]\n      processors: [memory_limiter, batch]\n      exporters: [prometheusremotewrite]",
+  "language": "yaml",
+  "deps": [
+    "otelcol"
+  ],
+  "summary_zh": "OTel Collector,trace 出 Jaeger,metrics 推 Prom RW"
+}

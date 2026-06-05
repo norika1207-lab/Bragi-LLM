@@ -1,0 +1,23 @@
+{
+  "id": "system-cli-028-questionary-menu",
+  "category": "system-cli/python/interactive",
+  "intents_zh": [
+    "questionary 互動選單",
+    "python 終端選單",
+    "CLI 問卷"
+  ],
+  "intents_en": [
+    "questionary menu",
+    "python interactive select",
+    "CLI questionnaire"
+  ],
+  "slots": [
+    "prompt_text"
+  ],
+  "code": "import questionary\n\nenv = questionary.select(\n    '{{prompt_text}}',\n    choices=['dev', 'staging', 'prod']\n).ask()\n\nconfirm = questionary.confirm(f'deploy to {env}?').ask()\nif not confirm:\n    raise SystemExit(0)\nprint(f'deploying {env}')",
+  "language": "py",
+  "deps": [
+    "questionary"
+  ],
+  "summary_zh": "questionary 選單 + 確認"
+}

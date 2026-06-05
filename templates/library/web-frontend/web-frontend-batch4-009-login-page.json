@@ -1,0 +1,28 @@
+{
+  "id": "web-frontend-batch4-009-login-page",
+  "category": "web-frontend/nextjs/app-router/login",
+  "intents_zh": [
+    "登入頁面",
+    "Next.js 13 app router 登入",
+    "產生 login form 頁",
+    "email 密碼登入頁",
+    "auth 頁面",
+    "sign in 表單"
+  ],
+  "intents_en": [
+    "login page app router",
+    "sign in form page",
+    "email password login",
+    "auth login page",
+    "next.js login",
+    "credentials login screen"
+  ],
+  "slots": [
+    "app_name",
+    "signin_action"
+  ],
+  "code": "export default function LoginPage() {\n  return (\n    <main className=\"min-h-screen flex items-center justify-center bg-gray-50\">\n      <form action=\"{{signin_action}}\" method=\"post\" className=\"w-full max-w-sm bg-white rounded-xl shadow p-8 space-y-4\">\n        <h1 className=\"text-2xl font-bold\">Sign in to {{app_name}}</h1>\n        <input name=\"email\" type=\"email\" placeholder=\"Email\" className=\"w-full border rounded px-3 py-2\" required />\n        <input name=\"password\" type=\"password\" placeholder=\"Password\" className=\"w-full border rounded px-3 py-2\" required />\n        <button type=\"submit\" className=\"w-full bg-indigo-600 text-white py-2 rounded\">Sign in</button>\n      </form>\n    </main>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "App Router 登入頁面表單"
+}

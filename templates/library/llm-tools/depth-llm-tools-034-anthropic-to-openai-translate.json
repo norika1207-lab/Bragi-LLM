@@ -1,0 +1,26 @@
+{
+  "id": "depth-llm-tools-034-anthropic-to-openai-translate",
+  "category": "llm-tools/schema/anthropic-to-openai",
+  "intents_zh": [
+    "Anthropic 轉 OpenAI 格式",
+    "system 合回 messages",
+    "Claude 訊息回 ChatML",
+    "格式反向轉",
+    "OpenAI compat 包裝"
+  ],
+  "intents_en": [
+    "Anthropic to OpenAI format",
+    "fold system into messages",
+    "Claude messages to ChatML",
+    "reverse translate",
+    "OpenAI compat wrap"
+  ],
+  "slots": [
+    "system",
+    "anthropic_messages"
+  ],
+  "code": "def to_openai({{system}}, {{anthropic_messages}}):\n    out = []\n    if {{system}}: out.append({\"role\": \"system\", \"content\": {{system}}})\n    for m in {{anthropic_messages}}:\n        out.append({\"role\": m[\"role\"], \"content\": m[\"content\"]})\n    return out",
+  "language": "python",
+  "deps": [],
+  "summary_zh": "把 Anthropic system + messages 合成 OpenAI ChatML 陣列"
+}

@@ -1,0 +1,22 @@
+{
+  "id": "system-cli-068-zip-extract",
+  "category": "system-cli/file/archive",
+  "intents_zh": [
+    "解壓全部 zip",
+    "批次 unzip",
+    "資料夾下所有 zip 攤平"
+  ],
+  "intents_en": [
+    "batch unzip files",
+    "extract all zip in folder",
+    "zip extractor"
+  ],
+  "slots": [
+    "src_dir",
+    "out_dir"
+  ],
+  "code": "import zipfile\nfrom pathlib import Path\n\nsrc = Path('{{src_dir}}'); out = Path('{{out_dir}}'); out.mkdir(parents=True, exist_ok=True)\nfor z in src.glob('*.zip'):\n    target = out / z.stem\n    target.mkdir(exist_ok=True)\n    with zipfile.ZipFile(z) as zf:\n        zf.extractall(target)\n    print(z.name, '->', target)",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "批次解壓 zip"
+}

@@ -1,0 +1,25 @@
+{
+  "id": "database-devops-032-knex-migration",
+  "category": "database-devops/migration/knex",
+  "intents_zh": [
+    "knex migration",
+    "knex 建表",
+    "knex schema builder",
+    "knex up down"
+  ],
+  "intents_en": [
+    "knex migration",
+    "create table knex",
+    "knex schema builder",
+    "knex up down"
+  ],
+  "slots": [
+    "table_name"
+  ],
+  "code": "exports.up = function(knex) {\n  return knex.schema.createTable('{{table_name}}', (t) => {\n    t.increments('id').primary()\n    t.string('name').notNullable()\n    t.integer('user_id').unsigned().references('id').inTable('users').onDelete('CASCADE')\n    t.timestamps(true, true)\n    t.index(['user_id'])\n  })\n}\n\nexports.down = function(knex) {\n  return knex.schema.dropTable('{{table_name}}')\n}",
+  "language": "js",
+  "deps": [
+    "knex"
+  ],
+  "summary_zh": "Knex 建表 migration"
+}

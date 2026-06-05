@@ -1,0 +1,29 @@
+{
+  "id": "web-frontend-batch3-011-svelte-login",
+  "category": "web-frontend/svelte/forms/login",
+  "intents_zh": [
+    "Svelte 登入表單",
+    "Svelte login 元件",
+    "SvelteKit 登入頁",
+    "Svelte 帳密表單",
+    "Svelte auth login",
+    "Svelte 簡單登入"
+  ],
+  "intents_en": [
+    "svelte login form",
+    "svelte login component",
+    "sveltekit login page",
+    "svelte auth form",
+    "svelte email password",
+    "svelte simple login"
+  ],
+  "slots": [
+    "api_path"
+  ],
+  "code": "<script>\n  let email = '';\n  let password = '';\n  let loading = false;\n  async function submit() {\n    loading = true;\n    try {\n      await fetch('{{api_path}}', {\n        method: 'POST',\n        headers: { 'Content-Type': 'application/json' },\n        body: JSON.stringify({ email, password })\n      });\n    } finally { loading = false; }\n  }\n</script>\n<form on:submit|preventDefault={submit}>\n  <input bind:value={email} type=\"email\" placeholder=\"Email\" required />\n  <input bind:value={password} type=\"password\" placeholder=\"Password\" required />\n  <button disabled={loading}>{loading ? '...' : 'Sign in'}</button>\n</form>",
+  "language": "svelte",
+  "deps": [
+    "svelte"
+  ],
+  "summary_zh": "Svelte 登入表單元件"
+}

@@ -1,0 +1,29 @@
+{
+  "id": "mobile-044-flutter-darkmode",
+  "category": "mobile/flutter/theme",
+  "intents_zh": [
+    "Flutter dark mode",
+    "flutter 深色主題",
+    "ThemeMode.system flutter",
+    "flutter 自動切深色",
+    "flutter theme switch",
+    "flutter brightness",
+    "dark theme flutter"
+  ],
+  "intents_en": [
+    "flutter dark mode",
+    "flutter ThemeMode system",
+    "flutter dark theme",
+    "follow system brightness flutter",
+    "theme switching flutter",
+    "flutter dark light",
+    "brightness flutter"
+  ],
+  "slots": [],
+  "code": "import 'package:flutter/material.dart';\nclass App extends StatelessWidget{const App({super.key});\n  @override Widget build(BuildContext c)=>MaterialApp(\n    theme:ThemeData.light(),\n    darkTheme:ThemeData.dark(),\n    themeMode:ThemeMode.system,\n    home:Scaffold(appBar:AppBar(title:const Text('themed')),body:const Center(child:Text('hi'))));}",
+  "language": "dart",
+  "deps": [
+    "flutter"
+  ],
+  "summary_zh": "Flutter MaterialApp 跟隨系統 dark/light"
+}

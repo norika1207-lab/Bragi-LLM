@@ -1,0 +1,29 @@
+{
+  "id": "web-backend-064-django-drf",
+  "category": "web-backend/django/rest",
+  "intents_zh": [
+    "DRF viewset",
+    "django rest framework CRUD",
+    "ModelViewSet 範例",
+    "DRF serializer",
+    "django REST api"
+  ],
+  "intents_en": [
+    "DRF viewset crud",
+    "django rest framework",
+    "ModelViewSet example",
+    "serializer DRF",
+    "django rest api"
+  ],
+  "slots": [
+    "model_name",
+    "fields_list"
+  ],
+  "code": "# views.py\nfrom rest_framework import viewsets, serializers\nfrom .models import {{model_name}}\n\nclass {{model_name}}Serializer(serializers.ModelSerializer):\n    class Meta:\n        model = {{model_name}}\n        fields = {{fields_list}}\n\nclass {{model_name}}ViewSet(viewsets.ModelViewSet):\n    queryset = {{model_name}}.objects.all()\n    serializer_class = {{model_name}}Serializer\n\n# urls.py\nfrom rest_framework.routers import DefaultRouter\nrouter = DefaultRouter()\nrouter.register(r'{{model_name|lower}}', {{model_name}}ViewSet)\nurlpatterns = router.urls",
+  "language": "py",
+  "deps": [
+    "django",
+    "djangorestframework"
+  ],
+  "summary_zh": "DRF ModelViewSet CRUD"
+}

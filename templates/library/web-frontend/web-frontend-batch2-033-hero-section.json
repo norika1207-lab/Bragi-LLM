@@ -1,0 +1,29 @@
+{
+  "id": "web-frontend-batch2-033-hero-section",
+  "category": "web-frontend/react/layout/hero",
+  "intents_zh": [
+    "首頁 hero 區",
+    "hero section",
+    "主視覺區塊",
+    "landing hero",
+    "CTA 區塊",
+    "首屏標題區"
+  ],
+  "intents_en": [
+    "hero section",
+    "landing hero",
+    "main banner",
+    "CTA hero",
+    "homepage hero",
+    "top hero"
+  ],
+  "slots": [
+    "headline",
+    "sub",
+    "cta"
+  ],
+  "code": "export function Hero() {\n  return (\n    <section className=\"mx-auto max-w-5xl px-6 py-24 text-center\">\n      <h1 className=\"text-5xl font-bold tracking-tight\">{{headline}}</h1>\n      <p className=\"mx-auto mt-6 max-w-2xl text-lg text-gray-600\">{{sub}}</p>\n      <div className=\"mt-8 flex justify-center gap-3\">\n        <button className=\"rounded-lg bg-black px-6 py-3 text-white\">{{cta}}</button>\n        <button className=\"rounded-lg border px-6 py-3\">Learn more</button>\n      </div>\n    </section>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "landing page hero 區塊"
+}

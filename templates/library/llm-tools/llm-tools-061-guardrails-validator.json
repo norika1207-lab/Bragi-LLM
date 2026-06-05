@@ -1,0 +1,33 @@
+{
+  "id": "llm-tools-061-guardrails-validator",
+  "category": "llm-tools/output/guardrails",
+  "intents_zh": [
+    "guardrails 驗證",
+    "LLM 輸出檢查",
+    "output validator",
+    "檢查 JSON 合法",
+    "驗證 LLM 答",
+    "guardrails 範例",
+    "schema validator",
+    "拒絕不合法輸出"
+  ],
+  "intents_en": [
+    "guardrails validator",
+    "llm output check",
+    "json output validator",
+    "verify llm answer",
+    "guardrails example",
+    "schema validator",
+    "reject invalid output",
+    "output checker"
+  ],
+  "slots": [
+    "class_name"
+  ],
+  "code": "from pydantic import BaseModel, ValidationError\nimport json\n\nclass {{class_name}}(BaseModel):\n    name: str\n    age: int\n\ndef validate(raw: str) -> {{class_name}} | None:\n    try:\n        return {{class_name}}.model_validate_json(raw)\n    except (ValidationError, json.JSONDecodeError) as e:\n        print(\"validation failed:\", e)\n        return None\n\nif __name__ == \"__main__\":\n    print(validate('{\"name\": \"A\", \"age\": 30}'))\n    print(validate('bad'))",
+  "language": "py",
+  "deps": [
+    "pydantic"
+  ],
+  "summary_zh": "pydantic 驗證 LLM JSON 輸出"
+}

@@ -1,0 +1,23 @@
+{
+  "id": "system-cli-083-clipboard-pyperclip",
+  "category": "system-cli/util/clipboard",
+  "intents_zh": [
+    "python 操作剪貼簿",
+    "複製到剪貼簿",
+    "pyperclip 範本"
+  ],
+  "intents_en": [
+    "python clipboard copy",
+    "pyperclip read write",
+    "copy text to clipboard"
+  ],
+  "slots": [
+    "text_var"
+  ],
+  "code": "import pyperclip\n\npyperclip.copy('{{text_var}}')\nprint('copied:', pyperclip.paste()[:80])",
+  "language": "py",
+  "deps": [
+    "pyperclip"
+  ],
+  "summary_zh": "pyperclip 讀寫剪貼簿"
+}

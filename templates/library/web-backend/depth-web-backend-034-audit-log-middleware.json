@@ -1,0 +1,28 @@
+{
+  "id": "depth-web-backend-034-audit-log-middleware",
+  "category": "web-backend/audit/middleware",
+  "intents_zh": [
+    "audit log 中介層",
+    "記錄寫操作",
+    "Express 寫稽核紀錄",
+    "誰改了什麼",
+    "審計追蹤"
+  ],
+  "intents_en": [
+    "audit log middleware",
+    "record write operations",
+    "express audit logger",
+    "who changed what",
+    "audit trail"
+  ],
+  "slots": [
+    "table"
+  ],
+  "code": "export function audit(action) {\n  return async (req, res, next) => {\n    res.on('finish', async () => {\n      if (res.statusCode >= 400) return;\n      await db('{{table}}').insert({\n        user_id: req.user?.id, action,\n        route: req.originalUrl, method: req.method,\n        ip: req.ip, body: JSON.stringify(req.body),\n        ts: new Date(),\n      });\n    });\n    next();\n  };\n}",
+  "language": "js",
+  "deps": [
+    "express",
+    "knex"
+  ],
+  "summary_zh": "Express 稽核紀錄中介層"
+}

@@ -1,0 +1,27 @@
+{
+  "id": "web-backend-054-fastapi-pagination",
+  "category": "web-backend/fastapi/rest",
+  "intents_zh": [
+    "fastapi 分頁",
+    "page size fastapi",
+    "Query 參數分頁",
+    "回傳分頁結構 fastapi",
+    "limit offset fastapi"
+  ],
+  "intents_en": [
+    "fastapi pagination",
+    "page size param",
+    "Query pagination",
+    "paginated response fastapi",
+    "limit offset fastapi"
+  ],
+  "slots": [
+    "resource"
+  ],
+  "code": "from fastapi import APIRouter, Query\nfrom typing import Annotated\n\nrouter = APIRouter()\n\n@router.get('/{{resource}}')\nasync def list_items(\n    page: Annotated[int, Query(ge=1)] = 1,\n    size: Annotated[int, Query(ge=1, le=100)] = 20\n):\n    offset = (page - 1) * size\n    # rows = await db.fetch(... LIMIT {size} OFFSET {offset})\n    rows: list = []\n    total = 0\n    return {\n        'data': rows,\n        'page': page,\n        'size': size,\n        'total': total,\n        'pages': (total + size - 1) // size\n    }",
+  "language": "py",
+  "deps": [
+    "fastapi"
+  ],
+  "summary_zh": "FastAPI 分頁查詢樣板"
+}

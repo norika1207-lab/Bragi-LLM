@@ -1,0 +1,23 @@
+{
+  "id": "depth-database-devops-028-prometheus-yml",
+  "category": "database-devops/observability/prometheus",
+  "intents_zh": [
+    "prometheus 設定檔",
+    "scrape job",
+    "抓 node_exporter"
+  ],
+  "intents_en": [
+    "prometheus config",
+    "scrape job",
+    "scrape node_exporter"
+  ],
+  "slots": [
+    "app_target"
+  ],
+  "code": "global:\n  scrape_interval: 15s\n  evaluation_interval: 15s\n\nscrape_configs:\n  - job_name: prometheus\n    static_configs:\n      - targets: ['localhost:9090']\n  - job_name: node\n    static_configs:\n      - targets: ['node-exporter:9100']\n  - job_name: app\n    metrics_path: /metrics\n    static_configs:\n      - targets: ['{{app_target}}']",
+  "language": "yaml",
+  "deps": [
+    "prometheus"
+  ],
+  "summary_zh": "prometheus.yml 基本 scrape jobs"
+}

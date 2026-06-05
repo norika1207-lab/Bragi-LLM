@@ -1,0 +1,27 @@
+{
+  "id": "database-devops-099-vitest-react",
+  "category": "database-devops/test/vitest",
+  "intents_zh": [
+    "vitest 測 React 元件",
+    "testing-library + vitest",
+    "render screen vitest"
+  ],
+  "intents_en": [
+    "vitest react component",
+    "testing library vitest",
+    "render screen vitest"
+  ],
+  "slots": [
+    "component_name",
+    "component_path"
+  ],
+  "code": "import { render, screen } from '@testing-library/react'\nimport userEvent from '@testing-library/user-event'\nimport { describe, it, expect } from 'vitest'\nimport { {{component_name}} } from '{{component_path}}'\n\ndescribe('{{component_name}}', () => {\n  it('renders heading', () => {\n    render(<{{component_name}} />)\n    expect(screen.getByRole('heading')).toBeInTheDocument()\n  })\n\n  it('handles click', async () => {\n    const user = userEvent.setup()\n    render(<{{component_name}} />)\n    await user.click(screen.getByRole('button'))\n    expect(screen.getByText(/clicked/i)).toBeVisible()\n  })\n})",
+  "language": "tsx",
+  "deps": [
+    "vitest",
+    "@testing-library/react",
+    "@testing-library/user-event",
+    "@testing-library/jest-dom"
+  ],
+  "summary_zh": "vitest + testing-library 測 React"
+}

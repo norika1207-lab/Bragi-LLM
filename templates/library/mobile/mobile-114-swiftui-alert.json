@@ -1,0 +1,30 @@
+{
+  "id": "mobile-114-swiftui-alert",
+  "category": "mobile/swiftui/feedback",
+  "intents_zh": [
+    "SwiftUI Alert",
+    "SwiftUI 跳警告",
+    "Swift confirmation alert",
+    "SwiftUI 確認對話框",
+    "SwiftUI alert binding",
+    "Swift dialog",
+    "SwiftUI 警示框"
+  ],
+  "intents_en": [
+    "swiftui Alert",
+    "swiftui alert dialog",
+    "confirmation alert swiftui",
+    "swiftui ok cancel",
+    "alert binding swiftui",
+    "swiftui warning dialog",
+    "swift dialog example"
+  ],
+  "slots": [
+    "title",
+    "msg"
+  ],
+  "code": "import SwiftUI\nstruct A:View{@State var show=false\n  var body:some View{Button(\"Show\"){show=true}.alert(\"{{title}}\",isPresented:$show){Button(\"OK\",role:.cancel){}}message:{Text(\"{{msg}}\")}}}",
+  "language": "swift",
+  "deps": [],
+  "summary_zh": "SwiftUI alert with binding"
+}

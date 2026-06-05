@@ -1,0 +1,23 @@
+{
+  "id": "database-devops-077-sql-batch-insert",
+  "category": "database-devops/sql/dml",
+  "intents_zh": [
+    "批次 insert",
+    "一次塞多列",
+    "VALUES 多筆"
+  ],
+  "intents_en": [
+    "batch insert",
+    "multi-row insert",
+    "values multiple rows"
+  ],
+  "slots": [
+    "table",
+    "col1",
+    "col2"
+  ],
+  "code": "INSERT INTO {{table}} ({{col1}}, {{col2}})\nVALUES\n  ($1, $2),\n  ($3, $4),\n  ($5, $6)\nRETURNING id;",
+  "language": "sql",
+  "deps": [],
+  "summary_zh": "批次 INSERT 多列 RETURNING id"
+}

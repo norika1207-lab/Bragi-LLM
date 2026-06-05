@@ -1,0 +1,21 @@
+{
+  "id": "system-cli-125-which-bin",
+  "category": "system-cli/shell/check",
+  "intents_zh": [
+    "檢查命令存在",
+    "require binary",
+    "script 開頭驗 dep"
+  ],
+  "intents_en": [
+    "require binary present",
+    "check command exists",
+    "shell preflight"
+  ],
+  "slots": [
+    "bin_list"
+  ],
+  "code": "#!/usr/bin/env bash\nset -euo pipefail\nfor bin in {{bin_list}}; do\n  if ! command -v \"$bin\" >/dev/null 2>&1; then\n    echo \"missing required binary: $bin\" >&2; exit 1\n  fi\ndone\necho 'all deps present'",
+  "language": "sh",
+  "deps": [],
+  "summary_zh": "preflight 驗必要 bin"
+}

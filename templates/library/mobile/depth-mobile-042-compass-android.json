@@ -1,0 +1,23 @@
+{
+  "id": "depth-mobile-042-compass-android",
+  "category": "mobile/sensors/compass-android",
+  "intents_zh": [
+    "Android 磁力計 + 加速度算方位",
+    "TYPE_MAGNETIC_FIELD",
+    "getRotationMatrix",
+    "getOrientation azimuth",
+    "羅盤"
+  ],
+  "intents_en": [
+    "Android magnetometer plus accel azimuth",
+    "TYPE_MAGNETIC_FIELD",
+    "getRotationMatrix",
+    "getOrientation",
+    "compass"
+  ],
+  "slots": [],
+  "code": "val sm = getSystemService(SENSOR_SERVICE) as SensorManager\nval gravity = FloatArray(3); val geomag = FloatArray(3)\nval listener = object : SensorEventListener {\n    override fun onSensorChanged(e: SensorEvent) {\n        when (e.sensor.type) {\n            Sensor.TYPE_ACCELEROMETER -> e.values.copyInto(gravity)\n            Sensor.TYPE_MAGNETIC_FIELD -> e.values.copyInto(geomag)\n        }\n        val R = FloatArray(9); val I = FloatArray(9)\n        if (SensorManager.getRotationMatrix(R, I, gravity, geomag)) {\n            val o = FloatArray(3); SensorManager.getOrientation(R, o)\n            val azimuthDeg = Math.toDegrees(o[0].toDouble())\n        }\n    }\n    override fun onAccuracyChanged(s: Sensor?, a: Int) {}\n}\nsm.registerListener(listener, sm.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_UI)\nsm.registerListener(listener, sm.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD), SensorManager.SENSOR_DELAY_UI)",
+  "language": "kotlin",
+  "deps": [],
+  "summary_zh": "Android 磁力 + 加速度算 azimuth"
+}

@@ -1,0 +1,28 @@
+{
+  "id": "web-frontend-batch1-024-file-upload-basic",
+  "category": "web-frontend/react/file-upload/basic",
+  "intents_zh": [
+    "檔案上傳元件",
+    "upload file React",
+    "選檔案 button",
+    "基本 file input",
+    "上傳檔案到 API",
+    "file upload form"
+  ],
+  "intents_en": [
+    "file upload component",
+    "react file input",
+    "upload file basic",
+    "file picker",
+    "upload to server",
+    "input type file"
+  ],
+  "slots": [
+    "component_name",
+    "upload_url"
+  ],
+  "code": "import { useState } from 'react';\n\nexport default function {{component_name}}() {\n  const [uploading, setUploading] = useState(false);\n\n  async function onChange(e: React.ChangeEvent<HTMLInputElement>) {\n    const f = e.target.files?.[0];\n    if (!f) return;\n    setUploading(true);\n    const fd = new FormData();\n    fd.append('file', f);\n    await fetch('{{upload_url}}', { method: 'POST', body: fd });\n    setUploading(false);\n  }\n\n  return (\n    <label>\n      <input type=\"file\" onChange={onChange} disabled={uploading} />\n      {uploading && <span> Uploading...</span>}\n    </label>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "基本檔案上傳 FormData POST"
+}

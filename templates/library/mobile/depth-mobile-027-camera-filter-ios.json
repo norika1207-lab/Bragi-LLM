@@ -1,0 +1,25 @@
+{
+  "id": "depth-mobile-027-camera-filter-ios",
+  "category": "mobile/camera/filter-ios",
+  "intents_zh": [
+    "iOS 相機 CIFilter 即時",
+    "AVCaptureVideoDataOutput 處理",
+    "CIImage 套濾鏡",
+    "predefined filter overlay",
+    "sepia tone live"
+  ],
+  "intents_en": [
+    "iOS camera CIFilter live",
+    "AVCaptureVideoDataOutput",
+    "CIImage filter",
+    "filter overlay",
+    "live sepia"
+  ],
+  "slots": [
+    "filter_name"
+  ],
+  "code": "func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {\n  guard let pb = CMSampleBufferGetImageBuffer(sampleBuffer) else { return }\n  let ci = CIImage(cvPixelBuffer: pb)\n  let filter = CIFilter(name: \"{{filter_name}}\")\n  filter?.setValue(ci, forKey: kCIInputImageKey)\n  if let out = filter?.outputImage {\n    DispatchQueue.main.async { self.previewLayer.contents = self.context.createCGImage(out, from: out.extent) }\n  }\n}",
+  "language": "swift",
+  "deps": [],
+  "summary_zh": "iOS 相機即時套 CIFilter"
+}

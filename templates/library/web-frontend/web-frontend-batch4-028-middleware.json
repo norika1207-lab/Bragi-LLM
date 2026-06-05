@@ -1,0 +1,30 @@
+{
+  "id": "web-frontend-batch4-028-middleware",
+  "category": "web-frontend/nextjs/middleware/auth",
+  "intents_zh": [
+    "middleware 驗證",
+    "Next.js middleware.ts",
+    "路由保護",
+    "cookie 驗證",
+    "redirect 未登入",
+    "auth middleware"
+  ],
+  "intents_en": [
+    "next.js middleware",
+    "auth middleware",
+    "route protection",
+    "cookie based gate",
+    "redirect unauthenticated",
+    "middleware.ts"
+  ],
+  "slots": [
+    "login_path",
+    "protected_prefix"
+  ],
+  "code": "import { NextResponse } from 'next/server';\nimport type { NextRequest } from 'next/server';\n\nexport function middleware(req: NextRequest) {\n  const token = req.cookies.get('token')?.value;\n  if (!token) {\n    return NextResponse.redirect(new URL('{{login_path}}', req.url));\n  }\n  return NextResponse.next();\n}\n\nexport const config = { matcher: ['{{protected_prefix}}/:path*'] };",
+  "language": "ts",
+  "deps": [
+    "next"
+  ],
+  "summary_zh": "middleware 檢查 cookie 未登入則 redirect"
+}

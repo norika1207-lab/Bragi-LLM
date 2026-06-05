@@ -1,0 +1,27 @@
+{
+  "id": "web-frontend-batch1-023-time-picker",
+  "category": "web-frontend/react/date-pickers/time",
+  "intents_zh": [
+    "時間選擇器",
+    "time picker React",
+    "選時間元件",
+    "time input 包裝",
+    "hh:mm input",
+    "native time picker"
+  ],
+  "intents_en": [
+    "time picker",
+    "react time input",
+    "time selector",
+    "html time input",
+    "hh mm picker",
+    "time field"
+  ],
+  "slots": [
+    "component_name"
+  ],
+  "code": "import { useState } from 'react';\n\nexport default function {{component_name}}() {\n  const [t, setT] = useState('09:00');\n  return (\n    <input\n      type=\"time\"\n      value={t}\n      onChange={(e) => setT(e.target.value)}\n      className=\"px-3 py-2 border rounded\"\n    />\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "原生 time input 包裝"
+}

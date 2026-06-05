@@ -1,0 +1,31 @@
+{
+  "id": "mobile-075-swiftui-profile",
+  "category": "mobile/swiftui/profile",
+  "intents_zh": [
+    "SwiftUI 個人頁",
+    "SwiftUI profile view",
+    "SwiftUI 用戶頁",
+    "SwiftUI 我的頁",
+    "個人檔案 SwiftUI",
+    "SwiftUI account 頁",
+    "SwiftUI 頭像 bio"
+  ],
+  "intents_en": [
+    "swiftui profile view",
+    "swiftui user profile",
+    "swiftui my page",
+    "profile template swiftui",
+    "account swiftui",
+    "swiftui avatar bio",
+    "profile screen swiftui"
+  ],
+  "slots": [
+    "avatar_url",
+    "name",
+    "bio"
+  ],
+  "code": "import SwiftUI\nstruct Profile:View{\n  var body:some View{VStack(spacing:12){AsyncImage(url:URL(string:\"{{avatar_url}}\")){$0.resizable().scaledToFill()}placeholder:{Color.gray}.frame(width:120,height:120).clipShape(Circle())\n    Text(\"{{name}}\").font(.title2.bold())\n    Text(\"{{bio}}\").foregroundColor(.secondary).multilineTextAlignment(.center).padding(.horizontal)}.padding()}}",
+  "language": "swift",
+  "deps": [],
+  "summary_zh": "SwiftUI 個人檔案頁含頭像 bio"
+}

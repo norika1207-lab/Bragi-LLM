@@ -1,0 +1,24 @@
+{
+  "id": "system-cli-030-dotenv-python",
+  "category": "system-cli/config/dotenv",
+  "intents_zh": [
+    "python 讀 .env",
+    "dotenv 載入環境變數",
+    "python-dotenv 範本"
+  ],
+  "intents_en": [
+    "python dotenv load",
+    "load .env file in python",
+    "python-dotenv example"
+  ],
+  "slots": [
+    "env_var_a",
+    "env_var_b"
+  ],
+  "code": "from dotenv import load_dotenv\nimport os\n\nload_dotenv()\n\n{{env_var_a}} = os.environ['{{env_var_a}}']\n{{env_var_b}} = os.environ.get('{{env_var_b}}', 'default')\n\nprint(f'loaded {{env_var_a}}=*** {{env_var_b}}={{{env_var_b}}}')",
+  "language": "py",
+  "deps": [
+    "python-dotenv"
+  ],
+  "summary_zh": "python-dotenv 載 .env"
+}

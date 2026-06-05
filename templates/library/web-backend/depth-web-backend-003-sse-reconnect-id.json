@@ -1,0 +1,27 @@
+{
+  "id": "depth-web-backend-003-sse-reconnect-id",
+  "category": "web-backend/sse/resume",
+  "intents_zh": [
+    "SSE 斷線重連",
+    "Last-Event-ID 續推",
+    "可恢復事件串流",
+    "SSE id 機制",
+    "SSE 補推遺漏訊息"
+  ],
+  "intents_en": [
+    "sse reconnect",
+    "last-event-id resume",
+    "resumable event stream",
+    "sse id mechanic",
+    "backfill missed sse"
+  ],
+  "slots": [
+    "path"
+  ],
+  "code": "app.get('{{path}}', async (req, res) => {\n  res.setHeader('Content-Type', 'text/event-stream');\n  const lastId = Number(req.header('Last-Event-ID') || 0);\n  const missed = await store.eventsAfter(lastId);\n  for (const e of missed) res.write(`id: ${e.id}\\ndata: ${JSON.stringify(e.payload)}\\n\\n`);\n  store.on('event', (e) => res.write(`id: ${e.id}\\ndata: ${JSON.stringify(e.payload)}\\n\\n`));\n});",
+  "language": "js",
+  "deps": [
+    "express"
+  ],
+  "summary_zh": "SSE 用 Last-Event-ID 做補推"
+}

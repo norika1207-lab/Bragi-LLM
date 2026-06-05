@@ -1,0 +1,21 @@
+{
+  "id": "database-devops-041-compose-full-stack",
+  "category": "database-devops/docker/compose",
+  "intents_zh": [
+    "全端 compose",
+    "app + db + redis 三合一",
+    "整套服務 compose"
+  ],
+  "intents_en": [
+    "full stack compose",
+    "app db redis",
+    "whole stack compose"
+  ],
+  "slots": [
+    "app_port"
+  ],
+  "code": "services:\n  app:\n    build: .\n    ports: [\"{{app_port}}:3000\"]\n    environment:\n      DATABASE_URL: postgres://app:app@postgres:5432/app\n      REDIS_URL: redis://redis:6379\n    depends_on:\n      postgres:\n        condition: service_healthy\n      redis:\n        condition: service_started\n\n  postgres:\n    image: postgres:16-alpine\n    environment:\n      POSTGRES_DB: app\n      POSTGRES_USER: app\n      POSTGRES_PASSWORD: app\n    healthcheck:\n      test: [\"CMD-SHELL\", \"pg_isready -U app\"]\n      interval: 5s\n    volumes: [\"pg:/var/lib/postgresql/data\"]\n\n  redis:\n    image: redis:7-alpine\n\nvolumes:\n  pg:",
+  "language": "yaml",
+  "deps": [],
+  "summary_zh": "app + pg + redis 全端 compose"
+}

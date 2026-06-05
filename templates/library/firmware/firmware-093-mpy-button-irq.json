@@ -1,0 +1,25 @@
+{
+  "id": "firmware-093-mpy-button-irq",
+  "category": "firmware/micropython/input",
+  "intents_zh": [
+    "MicroPython 按鈕中斷",
+    "mpy IRQ",
+    "Pin.irq 範例",
+    "ESP32 mpy 按鈕中斷",
+    "micropython interrupt"
+  ],
+  "intents_en": [
+    "MicroPython button IRQ",
+    "Pin.irq example",
+    "ESP32 mpy interrupt",
+    "micropython external interrupt",
+    "gpio irq mpy"
+  ],
+  "slots": [
+    "button_pin"
+  ],
+  "code": "from machine import Pin\n\nbtn = Pin({{button_pin}}, Pin.IN, Pin.PULL_UP)\ndef handler(p):\n    print('pressed', p)\nbtn.irq(trigger=Pin.IRQ_FALLING, handler=handler)",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "MicroPython 按鈕外部中斷"
+}

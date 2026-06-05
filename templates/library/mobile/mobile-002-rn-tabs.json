@@ -1,0 +1,34 @@
+{
+  "id": "mobile-002-rn-tabs",
+  "category": "mobile/rn/nav",
+  "intents_zh": [
+    "RN bottom tab 導航",
+    "React Native 底部分頁",
+    "RN 三個 tab",
+    "給我 RN tab navigator",
+    "RN navigation tabs",
+    "底部 tab bar RN",
+    "RN 主導航"
+  ],
+  "intents_en": [
+    "RN bottom tab nav",
+    "react native tabs",
+    "bottom tab navigator rn",
+    "three tab nav rn",
+    "react navigation tabs",
+    "tab bar RN setup",
+    "main nav RN"
+  ],
+  "slots": [
+    "tab1",
+    "tab2",
+    "tab3"
+  ],
+  "code": "import React from 'react';\nimport {NavigationContainer} from '@react-navigation/native';\nimport {createBottomTabNavigator} from '@react-navigation/bottom-tabs';\nimport {Text,View} from 'react-native';\nconst T=createBottomTabNavigator();\nconst Screen=({n}:{n:string})=>(<View style={{flex:1,alignItems:'center',justifyContent:'center'}}><Text>{n}</Text></View>);\nexport default function App(){return(<NavigationContainer><T.Navigator>\n<T.Screen name='{{tab1}}'>{()=><Screen n='{{tab1}}'/>}</T.Screen>\n<T.Screen name='{{tab2}}'>{()=><Screen n='{{tab2}}'/>}</T.Screen>\n<T.Screen name='{{tab3}}'>{()=><Screen n='{{tab3}}'/>}</T.Screen>\n</T.Navigator></NavigationContainer>);}",
+  "language": "tsx",
+  "deps": [
+    "@react-navigation/native",
+    "@react-navigation/bottom-tabs"
+  ],
+  "summary_zh": "React Native 三頁底部 tab 導航骨架"
+}

@@ -1,0 +1,29 @@
+{
+  "id": "mobile-128-flutter-qrscan",
+  "category": "mobile/flutter/scan",
+  "intents_zh": [
+    "Flutter mobile_scanner",
+    "flutter QR 掃描",
+    "flutter 條碼掃描",
+    "Flutter 掃 QR",
+    "mobile_scanner 範例",
+    "flutter barcode scan",
+    "Flutter QR view"
+  ],
+  "intents_en": [
+    "flutter mobile_scanner",
+    "flutter qr scanner",
+    "flutter barcode scan",
+    "mobile_scanner example",
+    "scan qr flutter",
+    "flutter qr view",
+    "barcode scan flutter"
+  ],
+  "slots": [],
+  "code": "import 'package:flutter/material.dart';\nimport 'package:mobile_scanner/mobile_scanner.dart';\nclass Q extends StatelessWidget{const Q({super.key});\n  @override Widget build(BuildContext c)=>Scaffold(body:MobileScanner(onDetect:(cap){for(final b in cap.barcodes){debugPrint(b.rawValue);}}));}",
+  "language": "dart",
+  "deps": [
+    "mobile_scanner"
+  ],
+  "summary_zh": "Flutter mobile_scanner QR 掃描"
+}

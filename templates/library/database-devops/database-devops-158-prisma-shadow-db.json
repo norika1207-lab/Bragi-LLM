@@ -1,0 +1,21 @@
+{
+  "id": "database-devops-158-prisma-shadow-db",
+  "category": "database-devops/orm/prisma",
+  "intents_zh": [
+    "prisma shadow database",
+    "prisma 開發 migration shadow",
+    "SHADOW_DATABASE_URL"
+  ],
+  "intents_en": [
+    "prisma shadow database",
+    "shadow db url",
+    "migration shadow"
+  ],
+  "slots": [],
+  "code": "datasource db {\n  provider          = \"postgresql\"\n  url               = env(\"DATABASE_URL\")\n  shadowDatabaseUrl = env(\"SHADOW_DATABASE_URL\")\n}\n\ngenerator client {\n  provider = \"prisma-client-js\"\n}",
+  "language": "prisma",
+  "deps": [
+    "prisma"
+  ],
+  "summary_zh": "prisma 設定 shadow database URL"
+}

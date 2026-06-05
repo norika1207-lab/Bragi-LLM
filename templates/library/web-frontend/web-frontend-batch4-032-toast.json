@@ -1,0 +1,29 @@
+{
+  "id": "web-frontend-batch4-032-toast",
+  "category": "web-frontend/react/components/toast",
+  "intents_zh": [
+    "toast 提示",
+    "通知元件",
+    "auto dismiss toast",
+    "成功訊息浮窗",
+    "tailwind notification",
+    "臨時提示"
+  ],
+  "intents_en": [
+    "toast notification",
+    "auto dismiss toast",
+    "success popup",
+    "tailwind notification",
+    "temporary message",
+    "alert toast"
+  ],
+  "slots": [
+    "toast_message"
+  ],
+  "code": "'use client';\nimport { useEffect, useState } from 'react';\n\nexport default function Toast() {\n  const [show, setShow] = useState(true);\n  useEffect(() => {\n    const t = setTimeout(() => setShow(false), 3000);\n    return () => clearTimeout(t);\n  }, []);\n  if (!show) return null;\n  return (\n    <div className=\"fixed bottom-6 right-6 bg-gray-900 text-white px-4 py-2 rounded shadow\">\n      {{toast_message}}\n    </div>\n  );\n}",
+  "language": "tsx",
+  "deps": [
+    "react"
+  ],
+  "summary_zh": "3 秒自動消失的 toast 提示"
+}

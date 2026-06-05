@@ -1,0 +1,22 @@
+{
+  "id": "database-devops-094-compose-mysql",
+  "category": "database-devops/docker/compose",
+  "intents_zh": [
+    "compose mysql",
+    "docker mysql 本地",
+    "mysql 8 容器"
+  ],
+  "intents_en": [
+    "compose mysql",
+    "local mysql container",
+    "mysql 8 docker"
+  ],
+  "slots": [
+    "db_name",
+    "root_password"
+  ],
+  "code": "services:\n  mysql:\n    image: mysql:8\n    command: --default-authentication-plugin=mysql_native_password\n    environment:\n      MYSQL_DATABASE: {{db_name}}\n      MYSQL_ROOT_PASSWORD: {{root_password}}\n    ports: [\"3306:3306\"]\n    volumes: [\"mysqldata:/var/lib/mysql\"]\n    healthcheck:\n      test: [\"CMD\", \"mysqladmin\", \"ping\", \"-h\", \"localhost\"]\n      interval: 5s\n      retries: 10\n\nvolumes:\n  mysqldata:",
+  "language": "yaml",
+  "deps": [],
+  "summary_zh": "compose mysql 8 服務"
+}

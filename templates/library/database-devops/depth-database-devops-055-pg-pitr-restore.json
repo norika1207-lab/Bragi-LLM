@@ -1,0 +1,22 @@
+{
+  "id": "depth-database-devops-055-pg-pitr-restore",
+  "category": "database-devops/postgres/backup",
+  "intents_zh": [
+    "PITR recovery.conf",
+    "還原到時間點",
+    "postgres restore"
+  ],
+  "intents_en": [
+    "PITR recovery config",
+    "restore to point in time",
+    "postgres recovery"
+  ],
+  "slots": [
+    "restore_time",
+    "wal_archive_cmd"
+  ],
+  "code": "# postgresql.auto.conf (PG 12+)\nrestore_command = '{{wal_archive_cmd}}'\nrecovery_target_time = '{{restore_time}}'\nrecovery_target_action = 'promote'\n\n# 觸發復原:\n# touch $PGDATA/recovery.signal\n# systemctl start postgresql",
+  "language": "conf",
+  "deps": [],
+  "summary_zh": "PG 12+ PITR,設 restore_command + 目標時間"
+}

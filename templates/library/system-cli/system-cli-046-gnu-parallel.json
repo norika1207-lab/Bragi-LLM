@@ -1,0 +1,25 @@
+{
+  "id": "system-cli-046-gnu-parallel",
+  "category": "system-cli/parallel/gnu",
+  "intents_zh": [
+    "GNU parallel 跑任務",
+    "平行處理大量檔",
+    "parallel 範本"
+  ],
+  "intents_en": [
+    "gnu parallel example",
+    "parallel batch processing",
+    "parallel command template"
+  ],
+  "slots": [
+    "src_glob",
+    "output_dir",
+    "jobs"
+  ],
+  "code": "#!/usr/bin/env bash\nset -euo pipefail\nmkdir -p \"{{output_dir}}\"\n\nls {{src_glob}} | parallel -j {{jobs}} --bar \\\n  'ffmpeg -y -i {} -ac 1 -ar 16000 {{output_dir}}/{/.}.wav'",
+  "language": "sh",
+  "deps": [
+    "parallel"
+  ],
+  "summary_zh": "GNU parallel 平行轉檔"
+}

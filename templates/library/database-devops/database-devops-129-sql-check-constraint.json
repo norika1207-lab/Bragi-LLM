@@ -1,0 +1,24 @@
+{
+  "id": "database-devops-129-sql-check-constraint",
+  "category": "database-devops/sql/ddl",
+  "intents_zh": [
+    "SQL CHECK 約束",
+    "欄位範圍檢查",
+    "加值域限制"
+  ],
+  "intents_en": [
+    "sql check constraint",
+    "column range check",
+    "add value validation"
+  ],
+  "slots": [
+    "table",
+    "column",
+    "min",
+    "max"
+  ],
+  "code": "ALTER TABLE {{table}}\nADD CONSTRAINT chk_{{table}}_{{column}}_range\nCHECK ({{column}} BETWEEN {{min}} AND {{max}});",
+  "language": "sql",
+  "deps": [],
+  "summary_zh": "加 CHECK 約束限值域"
+}

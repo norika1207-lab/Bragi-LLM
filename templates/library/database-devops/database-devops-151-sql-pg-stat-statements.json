@@ -1,0 +1,19 @@
+{
+  "id": "database-devops-151-sql-pg-stat-statements",
+  "category": "database-devops/sql/perf",
+  "intents_zh": [
+    "pg_stat_statements 慢查詢",
+    "postgres top slow queries",
+    "query 統計"
+  ],
+  "intents_en": [
+    "pg_stat_statements",
+    "postgres slow queries",
+    "query stats"
+  ],
+  "slots": [],
+  "code": "CREATE EXTENSION IF NOT EXISTS pg_stat_statements;\n\nSELECT\n  substring(query, 1, 80) AS query,\n  calls,\n  round(total_exec_time::numeric, 2) AS total_ms,\n  round(mean_exec_time::numeric, 2) AS mean_ms,\n  rows\nFROM pg_stat_statements\nORDER BY total_exec_time DESC\nLIMIT 20;",
+  "language": "sql",
+  "deps": [],
+  "summary_zh": "pg_stat_statements 找最慢查詢"
+}

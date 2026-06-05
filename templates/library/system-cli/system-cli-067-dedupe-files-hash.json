@@ -1,0 +1,21 @@
+{
+  "id": "system-cli-067-dedupe-files-hash",
+  "category": "system-cli/batch/file",
+  "intents_zh": [
+    "找重複檔案",
+    "用 hash 去重",
+    "檔案去重 script"
+  ],
+  "intents_en": [
+    "find duplicate files",
+    "dedupe by hash",
+    "duplicate file finder"
+  ],
+  "slots": [
+    "scan_dir"
+  ],
+  "code": "import hashlib\nfrom collections import defaultdict\nfrom pathlib import Path\n\ndef sha(p, buf=1<<20):\n    h = hashlib.sha256()\n    with open(p, 'rb') as f:\n        for chunk in iter(lambda: f.read(buf), b''):\n            h.update(chunk)\n    return h.hexdigest()\n\nbuckets = defaultdict(list)\nfor p in Path('{{scan_dir}}').rglob('*'):\n    if p.is_file():\n        buckets[sha(p)].append(p)\n\nfor h, files in buckets.items():\n    if len(files) > 1:\n        print('DUP', h[:10])\n        for f in files: print(' ', f)",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "用 sha256 找重複檔"
+}

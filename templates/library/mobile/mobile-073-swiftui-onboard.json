@@ -1,0 +1,31 @@
+{
+  "id": "mobile-073-swiftui-onboard",
+  "category": "mobile/swiftui/onboarding",
+  "intents_zh": [
+    "SwiftUI 引導頁",
+    "SwiftUI TabView pageStyle",
+    "SwiftUI onboarding 三頁",
+    "SwiftUI intro 輪播",
+    "SwiftUI 新手教學",
+    "onboarding pages SwiftUI",
+    "SwiftUI 引導輪播"
+  ],
+  "intents_en": [
+    "swiftui onboarding",
+    "swiftui TabView pageStyle",
+    "swiftui intro pages",
+    "swiftui carousel onboarding",
+    "first launch swiftui",
+    "swiftui walkthrough",
+    "onboarding carousel swiftui"
+  ],
+  "slots": [
+    "t1",
+    "t2",
+    "t3"
+  ],
+  "code": "import SwiftUI\nstruct Onboard:View{var onDone:()->Void\n  var body:some View{TabView{Text(\"{{t1}}\").font(.largeTitle);Text(\"{{t2}}\").font(.largeTitle);VStack{Text(\"{{t3}}\").font(.largeTitle);Button(\"Done\",action:onDone)}}.tabViewStyle(.page)}}",
+  "language": "swift",
+  "deps": [],
+  "summary_zh": "SwiftUI TabView pageStyle onboarding 三頁"
+}

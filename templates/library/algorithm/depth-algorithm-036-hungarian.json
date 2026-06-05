@@ -1,0 +1,31 @@
+{
+  "id": "depth-algorithm-036-hungarian",
+  "category": "algorithm/matching/hungarian",
+  "intents_zh": [
+    "匈牙利算法",
+    "二分圖最大匹配",
+    "hungarian algorithm",
+    "bipartite matching",
+    "完美匹配 KM",
+    "匈牙利模板",
+    "最大二分匹配"
+  ],
+  "intents_en": [
+    "Hungarian algorithm",
+    "bipartite maximum matching",
+    "Hungarian matching",
+    "KM algorithm assignment",
+    "perfect matching",
+    "bipartite matching template",
+    "max matching bipartite"
+  ],
+  "slots": [
+    "graph",
+    "n_left",
+    "n_right"
+  ],
+  "code": "def hungarian(graph={{graph}}, nL={{n_left}}, nR={{n_right}}):\n    match_r = [-1]*nR\n    def try_kuhn(u, visited):\n        for v in graph[u]:\n            if visited[v]: continue\n            visited[v] = True\n            if match_r[v] == -1 or try_kuhn(match_r[v], visited):\n                match_r[v] = u; return True\n        return False\n    count = 0\n    for u in range(nL):\n        if try_kuhn(u, [False]*nR): count += 1\n    return count, match_r",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "匈牙利算法求二分圖最大匹配"
+}

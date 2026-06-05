@@ -1,0 +1,28 @@
+{
+  "id": "depth-web-frontend-011-jotai-async",
+  "category": "web-frontend/state/jotai",
+  "intents_zh": [
+    "jotai async atom",
+    "非同步 atom",
+    "atom 從 API 抓",
+    "Suspense + jotai",
+    "atomWithQuery"
+  ],
+  "intents_en": [
+    "jotai async atom",
+    "async data atom",
+    "jotai with suspense",
+    "atomWithQuery",
+    "fetch in atom"
+  ],
+  "slots": [
+    "atom_name",
+    "endpoint"
+  ],
+  "code": "import { atom, useAtom } from 'jotai';\n\nexport const {{atom_name}}Atom = atom(async () => {\n  const res = await fetch('{{endpoint}}');\n  return res.json();\n});\n\nexport function Use{{atom_name}}() {\n  const [data] = useAtom({{atom_name}}Atom);\n  return <pre>{JSON.stringify(data, null, 2)}</pre>;\n}",
+  "language": "tsx",
+  "deps": [
+    "jotai"
+  ],
+  "summary_zh": "jotai 非同步 atom + Suspense"
+}

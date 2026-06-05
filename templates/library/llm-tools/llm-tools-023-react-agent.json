@@ -1,0 +1,34 @@
+{
+  "id": "llm-tools-023-react-agent",
+  "category": "llm-tools/agent/react",
+  "intents_zh": [
+    "ReAct agent loop",
+    "思考行動觀察循環",
+    "ReAct 範本",
+    "agent thought-action",
+    "自主 agent loop",
+    "ReAct pattern",
+    "ReAct 迴圈",
+    "agent 推理動作"
+  ],
+  "intents_en": [
+    "react agent loop",
+    "thought action observation",
+    "react pattern agent",
+    "autonomous agent loop",
+    "react scaffold",
+    "minimal react agent",
+    "agent reasoning loop",
+    "tool-using agent"
+  ],
+  "slots": [
+    "model_name",
+    "max_steps"
+  ],
+  "code": "from openai import OpenAI\nimport re\n\nclient = OpenAI()\nTOOLS = {\"calc\": lambda x: str(eval(x))}\n\nSYSTEM = (\"Use format: Thought: ...\\nAction: tool[args]\\nObservation: ...\\n\"\n          \"When done: Final: answer\")\n\ndef react(question: str):\n    msgs = [{\"role\": \"system\", \"content\": SYSTEM}, {\"role\": \"user\", \"content\": question}]\n    for _ in range({{max_steps}}):\n        r = client.chat.completions.create(model=\"{{model_name}}\", messages=msgs, stop=[\"Observation:\"])\n        text = r.choices[0].message.content\n        if \"Final:\" in text:\n            return text.split(\"Final:\")[-1].strip()\n        m = re.search(r\"Action: (\\w+)\\[(.+?)\\]\", text)\n        if not m:\n            return text\n        obs = TOOLS[m.group(1)](m.group(2))\n        msgs.append({\"role\": \"assistant\", \"content\": text})\n        msgs.append({\"role\": \"user\", \"content\": f\"Observation: {obs}\"})\n    return \"max steps\"",
+  "language": "py",
+  "deps": [
+    "openai"
+  ],
+  "summary_zh": "ReAct 思考-動作-觀察 agent 迴圈"
+}

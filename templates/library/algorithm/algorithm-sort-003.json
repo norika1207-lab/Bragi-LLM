@@ -1,0 +1,29 @@
+{
+  "id": "algorithm-sort-003",
+  "category": "algorithm/sort/radix",
+  "intents_zh": [
+    "基數排序",
+    "radix sort",
+    "LSD 基數排序",
+    "非比較排序",
+    "整數快速排序",
+    "radix 給我一個",
+    "按位排序"
+  ],
+  "intents_en": [
+    "radix sort",
+    "LSD radix sort",
+    "non-comparison sort",
+    "integer sort radix",
+    "write radix sort",
+    "digit-based sort",
+    "fast int sort"
+  ],
+  "slots": [
+    "fn_name"
+  ],
+  "code": "def {{fn_name}}(arr):\n    if not arr:\n        return arr\n    max_val = max(arr)\n    exp = 1\n    while max_val // exp > 0:\n        buckets = [[] for _ in range(10)]\n        for n in arr:\n            buckets[(n // exp) % 10].append(n)\n        arr = [n for b in buckets for n in b]\n        exp *= 10\n    return arr",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "LSD 十進位基數排序，O(d*n)"
+}

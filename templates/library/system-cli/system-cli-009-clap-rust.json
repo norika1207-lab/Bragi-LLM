@@ -1,0 +1,23 @@
+{
+  "id": "system-cli-009-clap-rust",
+  "category": "system-cli/rust/clap",
+  "intents_zh": [
+    "rust clap 寫 CLI",
+    "clap derive 範本",
+    "rust 命令列骨架"
+  ],
+  "intents_en": [
+    "rust clap CLI",
+    "clap derive template",
+    "rust command line skeleton"
+  ],
+  "slots": [
+    "arg_name"
+  ],
+  "code": "use clap::Parser;\n\n#[derive(Parser, Debug)]\n#[command(version, about)]\nstruct Args {\n    #[arg(short, long)]\n    {{arg_name}}: String,\n\n    #[arg(short, long, default_value_t = 1)]\n    count: u32,\n}\n\nfn main() {\n    let args = Args::parse();\n    for _ in 0..args.count {\n        println!(\"{{arg_name}}={}\", args.{{arg_name}});\n    }\n}",
+  "language": "rs",
+  "deps": [
+    "clap"
+  ],
+  "summary_zh": "clap derive 風格 CLI"
+}

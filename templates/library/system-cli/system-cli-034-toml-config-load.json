@@ -1,0 +1,22 @@
+{
+  "id": "system-cli-034-toml-config-load",
+  "category": "system-cli/config/toml",
+  "intents_zh": [
+    "python 讀 toml 設定",
+    "tomllib 載入",
+    "pyproject 讀取"
+  ],
+  "intents_en": [
+    "python toml config",
+    "tomllib load",
+    "read toml settings"
+  ],
+  "slots": [
+    "config_path",
+    "section"
+  ],
+  "code": "import tomllib\nfrom pathlib import Path\n\ndata = tomllib.loads(Path('{{config_path}}').read_text())\nsection = data.get('{{section}}', {})\nfor k, v in section.items():\n    print(f'{k} = {v}')",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "tomllib 讀 toml"
+}

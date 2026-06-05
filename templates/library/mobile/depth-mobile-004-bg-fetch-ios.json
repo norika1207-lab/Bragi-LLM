@@ -1,0 +1,26 @@
+{
+  "id": "depth-mobile-004-bg-fetch-ios",
+  "category": "mobile/background/ios",
+  "intents_zh": [
+    "iOS BackgroundTasks",
+    "BGAppRefreshTask 註冊",
+    "背景刷新排程",
+    "BGTaskScheduler 用法",
+    "背景抓資料"
+  ],
+  "intents_en": [
+    "iOS background tasks",
+    "BGAppRefreshTask register",
+    "schedule background refresh",
+    "BGTaskScheduler",
+    "background fetch"
+  ],
+  "slots": [
+    "task_id",
+    "interval_sec"
+  ],
+  "code": "import BackgroundTasks\n\nBGTaskScheduler.shared.register(forTaskWithIdentifier: \"{{task_id}}\", using: nil) { task in\n    let req = BGAppRefreshTaskRequest(identifier: \"{{task_id}}\")\n    req.earliestBeginDate = Date(timeIntervalSinceNow: {{interval_sec}})\n    try? BGTaskScheduler.shared.submit(req)\n    Task { await refreshData(); task.setTaskCompleted(success: true) }\n}",
+  "language": "swift",
+  "deps": [],
+  "summary_zh": "iOS 背景刷新註冊"
+}

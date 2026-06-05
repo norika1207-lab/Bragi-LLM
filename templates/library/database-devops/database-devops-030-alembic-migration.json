@@ -1,0 +1,28 @@
+{
+  "id": "database-devops-030-alembic-migration",
+  "category": "database-devops/migration/alembic",
+  "intents_zh": [
+    "Alembic migration",
+    "alembic 加欄位",
+    "alembic upgrade downgrade",
+    "新增資料表 migration"
+  ],
+  "intents_en": [
+    "alembic migration",
+    "add column alembic",
+    "upgrade downgrade",
+    "new table migration"
+  ],
+  "slots": [
+    "table_name",
+    "column_name",
+    "column_type"
+  ],
+  "code": "\"\"\"add {{column_name}} to {{table_name}}\n\nRevision ID: abc123\n\"\"\"\nfrom alembic import op\nimport sqlalchemy as sa\n\nrevision = 'abc123'\ndown_revision = None\n\ndef upgrade():\n    op.add_column('{{table_name}}', sa.Column('{{column_name}}', sa.{{column_type}}(), nullable=True))\n    op.create_index('ix_{{table_name}}_{{column_name}}', '{{table_name}}', ['{{column_name}}'])\n\ndef downgrade():\n    op.drop_index('ix_{{table_name}}_{{column_name}}', table_name='{{table_name}}')\n    op.drop_column('{{table_name}}', '{{column_name}}')",
+  "language": "py",
+  "deps": [
+    "alembic",
+    "sqlalchemy"
+  ],
+  "summary_zh": "Alembic 加欄位 migration"
+}

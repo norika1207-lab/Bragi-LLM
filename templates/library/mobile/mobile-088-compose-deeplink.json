@@ -1,0 +1,33 @@
+{
+  "id": "mobile-088-compose-deeplink",
+  "category": "mobile/compose/nav",
+  "intents_zh": [
+    "Compose Navigation deep link",
+    "Compose navDeepLink",
+    "Compose 接 url",
+    "Compose 深連結",
+    "Android Compose deep link",
+    "navigation deep link compose",
+    "Compose handle uri"
+  ],
+  "intents_en": [
+    "compose navigation deep link",
+    "navDeepLink compose",
+    "compose handle url",
+    "jetpack compose deeplink",
+    "android compose deep link",
+    "navigation compose uri",
+    "compose intent filter link"
+  ],
+  "slots": [
+    "scheme",
+    "host",
+    "route"
+  ],
+  "code": "import androidx.compose.runtime.Composable\nimport androidx.navigation.NavType\nimport androidx.navigation.compose.*\nimport androidx.navigation.navArgument\nimport androidx.navigation.navDeepLink\n@Composable\nfun Nav(){\n  val nav=rememberNavController()\n  NavHost(nav,startDestination=\"home\"){\n    composable(\"home\"){}\n    composable(\"{{route}}/{id}\",arguments=listOf(navArgument(\"id\"){type=NavType.StringType}),deepLinks=listOf(navDeepLink{uriPattern=\"{{scheme}}://{{host}}/{{route}}/{id}\"})){}}}",
+  "language": "kt",
+  "deps": [
+    "androidx.navigation:navigation-compose"
+  ],
+  "summary_zh": "Compose Navigation deep link uriPattern"
+}

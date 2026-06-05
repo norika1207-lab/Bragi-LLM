@@ -1,0 +1,25 @@
+{
+  "id": "depth-llm-tools-033-openai-to-anthropic-translate",
+  "category": "llm-tools/schema/openai-to-anthropic",
+  "intents_zh": [
+    "OpenAI messages 轉 Anthropic",
+    "schema 翻譯",
+    "跨 provider 訊息",
+    "system prompt 拆出",
+    "Anthropic 格式轉換"
+  ],
+  "intents_en": [
+    "OpenAI to Anthropic messages",
+    "schema translate",
+    "cross-provider messages",
+    "extract system prompt",
+    "Anthropic format convert"
+  ],
+  "slots": [
+    "openai_messages"
+  ],
+  "code": "def to_anthropic({{openai_messages}}):\n    system = \"\"\n    msgs = []\n    for m in {{openai_messages}}:\n        if m[\"role\"] == \"system\":\n            system += m[\"content\"] + \"\\n\"\n        else:\n            msgs.append({\"role\": m[\"role\"], \"content\": m[\"content\"]})\n    return system.strip(), msgs",
+  "language": "python",
+  "deps": [],
+  "summary_zh": "把 OpenAI messages 拆出 system 字串與 user/assistant list 給 Anthropic"
+}

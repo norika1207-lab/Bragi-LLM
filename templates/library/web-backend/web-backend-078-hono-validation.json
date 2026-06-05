@@ -1,0 +1,29 @@
+{
+  "id": "web-backend-078-hono-validation",
+  "category": "web-backend/hono/validation",
+  "intents_zh": [
+    "hono zod 驗證",
+    "hono request schema",
+    "驗證 body hono",
+    "zValidator 範例",
+    "input validation hono"
+  ],
+  "intents_en": [
+    "hono zod validator",
+    "request schema hono",
+    "body validator hono",
+    "zValidator example",
+    "input validation hono"
+  ],
+  "slots": [
+    "schema_name"
+  ],
+  "code": "import { Hono } from 'hono';\nimport { zValidator } from '@hono/zod-validator';\nimport { z } from 'zod';\n\nconst {{schema_name}} = z.object({\n  email: z.string().email(),\n  age: z.number().int().min(0)\n});\n\nconst app = new Hono();\napp.post('/users', zValidator('json', {{schema_name}}), (c) => {\n  const data = c.req.valid('json');\n  return c.json({ ok: true, data }, 201);\n});\n\nexport default app;",
+  "language": "ts",
+  "deps": [
+    "hono",
+    "@hono/zod-validator",
+    "zod"
+  ],
+  "summary_zh": "Hono + zod 驗證"
+}

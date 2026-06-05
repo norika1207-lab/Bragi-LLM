@@ -1,0 +1,55 @@
+{
+  "id": "react.login-form",
+  "description": "React 登入表單，支援『記住我』勾選與自訂提交 endpoint",
+  "intents_zh": [
+    "做一個登入頁面",
+    "login 表單要記住帳號",
+    "幫我寫 React 登入頁",
+    "登入頁面要有記住我",
+    "做個會員登入的元件",
+    "登入畫面 email 加密碼",
+    "sign in 頁面要 remember me",
+    "做個前端登入元件",
+    "登入表單帶記住帳號功能",
+    "幫我刻一個 login form"
+  ],
+  "intents_en": [
+    "build a login form",
+    "create a sign in page",
+    "login component with remember me",
+    "react login form with email and password",
+    "authentication form component",
+    "login page that remembers username",
+    "build a sign in component in react"
+  ],
+  "slots": {
+    "component_name": {
+      "type": "string",
+      "description": "React component 名稱，PascalCase",
+      "required": true,
+      "default": "LoginForm",
+      "hints": ["登入", "login", "sign in", "signin", "會員"]
+    },
+    "submit_endpoint": {
+      "type": "string",
+      "description": "表單 POST 的 API 路徑",
+      "default": "/api/login"
+    },
+    "remember_me": {
+      "type": "boolean",
+      "description": "是否顯示『記住我』勾選框並把 email 寫進 localStorage",
+      "default": true
+    },
+    "primary_color": {
+      "type": "string",
+      "description": "主按鈕的 Tailwind color class，例如 blue-600",
+      "default": "blue-600"
+    },
+    "username_label": {
+      "type": "string",
+      "description": "帳號欄位的 label 文字",
+      "default": "Email"
+    }
+  },
+  "code_template": "import { useEffect, useState } from 'react';\n\nexport function {{component_name}}() {\n  const [email, setEmail] = useState('');\n  const [password, setPassword] = useState('');\n  const [remember, setRemember] = useState({{remember_me}});\n  const [error, setError] = useState(null);\n  const [loading, setLoading] = useState(false);\n\n  useEffect(() => {\n    if ({{remember_me}}) {\n      const saved = localStorage.getItem('bragi.login.email');\n      if (saved) setEmail(saved);\n    }\n  }, []);\n\n  async function handleSubmit(e) {\n    e.preventDefault();\n    setLoading(true);\n    setError(null);\n    try {\n      const resp = await fetch('{{submit_endpoint}}', {\n        method: 'POST',\n        headers: { 'Content-Type': 'application/json' },\n        body: JSON.stringify({ email, password }),\n      });\n      if (!resp.ok) throw new Error('登入失敗');\n      if (remember && {{remember_me}}) {\n        localStorage.setItem('bragi.login.email', email);\n      } else {\n        localStorage.removeItem('bragi.login.email');\n      }\n    } catch (err) {\n      setError(err.message);\n    } finally {\n      setLoading(false);\n    }\n  }\n\n  return (\n    <form onSubmit={handleSubmit} className=\"max-w-sm mx-auto p-6 space-y-4\">\n      <div>\n        <label className=\"block text-sm mb-1\">{{username_label}}</label>\n        <input\n          type=\"email\"\n          value={email}\n          onChange={(e) => setEmail(e.target.value)}\n          required\n          className=\"w-full border rounded px-3 py-2\"\n        />\n      </div>\n      <div>\n        <label className=\"block text-sm mb-1\">密碼</label>\n        <input\n          type=\"password\"\n          value={password}\n          onChange={(e) => setPassword(e.target.value)}\n          required\n          className=\"w-full border rounded px-3 py-2\"\n        />\n      </div>\n      {{{remember_me}} && (\n        <label className=\"flex items-center gap-2 text-sm\">\n          <input\n            type=\"checkbox\"\n            checked={remember}\n            onChange={(e) => setRemember(e.target.checked)}\n          />\n          記住我\n        </label>\n      )}\n      {error && <p className=\"text-red-600 text-sm\">{error}</p>}\n      <button\n        type=\"submit\"\n        disabled={loading}\n        className=\"w-full bg-{{primary_color}} text-white py-2 rounded disabled:opacity-50\"\n      >\n        {loading ? '登入中⋯' : '登入'}\n      </button>\n    </form>\n  );\n}\n"
+}

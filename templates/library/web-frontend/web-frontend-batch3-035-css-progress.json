@@ -1,0 +1,27 @@
+{
+  "id": "web-frontend-batch3-035-css-progress",
+  "category": "web-frontend/css/ui/progress",
+  "intents_zh": [
+    "HTML progress 元素",
+    "CSS 進度條",
+    "原生 progress",
+    "靜態進度條",
+    "純 CSS bar",
+    "HTML5 progress bar"
+  ],
+  "intents_en": [
+    "html progress element",
+    "css progress bar",
+    "native progress",
+    "static progress bar",
+    "pure css bar",
+    "html5 progress"
+  ],
+  "slots": [
+    "fill_color"
+  ],
+  "code": "<progress value=\"32\" max=\"100\">32%</progress>\n<style>\n  progress { width: 100%; height: 16px; -webkit-appearance: none; appearance: none; border: 0; }\n  progress::-webkit-progress-bar { background: #eee; border-radius: 8px; }\n  progress::-webkit-progress-value { background: {{fill_color}}; border-radius: 8px; transition: width .3s; }\n  progress::-moz-progress-bar { background: {{fill_color}}; border-radius: 8px; }\n</style>",
+  "language": "html",
+  "deps": [],
+  "summary_zh": "原生 HTML5 progress 跨瀏覽器樣式"
+}

@@ -1,0 +1,27 @@
+{
+  "id": "web-frontend-batch1-033-color-swatches",
+  "category": "web-frontend/react/inputs/color-swatches",
+  "intents_zh": [
+    "色票選擇器",
+    "預設顏色選擇",
+    "swatch palette React",
+    "主題色選擇",
+    "color swatches",
+    "palette 選色"
+  ],
+  "intents_en": [
+    "color swatches",
+    "palette picker",
+    "preset color picker",
+    "theme color swatches",
+    "react color palette",
+    "swatch grid"
+  ],
+  "slots": [
+    "component_name"
+  ],
+  "code": "import { useState } from 'react';\n\nexport default function {{component_name}}({ colors }: { colors: string[] }) {\n  const [picked, setPicked] = useState(colors[0]);\n  return (\n    <div className=\"flex gap-2\">\n      {colors.map((c) => (\n        <button\n          key={c}\n          onClick={() => setPicked(c)}\n          style={{ background: c }}\n          className={`w-8 h-8 rounded-full border-2 ${picked === c ? 'border-black' : 'border-transparent'}`}\n        />\n      ))}\n    </div>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "色票圓點選色器"
+}

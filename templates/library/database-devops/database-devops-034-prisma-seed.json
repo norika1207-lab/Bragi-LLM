@@ -1,0 +1,23 @@
+{
+  "id": "database-devops-034-prisma-seed",
+  "category": "database-devops/seed/prisma",
+  "intents_zh": [
+    "Prisma seed",
+    "prisma 塞種子資料",
+    "prisma seed.ts"
+  ],
+  "intents_en": [
+    "prisma seed",
+    "seed prisma db",
+    "prisma seed.ts"
+  ],
+  "slots": [
+    "model_name"
+  ],
+  "code": "import { PrismaClient } from '@prisma/client'\nconst prisma = new PrismaClient()\n\nasync function main() {\n  await prisma.{{model_name}}.createMany({\n    data: [\n      { name: 'Alice' },\n      { name: 'Bob' },\n      { name: 'Carol' },\n    ],\n    skipDuplicates: true,\n  })\n}\n\nmain().finally(() => prisma.$disconnect())",
+  "language": "ts",
+  "deps": [
+    "@prisma/client"
+  ],
+  "summary_zh": "Prisma seed 塞種子資料"
+}

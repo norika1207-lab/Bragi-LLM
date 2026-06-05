@@ -1,0 +1,29 @@
+{
+  "id": "mobile-057-swiftui-pullrefresh",
+  "category": "mobile/swiftui/list",
+  "intents_zh": [
+    "SwiftUI 下拉刷新",
+    "SwiftUI refreshable",
+    "SwiftUI List pull refresh",
+    "下拉重整 SwiftUI",
+    "List 刷新 SwiftUI",
+    "SwiftUI 列表更新",
+    "refreshable 範例"
+  ],
+  "intents_en": [
+    "swiftui refreshable",
+    "swiftui pull to refresh",
+    "swiftui list refresh",
+    "refresh on swipe swiftui",
+    "swiftui reload list",
+    "refreshable list swiftui",
+    "swiftui pull down"
+  ],
+  "slots": [
+    "endpoint"
+  ],
+  "code": "import SwiftUI\nstruct Item:Decodable,Identifiable{let id:Int;let title:String}\nstruct L:View{\n  @State var items:[Item]=[]\n  var body:some View{\n    List(items){Text($0.title)}.refreshable{await load()}.task{await load()}}\n  func load()async{\n    if let d=try?await URLSession.shared.data(from:URL(string:\"{{endpoint}}\")!).0,\n       let arr=try?JSONDecoder().decode([Item].self,from:d){items=arr}}}",
+  "language": "swift",
+  "deps": [],
+  "summary_zh": "SwiftUI refreshable 下拉刷新 List"
+}

@@ -1,0 +1,27 @@
+{
+  "id": "web-frontend-batch2-034-feature-grid",
+  "category": "web-frontend/react/layout/feature-grid",
+  "intents_zh": [
+    "功能介紹網格",
+    "feature grid",
+    "產品特色區",
+    "icon 卡片",
+    "三欄特色",
+    "feature section"
+  ],
+  "intents_en": [
+    "feature grid",
+    "feature section",
+    "product features",
+    "icon cards",
+    "three feature columns",
+    "benefits grid"
+  ],
+  "slots": [
+    "features"
+  ],
+  "code": "export function FeatureGrid() {\n  const features = {{features}};\n  return (\n    <section className=\"mx-auto max-w-6xl px-6 py-16\">\n      <div className=\"grid gap-8 md:grid-cols-3\">\n        {features.map((f) => (\n          <div key={f.title}>\n            <div className=\"mb-4 inline-flex h-12 w-12 items-center justify-center rounded-lg bg-blue-100 text-2xl\">{f.icon}</div>\n            <h3 className=\"mb-2 text-lg font-semibold\">{f.title}</h3>\n            <p className=\"text-gray-600\">{f.desc}</p>\n          </div>\n        ))}\n      </div>\n    </section>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "三欄功能介紹網格"
+}

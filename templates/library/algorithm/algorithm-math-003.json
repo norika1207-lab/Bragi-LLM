@@ -1,0 +1,22 @@
+{
+  "id": "algorithm-math-003",
+  "category": "algorithm/math/sieve",
+  "intents_zh": [
+    "質數篩",
+    "Sieve of Eratosthenes",
+    "埃式篩",
+    "給我 sieve"
+  ],
+  "intents_en": [
+    "sieve of Eratosthenes",
+    "prime sieve",
+    "generate primes"
+  ],
+  "slots": [
+    "fn_name"
+  ],
+  "code": "def {{fn_name}}(n):\n    sieve = [True] * (n + 1)\n    sieve[0] = sieve[1] = False\n    for i in range(2, int(n**0.5) + 1):\n        if sieve[i]:\n            for j in range(i*i, n+1, i):\n                sieve[j] = False\n    return [i for i, v in enumerate(sieve) if v]",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "埃式篩取 <=n 質數"
+}

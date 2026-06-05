@@ -1,0 +1,29 @@
+{
+  "id": "depth-firmware-022-led-matrix-scroll",
+  "category": "firmware/display/led-matrix",
+  "intents_zh": [
+    "LED 矩陣跑馬燈",
+    "MAX7219 滾動文字",
+    "8x8 跑字",
+    "matrix scroll text",
+    "點陣顯示"
+  ],
+  "intents_en": [
+    "led matrix scroll",
+    "max7219 scroll text",
+    "8x8 matrix text",
+    "scrolling display",
+    "dot matrix text"
+  ],
+  "slots": [
+    "text",
+    "speed_ms"
+  ],
+  "code": "#include <MD_Parola.h>\n#include <MD_MAX72xx.h>\nMD_Parola P(MD_MAX72XX::FC16_HW, 5, 18, 23, 4);\nvoid setup() {\n    P.begin();\n    P.setIntensity(5);\n    P.displayText(\"{{text}}\", PA_CENTER, {{speed_ms}}, 0, PA_SCROLL_LEFT, PA_SCROLL_LEFT);\n}\nvoid loop() {\n    if (P.displayAnimate()) P.displayReset();\n}",
+  "language": "cpp",
+  "deps": [
+    "MD_Parola",
+    "MD_MAX72XX"
+  ],
+  "summary_zh": "用 MD_Parola 在 MAX7219 矩陣跑滾動文字"
+}

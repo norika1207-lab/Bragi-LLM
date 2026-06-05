@@ -1,0 +1,35 @@
+{
+  "id": "llm-tools-062-chunk-by-tokens",
+  "category": "llm-tools/rag/token-chunker",
+  "intents_zh": [
+    "按 token 切塊",
+    "tiktoken 切塊",
+    "token-based chunker",
+    "用 token 數切文件",
+    "token 對齊切",
+    "chunk by tokens",
+    "切到不超 token",
+    "精準 token 切"
+  ],
+  "intents_en": [
+    "chunk by token count",
+    "tiktoken splitter",
+    "token based chunker",
+    "split by tokens",
+    "token-aligned chunks",
+    "precise token chunker",
+    "tiktoken chunk",
+    "token window splitter"
+  ],
+  "slots": [
+    "model_name",
+    "chunk_tokens",
+    "overlap"
+  ],
+  "code": "import tiktoken\n\nenc = tiktoken.encoding_for_model(\"{{model_name}}\")\n\ndef chunk(text: str, size: int = {{chunk_tokens}}, overlap: int = {{overlap}}) -> list[str]:\n    ids = enc.encode(text)\n    out, start = [], 0\n    while start < len(ids):\n        end = min(start + size, len(ids))\n        out.append(enc.decode(ids[start:end]))\n        if end == len(ids):\n            break\n        start = end - overlap\n    return out",
+  "language": "py",
+  "deps": [
+    "tiktoken"
+  ],
+  "summary_zh": "以 tiktoken token 數切塊"
+}

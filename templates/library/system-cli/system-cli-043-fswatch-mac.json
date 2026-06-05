@@ -1,0 +1,24 @@
+{
+  "id": "system-cli-043-fswatch-mac",
+  "category": "system-cli/file/watch",
+  "intents_zh": [
+    "mac fswatch 監看",
+    "macOS 檔案改動跑指令",
+    "fswatch 範本"
+  ],
+  "intents_en": [
+    "fswatch on mac",
+    "mac file change watcher",
+    "fswatch run command"
+  ],
+  "slots": [
+    "watch_dir",
+    "run_cmd"
+  ],
+  "code": "#!/usr/bin/env bash\nset -euo pipefail\nDIR=\"{{watch_dir}}\"\n\nfswatch -o \"$DIR\" | while read -r _; do\n  echo \"[$(date +%T)] change detected\"\n  {{run_cmd}}\ndone",
+  "language": "sh",
+  "deps": [
+    "fswatch"
+  ],
+  "summary_zh": "fswatch 監看 mac 檔案"
+}

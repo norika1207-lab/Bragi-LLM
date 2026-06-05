@@ -1,0 +1,22 @@
+{
+  "id": "algorithm-geometry-003",
+  "category": "algorithm/geometry/point_in_polygon",
+  "intents_zh": [
+    "點在多邊形內",
+    "point in polygon",
+    "ray casting",
+    "給我 PIP"
+  ],
+  "intents_en": [
+    "point in polygon",
+    "PIP test",
+    "ray casting polygon"
+  ],
+  "slots": [
+    "fn_name"
+  ],
+  "code": "def {{fn_name}}(point, polygon):\n    x, y = point\n    inside = False\n    n = len(polygon)\n    j = n - 1\n    for i in range(n):\n        xi, yi = polygon[i]\n        xj, yj = polygon[j]\n        if ((yi > y) != (yj > y)) and (x < (xj - xi) * (y - yi) / (yj - yi + 1e-12) + xi):\n            inside = not inside\n        j = i\n    return inside",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "射線法 point-in-polygon"
+}

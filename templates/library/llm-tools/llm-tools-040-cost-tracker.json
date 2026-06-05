@@ -1,0 +1,32 @@
+{
+  "id": "llm-tools-040-cost-tracker",
+  "category": "llm-tools/utils/cost-tracker",
+  "intents_zh": [
+    "LLM 費用追蹤",
+    "算 API 花費",
+    "cost tracker",
+    "記錄 token 消耗",
+    "成本估算",
+    "openai cost",
+    "累計 token 計費",
+    "費用統計"
+  ],
+  "intents_en": [
+    "llm cost tracker",
+    "api cost estimator",
+    "track token spend",
+    "openai cost log",
+    "token usage tracker",
+    "accumulate cost",
+    "cost meter",
+    "spend monitor"
+  ],
+  "slots": [
+    "price_in",
+    "price_out"
+  ],
+  "code": "from dataclasses import dataclass, field\n\n@dataclass\nclass CostTracker:\n    in_tokens: int = 0\n    out_tokens: int = 0\n    price_in: float = {{price_in}}\n    price_out: float = {{price_out}}\n\n    def add(self, usage):\n        self.in_tokens += usage.prompt_tokens\n        self.out_tokens += usage.completion_tokens\n\n    @property\n    def usd(self) -> float:\n        return self.in_tokens * self.price_in / 1e6 + self.out_tokens * self.price_out / 1e6\n\ntracker = CostTracker()",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "OpenAI token 用量與成本追蹤器"
+}

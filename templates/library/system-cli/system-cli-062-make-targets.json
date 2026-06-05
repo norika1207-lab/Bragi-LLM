@@ -1,0 +1,21 @@
+{
+  "id": "system-cli-062-make-targets",
+  "category": "system-cli/build/make",
+  "intents_zh": [
+    "Makefile 常見 target",
+    "make help auto",
+    "Makefile 模板"
+  ],
+  "intents_en": [
+    "Makefile common targets",
+    "auto help Makefile",
+    "make template"
+  ],
+  "slots": [
+    "project_name"
+  ],
+  "code": ".PHONY: help install lint test run clean\n\nhelp: ## show this help\n\t@grep -E '^[a-zA-Z_-]+:.*?## ' $(MAKEFILE_LIST) | awk -F':.*?## ' '{printf \"  %-12s %s\\n\", $$1, $$2}'\n\ninstall: ## install deps\n\tpip install -r requirements.txt\n\nlint: ## run lint\n\truff check .\n\ntest: ## run tests\n\tpytest -q\n\nrun: ## run {{project_name}}\n\tpython -m {{project_name}}\n\nclean: ## clean caches\n\trm -rf .pytest_cache __pycache__ .ruff_cache",
+  "language": "make",
+  "deps": [],
+  "summary_zh": "Makefile 自動 help + 標準 target"
+}

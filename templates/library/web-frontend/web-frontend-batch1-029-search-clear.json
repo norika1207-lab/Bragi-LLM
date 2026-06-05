@@ -1,0 +1,27 @@
+{
+  "id": "web-frontend-batch1-029-search-clear",
+  "category": "web-frontend/react/search/clear-button",
+  "intents_zh": [
+    "搜尋框含清除按鈕",
+    "clearable search input",
+    "x 清除 input",
+    "重置搜尋框",
+    "search bar 含清除",
+    "清空 input 按鈕"
+  ],
+  "intents_en": [
+    "search with clear",
+    "clearable input",
+    "clear button input",
+    "reset search input",
+    "x button input",
+    "search bar clear"
+  ],
+  "slots": [
+    "component_name"
+  ],
+  "code": "import { useState } from 'react';\n\nexport default function {{component_name}}() {\n  const [q, setQ] = useState('');\n  return (\n    <div className=\"relative inline-block\">\n      <input value={q} onChange={(e) => setQ(e.target.value)} className=\"border rounded px-3 py-2 pr-8\" />\n      {q && (\n        <button onClick={() => setQ('')} className=\"absolute right-2 top-2\">×</button>\n      )}\n    </div>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "搜尋框含清除 x 按鈕"
+}

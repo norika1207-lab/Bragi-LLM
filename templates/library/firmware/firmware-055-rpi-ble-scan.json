@@ -1,0 +1,27 @@
+{
+  "id": "firmware-055-rpi-ble-scan",
+  "category": "firmware/rpi/ble",
+  "intents_zh": [
+    "樹莓派掃 BLE",
+    "bleak scan",
+    "Pi 找藍牙裝置",
+    "BLE central Pi",
+    "python BLE 掃描"
+  ],
+  "intents_en": [
+    "Raspberry Pi BLE scan",
+    "bleak scanner",
+    "Pi find BLE devices",
+    "BLE central python",
+    "scan bluetooth LE"
+  ],
+  "slots": [
+    "scan_seconds"
+  ],
+  "code": "import asyncio\nfrom bleak import BleakScanner\n\nasync def main():\n    devs = await BleakScanner.discover(timeout={{scan_seconds}})\n    for d in devs:\n        print(d.address, d.name, d.rssi)\n\nasyncio.run(main())",
+  "language": "py",
+  "deps": [
+    "bleak"
+  ],
+  "summary_zh": "Raspberry Pi 用 bleak 掃描 BLE 裝置"
+}

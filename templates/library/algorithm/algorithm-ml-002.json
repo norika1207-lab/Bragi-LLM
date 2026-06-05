@@ -1,0 +1,26 @@
+{
+  "id": "algorithm-ml-002",
+  "category": "algorithm/ml/kmeans",
+  "intents_zh": [
+    "k-means",
+    "分群",
+    "給我 kmeans",
+    "sklearn 分群"
+  ],
+  "intents_en": [
+    "k-means",
+    "clustering",
+    "kmeans sklearn",
+    "cluster data"
+  ],
+  "slots": [
+    "data_var",
+    "k_val"
+  ],
+  "code": "from sklearn.cluster import KMeans\n\nkm = KMeans(n_clusters={{k_val}}, n_init=10, random_state=0)\nlabels = km.fit_predict({{data_var}})\ncenters = km.cluster_centers_\nprint(labels[:20], centers)",
+  "language": "py",
+  "deps": [
+    "scikit-learn"
+  ],
+  "summary_zh": "sklearn KMeans 分群"
+}

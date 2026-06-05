@@ -1,0 +1,29 @@
+{
+  "id": "depth-web-backend-017-graphql-ws-server",
+  "category": "web-backend/graphql/ws-server",
+  "intents_zh": [
+    "graphql-ws server 掛 Express",
+    "WebSocketServer + useServer",
+    "Apollo subscription server",
+    "ws + http 雙伺服器",
+    "訂閱端點設定"
+  ],
+  "intents_en": [
+    "graphql-ws server express",
+    "websocketserver useserver",
+    "apollo subscription server",
+    "ws + http dual server",
+    "subscription endpoint setup"
+  ],
+  "slots": [
+    "path"
+  ],
+  "code": "import { WebSocketServer } from 'ws';\nimport { useServer } from 'graphql-ws/lib/use/ws';\nconst wss = new WebSocketServer({ server: httpServer, path: '{{path}}' });\nuseServer({ schema }, wss);",
+  "language": "js",
+  "deps": [
+    "graphql-ws",
+    "ws",
+    "graphql"
+  ],
+  "summary_zh": "graphql-ws 接 ws server"
+}

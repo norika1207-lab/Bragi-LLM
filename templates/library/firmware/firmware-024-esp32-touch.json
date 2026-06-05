@@ -1,0 +1,26 @@
+{
+  "id": "firmware-024-esp32-touch",
+  "category": "firmware/esp32/input",
+  "intents_zh": [
+    "ESP32 內建觸控",
+    "touchRead 範例",
+    "電容觸控腳位",
+    "ESP32 touch pin",
+    "用手摸 GPIO"
+  ],
+  "intents_en": [
+    "ESP32 touch sensor",
+    "touchRead pin",
+    "capacitive touch ESP32",
+    "GPIO touch detect",
+    "builtin touch"
+  ],
+  "slots": [
+    "touch_pin",
+    "threshold"
+  ],
+  "code": "const int TOUCH = {{touch_pin}};\nconst int THRESH = {{threshold}};\n\nvoid setup() {\n  Serial.begin(115200);\n}\n\nvoid loop() {\n  int v = touchRead(TOUCH);\n  Serial.print(\"touch=\"); Serial.println(v);\n  if (v < THRESH) Serial.println(\"TOUCHED\");\n  delay(150);\n}",
+  "language": "ino",
+  "deps": [],
+  "summary_zh": "ESP32 內建電容觸控讀取"
+}

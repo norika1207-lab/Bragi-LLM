@@ -1,0 +1,27 @@
+{
+  "id": "depth-system-cli-023-yaml-diff",
+  "category": "system-cli/yaml/diff",
+  "intents_zh": [
+    "YAML 差異比對",
+    "語意 yaml diff",
+    "忽略順序比 YAML",
+    "Python YAML diff"
+  ],
+  "intents_en": [
+    "yaml diff tool",
+    "semantic yaml diff",
+    "order insensitive yaml",
+    "python yaml diff"
+  ],
+  "slots": [
+    "file_a",
+    "file_b"
+  ],
+  "code": "import sys, yaml\nfrom deepdiff import DeepDiff\n\na = yaml.safe_load(open(\"{{file_a}}\"))\nb = yaml.safe_load(open(\"{{file_b}}\"))\n\ndiff = DeepDiff(a, b, ignore_order=True, view='tree')\nif not diff:\n    print(\"identical\"); sys.exit(0)\n\nfor change_type, items in diff.items():\n    print(f\"\\n=== {change_type} ===\")\n    for item in items:\n        print(f\"  path: {item.path()}\")\n        print(f\"  before: {item.t1!r}\")\n        print(f\"  after:  {item.t2!r}\")\nsys.exit(1)",
+  "language": "python",
+  "deps": [
+    "pyyaml",
+    "deepdiff"
+  ],
+  "summary_zh": "YAML 語意 diff 忽略順序顯示樹狀差異"
+}

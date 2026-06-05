@@ -1,0 +1,26 @@
+{
+  "id": "firmware-002-arduino-button-read",
+  "category": "firmware/arduino/gpio",
+  "intents_zh": [
+    "Arduino 讀按鈕",
+    "按鈕控制 LED",
+    "怎麼判斷按鈕被按下",
+    "Arduino button input",
+    "實作一個開關按鈕"
+  ],
+  "intents_en": [
+    "read button state on Arduino",
+    "Arduino button input",
+    "toggle LED with button",
+    "detect button press",
+    "digital input read"
+  ],
+  "slots": [
+    "button_pin",
+    "led_pin"
+  ],
+  "code": "const int BUTTON_PIN = {{button_pin}};\nconst int LED_PIN = {{led_pin}};\n\nvoid setup() {\n  pinMode(BUTTON_PIN, INPUT_PULLUP);\n  pinMode(LED_PIN, OUTPUT);\n}\n\nvoid loop() {\n  int state = digitalRead(BUTTON_PIN);\n  digitalWrite(LED_PIN, state == LOW ? HIGH : LOW);\n}",
+  "language": "ino",
+  "deps": [],
+  "summary_zh": "Arduino 讀取按鈕並控制 LED"
+}

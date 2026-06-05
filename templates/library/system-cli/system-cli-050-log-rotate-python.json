@@ -1,0 +1,22 @@
+{
+  "id": "system-cli-050-log-rotate-python",
+  "category": "system-cli/logging/python",
+  "intents_zh": [
+    "python logging 含 rotation",
+    "python rotating file handler",
+    "log 檔自動切割"
+  ],
+  "intents_en": [
+    "python rotating log handler",
+    "logging with rotation",
+    "python log file rotate"
+  ],
+  "slots": [
+    "log_file",
+    "logger_name"
+  ],
+  "code": "import logging\nfrom logging.handlers import RotatingFileHandler\n\nlogger = logging.getLogger('{{logger_name}}')\nlogger.setLevel(logging.INFO)\n\nh = RotatingFileHandler('{{log_file}}', maxBytes=5_000_000, backupCount=5)\nh.setFormatter(logging.Formatter('%(asctime)s %(levelname)s %(name)s: %(message)s'))\nlogger.addHandler(h)\n\nlogger.info('boot')\nfor i in range(1000):\n    logger.info('event %d', i)",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "RotatingFileHandler 自動輪替"
+}

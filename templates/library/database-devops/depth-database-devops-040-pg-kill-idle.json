@@ -1,0 +1,21 @@
+{
+  "id": "depth-database-devops-040-pg-kill-idle",
+  "category": "database-devops/postgres/ops",
+  "intents_zh": [
+    "砍 idle in transaction",
+    "清掛住的連線",
+    "terminate backend"
+  ],
+  "intents_en": [
+    "kill idle in transaction",
+    "terminate stuck connection",
+    "cancel backend"
+  ],
+  "slots": [
+    "idle_minutes"
+  ],
+  "code": "SELECT pg_terminate_backend(pid)\nFROM pg_stat_activity\nWHERE state = 'idle in transaction'\n  AND now() - state_change > interval '{{idle_minutes}} minutes'\n  AND pid <> pg_backend_pid();",
+  "language": "sql",
+  "deps": [],
+  "summary_zh": "砍掉超過 N 分鐘 idle in transaction 的 backend"
+}

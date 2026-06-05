@@ -1,0 +1,23 @@
+{
+  "id": "algorithm-tree-001",
+  "category": "algorithm/tree/bst",
+  "intents_zh": [
+    "二元搜尋樹",
+    "BST class",
+    "給我 bst",
+    "insert search delete bst"
+  ],
+  "intents_en": [
+    "BST",
+    "binary search tree",
+    "write bst",
+    "bst insert search"
+  ],
+  "slots": [
+    "class_name"
+  ],
+  "code": "class {{class_name}}:\n    def __init__(self, val):\n        self.val = val\n        self.left = None\n        self.right = None\n    def insert(self, v):\n        if v < self.val:\n            if self.left: self.left.insert(v)\n            else: self.left = {{class_name}}(v)\n        else:\n            if self.right: self.right.insert(v)\n            else: self.right = {{class_name}}(v)\n    def search(self, v):\n        if v == self.val: return True\n        if v < self.val: return self.left.search(v) if self.left else False\n        return self.right.search(v) if self.right else False",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "基本 BST 含 insert 與 search"
+}

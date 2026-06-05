@@ -1,0 +1,21 @@
+{
+  "id": "database-devops-069-sql-explain",
+  "category": "database-devops/sql/perf",
+  "intents_zh": [
+    "EXPLAIN ANALYZE 查詢計畫",
+    "看 query 效能",
+    "postgres explain"
+  ],
+  "intents_en": [
+    "explain analyze",
+    "query plan",
+    "postgres explain"
+  ],
+  "slots": [
+    "query"
+  ],
+  "code": "EXPLAIN (ANALYZE, BUFFERS, VERBOSE, FORMAT TEXT)\n{{query}};",
+  "language": "sql",
+  "deps": [],
+  "summary_zh": "EXPLAIN ANALYZE 看查詢計畫"
+}

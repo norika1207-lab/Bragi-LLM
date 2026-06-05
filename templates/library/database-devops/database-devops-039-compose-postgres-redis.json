@@ -1,0 +1,23 @@
+{
+  "id": "database-devops-039-compose-postgres-redis",
+  "category": "database-devops/docker/compose",
+  "intents_zh": [
+    "compose 起 postgres 加 redis",
+    "本地開發 stack",
+    "pg + redis 一起跑"
+  ],
+  "intents_en": [
+    "postgres and redis compose",
+    "local dev stack",
+    "pg redis compose"
+  ],
+  "slots": [
+    "db_name",
+    "db_user",
+    "db_password"
+  ],
+  "code": "services:\n  postgres:\n    image: postgres:16-alpine\n    environment:\n      POSTGRES_DB: {{db_name}}\n      POSTGRES_USER: {{db_user}}\n      POSTGRES_PASSWORD: {{db_password}}\n    ports: [\"5432:5432\"]\n    volumes: [\"pg:/var/lib/postgresql/data\"]\n\n  redis:\n    image: redis:7-alpine\n    command: [\"redis-server\", \"--appendonly\", \"yes\"]\n    ports: [\"6379:6379\"]\n    volumes: [\"redisdata:/data\"]\n\nvolumes:\n  pg:\n  redisdata:",
+  "language": "yaml",
+  "deps": [],
+  "summary_zh": "compose pg + redis 雙服務"
+}

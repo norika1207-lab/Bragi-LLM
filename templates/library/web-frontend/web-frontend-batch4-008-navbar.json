@@ -1,0 +1,30 @@
+{
+  "id": "web-frontend-batch4-008-navbar",
+  "category": "web-frontend/nextjs/landing/navbar",
+  "intents_zh": [
+    "頂部導航列",
+    "產生 navbar",
+    "sticky 導覽",
+    "logo 加選單",
+    "tailwind 導航",
+    "響應式導覽列"
+  ],
+  "intents_en": [
+    "top navbar",
+    "sticky navigation",
+    "logo with menu",
+    "responsive nav",
+    "header bar",
+    "tailwind navbar"
+  ],
+  "slots": [
+    "brand_name",
+    "link_one",
+    "link_two",
+    "link_three"
+  ],
+  "code": "export default function Navbar() {\n  return (\n    <nav className=\"sticky top-0 z-40 bg-white/80 backdrop-blur border-b border-gray-100\">\n      <div className=\"mx-auto max-w-6xl px-6 h-14 flex items-center justify-between\">\n        <span className=\"font-bold\">{{brand_name}}</span>\n        <ul className=\"flex gap-6 text-sm\">\n          <li><a href=\"#\">{{link_one}}</a></li>\n          <li><a href=\"#\">{{link_two}}</a></li>\n          <li><a href=\"#\">{{link_three}}</a></li>\n        </ul>\n      </div>\n    </nav>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "sticky 半透明頂部導航列"
+}

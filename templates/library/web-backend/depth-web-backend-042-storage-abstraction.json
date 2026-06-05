@@ -1,0 +1,23 @@
+{
+  "id": "depth-web-backend-042-storage-abstraction",
+  "category": "web-backend/storage/abstraction",
+  "intents_zh": [
+    "檔案儲存抽象介面",
+    "本地與 S3 共用 API",
+    "Storage adapter pattern",
+    "put/get/delete 介面",
+    "可切換 backend"
+  ],
+  "intents_en": [
+    "file storage abstraction",
+    "local s3 same api",
+    "storage adapter pattern",
+    "put get delete interface",
+    "swappable backend"
+  ],
+  "slots": [],
+  "code": "export interface Storage {\n  put(key: string, body: Buffer | NodeJS.ReadableStream, mime?: string): Promise<void>;\n  get(key: string): Promise<NodeJS.ReadableStream>;\n  delete(key: string): Promise<void>;\n  url(key: string): Promise<string>;\n}\nexport function getStorage(): Storage {\n  return process.env.STORAGE === 's3' ? new S3Storage() : new LocalStorage();\n}",
+  "language": "ts",
+  "deps": [],
+  "summary_zh": "Storage 抽象介面 + 工廠"
+}

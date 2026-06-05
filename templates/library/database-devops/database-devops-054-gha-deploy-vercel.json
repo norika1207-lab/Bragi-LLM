@@ -1,0 +1,19 @@
+{
+  "id": "database-devops-054-gha-deploy-vercel",
+  "category": "database-devops/cicd/github-actions",
+  "intents_zh": [
+    "GitHub Actions 部署 Vercel",
+    "vercel CI deploy",
+    "main 自動部署 vercel"
+  ],
+  "intents_en": [
+    "github actions deploy vercel",
+    "vercel ci deploy",
+    "auto deploy vercel"
+  ],
+  "slots": [],
+  "code": "name: Deploy Vercel\non:\n  push:\n    branches: [main]\n\njobs:\n  deploy:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-node@v4\n        with: { node-version: '20' }\n      - run: npm i -g vercel@latest\n      - run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}\n      - run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}\n      - run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}",
+  "language": "yaml",
+  "deps": [],
+  "summary_zh": "GHA push main 自動部署 Vercel"
+}

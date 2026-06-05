@@ -1,0 +1,22 @@
+{
+  "id": "system-cli-066-batch-rename",
+  "category": "system-cli/batch/file",
+  "intents_zh": [
+    "批次改檔名",
+    "加日期前綴 rename",
+    "資料夾改名 script"
+  ],
+  "intents_en": [
+    "batch rename files",
+    "add prefix to filenames",
+    "bulk rename script"
+  ],
+  "slots": [
+    "target_dir",
+    "prefix"
+  ],
+  "code": "from pathlib import Path\n\ntarget = Path('{{target_dir}}')\nfor p in sorted(target.iterdir()):\n    if not p.is_file(): continue\n    new = p.with_name('{{prefix}}_' + p.name)\n    if new.exists():\n        print('skip', new); continue\n    p.rename(new)\n    print(p.name, '->', new.name)",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "批次加前綴 rename"
+}

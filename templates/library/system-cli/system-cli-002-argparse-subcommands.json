@@ -1,0 +1,27 @@
+{
+  "id": "system-cli-002-argparse-subcommands",
+  "category": "system-cli/python/argparse",
+  "intents_zh": [
+    "argparse 多個子命令",
+    "python CLI 像 git 那種 subcommand",
+    "幫我加 subparser",
+    "argparse subcommand 範本",
+    "python 寫 git 風格 CLI"
+  ],
+  "intents_en": [
+    "argparse subcommands",
+    "git style CLI in python",
+    "add subparsers",
+    "multi command python CLI",
+    "argparse subparser template"
+  ],
+  "slots": [
+    "tool_name",
+    "cmd_a",
+    "cmd_b"
+  ],
+  "code": "import argparse\n\ndef cmd_{{cmd_a}}(args):\n    print('running {{cmd_a}}', args.target)\n\ndef cmd_{{cmd_b}}(args):\n    print('running {{cmd_b}}', args.target)\n\ndef main():\n    p = argparse.ArgumentParser(prog='{{tool_name}}')\n    sub = p.add_subparsers(dest='cmd', required=True)\n    a = sub.add_parser('{{cmd_a}}'); a.add_argument('target'); a.set_defaults(func=cmd_{{cmd_a}})\n    b = sub.add_parser('{{cmd_b}}'); b.add_argument('target'); b.set_defaults(func=cmd_{{cmd_b}})\n    args = p.parse_args()\n    args.func(args)\n\nif __name__ == '__main__':\n    main()",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "argparse 子命令分派架構"
+}

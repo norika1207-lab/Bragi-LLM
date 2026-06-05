@@ -1,0 +1,25 @@
+{
+  "id": "depth-mobile-046-netinfo-rn",
+  "category": "mobile/network/monitor-rn",
+  "intents_zh": [
+    "RN NetInfo",
+    "@react-native-community/netinfo",
+    "網路狀態監聽",
+    "isConnected type",
+    "跨平台網路"
+  ],
+  "intents_en": [
+    "RN NetInfo",
+    "@react-native-community/netinfo",
+    "network state listener",
+    "isConnected type",
+    "cross platform net"
+  ],
+  "slots": [],
+  "code": "import NetInfo from '@react-native-community/netinfo';\nconst unsubscribe = NetInfo.addEventListener(state => {\n  console.log('type', state.type, 'connected', state.isConnected);\n});\n// unsubscribe() when done",
+  "language": "ts",
+  "deps": [
+    "@react-native-community/netinfo"
+  ],
+  "summary_zh": "RN NetInfo 網路監聽"
+}

@@ -1,0 +1,25 @@
+{
+  "id": "web-backend-056-fastapi-bgtask",
+  "category": "web-backend/fastapi/jobs",
+  "intents_zh": [
+    "fastapi BackgroundTasks",
+    "非同步背景任務",
+    "發完 response 再做事",
+    "background job fastapi",
+    "fastapi async task"
+  ],
+  "intents_en": [
+    "fastapi background tasks",
+    "async background fastapi",
+    "after response task",
+    "background job fastapi",
+    "BackgroundTasks example"
+  ],
+  "slots": [],
+  "code": "from fastapi import FastAPI, BackgroundTasks\n\napp = FastAPI()\n\ndef write_log(msg: str):\n    with open('app.log', 'a') as f:\n        f.write(msg + '\\n')\n\n@app.post('/notify')\nasync def notify(message: str, bg: BackgroundTasks):\n    bg.add_task(write_log, message)\n    return {'queued': True}",
+  "language": "py",
+  "deps": [
+    "fastapi"
+  ],
+  "summary_zh": "FastAPI BackgroundTasks"
+}

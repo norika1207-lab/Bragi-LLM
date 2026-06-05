@@ -1,0 +1,34 @@
+{
+  "id": "llm-tools-098-weaviate-client",
+  "category": "llm-tools/vectordb/weaviate",
+  "intents_zh": [
+    "weaviate 範例",
+    "weaviate v4 client",
+    "用 weaviate 存向量",
+    "weaviate collection",
+    "weaviate query",
+    "weaviate 起步",
+    "minimal weaviate",
+    "weaviate CRUD"
+  ],
+  "intents_en": [
+    "weaviate v4 example",
+    "weaviate python client",
+    "weaviate collection",
+    "weaviate vector store",
+    "weaviate query",
+    "minimal weaviate",
+    "weaviate getting started",
+    "weaviate crud"
+  ],
+  "slots": [
+    "collection_name",
+    "weaviate_url"
+  ],
+  "code": "import weaviate\n\nclient = weaviate.connect_to_local()\n\nif not client.collections.exists(\"{{collection_name}}\"):\n    client.collections.create(\"{{collection_name}}\")\n\ncol = client.collections.get(\"{{collection_name}}\")\n\ndef add(text: str, vec: list[float]):\n    col.data.insert(properties={\"text\": text}, vector=vec)\n\ndef search(vec: list[float], k: int = 5):\n    return col.query.near_vector(near_vector=vec, limit=k).objects",
+  "language": "py",
+  "deps": [
+    "weaviate-client"
+  ],
+  "summary_zh": "Weaviate v4 collection 寫入查詢"
+}

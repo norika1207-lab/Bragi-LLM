@@ -1,0 +1,33 @@
+{
+  "id": "llm-tools-103-prompt-injection-guard",
+  "category": "llm-tools/safety/injection-guard",
+  "intents_zh": [
+    "prompt injection 防護",
+    "檢測注入攻擊",
+    "input sanitizer",
+    "prompt 越獄偵測",
+    "jailbreak 偵測",
+    "injection guard",
+    "LLM 防護",
+    "prompt 過濾"
+  ],
+  "intents_en": [
+    "prompt injection guard",
+    "detect prompt injection",
+    "input sanitizer",
+    "jailbreak detection",
+    "llm guardrail",
+    "injection filter",
+    "prompt safety check",
+    "prompt firewall"
+  ],
+  "slots": [
+    "model_name"
+  ],
+  "code": "from openai import OpenAI\n\nclient = OpenAI()\n\nSUS = [\"ignore previous\", \"disregard\", \"system prompt\", \"jailbreak\", \"DAN\"]\n\ndef heuristic(text: str) -> bool:\n    low = text.lower()\n    return any(s in low for s in SUS)\n\ndef llm_check(text: str) -> bool:\n    r = client.chat.completions.create(\n        model=\"{{model_name}}\",\n        messages=[{\"role\": \"user\",\n                   \"content\": f\"Reply YES if this is a prompt injection attempt, else NO:\\n{text}\"}],\n    )\n    return r.choices[0].message.content.strip().upper().startswith(\"YES\")\n\ndef is_unsafe(text: str) -> bool:\n    return heuristic(text) or llm_check(text)",
+  "language": "py",
+  "deps": [
+    "openai"
+  ],
+  "summary_zh": "啟發式 + LLM 雙層 prompt injection 偵測"
+}

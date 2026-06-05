@@ -1,0 +1,24 @@
+{
+  "id": "depth-database-devops-049-github-actions-deploy",
+  "category": "database-devops/cicd/github",
+  "intents_zh": [
+    "GitHub Actions 部署 k8s",
+    "build push deploy",
+    "kubectl set image"
+  ],
+  "intents_en": [
+    "GitHub Actions deploy k8s",
+    "build push deploy",
+    "kubectl set image"
+  ],
+  "slots": [
+    "image_name",
+    "deployment_name"
+  ],
+  "code": "name: deploy\non:\n  push: { branches: [main] }\njobs:\n  deploy:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - uses: docker/login-action@v3\n        with: { username: ${{ secrets.DOCKER_USER }}, password: ${{ secrets.DOCKER_PASS }} }\n      - run: |\n          TAG=${GITHUB_SHA::7}\n          docker build -t {{image_name}}:$TAG .\n          docker push {{image_name}}:$TAG\n          echo \"TAG=$TAG\" >> $GITHUB_ENV\n      - uses: azure/setup-kubectl@v4\n      - run: kubectl set image deployment/{{deployment_name}} app={{image_name}}:${{ env.TAG }}",
+  "language": "yaml",
+  "deps": [
+    "github-actions"
+  ],
+  "summary_zh": "GHA build/push/kubectl set image 部署"
+}

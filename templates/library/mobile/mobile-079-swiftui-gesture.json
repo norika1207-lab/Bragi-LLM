@@ -1,0 +1,27 @@
+{
+  "id": "mobile-079-swiftui-gesture",
+  "category": "mobile/swiftui/gesture",
+  "intents_zh": [
+    "SwiftUI DragGesture",
+    "SwiftUI 拖曳手勢",
+    "SwiftUI 拖元件",
+    "Swift gesture drag",
+    "SwiftUI 拖動方塊",
+    "gesture 範例 SwiftUI",
+    "SwiftUI offset drag"
+  ],
+  "intents_en": [
+    "swiftui DragGesture",
+    "swiftui drag gesture",
+    "drag widget swiftui",
+    "swiftui pan gesture",
+    "swiftui move with finger",
+    "gesture example swiftui",
+    "swiftui offset drag"
+  ],
+  "slots": [],
+  "code": "import SwiftUI\nstruct D:View{@State var off=CGSize.zero;@State var saved=CGSize.zero\n  var body:some View{Rectangle().fill(.blue).frame(width:80,height:80).offset(off).gesture(DragGesture().onChanged{v in off=CGSize(width:saved.width+v.translation.width,height:saved.height+v.translation.height)}.onEnded{_ in saved=off})}}",
+  "language": "swift",
+  "deps": [],
+  "summary_zh": "SwiftUI DragGesture 拖動方塊"
+}

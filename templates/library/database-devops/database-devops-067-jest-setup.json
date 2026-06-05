@@ -1,0 +1,23 @@
+{
+  "id": "database-devops-067-jest-setup",
+  "category": "database-devops/test/jest",
+  "intents_zh": [
+    "jest 設定",
+    "jest config 範本",
+    "jest + ts-jest"
+  ],
+  "intents_en": [
+    "jest config",
+    "jest setup",
+    "jest ts-jest"
+  ],
+  "slots": [],
+  "code": "module.exports = {\n  preset: 'ts-jest',\n  testEnvironment: 'node',\n  roots: ['<rootDir>/src', '<rootDir>/test'],\n  testMatch: ['**/*.test.ts'],\n  collectCoverageFrom: ['src/**/*.ts', '!src/**/*.d.ts'],\n  coverageThreshold: {\n    global: { branches: 80, functions: 80, lines: 80, statements: 80 },\n  },\n  setupFilesAfterEnv: ['<rootDir>/test/setup.ts'],\n}",
+  "language": "js",
+  "deps": [
+    "jest",
+    "ts-jest",
+    "@types/jest"
+  ],
+  "summary_zh": "jest + ts-jest 設定範本"
+}

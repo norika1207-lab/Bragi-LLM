@@ -1,0 +1,30 @@
+{
+  "id": "web-backend-048-fastapi-jwt",
+  "category": "web-backend/fastapi/auth",
+  "intents_zh": [
+    "fastapi JWT 登入",
+    "oauth2 password bearer",
+    "fastapi 加 token 驗證",
+    "jwt depends",
+    "保護 endpoint fastapi"
+  ],
+  "intents_en": [
+    "fastapi jwt auth",
+    "oauth2 password bearer",
+    "jwt depends fastapi",
+    "protected route fastapi",
+    "token auth fastapi"
+  ],
+  "slots": [
+    "secret_env",
+    "token_ttl_min"
+  ],
+  "code": "from fastapi import Depends, FastAPI, HTTPException\nfrom fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm\nfrom jose import jwt, JWTError\nfrom datetime import datetime, timedelta\nimport os\n\napp = FastAPI()\noauth2 = OAuth2PasswordBearer(tokenUrl='token')\nSECRET = os.environ['{{secret_env}}']\n\n@app.post('/token')\ndef login(form: OAuth2PasswordRequestForm = Depends()):\n    exp = datetime.utcnow() + timedelta(minutes={{token_ttl_min}})\n    token = jwt.encode({'sub': form.username, 'exp': exp}, SECRET, algorithm='HS256')\n    return {'access_token': token, 'token_type': 'bearer'}\n\ndef current_user(token: str = Depends(oauth2)):\n    try:\n        payload = jwt.decode(token, SECRET, algorithms=['HS256'])\n        return payload['sub']\n    except JWTError:\n        raise HTTPException(401, 'bad token')\n\n@app.get('/me')\ndef me(user: str = Depends(current_user)):\n    return {'user': user}",
+  "language": "py",
+  "deps": [
+    "fastapi",
+    "python-jose",
+    "python-multipart"
+  ],
+  "summary_zh": "FastAPI OAuth2 password JWT"
+}

@@ -1,0 +1,24 @@
+{
+  "id": "depth-system-cli-041-syslog-aggregator",
+  "category": "system-cli/logging/syslog",
+  "intents_zh": [
+    "Python syslog 接收",
+    "UDP 514 log 聚合",
+    "集中 log server 小型",
+    "Python log collector"
+  ],
+  "intents_en": [
+    "python syslog receiver",
+    "udp 514 log aggregator",
+    "mini central log server",
+    "python log collector"
+  ],
+  "slots": [
+    "bind_port",
+    "output_file"
+  ],
+  "code": "import socketserver, datetime\n\nclass Handler(socketserver.DatagramRequestHandler):\n    def handle(self):\n        data = self.rfile.read().decode(errors='replace').rstrip()\n        ts = datetime.datetime.utcnow().isoformat()\n        line = f\"{ts} {self.client_address[0]} {data}\\n\"\n        with open(\"{{output_file}}\", \"a\") as f: f.write(line)\n        print(line, end='')\n\nwith socketserver.UDPServer((\"0.0.0.0\", {{bind_port}}), Handler) as s:\n    print(f\"syslog listening on udp/{{{{bind_port}}}}\")\n    s.serve_forever()",
+  "language": "python",
+  "deps": [],
+  "summary_zh": "UDP syslog 聚合寫檔加 timestamp"
+}

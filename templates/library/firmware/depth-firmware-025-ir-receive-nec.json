@@ -1,0 +1,27 @@
+{
+  "id": "depth-firmware-025-ir-receive-nec",
+  "category": "firmware/protocol/ir",
+  "intents_zh": [
+    "紅外線 NEC 接收",
+    "IR 遙控器解碼",
+    "TSOP1838 接收",
+    "IRremote NEC",
+    "解 IR code"
+  ],
+  "intents_en": [
+    "ir receive nec",
+    "decode ir remote",
+    "tsop1838 receive",
+    "irremote nec",
+    "read ir code"
+  ],
+  "slots": [
+    "ir_pin"
+  ],
+  "code": "#include <IRremote.hpp>\nvoid setup() {\n    Serial.begin(115200);\n    IrReceiver.begin({{ir_pin}}, ENABLE_LED_FEEDBACK);\n}\nvoid loop() {\n    if (IrReceiver.decode()) {\n        if (IrReceiver.decodedIRData.protocol == NEC) {\n            Serial.printf(\"addr=0x%04X cmd=0x%02X\\n\",\n                IrReceiver.decodedIRData.address,\n                IrReceiver.decodedIRData.command);\n        }\n        IrReceiver.resume();\n    }\n}",
+  "language": "cpp",
+  "deps": [
+    "IRremote"
+  ],
+  "summary_zh": "用 IRremote 解 NEC 協定的遙控器訊號"
+}

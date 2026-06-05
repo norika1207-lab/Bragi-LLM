@@ -1,0 +1,25 @@
+{
+  "id": "database-devops-130-pytest-mock",
+  "category": "database-devops/test/pytest",
+  "intents_zh": [
+    "pytest mocker fixture",
+    "pytest-mock 範本",
+    "monkeypatch 用法"
+  ],
+  "intents_en": [
+    "pytest mocker",
+    "pytest-mock example",
+    "monkeypatch usage"
+  ],
+  "slots": [
+    "target",
+    "return_value"
+  ],
+  "code": "def test_with_mocker(mocker):\n    mock = mocker.patch('{{target}}', return_value={{return_value}})\n    from yourmod import call_target\n    result = call_target()\n    assert result == {{return_value}}\n    mock.assert_called_once()\n\ndef test_monkeypatch(monkeypatch):\n    monkeypatch.setenv('API_KEY', 'fake')\n    import os\n    assert os.environ['API_KEY'] == 'fake'",
+  "language": "py",
+  "deps": [
+    "pytest",
+    "pytest-mock"
+  ],
+  "summary_zh": "pytest-mock + monkeypatch 範本"
+}

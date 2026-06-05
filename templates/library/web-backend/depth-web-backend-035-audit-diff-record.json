@@ -1,0 +1,27 @@
+{
+  "id": "depth-web-backend-035-audit-diff-record",
+  "category": "web-backend/audit/diff",
+  "intents_zh": [
+    "紀錄欄位變更 diff",
+    "before/after audit",
+    "JSON diff log",
+    "資料異動追蹤",
+    "稽核 patch"
+  ],
+  "intents_en": [
+    "record field diff",
+    "before after audit",
+    "json diff log",
+    "data change tracking",
+    "audit patch"
+  ],
+  "slots": [
+    "entity"
+  ],
+  "code": "export async function recordChange(entity, id, before, after, userId) {\n  const diff = {};\n  for (const k of new Set([...Object.keys(before), ...Object.keys(after)])) {\n    if (before[k] !== after[k]) diff[k] = { from: before[k], to: after[k] };\n  }\n  if (!Object.keys(diff).length) return;\n  await db('audit_log').insert({ entity: '{{entity}}', entity_id: id, diff, user_id: userId, ts: new Date() });\n}",
+  "language": "js",
+  "deps": [
+    "knex"
+  ],
+  "summary_zh": "紀錄欄位 before/after diff"
+}

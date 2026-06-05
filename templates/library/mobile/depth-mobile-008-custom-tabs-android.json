@@ -1,0 +1,28 @@
+{
+  "id": "depth-mobile-008-custom-tabs-android",
+  "category": "mobile/inappbrowser/android",
+  "intents_zh": [
+    "Android Chrome Custom Tabs",
+    "CustomTabsIntent",
+    "app 內開連結",
+    "自訂瀏覽器分頁",
+    "launchUrl"
+  ],
+  "intents_en": [
+    "Android Custom Tabs",
+    "CustomTabsIntent",
+    "in-app browser",
+    "custom tabs builder",
+    "launchUrl"
+  ],
+  "slots": [
+    "url_string",
+    "toolbar_color"
+  ],
+  "code": "val intent = CustomTabsIntent.Builder()\n    .setDefaultColorSchemeParams(\n        CustomTabColorSchemeParams.Builder().setToolbarColor({{toolbar_color}}).build()\n    )\n    .setShowTitle(true)\n    .build()\nintent.launchUrl(context, Uri.parse(\"{{url_string}}\"))",
+  "language": "kotlin",
+  "deps": [
+    "androidx.browser:browser"
+  ],
+  "summary_zh": "Android Custom Tabs 開網頁"
+}

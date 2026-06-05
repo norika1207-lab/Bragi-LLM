@@ -1,0 +1,29 @@
+{
+  "id": "web-frontend-batch4-017-client-counter",
+  "category": "web-frontend/nextjs/client-component/counter",
+  "intents_zh": [
+    "客戶端計數器",
+    "use client 範例",
+    "useState 加減",
+    "Next.js client component",
+    "互動按鈕",
+    "計數元件"
+  ],
+  "intents_en": [
+    "client counter",
+    "use client example",
+    "usestate counter",
+    "interactive button",
+    "client component demo",
+    "increment widget"
+  ],
+  "slots": [
+    "initial_count"
+  ],
+  "code": "'use client';\nimport { useState } from 'react';\n\nexport default function Counter() {\n  const [count, setCount] = useState({{initial_count}});\n  return (\n    <div className=\"flex items-center gap-3\">\n      <button onClick={() => setCount(count - 1)} className=\"px-3 py-1 border rounded\">-</button>\n      <span className=\"text-xl font-mono\">{count}</span>\n      <button onClick={() => setCount(count + 1)} className=\"px-3 py-1 border rounded\">+</button>\n    </div>\n  );\n}",
+  "language": "tsx",
+  "deps": [
+    "react"
+  ],
+  "summary_zh": "use client 計數器元件"
+}

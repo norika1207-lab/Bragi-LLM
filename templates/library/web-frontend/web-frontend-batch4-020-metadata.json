@@ -1,0 +1,31 @@
+{
+  "id": "web-frontend-batch4-020-metadata",
+  "category": "web-frontend/nextjs/seo/metadata",
+  "intents_zh": [
+    "設定頁面 metadata",
+    "SEO title description",
+    "Next.js generateMetadata",
+    "頁面標題 export",
+    "open graph 設定",
+    "靜態 metadata"
+  ],
+  "intents_en": [
+    "page metadata",
+    "seo title description",
+    "next.js generateMetadata",
+    "static metadata",
+    "open graph meta",
+    "head meta tags"
+  ],
+  "slots": [
+    "page_title",
+    "page_description",
+    "og_image_url"
+  ],
+  "code": "import type { Metadata } from 'next';\n\nexport const metadata: Metadata = {\n  title: '{{page_title}}',\n  description: '{{page_description}}',\n  openGraph: {\n    title: '{{page_title}}',\n    description: '{{page_description}}',\n    images: ['{{og_image_url}}'],\n  },\n};\n\nexport default function Page() {\n  return <main className=\"p-6\">Content</main>;\n}",
+  "language": "tsx",
+  "deps": [
+    "next"
+  ],
+  "summary_zh": "App Router 靜態 metadata 設定"
+}

@@ -1,0 +1,33 @@
+{
+  "id": "llm-tools-128-anthropic-batch",
+  "category": "llm-tools/anthropic/batch",
+  "intents_zh": [
+    "anthropic 批次 API",
+    "claude batch jobs",
+    "claude 批跑",
+    "用 claude batch",
+    "批次 claude 任務",
+    "msg batch claude",
+    "anthropic batches",
+    "批量 claude inference"
+  ],
+  "intents_en": [
+    "anthropic batch api",
+    "claude batch jobs",
+    "claude batches submit",
+    "bulk claude inference",
+    "claude message batches",
+    "anthropic batches",
+    "batch claude inference",
+    "msg batch"
+  ],
+  "slots": [
+    "model_name"
+  ],
+  "code": "import anthropic\nfrom anthropic.types.messages import MessageCreateParamsNonStreaming\n\nclient = anthropic.Anthropic()\n\nrequests = [\n    {\n        \"custom_id\": f\"r{i}\",\n        \"params\": MessageCreateParamsNonStreaming(\n            model=\"{{model_name}}\",\n            max_tokens=256,\n            messages=[{\"role\": \"user\", \"content\": prompt}],\n        ),\n    }\n    for i, prompt in enumerate([\"hi\", \"hello\", \"hey\"])\n]\n\nbatch = client.messages.batches.create(requests=requests)\nprint(\"batch id:\", batch.id)",
+  "language": "py",
+  "deps": [
+    "anthropic"
+  ],
+  "summary_zh": "Anthropic Message Batches 批次提交"
+}

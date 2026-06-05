@@ -1,0 +1,28 @@
+{
+  "id": "depth-web-backend-031-stripe-webhook-verify",
+  "category": "web-backend/webhook/stripe",
+  "intents_zh": [
+    "Stripe webhook 驗章",
+    "constructEvent 驗證",
+    "raw body 簽章",
+    "Express stripe webhook",
+    "Stripe 事件處理"
+  ],
+  "intents_en": [
+    "stripe webhook verify",
+    "constructevent verify",
+    "raw body signature",
+    "express stripe webhook",
+    "stripe event handler"
+  ],
+  "slots": [
+    "webhook_secret"
+  ],
+  "code": "app.post('/webhooks/stripe', express.raw({ type: 'application/json' }), (req, res) => {\n  const sig = req.headers['stripe-signature'];\n  let event;\n  try { event = stripe.webhooks.constructEvent(req.body, sig, '{{webhook_secret}}'); }\n  catch (e) { return res.status(400).send(`bad sig: ${e.message}`); }\n  if (event.type === 'checkout.session.completed') handleCheckout(event.data.object);\n  res.json({ received: true });\n});",
+  "language": "js",
+  "deps": [
+    "stripe",
+    "express"
+  ],
+  "summary_zh": "Stripe webhook 簽章驗證"
+}

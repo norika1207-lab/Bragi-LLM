@@ -1,0 +1,25 @@
+{
+  "id": "depth-system-cli-033-docker-inspect-summary",
+  "category": "system-cli/docker/inspector",
+  "intents_zh": [
+    "docker inspect 摘要",
+    "容器詳情漂亮版",
+    "docker inspect 篩欄位",
+    "快看容器網路 mount"
+  ],
+  "intents_en": [
+    "docker inspect summary",
+    "container detail pretty",
+    "docker inspect filter",
+    "quick container net mounts"
+  ],
+  "slots": [
+    "container_name"
+  ],
+  "code": "#!/usr/bin/env bash\nset -euo pipefail\n\nC=\"{{container_name}}\"\ndocker inspect \"$C\" --format '\n=== {{ .Name }} ===\nimage:    {{ .Config.Image }}\nstatus:   {{ .State.Status }} (started {{ .State.StartedAt }})\nrestarts: {{ .RestartCount }}\nipv4:     {{ range .NetworkSettings.Networks }}{{ .IPAddress }} {{ end }}\nports:\n{{- range $p, $b := .NetworkSettings.Ports }}\n  {{ $p }} -> {{ range $b }}{{ .HostIp }}:{{ .HostPort }} {{ end }}\n{{- end }}\nmounts:\n{{- range .Mounts }}\n  {{ .Type }} {{ .Source }} -> {{ .Destination }} ({{ if .RW }}rw{{ else }}ro{{ end }})\n{{- end }}\nenv:\n{{- range .Config.Env }}\n  {{ . }}\n{{- end }}\n'",
+  "language": "bash",
+  "deps": [
+    "docker"
+  ],
+  "summary_zh": "docker inspect 自訂模板輸出摘要"
+}

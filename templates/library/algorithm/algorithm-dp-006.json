@@ -1,0 +1,21 @@
+{
+  "id": "algorithm-dp-006",
+  "category": "algorithm/dp/fibonacci",
+  "intents_zh": [
+    "費氏 dp",
+    "fibonacci dp",
+    "記憶化費氏"
+  ],
+  "intents_en": [
+    "fibonacci dp",
+    "memoized fib",
+    "fib bottom up"
+  ],
+  "slots": [
+    "fn_name"
+  ],
+  "code": "def {{fn_name}}(n):\n    if n < 2: return n\n    a, b = 0, 1\n    for _ in range(n-1):\n        a, b = b, a + b\n    return b",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "O(n) 迭代費氏"
+}

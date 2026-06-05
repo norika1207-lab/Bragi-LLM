@@ -1,0 +1,28 @@
+{
+  "id": "web-frontend-batch2-032-banner-announcement",
+  "category": "web-frontend/react/layout/banner",
+  "intents_zh": [
+    "公告 banner",
+    "頂部公告列",
+    "告示橫幅",
+    "通知 banner",
+    "站點公告",
+    "維護通知"
+  ],
+  "intents_en": [
+    "announcement banner",
+    "top banner",
+    "site notice",
+    "notification bar",
+    "maintenance banner",
+    "promo banner"
+  ],
+  "slots": [
+    "message",
+    "cta_text"
+  ],
+  "code": "import { useState } from 'react';\n\nexport function Banner() {\n  const [show, setShow] = useState(true);\n  if (!show) return null;\n  return (\n    <div className=\"flex items-center justify-between bg-blue-600 px-4 py-2 text-sm text-white\">\n      <span>{{message}}</span>\n      <div className=\"flex items-center gap-3\">\n        <button className=\"underline\">{{cta_text}}</button>\n        <button onClick={() => setShow(false)} aria-label=\"Dismiss\">✕</button>\n      </div>\n    </div>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "可關閉的頂部公告 banner"
+}

@@ -1,0 +1,21 @@
+{
+  "id": "database-devops-044-dockerfile-nginx-static",
+  "category": "database-devops/docker/dockerfile",
+  "intents_zh": [
+    "nginx 靜態網站 Dockerfile",
+    "SPA 部署到 nginx",
+    "build 完丟 nginx"
+  ],
+  "intents_en": [
+    "nginx static dockerfile",
+    "spa nginx deploy",
+    "build then nginx"
+  ],
+  "slots": [
+    "node_version"
+  ],
+  "code": "FROM node:{{node_version}}-alpine AS build\nWORKDIR /app\nCOPY package*.json ./\nRUN npm ci\nCOPY . .\nRUN npm run build\n\nFROM nginx:alpine\nCOPY --from=build /app/dist /usr/share/nginx/html\nCOPY nginx.conf /etc/nginx/conf.d/default.conf\nEXPOSE 80\nCMD [\"nginx\", \"-g\", \"daemon off;\"]",
+  "language": "dockerfile",
+  "deps": [],
+  "summary_zh": "Build SPA 再丟到 nginx 容器"
+}

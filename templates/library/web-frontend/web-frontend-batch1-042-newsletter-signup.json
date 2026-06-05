@@ -1,0 +1,28 @@
+{
+  "id": "web-frontend-batch1-042-newsletter-signup",
+  "category": "web-frontend/react/forms/newsletter",
+  "intents_zh": [
+    "訂閱電子報 form",
+    "newsletter 訂閱",
+    "email 訂閱表單",
+    "訂閱 input + 按鈕",
+    "訂閱單欄表單",
+    "newsletter signup React"
+  ],
+  "intents_en": [
+    "newsletter signup",
+    "email subscribe form",
+    "newsletter form",
+    "subscribe input button",
+    "single field email",
+    "mailing list signup"
+  ],
+  "slots": [
+    "component_name",
+    "subscribe_url"
+  ],
+  "code": "import { useState } from 'react';\n\nexport default function {{component_name}}() {\n  const [email, setEmail] = useState('');\n  const [done, setDone] = useState(false);\n\n  async function onSubmit(e: React.FormEvent) {\n    e.preventDefault();\n    await fetch('{{subscribe_url}}', {\n      method: 'POST',\n      headers: { 'Content-Type': 'application/json' },\n      body: JSON.stringify({ email }),\n    });\n    setDone(true);\n  }\n\n  if (done) return <p>Subscribed.</p>;\n  return (\n    <form onSubmit={onSubmit} className=\"flex gap-2\">\n      <input type=\"email\" required value={email} onChange={(e) => setEmail(e.target.value)} className=\"border rounded px-2 py-1\" />\n      <button type=\"submit\" className=\"px-3 py-1 bg-blue-600 text-white rounded\">Subscribe</button>\n    </form>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "電子報訂閱單欄表單"
+}

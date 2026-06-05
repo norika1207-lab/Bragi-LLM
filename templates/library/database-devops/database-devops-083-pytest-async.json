@@ -1,0 +1,25 @@
+{
+  "id": "database-devops-083-pytest-async",
+  "category": "database-devops/test/pytest",
+  "intents_zh": [
+    "pytest async 測試",
+    "pytest-asyncio",
+    "async def test"
+  ],
+  "intents_en": [
+    "pytest async",
+    "pytest-asyncio",
+    "async def test"
+  ],
+  "slots": [
+    "function_name",
+    "module_path"
+  ],
+  "code": "import pytest\nfrom {{module_path}} import {{function_name}}\n\n@pytest.mark.asyncio\nasync def test_{{function_name}}_returns():\n    result = await {{function_name}}('hello')\n    assert result == 'HELLO'\n\n@pytest.mark.asyncio\nasync def test_{{function_name}}_concurrent():\n    import asyncio\n    results = await asyncio.gather(*[{{function_name}}(str(i)) for i in range(5)])\n    assert len(results) == 5",
+  "language": "py",
+  "deps": [
+    "pytest",
+    "pytest-asyncio"
+  ],
+  "summary_zh": "pytest-asyncio 非同步測試"
+}

@@ -1,0 +1,25 @@
+{
+  "id": "firmware-098-arduino-eeprom-struct",
+  "category": "firmware/arduino/storage",
+  "intents_zh": [
+    "EEPROM 存結構",
+    "EEPROM.put",
+    "儲存設定 struct",
+    "Arduino 設定持久化",
+    "EEPROM 物件"
+  ],
+  "intents_en": [
+    "Arduino EEPROM put struct",
+    "persist struct EEPROM",
+    "EEPROM.put example",
+    "save settings struct",
+    "EEPROM object Arduino"
+  ],
+  "slots": [
+    "address"
+  ],
+  "code": "#include <EEPROM.h>\nstruct Config { int version; float threshold; char name[16]; };\n\nvoid setup() {\n  Serial.begin(115200);\n  Config c = {1, 23.5, \"sensor-a\"};\n  EEPROM.put({{address}}, c);\n  Config r;\n  EEPROM.get({{address}}, r);\n  Serial.print(r.version); Serial.print(' ');\n  Serial.print(r.threshold); Serial.print(' ');\n  Serial.println(r.name);\n}\n\nvoid loop() {}",
+  "language": "ino",
+  "deps": [],
+  "summary_zh": "Arduino EEPROM 存取結構體設定"
+}

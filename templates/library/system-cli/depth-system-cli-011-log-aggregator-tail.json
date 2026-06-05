@@ -1,0 +1,25 @@
+{
+  "id": "depth-system-cli-011-log-aggregator-tail",
+  "category": "system-cli/logging/aggregation",
+  "intents_zh": [
+    "多檔 log 聚合",
+    "tail 多個 log",
+    "彩色 prefix log 聚合",
+    "同時看多個 log"
+  ],
+  "intents_en": [
+    "aggregate multi log tail",
+    "tail multiple files",
+    "colored prefix log",
+    "watch many logs"
+  ],
+  "slots": [
+    "log_glob"
+  ],
+  "code": "#!/usr/bin/env bash\nset -euo pipefail\n\ncolors=(31 32 33 34 35 36)\ni=0\nfor f in {{log_glob}}; do\n  c=${colors[$((i % ${#colors[@]}))]}\n  name=$(basename \"$f\")\n  ( tail -n 0 -F \"$f\" | sed -u \"s/^/\\x1b[${c}m[$name]\\x1b[0m /\" ) &\n  i=$((i+1))\ndone\nwait",
+  "language": "bash",
+  "deps": [
+    "coreutils"
+  ],
+  "summary_zh": "並行 tail 多個 log 加彩色 prefix"
+}

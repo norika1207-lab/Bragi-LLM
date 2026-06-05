@@ -1,0 +1,21 @@
+{
+  "id": "algorithm-math-009",
+  "category": "algorithm/math/linear_sieve",
+  "intents_zh": [
+    "線性篩",
+    "euler sieve",
+    "O(n) 質數篩"
+  ],
+  "intents_en": [
+    "linear sieve",
+    "Euler sieve",
+    "O(n) primes"
+  ],
+  "slots": [
+    "fn_name"
+  ],
+  "code": "def {{fn_name}}(n):\n    primes = []\n    spf = [0]*(n+1)\n    for i in range(2, n+1):\n        if spf[i] == 0:\n            spf[i] = i\n            primes.append(i)\n        for p in primes:\n            if p > spf[i] or i*p > n: break\n            spf[i*p] = p\n    return primes, spf",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "線性篩，含最小質因數"
+}

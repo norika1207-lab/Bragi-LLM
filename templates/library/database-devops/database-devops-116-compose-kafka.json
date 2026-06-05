@@ -1,0 +1,19 @@
+{
+  "id": "database-devops-116-compose-kafka",
+  "category": "database-devops/docker/compose",
+  "intents_zh": [
+    "compose kafka",
+    "KRaft 模式 kafka",
+    "本地 kafka 單節點"
+  ],
+  "intents_en": [
+    "compose kafka",
+    "kraft kafka",
+    "single node kafka"
+  ],
+  "slots": [],
+  "code": "services:\n  kafka:\n    image: bitnami/kafka:3.7\n    environment:\n      KAFKA_CFG_NODE_ID: 0\n      KAFKA_CFG_PROCESS_ROLES: controller,broker\n      KAFKA_CFG_LISTENERS: PLAINTEXT://:9092,CONTROLLER://:9093\n      KAFKA_CFG_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092\n      KAFKA_CFG_CONTROLLER_QUORUM_VOTERS: 0@kafka:9093\n      KAFKA_CFG_CONTROLLER_LISTENER_NAMES: CONTROLLER\n      KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE: 'true'\n    ports: [\"9092:9092\"]\n    volumes: [\"kafkadata:/bitnami/kafka\"]\n\nvolumes:\n  kafkadata:",
+  "language": "yaml",
+  "deps": [],
+  "summary_zh": "compose Kafka KRaft 單節點"
+}

@@ -1,0 +1,25 @@
+{
+  "id": "depth-mobile-031-stt-android",
+  "category": "mobile/speech/stt-android",
+  "intents_zh": [
+    "Android SpeechRecognizer",
+    "RecognizerIntent",
+    "語音輸入結果",
+    "onResults callback",
+    "語音辨識"
+  ],
+  "intents_en": [
+    "Android SpeechRecognizer",
+    "RecognizerIntent",
+    "speech input result",
+    "onResults callback",
+    "speech recognition"
+  ],
+  "slots": [
+    "language_tag"
+  ],
+  "code": "val recognizer = SpeechRecognizer.createSpeechRecognizer(this)\nval intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {\n    putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)\n    putExtra(RecognizerIntent.EXTRA_LANGUAGE, \"{{language_tag}}\")\n}\nrecognizer.setRecognitionListener(object : RecognitionListener {\n    override fun onResults(b: Bundle) {\n        val text = b.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION)?.firstOrNull()\n        Log.d(\"STT\", text ?: \"\")\n    }\n    // unused stubs omitted\n})\nrecognizer.startListening(intent)",
+  "language": "kotlin",
+  "deps": [],
+  "summary_zh": "Android SpeechRecognizer 語音輸入"
+}

@@ -1,0 +1,28 @@
+{
+  "id": "depth-llm-tools-045-rate-limit-backoff",
+  "category": "llm-tools/reliability/backoff",
+  "intents_zh": [
+    "429 速率限制退避",
+    "指數退避重試",
+    "tenacity LLM 呼叫",
+    "rate limit handler",
+    "API 重試"
+  ],
+  "intents_en": [
+    "429 rate limit backoff",
+    "exponential retry",
+    "tenacity LLM call",
+    "rate limit handler",
+    "API retry"
+  ],
+  "slots": [
+    "call_fn"
+  ],
+  "code": "from tenacity import retry, wait_exponential, stop_after_attempt, retry_if_exception_type\nimport openai\n\n@retry(\n    wait=wait_exponential(multiplier=1, min=2, max=60),\n    stop=stop_after_attempt(6),\n    retry=retry_if_exception_type(openai.RateLimitError),\n)\ndef safe_call(*args, **kwargs):\n    return {{call_fn}}(*args, **kwargs)",
+  "language": "python",
+  "deps": [
+    "tenacity",
+    "openai"
+  ],
+  "summary_zh": "tenacity 指數退避自動重試 429 速率錯誤"
+}

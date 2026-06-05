@@ -1,0 +1,22 @@
+{
+  "id": "database-devops-153-sql-self-join",
+  "category": "database-devops/sql/joins",
+  "intents_zh": [
+    "self join",
+    "同表自連接",
+    "員工跟主管同表"
+  ],
+  "intents_en": [
+    "self join",
+    "same table join",
+    "employee manager self join"
+  ],
+  "slots": [
+    "table",
+    "fk_col"
+  ],
+  "code": "SELECT e.id, e.name AS employee, m.name AS manager\nFROM {{table}} e\nLEFT JOIN {{table}} m ON e.{{fk_col}} = m.id\nORDER BY m.name NULLS FIRST, e.name;",
+  "language": "sql",
+  "deps": [],
+  "summary_zh": "同表 self join 員工主管"
+}

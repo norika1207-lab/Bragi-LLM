@@ -1,0 +1,34 @@
+{
+  "id": "llm-tools-014-chromadb-collection",
+  "category": "llm-tools/vectordb/chromadb",
+  "intents_zh": [
+    "chromadb 集合 CRUD",
+    "用 chroma 存向量",
+    "chromadb 範例",
+    "chroma 基本用法",
+    "建 chroma collection",
+    "chroma 寫入查詢",
+    "local chroma",
+    "persistent chroma"
+  ],
+  "intents_en": [
+    "chromadb collection example",
+    "chroma vector crud",
+    "persistent chroma",
+    "chroma basic usage",
+    "add and query chroma",
+    "chroma collection",
+    "chroma minimal",
+    "local chroma db"
+  ],
+  "slots": [
+    "collection_name",
+    "persist_dir"
+  ],
+  "code": "import chromadb\n\nclient = chromadb.PersistentClient(path=\"{{persist_dir}}\")\ncol = client.get_or_create_collection(\"{{collection_name}}\")\n\ndef add(ids, docs, metadatas=None):\n    col.add(ids=ids, documents=docs, metadatas=metadatas)\n\ndef query(text: str, k: int = 5):\n    return col.query(query_texts=[text], n_results=k)\n\nif __name__ == \"__main__\":\n    add([\"a\", \"b\"], [\"hello\", \"world\"])\n    print(query(\"hi\"))",
+  "language": "py",
+  "deps": [
+    "chromadb"
+  ],
+  "summary_zh": "ChromaDB 集合新增與查詢"
+}

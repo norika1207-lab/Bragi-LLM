@@ -1,0 +1,28 @@
+{
+  "id": "depth-firmware-045-spiffs-mount",
+  "category": "firmware/storage/spiffs",
+  "intents_zh": [
+    "SPIFFS 掛載",
+    "LittleFS 寫檔",
+    "內部 flash 檔案",
+    "mount fs",
+    "檔案系統 ESP32"
+  ],
+  "intents_en": [
+    "spiffs mount",
+    "littlefs write",
+    "internal flash fs",
+    "mount fs",
+    "esp32 filesystem"
+  ],
+  "slots": [
+    "path",
+    "text"
+  ],
+  "code": "#include <LittleFS.h>\nvoid setup() {\n    Serial.begin(115200);\n    LittleFS.begin(true);\n    File f = LittleFS.open(\"{{path}}\", \"w\");\n    f.println(\"{{text}}\");\n    f.close();\n    File r = LittleFS.open(\"{{path}}\", \"r\");\n    while (r.available()) Serial.write(r.read());\n}",
+  "language": "cpp",
+  "deps": [
+    "LittleFS"
+  ],
+  "summary_zh": "LittleFS 在內部 flash 寫讀檔案"
+}

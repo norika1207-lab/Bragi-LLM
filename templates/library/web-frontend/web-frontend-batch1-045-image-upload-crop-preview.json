@@ -1,0 +1,28 @@
+{
+  "id": "web-frontend-batch1-045-image-upload-crop-preview",
+  "category": "web-frontend/react/file-upload/avatar",
+  "intents_zh": [
+    "頭像上傳元件",
+    "avatar uploader",
+    "圓形頭像預覽 + 上傳",
+    "profile 圖上傳",
+    "換頭像 UI",
+    "頭像選擇 + 預覽"
+  ],
+  "intents_en": [
+    "avatar uploader",
+    "profile picture upload",
+    "circular avatar preview",
+    "change avatar ui",
+    "upload profile image",
+    "avatar picker"
+  ],
+  "slots": [
+    "component_name",
+    "upload_url"
+  ],
+  "code": "import { useState } from 'react';\n\nexport default function {{component_name}}() {\n  const [url, setUrl] = useState<string | null>(null);\n\n  async function onChange(e: React.ChangeEvent<HTMLInputElement>) {\n    const f = e.target.files?.[0];\n    if (!f) return;\n    setUrl(URL.createObjectURL(f));\n    const fd = new FormData();\n    fd.append('avatar', f);\n    await fetch('{{upload_url}}', { method: 'POST', body: fd });\n  }\n\n  return (\n    <label className=\"inline-block cursor-pointer\">\n      <div className=\"w-24 h-24 rounded-full bg-gray-200 overflow-hidden\">\n        {url && <img src={url} alt=\"avatar\" className=\"w-full h-full object-cover\" />}\n      </div>\n      <input type=\"file\" accept=\"image/*\" hidden onChange={onChange} />\n    </label>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "圓形頭像上傳含即時預覽"
+}

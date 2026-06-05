@@ -1,0 +1,32 @@
+{
+  "id": "mobile-003-rn-pullrefresh",
+  "category": "mobile/rn/list",
+  "intents_zh": [
+    "RN 下拉刷新",
+    "FlatList pull to refresh",
+    "RN 列表加 refresh",
+    "下拉重整 RN",
+    "React Native 拉下更新",
+    "RN refresh control",
+    "FlatList 刷新"
+  ],
+  "intents_en": [
+    "pull to refresh RN",
+    "FlatList refresh control",
+    "react native pull refresh list",
+    "refreshing FlatList",
+    "rn list pull down",
+    "refresh on swipe down rn",
+    "FlatList onRefresh"
+  ],
+  "slots": [
+    "endpoint"
+  ],
+  "code": "import React,{useState,useCallback,useEffect} from 'react';\nimport {FlatList,Text,RefreshControl,View} from 'react-native';\nexport default function L(){\n  const[d,setD]=useState<any[]>([]);const[r,setR]=useState(false);\n  const load=useCallback(async()=>{setR(true);const x=await fetch('{{endpoint}}').then(r=>r.json());setD(x);setR(false);},[]);\n  useEffect(()=>{load();},[load]);\n  return(<FlatList data={d} keyExtractor={(_,i)=>String(i)} renderItem={({item})=>(<View style={{padding:16}}><Text>{item.title}</Text></View>)} refreshControl={<RefreshControl refreshing={r} onRefresh={load}/>}/>);}",
+  "language": "tsx",
+  "deps": [
+    "react",
+    "react-native"
+  ],
+  "summary_zh": "FlatList 下拉刷新從 API 重抓資料"
+}

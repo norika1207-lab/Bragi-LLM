@@ -1,0 +1,23 @@
+{
+  "id": "database-devops-033-knex-seed",
+  "category": "database-devops/seed/knex",
+  "intents_zh": [
+    "knex seed",
+    "knex 塞測試資料",
+    "knex seed 範本"
+  ],
+  "intents_en": [
+    "knex seed",
+    "seed test data",
+    "knex seed file"
+  ],
+  "slots": [
+    "table_name"
+  ],
+  "code": "exports.seed = async function(knex) {\n  await knex('{{table_name}}').del()\n  await knex('{{table_name}}').insert([\n    { name: 'Alice', user_id: 1 },\n    { name: 'Bob', user_id: 2 },\n    { name: 'Carol', user_id: 3 },\n  ])\n}",
+  "language": "js",
+  "deps": [
+    "knex"
+  ],
+  "summary_zh": "Knex seed 塞測試資料"
+}

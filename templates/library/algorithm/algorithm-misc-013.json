@@ -1,0 +1,20 @@
+{
+  "id": "algorithm-misc-013",
+  "category": "algorithm/misc/rotate_matrix",
+  "intents_zh": [
+    "矩陣旋轉 90",
+    "rotate matrix",
+    "給我原地旋轉"
+  ],
+  "intents_en": [
+    "rotate matrix 90",
+    "in place matrix rotation"
+  ],
+  "slots": [
+    "fn_name"
+  ],
+  "code": "def {{fn_name}}(matrix):\n    n = len(matrix)\n    for i in range(n):\n        for j in range(i+1, n):\n            matrix[i][j], matrix[j][i] = matrix[j][i], matrix[i][j]\n    for row in matrix:\n        row.reverse()\n    return matrix",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "原地順時針旋轉 90 度"
+}

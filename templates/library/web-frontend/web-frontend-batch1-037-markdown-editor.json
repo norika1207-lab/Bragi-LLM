@@ -1,0 +1,29 @@
+{
+  "id": "web-frontend-batch1-037-markdown-editor",
+  "category": "web-frontend/react/rich-text/markdown",
+  "intents_zh": [
+    "markdown 編輯器",
+    "左寫右預覽 markdown",
+    "React MD editor",
+    "markdown live preview",
+    "split view markdown",
+    "寫 markdown 元件"
+  ],
+  "intents_en": [
+    "markdown editor",
+    "md editor with preview",
+    "live markdown preview",
+    "split view markdown",
+    "react markdown editor",
+    "markdown writer"
+  ],
+  "slots": [
+    "component_name"
+  ],
+  "code": "import { useState } from 'react';\nimport { marked } from 'marked';\n\nexport default function {{component_name}}() {\n  const [md, setMd] = useState('# Hello');\n  return (\n    <div className=\"grid grid-cols-2 gap-2 h-80\">\n      <textarea value={md} onChange={(e) => setMd(e.target.value)} className=\"border rounded p-2 font-mono\" />\n      <div className=\"border rounded p-2 prose\" dangerouslySetInnerHTML={{ __html: marked.parse(md) as string }} />\n    </div>\n  );\n}",
+  "language": "tsx",
+  "deps": [
+    "marked"
+  ],
+  "summary_zh": "左寫右預覽 markdown 編輯器"
+}

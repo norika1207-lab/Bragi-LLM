@@ -1,0 +1,28 @@
+{
+  "id": "depth-firmware-036-rotary-encoder",
+  "category": "firmware/input/encoder",
+  "intents_zh": [
+    "旋轉編碼器",
+    "rotary encoder count",
+    "quadrature 解碼",
+    "音量旋鈕",
+    "KY-040"
+  ],
+  "intents_en": [
+    "rotary encoder",
+    "quadrature decode",
+    "encoder count",
+    "volume knob",
+    "ky-040"
+  ],
+  "slots": [
+    "clk_pin",
+    "dt_pin"
+  ],
+  "code": "volatile int count = 0;\nvolatile int last_clk = HIGH;\nvoid IRAM_ATTR isr() {\n    int c = digitalRead({{clk_pin}});\n    if (c != last_clk && c == LOW) {\n        count += (digitalRead({{dt_pin}}) != c) ? 1 : -1;\n    }\n    last_clk = c;\n}\nvoid setup() {\n    pinMode({{clk_pin}}, INPUT_PULLUP);\n    pinMode({{dt_pin}}, INPUT_PULLUP);\n    attachInterrupt(digitalPinToInterrupt({{clk_pin}}), isr, CHANGE);\n}",
+  "language": "cpp",
+  "deps": [
+    "Arduino"
+  ],
+  "summary_zh": "中斷讀旋轉編碼器 quadrature 計數"
+}

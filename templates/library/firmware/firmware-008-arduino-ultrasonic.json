@@ -1,0 +1,26 @@
+{
+  "id": "firmware-008-arduino-ultrasonic",
+  "category": "firmware/arduino/sensor",
+  "intents_zh": [
+    "超音波測距",
+    "HC-SR04 範例",
+    "量距離",
+    "ultrasonic sensor",
+    "Arduino 測距感測"
+  ],
+  "intents_en": [
+    "Arduino HC-SR04",
+    "ultrasonic distance sensor",
+    "measure distance with ultrasonic",
+    "SR04 reading",
+    "cm distance read"
+  ],
+  "slots": [
+    "trig_pin",
+    "echo_pin"
+  ],
+  "code": "const int TRIG = {{trig_pin}};\nconst int ECHO = {{echo_pin}};\n\nvoid setup() {\n  pinMode(TRIG, OUTPUT);\n  pinMode(ECHO, INPUT);\n  Serial.begin(115200);\n}\n\nvoid loop() {\n  digitalWrite(TRIG, LOW); delayMicroseconds(2);\n  digitalWrite(TRIG, HIGH); delayMicroseconds(10);\n  digitalWrite(TRIG, LOW);\n  long dur = pulseIn(ECHO, HIGH, 30000);\n  float cm = dur * 0.0343 / 2.0;\n  Serial.print(\"distance cm=\"); Serial.println(cm);\n  delay(200);\n}",
+  "language": "ino",
+  "deps": [],
+  "summary_zh": "HC-SR04 超音波測距讀取"
+}

@@ -1,0 +1,24 @@
+{
+  "id": "depth-database-devops-014-rds-snapshot-prune",
+  "category": "database-devops/aws/rds",
+  "intents_zh": [
+    "刪舊 RDS snapshot",
+    "保留 N 天",
+    "快照清理腳本"
+  ],
+  "intents_en": [
+    "prune old RDS snapshots",
+    "retain N days",
+    "snapshot cleanup"
+  ],
+  "slots": [
+    "db_instance_id",
+    "retain_days"
+  ],
+  "code": "import boto3, datetime\nrds = boto3.client('rds')\ncutoff = datetime.datetime.utcnow().replace(tzinfo=None) - datetime.timedelta(days={{retain_days}})\nsnaps = rds.describe_db_snapshots(DBInstanceIdentifier='{{db_instance_id}}', SnapshotType='manual')['DBSnapshots']\nfor s in snaps:\n    if s['SnapshotCreateTime'].replace(tzinfo=None) < cutoff:\n        print('deleting', s['DBSnapshotIdentifier'])\n        rds.delete_db_snapshot(DBSnapshotIdentifier=s['DBSnapshotIdentifier'])",
+  "language": "py",
+  "deps": [
+    "boto3"
+  ],
+  "summary_zh": "清理 N 天前的手動 RDS snapshot"
+}

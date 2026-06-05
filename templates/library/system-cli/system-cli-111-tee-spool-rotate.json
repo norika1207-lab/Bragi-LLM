@@ -1,0 +1,22 @@
+{
+  "id": "system-cli-111-tee-spool-rotate",
+  "category": "system-cli/logging/spool",
+  "intents_zh": [
+    "log 大小到了 rotate",
+    "自製 rotation",
+    "size based rotate shell"
+  ],
+  "intents_en": [
+    "size based log rotate",
+    "custom rotation script",
+    "trim log when too big"
+  ],
+  "slots": [
+    "log_file",
+    "max_bytes"
+  ],
+  "code": "#!/usr/bin/env bash\nset -euo pipefail\nF=\"{{log_file}}\"\nMAX={{max_bytes}}\n[[ -f \"$F\" ]] || exit 0\nSZ=$(wc -c < \"$F\")\nif (( SZ > MAX )); then\n  TS=$(date +%Y%m%d-%H%M%S)\n  mv \"$F\" \"$F.$TS\"\n  gzip \"$F.$TS\"\n  : > \"$F\"\n  echo \"rotated $F (was ${SZ}B)\"\nfi",
+  "language": "sh",
+  "deps": [],
+  "summary_zh": "按大小手動 rotate log"
+}

@@ -1,0 +1,27 @@
+{
+  "id": "firmware-066-mpy-http-get",
+  "category": "firmware/micropython/network",
+  "intents_zh": [
+    "mpy urequests",
+    "MicroPython HTTP GET",
+    "ESP32 抓 API mpy",
+    "mpy 呼叫 REST",
+    "urequests 範例"
+  ],
+  "intents_en": [
+    "MicroPython urequests GET",
+    "mpy HTTP client",
+    "fetch URL micropython",
+    "ESP32 urequests",
+    "micropython REST call"
+  ],
+  "slots": [
+    "url"
+  ],
+  "code": "import urequests\n\nr = urequests.get(\"{{url}}\")\nprint(r.status_code, r.text)\nr.close()",
+  "language": "py",
+  "deps": [
+    "urequests"
+  ],
+  "summary_zh": "MicroPython urequests HTTP GET"
+}

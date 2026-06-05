@@ -1,0 +1,25 @@
+{
+  "id": "depth-database-devops-034-sli-latency",
+  "category": "database-devops/sre/slo",
+  "intents_zh": [
+    "latency SLI 定義",
+    "p99 SLI",
+    "histogram_quantile"
+  ],
+  "intents_en": [
+    "latency SLI",
+    "p99 SLI",
+    "histogram_quantile"
+  ],
+  "slots": [
+    "service_name",
+    "p_quantile",
+    "threshold_ms"
+  ],
+  "code": "# Recording rule for latency SLI\ngroups:\n  - name: sli-latency\n    rules:\n      - record: sli:latency:{{service_name}}:good\n        expr: |\n          sum(rate(http_request_duration_seconds_bucket{service=\"{{service_name}}\",le=\"{{threshold_ms}}e-3\"}[5m]))\n      - record: sli:latency:{{service_name}}:total\n        expr: |\n          sum(rate(http_request_duration_seconds_count{service=\"{{service_name}}\"}[5m]))\n      - record: sli:latency:{{service_name}}:ratio\n        expr: sli:latency:{{service_name}}:good / sli:latency:{{service_name}}:total",
+  "language": "yaml",
+  "deps": [
+    "prometheus"
+  ],
+  "summary_zh": "Prometheus recording rule 算 latency SLI 比例"
+}

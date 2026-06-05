@@ -1,0 +1,27 @@
+{
+  "id": "firmware-097-arduino-json-parse",
+  "category": "firmware/arduino/data",
+  "intents_zh": [
+    "Arduino 解析 JSON",
+    "ArduinoJson 範例",
+    "JSON 解碼",
+    "ESP32 解析 API response",
+    "JSON 物件讀取"
+  ],
+  "intents_en": [
+    "ArduinoJson parse",
+    "Arduino JSON deserialize",
+    "decode JSON Arduino",
+    "ArduinoJson example",
+    "JSON object read"
+  ],
+  "slots": [
+    "json_string"
+  ],
+  "code": "#include <ArduinoJson.h>\n\nvoid setup() {\n  Serial.begin(115200);\n  StaticJsonDocument<256> doc;\n  DeserializationError err = deserializeJson(doc, \"{{json_string}}\");\n  if (err) { Serial.println(err.c_str()); return; }\n  const char* name = doc[\"name\"];\n  int age = doc[\"age\"];\n  Serial.print(name); Serial.print(' '); Serial.println(age);\n}\n\nvoid loop() {}",
+  "language": "ino",
+  "deps": [
+    "ArduinoJson"
+  ],
+  "summary_zh": "Arduino ArduinoJson 解析 JSON"
+}

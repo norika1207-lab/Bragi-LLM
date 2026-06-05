@@ -1,0 +1,27 @@
+{
+  "id": "depth-web-frontend-050-svelte-transition",
+  "category": "web-frontend/animation/svelte",
+  "intents_zh": [
+    "Svelte 進場動畫",
+    "fly transition",
+    "Svelte 內建動畫",
+    "元件淡入 svelte",
+    "crossfade"
+  ],
+  "intents_en": [
+    "svelte transition",
+    "fly transition svelte",
+    "builtin animation",
+    "svelte fade in",
+    "crossfade svelte"
+  ],
+  "slots": [
+    "component_name"
+  ],
+  "code": "<script lang=\"ts\">\n  import { fly, fade } from 'svelte/transition';\n  export let items: { id: string; label: string }[] = [];\n</script>\n\n<ul>\n  {#each items as it (it.id)}\n    <li in:fly={{ y: 8, duration: 220 }} out:fade={{ duration: 150 }}>{it.label}</li>\n  {/each}\n</ul>",
+  "language": "svelte",
+  "deps": [
+    "svelte"
+  ],
+  "summary_zh": "Svelte fly/fade 列表動畫"
+}

@@ -1,0 +1,24 @@
+{
+  "id": "database-devops-019-sql-materialized-view",
+  "category": "database-devops/sql/ddl",
+  "intents_zh": [
+    "物化視圖",
+    "materialized view",
+    "快取查詢結果",
+    "定期 refresh 的 view"
+  ],
+  "intents_en": [
+    "materialized view",
+    "cached view",
+    "refresh materialized",
+    "precomputed view"
+  ],
+  "slots": [
+    "view_name",
+    "query_body"
+  ],
+  "code": "CREATE MATERIALIZED VIEW {{view_name}} AS\n{{query_body}}\nWITH DATA;\n\nREFRESH MATERIALIZED VIEW CONCURRENTLY {{view_name}};",
+  "language": "sql",
+  "deps": [],
+  "summary_zh": "建立物化視圖並可 refresh"
+}

@@ -1,0 +1,25 @@
+{
+  "id": "web-backend-105-fastapi-mw-time",
+  "category": "web-backend/fastapi/middleware",
+  "intents_zh": [
+    "fastapi 自訂 middleware",
+    "記錄 response time",
+    "加 X-Process-Time header",
+    "middleware 範例 fastapi",
+    "async middleware"
+  ],
+  "intents_en": [
+    "fastapi custom middleware",
+    "response time middleware",
+    "X-Process-Time header",
+    "middleware example fastapi",
+    "async middleware fastapi"
+  ],
+  "slots": [],
+  "code": "from fastapi import FastAPI, Request\nimport time\n\napp = FastAPI()\n\n@app.middleware('http')\nasync def add_process_time(request: Request, call_next):\n    start = time.perf_counter()\n    response = await call_next(request)\n    response.headers['X-Process-Time'] = f'{(time.perf_counter() - start)*1000:.2f}ms'\n    return response",
+  "language": "py",
+  "deps": [
+    "fastapi"
+  ],
+  "summary_zh": "FastAPI response-time middleware"
+}

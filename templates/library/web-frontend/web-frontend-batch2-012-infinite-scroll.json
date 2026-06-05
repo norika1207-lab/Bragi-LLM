@@ -1,0 +1,27 @@
+{
+  "id": "web-frontend-batch2-012-infinite-scroll",
+  "category": "web-frontend/react/layout/infinite-scroll",
+  "intents_zh": [
+    "無限滾動",
+    "infinite scroll",
+    "捲動載入更多",
+    "scroll 載入",
+    "自動載入",
+    "下拉載入"
+  ],
+  "intents_en": [
+    "infinite scroll",
+    "scroll load more",
+    "auto-load on scroll",
+    "endless list",
+    "scroll pagination",
+    "load on scroll"
+  ],
+  "slots": [
+    "fetch_more_fn"
+  ],
+  "code": "import { useEffect, useRef, useState } from 'react';\n\nexport function InfiniteList() {\n  const [items, setItems] = useState<any[]>([]);\n  const [page, setPage] = useState(1);\n  const sentinel = useRef<HTMLDivElement>(null);\n\n  useEffect(() => {\n    const obs = new IntersectionObserver(async (entries) => {\n      if (entries[0].isIntersecting) {\n        const more = await {{fetch_more_fn}}(page);\n        setItems((p) => [...p, ...more]);\n        setPage((p) => p + 1);\n      }\n    });\n    if (sentinel.current) obs.observe(sentinel.current);\n    return () => obs.disconnect();\n  }, [page]);\n\n  return (\n    <div>\n      {items.map((it, i) => <div key={i} className=\"border-b p-3\">{it.title}</div>)}\n      <div ref={sentinel} className=\"h-10\" />\n    </div>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "IntersectionObserver 無限滾動"
+}

@@ -1,0 +1,27 @@
+{
+  "id": "depth-web-frontend-020-ppr-segment",
+  "category": "web-frontend/server/partial-prerender",
+  "intents_zh": [
+    "Next PPR 設定",
+    "partial prerendering",
+    "experimental_ppr",
+    "靜態加動態 segment",
+    "ppr 範例"
+  ],
+  "intents_en": [
+    "next partial prerendering",
+    "experimental_ppr",
+    "ppr setup",
+    "static + dynamic segment",
+    "ppr next.js"
+  ],
+  "slots": [
+    "page_name"
+  ],
+  "code": "// app/{{page_name}}/page.tsx\nimport { Suspense } from 'react';\nimport { DynamicWidget } from './widget';\n\nexport const experimental_ppr = true;\n\nexport default function Page() {\n  return (\n    <main>\n      <h1>靜態殼</h1>\n      <Suspense fallback={<div className=\"skeleton\" />}>\n        <DynamicWidget />\n      </Suspense>\n    </main>\n  );\n}",
+  "language": "tsx",
+  "deps": [
+    "next"
+  ],
+  "summary_zh": "Next PPR 靜態殼 + Suspense 動態洞"
+}

@@ -1,0 +1,25 @@
+{
+  "id": "depth-mobile-036-accel-ios",
+  "category": "mobile/sensors/accelerometer-ios",
+  "intents_zh": [
+    "iOS CMMotionManager 加速度",
+    "accelerometer 讀值",
+    "startAccelerometerUpdates",
+    "x y z 軸資料",
+    "運動感測器"
+  ],
+  "intents_en": [
+    "iOS CMMotionManager accelerometer",
+    "read accel",
+    "startAccelerometerUpdates",
+    "x y z axes",
+    "motion sensor"
+  ],
+  "slots": [
+    "hz"
+  ],
+  "code": "import CoreMotion\nlet mm = CMMotionManager()\nmm.accelerometerUpdateInterval = 1.0 / Double({{hz}})\nmm.startAccelerometerUpdates(to: .main) { data, _ in\n  guard let a = data?.acceleration else { return }\n  print(a.x, a.y, a.z)\n}",
+  "language": "swift",
+  "deps": [],
+  "summary_zh": "iOS 加速度計取樣"
+}

@@ -1,0 +1,27 @@
+{
+  "id": "firmware-100-platformio-ini",
+  "category": "firmware/build/config",
+  "intents_zh": [
+    "PlatformIO 設定檔",
+    "platformio.ini 範例",
+    "ESP32 build 設定",
+    "PIO 專案範本",
+    "pio 基本設定"
+  ],
+  "intents_en": [
+    "PlatformIO ini config",
+    "platformio.ini example",
+    "ESP32 build settings",
+    "PIO project template",
+    "platformio basic config"
+  ],
+  "slots": [
+    "board",
+    "framework",
+    "monitor_speed"
+  ],
+  "code": "[env:{{board}}]\nplatform = espressif32\nboard = {{board}}\nframework = {{framework}}\nmonitor_speed = {{monitor_speed}}\nlib_deps =\n  knolleary/PubSubClient\n  bblanchon/ArduinoJson\n  adafruit/Adafruit NeoPixel\nbuild_flags = -DCORE_DEBUG_LEVEL=3",
+  "language": "ini",
+  "deps": [],
+  "summary_zh": "PlatformIO ESP32 專案基本設定檔"
+}

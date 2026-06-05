@@ -1,0 +1,23 @@
+{
+  "id": "algorithm-ml-014",
+  "category": "algorithm/ml/standard_scale",
+  "intents_zh": [
+    "標準化",
+    "StandardScaler",
+    "z-score 標準化"
+  ],
+  "intents_en": [
+    "standard scaler",
+    "z score normalize",
+    "feature standardization"
+  ],
+  "slots": [
+    "X_var"
+  ],
+  "code": "from sklearn.preprocessing import StandardScaler\n\nscaler = StandardScaler()\nX_scaled = scaler.fit_transform({{X_var}})\nprint(X_scaled.mean(axis=0), X_scaled.std(axis=0))",
+  "language": "py",
+  "deps": [
+    "scikit-learn"
+  ],
+  "summary_zh": "特徵標準化 z-score"
+}

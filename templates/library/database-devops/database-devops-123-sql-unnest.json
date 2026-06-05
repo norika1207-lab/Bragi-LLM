@@ -1,0 +1,22 @@
+{
+  "id": "database-devops-123-sql-unnest",
+  "category": "database-devops/sql/postgres",
+  "intents_zh": [
+    "postgres unnest 展開陣列",
+    "array 攤平成列",
+    "unnest with ordinality"
+  ],
+  "intents_en": [
+    "postgres unnest array",
+    "flatten array to rows",
+    "unnest with ordinality"
+  ],
+  "slots": [
+    "array_col",
+    "table"
+  ],
+  "code": "SELECT t.id, item, idx\nFROM {{table}} t,\n  LATERAL unnest(t.{{array_col}}) WITH ORDINALITY AS u(item, idx)\nORDER BY t.id, idx;",
+  "language": "sql",
+  "deps": [],
+  "summary_zh": "Postgres unnest 攤平陣列保留索引"
+}

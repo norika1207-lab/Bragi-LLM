@@ -1,0 +1,29 @@
+{
+  "id": "firmware-049-rpi-i2c-bme280",
+  "category": "firmware/rpi/sensor",
+  "intents_zh": [
+    "樹莓派讀 BME280",
+    "Pi I2C 溫溼度",
+    "smbus2 BME280",
+    "Pi 環境感測",
+    "Pi 氣壓計"
+  ],
+  "intents_en": [
+    "Raspberry Pi BME280",
+    "Pi I2C BME280",
+    "read temperature humidity Pi",
+    "smbus2 sensor",
+    "Pi weather sensor"
+  ],
+  "slots": [
+    "i2c_bus",
+    "sensor_addr"
+  ],
+  "code": "import bme280, smbus2\nbus = smbus2.SMBus({{i2c_bus}})\naddr = {{sensor_addr}}\ncal = bme280.load_calibration_params(bus, addr)\nd = bme280.sample(bus, addr, cal)\nprint('T=', d.temperature, 'H=', d.humidity, 'P=', d.pressure)",
+  "language": "py",
+  "deps": [
+    "RPi.bme280",
+    "smbus2"
+  ],
+  "summary_zh": "樹莓派透過 I2C 讀 BME280"
+}

@@ -1,0 +1,33 @@
+{
+  "id": "llm-tools-041-prompt-cache-anthropic",
+  "category": "llm-tools/anthropic/prompt-cache",
+  "intents_zh": [
+    "anthropic prompt caching",
+    "Claude 系統訊息快取",
+    "prompt cache control",
+    "cache_control 範例",
+    "Claude 提示快取",
+    "anthropic 快取",
+    "快取 system prompt",
+    "reduce token cost"
+  ],
+  "intents_en": [
+    "anthropic prompt caching",
+    "claude cache_control",
+    "system prompt caching",
+    "claude prompt cache",
+    "cached prompt example",
+    "anthropic cache",
+    "reduce token cost claude",
+    "prompt caching"
+  ],
+  "slots": [
+    "model_name"
+  ],
+  "code": "import anthropic\n\nclient = anthropic.Anthropic()\n\nLONG_CTX = \"...big knowledge base here...\" * 200\n\ndef ask(q: str) -> str:\n    msg = client.messages.create(\n        model=\"{{model_name}}\",\n        max_tokens=512,\n        system=[\n            {\"type\": \"text\", \"text\": LONG_CTX, \"cache_control\": {\"type\": \"ephemeral\"}},\n        ],\n        messages=[{\"role\": \"user\", \"content\": q}],\n    )\n    return msg.content[0].text",
+  "language": "py",
+  "deps": [
+    "anthropic"
+  ],
+  "summary_zh": "Claude prompt caching cache_control 用法"
+}

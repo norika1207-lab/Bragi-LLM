@@ -1,0 +1,23 @@
+{
+  "id": "depth-mobile-039-gyro-android",
+  "category": "mobile/sensors/gyro-android",
+  "intents_zh": [
+    "Android TYPE_GYROSCOPE",
+    "陀螺儀讀值",
+    "SensorEventListener gyro",
+    "角速度",
+    "旋轉感測"
+  ],
+  "intents_en": [
+    "Android TYPE_GYROSCOPE",
+    "gyro values",
+    "SensorEventListener gyro",
+    "angular velocity",
+    "rotation sensor"
+  ],
+  "slots": [],
+  "code": "val sm = getSystemService(SENSOR_SERVICE) as SensorManager\nval gyro = sm.getDefaultSensor(Sensor.TYPE_GYROSCOPE)\nsm.registerListener(object : SensorEventListener {\n    override fun onSensorChanged(e: SensorEvent) { /* e.values: rad/s on x,y,z */ }\n    override fun onAccuracyChanged(s: Sensor?, a: Int) {}\n}, gyro, SensorManager.SENSOR_DELAY_GAME)",
+  "language": "kotlin",
+  "deps": [],
+  "summary_zh": "Android 陀螺儀訂閱"
+}

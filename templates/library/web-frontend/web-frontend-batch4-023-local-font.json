@@ -1,0 +1,30 @@
+{
+  "id": "web-frontend-batch4-023-local-font",
+  "category": "web-frontend/nextjs/fonts/local",
+  "intents_zh": [
+    "載入本地字型",
+    "next/font/local",
+    "自訂 woff2",
+    "local font 設定",
+    "加自己的字體檔",
+    "local 字型 layout"
+  ],
+  "intents_en": [
+    "load local font",
+    "next/font/local",
+    "custom woff2",
+    "add own font file",
+    "local font setup",
+    "next local font"
+  ],
+  "slots": [
+    "font_path",
+    "font_var_name"
+  ],
+  "code": "import localFont from 'next/font/local';\n\nconst myFont = localFont({ src: '{{font_path}}', variable: '--font-{{font_var_name}}' });\n\nexport default function RootLayout({ children }: { children: React.ReactNode }) {\n  return (\n    <html lang=\"en\" className={myFont.variable}>\n      <body>{children}</body>\n    </html>\n  );\n}",
+  "language": "tsx",
+  "deps": [
+    "next"
+  ],
+  "summary_zh": "用 next/font/local 載入本地字型"
+}

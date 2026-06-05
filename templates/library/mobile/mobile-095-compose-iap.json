@@ -1,0 +1,31 @@
+{
+  "id": "mobile-095-compose-iap",
+  "category": "mobile/compose/iap",
+  "intents_zh": [
+    "Android Billing Kotlin",
+    "Compose 內購",
+    "Play Billing 範例",
+    "Kotlin BillingClient",
+    "Android in app purchase Kotlin",
+    "Compose 訂閱",
+    "Play Store 內購"
+  ],
+  "intents_en": [
+    "android Play Billing kotlin",
+    "compose in app purchase",
+    "Play Billing example",
+    "kotlin BillingClient",
+    "android iap kotlin",
+    "play store iap",
+    "compose subscription"
+  ],
+  "slots": [
+    "product_id"
+  ],
+  "code": "import com.android.billingclient.api.*\nfun startBilling(ctx:android.content.Context,onReady:(BillingClient)->Unit){\n  val client=BillingClient.newBuilder(ctx).enablePendingPurchases().setListener{_,_->}.build()\n  client.startConnection(object:BillingClientStateListener{\n    override fun onBillingServiceDisconnected(){}\n    override fun onBillingSetupFinished(r:BillingResult){if(r.responseCode==BillingClient.BillingResponseCode.OK)onReady(client)}})}\nval PRODUCT=\"{{product_id}}\"",
+  "language": "kt",
+  "deps": [
+    "com.android.billingclient:billing-ktx"
+  ],
+  "summary_zh": "Android Play Billing 連線骨架"
+}

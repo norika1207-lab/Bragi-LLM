@@ -1,0 +1,27 @@
+{
+  "id": "depth-web-backend-054-sse-pubsub-broadcast",
+  "category": "web-backend/sse/broadcast",
+  "intents_zh": [
+    "SSE 多 client 廣播",
+    "EventEmitter 推給所有訂閱",
+    "Node SSE hub",
+    "事件 fan-out",
+    "SSE 訂閱集合"
+  ],
+  "intents_en": [
+    "sse broadcast multi client",
+    "eventemitter push subs",
+    "node sse hub",
+    "fan-out events",
+    "sse subscriber set"
+  ],
+  "slots": [
+    "path"
+  ],
+  "code": "const clients = new Set();\napp.get('{{path}}', (req, res) => {\n  res.set({ 'Content-Type': 'text/event-stream', 'Cache-Control': 'no-cache', Connection: 'keep-alive' });\n  res.flushHeaders();\n  clients.add(res);\n  req.on('close', () => clients.delete(res));\n});\nexport function broadcast(event, data) {\n  const payload = `event: ${event}\\ndata: ${JSON.stringify(data)}\\n\\n`;\n  for (const c of clients) c.write(payload);\n}",
+  "language": "js",
+  "deps": [
+    "express"
+  ],
+  "summary_zh": "SSE 廣播 hub fan-out"
+}

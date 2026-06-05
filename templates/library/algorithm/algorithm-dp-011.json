@@ -1,0 +1,21 @@
+{
+  "id": "algorithm-dp-011",
+  "category": "algorithm/dp/maximum_subarray",
+  "intents_zh": [
+    "最大子陣列和",
+    "Kadane",
+    "給我 kadane"
+  ],
+  "intents_en": [
+    "max subarray sum",
+    "Kadane algorithm",
+    "maximum subarray"
+  ],
+  "slots": [
+    "fn_name"
+  ],
+  "code": "def {{fn_name}}(arr):\n    best = cur = arr[0]\n    for x in arr[1:]:\n        cur = max(x, cur + x)\n        best = max(best, cur)\n    return best",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "Kadane 最大子陣列和"
+}

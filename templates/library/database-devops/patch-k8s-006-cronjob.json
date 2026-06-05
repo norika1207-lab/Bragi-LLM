@@ -1,0 +1,31 @@
+{
+  "id": "patch-k8s-006-cronjob",
+  "category": "database-devops/kubernetes/batch",
+  "intents_zh": [
+    "寫一個 k8s CronJob 排程",
+    "幫我做定時跑的 cronjob",
+    "我要每天備份的 cronjob",
+    "k8s 排程任務 yaml",
+    "排程 batch job 模板"
+  ],
+  "intents_en": [
+    "create k8s cronjob template",
+    "scheduled batch job yaml",
+    "cron job for daily backup",
+    "kubernetes periodic task",
+    "cronjob manifest"
+  ],
+  "slots": [
+    "job_name",
+    "namespace",
+    "schedule",
+    "image",
+    "command_arg"
+  ],
+  "code": "apiVersion: batch/v1\nkind: CronJob\nmetadata:\n  name: {{job_name}}\n  namespace: {{namespace}}\nspec:\n  schedule: \"{{schedule}}\"\n  concurrencyPolicy: Forbid\n  successfulJobsHistoryLimit: 3\n  failedJobsHistoryLimit: 1\n  jobTemplate:\n    spec:\n      backoffLimit: 2\n      template:\n        spec:\n          restartPolicy: OnFailure\n          containers:\n            - name: {{job_name}}\n              image: {{image}}\n              args:\n                - /bin/sh\n                - -c\n                - {{command_arg}}\n",
+  "language": "yaml",
+  "deps": [
+    "kubernetes"
+  ],
+  "summary_zh": "CronJob 排程任務,Forbid 並行、保留近 3 次成功與 1 次失敗紀錄"
+}

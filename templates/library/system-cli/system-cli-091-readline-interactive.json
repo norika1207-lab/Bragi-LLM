@@ -1,0 +1,22 @@
+{
+  "id": "system-cli-091-readline-interactive",
+  "category": "system-cli/python/interactive",
+  "intents_zh": [
+    "python 互動 REPL with history",
+    "readline 歷史",
+    "CLI 輸入歷史"
+  ],
+  "intents_en": [
+    "python readline history",
+    "interactive repl with history",
+    "input history shell"
+  ],
+  "slots": [
+    "prompt_str",
+    "history_file"
+  ],
+  "code": "import readline, atexit, os\n\nHIST = os.path.expanduser('{{history_file}}')\ntry: readline.read_history_file(HIST)\nexcept FileNotFoundError: pass\natexit.register(readline.write_history_file, HIST)\nreadline.set_history_length(1000)\n\nwhile True:\n    try:\n        line = input('{{prompt_str}}> ')\n    except (EOFError, KeyboardInterrupt):\n        print(); break\n    if line.strip() == 'exit': break\n    print('you said:', line)",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "readline REPL + 歷史檔"
+}

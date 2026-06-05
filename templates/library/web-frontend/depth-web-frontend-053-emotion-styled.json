@@ -1,0 +1,28 @@
+{
+  "id": "depth-web-frontend-053-emotion-styled",
+  "category": "web-frontend/css-in-js/emotion",
+  "intents_zh": [
+    "emotion styled",
+    "CSS-in-JS emotion",
+    "主題 ThemeProvider emotion",
+    "css prop",
+    "樣式組件 emotion"
+  ],
+  "intents_en": [
+    "emotion styled component",
+    "css-in-js emotion",
+    "themeprovider emotion",
+    "css prop",
+    "emotion react"
+  ],
+  "slots": [
+    "component_name"
+  ],
+  "code": "/** @jsxImportSource @emotion/react */\nimport styled from '@emotion/styled';\nimport { css } from '@emotion/react';\n\nexport const {{component_name}} = styled.button<{ primary?: boolean }>`\n  padding: 8px 14px; border-radius: 8px; font-weight: 500;\n  ${(p) => p.primary ? css`background:#0EA5E9;color:#fff;` : css`background:#f3f4f6;color:#111;`}\n  &:hover { filter: brightness(0.97); }\n`;",
+  "language": "tsx",
+  "deps": [
+    "@emotion/react",
+    "@emotion/styled"
+  ],
+  "summary_zh": "emotion styled 變體按鈕"
+}

@@ -1,0 +1,26 @@
+{
+  "id": "firmware-072-mpy-pwm",
+  "category": "firmware/micropython/pwm",
+  "intents_zh": [
+    "mpy PWM",
+    "micropython PWM 範例",
+    "ESP32 mpy 控制亮度",
+    "machine.PWM",
+    "mpy 漸變"
+  ],
+  "intents_en": [
+    "MicroPython PWM",
+    "machine.PWM example",
+    "ESP32 mpy fade LED",
+    "pwm duty micropython",
+    "brightness mpy"
+  ],
+  "slots": [
+    "pwm_pin",
+    "freq"
+  ],
+  "code": "from machine import Pin, PWM\nimport time\n\np = PWM(Pin({{pwm_pin}}), freq={{freq}})\nfor d in range(0, 1024, 8):\n    p.duty(d)\n    time.sleep_ms(10)",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "MicroPython PWM 漸變輸出"
+}

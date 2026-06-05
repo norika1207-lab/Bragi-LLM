@@ -1,0 +1,29 @@
+{
+  "id": "llm-tools-105-pii-redact",
+  "category": "llm-tools/safety/pii",
+  "intents_zh": [
+    "PII 去識別化",
+    "遮蔽個資",
+    "redact PII",
+    "用 presidio 去識別",
+    "email phone 遮罩",
+    "pii filter",
+    "遮蔽信用卡號",
+    "個資遮罩"
+  ],
+  "intents_en": [
+    "pii redaction",
+    "mask personal info",
+    "redact pii",
+    "presidio anonymizer",
+    "mask emails and phones",
+    "pii filter",
+    "credit card redact",
+    "anonymize text"
+  ],
+  "slots": [],
+  "code": "import re\n\nPATTERNS = {\n    \"email\": r\"[\\w.+-]+@[\\w-]+\\.[\\w.-]+\",\n    \"phone\": r\"\\b\\+?\\d[\\d -]{7,}\\d\\b\",\n    \"ssn\": r\"\\b\\d{3}-\\d{2}-\\d{4}\\b\",\n    \"cc\": r\"\\b(?:\\d[ -]*?){13,16}\\b\",\n}\n\ndef redact(text: str) -> str:\n    for name, pat in PATTERNS.items():\n        text = re.sub(pat, f\"[{name.upper()}]\", text)\n    return text\n\nif __name__ == \"__main__\":\n    print(redact(\"reach me at a@b.com or 555-123-4567\"))",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "regex 遮蔽 email/phone/SSN/卡號"
+}

@@ -1,0 +1,29 @@
+{
+  "id": "web-frontend-batch4-012-profile-page",
+  "category": "web-frontend/nextjs/app-router/profile",
+  "intents_zh": [
+    "個人檔案頁",
+    "用戶 profile",
+    "展示 user 資訊頁",
+    "頭像加簡介頁",
+    "會員資料頁",
+    "profile card"
+  ],
+  "intents_en": [
+    "profile page",
+    "user profile",
+    "display user info",
+    "avatar bio page",
+    "member profile",
+    "profile card page"
+  ],
+  "slots": [
+    "user_name",
+    "user_bio",
+    "avatar_url"
+  ],
+  "code": "export default function ProfilePage() {\n  return (\n    <main className=\"max-w-xl mx-auto p-8\">\n      <div className=\"flex items-center gap-4\">\n        <img src=\"{{avatar_url}}\" alt=\"avatar\" className=\"w-20 h-20 rounded-full\" />\n        <div>\n          <h1 className=\"text-xl font-bold\">{{user_name}}</h1>\n          <p className=\"text-gray-600\">{{user_bio}}</p>\n        </div>\n      </div>\n    </main>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "個人檔案頁含頭像與簡介"
+}

@@ -1,0 +1,23 @@
+{
+  "id": "algorithm-tree-002",
+  "category": "algorithm/tree/trie",
+  "intents_zh": [
+    "前綴樹",
+    "Trie",
+    "給我 trie",
+    "字典樹"
+  ],
+  "intents_en": [
+    "trie",
+    "prefix tree",
+    "write trie",
+    "trie insert search"
+  ],
+  "slots": [
+    "class_name"
+  ],
+  "code": "class {{class_name}}:\n    def __init__(self):\n        self.root = {}\n    def insert(self, word):\n        node = self.root\n        for ch in word:\n            node = node.setdefault(ch, {})\n        node['$'] = True\n    def search(self, word):\n        node = self.root\n        for ch in word:\n            if ch not in node: return False\n            node = node[ch]\n        return '$' in node\n    def starts_with(self, prefix):\n        node = self.root\n        for ch in prefix:\n            if ch not in node: return False\n            node = node[ch]\n        return True",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "Trie 前綴樹"
+}

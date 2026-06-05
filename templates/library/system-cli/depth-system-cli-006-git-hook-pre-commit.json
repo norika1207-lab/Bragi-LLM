@@ -1,0 +1,27 @@
+{
+  "id": "depth-system-cli-006-git-hook-pre-commit",
+  "category": "system-cli/git-hooks/pre-commit",
+  "intents_zh": [
+    "git pre-commit hook",
+    "commit 前檢查",
+    "阻擋大檔 commit",
+    "pre-commit 跑 lint",
+    "git hook 腳本"
+  ],
+  "intents_en": [
+    "git pre-commit hook",
+    "check before commit",
+    "block large files",
+    "run lint precommit",
+    "git hook script"
+  ],
+  "slots": [
+    "max_kb"
+  ],
+  "code": "#!/usr/bin/env bash\n# .git/hooks/pre-commit\nset -e\n\nMAX_KB={{max_kb}}\nfor f in $(git diff --cached --name-only --diff-filter=AM); do\n  [ -f \"$f\" ] || continue\n  size=$(wc -c < \"$f\")\n  if [ \"$size\" -gt $((MAX_KB * 1024)) ]; then\n    echo \"reject: $f exceeds ${MAX_KB}KB\"; exit 1\n  fi\ndone\n\ncommand -v ruff >/dev/null && ruff check . || true\ncommand -v prettier >/dev/null && prettier --check . || true",
+  "language": "bash",
+  "deps": [
+    "git"
+  ],
+  "summary_zh": "pre-commit hook 擋大檔並跑 lint"
+}

@@ -1,0 +1,29 @@
+{
+  "id": "web-backend-068-django-channels",
+  "category": "web-backend/django/websocket",
+  "intents_zh": [
+    "django channels websocket",
+    "chat consumer",
+    "ws + django",
+    "async consumer 範例",
+    "channels group broadcast"
+  ],
+  "intents_en": [
+    "django channels chat",
+    "ws consumer django",
+    "async consumer channels",
+    "channels group broadcast",
+    "django realtime"
+  ],
+  "slots": [
+    "group_name"
+  ],
+  "code": "from channels.generic.websocket import AsyncJsonWebsocketConsumer\n\nclass ChatConsumer(AsyncJsonWebsocketConsumer):\n    async def connect(self):\n        await self.channel_layer.group_add('{{group_name}}', self.channel_name)\n        await self.accept()\n\n    async def disconnect(self, code):\n        await self.channel_layer.group_discard('{{group_name}}', self.channel_name)\n\n    async def receive_json(self, content, **kw):\n        await self.channel_layer.group_send('{{group_name}}', {\n            'type': 'chat.message', 'message': content\n        })\n\n    async def chat_message(self, event):\n        await self.send_json(event['message'])",
+  "language": "py",
+  "deps": [
+    "django",
+    "channels",
+    "channels-redis"
+  ],
+  "summary_zh": "Django Channels 聊天 consumer"
+}

@@ -1,0 +1,28 @@
+{
+  "id": "depth-web-backend-028-mjml-render",
+  "category": "web-backend/email/mjml",
+  "intents_zh": [
+    "mjml 編譯 email HTML",
+    "響應式 email 範本",
+    "mjml2html",
+    "email 模板輸出",
+    "Node 寄信 HTML"
+  ],
+  "intents_en": [
+    "mjml compile email html",
+    "responsive email template",
+    "mjml2html",
+    "email template render",
+    "node email html"
+  ],
+  "slots": [
+    "title",
+    "body"
+  ],
+  "code": "import mjml2html from 'mjml';\nconst { html } = mjml2html(`\n<mjml><mj-body><mj-section><mj-column>\n  <mj-text font-size=\"20px\">{{title}}</mj-text>\n  <mj-text>{{body}}</mj-text>\n  <mj-button href=\"https://example.com\">Open</mj-button>\n</mj-column></mj-section></mj-body></mjml>`);",
+  "language": "js",
+  "deps": [
+    "mjml"
+  ],
+  "summary_zh": "mjml 編譯成響應式 email HTML"
+}

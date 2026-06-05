@@ -1,0 +1,27 @@
+{
+  "id": "depth-mobile-020-ble-rn",
+  "category": "mobile/bluetooth/reactnative",
+  "intents_zh": [
+    "RN BLE scan",
+    "react-native-ble-plx",
+    "跨平台藍牙掃描",
+    "BleManager startDeviceScan",
+    "BLE 周邊"
+  ],
+  "intents_en": [
+    "RN BLE scan",
+    "react-native-ble-plx",
+    "cross platform BLE",
+    "startDeviceScan",
+    "BLE peripheral"
+  ],
+  "slots": [
+    "service_uuid"
+  ],
+  "code": "import { BleManager } from 'react-native-ble-plx';\nconst manager = new BleManager();\nmanager.startDeviceScan(['{{service_uuid}}'], null, (err, device) => {\n  if (err) { console.warn(err); return; }\n  console.log('found', device?.name, device?.rssi);\n});",
+  "language": "ts",
+  "deps": [
+    "react-native-ble-plx"
+  ],
+  "summary_zh": "RN ble-plx 周邊掃描"
+}

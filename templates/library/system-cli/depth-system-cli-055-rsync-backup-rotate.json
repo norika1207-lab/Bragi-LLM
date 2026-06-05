@@ -1,0 +1,27 @@
+{
+  "id": "depth-system-cli-055-rsync-backup-rotate",
+  "category": "system-cli/backup/rsync",
+  "intents_zh": [
+    "rsync 增量備份輪替",
+    "硬連結快照備份",
+    "time machine 風 rsync",
+    "每日備份保留 N 份"
+  ],
+  "intents_en": [
+    "rsync incremental rotate",
+    "hardlink snapshot backup",
+    "time machine style rsync",
+    "daily backup keep n"
+  ],
+  "slots": [
+    "src_dir",
+    "dst_root",
+    "keep_days"
+  ],
+  "code": "#!/usr/bin/env bash\nset -euo pipefail\n\nSRC=\"{{src_dir}}\"\nROOT=\"{{dst_root}}\"\nDATE=$(date +%Y-%m-%d)\nLATEST=\"$ROOT/latest\"\nTARGET=\"$ROOT/$DATE\"\n\nmkdir -p \"$ROOT\"\n\nrsync -aAX --delete \\\n  --link-dest=\"$LATEST\" \\\n  --exclude='.cache' --exclude='node_modules' \\\n  \"$SRC/\" \"$TARGET/\"\n\nrm -f \"$LATEST\"\nln -s \"$DATE\" \"$LATEST\"\n\nfind \"$ROOT\" -maxdepth 1 -type d -name '20*' -mtime +{{keep_days}} -exec rm -rf {} +",
+  "language": "bash",
+  "deps": [
+    "rsync"
+  ],
+  "summary_zh": "rsync 硬連結增量備份保留 N 天"
+}

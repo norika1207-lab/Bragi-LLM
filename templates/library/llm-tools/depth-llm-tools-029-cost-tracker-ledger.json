@@ -1,0 +1,25 @@
+{
+  "id": "depth-llm-tools-029-cost-tracker-ledger",
+  "category": "llm-tools/cost/ledger",
+  "intents_zh": [
+    "呼叫成本記帳",
+    "累積花費追蹤",
+    "jsonl ledger",
+    "支出明細記錄",
+    "cost 累計器"
+  ],
+  "intents_en": [
+    "per-call cost ledger",
+    "cumulative spend tracking",
+    "jsonl ledger",
+    "spend itemised log",
+    "cost accumulator"
+  ],
+  "slots": [
+    "ledger_path"
+  ],
+  "code": "import json, time, pathlib\n\nclass CostLedger:\n    def __init__(self, p={{ledger_path}}):\n        self.p = pathlib.Path(p)\n    def log(self, model, in_tok, out_tok, usd):\n        rec = {\"ts\": time.time(), \"model\": model, \"in\": in_tok, \"out\": out_tok, \"usd\": usd}\n        with self.p.open(\"a\") as f: f.write(json.dumps(rec) + \"\\n\")\n    def total(self):\n        return sum(json.loads(l)[\"usd\"] for l in self.p.read_text().splitlines())",
+  "language": "python",
+  "deps": [],
+  "summary_zh": "每筆呼叫寫 jsonl ledger，可隨時加總總花費"
+}

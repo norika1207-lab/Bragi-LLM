@@ -1,0 +1,25 @@
+{
+  "id": "system-cli-065-batch-image-resize",
+  "category": "system-cli/batch/image",
+  "intents_zh": [
+    "批次縮圖",
+    "python pillow resize 所有圖",
+    "資料夾批次縮圖"
+  ],
+  "intents_en": [
+    "batch image resize",
+    "resize folder of images",
+    "pillow batch resize"
+  ],
+  "slots": [
+    "src_dir",
+    "dst_dir",
+    "max_w"
+  ],
+  "code": "from PIL import Image\nfrom pathlib import Path\n\nsrc = Path('{{src_dir}}'); dst = Path('{{dst_dir}}'); dst.mkdir(parents=True, exist_ok=True)\nMAX_W = {{max_w}}\n\nfor p in src.iterdir():\n    if p.suffix.lower() not in {'.jpg','.jpeg','.png','.webp'}: continue\n    img = Image.open(p)\n    if img.width > MAX_W:\n        ratio = MAX_W / img.width\n        img = img.resize((MAX_W, int(img.height*ratio)))\n    img.save(dst / p.name, optimize=True, quality=85)\nprint('done')",
+  "language": "py",
+  "deps": [
+    "Pillow"
+  ],
+  "summary_zh": "批次按寬度縮圖"
+}

@@ -1,0 +1,29 @@
+{
+  "id": "depth-firmware-043-modbus-rtu-master",
+  "category": "firmware/bus/modbus",
+  "intents_zh": [
+    "Modbus RTU master",
+    "RS485 讀暫存器",
+    "ModbusMaster lib",
+    "工業感測器讀取",
+    "slave register"
+  ],
+  "intents_en": [
+    "modbus rtu master",
+    "rs485 read holding",
+    "modbusmaster lib",
+    "industrial sensor read",
+    "slave register"
+  ],
+  "slots": [
+    "slave_id",
+    "reg_addr",
+    "de_pin"
+  ],
+  "code": "#include <ModbusMaster.h>\nModbusMaster node;\nvoid pre()  { digitalWrite({{de_pin}}, HIGH); }\nvoid post() { digitalWrite({{de_pin}}, LOW); }\nvoid setup() {\n    pinMode({{de_pin}}, OUTPUT);\n    Serial2.begin(9600);\n    node.begin({{slave_id}}, Serial2);\n    node.preTransmission(pre);\n    node.postTransmission(post);\n}\nvoid loop() {\n    if (node.readHoldingRegisters({{reg_addr}}, 1) == node.ku8MBSuccess) {\n        Serial.println(node.getResponseBuffer(0));\n    }\n    delay(1000);\n}",
+  "language": "cpp",
+  "deps": [
+    "ModbusMaster"
+  ],
+  "summary_zh": "Modbus RTU master 透過 RS485 讀 holding register"
+}

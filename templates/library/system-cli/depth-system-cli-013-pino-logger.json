@@ -1,0 +1,26 @@
+{
+  "id": "depth-system-cli-013-pino-logger",
+  "category": "system-cli/logging/pino",
+  "intents_zh": [
+    "pino Node 結構化 log",
+    "pino transport",
+    "Node JSON log",
+    "pino pretty 開發模式"
+  ],
+  "intents_en": [
+    "pino node structured log",
+    "pino transport",
+    "node json log",
+    "pino pretty dev"
+  ],
+  "slots": [
+    "app_name"
+  ],
+  "code": "const pino = require('pino');\n\nconst logger = pino({\n  name: '{{app_name}}',\n  level: process.env.LOG_LEVEL || 'info',\n  base: { pid: process.pid, host: require('os').hostname() },\n  timestamp: pino.stdTimeFunctions.isoTime,\n  transport: process.env.NODE_ENV !== 'production' ? {\n    target: 'pino-pretty',\n    options: { colorize: true, translateTime: 'HH:MM:ss' }\n  } : undefined\n});\n\nlogger.info({ user: 'alice' }, 'login ok');\nlogger.error({ err: new Error('nope') }, 'failed');\nmodule.exports = logger;",
+  "language": "javascript",
+  "deps": [
+    "pino",
+    "pino-pretty"
+  ],
+  "summary_zh": "pino Node 結構化 logger 開發 pretty 生產 JSON"
+}

@@ -1,0 +1,19 @@
+{
+  "id": "database-devops-053-gha-python-test",
+  "category": "database-devops/cicd/github-actions",
+  "intents_zh": [
+    "GitHub Actions python pytest",
+    "python CI",
+    "matrix python 多版本"
+  ],
+  "intents_en": [
+    "github actions pytest",
+    "python ci",
+    "matrix python versions"
+  ],
+  "slots": [],
+  "code": "name: Python CI\non: [push, pull_request]\n\njobs:\n  test:\n    runs-on: ubuntu-latest\n    strategy:\n      matrix:\n        python: ['3.10', '3.11', '3.12']\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-python@v5\n        with:\n          python-version: ${{ matrix.python }}\n          cache: 'pip'\n      - run: pip install -r requirements.txt -r requirements-dev.txt\n      - run: ruff check .\n      - run: pytest --cov=src --cov-report=xml",
+  "language": "yaml",
+  "deps": [],
+  "summary_zh": "GHA python matrix lint + test"
+}

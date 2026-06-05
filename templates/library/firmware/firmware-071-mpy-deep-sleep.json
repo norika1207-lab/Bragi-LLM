@@ -1,0 +1,25 @@
+{
+  "id": "firmware-071-mpy-deep-sleep",
+  "category": "firmware/micropython/power",
+  "intents_zh": [
+    "mpy deep sleep",
+    "ESP32 micropython 深層睡眠",
+    "mpy 省電",
+    "machine.deepsleep",
+    "mpy 定時喚醒"
+  ],
+  "intents_en": [
+    "MicroPython deep sleep",
+    "ESP32 mpy deep sleep",
+    "machine.deepsleep example",
+    "timer wakeup mpy",
+    "low power micropython"
+  ],
+  "slots": [
+    "sleep_ms"
+  ],
+  "code": "import machine\n\nprint('sleeping')\nmachine.deepsleep({{sleep_ms}})",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "MicroPython 深層睡眠定時喚醒"
+}

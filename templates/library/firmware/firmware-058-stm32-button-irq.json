@@ -1,0 +1,29 @@
+{
+  "id": "firmware-058-stm32-button-irq",
+  "category": "firmware/stm32/input",
+  "intents_zh": [
+    "STM32 EXTI 中斷",
+    "按鈕外部中斷",
+    "HAL_GPIO_EXTI_Callback",
+    "STM32 按鈕",
+    "interrupt STM32"
+  ],
+  "intents_en": [
+    "STM32 EXTI button interrupt",
+    "HAL_GPIO_EXTI_Callback",
+    "external interrupt STM32",
+    "button IRQ HAL",
+    "STM32 GPIO interrupt"
+  ],
+  "slots": [
+    "exti_pin",
+    "led_port",
+    "led_pin"
+  ],
+  "code": "#include \"main.h\"\n\nvoid HAL_GPIO_EXTI_Callback(uint16_t pin) {\n  if (pin == {{exti_pin}}) {\n    HAL_GPIO_TogglePin({{led_port}}, {{led_pin}});\n  }\n}\n\nint main(void) {\n  HAL_Init();\n  SystemClock_Config();\n  MX_GPIO_Init();\n  while (1) { HAL_Delay(1000); }\n}",
+  "language": "c",
+  "deps": [
+    "STM32 HAL"
+  ],
+  "summary_zh": "STM32 EXTI 外部中斷切換 LED"
+}

@@ -1,0 +1,28 @@
+{
+  "id": "web-backend-083-mongoose-model",
+  "category": "web-backend/db/mongo",
+  "intents_zh": [
+    "mongoose model",
+    "mongo schema 範例",
+    "node 接 mongodb",
+    "mongoose connect",
+    "mongo CRUD model"
+  ],
+  "intents_en": [
+    "mongoose model schema",
+    "mongo schema example",
+    "node mongodb",
+    "mongoose connect",
+    "mongo CRUD model"
+  ],
+  "slots": [
+    "model_name",
+    "collection_name"
+  ],
+  "code": "const mongoose = require('mongoose');\n\nconst schema = new mongoose.Schema({\n  name: { type: String, required: true, index: true },\n  email: { type: String, required: true, unique: true },\n  createdAt: { type: Date, default: Date.now }\n}, { collection: '{{collection_name}}' });\n\nmodule.exports = mongoose.model('{{model_name}}', schema);\n\n// connect:\n// mongoose.connect(process.env.MONGO_URL);",
+  "language": "js",
+  "deps": [
+    "mongoose"
+  ],
+  "summary_zh": "Mongoose schema + model"
+}

@@ -1,0 +1,35 @@
+{
+  "id": "llm-tools-106-cache-prompt-disk",
+  "category": "llm-tools/utils/disk-cache",
+  "intents_zh": [
+    "LLM 呼叫快取",
+    "disk cache prompt",
+    "用 diskcache 快取 GPT",
+    "prompt 結果快取",
+    "cache decorator",
+    "回應磁碟快取",
+    "重複 prompt 不重打",
+    "cache wrapper"
+  ],
+  "intents_en": [
+    "llm response cache",
+    "disk cache prompt",
+    "prompt result cache",
+    "cache decorator openai",
+    "memoize llm",
+    "avoid repeat calls",
+    "persistent llm cache",
+    "diskcache wrapper"
+  ],
+  "slots": [
+    "cache_dir",
+    "model_name"
+  ],
+  "code": "from diskcache import Cache\nfrom openai import OpenAI\nimport hashlib, json\n\ncache = Cache(\"{{cache_dir}}\")\nclient = OpenAI()\n\ndef chat(prompt: str) -> str:\n    key = hashlib.sha256(prompt.encode()).hexdigest()\n    if key in cache:\n        return cache[key]\n    r = client.chat.completions.create(\n        model=\"{{model_name}}\",\n        messages=[{\"role\": \"user\", \"content\": prompt}],\n    )\n    text = r.choices[0].message.content\n    cache[key] = text\n    return text",
+  "language": "py",
+  "deps": [
+    "diskcache",
+    "openai"
+  ],
+  "summary_zh": "diskcache 持久化 LLM 回應"
+}

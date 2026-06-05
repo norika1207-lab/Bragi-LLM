@@ -1,0 +1,25 @@
+{
+  "id": "depth-web-backend-043-storage-local",
+  "category": "web-backend/storage/local",
+  "intents_zh": [
+    "本地檔案 storage 實作",
+    "fs 寫入串流",
+    "local adapter",
+    "disk storage class",
+    "檔案系統 storage"
+  ],
+  "intents_en": [
+    "local file storage impl",
+    "fs write stream",
+    "local adapter",
+    "disk storage class",
+    "fs storage"
+  ],
+  "slots": [
+    "root"
+  ],
+  "code": "export class LocalStorage implements Storage {\n  async put(key, body) {\n    const full = path.join('{{root}}', key);\n    await fs.promises.mkdir(path.dirname(full), { recursive: true });\n    if (Buffer.isBuffer(body)) await fs.promises.writeFile(full, body);\n    else await pipeline(body, fs.createWriteStream(full));\n  }\n  async get(key) { return fs.createReadStream(path.join('{{root}}', key)); }\n  async delete(key) { await fs.promises.unlink(path.join('{{root}}', key)); }\n  async url(key) { return `/files/${encodeURIComponent(key)}`; }\n}",
+  "language": "ts",
+  "deps": [],
+  "summary_zh": "Local storage adapter 實作"
+}

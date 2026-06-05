@@ -1,0 +1,19 @@
+{
+  "id": "database-devops-167-compose-loki",
+  "category": "database-devops/docker/compose",
+  "intents_zh": [
+    "compose loki + promtail",
+    "本地 log stack",
+    "grafana loki"
+  ],
+  "intents_en": [
+    "compose loki promtail",
+    "local log stack",
+    "grafana loki"
+  ],
+  "slots": [],
+  "code": "services:\n  loki:\n    image: grafana/loki:latest\n    ports: [\"3100:3100\"]\n    command: -config.file=/etc/loki/local-config.yaml\n\n  promtail:\n    image: grafana/promtail:latest\n    volumes:\n      - /var/log:/var/log:ro\n      - ./promtail-config.yml:/etc/promtail/config.yml\n    command: -config.file=/etc/promtail/config.yml\n    depends_on: [loki]",
+  "language": "yaml",
+  "deps": [],
+  "summary_zh": "compose Loki + Promtail 日誌"
+}

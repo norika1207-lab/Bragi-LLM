@@ -1,0 +1,23 @@
+{
+  "id": "system-cli-118-rsync-over-ssh",
+  "category": "system-cli/backup/rsync",
+  "intents_zh": [
+    "rsync over ssh",
+    "遠端同步",
+    "ssh 跨機器 rsync"
+  ],
+  "intents_en": [
+    "rsync over ssh",
+    "remote folder sync",
+    "rsync ssh transfer"
+  ],
+  "slots": [
+    "src_path",
+    "ssh_alias",
+    "remote_path"
+  ],
+  "code": "#!/usr/bin/env bash\nset -euo pipefail\nrsync -avhz --info=progress2 --partial \\\n  -e 'ssh -o StrictHostKeyChecking=accept-new' \\\n  \"{{src_path}}/\" \"{{ssh_alias}}:{{remote_path}}/\"",
+  "language": "sh",
+  "deps": [],
+  "summary_zh": "rsync 透過 ssh 遠端同步"
+}

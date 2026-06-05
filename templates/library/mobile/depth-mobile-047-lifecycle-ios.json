@@ -1,0 +1,23 @@
+{
+  "id": "depth-mobile-047-lifecycle-ios",
+  "category": "mobile/lifecycle/ios",
+  "intents_zh": [
+    "iOS App lifecycle",
+    "SceneDelegate willEnterForeground",
+    "didEnterBackground",
+    "applicationWillResignActive",
+    "app 生命週期"
+  ],
+  "intents_en": [
+    "iOS app lifecycle",
+    "SceneDelegate willEnterForeground",
+    "didEnterBackground",
+    "willResignActive",
+    "app states"
+  ],
+  "slots": [],
+  "code": "// In SceneDelegate\nfunc sceneDidBecomeActive(_ scene: UIScene) { print(\"active\") }\nfunc sceneWillResignActive(_ scene: UIScene) { print(\"inactive\") }\nfunc sceneDidEnterBackground(_ scene: UIScene) { print(\"background\") }\nfunc sceneWillEnterForeground(_ scene: UIScene) { print(\"foreground\") }",
+  "language": "swift",
+  "deps": [],
+  "summary_zh": "iOS Scene 生命週期 hooks"
+}

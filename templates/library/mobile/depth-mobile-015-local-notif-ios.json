@@ -1,0 +1,28 @@
+{
+  "id": "depth-mobile-015-local-notif-ios",
+  "category": "mobile/notifications/local-ios",
+  "intents_zh": [
+    "iOS 本地通知排程",
+    "UNCalendarNotificationTrigger",
+    "UNUserNotificationCenter add",
+    "定時提醒",
+    "local notification"
+  ],
+  "intents_en": [
+    "iOS local notification schedule",
+    "UNCalendarNotificationTrigger",
+    "UNUserNotificationCenter add",
+    "timed reminder",
+    "local notification"
+  ],
+  "slots": [
+    "title",
+    "body",
+    "hour",
+    "minute"
+  ],
+  "code": "let content = UNMutableNotificationContent()\ncontent.title = \"{{title}}\"; content.body = \"{{body}}\"; content.sound = .default\nvar date = DateComponents(); date.hour = {{hour}}; date.minute = {{minute}}\nlet trigger = UNCalendarNotificationTrigger(dateMatching: date, repeats: true)\nlet req = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)\nUNUserNotificationCenter.current().add(req)",
+  "language": "swift",
+  "deps": [],
+  "summary_zh": "iOS 排定每日本地通知"
+}

@@ -1,0 +1,27 @@
+{
+  "id": "web-frontend-batch2-037-loading-skeleton",
+  "category": "web-frontend/react/layout/skeleton",
+  "intents_zh": [
+    "骨架載入",
+    "skeleton loader",
+    "placeholder 載入",
+    "卡片骨架",
+    "loading 占位",
+    "shimmer 載入"
+  ],
+  "intents_en": [
+    "skeleton loader",
+    "loading placeholder",
+    "shimmer loading",
+    "card skeleton",
+    "content placeholder",
+    "skeleton screen"
+  ],
+  "slots": [
+    "lines"
+  ],
+  "code": "export function Skeleton() {\n  const lines = {{lines}};\n  return (\n    <div className=\"space-y-3 animate-pulse\">\n      <div className=\"h-12 w-12 rounded-full bg-gray-200\" />\n      {Array.from({ length: lines }).map((_, i) => (\n        <div key={i} className=\"h-4 bg-gray-200 rounded\" style={{ width: `${60 + Math.random() * 40}%` }} />\n      ))}\n    </div>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "通用內容載入 skeleton"
+}

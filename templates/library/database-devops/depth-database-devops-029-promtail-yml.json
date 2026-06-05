@@ -1,0 +1,23 @@
+{
+  "id": "depth-database-devops-029-promtail-yml",
+  "category": "database-devops/observability/loki",
+  "intents_zh": [
+    "promtail 設定",
+    "推 log 到 loki",
+    "tail journal"
+  ],
+  "intents_en": [
+    "promtail config",
+    "push logs to loki",
+    "tail journal"
+  ],
+  "slots": [
+    "loki_url"
+  ],
+  "code": "server:\n  http_listen_port: 9080\n\npositions:\n  filename: /tmp/positions.yaml\n\nclients:\n  - url: {{loki_url}}/loki/api/v1/push\n\nscrape_configs:\n  - job_name: varlogs\n    static_configs:\n      - targets: [localhost]\n        labels:\n          job: varlogs\n          host: ${HOSTNAME}\n          __path__: /var/log/*.log",
+  "language": "yaml",
+  "deps": [
+    "promtail"
+  ],
+  "summary_zh": "promtail 把 /var/log 推到 loki"
+}

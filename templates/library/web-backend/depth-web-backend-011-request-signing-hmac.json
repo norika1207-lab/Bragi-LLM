@@ -1,0 +1,27 @@
+{
+  "id": "depth-web-backend-011-request-signing-hmac",
+  "category": "web-backend/security/signing",
+  "intents_zh": [
+    "HMAC 簽 API 請求",
+    "client 簽名 header",
+    "verify signature middleware",
+    "防重放 nonce",
+    "API 請求簽章"
+  ],
+  "intents_en": [
+    "hmac sign api request",
+    "client signed header",
+    "verify signature middleware",
+    "replay protection nonce",
+    "api signing"
+  ],
+  "slots": [
+    "secret"
+  ],
+  "code": "function verify(req, res, next) {\n  const ts = req.header('x-timestamp');\n  const sig = req.header('x-signature');\n  if (Math.abs(Date.now()/1000 - Number(ts)) > 300) return res.status(401).send('expired');\n  const payload = `${ts}.${req.method}.${req.path}.${JSON.stringify(req.body)}`;\n  const expected = crypto.createHmac('sha256', '{{secret}}').update(payload).digest('hex');\n  if (!crypto.timingSafeEqual(Buffer.from(expected), Buffer.from(sig))) return res.status(401).send('bad sig');\n  next();\n}",
+  "language": "js",
+  "deps": [
+    "express"
+  ],
+  "summary_zh": "HMAC + timestamp 防重放簽章驗證"
+}

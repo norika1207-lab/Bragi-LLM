@@ -1,0 +1,28 @@
+{
+  "id": "web-backend-138-express-bull-cron",
+  "category": "web-backend/express/queue",
+  "intents_zh": [
+    "bullmq repeat job",
+    "bull cron task",
+    "定時 queue job",
+    "週期任務 bullmq",
+    "bull schedule"
+  ],
+  "intents_en": [
+    "bullmq repeat job",
+    "bull cron task",
+    "scheduled queue job",
+    "periodic task bullmq",
+    "bull schedule"
+  ],
+  "slots": [
+    "queue_name",
+    "cron_expr"
+  ],
+  "code": "const { Queue } = require('bullmq');\nconst connection = { host: '127.0.0.1', port: 6379 };\n\nconst queue = new Queue('{{queue_name}}', { connection });\n\nasync function setup() {\n  await queue.add('periodic', { ts: Date.now() }, {\n    repeat: { pattern: '{{cron_expr}}' },\n    removeOnComplete: 100,\n    removeOnFail: 50\n  });\n}\n\nsetup().catch(console.error);",
+  "language": "js",
+  "deps": [
+    "bullmq"
+  ],
+  "summary_zh": "BullMQ 週期任務排程"
+}

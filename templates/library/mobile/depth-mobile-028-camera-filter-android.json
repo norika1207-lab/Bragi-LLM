@@ -1,0 +1,26 @@
+{
+  "id": "depth-mobile-028-camera-filter-android",
+  "category": "mobile/camera/filter-android",
+  "intents_zh": [
+    "CameraX ImageAnalysis",
+    "Android 即時濾鏡",
+    "RenderScript blur",
+    "Bitmap 處理 frame",
+    "camera overlay"
+  ],
+  "intents_en": [
+    "CameraX ImageAnalysis",
+    "Android live filter",
+    "RenderScript blur",
+    "Bitmap frame",
+    "camera overlay"
+  ],
+  "slots": [],
+  "code": "val analysis = ImageAnalysis.Builder().setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST).build()\nanalysis.setAnalyzer(ContextCompat.getMainExecutor(this)) { proxy ->\n    val bmp = proxy.toBitmap()\n    val gray = Bitmap.createBitmap(bmp.width, bmp.height, bmp.config)\n    Canvas(gray).drawBitmap(bmp, 0f, 0f, Paint().apply {\n        colorFilter = ColorMatrixColorFilter(ColorMatrix().apply { setSaturation(0f) })\n    })\n    overlayView.setImageBitmap(gray)\n    proxy.close()\n}",
+  "language": "kotlin",
+  "deps": [
+    "androidx.camera:camera-core",
+    "androidx.camera:camera-lifecycle"
+  ],
+  "summary_zh": "CameraX 即時灰階濾鏡"
+}

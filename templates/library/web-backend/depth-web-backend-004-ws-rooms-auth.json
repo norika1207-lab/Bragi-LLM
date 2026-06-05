@@ -1,0 +1,28 @@
+{
+  "id": "depth-web-backend-004-ws-rooms-auth",
+  "category": "web-backend/websocket/rooms",
+  "intents_zh": [
+    "socket.io 房間驗證",
+    "WebSocket 帶 JWT 加入房間",
+    "ws 房間權限",
+    "socket.io 中介層 auth",
+    "房間訂閱檢查"
+  ],
+  "intents_en": [
+    "socket.io room auth",
+    "websocket join room jwt",
+    "ws room permission",
+    "socket.io middleware auth",
+    "room subscription check"
+  ],
+  "slots": [
+    "secret"
+  ],
+  "code": "io.use((socket, next) => {\n  try {\n    socket.user = jwt.verify(socket.handshake.auth.token, '{{secret}}');\n    next();\n  } catch { next(new Error('unauthorized')); }\n});\nio.on('connection', (socket) => {\n  socket.on('join', async (room) => {\n    if (!await canJoin(socket.user.id, room)) return socket.emit('error', 'forbidden');\n    socket.join(room);\n    io.to(room).emit('joined', { user: socket.user.id });\n  });\n});",
+  "language": "js",
+  "deps": [
+    "socket.io",
+    "jsonwebtoken"
+  ],
+  "summary_zh": "socket.io JWT 驗證 + 房間權限"
+}

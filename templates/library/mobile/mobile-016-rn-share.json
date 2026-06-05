@@ -1,0 +1,32 @@
+{
+  "id": "mobile-016-rn-share",
+  "category": "mobile/rn/share",
+  "intents_zh": [
+    "RN 分享 sheet",
+    "React Native Share",
+    "RN 叫出分享",
+    "分享文字 RN",
+    "share API RN",
+    "RN 系統分享",
+    "Share.share 範例"
+  ],
+  "intents_en": [
+    "RN share sheet",
+    "react native share",
+    "open share dialog rn",
+    "share text rn",
+    "native share rn",
+    "share api rn",
+    "share content rn"
+  ],
+  "slots": [
+    "message",
+    "url"
+  ],
+  "code": "import {Share} from 'react-native';\nexport async function shareIt(){\n  try{await Share.share({message:'{{message}}',url:'{{url}}'});}catch(e){console.warn(e);}}",
+  "language": "ts",
+  "deps": [
+    "react-native"
+  ],
+  "summary_zh": "RN 系統分享 sheet 拋文字與 URL"
+}

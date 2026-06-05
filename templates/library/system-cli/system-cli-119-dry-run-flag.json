@@ -1,0 +1,21 @@
+{
+  "id": "system-cli-119-dry-run-flag",
+  "category": "system-cli/python/argparse",
+  "intents_zh": [
+    "python script 加 dry-run",
+    "只列要做的事不真做",
+    "dry run pattern"
+  ],
+  "intents_en": [
+    "python dry run flag",
+    "preview without action",
+    "dry-run pattern"
+  ],
+  "slots": [
+    "op_name"
+  ],
+  "code": "import argparse\nfrom pathlib import Path\n\nap = argparse.ArgumentParser()\nap.add_argument('paths', nargs='+')\nap.add_argument('--dry-run', action='store_true')\nargs = ap.parse_args()\n\nfor p in args.paths:\n    path = Path(p)\n    if args.dry_run:\n        print(f'[dry] {{op_name}} {path}')\n    else:\n        print(f'{{op_name}} {path}')\n        path.unlink(missing_ok=True)",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "dry-run 模式範本"
+}

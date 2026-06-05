@@ -1,0 +1,27 @@
+{
+  "id": "web-frontend-batch1-009-text-input",
+  "category": "web-frontend/react/inputs/text",
+  "intents_zh": [
+    "文字輸入元件",
+    "React text input",
+    "帶 label 的 input",
+    "可重用 input 元件",
+    "input with label",
+    "給我 Input"
+  ],
+  "intents_en": [
+    "text input component",
+    "react input with label",
+    "reusable text input",
+    "labeled input",
+    "form input component",
+    "controlled text input"
+  ],
+  "slots": [
+    "component_name"
+  ],
+  "code": "type Props = {\n  label: string;\n  value: string;\n  onChange: (v: string) => void;\n  placeholder?: string;\n  error?: string;\n};\n\nexport default function {{component_name}}({ label, value, onChange, placeholder, error }: Props) {\n  return (\n    <label className=\"block\">\n      <span className=\"text-sm text-gray-700\">{label}</span>\n      <input\n        value={value}\n        onChange={(e) => onChange(e.target.value)}\n        placeholder={placeholder}\n        className={`mt-1 w-full px-3 py-2 border rounded ${error ? 'border-red-500' : 'border-gray-300'}`}\n      />\n      {error && <span className=\"text-sm text-red-500\">{error}</span>}\n    </label>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "帶 label 和 error 的 text input 元件"
+}

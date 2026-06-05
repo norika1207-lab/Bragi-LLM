@@ -1,0 +1,25 @@
+{
+  "id": "algorithm-graph-003",
+  "category": "algorithm/graph/topo",
+  "intents_zh": [
+    "拓撲排序",
+    "topological sort",
+    "Kahn 演算法",
+    "DAG 排序",
+    "給我 topo sort"
+  ],
+  "intents_en": [
+    "topological sort",
+    "topo sort",
+    "Kahn algorithm",
+    "DAG ordering",
+    "toposort"
+  ],
+  "slots": [
+    "fn_name"
+  ],
+  "code": "from collections import deque\n\ndef {{fn_name}}(graph):\n    indeg = {u: 0 for u in graph}\n    for u in graph:\n        for v in graph[u]:\n            indeg[v] = indeg.get(v, 0) + 1\n    q = deque([u for u, d in indeg.items() if d == 0])\n    out = []\n    while q:\n        u = q.popleft()\n        out.append(u)\n        for v in graph.get(u, []):\n            indeg[v] -= 1\n            if indeg[v] == 0:\n                q.append(v)\n    return out if len(out) == len(indeg) else None",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "Kahn 拓撲排序，環則回 None"
+}

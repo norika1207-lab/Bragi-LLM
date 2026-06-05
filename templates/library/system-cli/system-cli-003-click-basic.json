@@ -1,0 +1,28 @@
+{
+  "id": "system-cli-003-click-basic",
+  "category": "system-cli/python/click",
+  "intents_zh": [
+    "用 click 寫 CLI",
+    "click 基本範本",
+    "click 接參數",
+    "python click 入門骨架",
+    "click 命令列"
+  ],
+  "intents_en": [
+    "click CLI template",
+    "basic click command",
+    "python click skeleton",
+    "click with options",
+    "start a click app"
+  ],
+  "slots": [
+    "cmd_name",
+    "arg_name"
+  ],
+  "code": "import click\n\n@click.command()\n@click.option('--{{arg_name}}', required=True, help='target {{arg_name}}')\n@click.option('--count', default=1, type=int)\n@click.option('--dry-run', is_flag=True)\ndef {{cmd_name}}({{arg_name}}, count, dry_run):\n    \"\"\"Run {{cmd_name}} on {{arg_name}}.\"\"\"\n    for i in range(count):\n        if dry_run:\n            click.echo(f'[dry] {i}: {{{arg_name}}}')\n        else:\n            click.echo(f'{i}: {{{arg_name}}}')\n\nif __name__ == '__main__':\n    {{cmd_name}}()",
+  "language": "py",
+  "deps": [
+    "click"
+  ],
+  "summary_zh": "click 單命令含 option/flag"
+}

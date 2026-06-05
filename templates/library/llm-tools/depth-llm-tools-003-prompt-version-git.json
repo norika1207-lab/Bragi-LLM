@@ -1,0 +1,27 @@
+{
+  "id": "depth-llm-tools-003-prompt-version-git",
+  "category": "llm-tools/prompt-mgmt/versioning",
+  "intents_zh": [
+    "用 git 管 prompt 版本",
+    "prompt 寫進 repo",
+    "commit prompt 變更",
+    "追蹤 prompt 歷史",
+    "prompt 版本化"
+  ],
+  "intents_en": [
+    "version prompts with git",
+    "store prompts in repo",
+    "commit prompt changes",
+    "track prompt history",
+    "prompt versioning"
+  ],
+  "slots": [
+    "prompt_dir",
+    "prompt_name",
+    "content"
+  ],
+  "code": "import subprocess, pathlib, hashlib\n\ndef save_prompt({{prompt_dir}}, {{prompt_name}}, {{content}}):\n    p = pathlib.Path({{prompt_dir}}) / f\"{{{prompt_name}}}.md\"\n    p.parent.mkdir(parents=True, exist_ok=True)\n    p.write_text({{content}})\n    h = hashlib.sha256({{content}}.encode()).hexdigest()[:8]\n    subprocess.run([\"git\", \"-C\", {{prompt_dir}}, \"add\", p.name], check=True)\n    subprocess.run([\"git\", \"-C\", {{prompt_dir}}, \"commit\", \"-m\", f\"prompt({{{prompt_name}}}): {h}\"], check=True)\n    return h",
+  "language": "python",
+  "deps": [],
+  "summary_zh": "把 prompt 寫到 repo，hash 入 commit message 做版本標記"
+}

@@ -1,0 +1,29 @@
+{
+  "id": "mobile-050-flutter-dismiss",
+  "category": "mobile/flutter/list",
+  "intents_zh": [
+    "Flutter Dismissible",
+    "flutter 滑動刪除",
+    "flutter list swipe delete",
+    "flutter 左滑刪除",
+    "swipe to dismiss flutter",
+    "flutter 拖掉一列",
+    "dismiss item flutter"
+  ],
+  "intents_en": [
+    "flutter Dismissible",
+    "flutter swipe to delete",
+    "swipe dismiss list flutter",
+    "flutter list remove on swipe",
+    "dismiss list item flutter",
+    "swipe action flutter",
+    "flutter delete on swipe"
+  ],
+  "slots": [],
+  "code": "import 'package:flutter/material.dart';\nclass L extends StatefulWidget{const L({super.key});@override State<L> createState()=>_L();}\nclass _L extends State<L>{final items=List.generate(10,(i)=>'Item $i');\n  @override Widget build(BuildContext c)=>ListView.builder(itemCount:items.length,itemBuilder:(_,i)=>Dismissible(key:ValueKey(items[i]),background:Container(color:Colors.red),onDismissed:(_)=>setState(()=>items.removeAt(i)),child:ListTile(title:Text(items[i]))));}",
+  "language": "dart",
+  "deps": [
+    "flutter"
+  ],
+  "summary_zh": "Flutter Dismissible 滑動刪除清單"
+}

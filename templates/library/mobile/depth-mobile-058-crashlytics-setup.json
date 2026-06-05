@@ -1,0 +1,28 @@
+{
+  "id": "depth-mobile-058-crashlytics-setup",
+  "category": "mobile/observability/crashlytics",
+  "intents_zh": [
+    "Firebase Crashlytics 初始化",
+    "RN crashlytics",
+    "記錄錯誤 recordError",
+    "setUserId",
+    "crash log"
+  ],
+  "intents_en": [
+    "Firebase Crashlytics setup",
+    "RN crashlytics",
+    "recordError",
+    "setUserId",
+    "crash log"
+  ],
+  "slots": [
+    "user_id"
+  ],
+  "code": "import crashlytics from '@react-native-firebase/crashlytics';\nawait crashlytics().setUserId('{{user_id}}');\nawait crashlytics().log('App started');\ntry {\n  // risky op\n} catch (e: any) {\n  crashlytics().recordError(e);\n}",
+  "language": "ts",
+  "deps": [
+    "@react-native-firebase/app",
+    "@react-native-firebase/crashlytics"
+  ],
+  "summary_zh": "RN Crashlytics 初始化與記錄"
+}

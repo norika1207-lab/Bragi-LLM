@@ -1,0 +1,23 @@
+{
+  "id": "depth-system-cli-022-json-beautify-paths",
+  "category": "system-cli/json/formatter",
+  "intents_zh": [
+    "JSON 美化含路徑",
+    "JSON 每個 key 顯示 jsonpath",
+    "JSON pretty + path 註解",
+    "JSON 結構掃描"
+  ],
+  "intents_en": [
+    "json beautify with paths",
+    "jsonpath per key",
+    "pretty json annotated",
+    "json structure scan"
+  ],
+  "slots": [
+    "input_file"
+  ],
+  "code": "import json, sys\n\ndef walk(obj, path=\"$\"):\n    if isinstance(obj, dict):\n        for k, v in obj.items():\n            p = f\"{path}.{k}\"\n            if isinstance(v, (dict, list)): yield p, type(v).__name__; yield from walk(v, p)\n            else: yield p, repr(v)\n    elif isinstance(obj, list):\n        for i, v in enumerate(obj):\n            p = f\"{path}[{i}]\"\n            if isinstance(v, (dict, list)): yield p, type(v).__name__; yield from walk(v, p)\n            else: yield p, repr(v)\n\ndata = json.load(open(\"{{input_file}}\"))\nprint(json.dumps(data, indent=2, ensure_ascii=False))\nprint(\"\\n--- paths ---\")\nfor p, v in walk(data): print(f\"{p:50s} {v}\")",
+  "language": "python",
+  "deps": [],
+  "summary_zh": "JSON 美化並列出每個值的 jsonpath"
+}

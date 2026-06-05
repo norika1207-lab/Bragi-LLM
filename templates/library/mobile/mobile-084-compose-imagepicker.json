@@ -1,0 +1,30 @@
+{
+  "id": "mobile-084-compose-imagepicker",
+  "category": "mobile/compose/media",
+  "intents_zh": [
+    "Compose 選圖",
+    "Compose PhotoPicker",
+    "Compose 開相簿",
+    "Android 選照片 Compose",
+    "Compose image picker",
+    "Compose photo 選取",
+    "Compose rememberLauncher 圖片"
+  ],
+  "intents_en": [
+    "compose photo picker",
+    "compose image picker",
+    "android compose pick image",
+    "compose gallery picker",
+    "rememberLauncher image compose",
+    "photo picker compose",
+    "compose select image"
+  ],
+  "slots": [],
+  "code": "import android.net.Uri\nimport androidx.activity.compose.rememberLauncherForActivityResult\nimport androidx.activity.result.contract.ActivityResultContracts\nimport androidx.compose.foundation.layout.Column\nimport androidx.compose.material3.Button\nimport androidx.compose.material3.Text\nimport androidx.compose.runtime.*\nimport coil.compose.AsyncImage\n@Composable\nfun Pick(){\n  var uri by remember{mutableStateOf<Uri?>(null)}\n  val launch=rememberLauncherForActivityResult(ActivityResultContracts.PickVisualMedia()){uri=it}\n  Column{Button(onClick={launch.launch(androidx.activity.result.PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))}){Text(\"Pick\")}\n    uri?.let{AsyncImage(model=it,contentDescription=null)}}}",
+  "language": "kt",
+  "deps": [
+    "androidx.activity:activity-compose",
+    "io.coil-kt:coil-compose"
+  ],
+  "summary_zh": "Compose PickVisualMedia 選圖預覽"
+}

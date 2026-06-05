@@ -1,0 +1,22 @@
+{
+  "id": "database-devops-141-sql-row-level-security",
+  "category": "database-devops/sql/postgres",
+  "intents_zh": [
+    "postgres RLS",
+    "row level security",
+    "多租戶資料隔離"
+  ],
+  "intents_en": [
+    "postgres rls",
+    "row level security",
+    "multi-tenant isolation"
+  ],
+  "slots": [
+    "table",
+    "tenant_col"
+  ],
+  "code": "ALTER TABLE {{table}} ENABLE ROW LEVEL SECURITY;\n\nCREATE POLICY tenant_isolation ON {{table}}\n  USING ({{tenant_col}} = current_setting('app.tenant_id')::int);\n\n-- caller sets:\n-- SET app.tenant_id = '42';",
+  "language": "sql",
+  "deps": [],
+  "summary_zh": "Postgres RLS 多租戶隔離"
+}

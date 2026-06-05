@@ -1,0 +1,19 @@
+{
+  "id": "database-devops-045-dockerignore",
+  "category": "database-devops/docker/dockerfile",
+  "intents_zh": [
+    ".dockerignore 範本",
+    "docker ignore 列表",
+    "減少 build context"
+  ],
+  "intents_en": [
+    "dockerignore template",
+    "docker ignore list",
+    "reduce build context"
+  ],
+  "slots": [],
+  "code": "node_modules\nnpm-debug.log\n.git\n.gitignore\n.env\n.env.local\ndist\nbuild\ncoverage\n.vscode\n.idea\n*.md\n!README.md\nDockerfile\n.dockerignore\n.DS_Store",
+  "language": "text",
+  "deps": [],
+  "summary_zh": ".dockerignore 通用範本"
+}

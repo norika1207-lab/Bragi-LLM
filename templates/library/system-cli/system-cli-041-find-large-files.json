@@ -1,0 +1,22 @@
+{
+  "id": "system-cli-041-find-large-files",
+  "category": "system-cli/file/find",
+  "intents_zh": [
+    "找大檔案",
+    "硬碟空間爆掉找元兇",
+    "top N 大檔"
+  ],
+  "intents_en": [
+    "find largest files",
+    "disk usage hunt",
+    "top N big files"
+  ],
+  "slots": [
+    "scan_dir",
+    "top_n"
+  ],
+  "code": "#!/usr/bin/env bash\nset -euo pipefail\nfind \"{{scan_dir}}\" -type f -printf '%s %p\\n' 2>/dev/null | \\\n  sort -nr | head -n {{top_n}} | \\\n  awk '{printf \"%8.1f MB  %s\\n\", $1/1024/1024, substr($0, index($0,$2))}'",
+  "language": "sh",
+  "deps": [],
+  "summary_zh": "找最大 N 個檔"
+}

@@ -1,0 +1,24 @@
+{
+  "id": "database-devops-020-sql-transaction",
+  "category": "database-devops/sql/transaction",
+  "intents_zh": [
+    "SQL transaction",
+    "BEGIN COMMIT 範本",
+    "原子操作",
+    "交易回滾"
+  ],
+  "intents_en": [
+    "sql transaction",
+    "begin commit rollback",
+    "atomic operation",
+    "transactional block"
+  ],
+  "slots": [
+    "statement1",
+    "statement2"
+  ],
+  "code": "BEGIN;\n\n{{statement1}};\n{{statement2}};\n\n-- ROLLBACK; -- uncomment to abort\nCOMMIT;",
+  "language": "sql",
+  "deps": [],
+  "summary_zh": "SQL 交易 BEGIN/COMMIT 結構"
+}

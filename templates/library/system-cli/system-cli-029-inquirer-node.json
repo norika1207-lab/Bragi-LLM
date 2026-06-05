@@ -1,0 +1,23 @@
+{
+  "id": "system-cli-029-inquirer-node",
+  "category": "system-cli/node/interactive",
+  "intents_zh": [
+    "node 互動 prompt",
+    "inquirer 問使用者",
+    "js CLI 選單"
+  ],
+  "intents_en": [
+    "inquirer prompts node",
+    "js interactive CLI",
+    "node user prompt"
+  ],
+  "slots": [
+    "question_msg"
+  ],
+  "code": "const inquirer = require('inquirer');\n\n(async () => {\n  const answers = await inquirer.prompt([\n    { type: 'list', name: 'env', message: '{{question_msg}}', choices: ['dev','staging','prod'] },\n    { type: 'confirm', name: 'go', message: 'proceed?', default: false }\n  ]);\n  if (!answers.go) process.exit(0);\n  console.log('deploying', answers.env);\n})();",
+  "language": "js",
+  "deps": [
+    "inquirer"
+  ],
+  "summary_zh": "inquirer 互動 prompt"
+}

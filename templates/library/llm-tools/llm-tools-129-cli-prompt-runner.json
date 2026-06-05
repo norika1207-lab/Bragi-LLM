@@ -1,0 +1,33 @@
+{
+  "id": "llm-tools-129-cli-prompt-runner",
+  "category": "llm-tools/cli/prompt-runner",
+  "intents_zh": [
+    "CLI prompt runner",
+    "argparse + LLM",
+    "命令列跑 prompt",
+    "ad-hoc prompt cli",
+    "script 化 prompt",
+    "cli 試 LLM",
+    "quick cli",
+    "prompt one-liner"
+  ],
+  "intents_en": [
+    "cli prompt runner",
+    "argparse plus llm",
+    "run prompt from cli",
+    "ad-hoc prompt cli",
+    "quick llm cli",
+    "script-able prompt",
+    "one-liner prompt cli",
+    "minimal cli runner"
+  ],
+  "slots": [
+    "model_name"
+  ],
+  "code": "import argparse\nfrom openai import OpenAI\n\nclient = OpenAI()\n\ndef main():\n    p = argparse.ArgumentParser()\n    p.add_argument(\"prompt\", nargs=\"+\")\n    p.add_argument(\"--system\", default=\"\")\n    p.add_argument(\"--model\", default=\"{{model_name}}\")\n    args = p.parse_args()\n    msgs = []\n    if args.system:\n        msgs.append({\"role\": \"system\", \"content\": args.system})\n    msgs.append({\"role\": \"user\", \"content\": \" \".join(args.prompt)})\n    r = client.chat.completions.create(model=args.model, messages=msgs)\n    print(r.choices[0].message.content)\n\nif __name__ == \"__main__\":\n    main()",
+  "language": "py",
+  "deps": [
+    "openai"
+  ],
+  "summary_zh": "argparse + OpenAI CLI prompt 工具"
+}

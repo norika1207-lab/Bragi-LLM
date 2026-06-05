@@ -1,0 +1,28 @@
+{
+  "id": "depth-mobile-054-biometric-android",
+  "category": "mobile/biometric/android",
+  "intents_zh": [
+    "Android BiometricPrompt",
+    "androidx.biometric",
+    "authenticate callback",
+    "指紋臉部",
+    "PromptInfo"
+  ],
+  "intents_en": [
+    "Android BiometricPrompt",
+    "androidx.biometric",
+    "authenticate callback",
+    "fingerprint face",
+    "PromptInfo"
+  ],
+  "slots": [
+    "title",
+    "subtitle"
+  ],
+  "code": "val prompt = BiometricPrompt(this, ContextCompat.getMainExecutor(this),\n    object : BiometricPrompt.AuthenticationCallback() {\n        override fun onAuthenticationSucceeded(r: BiometricPrompt.AuthenticationResult) { /* ok */ }\n        override fun onAuthenticationError(code: Int, msg: CharSequence) { /* fail */ }\n    })\nval info = BiometricPrompt.PromptInfo.Builder()\n    .setTitle(\"{{title}}\").setSubtitle(\"{{subtitle}}\")\n    .setNegativeButtonText(\"Cancel\").build()\nprompt.authenticate(info)",
+  "language": "kotlin",
+  "deps": [
+    "androidx.biometric:biometric"
+  ],
+  "summary_zh": "Android BiometricPrompt 驗證"
+}

@@ -1,0 +1,31 @@
+{
+  "id": "web-frontend-batch1-005-form-validation-zod",
+  "category": "web-frontend/react/forms/with-validation",
+  "intents_zh": [
+    "React 表單 zod 驗證",
+    "react-hook-form + zod",
+    "form validation 範本",
+    "schema 驗證表單",
+    "給我帶驗證的表單",
+    "表單錯誤訊息顯示"
+  ],
+  "intents_en": [
+    "react hook form zod",
+    "form with validation",
+    "schema validation form",
+    "react form errors",
+    "zod validated form",
+    "form validation example"
+  ],
+  "slots": [
+    "component_name"
+  ],
+  "code": "import { useForm } from 'react-hook-form';\nimport { zodResolver } from '@hookform/resolvers/zod';\nimport { z } from 'zod';\n\nconst schema = z.object({\n  email: z.string().email(),\n  age: z.coerce.number().min(18),\n});\ntype FormData = z.infer<typeof schema>;\n\nexport default function {{component_name}}() {\n  const { register, handleSubmit, formState: { errors } } = useForm<FormData>({\n    resolver: zodResolver(schema),\n  });\n\n  return (\n    <form onSubmit={handleSubmit((d) => console.log(d))}>\n      <input {...register('email')} />\n      {errors.email && <span>{errors.email.message}</span>}\n      <input type=\"number\" {...register('age')} />\n      {errors.age && <span>{errors.age.message}</span>}\n      <button type=\"submit\">Submit</button>\n    </form>\n  );\n}",
+  "language": "tsx",
+  "deps": [
+    "react-hook-form",
+    "@hookform/resolvers",
+    "zod"
+  ],
+  "summary_zh": "react-hook-form + zod schema 驗證表單"
+}

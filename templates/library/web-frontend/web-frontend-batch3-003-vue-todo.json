@@ -1,0 +1,29 @@
+{
+  "id": "web-frontend-batch3-003-vue-todo",
+  "category": "web-frontend/vue/apps/todo",
+  "intents_zh": [
+    "Vue todo list",
+    "Vue 待辦清單",
+    "Vue 任務管理元件",
+    "Vue 簡單 todo app",
+    "Vue 3 setup todo",
+    "Vue 增刪改 todo"
+  ],
+  "intents_en": [
+    "vue todo list",
+    "vue todo app",
+    "vue task list component",
+    "vue 3 setup todo",
+    "vue add remove todo",
+    "vue checklist"
+  ],
+  "slots": [
+    "storage_key"
+  ],
+  "code": "<script setup>\nimport { ref, watch, onMounted } from 'vue'\nconst items = ref([])\nconst draft = ref('')\nonMounted(() => {\n  const raw = localStorage.getItem('{{storage_key}}')\n  if (raw) items.value = JSON.parse(raw)\n})\nwatch(items, v => localStorage.setItem('{{storage_key}}', JSON.stringify(v)), { deep: true })\nfunction add() {\n  if (!draft.value.trim()) return\n  items.value.push({ id: Date.now(), text: draft.value, done: false })\n  draft.value = ''\n}\n</script>\n<template>\n  <div>\n    <input v-model=\"draft\" @keyup.enter=\"add\" placeholder=\"New task\" />\n    <ul>\n      <li v-for=\"t in items\" :key=\"t.id\">\n        <input type=\"checkbox\" v-model=\"t.done\" />\n        <span :class=\"{ done: t.done }\">{{ t.text }}</span>\n        <button @click=\"items = items.filter(x => x.id !== t.id)\">x</button>\n      </li>\n    </ul>\n  </div>\n</template>",
+  "language": "vue",
+  "deps": [
+    "vue"
+  ],
+  "summary_zh": "Vue 待辦清單含 localStorage 持久化"
+}

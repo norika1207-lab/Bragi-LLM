@@ -1,0 +1,34 @@
+{
+  "id": "llm-tools-118-context-truncator",
+  "category": "llm-tools/utils/truncator",
+  "intents_zh": [
+    "context 截斷",
+    "按 token 截 prompt",
+    "truncate to fit",
+    "上下文限長處理",
+    "fit context window",
+    "token-aware truncate",
+    "裁切上下文",
+    "防超長"
+  ],
+  "intents_en": [
+    "context truncator",
+    "token-aware truncate",
+    "fit context window",
+    "truncate to budget",
+    "prompt length cap",
+    "trim context",
+    "budget-aware truncation",
+    "prevent over-length"
+  ],
+  "slots": [
+    "model_name",
+    "budget_tokens"
+  ],
+  "code": "import tiktoken\n\nenc = tiktoken.encoding_for_model(\"{{model_name}}\")\n\ndef truncate(text: str, budget: int = {{budget_tokens}}) -> str:\n    ids = enc.encode(text)\n    if len(ids) <= budget:\n        return text\n    return enc.decode(ids[:budget])",
+  "language": "py",
+  "deps": [
+    "tiktoken"
+  ],
+  "summary_zh": "按 token 預算截斷上下文"
+}

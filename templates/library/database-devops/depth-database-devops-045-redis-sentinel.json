@@ -1,0 +1,25 @@
+{
+  "id": "depth-database-devops-045-redis-sentinel",
+  "category": "database-devops/redis/ha",
+  "intents_zh": [
+    "redis sentinel 設定",
+    "master failover",
+    "redis HA"
+  ],
+  "intents_en": [
+    "redis sentinel config",
+    "master failover",
+    "redis HA"
+  ],
+  "slots": [
+    "master_name",
+    "master_host",
+    "quorum"
+  ],
+  "code": "port 26379\nsentinel monitor {{master_name}} {{master_host}} 6379 {{quorum}}\nsentinel down-after-milliseconds {{master_name}} 5000\nsentinel failover-timeout {{master_name}} 30000\nsentinel parallel-syncs {{master_name}} 1",
+  "language": "conf",
+  "deps": [
+    "redis"
+  ],
+  "summary_zh": "redis sentinel 監看 master,自動 failover"
+}

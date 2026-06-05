@@ -1,0 +1,33 @@
+{
+  "id": "llm-tools-046-pdf-loader",
+  "category": "llm-tools/ingest/pdf",
+  "intents_zh": [
+    "讀 PDF 抽文字",
+    "pdf loader RAG",
+    "pypdf 範例",
+    "pdf 切塊",
+    "pdf 文字抽取",
+    "抽 pdf 給 RAG",
+    "load pdf to text",
+    "pdf reader"
+  ],
+  "intents_en": [
+    "load pdf to text",
+    "pypdf example",
+    "pdf text extraction",
+    "pdf loader for rag",
+    "read pdf pages",
+    "pdf reader script",
+    "pdf ingest",
+    "extract pdf content"
+  ],
+  "slots": [
+    "pdf_path"
+  ],
+  "code": "from pypdf import PdfReader\n\ndef load_pdf(path: str = \"{{pdf_path}}\") -> list[str]:\n    reader = PdfReader(path)\n    return [p.extract_text() or \"\" for p in reader.pages]\n\nif __name__ == \"__main__\":\n    pages = load_pdf()\n    print(f\"{len(pages)} pages, first 200 chars: {pages[0][:200]}\")",
+  "language": "py",
+  "deps": [
+    "pypdf"
+  ],
+  "summary_zh": "pypdf 抽 PDF 每頁文字"
+}

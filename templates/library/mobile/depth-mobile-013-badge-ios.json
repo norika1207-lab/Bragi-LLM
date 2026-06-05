@@ -1,0 +1,25 @@
+{
+  "id": "depth-mobile-013-badge-ios",
+  "category": "mobile/badge/ios",
+  "intents_zh": [
+    "iOS app icon badge",
+    "設定未讀數",
+    "applicationIconBadgeNumber",
+    "清除 badge",
+    "桌面紅點"
+  ],
+  "intents_en": [
+    "iOS app icon badge",
+    "set unread count",
+    "applicationIconBadgeNumber",
+    "clear badge",
+    "home screen badge"
+  ],
+  "slots": [
+    "count"
+  ],
+  "code": "import UIKit\nUNUserNotificationCenter.current().setBadgeCount({{count}}) { _ in }\n// iOS 15 and earlier:\n// UIApplication.shared.applicationIconBadgeNumber = {{count}}",
+  "language": "swift",
+  "deps": [],
+  "summary_zh": "iOS app 圖示紅點計數"
+}

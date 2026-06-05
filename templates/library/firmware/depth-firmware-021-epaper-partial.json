@@ -1,0 +1,31 @@
+{
+  "id": "depth-firmware-021-epaper-partial",
+  "category": "firmware/display/epaper",
+  "intents_zh": [
+    "電子紙局部更新",
+    "e-paper partial refresh",
+    "GxEPD2 partial",
+    "局部刷新時鐘",
+    "電子紙省電刷新"
+  ],
+  "intents_en": [
+    "epaper partial refresh",
+    "e-ink partial update",
+    "gxepd2 partial",
+    "clock partial refresh",
+    "epd low power update"
+  ],
+  "slots": [
+    "x",
+    "y",
+    "w",
+    "h",
+    "text"
+  ],
+  "code": "#include <GxEPD2_BW.h>\nGxEPD2_BW<GxEPD2_290, GxEPD2_290::HEIGHT> display(GxEPD2_290(/*CS*/5, /*DC*/17, /*RST*/16, /*BUSY*/4));\ndisplay.setPartialWindow({{x}}, {{y}}, {{w}}, {{h}});\ndisplay.firstPage();\ndo {\n    display.fillScreen(GxEPD_WHITE);\n    display.setCursor({{x}}, {{y}} + 20);\n    display.print(\"{{text}}\");\n} while (display.nextPage());",
+  "language": "cpp",
+  "deps": [
+    "GxEPD2"
+  ],
+  "summary_zh": "e-paper 局部視窗刷新文字省電省時間"
+}

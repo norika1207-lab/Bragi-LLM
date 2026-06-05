@@ -1,0 +1,23 @@
+{
+  "id": "system-cli-007-yargs-node",
+  "category": "system-cli/node/yargs",
+  "intents_zh": [
+    "node yargs CLI",
+    "yargs 範本",
+    "用 yargs 解析參數"
+  ],
+  "intents_en": [
+    "yargs CLI template",
+    "node yargs parser",
+    "yargs command setup"
+  ],
+  "slots": [
+    "cmd_name"
+  ],
+  "code": "#!/usr/bin/env node\nconst yargs = require('yargs/yargs');\nconst { hideBin } = require('yargs/helpers');\n\nyargs(hideBin(process.argv))\n  .command('{{cmd_name}} <target>', 'run {{cmd_name}}', (y) => {\n    return y.positional('target', { type: 'string' });\n  }, (argv) => {\n    console.log(`{{cmd_name}} -> ${argv.target}`);\n  })\n  .option('verbose', { alias: 'v', type: 'boolean' })\n  .demandCommand(1)\n  .strict()\n  .parse();",
+  "language": "js",
+  "deps": [
+    "yargs"
+  ],
+  "summary_zh": "yargs 子命令解析"
+}

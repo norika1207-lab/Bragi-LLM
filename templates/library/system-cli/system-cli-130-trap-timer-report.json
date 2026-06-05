@@ -1,0 +1,21 @@
+{
+  "id": "system-cli-130-trap-timer-report",
+  "category": "system-cli/shell/timing",
+  "intents_zh": [
+    "script 跑多久",
+    "bash exit 印耗時",
+    "timing wrapper shell"
+  ],
+  "intents_en": [
+    "bash report elapsed time",
+    "exit timing trap",
+    "measure script duration"
+  ],
+  "slots": [
+    "work_block"
+  ],
+  "code": "#!/usr/bin/env bash\nset -euo pipefail\nstart=$SECONDS\nfinish() {\n  rc=$?\n  echo \"== elapsed $((SECONDS-start))s rc=$rc ==\"\n}\ntrap finish EXIT\n\n{{work_block}}",
+  "language": "sh",
+  "deps": [],
+  "summary_zh": "trap EXIT 印 script 耗時"
+}

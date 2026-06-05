@@ -1,0 +1,32 @@
+{
+  "id": "patch-sql-index-001-btree-date-range",
+  "category": "database-devops/index/btree-range",
+  "intents_zh": [
+    "日期區間查詢加 B-tree index",
+    "時間範圍查詢慢",
+    "幫 created_at 加索引",
+    "range query 怎麼建 index",
+    "日期欄位 btree 索引",
+    "查最近七天太慢"
+  ],
+  "intents_en": [
+    "btree index for date range query",
+    "speed up created_at range scan",
+    "index for between dates",
+    "add index for time window query",
+    "postgres index date column",
+    "range scan optimization"
+  ],
+  "slots": [
+    "table_name",
+    "date_column",
+    "index_name",
+    "tenant_column"
+  ],
+  "code": "-- B-tree index for date-range queries with tenant scoping\n-- Use leading equality column then range column for best selectivity\nCREATE INDEX CONCURRENTLY IF NOT EXISTS {{index_name}}\n  ON {{table_name}} ({{tenant_column}}, {{date_column}} DESC);\n\n-- Verify planner uses it\nEXPLAIN (ANALYZE, BUFFERS)\nSELECT *\nFROM {{table_name}}\nWHERE {{tenant_column}} = $1\n  AND {{date_column}} >= now() - interval '7 days'\nORDER BY {{date_column}} DESC\nLIMIT 100;",
+  "language": "sql",
+  "deps": [
+    "postgresql>=12"
+  ],
+  "summary_zh": "替日期區間查詢建立 tenant + 日期的複合 B-tree 索引，含 EXPLAIN 驗證"
+}

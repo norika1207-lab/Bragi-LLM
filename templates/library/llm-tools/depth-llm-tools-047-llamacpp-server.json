@@ -1,0 +1,27 @@
+{
+  "id": "depth-llm-tools-047-llamacpp-server",
+  "category": "llm-tools/serving/llamacpp",
+  "intents_zh": [
+    "llama.cpp server",
+    "gguf 模型上線",
+    "本地 GGUF endpoint",
+    "llama-server CLI",
+    "低資源服務"
+  ],
+  "intents_en": [
+    "llama.cpp server",
+    "gguf model serve",
+    "local GGUF endpoint",
+    "llama-server CLI",
+    "low-resource serve"
+  ],
+  "slots": [
+    "model_path",
+    "port",
+    "ctx"
+  ],
+  "code": "# CLI:\n# llama-server -m {{model_path}} -c {{ctx}} --port {{port}} --host 0.0.0.0\nimport httpx\nr = httpx.post(f\"http://localhost:{{{port}}}/v1/chat/completions\", json={\n    \"messages\": [{\"role\":\"user\",\"content\":\"hi\"}]\n})",
+  "language": "python",
+  "deps": [],
+  "summary_zh": "llama.cpp llama-server 啟動 OpenAI 相容端點呼叫 gguf 模型"
+}

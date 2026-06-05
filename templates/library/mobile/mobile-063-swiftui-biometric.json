@@ -1,0 +1,29 @@
+{
+  "id": "mobile-063-swiftui-biometric",
+  "category": "mobile/swiftui/auth",
+  "intents_zh": [
+    "SwiftUI Face ID",
+    "SwiftUI LocalAuthentication",
+    "SwiftUI 生物辨識",
+    "SwiftUI 指紋登入",
+    "iOS biometric Swift",
+    "TouchID SwiftUI",
+    "SwiftUI 解鎖"
+  ],
+  "intents_en": [
+    "swiftui face id",
+    "LocalAuthentication swift",
+    "biometric auth swiftui",
+    "touch id swiftui",
+    "ios biometric swiftui",
+    "faceid login swift",
+    "swiftui unlock biometric"
+  ],
+  "slots": [
+    "reason"
+  ],
+  "code": "import LocalAuthentication\nfunc bio() async -> Bool {\n  let c=LAContext();var err:NSError?\n  guard c.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics,error:&err) else{return false}\n  return await withCheckedContinuation{cont in\n    c.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics,localizedReason:\"{{reason}}\"){ok,_ in cont.resume(returning:ok)}}}",
+  "language": "swift",
+  "deps": [],
+  "summary_zh": "Swift LAContext Face ID 驗證"
+}

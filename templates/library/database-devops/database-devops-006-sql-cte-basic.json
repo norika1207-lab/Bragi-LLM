@@ -1,0 +1,28 @@
+{
+  "id": "database-devops-006-sql-cte-basic",
+  "category": "database-devops/sql/cte",
+  "intents_zh": [
+    "寫個 CTE",
+    "WITH 子句範本",
+    "共用表表達式",
+    "CTE 拆步驟",
+    "用 WITH 重寫子查詢"
+  ],
+  "intents_en": [
+    "CTE example",
+    "with clause",
+    "common table expression",
+    "break query into steps",
+    "refactor subquery to cte"
+  ],
+  "slots": [
+    "cte_name",
+    "source_table",
+    "filter_col",
+    "filter_val"
+  ],
+  "code": "WITH {{cte_name}} AS (\n  SELECT *\n  FROM {{source_table}}\n  WHERE {{filter_col}} = '{{filter_val}}'\n)\nSELECT * FROM {{cte_name}};",
+  "language": "sql",
+  "deps": [],
+  "summary_zh": "WITH CTE 基本結構"
+}

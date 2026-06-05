@@ -1,0 +1,30 @@
+{
+  "id": "firmware-020-esp32-mqtt-subscribe",
+  "category": "firmware/esp32/mqtt",
+  "intents_zh": [
+    "ESP32 訂閱 MQTT",
+    "收 MQTT 訊息",
+    "subscribe 範例",
+    "MQTT callback",
+    "ESP32 接訊息"
+  ],
+  "intents_en": [
+    "ESP32 MQTT subscribe",
+    "receive MQTT messages",
+    "PubSubClient callback",
+    "subscribe to topic",
+    "listen MQTT topic"
+  ],
+  "slots": [
+    "ssid",
+    "password",
+    "broker",
+    "topic"
+  ],
+  "code": "#include <WiFi.h>\n#include <PubSubClient.h>\nWiFiClient net;\nPubSubClient client(net);\n\nvoid onMsg(char* t, byte* p, unsigned int len) {\n  Serial.print(t); Serial.print(\": \");\n  for (unsigned i = 0; i < len; i++) Serial.print((char)p[i]);\n  Serial.println();\n}\n\nvoid setup() {\n  Serial.begin(115200);\n  WiFi.begin(\"{{ssid}}\", \"{{password}}\");\n  while (WiFi.status() != WL_CONNECTED) delay(300);\n  client.setServer(\"{{broker}}\", 1883);\n  client.setCallback(onMsg);\n  while (!client.connect(\"esp32-sub\")) delay(500);\n  client.subscribe(\"{{topic}}\");\n}\n\nvoid loop() { client.loop(); }",
+  "language": "ino",
+  "deps": [
+    "PubSubClient"
+  ],
+  "summary_zh": "ESP32 訂閱 MQTT topic 並回呼處理"
+}

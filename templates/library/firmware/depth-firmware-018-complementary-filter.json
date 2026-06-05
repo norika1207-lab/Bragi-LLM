@@ -1,0 +1,27 @@
+{
+  "id": "depth-firmware-018-complementary-filter",
+  "category": "firmware/sensor/imu",
+  "intents_zh": [
+    "互補濾波 IMU",
+    "accel + gyro 融合",
+    "pitch roll 估計",
+    "complementary filter",
+    "姿態估計"
+  ],
+  "intents_en": [
+    "complementary filter",
+    "fuse accel gyro",
+    "pitch roll estimate",
+    "imu fusion",
+    "attitude estimation"
+  ],
+  "slots": [
+    "alpha"
+  ],
+  "code": "float pitch = 0;\nfloat dt = 0.01;\nvoid update(float ax, float ay, float az, float gy) {\n    float acc_pitch = atan2(ax, sqrt(ay*ay + az*az)) * 180.0 / PI;\n    pitch = {{alpha}} * (pitch + gy * dt) + (1 - {{alpha}}) * acc_pitch;\n}",
+  "language": "cpp",
+  "deps": [
+    "Arduino"
+  ],
+  "summary_zh": "互補濾波融合加速度與陀螺儀算 pitch"
+}

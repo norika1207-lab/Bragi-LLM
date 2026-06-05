@@ -1,0 +1,27 @@
+{
+  "id": "depth-database-devops-018-pulumi-s3",
+  "category": "database-devops/iac/pulumi",
+  "intents_zh": [
+    "Pulumi 取代 Terraform",
+    "Pulumi python 範例",
+    "建 S3 bucket",
+    "pulumi up"
+  ],
+  "intents_en": [
+    "Pulumi alternative to terraform",
+    "Pulumi python example",
+    "create S3 bucket",
+    "pulumi up"
+  ],
+  "slots": [
+    "bucket_name",
+    "project_name"
+  ],
+  "code": "# __main__.py\nimport pulumi\nimport pulumi_aws as aws\n\nbucket = aws.s3.BucketV2('{{bucket_name}}',\n    bucket='{{bucket_name}}',\n    tags={'project': '{{project_name}}', 'managed_by': 'pulumi'})\n\naws.s3.BucketVersioningV2('ver',\n    bucket=bucket.id,\n    versioning_configuration={'status': 'Enabled'})\n\npulumi.export('bucket_arn', bucket.arn)",
+  "language": "py",
+  "deps": [
+    "pulumi",
+    "pulumi-aws"
+  ],
+  "summary_zh": "Pulumi python 建有版本控的 S3 bucket"
+}

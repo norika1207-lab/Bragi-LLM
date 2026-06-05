@@ -1,0 +1,34 @@
+{
+  "id": "llm-tools-067-multimodal-vision",
+  "category": "llm-tools/multimodal/vision",
+  "intents_zh": [
+    "GPT-4o vision",
+    "上傳圖片問 GPT",
+    "openai 看圖",
+    "vision api 範例",
+    "給圖片 + 問題",
+    "multimodal chat",
+    "看圖 LLM",
+    "vision wrapper"
+  ],
+  "intents_en": [
+    "gpt-4o vision example",
+    "openai image input",
+    "vision api wrapper",
+    "ask question about image",
+    "multimodal chat",
+    "image + prompt openai",
+    "vision llm",
+    "minimal vision call"
+  ],
+  "slots": [
+    "model_name",
+    "image_url"
+  ],
+  "code": "from openai import OpenAI\n\nclient = OpenAI()\n\ndef vision(question: str, img: str = \"{{image_url}}\") -> str:\n    r = client.chat.completions.create(\n        model=\"{{model_name}}\",\n        messages=[{\"role\": \"user\", \"content\": [\n            {\"type\": \"text\", \"text\": question},\n            {\"type\": \"image_url\", \"image_url\": {\"url\": img}},\n        ]}],\n    )\n    return r.choices[0].message.content\n\nif __name__ == \"__main__\":\n    print(vision(\"what is in this image?\"))",
+  "language": "py",
+  "deps": [
+    "openai"
+  ],
+  "summary_zh": "OpenAI 多模態圖文輸入 chat"
+}

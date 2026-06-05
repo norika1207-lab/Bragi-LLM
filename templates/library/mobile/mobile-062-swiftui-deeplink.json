@@ -1,0 +1,27 @@
+{
+  "id": "mobile-062-swiftui-deeplink",
+  "category": "mobile/swiftui/nav",
+  "intents_zh": [
+    "SwiftUI deep link",
+    "SwiftUI onOpenURL",
+    "SwiftUI 處理 url",
+    "深連結 SwiftUI",
+    "SwiftUI universal link",
+    "url scheme SwiftUI",
+    "SwiftUI handle uri"
+  ],
+  "intents_en": [
+    "swiftui onOpenURL",
+    "swiftui deep link",
+    "handle url swiftui",
+    "universal link swiftui",
+    "ios deep linking swiftui",
+    "url scheme swiftui",
+    "swiftui open url handler"
+  ],
+  "slots": [],
+  "code": "import SwiftUI\n@main\nstruct App1:App{\n  @State var lastPath=\"\"\n  var body:some Scene{WindowGroup{ContentView(path:lastPath).onOpenURL{url in lastPath=url.path}}}}\nstruct ContentView:View{let path:String;var body:some View{Text(\"link: \\(path)\")}}",
+  "language": "swift",
+  "deps": [],
+  "summary_zh": "SwiftUI onOpenURL 接 deep link"
+}

@@ -1,0 +1,29 @@
+{
+  "id": "web-frontend-batch4-045-route-revalidate",
+  "category": "web-frontend/nextjs/api/revalidate",
+  "intents_zh": [
+    "手動 revalidate",
+    "ISR 重新驗證 API",
+    "revalidatePath 端點",
+    "Next.js cache 刷新",
+    "tag revalidate",
+    "清快取 route"
+  ],
+  "intents_en": [
+    "manual revalidate api",
+    "isr revalidate route",
+    "revalidatePath endpoint",
+    "cache purge api",
+    "tag revalidate",
+    "on-demand revalidation"
+  ],
+  "slots": [
+    "revalidate_path"
+  ],
+  "code": "import { NextResponse } from 'next/server';\nimport { revalidatePath } from 'next/cache';\n\nexport async function POST(req: Request) {\n  const secret = new URL(req.url).searchParams.get('secret');\n  if (secret !== process.env.REVALIDATE_SECRET) {\n    return NextResponse.json({ error: 'unauthorized' }, { status: 401 });\n  }\n  revalidatePath('{{revalidate_path}}');\n  return NextResponse.json({ revalidated: true });\n}",
+  "language": "ts",
+  "deps": [
+    "next"
+  ],
+  "summary_zh": "手動觸發 revalidatePath 的 API"
+}

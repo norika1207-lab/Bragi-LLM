@@ -1,0 +1,31 @@
+{
+  "id": "mobile-056-swiftui-tabs",
+  "category": "mobile/swiftui/nav",
+  "intents_zh": [
+    "SwiftUI TabView",
+    "SwiftUI 底部 tab",
+    "三頁 tab SwiftUI",
+    "SwiftUI 主導航 tab",
+    "iOS bottom tabs SwiftUI",
+    "SwiftUI tab bar",
+    "SwiftUI tabs 範例"
+  ],
+  "intents_en": [
+    "swiftui TabView",
+    "swiftui bottom tabs",
+    "swiftui main nav",
+    "ios tabs swiftui",
+    "swiftui tab bar",
+    "tab navigation swiftui",
+    "swiftui three tabs"
+  ],
+  "slots": [
+    "tab1",
+    "tab2",
+    "tab3"
+  ],
+  "code": "import SwiftUI\nstruct Root:View{var body:some View{\n  TabView{\n    Text(\"{{tab1}}\").tabItem{Label(\"{{tab1}}\",systemImage:\"house\")}\n    Text(\"{{tab2}}\").tabItem{Label(\"{{tab2}}\",systemImage:\"magnifyingglass\")}\n    Text(\"{{tab3}}\").tabItem{Label(\"{{tab3}}\",systemImage:\"person\")}}}}",
+  "language": "swift",
+  "deps": [],
+  "summary_zh": "SwiftUI TabView 三頁底部 tab"
+}

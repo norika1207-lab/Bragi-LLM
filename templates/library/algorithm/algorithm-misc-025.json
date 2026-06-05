@@ -1,0 +1,19 @@
+{
+  "id": "algorithm-misc-025",
+  "category": "algorithm/misc/queue_via_stack",
+  "intents_zh": [
+    "雙棧實作隊列",
+    "queue via two stacks"
+  ],
+  "intents_en": [
+    "queue with two stacks",
+    "implement queue using stacks"
+  ],
+  "slots": [
+    "class_name"
+  ],
+  "code": "class {{class_name}}:\n    def __init__(self):\n        self.inp = []\n        self.out = []\n    def push(self, x):\n        self.inp.append(x)\n    def pop(self):\n        if not self.out:\n            while self.inp: self.out.append(self.inp.pop())\n        return self.out.pop()\n    def peek(self):\n        if not self.out:\n            while self.inp: self.out.append(self.inp.pop())\n        return self.out[-1]\n    def empty(self):\n        return not self.inp and not self.out",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "雙棧實作隊列 amortized O(1)"
+}

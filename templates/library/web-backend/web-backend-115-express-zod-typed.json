@@ -1,0 +1,28 @@
+{
+  "id": "web-backend-115-express-zod-typed",
+  "category": "web-backend/express/validation",
+  "intents_zh": [
+    "express + zod 型別安全",
+    "typed route handler",
+    "驗證 query + params + body",
+    "zod 多源驗證",
+    "type-safe express"
+  ],
+  "intents_en": [
+    "express zod type safe",
+    "typed route handler",
+    "validate query params body",
+    "zod multi-source",
+    "type-safe express"
+  ],
+  "slots": [
+    "resource"
+  ],
+  "code": "import { Router, Request, Response } from 'express';\nimport { z } from 'zod';\n\nconst querySchema = z.object({ page: z.coerce.number().int().min(1).default(1) });\nconst bodySchema = z.object({ name: z.string().min(1) });\n\nconst router = Router();\nrouter.post('/{{resource}}', (req: Request, res: Response) => {\n  const q = querySchema.safeParse(req.query);\n  const b = bodySchema.safeParse(req.body);\n  if (!q.success || !b.success) {\n    return res.status(400).json({ errors: { query: q.error?.issues, body: b.error?.issues } });\n  }\n  res.json({ page: q.data.page, name: b.data.name });\n});\n\nexport default router;",
+  "language": "ts",
+  "deps": [
+    "express",
+    "zod"
+  ],
+  "summary_zh": "Express + zod 多源型別驗證"
+}

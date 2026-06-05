@@ -1,0 +1,31 @@
+{
+  "id": "mobile-009-rn-biometric",
+  "category": "mobile/rn/auth",
+  "intents_zh": [
+    "RN 指紋登入",
+    "React Native biometric",
+    "Face ID RN",
+    "local authentication RN",
+    "RN 生物辨識",
+    "TouchID RN",
+    "RN faceid 解鎖"
+  ],
+  "intents_en": [
+    "RN biometric auth",
+    "face id rn",
+    "touch id rn",
+    "fingerprint login rn",
+    "local auth rn",
+    "biometric unlock rn",
+    "expo local authentication"
+  ],
+  "slots": [
+    "prompt_text"
+  ],
+  "code": "import * as LocalAuthentication from 'expo-local-authentication';\nexport async function authBiometric():Promise<boolean>{\n  const has=await LocalAuthentication.hasHardwareAsync();\n  const enrolled=await LocalAuthentication.isEnrolledAsync();\n  if(!has||!enrolled)return false;\n  const r=await LocalAuthentication.authenticateAsync({promptMessage:'{{prompt_text}}',fallbackLabel:'PIN'});\n  return r.success;}",
+  "language": "ts",
+  "deps": [
+    "expo-local-authentication"
+  ],
+  "summary_zh": "Expo 生物辨識登入函式"
+}

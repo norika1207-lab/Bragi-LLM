@@ -1,0 +1,33 @@
+{
+  "id": "llm-tools-079-citation-extraction",
+  "category": "llm-tools/rag/citation",
+  "intents_zh": [
+    "RAG 引用標註",
+    "回答附引用",
+    "cite sources",
+    "RAG citation",
+    "附來源編號",
+    "回答帶 [1][2]",
+    "引用追蹤",
+    "citation 機制"
+  ],
+  "intents_en": [
+    "rag citation",
+    "answer with citations",
+    "cite sources",
+    "attribution in rag",
+    "source-tagged answer",
+    "numbered citations",
+    "citation tracking",
+    "grounded answer"
+  ],
+  "slots": [
+    "model_name"
+  ],
+  "code": "from openai import OpenAI\n\nclient = OpenAI()\n\ndef answer(q: str, docs: list[str]) -> str:\n    ctx = \"\\n\".join(f\"[{i+1}] {d}\" for i, d in enumerate(docs))\n    sys = \"Answer with inline citations like [1], [2]. Only cite given sources.\"\n    r = client.chat.completions.create(\n        model=\"{{model_name}}\",\n        messages=[\n            {\"role\": \"system\", \"content\": sys},\n            {\"role\": \"user\", \"content\": f\"Sources:\\n{ctx}\\n\\nQ: {q}\"},\n        ],\n    )\n    return r.choices[0].message.content",
+  "language": "py",
+  "deps": [
+    "openai"
+  ],
+  "summary_zh": "附編號引用的 RAG 回答"
+}

@@ -1,0 +1,22 @@
+{
+  "id": "depth-database-devops-036-postmortem-template",
+  "category": "database-devops/sre/postmortem",
+  "intents_zh": [
+    "postmortem 模板",
+    "事故報告 blameless",
+    "incident review"
+  ],
+  "intents_en": [
+    "postmortem template",
+    "blameless incident report",
+    "incident review"
+  ],
+  "slots": [
+    "incident_id",
+    "date"
+  ],
+  "code": "# Incident {{incident_id}} Postmortem\n\nDate: {{date}}\nSeverity: SEV-?\nDuration: ?h ?m\nImpact: ? users / ? requests\n\n## Timeline (UTC)\n- T+0:00 alert fired\n- T+0:?? oncall acknowledged\n- T+0:?? mitigation applied\n- T+0:?? service recovered\n\n## Root cause\n\n## Contributing factors\n\n## What went well\n\n## What went wrong\n\n## Action items\n| owner | task | due | severity |\n|---|---|---|---|\n|  |  |  |  |",
+  "language": "md",
+  "deps": [],
+  "summary_zh": "blameless postmortem 範本含時間軸與 action item"
+}

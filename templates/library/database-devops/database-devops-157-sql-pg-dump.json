@@ -1,0 +1,24 @@
+{
+  "id": "database-devops-157-sql-pg-dump",
+  "category": "database-devops/ops/backup",
+  "intents_zh": [
+    "pg_dump 備份",
+    "postgres 備份還原",
+    "dump restore 指令"
+  ],
+  "intents_en": [
+    "pg_dump backup",
+    "postgres backup restore",
+    "dump restore commands"
+  ],
+  "slots": [
+    "db_name",
+    "output_file"
+  ],
+  "code": "#!/usr/bin/env bash\nset -euo pipefail\n\nTS=$(date +%Y%m%d-%H%M%S)\nOUT=\"{{output_file}}-${TS}.dump\"\n\n# custom format dump (parallel-restore friendly)\npg_dump -Fc -j 4 -d {{db_name}} -f \"$OUT\"\n\n# restore\n# pg_restore -d {{db_name}} -j 4 --clean --if-exists \"$OUT\"\n\necho \"dumped to $OUT ($(du -h \"$OUT\" | cut -f1))\"",
+  "language": "sh",
+  "deps": [
+    "postgresql-client"
+  ],
+  "summary_zh": "pg_dump 自訂格式備份指令"
+}

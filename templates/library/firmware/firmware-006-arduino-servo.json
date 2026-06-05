@@ -1,0 +1,27 @@
+{
+  "id": "firmware-006-arduino-servo",
+  "category": "firmware/arduino/actuator",
+  "intents_zh": [
+    "伺服馬達控制",
+    "Arduino servo",
+    "控制舵機角度",
+    "servo 來回擺動",
+    "SG90 範例"
+  ],
+  "intents_en": [
+    "Arduino servo control",
+    "sweep servo motor",
+    "SG90 example",
+    "set servo angle",
+    "servo library demo"
+  ],
+  "slots": [
+    "servo_pin"
+  ],
+  "code": "#include <Servo.h>\nServo myServo;\nconst int SERVO_PIN = {{servo_pin}};\n\nvoid setup() {\n  myServo.attach(SERVO_PIN);\n}\n\nvoid loop() {\n  for (int a = 0; a <= 180; a++) { myServo.write(a); delay(15); }\n  for (int a = 180; a >= 0; a--) { myServo.write(a); delay(15); }\n}",
+  "language": "ino",
+  "deps": [
+    "Servo"
+  ],
+  "summary_zh": "Arduino 控制伺服馬達來回擺動"
+}

@@ -1,0 +1,26 @@
+{
+  "id": "firmware-068-mpy-i2c-scan",
+  "category": "firmware/micropython/i2c",
+  "intents_zh": [
+    "mpy I2C 掃描",
+    "ESP32 mpy I2C 找位址",
+    "machine.I2C scan",
+    "micropython i2c",
+    "掃 I2C 裝置"
+  ],
+  "intents_en": [
+    "MicroPython I2C scan",
+    "machine.I2C scan",
+    "find I2C addresses mpy",
+    "ESP32 micropython i2c",
+    "i2c bus scanner micropython"
+  ],
+  "slots": [
+    "sda_pin",
+    "scl_pin"
+  ],
+  "code": "from machine import Pin, I2C\n\ni2c = I2C(0, sda=Pin({{sda_pin}}), scl=Pin({{scl_pin}}), freq=400000)\nprint([hex(a) for a in i2c.scan()])",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "MicroPython 掃描 I2C 匯流排位址"
+}

@@ -1,0 +1,31 @@
+{
+  "id": "mobile-038-flutter-ble",
+  "category": "mobile/flutter/ble",
+  "intents_zh": [
+    "Flutter BLE 掃描",
+    "flutter 藍牙",
+    "flutter_blue_plus",
+    "Flutter 掃藍芽裝置",
+    "BLE 掃描 flutter",
+    "flutter ble peripherals",
+    "flutter bluetooth scan"
+  ],
+  "intents_en": [
+    "flutter ble scan",
+    "flutter_blue_plus",
+    "scan bluetooth flutter",
+    "ble peripherals flutter",
+    "flutter bluetooth devices",
+    "ble scanner flutter",
+    "flutter ble example"
+  ],
+  "slots": [
+    "scan_seconds"
+  ],
+  "code": "import 'package:flutter_blue_plus/flutter_blue_plus.dart';\nFuture<List<ScanResult>> scan()async{\n  final results=<ScanResult>[];\n  final sub=FlutterBluePlus.scanResults.listen((r){for(final x in r){if(!results.any((y)=>y.device.remoteId==x.device.remoteId))results.add(x);}});\n  await FlutterBluePlus.startScan(timeout:const Duration(seconds:{{scan_seconds}}));\n  await Future.delayed(const Duration(seconds:{{scan_seconds}}));\n  await sub.cancel();\n  return results;}",
+  "language": "dart",
+  "deps": [
+    "flutter_blue_plus"
+  ],
+  "summary_zh": "Flutter flutter_blue_plus 掃 BLE N 秒"
+}

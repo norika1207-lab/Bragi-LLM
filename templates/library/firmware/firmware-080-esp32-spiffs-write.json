@@ -1,0 +1,26 @@
+{
+  "id": "firmware-080-esp32-spiffs-write",
+  "category": "firmware/esp32/storage",
+  "intents_zh": [
+    "ESP32 SPIFFS",
+    "檔案系統寫檔",
+    "LittleFS 替代",
+    "ESP32 內建檔案",
+    "spiffs 範例"
+  ],
+  "intents_en": [
+    "ESP32 SPIFFS write file",
+    "LittleFS ESP32",
+    "onboard filesystem",
+    "write file ESP32",
+    "SPIFFS example"
+  ],
+  "slots": [
+    "filename",
+    "content"
+  ],
+  "code": "#include <SPIFFS.h>\n\nvoid setup() {\n  Serial.begin(115200);\n  if (!SPIFFS.begin(true)) { Serial.println(\"mount fail\"); return; }\n  File f = SPIFFS.open(\"{{filename}}\", FILE_WRITE);\n  f.print(\"{{content}}\");\n  f.close();\n  File r = SPIFFS.open(\"{{filename}}\");\n  while (r.available()) Serial.write(r.read());\n  r.close();\n}\n\nvoid loop() {}",
+  "language": "ino",
+  "deps": [],
+  "summary_zh": "ESP32 SPIFFS 寫入並讀回檔案"
+}

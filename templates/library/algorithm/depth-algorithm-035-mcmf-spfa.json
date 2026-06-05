@@ -1,0 +1,32 @@
+{
+  "id": "depth-algorithm-035-mcmf-spfa",
+  "category": "algorithm/flow/mcmf",
+  "intents_zh": [
+    "最小費用最大流",
+    "MCMF SPFA",
+    "費用流",
+    "min cost max flow",
+    "SPFA 增廣",
+    "費用流模板",
+    "費用流 bellman"
+  ],
+  "intents_en": [
+    "min cost max flow",
+    "MCMF SPFA",
+    "cost flow algorithm",
+    "minimum cost flow",
+    "SPFA augmenting",
+    "MCMF template",
+    "cost network flow"
+  ],
+  "slots": [
+    "n",
+    "edges",
+    "s",
+    "t"
+  ],
+  "code": "from collections import deque\n\nclass MCMF:\n    def __init__(self, n):\n        self.n = n; self.g = [[] for _ in range(n)]; self.E = []\n    def add(self, u, v, cap, cost):\n        self.g[u].append(len(self.E)); self.E.append([v, cap, cost])\n        self.g[v].append(len(self.E)); self.E.append([u, 0, -cost])\n    def spfa(self, s, t):\n        INF = float('inf')\n        dist = [INF]*self.n; in_q = [False]*self.n\n        prev = [-1]*self.n; dist[s] = 0; in_q[s] = True\n        q = deque([s])\n        while q:\n            u = q.popleft(); in_q[u] = False\n            for i in self.g[u]:\n                v, c, w = self.E[i]\n                if c and dist[u] + w < dist[v]:\n                    dist[v] = dist[u]+w; prev[v] = i\n                    if not in_q[v]: q.append(v); in_q[v] = True\n        return dist, prev\n    def flow(self, s, t):\n        total_flow = 0; total_cost = 0\n        while True:\n            dist, prev = self.spfa(s, t)\n            if dist[t] == float('inf'): break\n            f = float('inf'); v = t\n            while v != s:\n                f = min(f, self.E[prev[v]][1]); v = self.E[prev[v]^1][0]\n            v = t\n            while v != s:\n                self.E[prev[v]][1] -= f; self.E[prev[v]^1][1] += f\n                v = self.E[prev[v]^1][0]\n            total_flow += f; total_cost += f*dist[t]\n        return total_flow, total_cost",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "SPFA 增廣的最小費用最大流"
+}

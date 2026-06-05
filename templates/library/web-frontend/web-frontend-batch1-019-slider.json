@@ -1,0 +1,27 @@
+{
+  "id": "web-frontend-batch1-019-slider",
+  "category": "web-frontend/react/sliders/basic",
+  "intents_zh": [
+    "滑桿元件",
+    "range slider React",
+    "拉桿選數值",
+    "React slider",
+    "音量滑桿",
+    "input range 元件"
+  ],
+  "intents_en": [
+    "range slider",
+    "react slider",
+    "value picker slider",
+    "input range",
+    "volume slider",
+    "slider component"
+  ],
+  "slots": [
+    "component_name"
+  ],
+  "code": "import { useState } from 'react';\n\ntype Props = { min?: number; max?: number; step?: number; initial?: number };\n\nexport default function {{component_name}}({ min = 0, max = 100, step = 1, initial = 50 }: Props) {\n  const [v, setV] = useState(initial);\n  return (\n    <div>\n      <input\n        type=\"range\"\n        min={min}\n        max={max}\n        step={step}\n        value={v}\n        onChange={(e) => setV(Number(e.target.value))}\n        className=\"w-full\"\n      />\n      <div className=\"text-sm text-gray-600\">{v}</div>\n    </div>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "基本 range slider 含當前值顯示"
+}

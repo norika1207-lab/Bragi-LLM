@@ -1,0 +1,29 @@
+{
+  "id": "depth-algorithm-004-fenwick-bit-point",
+  "category": "algorithm/bit/point-update",
+  "intents_zh": [
+    "Fenwick tree",
+    "BIT 樹狀數組",
+    "單點更新區間求和",
+    "樹狀數組模板",
+    "prefix sum 動態",
+    "lowbit 結構",
+    "區間 query 點 update"
+  ],
+  "intents_en": [
+    "Fenwick tree",
+    "binary indexed tree",
+    "BIT point update range sum",
+    "prefix sum dynamic",
+    "lowbit structure",
+    "write Fenwick",
+    "range sum BIT"
+  ],
+  "slots": [
+    "n"
+  ],
+  "code": "class BIT:\n    def __init__(self, n={{n}}):\n        self.n = n\n        self.t = [0]*(n+1)\n    def update(self, i, v):\n        i += 1\n        while i <= self.n:\n            self.t[i] += v\n            i += i & -i\n    def query(self, i):\n        i += 1; s = 0\n        while i > 0:\n            s += self.t[i]\n            i -= i & -i\n        return s\n    def range_sum(self, l, r):\n        return self.query(r) - (self.query(l-1) if l else 0)",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "樹狀數組支援單點更新與前綴和查詢"
+}

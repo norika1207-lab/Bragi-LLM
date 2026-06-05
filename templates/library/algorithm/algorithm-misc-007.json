@@ -1,0 +1,20 @@
+{
+  "id": "algorithm-misc-007",
+  "category": "algorithm/misc/skip_list",
+  "intents_zh": [
+    "跳表",
+    "skip list",
+    "給我 skip list"
+  ],
+  "intents_en": [
+    "skip list",
+    "skiplist data structure"
+  ],
+  "slots": [
+    "class_name"
+  ],
+  "code": "import random\n\nclass {{class_name}}:\n    def __init__(self, max_level=16, p=0.5):\n        self.max_level = max_level\n        self.p = p\n        self.head = [None]*max_level\n        self.level = 0\n    def _rand_level(self):\n        lvl = 0\n        while random.random() < self.p and lvl < self.max_level - 1:\n            lvl += 1\n        return lvl\n    def insert(self, val):\n        update = [None]*self.max_level\n        node = self.head\n        for i in range(self.level, -1, -1):\n            while node[i] and node[i][0] < val:\n                node = node[i][1]\n            update[i] = node\n        lvl = self._rand_level()\n        if lvl > self.level:\n            for i in range(self.level+1, lvl+1):\n                update[i] = self.head\n            self.level = lvl\n        new_node = [val, [None]*(lvl+1)]\n        for i in range(lvl+1):\n            new_node[1][i] = update[i][i] if update[i] is not self.head else self.head[i]\n            if update[i] is self.head:\n                self.head[i] = new_node\n            else:\n                update[i][i] = new_node",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "簡化版跳表插入"
+}

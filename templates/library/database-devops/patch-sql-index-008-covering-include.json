@@ -1,0 +1,33 @@
+{
+  "id": "patch-sql-index-008-covering-include",
+  "category": "database-devops/index/covering",
+  "intents_zh": [
+    "covering index 怎麼建",
+    "index include 欄位",
+    "index-only scan",
+    "避免回表",
+    "把 select 欄位包進 index",
+    "減少 heap fetch"
+  ],
+  "intents_en": [
+    "covering index with include",
+    "index only scan postgres",
+    "avoid heap lookup",
+    "include non-key columns in index",
+    "covering index design",
+    "reduce buffer reads"
+  ],
+  "slots": [
+    "table_name",
+    "index_name",
+    "key_col",
+    "include_col_a",
+    "include_col_b"
+  ],
+  "code": "-- Covering index: key columns for lookup, INCLUDE columns ride along\n-- Enables Index Only Scan and avoids heap fetches\nCREATE INDEX CONCURRENTLY IF NOT EXISTS {{index_name}}\n  ON {{table_name}} ({{key_col}})\n  INCLUDE ({{include_col_a}}, {{include_col_b}});\n\n-- Keep visibility map fresh so Index Only Scan can skip heap\nVACUUM (ANALYZE) {{table_name}};\n\nEXPLAIN (ANALYZE, BUFFERS)\nSELECT {{key_col}}, {{include_col_a}}, {{include_col_b}}\nFROM {{table_name}}\nWHERE {{key_col}} = $1;\n-- Look for: Index Only Scan, Heap Fetches: 0",
+  "language": "sql",
+  "deps": [
+    "postgresql>=11"
+  ],
+  "summary_zh": "用 INCLUDE 建 covering index 觸發 Index Only Scan，要 VACUUM 保持 visibility map"
+}

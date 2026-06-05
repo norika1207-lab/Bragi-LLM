@@ -1,0 +1,24 @@
+{
+  "id": "system-cli-113-fzf-picker",
+  "category": "system-cli/shell/fzf",
+  "intents_zh": [
+    "fzf 選檔案再開",
+    "互動挑選",
+    "fzf 結合 vim"
+  ],
+  "intents_en": [
+    "fzf file picker",
+    "interactive choose with fzf",
+    "fzf vim open"
+  ],
+  "slots": [
+    "root_dir",
+    "open_cmd"
+  ],
+  "code": "#!/usr/bin/env bash\nset -euo pipefail\ncd \"{{root_dir}}\"\nf=$(find . -type f \\( -name '*.py' -o -name '*.md' -o -name '*.ts' \\) | fzf --preview 'sed -n 1,80p {}')\n[[ -z \"$f\" ]] && exit 0\n{{open_cmd}} \"$f\"",
+  "language": "sh",
+  "deps": [
+    "fzf"
+  ],
+  "summary_zh": "fzf 挑檔再開"
+}

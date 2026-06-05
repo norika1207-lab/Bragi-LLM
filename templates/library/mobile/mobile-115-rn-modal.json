@@ -1,0 +1,30 @@
+{
+  "id": "mobile-115-rn-modal",
+  "category": "mobile/rn/feedback",
+  "intents_zh": [
+    "RN Modal",
+    "React Native modal 範例",
+    "RN 彈出視窗",
+    "modal 跳出 RN",
+    "RN bottom sheet 簡易",
+    "RN 對話框",
+    "RN 視窗 modal"
+  ],
+  "intents_en": [
+    "rn Modal example",
+    "react native modal",
+    "rn popup window",
+    "modal dialog rn",
+    "rn bottom popup",
+    "rn modal sheet",
+    "modal screen rn"
+  ],
+  "slots": [],
+  "code": "import React,{useState} from 'react';\nimport {Modal,View,Text,Button,StyleSheet} from 'react-native';\nexport default function M(){const[v,setV]=useState(false);\n  return(<View style={s.c}><Button title='Open' onPress={()=>setV(true)}/><Modal visible={v} transparent animationType='slide' onRequestClose={()=>setV(false)}><View style={s.bg}><View style={s.box}><Text>Hi</Text><Button title='Close' onPress={()=>setV(false)}/></View></View></Modal></View>);}\nconst s=StyleSheet.create({c:{flex:1,justifyContent:'center'},bg:{flex:1,backgroundColor:'#0008',justifyContent:'center',padding:24},box:{backgroundColor:'#fff',padding:24,borderRadius:12}});",
+  "language": "tsx",
+  "deps": [
+    "react",
+    "react-native"
+  ],
+  "summary_zh": "RN Modal 半透明背景彈出視窗"
+}

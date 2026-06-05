@@ -1,0 +1,24 @@
+{
+  "id": "system-cli-044-inotifywait-linux",
+  "category": "system-cli/file/watch",
+  "intents_zh": [
+    "linux inotify 監看",
+    "資料夾改動跑命令 linux",
+    "inotifywait 範本"
+  ],
+  "intents_en": [
+    "linux inotifywait watcher",
+    "trigger script on file event linux",
+    "inotify monitor"
+  ],
+  "slots": [
+    "watch_dir",
+    "run_cmd"
+  ],
+  "code": "#!/usr/bin/env bash\nset -euo pipefail\ninotifywait -m -r -e modify,create,delete --format '%w%f %e' \"{{watch_dir}}\" | \\\nwhile read path event; do\n  echo \"$event $path\"\n  {{run_cmd}}\ndone",
+  "language": "sh",
+  "deps": [
+    "inotify-tools"
+  ],
+  "summary_zh": "inotifywait 監看 linux"
+}

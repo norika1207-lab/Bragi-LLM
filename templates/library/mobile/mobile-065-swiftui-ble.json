@@ -1,0 +1,27 @@
+{
+  "id": "mobile-065-swiftui-ble",
+  "category": "mobile/swiftui/ble",
+  "intents_zh": [
+    "SwiftUI BLE 掃描",
+    "Swift CoreBluetooth scan",
+    "iOS 藍牙掃描 Swift",
+    "CBCentralManager 掃描",
+    "Swift ble peripherals",
+    "SwiftUI ble manager",
+    "Swift 藍芽範例"
+  ],
+  "intents_en": [
+    "swift CoreBluetooth scan",
+    "ios ble scan swift",
+    "CBCentralManager scan",
+    "swift bluetooth devices",
+    "ble manager swift",
+    "swiftui ble scanner",
+    "swift bluetooth example"
+  ],
+  "slots": [],
+  "code": "import CoreBluetooth\nclass Scanner:NSObject,CBCentralManagerDelegate{\n  var mgr:CBCentralManager!;var found:[CBPeripheral]=[];var onFound:((CBPeripheral)->Void)?\n  override init(){super.init();mgr=CBCentralManager(delegate:self,queue:nil)}\n  func centralManagerDidUpdateState(_ c:CBCentralManager){if c.state == .poweredOn{c.scanForPeripherals(withServices:nil)}}\n  func centralManager(_ c:CBCentralManager,didDiscover p:CBPeripheral,advertisementData:[String:Any],rssi:NSNumber){if !found.contains(p){found.append(p);onFound?(p)}}}",
+  "language": "swift",
+  "deps": [],
+  "summary_zh": "Swift CoreBluetooth 掃 BLE 周邊"
+}

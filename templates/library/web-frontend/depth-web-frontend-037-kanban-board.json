@@ -1,0 +1,27 @@
+{
+  "id": "depth-web-frontend-037-kanban-board",
+  "category": "web-frontend/widgets/kanban",
+  "intents_zh": [
+    "看板 UI",
+    "Kanban 三欄",
+    "todo doing done 板",
+    "拖曳卡片版",
+    "task board"
+  ],
+  "intents_en": [
+    "kanban board ui",
+    "three column todo doing done",
+    "task board",
+    "drag card board",
+    "trello like"
+  ],
+  "slots": [
+    "board_name"
+  ],
+  "code": "'use client';\nimport { useState } from 'react';\n\ntype Card = { id: string; title: string };\ntype Cols = { todo: Card[]; doing: Card[]; done: Card[] };\n\nexport function {{board_name}}() {\n  const [cols, setCols] = useState<Cols>({ todo: [{id:'1',title:'寫 paper'}], doing: [], done: [] });\n  function move(card: Card, from: keyof Cols, to: keyof Cols) {\n    setCols(c => ({ ...c, [from]: c[from].filter(x => x.id !== card.id), [to]: [...c[to], card] }));\n  }\n  return (\n    <div style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:12 }}>\n      {(['todo','doing','done'] as const).map(col => (\n        <section key={col}>\n          <h3>{col}</h3>\n          {cols[col].map(card => (\n            <article key={card.id} draggable onDragEnd={() => {/* 接 dnd-kit 更穩 */}}>{card.title}</article>\n          ))}\n        </section>\n      ))}\n    </div>\n  );\n}",
+  "language": "tsx",
+  "deps": [
+    "react"
+  ],
+  "summary_zh": "三欄看板資料骨架"
+}

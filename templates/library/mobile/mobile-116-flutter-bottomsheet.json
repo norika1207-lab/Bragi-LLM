@@ -1,0 +1,29 @@
+{
+  "id": "mobile-116-flutter-bottomsheet",
+  "category": "mobile/flutter/feedback",
+  "intents_zh": [
+    "Flutter showModalBottomSheet",
+    "flutter 底部彈窗",
+    "flutter bottom sheet",
+    "Flutter 彈出底部選單",
+    "modal bottom sheet flutter",
+    "flutter 抽屜底部",
+    "flutter bottom modal"
+  ],
+  "intents_en": [
+    "flutter showModalBottomSheet",
+    "flutter bottom sheet",
+    "modal bottom sheet flutter",
+    "flutter bottom popup",
+    "flutter bottom drawer",
+    "bottom sheet example flutter",
+    "flutter modal bottom"
+  ],
+  "slots": [],
+  "code": "import 'package:flutter/material.dart';\nvoid show(BuildContext c){\n  showModalBottomSheet(context:c,builder:(_)=>Container(padding:const EdgeInsets.all(24),child:Column(mainAxisSize:MainAxisSize.min,children:[const Text('Pick option'),ListTile(leading:const Icon(Icons.share),title:const Text('Share')),ListTile(leading:const Icon(Icons.delete),title:const Text('Delete'))])));}",
+  "language": "dart",
+  "deps": [
+    "flutter"
+  ],
+  "summary_zh": "Flutter showModalBottomSheet 範例"
+}

@@ -1,0 +1,29 @@
+{
+  "id": "web-backend-031-flask-hello",
+  "category": "web-backend/flask/basic",
+  "intents_zh": [
+    "flask 最小 server",
+    "起個 flask app",
+    "flask hello world",
+    "python web 起手",
+    "flask 基本 route"
+  ],
+  "intents_en": [
+    "minimal flask app",
+    "flask hello world",
+    "scaffold flask server",
+    "basic flask route",
+    "start flask"
+  ],
+  "slots": [
+    "port",
+    "route_path",
+    "message"
+  ],
+  "code": "from flask import Flask, jsonify\n\napp = Flask(__name__)\n\n@app.get('{{route_path}}')\ndef index():\n    return jsonify(message='{{message}}')\n\nif __name__ == '__main__':\n    app.run(host='0.0.0.0', port={{port}})",
+  "language": "py",
+  "deps": [
+    "flask"
+  ],
+  "summary_zh": "Flask 最小可運作 app"
+}

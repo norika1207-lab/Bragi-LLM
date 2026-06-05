@@ -1,0 +1,25 @@
+{
+  "id": "database-devops-027-sqlalchemy-query",
+  "category": "database-devops/orm/sqlalchemy",
+  "intents_zh": [
+    "sqlalchemy 查詢",
+    "session.query 範本",
+    "filter_by 用法"
+  ],
+  "intents_en": [
+    "sqlalchemy query",
+    "session.query example",
+    "filter_by usage"
+  ],
+  "slots": [
+    "model_class",
+    "filter_field",
+    "filter_value"
+  ],
+  "code": "from sqlalchemy.orm import Session\n\ndef list_items(db: Session, limit: int = 50):\n    return (\n        db.query({{model_class}})\n          .filter({{model_class}}.{{filter_field}} == '{{filter_value}}')\n          .order_by({{model_class}}.created_at.desc())\n          .limit(limit)\n          .all()\n    )",
+  "language": "py",
+  "deps": [
+    "sqlalchemy"
+  ],
+  "summary_zh": "SQLAlchemy 查詢過濾排序"
+}

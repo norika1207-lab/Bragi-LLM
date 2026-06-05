@@ -1,0 +1,26 @@
+{
+  "id": "firmware-003-arduino-button-debounce",
+  "category": "firmware/arduino/input",
+  "intents_zh": [
+    "按鈕防彈跳",
+    "button debounce",
+    "按鈕一直亂跳怎麼辦",
+    "debounce 範例",
+    "穩定讀按鈕"
+  ],
+  "intents_en": [
+    "Arduino button debounce",
+    "stable button reading",
+    "debounce algorithm",
+    "prevent button bounce",
+    "clean button input"
+  ],
+  "slots": [
+    "button_pin",
+    "debounce_ms"
+  ],
+  "code": "const int BUTTON_PIN = {{button_pin}};\nconst unsigned long DEBOUNCE_MS = {{debounce_ms}};\nint lastReading = HIGH;\nint stableState = HIGH;\nunsigned long lastChange = 0;\n\nvoid setup() {\n  pinMode(BUTTON_PIN, INPUT_PULLUP);\n  Serial.begin(115200);\n}\n\nvoid loop() {\n  int reading = digitalRead(BUTTON_PIN);\n  if (reading != lastReading) lastChange = millis();\n  if (millis() - lastChange > DEBOUNCE_MS && reading != stableState) {\n    stableState = reading;\n    if (stableState == LOW) Serial.println(\"pressed\");\n  }\n  lastReading = reading;\n}",
+  "language": "ino",
+  "deps": [],
+  "summary_zh": "Arduino 按鈕防彈跳處理"
+}

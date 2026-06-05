@@ -1,0 +1,26 @@
+{
+  "id": "web-backend-040-flask-bcrypt",
+  "category": "web-backend/flask/auth",
+  "intents_zh": [
+    "flask 密碼 hash",
+    "bcrypt python",
+    "passlib hash",
+    "passwd 驗證 python",
+    "加 salt + hash flask"
+  ],
+  "intents_en": [
+    "bcrypt flask password",
+    "passlib hash example",
+    "password verify flask",
+    "secure password storage flask",
+    "hash + verify flask"
+  ],
+  "slots": [],
+  "code": "from passlib.hash import bcrypt\n\ndef hash_password(plain: str) -> str:\n    return bcrypt.using(rounds=12).hash(plain)\n\ndef verify_password(plain: str, hashed: str) -> bool:\n    try:\n        return bcrypt.verify(plain, hashed)\n    except ValueError:\n        return False",
+  "language": "py",
+  "deps": [
+    "passlib",
+    "bcrypt"
+  ],
+  "summary_zh": "passlib bcrypt 密碼 hash"
+}

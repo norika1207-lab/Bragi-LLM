@@ -1,0 +1,19 @@
+{
+  "id": "database-devops-109-nginx-static-cache",
+  "category": "database-devops/nginx/perf",
+  "intents_zh": [
+    "nginx 靜態快取",
+    "靜態檔長期 cache",
+    "add_header Cache-Control"
+  ],
+  "intents_en": [
+    "nginx static cache",
+    "long cache static",
+    "cache-control header"
+  ],
+  "slots": [],
+  "code": "location ~* \\.(?:css|js|woff2?|ttf|eot|svg|png|jpg|jpeg|gif|webp|ico)$ {\n  expires 1y;\n  add_header Cache-Control \"public, immutable\";\n  access_log off;\n  try_files $uri =404;\n}",
+  "language": "nginx",
+  "deps": [],
+  "summary_zh": "nginx 靜態檔長 cache 設定"
+}

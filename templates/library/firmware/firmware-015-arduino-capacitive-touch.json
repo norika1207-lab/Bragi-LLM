@@ -1,0 +1,29 @@
+{
+  "id": "firmware-015-arduino-capacitive-touch",
+  "category": "firmware/arduino/input",
+  "intents_zh": [
+    "電容觸控",
+    "CapacitiveSensor",
+    "用手摸感應",
+    "Arduino 觸控感應",
+    "capacitive touch 範例"
+  ],
+  "intents_en": [
+    "capacitive touch sensor Arduino",
+    "CapacitiveSensor library",
+    "DIY touch button",
+    "touch detection",
+    "sense human touch"
+  ],
+  "slots": [
+    "send_pin",
+    "receive_pin",
+    "threshold"
+  ],
+  "code": "#include <CapacitiveSensor.h>\nCapacitiveSensor cap = CapacitiveSensor({{send_pin}}, {{receive_pin}});\n\nvoid setup() {\n  Serial.begin(115200);\n}\n\nvoid loop() {\n  long v = cap.capacitiveSensor(30);\n  Serial.println(v);\n  if (v > {{threshold}}) Serial.println(\"TOUCH\");\n  delay(100);\n}",
+  "language": "ino",
+  "deps": [
+    "CapacitiveSensor"
+  ],
+  "summary_zh": "Arduino 自製電容觸控感應"
+}

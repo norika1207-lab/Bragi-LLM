@@ -1,0 +1,35 @@
+{
+  "id": "llm-tools-100-tokenizer-train",
+  "category": "llm-tools/tokenizer/train",
+  "intents_zh": [
+    "訓練 tokenizer",
+    "BPE tokenizer",
+    "tokenizers 庫範例",
+    "自訓 tokenizer",
+    "HF tokenizers BPE",
+    "train BPE",
+    "自製 tokenizer",
+    "tokenizer 範本"
+  ],
+  "intents_en": [
+    "train tokenizer",
+    "bpe tokenizer",
+    "huggingface tokenizers example",
+    "custom tokenizer",
+    "train bpe",
+    "tokenizer training",
+    "minimal tokenizer train",
+    "build tokenizer"
+  ],
+  "slots": [
+    "files_glob",
+    "vocab_size",
+    "output_path"
+  ],
+  "code": "from tokenizers import Tokenizer, models, trainers, pre_tokenizers\nimport glob\n\ntok = Tokenizer(models.BPE(unk_token=\"[UNK]\"))\ntok.pre_tokenizer = pre_tokenizers.ByteLevel(add_prefix_space=False)\ntrainer = trainers.BpeTrainer(\n    vocab_size={{vocab_size}},\n    special_tokens=[\"[UNK]\", \"[PAD]\", \"[BOS]\", \"[EOS]\"],\n)\nfiles = glob.glob(\"{{files_glob}}\")\ntok.train(files, trainer)\ntok.save(\"{{output_path}}\")",
+  "language": "py",
+  "deps": [
+    "tokenizers"
+  ],
+  "summary_zh": "HF tokenizers 訓練 BPE"
+}

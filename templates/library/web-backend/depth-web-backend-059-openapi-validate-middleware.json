@@ -1,0 +1,28 @@
+{
+  "id": "depth-web-backend-059-openapi-validate-middleware",
+  "category": "web-backend/openapi/validate",
+  "intents_zh": [
+    "express-openapi-validator",
+    "Express 驗 request/response",
+    "OpenAPI 自動校驗",
+    "違規 400",
+    "spec-driven validation"
+  ],
+  "intents_en": [
+    "express-openapi-validator",
+    "express validate request response",
+    "openapi auto validate",
+    "reject 400 violation",
+    "spec driven validation"
+  ],
+  "slots": [
+    "spec_path"
+  ],
+  "code": "import * as OpenApiValidator from 'express-openapi-validator';\napp.use(OpenApiValidator.middleware({\n  apiSpec: '{{spec_path}}',\n  validateRequests: true,\n  validateResponses: true,\n}));\napp.use((err, req, res, next) => {\n  res.status(err.status || 500).json({ message: err.message, errors: err.errors });\n});",
+  "language": "js",
+  "deps": [
+    "express",
+    "express-openapi-validator"
+  ],
+  "summary_zh": "OpenAPI spec 自動驗 req/res"
+}

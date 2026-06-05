@@ -1,0 +1,29 @@
+{
+  "id": "mobile-049-flutter-chat",
+  "category": "mobile/flutter/chat",
+  "intents_zh": [
+    "Flutter 聊天 UI",
+    "flutter chat bubble",
+    "flutter 訊息列表",
+    "聊天泡泡 flutter",
+    "flutter 對話畫面",
+    "chat ui flutter",
+    "訊息泡泡 列表 flutter"
+  ],
+  "intents_en": [
+    "flutter chat ui",
+    "chat bubbles flutter",
+    "message list flutter",
+    "flutter conversation",
+    "flutter chat screen",
+    "simple chat flutter",
+    "bubble chat flutter"
+  ],
+  "slots": [],
+  "code": "import 'package:flutter/material.dart';\nclass Msg{final String text;final bool mine;Msg(this.text,this.mine);}\nclass Chat extends StatelessWidget{final List<Msg> msgs;const Chat({super.key,required this.msgs});\n  @override Widget build(BuildContext c)=>ListView.builder(itemCount:msgs.length,padding:const EdgeInsets.all(12),itemBuilder:(_,i){final m=msgs[i];return Align(alignment:m.mine?Alignment.centerRight:Alignment.centerLeft,child:Container(margin:const EdgeInsets.symmetric(vertical:4),padding:const EdgeInsets.all(10),decoration:BoxDecoration(color:m.mine?Colors.blue:Colors.grey[300],borderRadius:BorderRadius.circular(14)),child:Text(m.text,style:TextStyle(color:m.mine?Colors.white:Colors.black))));});}",
+  "language": "dart",
+  "deps": [
+    "flutter"
+  ],
+  "summary_zh": "Flutter chat 泡泡訊息清單"
+}

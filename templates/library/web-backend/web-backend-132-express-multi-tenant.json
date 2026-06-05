@@ -1,0 +1,25 @@
+{
+  "id": "web-backend-132-express-multi-tenant",
+  "category": "web-backend/express/multi-tenant",
+  "intents_zh": [
+    "multi tenant express",
+    "tenant resolver middleware",
+    "按 host 路由 tenant",
+    "multi-tenant db",
+    "tenant context"
+  ],
+  "intents_en": [
+    "multi tenant express",
+    "tenant resolver middleware",
+    "host based tenant",
+    "tenant aware db",
+    "tenant context middleware"
+  ],
+  "slots": [],
+  "code": "function tenantResolver(req, res, next) {\n  const host = req.headers.host || '';\n  const sub = host.split('.')[0];\n  req.tenant = (sub && sub !== 'www') ? sub : 'public';\n  next();\n}\n\nfunction requireTenant(req, res, next) {\n  if (!req.tenant) return res.status(400).json({ error: 'no tenant' });\n  next();\n}\n\nmodule.exports = { tenantResolver, requireTenant };",
+  "language": "js",
+  "deps": [
+    "express"
+  ],
+  "summary_zh": "Express subdomain tenant 解析"
+}

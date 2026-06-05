@@ -1,0 +1,23 @@
+{
+  "id": "database-devops-068-jest-mock",
+  "category": "database-devops/test/jest",
+  "intents_zh": [
+    "jest mock",
+    "jest.mock 範本",
+    "jest spy"
+  ],
+  "intents_en": [
+    "jest mock",
+    "jest.mock example",
+    "jest spy"
+  ],
+  "slots": [
+    "module_path"
+  ],
+  "code": "import { fetchData } from '{{module_path}}'\n\njest.mock('{{module_path}}')\nconst mocked = fetchData as jest.MockedFunction<typeof fetchData>\n\ndescribe('with mock', () => {\n  beforeEach(() => mocked.mockReset())\n\n  it('returns mocked data', async () => {\n    mocked.mockResolvedValue({ ok: true })\n    const r = await fetchData()\n    expect(r.ok).toBe(true)\n    expect(mocked).toHaveBeenCalledTimes(1)\n  })\n})",
+  "language": "ts",
+  "deps": [
+    "jest"
+  ],
+  "summary_zh": "jest 模組 mock 範本"
+}

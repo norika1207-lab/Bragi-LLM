@@ -1,0 +1,30 @@
+{
+  "id": "web-frontend-batch4-022-google-font",
+  "category": "web-frontend/nextjs/fonts/google",
+  "intents_zh": [
+    "載入 Google Font",
+    "next/font 範例",
+    "Inter 字型設定",
+    "app 字型",
+    "root layout font",
+    "變數字型"
+  ],
+  "intents_en": [
+    "load google font",
+    "next/font example",
+    "inter font setup",
+    "app font",
+    "root layout font",
+    "variable font next"
+  ],
+  "slots": [
+    "font_family",
+    "font_weight"
+  ],
+  "code": "import { {{font_family}} } from 'next/font/google';\n\nconst font = {{font_family}}({ subsets: ['latin'], weight: '{{font_weight}}' });\n\nexport default function RootLayout({ children }: { children: React.ReactNode }) {\n  return (\n    <html lang=\"en\" className={font.className}>\n      <body>{children}</body>\n    </html>\n  );\n}",
+  "language": "tsx",
+  "deps": [
+    "next"
+  ],
+  "summary_zh": "用 next/font/google 載入字型"
+}

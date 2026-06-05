@@ -1,0 +1,28 @@
+{
+  "id": "depth-system-cli-018-reverse-ssh-keeper",
+  "category": "system-cli/network/ssh-tunnel",
+  "intents_zh": [
+    "reverse SSH tunnel 保活",
+    "autossh 反向通道",
+    "SSH 反向隧道常駐",
+    "內網穿透 ssh"
+  ],
+  "intents_en": [
+    "reverse ssh tunnel keeper",
+    "autossh reverse",
+    "ssh reverse tunnel daemon",
+    "nat traversal ssh"
+  ],
+  "slots": [
+    "jump_user",
+    "jump_host",
+    "remote_port",
+    "local_port"
+  ],
+  "code": "#!/usr/bin/env bash\nset -euo pipefail\n\nexec autossh -M 0 -N \\\n  -o \"ServerAliveInterval=30\" \\\n  -o \"ServerAliveCountMax=3\" \\\n  -o \"ExitOnForwardFailure=yes\" \\\n  -o \"StrictHostKeyChecking=accept-new\" \\\n  -R {{remote_port}}:localhost:{{local_port}} \\\n  {{jump_user}}@{{jump_host}}",
+  "language": "bash",
+  "deps": [
+    "autossh"
+  ],
+  "summary_zh": "autossh reverse tunnel 保活範本"
+}

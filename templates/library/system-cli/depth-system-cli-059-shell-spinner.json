@@ -1,0 +1,24 @@
+{
+  "id": "depth-system-cli-059-shell-spinner",
+  "category": "system-cli/shell/ui",
+  "intents_zh": [
+    "bash 旋轉等待動畫",
+    "長指令 spinner",
+    "背景跑顯示進度符號",
+    "shell loading 動畫"
+  ],
+  "intents_en": [
+    "bash spinner wait",
+    "long task spinner",
+    "background progress glyph",
+    "shell loading animation"
+  ],
+  "slots": [
+    "label",
+    "command"
+  ],
+  "code": "#!/usr/bin/env bash\nset -euo pipefail\n\nspin() {\n  local pid=$1 msg=$2\n  local frames='|/-\\\\'\n  local i=0\n  tput civis\n  while kill -0 \"$pid\" 2>/dev/null; do\n    printf \"\\r%s %s \" \"${frames:i++%${#frames}:1}\" \"$msg\"\n    sleep 0.1\n  done\n  tput cnorm\n  printf \"\\r\\033[K\"\n}\n\n( {{command}} ) & pid=$!\nspin \"$pid\" \"{{label}}\"\nwait \"$pid\" && echo \"done\" || echo \"failed\"",
+  "language": "bash",
+  "deps": [],
+  "summary_zh": "bash spinner 包長命令顯示等待動畫"
+}

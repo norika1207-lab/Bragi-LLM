@@ -1,0 +1,24 @@
+{
+  "id": "depth-database-devops-019-pulumi-k8s",
+  "category": "database-devops/iac/pulumi",
+  "intents_zh": [
+    "Pulumi 建 k8s deployment",
+    "pulumi typescript k8s",
+    "部署到 cluster"
+  ],
+  "intents_en": [
+    "Pulumi k8s deployment",
+    "pulumi typescript k8s",
+    "deploy to cluster"
+  ],
+  "slots": [
+    "app_name",
+    "image"
+  ],
+  "code": "import * as k8s from '@pulumi/kubernetes';\n\nconst appLabels = { app: '{{app_name}}' };\nnew k8s.apps.v1.Deployment('{{app_name}}', {\n  spec: {\n    selector: { matchLabels: appLabels },\n    replicas: 3,\n    template: {\n      metadata: { labels: appLabels },\n      spec: { containers: [{ name: '{{app_name}}', image: '{{image}}' }] },\n    },\n  },\n});",
+  "language": "ts",
+  "deps": [
+    "@pulumi/kubernetes"
+  ],
+  "summary_zh": "Pulumi TS 宣告 k8s Deployment"
+}

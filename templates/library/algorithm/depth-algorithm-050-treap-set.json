@@ -1,0 +1,27 @@
+{
+  "id": "depth-algorithm-050-treap-set",
+  "category": "algorithm/balanced-bst/treap-set",
+  "intents_zh": [
+    "treap 集合",
+    "隨機 BST set",
+    "treap 插入刪除",
+    "treap order set",
+    "平衡樹排名",
+    "treap kth",
+    "BBST treap"
+  ],
+  "intents_en": [
+    "treap ordered set",
+    "randomized BST set",
+    "treap insert delete",
+    "treap kth element",
+    "treap rank",
+    "BBST treap",
+    "treap container"
+  ],
+  "slots": [],
+  "code": "import random\nclass Node:\n    __slots__ = ('v','pri','sz','l','r')\n    def __init__(self, v):\n        self.v = v; self.pri = random.random(); self.sz = 1; self.l = self.r = None\n\ndef sz(n): return n.sz if n else 0\ndef upd(n):\n    if n: n.sz = 1 + sz(n.l) + sz(n.r)\ndef split(t, key):\n    if not t: return None, None\n    if t.v < key:\n        a, b = split(t.r, key); t.r = a; upd(t); return t, b\n    a, b = split(t.l, key); t.l = b; upd(t); return a, t\ndef merge(a, b):\n    if not a or not b: return a or b\n    if a.pri > b.pri:\n        a.r = merge(a.r, b); upd(a); return a\n    b.l = merge(a, b.l); upd(b); return b\ndef insert(t, v):\n    a, b = split(t, v); return merge(merge(a, Node(v)), b)\ndef kth(t, k):\n    while t:\n        if sz(t.l) == k: return t.v\n        if sz(t.l) > k: t = t.l\n        else: k -= sz(t.l)+1; t = t.r",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "以 treap 實作有序集合支援 kth"
+}

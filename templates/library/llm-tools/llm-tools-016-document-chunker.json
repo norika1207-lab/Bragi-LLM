@@ -1,0 +1,32 @@
+{
+  "id": "llm-tools-016-document-chunker",
+  "category": "llm-tools/rag/chunker",
+  "intents_zh": [
+    "文件切塊",
+    "document chunking",
+    "切 chunk",
+    "text splitter",
+    "固定長度切塊",
+    "overlap 切",
+    "切文件做 RAG",
+    "切片器"
+  ],
+  "intents_en": [
+    "document chunker",
+    "text splitter",
+    "chunk documents",
+    "fixed size chunking",
+    "overlap text splitter",
+    "rag chunker",
+    "split text",
+    "chunk function"
+  ],
+  "slots": [
+    "chunk_size",
+    "overlap"
+  ],
+  "code": "def chunk(text: str, size: int = {{chunk_size}}, overlap: int = {{overlap}}) -> list[str]:\n    chunks, start = [], 0\n    while start < len(text):\n        end = min(start + size, len(text))\n        chunks.append(text[start:end])\n        if end == len(text):\n            break\n        start = end - overlap\n    return chunks\n\nif __name__ == \"__main__\":\n    print(chunk(\"a\" * 2500))",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "固定長度帶 overlap 的文件切塊"
+}

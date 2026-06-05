@@ -1,0 +1,21 @@
+{
+  "id": "algorithm-sliding_window-001",
+  "category": "algorithm/sliding_window/max_sum",
+  "intents_zh": [
+    "滑動視窗最大和",
+    "給我 sliding window max sum",
+    "固定 k 視窗"
+  ],
+  "intents_en": [
+    "sliding window max sum",
+    "fixed window sum",
+    "max k subarray sum"
+  ],
+  "slots": [
+    "fn_name"
+  ],
+  "code": "def {{fn_name}}(arr, k):\n    if len(arr) < k: return None\n    s = sum(arr[:k])\n    best = s\n    for i in range(k, len(arr)):\n        s += arr[i] - arr[i-k]\n        best = max(best, s)\n    return best",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "固定大小 k 滑動視窗最大和"
+}

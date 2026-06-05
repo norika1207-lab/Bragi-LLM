@@ -1,0 +1,20 @@
+{
+  "id": "algorithm-sort-006",
+  "category": "algorithm/sort/counting",
+  "intents_zh": [
+    "計數排序",
+    "counting sort",
+    "給我 counting sort"
+  ],
+  "intents_en": [
+    "counting sort",
+    "integer counting sort"
+  ],
+  "slots": [
+    "fn_name"
+  ],
+  "code": "def {{fn_name}}(arr):\n    if not arr: return arr\n    lo, hi = min(arr), max(arr)\n    cnt = [0]*(hi - lo + 1)\n    for x in arr: cnt[x - lo] += 1\n    out = []\n    for i, c in enumerate(cnt):\n        out.extend([i + lo]*c)\n    return out",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "計數排序，整數範圍小時用"
+}

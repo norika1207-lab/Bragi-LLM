@@ -1,0 +1,28 @@
+{
+  "id": "web-backend-032-flask-crud",
+  "category": "web-backend/flask/rest",
+  "intents_zh": [
+    "flask CRUD",
+    "flask restful resource",
+    "用 flask 做增刪改查",
+    "flask blueprint CRUD",
+    "REST endpoint flask"
+  ],
+  "intents_en": [
+    "flask crud routes",
+    "flask rest resource",
+    "CRUD blueprint flask",
+    "scaffold rest flask",
+    "flask resource endpoints"
+  ],
+  "slots": [
+    "resource",
+    "id_field"
+  ],
+  "code": "from flask import Blueprint, request, jsonify, abort\nimport uuid\n\nbp = Blueprint('{{resource}}', __name__)\nstore = {}\n\n@bp.get('/{{resource}}')\ndef list_items():\n    return jsonify(list(store.values()))\n\n@bp.get('/{{resource}}/<{{id_field}}>')\ndef get_item({{id_field}}):\n    item = store.get({{id_field}})\n    if not item: abort(404)\n    return jsonify(item)\n\n@bp.post('/{{resource}}')\ndef create_item():\n    data = request.get_json() or {}\n    iid = str(uuid.uuid4())\n    data['{{id_field}}'] = iid\n    store[iid] = data\n    return jsonify(data), 201\n\n@bp.put('/{{resource}}/<{{id_field}}>')\ndef update_item({{id_field}}):\n    if {{id_field}} not in store: abort(404)\n    store[{{id_field}}].update(request.get_json() or {})\n    return jsonify(store[{{id_field}}])\n\n@bp.delete('/{{resource}}/<{{id_field}}>')\ndef delete_item({{id_field}}):\n    store.pop({{id_field}}, None)\n    return '', 204",
+  "language": "py",
+  "deps": [
+    "flask"
+  ],
+  "summary_zh": "Flask Blueprint CRUD"
+}

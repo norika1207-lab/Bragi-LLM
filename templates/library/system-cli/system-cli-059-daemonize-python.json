@@ -1,0 +1,22 @@
+{
+  "id": "system-cli-059-daemonize-python",
+  "category": "system-cli/daemon/python",
+  "intents_zh": [
+    "python 寫 daemon",
+    "背景守護程序",
+    "detach 跑 python"
+  ],
+  "intents_en": [
+    "python daemon process",
+    "detach background python",
+    "daemonize script"
+  ],
+  "slots": [
+    "pid_file",
+    "work_loop"
+  ],
+  "code": "import os, sys, time, atexit\n\ndef daemonize(pidfile):\n    if os.fork() > 0: sys.exit(0)\n    os.setsid()\n    if os.fork() > 0: sys.exit(0)\n    sys.stdout.flush(); sys.stderr.flush()\n    with open('/dev/null', 'rb') as f: os.dup2(f.fileno(), 0)\n    with open('/tmp/daemon.out', 'ab') as f:\n        os.dup2(f.fileno(), 1); os.dup2(f.fileno(), 2)\n    atexit.register(lambda: os.path.exists(pidfile) and os.remove(pidfile))\n    open(pidfile, 'w').write(str(os.getpid()))\n\ndaemonize('{{pid_file}}')\nwhile True:\n    {{work_loop}}\n    time.sleep(30)",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "雙 fork python daemon"
+}

@@ -1,0 +1,21 @@
+{
+  "id": "algorithm-math-005",
+  "category": "algorithm/math/matrix_exp",
+  "intents_zh": [
+    "矩陣快速冪",
+    "matrix exponentiation",
+    "給我 matrix power"
+  ],
+  "intents_en": [
+    "matrix exponentiation",
+    "matrix power",
+    "fast matrix power"
+  ],
+  "slots": [
+    "fn_name"
+  ],
+  "code": "def mat_mul(A, B, mod=None):\n    n, m, p = len(A), len(B), len(B[0])\n    C = [[0]*p for _ in range(n)]\n    for i in range(n):\n        for k in range(m):\n            if A[i][k]:\n                for j in range(p):\n                    C[i][j] += A[i][k]*B[k][j]\n                    if mod: C[i][j] %= mod\n    return C\n\ndef {{fn_name}}(M, e, mod=None):\n    n = len(M)\n    R = [[1 if i==j else 0 for j in range(n)] for i in range(n)]\n    while e:\n        if e & 1: R = mat_mul(R, M, mod)\n        M = mat_mul(M, M, mod)\n        e >>= 1\n    return R",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "矩陣快速冪"
+}

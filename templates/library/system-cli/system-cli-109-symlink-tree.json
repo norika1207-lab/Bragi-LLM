@@ -1,0 +1,22 @@
+{
+  "id": "system-cli-109-symlink-tree",
+  "category": "system-cli/file/symlink",
+  "intents_zh": [
+    "建一堆 symlink",
+    "mirror 結構但用 link",
+    "dotfiles 部署"
+  ],
+  "intents_en": [
+    "create symlinks tree",
+    "mirror as symlinks",
+    "dotfiles deploy script"
+  ],
+  "slots": [
+    "src_dir",
+    "dst_dir"
+  ],
+  "code": "#!/usr/bin/env bash\nset -euo pipefail\nSRC=\"{{src_dir}}\"; DST=\"{{dst_dir}}\"\nmkdir -p \"$DST\"\nwhile IFS= read -r -d '' f; do\n  rel=\"${f#$SRC/}\"\n  target=\"$DST/$rel\"\n  mkdir -p \"$(dirname \"$target\")\"\n  ln -sfn \"$f\" \"$target\"\n  echo \"link $rel\"\ndone < <(find \"$SRC\" -type f -print0)",
+  "language": "sh",
+  "deps": [],
+  "summary_zh": "批次建 symlink 樹"
+}

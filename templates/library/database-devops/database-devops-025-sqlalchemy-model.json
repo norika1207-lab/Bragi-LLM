@@ -1,0 +1,24 @@
+{
+  "id": "database-devops-025-sqlalchemy-model",
+  "category": "database-devops/orm/sqlalchemy",
+  "intents_zh": [
+    "SQLAlchemy 模型",
+    "declarative_base 範本",
+    "sqlalchemy ORM 類別"
+  ],
+  "intents_en": [
+    "sqlalchemy model",
+    "declarative base",
+    "sqlalchemy orm class"
+  ],
+  "slots": [
+    "class_name",
+    "table_name"
+  ],
+  "code": "from sqlalchemy import Column, Integer, String, DateTime, func\nfrom sqlalchemy.orm import declarative_base\n\nBase = declarative_base()\n\nclass {{class_name}}(Base):\n    __tablename__ = '{{table_name}}'\n\n    id = Column(Integer, primary_key=True)\n    name = Column(String(255), nullable=False, index=True)\n    created_at = Column(DateTime, server_default=func.now())\n    updated_at = Column(DateTime, server_default=func.now(), onupdate=func.now())",
+  "language": "py",
+  "deps": [
+    "sqlalchemy"
+  ],
+  "summary_zh": "SQLAlchemy declarative 模型"
+}

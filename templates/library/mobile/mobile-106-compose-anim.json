@@ -1,0 +1,31 @@
+{
+  "id": "mobile-106-compose-anim",
+  "category": "mobile/compose/anim",
+  "intents_zh": [
+    "Compose 淡入動畫",
+    "Compose animateFloatAsState",
+    "Compose fade in",
+    "Compose 入場動畫",
+    "Compose alpha animation",
+    "Compose AnimatedVisibility",
+    "Compose 動畫範例"
+  ],
+  "intents_en": [
+    "compose fade in",
+    "animateFloatAsState compose",
+    "compose AnimatedVisibility",
+    "compose entrance animation",
+    "compose alpha animation",
+    "compose animation example",
+    "jetpack compose animate"
+  ],
+  "slots": [
+    "duration_ms"
+  ],
+  "code": "import androidx.compose.animation.core.animateFloatAsState\nimport androidx.compose.animation.core.tween\nimport androidx.compose.runtime.*\nimport androidx.compose.ui.Modifier\nimport androidx.compose.ui.draw.alpha\n@Composable\nfun Fade(content:@Composable()->Unit){\n  var shown by remember{mutableStateOf(false)}\n  LaunchedEffect(Unit){shown=true}\n  val a by animateFloatAsState(if(shown)1f else 0f,tween({{duration_ms}}),label=\"fade\")\n  androidx.compose.foundation.layout.Box(Modifier.alpha(a)){content()}}",
+  "language": "kt",
+  "deps": [
+    "androidx.compose.animation"
+  ],
+  "summary_zh": "Compose animateFloatAsState 淡入包裝"
+}

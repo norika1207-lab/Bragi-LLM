@@ -1,0 +1,30 @@
+{
+  "id": "web-backend-125-express-i18n",
+  "category": "web-backend/express/i18n",
+  "intents_zh": [
+    "express i18n",
+    "多語言 express",
+    "accept-language 解析",
+    "i18next-http-middleware",
+    "本地化 endpoint"
+  ],
+  "intents_en": [
+    "express i18n setup",
+    "multi language express",
+    "accept-language parsing",
+    "i18next-http-middleware",
+    "localize endpoint"
+  ],
+  "slots": [
+    "default_lang"
+  ],
+  "code": "const express = require('express');\nconst i18next = require('i18next');\nconst Backend = require('i18next-fs-backend');\nconst middleware = require('i18next-http-middleware');\n\ni18next.use(Backend).use(middleware.LanguageDetector).init({\n  fallbackLng: '{{default_lang}}',\n  preload: ['en', 'zh-TW'],\n  backend: { loadPath: './locales/{{'{{'}}lng{{'}}'}}/translation.json' }\n});\n\nconst app = express();\napp.use(middleware.handle(i18next));\napp.get('/hi', (req, res) => res.json({ msg: req.t('greeting') }));",
+  "language": "js",
+  "deps": [
+    "express",
+    "i18next",
+    "i18next-fs-backend",
+    "i18next-http-middleware"
+  ],
+  "summary_zh": "Express i18next 多語系"
+}

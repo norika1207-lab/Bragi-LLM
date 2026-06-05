@@ -1,0 +1,28 @@
+{
+  "id": "depth-firmware-017-gyro-angle-integrate",
+  "category": "firmware/sensor/gyro",
+  "intents_zh": [
+    "陀螺儀積分角度",
+    "gyro 算角度",
+    "角速度轉角度",
+    "MPU6050 yaw",
+    "gyro integration"
+  ],
+  "intents_en": [
+    "gyro angle integration",
+    "integrate gyro to angle",
+    "angular velocity to angle",
+    "mpu6050 yaw",
+    "gyro accumulate"
+  ],
+  "slots": [
+    "axis"
+  ],
+  "code": "#include <MPU6050.h>\nMPU6050 mpu;\nfloat angle = 0;\nunsigned long last_us = 0;\nvoid loop() {\n    int16_t gx, gy, gz;\n    mpu.getRotation(&gx, &gy, &gz);\n    float dps = {{axis}} / 131.0f;\n    unsigned long now = micros();\n    float dt = (now - last_us) / 1e6f;\n    last_us = now;\n    angle += dps * dt;\n    Serial.println(angle);\n}",
+  "language": "cpp",
+  "deps": [
+    "MPU6050",
+    "Wire"
+  ],
+  "summary_zh": "對陀螺儀角速度做時間積分得到角度"
+}

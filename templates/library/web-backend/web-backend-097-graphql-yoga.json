@@ -1,0 +1,28 @@
+{
+  "id": "web-backend-097-graphql-yoga",
+  "category": "web-backend/graphql",
+  "intents_zh": [
+    "graphql-yoga server",
+    "standalone graphql server",
+    "yoga + node",
+    "graphql endpoint yoga",
+    "schema + resolver yoga"
+  ],
+  "intents_en": [
+    "graphql-yoga server",
+    "standalone graphql server",
+    "yoga node example",
+    "graphql endpoint yoga",
+    "schema resolver yoga"
+  ],
+  "slots": [
+    "port"
+  ],
+  "code": "const { createYoga, createSchema } = require('graphql-yoga');\nconst { createServer } = require('http');\n\nconst yoga = createYoga({\n  schema: createSchema({\n    typeDefs: `type Query { hello: String! }`,\n    resolvers: { Query: { hello: () => 'world' } }\n  })\n});\n\ncreateServer(yoga).listen({{port}}, () => console.log('graphql on {{port}}'));",
+  "language": "js",
+  "deps": [
+    "graphql-yoga",
+    "graphql"
+  ],
+  "summary_zh": "graphql-yoga 獨立 server"
+}

@@ -1,0 +1,28 @@
+{
+  "id": "depth-web-frontend-046-react-query-infinite",
+  "category": "web-frontend/data-fetching/react-query",
+  "intents_zh": [
+    "useInfiniteQuery",
+    "無限捲動",
+    "下一頁載入",
+    "cursor 分頁",
+    "react-query 分頁"
+  ],
+  "intents_en": [
+    "useInfiniteQuery",
+    "infinite scroll",
+    "load more",
+    "cursor pagination",
+    "react-query infinite"
+  ],
+  "slots": [
+    "query_key",
+    "endpoint"
+  ],
+  "code": "import { useInfiniteQuery } from '@tanstack/react-query';\n\nexport function use{{query_key}}() {\n  return useInfiniteQuery({\n    queryKey: ['{{query_key}}'],\n    initialPageParam: 0,\n    queryFn: async ({ pageParam }) => {\n      const res = await fetch(`{{endpoint}}?cursor=${pageParam}`);\n      return res.json() as Promise<{ items: any[]; nextCursor: number | null }>;\n    },\n    getNextPageParam: (last) => last.nextCursor,\n  });\n}",
+  "language": "ts",
+  "deps": [
+    "@tanstack/react-query"
+  ],
+  "summary_zh": "useInfiniteQuery 游標分頁"
+}

@@ -1,0 +1,26 @@
+{
+  "id": "algorithm-ml-005",
+  "category": "algorithm/ml/linear_regression",
+  "intents_zh": [
+    "線性回歸",
+    "linear regression",
+    "給我 linear regression",
+    "sklearn 線性回歸"
+  ],
+  "intents_en": [
+    "linear regression",
+    "sklearn linear regression",
+    "fit linear model",
+    "OLS regression"
+  ],
+  "slots": [
+    "X_train",
+    "y_train"
+  ],
+  "code": "from sklearn.linear_model import LinearRegression\n\nmodel = LinearRegression()\nmodel.fit({{X_train}}, {{y_train}})\nprint('coef:', model.coef_)\nprint('intercept:', model.intercept_)\nprint('R^2:', model.score({{X_train}}, {{y_train}}))",
+  "language": "py",
+  "deps": [
+    "scikit-learn"
+  ],
+  "summary_zh": "sklearn 線性回歸擬合"
+}

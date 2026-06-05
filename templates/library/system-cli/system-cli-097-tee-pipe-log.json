@@ -1,0 +1,22 @@
+{
+  "id": "system-cli-097-tee-pipe-log",
+  "category": "system-cli/shell/pipe",
+  "intents_zh": [
+    "script 同時印 + 寫 log",
+    "tee 雙寫",
+    "保留輸出到檔"
+  ],
+  "intents_en": [
+    "tee to log file",
+    "run and log shell",
+    "split stdout to file"
+  ],
+  "slots": [
+    "log_path",
+    "real_cmd"
+  ],
+  "code": "#!/usr/bin/env bash\nset -euo pipefail\nexec > >(tee -a \"{{log_path}}\") 2>&1\necho \"== run @ $(date -Iseconds) ==\"\n{{real_cmd}}",
+  "language": "sh",
+  "deps": [],
+  "summary_zh": "exec tee 同時輸出+寫檔"
+}

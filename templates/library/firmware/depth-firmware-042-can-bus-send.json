@@ -1,0 +1,29 @@
+{
+  "id": "depth-firmware-042-can-bus-send",
+  "category": "firmware/bus/can",
+  "intents_zh": [
+    "CAN bus 發送",
+    "TWAI 發送",
+    "ESP32 CAN frame",
+    "車載 CAN",
+    "twai_transmit"
+  ],
+  "intents_en": [
+    "can bus send",
+    "twai transmit",
+    "esp32 can frame",
+    "vehicle can",
+    "send can message"
+  ],
+  "slots": [
+    "tx_pin",
+    "rx_pin",
+    "msg_id"
+  ],
+  "code": "#include \"driver/twai.h\"\ntwai_general_config_t g = TWAI_GENERAL_CONFIG_DEFAULT({{tx_pin}}, {{rx_pin}}, TWAI_MODE_NORMAL);\ntwai_timing_config_t t = TWAI_TIMING_CONFIG_500KBITS();\ntwai_filter_config_t f = TWAI_FILTER_CONFIG_ACCEPT_ALL();\ntwai_driver_install(&g, &t, &f);\ntwai_start();\ntwai_message_t m = { .identifier = {{msg_id}}, .data_length_code = 4, .data = {1,2,3,4} };\ntwai_transmit(&m, pdMS_TO_TICKS(1000));",
+  "language": "c",
+  "deps": [
+    "esp-idf"
+  ],
+  "summary_zh": "用 TWAI 在 ESP32 上送一筆 CAN 訊框"
+}

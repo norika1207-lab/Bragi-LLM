@@ -1,0 +1,27 @@
+{
+  "id": "depth-web-frontend-012-theme-provider",
+  "category": "web-frontend/theming/css-variables",
+  "intents_zh": [
+    "主題 ThemeProvider",
+    "深淺色切換",
+    "CSS variable 主題",
+    "next-themes",
+    "theme toggle"
+  ],
+  "intents_en": [
+    "theme provider react",
+    "dark light toggle",
+    "css variable theme",
+    "next-themes setup",
+    "theme switcher"
+  ],
+  "slots": [
+    "provider_name"
+  ],
+  "code": "'use client';\nimport { ThemeProvider } from 'next-themes';\n\nexport function {{provider_name}}({ children }: { children: React.ReactNode }) {\n  return (\n    <ThemeProvider attribute=\"class\" defaultTheme=\"system\" enableSystem>\n      {children}\n    </ThemeProvider>\n  );\n}",
+  "language": "tsx",
+  "deps": [
+    "next-themes"
+  ],
+  "summary_zh": "next-themes 系統主題 provider"
+}

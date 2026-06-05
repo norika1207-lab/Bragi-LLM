@@ -1,0 +1,36 @@
+{
+  "id": "llm-tools-027-openai-proxy",
+  "category": "llm-tools/proxy/openai-compatible",
+  "intents_zh": [
+    "openai 相容 proxy",
+    "fastapi 起 openai api",
+    "自訂 openai endpoint",
+    "openai-compatible server",
+    "proxy 後端模型",
+    "fastapi chat completion",
+    "自寫 openai api",
+    "代理 openai"
+  ],
+  "intents_en": [
+    "openai compatible proxy",
+    "fastapi openai endpoint",
+    "custom openai server",
+    "openai-compatible api",
+    "proxy backend llm",
+    "write openai api",
+    "mimic openai api",
+    "openai shim"
+  ],
+  "slots": [
+    "port",
+    "model_name"
+  ],
+  "code": "from fastapi import FastAPI\nfrom pydantic import BaseModel\nimport uvicorn, time\n\napp = FastAPI()\n\nclass Msg(BaseModel):\n    role: str\n    content: str\n\nclass Req(BaseModel):\n    model: str\n    messages: list[Msg]\n\n@app.post(\"/v1/chat/completions\")\ndef chat(req: Req):\n    text = f\"echo: {req.messages[-1].content}\"\n    return {\n        \"id\": \"x\", \"object\": \"chat.completion\", \"created\": int(time.time()),\n        \"model\": \"{{model_name}}\",\n        \"choices\": [{\"index\": 0, \"message\": {\"role\": \"assistant\", \"content\": text}, \"finish_reason\": \"stop\"}],\n    }\n\nif __name__ == \"__main__\":\n    uvicorn.run(app, host=\"0.0.0.0\", port={{port}})",
+  "language": "py",
+  "deps": [
+    "fastapi",
+    "uvicorn",
+    "pydantic"
+  ],
+  "summary_zh": "FastAPI 寫 OpenAI 相容 chat completion 端點"
+}

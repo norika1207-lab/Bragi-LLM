@@ -1,0 +1,21 @@
+{
+  "id": "system-cli-035-json-config-load",
+  "category": "system-cli/config/json",
+  "intents_zh": [
+    "python 讀 json 設定",
+    "load json config",
+    "JSON 設定檔"
+  ],
+  "intents_en": [
+    "python json config",
+    "load json settings file",
+    "read json config"
+  ],
+  "slots": [
+    "config_path"
+  ],
+  "code": "import json\nfrom pathlib import Path\n\ncfg = json.loads(Path('{{config_path}}').read_text())\n\nrequired = ['host', 'port', 'token']\nmissing = [k for k in required if k not in cfg]\nif missing:\n    raise SystemExit(f'missing keys: {missing}')\n\nprint(f\"{cfg['host']}:{cfg['port']}\")",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "json config + 必填檢查"
+}

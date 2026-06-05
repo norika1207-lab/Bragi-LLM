@@ -1,0 +1,29 @@
+{
+  "id": "mobile-122-compose-webview",
+  "category": "mobile/compose/web",
+  "intents_zh": [
+    "Compose WebView",
+    "Compose AndroidView WebView",
+    "Compose 內嵌網頁",
+    "Compose 顯示 url",
+    "Android Compose webview",
+    "Compose embed html",
+    "Compose 瀏覽器嵌入"
+  ],
+  "intents_en": [
+    "compose WebView",
+    "AndroidView WebView compose",
+    "embed webview compose",
+    "compose show url",
+    "android compose webview",
+    "compose embed html",
+    "jetpack compose webview"
+  ],
+  "slots": [
+    "page_url"
+  ],
+  "code": "import android.webkit.WebView\nimport androidx.compose.runtime.Composable\nimport androidx.compose.ui.viewinterop.AndroidView\n@Composable\nfun Web(){AndroidView(factory={ctx->WebView(ctx).apply{settings.javaScriptEnabled=true;loadUrl(\"{{page_url}}\")}})}",
+  "language": "kt",
+  "deps": [],
+  "summary_zh": "Compose AndroidView 嵌入 WebView"
+}

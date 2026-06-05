@@ -1,0 +1,24 @@
+{
+  "id": "database-devops-062-vitest-basic",
+  "category": "database-devops/test/vitest",
+  "intents_zh": [
+    "vitest 基本範本",
+    "vitest 寫測試",
+    "vite 單元測試"
+  ],
+  "intents_en": [
+    "vitest basic",
+    "vitest write test",
+    "vite unit test"
+  ],
+  "slots": [
+    "module_path",
+    "function_name"
+  ],
+  "code": "import { describe, it, expect } from 'vitest'\nimport { {{function_name}} } from '{{module_path}}'\n\ndescribe('{{function_name}}', () => {\n  it('returns double of input', () => {\n    expect({{function_name}}(2)).toBe(4)\n  })\n\n  it('throws on null', () => {\n    expect(() => {{function_name}}(null as any)).toThrow()\n  })\n})",
+  "language": "ts",
+  "deps": [
+    "vitest"
+  ],
+  "summary_zh": "vitest 基本 describe/it/expect"
+}

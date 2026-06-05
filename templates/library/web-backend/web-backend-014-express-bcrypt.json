@@ -1,0 +1,27 @@
+{
+  "id": "web-backend-014-express-bcrypt",
+  "category": "web-backend/express/auth",
+  "intents_zh": [
+    "密碼 hash 用 bcrypt",
+    "註冊存 hashed password",
+    "驗證密碼",
+    "加 salt + hash",
+    "password hashing 範例"
+  ],
+  "intents_en": [
+    "bcrypt password hashing",
+    "hash password node",
+    "verify password bcrypt",
+    "store hashed password",
+    "secure password storage"
+  ],
+  "slots": [
+    "salt_rounds"
+  ],
+  "code": "const bcrypt = require('bcrypt');\n\nasync function hashPassword(plain) {\n  return bcrypt.hash(plain, {{salt_rounds}});\n}\n\nasync function verifyPassword(plain, hashed) {\n  return bcrypt.compare(plain, hashed);\n}\n\nmodule.exports = { hashPassword, verifyPassword };",
+  "language": "js",
+  "deps": [
+    "bcrypt"
+  ],
+  "summary_zh": "bcrypt 密碼雜湊與驗證"
+}

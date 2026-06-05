@@ -1,0 +1,31 @@
+{
+  "id": "patch-mobile-pedometer-006-calorie-tracker",
+  "category": "mobile/health/calorie",
+  "intents_zh": [
+    "卡路里追蹤 UI",
+    "做個熱量計算畫面",
+    "calorie 進度條元件",
+    "今日吃了多少卡",
+    "RN 卡路里卡片",
+    "熱量目標 vs 攝取顯示"
+  ],
+  "intents_en": [
+    "calorie tracker UI card",
+    "daily calorie intake screen",
+    "calories consumed vs goal",
+    "RN calorie progress component",
+    "macro and calorie display"
+  ],
+  "slots": [
+    "component_name",
+    "consumed",
+    "goal_kcal"
+  ],
+  "code": "import React from 'react';\nimport { View, Text, StyleSheet } from 'react-native';\n\nexport default function {{component_name}}({ consumed = {{consumed}}, goal = {{goal_kcal}} }) {\n  const remaining = Math.max(0, goal - consumed);\n  const pct = Math.min(100, (consumed / goal) * 100);\n  return (\n    <View style={styles.card}>\n      <Text style={styles.label}>Calories</Text>\n      <Text style={styles.big}>{consumed} <Text style={styles.unit}>/ {goal} kcal</Text></Text>\n      <View style={styles.bar}><View style={[styles.fill, { width: `${pct}%` }]} /></View>\n      <Text style={styles.left}>{remaining} kcal remaining</Text>\n    </View>\n  );\n}\nconst styles = StyleSheet.create({\n  card: { backgroundColor: '#fff', borderRadius: 16, padding: 20, shadowOpacity: 0.1, shadowRadius: 8 },\n  label: { fontSize: 12, color: '#888', textTransform: 'uppercase' },\n  big: { fontSize: 32, fontWeight: '700', marginVertical: 6 },\n  unit: { fontSize: 14, color: '#888', fontWeight: '400' },\n  bar: { height: 8, backgroundColor: '#eee', borderRadius: 4, overflow: 'hidden', marginVertical: 8 },\n  fill: { height: '100%', backgroundColor: '#ff8c42' },\n  left: { fontSize: 13, color: '#444' }\n});",
+  "language": "tsx",
+  "deps": [
+    "react-native",
+    "react"
+  ],
+  "summary_zh": "卡路里攝取卡片，含進度條與剩餘額度顯示"
+}

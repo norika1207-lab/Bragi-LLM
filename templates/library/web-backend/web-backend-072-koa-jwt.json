@@ -1,0 +1,32 @@
+{
+  "id": "web-backend-072-koa-jwt",
+  "category": "web-backend/koa/auth",
+  "intents_zh": [
+    "koa-jwt 設定",
+    "koa 加 JWT 驗證",
+    "保護 endpoint koa",
+    "koa 登入發 token",
+    "jwt middleware koa"
+  ],
+  "intents_en": [
+    "koa-jwt setup",
+    "koa jwt auth",
+    "protected route koa",
+    "login + token koa",
+    "jwt middleware koa"
+  ],
+  "slots": [
+    "secret_env",
+    "token_ttl"
+  ],
+  "code": "const Koa = require('koa');\nconst Router = require('@koa/router');\nconst bodyParser = require('koa-bodyparser');\nconst koaJwt = require('koa-jwt');\nconst jwt = require('jsonwebtoken');\n\nconst app = new Koa();\nconst router = new Router();\nconst SECRET = process.env.{{secret_env}};\n\nrouter.post('/login', (ctx) => {\n  const { username } = ctx.request.body || {};\n  if (!username) { ctx.status = 400; return; }\n  ctx.body = { token: jwt.sign({ sub: username }, SECRET, { expiresIn: '{{token_ttl}}' }) };\n});\n\nrouter.get('/me', koaJwt({ secret: SECRET }), (ctx) => {\n  ctx.body = { user: ctx.state.user };\n});\n\napp.use(bodyParser()).use(router.routes());",
+  "language": "js",
+  "deps": [
+    "koa",
+    "@koa/router",
+    "koa-bodyparser",
+    "koa-jwt",
+    "jsonwebtoken"
+  ],
+  "summary_zh": "Koa JWT 登入與保護"
+}

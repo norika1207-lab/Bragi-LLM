@@ -1,0 +1,26 @@
+{
+  "id": "depth-system-cli-040-watchexec-cmd",
+  "category": "system-cli/watcher/watchexec",
+  "intents_zh": [
+    "watchexec 自動跑",
+    "Rust 檔案監聽",
+    "變動自動測試",
+    "watchexec ignore"
+  ],
+  "intents_en": [
+    "watchexec auto run",
+    "rust file watcher",
+    "autorun tests on change",
+    "watchexec ignore"
+  ],
+  "slots": [
+    "watch_ext",
+    "command"
+  ],
+  "code": "#!/usr/bin/env bash\n# install: brew install watchexec  or  cargo install watchexec-cli\n\nwatchexec \\\n  --exts {{watch_ext}} \\\n  --ignore '**/node_modules/**' \\\n  --ignore '**/.git/**' \\\n  --ignore '**/dist/**' \\\n  --debounce 300ms \\\n  --clear \\\n  --restart \\\n  -- {{command}}",
+  "language": "bash",
+  "deps": [
+    "watchexec"
+  ],
+  "summary_zh": "watchexec 含 debounce ignore 自動跑命令"
+}

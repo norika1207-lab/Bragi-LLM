@@ -1,0 +1,27 @@
+{
+  "id": "web-frontend-batch2-010-breadcrumbs",
+  "category": "web-frontend/react/layout/breadcrumbs",
+  "intents_zh": [
+    "麵包屑",
+    "breadcrumb 導航",
+    "路徑導航",
+    "層級導航",
+    "當前位置指示",
+    "breadcrumbs 元件"
+  ],
+  "intents_en": [
+    "breadcrumbs",
+    "breadcrumb navigation",
+    "path navigation",
+    "hierarchy nav",
+    "location indicator",
+    "crumb trail"
+  ],
+  "slots": [
+    "crumbs"
+  ],
+  "code": "export function Breadcrumbs() {\n  const crumbs = {{crumbs}};\n  return (\n    <nav className=\"flex text-sm text-gray-600\">\n      {crumbs.map((c, i) => (\n        <span key={i} className=\"flex items-center\">\n          {i > 0 && <span className=\"mx-2 text-gray-400\">/</span>}\n          {i === crumbs.length - 1 ? (\n            <span className=\"font-medium text-gray-900\">{c.label}</span>\n          ) : (\n            <a href={c.href} className=\"hover:text-blue-600\">{c.label}</a>\n          )}\n        </span>\n      ))}\n    </nav>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "層級路徑麵包屑"
+}

@@ -1,0 +1,27 @@
+{
+  "id": "depth-system-cli-015-http-proxy-rewrite",
+  "category": "system-cli/proxy/http",
+  "intents_zh": [
+    "HTTP 反向代理改寫",
+    "Node http-proxy 改 path",
+    "proxy rewrite 範本",
+    "本機代理改 URL"
+  ],
+  "intents_en": [
+    "http reverse proxy rewrite",
+    "node http-proxy path",
+    "proxy rewrite template",
+    "local proxy url rewrite"
+  ],
+  "slots": [
+    "listen_port",
+    "target_url",
+    "strip_prefix"
+  ],
+  "code": "const http = require('http');\nconst { createProxyServer } = require('http-proxy');\n\nconst proxy = createProxyServer({ changeOrigin: true });\n\nhttp.createServer((req, res) => {\n  req.url = req.url.replace(/^{{strip_prefix}}/, '');\n  proxy.web(req, res, { target: '{{target_url}}' }, (err) => {\n    res.writeHead(502); res.end(`proxy error: ${err.message}`);\n  });\n}).listen({{listen_port}}, () => console.log('proxy on {{listen_port}} -> {{target_url}}'));",
+  "language": "javascript",
+  "deps": [
+    "http-proxy"
+  ],
+  "summary_zh": "Node HTTP 反向代理含 path prefix 改寫"
+}

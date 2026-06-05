@@ -1,0 +1,19 @@
+{
+  "id": "algorithm-misc-029",
+  "category": "algorithm/misc/median_of_two_sorted",
+  "intents_zh": [
+    "兩有序陣列中位數",
+    "median of two sorted arrays"
+  ],
+  "intents_en": [
+    "median of two sorted arrays",
+    "binary search median"
+  ],
+  "slots": [
+    "fn_name"
+  ],
+  "code": "def {{fn_name}}(a, b):\n    if len(a) > len(b): a, b = b, a\n    m, n = len(a), len(b)\n    lo, hi = 0, m\n    while lo <= hi:\n        i = (lo + hi) // 2\n        j = (m + n + 1) // 2 - i\n        al = a[i-1] if i else float('-inf')\n        ar = a[i] if i < m else float('inf')\n        bl = b[j-1] if j else float('-inf')\n        br = b[j] if j < n else float('inf')\n        if al <= br and bl <= ar:\n            if (m + n) % 2: return max(al, bl)\n            return (max(al, bl) + min(ar, br)) / 2\n        elif al > br: hi = i - 1\n        else: lo = i + 1",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "二分搜兩有序陣列中位數"
+}

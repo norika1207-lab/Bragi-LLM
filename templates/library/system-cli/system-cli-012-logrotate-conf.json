@@ -1,0 +1,23 @@
+{
+  "id": "system-cli-012-logrotate-conf",
+  "category": "system-cli/ops/logrotate",
+  "intents_zh": [
+    "logrotate 設定檔",
+    "app log 自動輪替",
+    "幫我寫 logrotate 規則"
+  ],
+  "intents_en": [
+    "logrotate config",
+    "rotate application logs",
+    "logrotate rule for app"
+  ],
+  "slots": [
+    "app_name",
+    "log_path",
+    "retain_days"
+  ],
+  "code": "{{log_path}} {\n    daily\n    rotate {{retain_days}}\n    compress\n    delaycompress\n    missingok\n    notifempty\n    create 0640 {{app_name}} {{app_name}}\n    sharedscripts\n    postrotate\n        systemctl reload {{app_name}} > /dev/null 2>&1 || true\n    endscript\n}",
+  "language": "conf",
+  "deps": [],
+  "summary_zh": "logrotate 每日輪替 + reload"
+}

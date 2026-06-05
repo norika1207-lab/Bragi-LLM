@@ -1,0 +1,24 @@
+{
+  "id": "database-devops-028-drizzle-schema",
+  "category": "database-devops/orm/drizzle",
+  "intents_zh": [
+    "Drizzle ORM schema",
+    "drizzle table 定義",
+    "drizzle pgTable"
+  ],
+  "intents_en": [
+    "drizzle schema",
+    "drizzle pgTable",
+    "drizzle table definition"
+  ],
+  "slots": [
+    "table_name",
+    "var_name"
+  ],
+  "code": "import { pgTable, serial, text, timestamp, integer } from 'drizzle-orm/pg-core'\n\nexport const {{var_name}} = pgTable('{{table_name}}', {\n  id: serial('id').primaryKey(),\n  name: text('name').notNull(),\n  userId: integer('user_id').notNull(),\n  createdAt: timestamp('created_at').defaultNow().notNull(),\n})",
+  "language": "ts",
+  "deps": [
+    "drizzle-orm"
+  ],
+  "summary_zh": "Drizzle pgTable 定義"
+}

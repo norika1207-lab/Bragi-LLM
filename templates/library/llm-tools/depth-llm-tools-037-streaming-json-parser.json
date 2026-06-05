@@ -1,0 +1,27 @@
+{
+  "id": "depth-llm-tools-037-streaming-json-parser",
+  "category": "llm-tools/structured/stream-json",
+  "intents_zh": [
+    "串流 JSON 解析",
+    "partial JSON 解析",
+    "邊收邊解析",
+    "streaming structured output",
+    "json-stream"
+  ],
+  "intents_en": [
+    "streaming JSON parser",
+    "partial JSON parse",
+    "parse while receiving",
+    "streaming structured output",
+    "json-stream"
+  ],
+  "slots": [
+    "stream"
+  ],
+  "code": "import json_stream\n\ndef parse_stream({{stream}}):\n    def gen():\n        for chunk in {{stream}}: yield chunk\n    return json_stream.load(gen())",
+  "language": "python",
+  "deps": [
+    "json-stream"
+  ],
+  "summary_zh": "用 json-stream 邊接串流邊解析 JSON tree"
+}

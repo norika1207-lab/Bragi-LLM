@@ -1,0 +1,23 @@
+{
+  "id": "database-devops-040-compose-mongo",
+  "category": "database-devops/docker/compose",
+  "intents_zh": [
+    "docker compose mongo",
+    "起一個 mongodb",
+    "本地 mongo"
+  ],
+  "intents_en": [
+    "docker compose mongo",
+    "spin up mongodb",
+    "local mongo"
+  ],
+  "slots": [
+    "mongo_version",
+    "root_user",
+    "root_password"
+  ],
+  "code": "services:\n  mongo:\n    image: mongo:{{mongo_version}}\n    restart: unless-stopped\n    environment:\n      MONGO_INITDB_ROOT_USERNAME: {{root_user}}\n      MONGO_INITDB_ROOT_PASSWORD: {{root_password}}\n    ports: [\"27017:27017\"]\n    volumes: [\"mongodata:/data/db\"]\n\n  mongo-express:\n    image: mongo-express\n    ports: [\"8081:8081\"]\n    environment:\n      ME_CONFIG_MONGODB_ADMINUSERNAME: {{root_user}}\n      ME_CONFIG_MONGODB_ADMINPASSWORD: {{root_password}}\n      ME_CONFIG_MONGODB_SERVER: mongo\n\nvolumes:\n  mongodata:",
+  "language": "yaml",
+  "deps": [],
+  "summary_zh": "compose mongo + mongo-express"
+}

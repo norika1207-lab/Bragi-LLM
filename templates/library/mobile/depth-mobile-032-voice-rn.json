@@ -1,0 +1,27 @@
+{
+  "id": "depth-mobile-032-voice-rn",
+  "category": "mobile/speech/stt-rn",
+  "intents_zh": [
+    "RN voice 語音輸入",
+    "@react-native-voice/voice",
+    "跨平台 STT",
+    "Voice.start onResults",
+    "RN 語音"
+  ],
+  "intents_en": [
+    "RN voice input",
+    "@react-native-voice/voice",
+    "cross platform STT",
+    "Voice.start onResults",
+    "RN speech"
+  ],
+  "slots": [
+    "locale"
+  ],
+  "code": "import Voice from '@react-native-voice/voice';\nVoice.onSpeechResults = (e) => console.log('text', e.value?.[0]);\nVoice.onSpeechError = (e) => console.warn(e.error);\nawait Voice.start('{{locale}}');",
+  "language": "ts",
+  "deps": [
+    "@react-native-voice/voice"
+  ],
+  "summary_zh": "RN Voice 跨平台 STT"
+}

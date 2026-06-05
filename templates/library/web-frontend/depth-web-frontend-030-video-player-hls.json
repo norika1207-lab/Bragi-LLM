@@ -1,0 +1,28 @@
+{
+  "id": "depth-web-frontend-030-video-player-hls",
+  "category": "web-frontend/media/video",
+  "intents_zh": [
+    "影片播放 HLS",
+    "hls.js 播放器",
+    "m3u8 video",
+    "串流播放",
+    "video element react"
+  ],
+  "intents_en": [
+    "hls video player",
+    "hls.js react",
+    "m3u8 stream",
+    "streaming video",
+    "react video"
+  ],
+  "slots": [
+    "component_name",
+    "src"
+  ],
+  "code": "'use client';\nimport Hls from 'hls.js';\nimport { useEffect, useRef } from 'react';\n\nexport function {{component_name}}() {\n  const ref = useRef<HTMLVideoElement>(null);\n  useEffect(() => {\n    const v = ref.current!;\n    if (Hls.isSupported()) {\n      const hls = new Hls(); hls.loadSource('{{src}}'); hls.attachMedia(v);\n      return () => hls.destroy();\n    } else {\n      v.src = '{{src}}';\n    }\n  }, []);\n  return <video ref={ref} controls playsInline style={{ width:'100%' }} />;\n}",
+  "language": "tsx",
+  "deps": [
+    "hls.js"
+  ],
+  "summary_zh": "hls.js HLS 影片播放器"
+}

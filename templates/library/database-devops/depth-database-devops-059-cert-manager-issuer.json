@@ -1,0 +1,23 @@
+{
+  "id": "depth-database-devops-059-cert-manager-issuer",
+  "category": "database-devops/k8s/cert",
+  "intents_zh": [
+    "cert-manager ClusterIssuer",
+    "letsencrypt prod",
+    "ACME http01"
+  ],
+  "intents_en": [
+    "cert-manager ClusterIssuer",
+    "letsencrypt prod",
+    "ACME http01"
+  ],
+  "slots": [
+    "email"
+  ],
+  "code": "apiVersion: cert-manager.io/v1\nkind: ClusterIssuer\nmetadata: { name: letsencrypt-prod }\nspec:\n  acme:\n    server: https://acme-v02.api.letsencrypt.org/directory\n    email: {{email}}\n    privateKeySecretRef: { name: letsencrypt-prod-key }\n    solvers:\n      - http01:\n          ingress:\n            class: nginx",
+  "language": "yaml",
+  "deps": [
+    "cert-manager"
+  ],
+  "summary_zh": "cert-manager ClusterIssuer 用 http01 + nginx"
+}

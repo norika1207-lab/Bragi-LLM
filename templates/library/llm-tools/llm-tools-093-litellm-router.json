@@ -1,0 +1,33 @@
+{
+  "id": "llm-tools-093-litellm-router",
+  "category": "llm-tools/router/litellm",
+  "intents_zh": [
+    "litellm 多模型路由",
+    "litellm 範例",
+    "用 litellm 切換 provider",
+    "litellm router",
+    "openai/claude 共用 SDK",
+    "litellm completion",
+    "provider 抽象",
+    "litellm minimal"
+  ],
+  "intents_en": [
+    "litellm router",
+    "litellm example",
+    "multi-provider router",
+    "litellm completion",
+    "switch providers easily",
+    "provider abstraction",
+    "litellm wrapper",
+    "minimal litellm"
+  ],
+  "slots": [
+    "model_name"
+  ],
+  "code": "from litellm import completion\n\ndef chat(prompt: str, model: str = \"{{model_name}}\") -> str:\n    r = completion(\n        model=model,\n        messages=[{\"role\": \"user\", \"content\": prompt}],\n    )\n    return r.choices[0].message.content\n\nif __name__ == \"__main__\":\n    print(chat(\"hi\"))",
+  "language": "py",
+  "deps": [
+    "litellm"
+  ],
+  "summary_zh": "litellm 多供應商統一介面"
+}

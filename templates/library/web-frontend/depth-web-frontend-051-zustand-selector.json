@@ -1,0 +1,27 @@
+{
+  "id": "depth-web-frontend-051-zustand-selector",
+  "category": "web-frontend/state/zustand",
+  "intents_zh": [
+    "zustand selector 避免重渲染",
+    "useShallow",
+    "subscribe with selector",
+    "效能優化 zustand",
+    "原子訂閱"
+  ],
+  "intents_en": [
+    "zustand selector",
+    "useShallow",
+    "avoid rerender zustand",
+    "performance selector",
+    "atomic subscription"
+  ],
+  "slots": [
+    "store_hook"
+  ],
+  "code": "import { useShallow } from 'zustand/react/shallow';\nimport { {{store_hook}} } from './store';\n\nexport function NameAndEmail() {\n  const { name, email } = {{store_hook}}(useShallow((s) => ({ name: s.name, email: s.email })));\n  return <div>{name} / {email}</div>;\n}",
+  "language": "tsx",
+  "deps": [
+    "zustand"
+  ],
+  "summary_zh": "zustand useShallow 避免多餘渲染"
+}

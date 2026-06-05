@@ -1,0 +1,25 @@
+{
+  "id": "firmware-005-arduino-pwm-fade",
+  "category": "firmware/arduino/pwm",
+  "intents_zh": [
+    "LED 漸亮漸暗",
+    "PWM 控制亮度",
+    "Arduino fade",
+    "用 analogWrite 控制",
+    "呼吸燈"
+  ],
+  "intents_en": [
+    "Arduino LED fade",
+    "PWM brightness control",
+    "breathing LED",
+    "analogWrite example",
+    "smooth LED dim"
+  ],
+  "slots": [
+    "led_pin"
+  ],
+  "code": "const int LED_PIN = {{led_pin}};\n\nvoid setup() {\n  pinMode(LED_PIN, OUTPUT);\n}\n\nvoid loop() {\n  for (int v = 0; v <= 255; v++) { analogWrite(LED_PIN, v); delay(8); }\n  for (int v = 255; v >= 0; v--) { analogWrite(LED_PIN, v); delay(8); }\n}",
+  "language": "ino",
+  "deps": [],
+  "summary_zh": "Arduino PWM 呼吸燈效果"
+}

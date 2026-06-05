@@ -1,0 +1,23 @@
+{
+  "id": "system-cli-013-systemd-service",
+  "category": "system-cli/ops/systemd",
+  "intents_zh": [
+    "systemd service 設定",
+    "linux 開機自動啟動服務",
+    "幫我寫 systemd unit"
+  ],
+  "intents_en": [
+    "systemd service unit",
+    "linux autostart service",
+    "systemd unit template"
+  ],
+  "slots": [
+    "service_name",
+    "exec_path",
+    "user_name"
+  ],
+  "code": "[Unit]\nDescription={{service_name}} service\nAfter=network.target\n\n[Service]\nType=simple\nUser={{user_name}}\nWorkingDirectory=/opt/{{service_name}}\nExecStart={{exec_path}}\nRestart=on-failure\nRestartSec=5\nStandardOutput=append:/var/log/{{service_name}}.log\nStandardError=append:/var/log/{{service_name}}.err\n\n[Install]\nWantedBy=multi-user.target",
+  "language": "ini",
+  "deps": [],
+  "summary_zh": "systemd simple service unit"
+}

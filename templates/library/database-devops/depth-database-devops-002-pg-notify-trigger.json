@@ -1,0 +1,24 @@
+{
+  "id": "depth-database-devops-002-pg-notify-trigger",
+  "category": "database-devops/postgres/pubsub",
+  "intents_zh": [
+    "postgres trigger 發 notify",
+    "資料表變動推 notify",
+    "row change 通知",
+    "trigger function 廣播"
+  ],
+  "intents_en": [
+    "postgres trigger notify",
+    "notify on row change",
+    "broadcast row update",
+    "trigger function pg_notify"
+  ],
+  "slots": [
+    "table_name",
+    "channel_name"
+  ],
+  "code": "CREATE OR REPLACE FUNCTION notify_{{table_name}}_change() RETURNS trigger AS $$\nBEGIN\n  PERFORM pg_notify('{{channel_name}}', json_build_object('op', TG_OP, 'id', NEW.id)::text);\n  RETURN NEW;\nEND;\n$$ LANGUAGE plpgsql;\n\nCREATE TRIGGER {{table_name}}_notify\nAFTER INSERT OR UPDATE ON {{table_name}}\nFOR EACH ROW EXECUTE FUNCTION notify_{{table_name}}_change();",
+  "language": "sql",
+  "deps": [],
+  "summary_zh": "在 row 變動時 pg_notify 廣播 JSON payload"
+}

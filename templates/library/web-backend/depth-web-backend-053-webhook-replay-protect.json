@@ -1,0 +1,26 @@
+{
+  "id": "depth-web-backend-053-webhook-replay-protect",
+  "category": "web-backend/webhook/replay",
+  "intents_zh": [
+    "webhook nonce 防重放",
+    "jti store with TTL",
+    "redis SETNX 阻止重送",
+    "已處理事件去重",
+    "webhook idempotency"
+  ],
+  "intents_en": [
+    "webhook nonce replay protect",
+    "jti store with ttl",
+    "redis setnx dedupe",
+    "processed event dedupe",
+    "webhook idempotency"
+  ],
+  "slots": [],
+  "code": "async function alreadyProcessed(eventId) {\n  const ok = await redis.set(`wh:${eventId}`, '1', 'EX', 86400, 'NX');\n  return ok === null;\n}\napp.post('/webhook', async (req, res) => {\n  if (await alreadyProcessed(req.body.id)) return res.status(200).send('dup');\n  await handle(req.body);\n  res.sendStatus(200);\n});",
+  "language": "js",
+  "deps": [
+    "ioredis",
+    "express"
+  ],
+  "summary_zh": "Redis SETNX 做 webhook 去重"
+}

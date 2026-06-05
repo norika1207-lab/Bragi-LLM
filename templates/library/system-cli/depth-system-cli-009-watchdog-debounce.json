@@ -1,0 +1,28 @@
+{
+  "id": "depth-system-cli-009-watchdog-debounce",
+  "category": "system-cli/watcher/python",
+  "intents_zh": [
+    "檔案監聽 debounce",
+    "watchdog Python 範本",
+    "檔案變動延遲觸發",
+    "防抖檔案 watcher",
+    "Python 觀察資料夾"
+  ],
+  "intents_en": [
+    "file watch debounce",
+    "watchdog python",
+    "delayed file trigger",
+    "debounced watcher",
+    "python folder observer"
+  ],
+  "slots": [
+    "watch_path",
+    "debounce_ms"
+  ],
+  "code": "import time, threading\nfrom watchdog.observers import Observer\nfrom watchdog.events import FileSystemEventHandler\n\nclass DebouncedHandler(FileSystemEventHandler):\n    def __init__(self, cb, delay):\n        self.cb, self.delay, self.timer = cb, delay, None\n    def on_any_event(self, event):\n        if event.is_directory: return\n        if self.timer: self.timer.cancel()\n        self.timer = threading.Timer(self.delay, lambda: self.cb(event.src_path))\n        self.timer.start()\n\ndef on_change(path): print(f\"changed: {path}\")\n\nobs = Observer()\nobs.schedule(DebouncedHandler(on_change, {{debounce_ms}}/1000), \"{{watch_path}}\", recursive=True)\nobs.start()\ntry:\n    while True: time.sleep(1)\nexcept KeyboardInterrupt: obs.stop()\nobs.join()",
+  "language": "python",
+  "deps": [
+    "watchdog"
+  ],
+  "summary_zh": "watchdog 檔案監聽含 debounce 延遲合併"
+}

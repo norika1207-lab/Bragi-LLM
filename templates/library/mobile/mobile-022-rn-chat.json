@@ -1,0 +1,29 @@
+{
+  "id": "mobile-022-rn-chat",
+  "category": "mobile/rn/chat",
+  "intents_zh": [
+    "RN 聊天 UI",
+    "React Native chat bubble",
+    "RN 對話框列表",
+    "聊天訊息畫面 RN",
+    "chat ui RN",
+    "RN 簡易聊天",
+    "訊息泡泡 RN"
+  ],
+  "intents_en": [
+    "rn chat ui",
+    "react native chat bubbles",
+    "message list rn",
+    "chat screen rn",
+    "simple chat rn",
+    "conversation ui rn",
+    "chat bubble rn"
+  ],
+  "slots": [],
+  "code": "import React from 'react';\nimport {FlatList,View,Text,StyleSheet} from 'react-native';\ntype Msg={id:string;text:string;mine:boolean};\nexport default function Chat({msgs}:{msgs:Msg[]}){\n  return(<FlatList data={msgs} keyExtractor={m=>m.id} renderItem={({item})=>(<View style={[s.b,item.mine?s.me:s.you]}><Text style={{color:item.mine?'#fff':'#000'}}>{item.text}</Text></View>)} contentContainerStyle={{padding:12}}/>);}\nconst s=StyleSheet.create({b:{padding:10,borderRadius:14,marginVertical:4,maxWidth:'75%'},me:{alignSelf:'flex-end',backgroundColor:'#0a84ff'},you:{alignSelf:'flex-start',backgroundColor:'#eee'}});",
+  "language": "tsx",
+  "deps": [
+    "react-native"
+  ],
+  "summary_zh": "RN 聊天泡泡列表左右對齊"
+}

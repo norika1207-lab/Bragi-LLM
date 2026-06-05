@@ -1,0 +1,22 @@
+{
+  "id": "system-cli-069-zip-create",
+  "category": "system-cli/file/archive",
+  "intents_zh": [
+    "打包 zip 排除某些檔",
+    "python 建 zip",
+    "壓縮指定資料夾"
+  ],
+  "intents_en": [
+    "create zip from folder",
+    "python zip with excludes",
+    "make zip archive"
+  ],
+  "slots": [
+    "src_dir",
+    "zip_path"
+  ],
+  "code": "import zipfile, os\nfrom pathlib import Path\n\nEXCLUDE = {'.DS_Store', '__pycache__', 'node_modules', '.git'}\nsrc = Path('{{src_dir}}')\nwith zipfile.ZipFile('{{zip_path}}', 'w', zipfile.ZIP_DEFLATED) as zf:\n    for p in src.rglob('*'):\n        if any(part in EXCLUDE for part in p.parts): continue\n        if p.is_file():\n            zf.write(p, p.relative_to(src.parent))\nprint('wrote {{zip_path}}')",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "python 建 zip 含排除"
+}

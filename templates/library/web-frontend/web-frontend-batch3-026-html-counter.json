@@ -1,0 +1,27 @@
+{
+  "id": "web-frontend-batch3-026-html-counter",
+  "category": "web-frontend/html/apps/counter",
+  "intents_zh": [
+    "純 HTML 計數器",
+    "vanilla JS counter",
+    "靜態加減",
+    "沒 framework counter",
+    "HTML 計數按鈕",
+    "原生 +/-"
+  ],
+  "intents_en": [
+    "plain html counter",
+    "vanilla js counter",
+    "static counter",
+    "no framework counter",
+    "html plus minus",
+    "raw counter"
+  ],
+  "slots": [
+    "step"
+  ],
+  "code": "<!DOCTYPE html>\n<html><head><meta charset=\"utf-8\"><title>Counter</title></head>\n<body>\n  <button id=\"dec\">-</button>\n  <span id=\"v\">0</span>\n  <button id=\"inc\">+</button>\n  <script>\n    let count = 0;\n    const STEP = {{step}};\n    const v = document.getElementById('v');\n    document.getElementById('inc').onclick = () => { count += STEP; v.textContent = count; };\n    document.getElementById('dec').onclick = () => { count -= STEP; v.textContent = count; };\n  </script>\n</body></html>",
+  "language": "html",
+  "deps": [],
+  "summary_zh": "純 HTML 計數器最小範例"
+}

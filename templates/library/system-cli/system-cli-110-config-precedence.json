@@ -1,0 +1,21 @@
+{
+  "id": "system-cli-110-config-precedence",
+  "category": "system-cli/config/precedence",
+  "intents_zh": [
+    "python 設定優先級 CLI>env>file",
+    "多來源 config",
+    "config 合併優先序"
+  ],
+  "intents_en": [
+    "config precedence python",
+    "cli env file merge",
+    "layered config python"
+  ],
+  "slots": [
+    "app_name"
+  ],
+  "code": "import os, json, argparse\nfrom pathlib import Path\n\ndef load_config():\n    cfg = {'host':'localhost', 'port': 8080, 'debug': False}\n    fp = Path.home() / '.config' / '{{app_name}}.json'\n    if fp.exists():\n        cfg.update(json.loads(fp.read_text()))\n    for k in ('host','port','debug'):\n        env = os.environ.get(f'{{app_name}}_{k}'.upper())\n        if env is not None:\n            cfg[k] = env\n    ap = argparse.ArgumentParser()\n    ap.add_argument('--host'); ap.add_argument('--port', type=int); ap.add_argument('--debug', action='store_true')\n    args = ap.parse_args()\n    for k, v in vars(args).items():\n        if v not in (None, False): cfg[k] = v\n    return cfg\n\nprint(load_config())",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "config 三層優先級合併"
+}

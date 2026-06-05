@@ -1,0 +1,28 @@
+{
+  "id": "depth-firmware-011-deep-sleep-gpio-wake",
+  "category": "firmware/power/deep-sleep",
+  "intents_zh": [
+    "GPIO 喚醒深度睡眠",
+    "ESP32 deep sleep",
+    "按鈕喚醒",
+    "ext0 wake up",
+    "低功耗睡眠"
+  ],
+  "intents_en": [
+    "wake deep sleep on gpio",
+    "esp32 deep sleep",
+    "button wake",
+    "ext0 wakeup",
+    "low power sleep"
+  ],
+  "slots": [
+    "wake_pin",
+    "wake_level"
+  ],
+  "code": "#include \"esp_sleep.h\"\nesp_sleep_enable_ext0_wakeup({{wake_pin}}, {{wake_level}});\nESP_LOGI(\"SLEEP\", \"going to deep sleep\");\nesp_deep_sleep_start();",
+  "language": "c",
+  "deps": [
+    "esp-idf"
+  ],
+  "summary_zh": "配置 ext0 GPIO 喚醒源後進入 deep sleep"
+}

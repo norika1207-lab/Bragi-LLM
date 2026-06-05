@@ -1,0 +1,28 @@
+{
+  "id": "depth-mobile-006-background-fetch-rn",
+  "category": "mobile/background/reactnative",
+  "intents_zh": [
+    "RN background fetch",
+    "react-native-background-fetch 設定",
+    "跨平台背景任務",
+    "headless task 配置",
+    "BackgroundFetch.configure"
+  ],
+  "intents_en": [
+    "RN background fetch",
+    "react-native-background-fetch",
+    "cross platform bg task",
+    "headless task",
+    "BackgroundFetch configure"
+  ],
+  "slots": [
+    "interval_min",
+    "task_fn"
+  ],
+  "code": "import BackgroundFetch from 'react-native-background-fetch';\n\nBackgroundFetch.configure(\n  { minimumFetchInterval: {{interval_min}}, stopOnTerminate: false, startOnBoot: true },\n  async (taskId) => { await {{task_fn}}(); BackgroundFetch.finish(taskId); },\n  (taskId) => BackgroundFetch.finish(taskId)\n);",
+  "language": "ts",
+  "deps": [
+    "react-native-background-fetch"
+  ],
+  "summary_zh": "RN 背景抓取設定"
+}

@@ -1,0 +1,27 @@
+{
+  "id": "web-backend-076-hono-jwt",
+  "category": "web-backend/hono/auth",
+  "intents_zh": [
+    "hono jwt middleware",
+    "hono token 驗證",
+    "hono 加 JWT",
+    "cloudflare hono jwt",
+    "保護 endpoint hono"
+  ],
+  "intents_en": [
+    "hono jwt middleware",
+    "hono token verify",
+    "hono protected route",
+    "cloudflare hono jwt",
+    "jwt auth hono"
+  ],
+  "slots": [
+    "secret_env"
+  ],
+  "code": "import { Hono } from 'hono';\nimport { jwt, sign } from 'hono/jwt';\n\nconst app = new Hono<{ Bindings: { {{secret_env}}: string } }>();\n\napp.post('/login', async (c) => {\n  const { username } = await c.req.json();\n  const token = await sign({ sub: username, exp: Math.floor(Date.now() / 1000) + 3600 }, c.env.{{secret_env}});\n  return c.json({ token });\n});\n\napp.use('/api/*', (c, next) => jwt({ secret: c.env.{{secret_env}} })(c, next));\napp.get('/api/me', (c) => c.json({ user: c.get('jwtPayload') }));\n\nexport default app;",
+  "language": "ts",
+  "deps": [
+    "hono"
+  ],
+  "summary_zh": "Hono JWT 登入與保護"
+}

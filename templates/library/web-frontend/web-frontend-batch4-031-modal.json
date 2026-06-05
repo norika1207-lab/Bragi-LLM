@@ -1,0 +1,29 @@
+{
+  "id": "web-frontend-batch4-031-modal",
+  "category": "web-frontend/react/components/modal",
+  "intents_zh": [
+    "modal 對話框",
+    "彈窗元件",
+    "tailwind dialog",
+    "客戶端 modal",
+    "遮罩 popup",
+    "useState 控制 modal"
+  ],
+  "intents_en": [
+    "modal dialog",
+    "popup component",
+    "tailwind dialog",
+    "client modal",
+    "overlay popup",
+    "useState modal"
+  ],
+  "slots": [
+    "modal_title"
+  ],
+  "code": "'use client';\nimport { useState } from 'react';\n\nexport default function ModalDemo() {\n  const [open, setOpen] = useState(false);\n  return (\n    <>\n      <button onClick={() => setOpen(true)} className=\"px-3 py-1 border rounded\">Open</button>\n      {open && (\n        <div className=\"fixed inset-0 bg-black/50 flex items-center justify-center\" onClick={() => setOpen(false)}>\n          <div className=\"bg-white rounded-lg p-6 w-80\" onClick={(e) => e.stopPropagation()}>\n            <h2 className=\"text-lg font-semibold\">{{modal_title}}</h2>\n            <button onClick={() => setOpen(false)} className=\"mt-4 text-sm text-gray-500\">Close</button>\n          </div>\n        </div>\n      )}\n    </>\n  );\n}",
+  "language": "tsx",
+  "deps": [
+    "react"
+  ],
+  "summary_zh": "useState 控制的 modal 對話框"
+}

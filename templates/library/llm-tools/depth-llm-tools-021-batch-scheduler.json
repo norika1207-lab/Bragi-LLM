@@ -1,0 +1,27 @@
+{
+  "id": "depth-llm-tools-021-batch-scheduler",
+  "category": "llm-tools/batch/scheduler",
+  "intents_zh": [
+    "批次推論排程",
+    "async 並行呼叫",
+    "限速並發",
+    "asyncio gather",
+    "批跑請求"
+  ],
+  "intents_en": [
+    "batch inference scheduler",
+    "async parallel calls",
+    "rate-limited concurrency",
+    "asyncio gather",
+    "batched requests"
+  ],
+  "slots": [
+    "items",
+    "call_fn",
+    "concurrency"
+  ],
+  "code": "import asyncio\n\nasync def batch_run({{items}}, {{call_fn}}, {{concurrency}}=10):\n    sem = asyncio.Semaphore({{concurrency}})\n    async def worker(x):\n        async with sem: return await {{call_fn}}(x)\n    return await asyncio.gather(*[worker(i) for i in {{items}}])",
+  "language": "python",
+  "deps": [],
+  "summary_zh": "asyncio Semaphore 限制並發跑批次推論"
+}

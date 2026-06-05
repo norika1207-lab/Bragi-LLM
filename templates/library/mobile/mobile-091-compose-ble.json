@@ -1,0 +1,29 @@
+{
+  "id": "mobile-091-compose-ble",
+  "category": "mobile/compose/ble",
+  "intents_zh": [
+    "Android Kotlin BLE scan",
+    "Compose 掃藍牙",
+    "Kotlin BluetoothLeScanner",
+    "Android BLE 範例",
+    "BLE scan Compose",
+    "Kotlin 藍芽掃描",
+    "Compose ble peripherals"
+  ],
+  "intents_en": [
+    "android kotlin ble scan",
+    "BluetoothLeScanner kotlin",
+    "compose ble scan",
+    "android ble example",
+    "kotlin bluetooth scan",
+    "ble peripherals android",
+    "ble scanner kotlin"
+  ],
+  "slots": [
+    "scan_ms"
+  ],
+  "code": "import android.bluetooth.BluetoothManager\nimport android.bluetooth.le.ScanCallback\nimport android.bluetooth.le.ScanResult\nimport android.content.Context\nimport android.os.Handler\nimport android.os.Looper\nfun scan(c:Context,onFound:(ScanResult)->Unit){\n  val mgr=c.getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager\n  val sc=mgr.adapter.bluetoothLeScanner\n  val cb=object:ScanCallback(){override fun onScanResult(t:Int,r:ScanResult){onFound(r)}}\n  sc.startScan(cb)\n  Handler(Looper.getMainLooper()).postDelayed({sc.stopScan(cb)},{{scan_ms}})}",
+  "language": "kt",
+  "deps": [],
+  "summary_zh": "Android Kotlin BLE 掃描 N 毫秒"
+}

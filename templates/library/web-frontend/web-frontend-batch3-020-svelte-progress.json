@@ -1,0 +1,29 @@
+{
+  "id": "web-frontend-batch3-020-svelte-progress",
+  "category": "web-frontend/svelte/ui/progress",
+  "intents_zh": [
+    "Svelte 進度條",
+    "Svelte progress bar",
+    "Svelte 百分比顯示",
+    "Svelte 動畫進度",
+    "Svelte tweened",
+    "Svelte 載入進度"
+  ],
+  "intents_en": [
+    "svelte progress bar",
+    "svelte percentage bar",
+    "svelte animated progress",
+    "svelte tweened progress",
+    "svelte loading bar",
+    "svelte progress component"
+  ],
+  "slots": [
+    "color"
+  ],
+  "code": "<script>\n  import { tweened } from 'svelte/motion';\n  import { cubicOut } from 'svelte/easing';\n  export let value = 0;\n  export let max = 100;\n  const progress = tweened(0, { duration: 400, easing: cubicOut });\n  $: progress.set(value / max * 100);\n</script>\n<div class=\"bar\">\n  <div class=\"fill\" style=\"width: {$progress}%\"></div>\n  <span>{Math.round($progress)}%</span>\n</div>\n<style>\n  .bar { position: relative; background: #eee; height: 20px; border-radius: 10px; overflow: hidden; }\n  .fill { background: {{color}}; height: 100%; }\n  span { position: absolute; inset: 0; text-align: center; font-size: 12px; }\n</style>",
+  "language": "svelte",
+  "deps": [
+    "svelte"
+  ],
+  "summary_zh": "Svelte tweened 動畫進度條"
+}

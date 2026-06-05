@@ -1,0 +1,26 @@
+{
+  "id": "depth-database-devops-032-otel-python",
+  "category": "database-devops/observability/tracing",
+  "intents_zh": [
+    "python OpenTelemetry 接 jaeger",
+    "OTLP exporter",
+    "trace flask"
+  ],
+  "intents_en": [
+    "python OpenTelemetry to jaeger",
+    "OTLP exporter",
+    "trace flask"
+  ],
+  "slots": [
+    "service_name",
+    "otlp_endpoint"
+  ],
+  "code": "from opentelemetry import trace\nfrom opentelemetry.sdk.resources import Resource\nfrom opentelemetry.sdk.trace import TracerProvider\nfrom opentelemetry.sdk.trace.export import BatchSpanProcessor\nfrom opentelemetry.exporter.otlp.proto.http.trace_exporter import OTLPSpanExporter\n\nprovider = TracerProvider(resource=Resource.create({'service.name': '{{service_name}}'}))\nprovider.add_span_processor(BatchSpanProcessor(OTLPSpanExporter(endpoint='{{otlp_endpoint}}/v1/traces')))\ntrace.set_tracer_provider(provider)\ntracer = trace.get_tracer(__name__)\n\nwith tracer.start_as_current_span('boot'):\n    print('hello traced world')",
+  "language": "py",
+  "deps": [
+    "opentelemetry-api",
+    "opentelemetry-sdk",
+    "opentelemetry-exporter-otlp"
+  ],
+  "summary_zh": "Python OTel SDK 推 trace 到 Jaeger OTLP"
+}

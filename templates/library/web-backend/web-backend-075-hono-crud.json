@@ -1,0 +1,27 @@
+{
+  "id": "web-backend-075-hono-crud",
+  "category": "web-backend/hono/rest",
+  "intents_zh": [
+    "hono CRUD",
+    "hono 增刪改查",
+    "Hono REST endpoint",
+    "hono 路由",
+    "hono resource"
+  ],
+  "intents_en": [
+    "hono crud",
+    "hono REST endpoints",
+    "scaffold rest hono",
+    "hono resource",
+    "hono routes example"
+  ],
+  "slots": [
+    "resource"
+  ],
+  "code": "import { Hono } from 'hono';\n\nconst app = new Hono();\nconst store = new Map<string, any>();\n\napp.get('/{{resource}}', (c) => c.json([...store.values()]));\napp.get('/{{resource}}/:id', (c) => {\n  const item = store.get(c.req.param('id'));\n  return item ? c.json(item) : c.json({ error: 'not found' }, 404);\n});\napp.post('/{{resource}}', async (c) => {\n  const body = await c.req.json();\n  const id = crypto.randomUUID();\n  const item = { id, ...body };\n  store.set(id, item);\n  return c.json(item, 201);\n});\napp.delete('/{{resource}}/:id', (c) => {\n  store.delete(c.req.param('id'));\n  return c.body(null, 204);\n});\n\nexport default app;",
+  "language": "ts",
+  "deps": [
+    "hono"
+  ],
+  "summary_zh": "Hono CRUD 路由"
+}

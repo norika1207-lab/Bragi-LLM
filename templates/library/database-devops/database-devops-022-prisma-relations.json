@@ -1,0 +1,26 @@
+{
+  "id": "database-devops-022-prisma-relations",
+  "category": "database-devops/orm/prisma",
+  "intents_zh": [
+    "Prisma 關聯",
+    "一對多 prisma",
+    "model 加 relation",
+    "外鍵關聯"
+  ],
+  "intents_en": [
+    "prisma relations",
+    "one to many prisma",
+    "foreign key prisma",
+    "relation field"
+  ],
+  "slots": [
+    "parent_model",
+    "child_model"
+  ],
+  "code": "model {{parent_model}} {\n  id       Int      @id @default(autoincrement())\n  name     String\n  children {{child_model}}[]\n}\n\nmodel {{child_model}} {\n  id       Int      @id @default(autoincrement())\n  parentId Int\n  parent   {{parent_model}} @relation(fields: [parentId], references: [id], onDelete: Cascade)\n}",
+  "language": "prisma",
+  "deps": [
+    "prisma"
+  ],
+  "summary_zh": "Prisma 一對多關聯定義"
+}

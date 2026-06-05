@@ -1,0 +1,29 @@
+{
+  "id": "depth-llm-tools-026-anthropic-token-counter",
+  "category": "llm-tools/tokens/anthropic",
+  "intents_zh": [
+    "Anthropic token 計數",
+    "Claude token API 估算",
+    "count_tokens 端點",
+    "訊息預估 token",
+    "Claude tokenizer"
+  ],
+  "intents_en": [
+    "Anthropic token count",
+    "Claude token API estimate",
+    "count_tokens endpoint",
+    "message token preview",
+    "Claude tokenizer"
+  ],
+  "slots": [
+    "client",
+    "model",
+    "messages"
+  ],
+  "code": "r = {{client}}.messages.count_tokens(\n    model={{model}},\n    messages={{messages}},\n)\nprint(r.input_tokens)",
+  "language": "python",
+  "deps": [
+    "anthropic"
+  ],
+  "summary_zh": "Anthropic count_tokens API 預估訊息 token 數"
+}

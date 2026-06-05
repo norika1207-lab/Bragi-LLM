@@ -1,0 +1,28 @@
+{
+  "id": "web-backend-050-fastapi-upload",
+  "category": "web-backend/fastapi/upload",
+  "intents_zh": [
+    "fastapi 檔案上傳",
+    "UploadFile 用法",
+    "fastapi multipart",
+    "儲存 upload 到 disk fastapi",
+    "上傳檔案 endpoint"
+  ],
+  "intents_en": [
+    "fastapi file upload",
+    "UploadFile example",
+    "multipart fastapi",
+    "save upload fastapi",
+    "upload endpoint fastapi"
+  ],
+  "slots": [
+    "upload_dir"
+  ],
+  "code": "from fastapi import APIRouter, UploadFile, File, HTTPException\nimport os, shutil\n\nrouter = APIRouter()\nUPLOAD_DIR = '{{upload_dir}}'\nos.makedirs(UPLOAD_DIR, exist_ok=True)\n\n@router.post('/upload')\nasync def upload(file: UploadFile = File(...)):\n    if not file.filename: raise HTTPException(400, 'no filename')\n    dest = os.path.join(UPLOAD_DIR, file.filename)\n    with open(dest, 'wb') as out:\n        shutil.copyfileobj(file.file, out)\n    return {'filename': file.filename, 'size': os.path.getsize(dest)}",
+  "language": "py",
+  "deps": [
+    "fastapi",
+    "python-multipart"
+  ],
+  "summary_zh": "FastAPI UploadFile 上傳"
+}

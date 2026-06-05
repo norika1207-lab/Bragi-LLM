@@ -1,0 +1,35 @@
+{
+  "id": "llm-tools-012-faiss-index-build",
+  "category": "llm-tools/vectordb/faiss",
+  "intents_zh": [
+    "建 FAISS 索引",
+    "faiss 向量庫",
+    "faiss 範例",
+    "用 faiss 存向量",
+    "build faiss index",
+    "faiss 基本用法",
+    "建 index 寫盤",
+    "faiss flat l2"
+  ],
+  "intents_en": [
+    "build faiss index",
+    "faiss vector store",
+    "faiss basic example",
+    "save faiss index",
+    "faiss flat l2",
+    "minimal faiss",
+    "faiss create index",
+    "persist faiss"
+  ],
+  "slots": [
+    "dim",
+    "index_path"
+  ],
+  "code": "import faiss\nimport numpy as np\n\nindex = faiss.IndexFlatIP({{dim}})\n\ndef add(vectors: np.ndarray):\n    index.add(vectors.astype(\"float32\"))\n\ndef search(query: np.ndarray, k: int = 5):\n    D, I = index.search(query.astype(\"float32\"), k)\n    return D, I\n\ndef save():\n    faiss.write_index(index, \"{{index_path}}\")\n\nif __name__ == \"__main__\":\n    add(np.random.rand(100, {{dim}}))\n    save()",
+  "language": "py",
+  "deps": [
+    "faiss-cpu",
+    "numpy"
+  ],
+  "summary_zh": "FAISS flat index 建立、新增、搜尋、持久化"
+}

@@ -1,0 +1,28 @@
+{
+  "id": "depth-web-frontend-044-vue-pinia",
+  "category": "web-frontend/state/vue",
+  "intents_zh": [
+    "Pinia store",
+    "Vue 狀態管理",
+    "defineStore composition",
+    "Pinia 範例",
+    "vue 共享狀態"
+  ],
+  "intents_en": [
+    "pinia store",
+    "vue state management",
+    "defineStore composition",
+    "pinia example",
+    "vue shared state"
+  ],
+  "slots": [
+    "store_name"
+  ],
+  "code": "import { defineStore } from 'pinia';\nimport { ref, computed } from 'vue';\n\nexport const use{{store_name}} = defineStore('{{store_name}}', () => {\n  const count = ref(0);\n  const doubled = computed(() => count.value * 2);\n  const inc = () => count.value++;\n  return { count, doubled, inc };\n});",
+  "language": "ts",
+  "deps": [
+    "pinia",
+    "vue"
+  ],
+  "summary_zh": "Pinia composition setup store"
+}

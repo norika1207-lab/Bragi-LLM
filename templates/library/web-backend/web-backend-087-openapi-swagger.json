@@ -1,0 +1,29 @@
+{
+  "id": "web-backend-087-openapi-swagger",
+  "category": "web-backend/docs",
+  "intents_zh": [
+    "express swagger ui",
+    "加 openapi doc",
+    "API 文件 endpoint",
+    "swagger-ui-express 範例",
+    "openapi spec 服務"
+  ],
+  "intents_en": [
+    "express swagger ui",
+    "openapi doc endpoint",
+    "api docs route",
+    "swagger-ui-express example",
+    "serve openapi spec"
+  ],
+  "slots": [
+    "spec_path",
+    "docs_path"
+  ],
+  "code": "const express = require('express');\nconst swaggerUi = require('swagger-ui-express');\nconst spec = require('{{spec_path}}');\n\nmodule.exports = (app) => {\n  app.use('{{docs_path}}', swaggerUi.serve, swaggerUi.setup(spec, {\n    customSiteTitle: 'API Docs'\n  }));\n};",
+  "language": "js",
+  "deps": [
+    "express",
+    "swagger-ui-express"
+  ],
+  "summary_zh": "Express Swagger UI 文件"
+}

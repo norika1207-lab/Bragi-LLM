@@ -1,0 +1,33 @@
+{
+  "id": "llm-tools-119-vllm-docker",
+  "category": "llm-tools/serving/vllm-docker",
+  "intents_zh": [
+    "vllm docker 部署",
+    "docker run vllm",
+    "用 docker 跑 vllm",
+    "vllm 容器化",
+    "gpu docker vllm",
+    "vllm 一鍵部署",
+    "container vllm",
+    "vllm 鏡像啟動"
+  ],
+  "intents_en": [
+    "vllm docker run",
+    "docker deploy vllm",
+    "containerize vllm",
+    "gpu docker vllm",
+    "one-shot vllm deploy",
+    "run vllm image",
+    "vllm container",
+    "vllm dockerfile"
+  ],
+  "slots": [
+    "model_id",
+    "port",
+    "gpu_id"
+  ],
+  "code": "#!/bin/bash\nset -e\n\ndocker run --rm -d \\\n  --name vllm-serve \\\n  --gpus device={{gpu_id}} \\\n  -p {{port}}:8000 \\\n  -v ~/.cache/huggingface:/root/.cache/huggingface \\\n  -e HUGGING_FACE_HUB_TOKEN \\\n  vllm/vllm-openai:latest \\\n  --model {{model_id}} \\\n  --dtype auto",
+  "language": "sh",
+  "deps": [],
+  "summary_zh": "vLLM 官方 docker 映像啟動腳本"
+}

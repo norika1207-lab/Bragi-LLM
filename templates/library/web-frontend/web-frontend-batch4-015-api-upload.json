@@ -1,0 +1,29 @@
+{
+  "id": "web-frontend-batch4-015-api-upload",
+  "category": "web-frontend/nextjs/api/upload",
+  "intents_zh": [
+    "檔案上傳 API",
+    "multipart 上傳 route",
+    "接收 FormData 的 API",
+    "Next.js 上傳端點",
+    "存圖片 API",
+    "POST 上傳檔案"
+  ],
+  "intents_en": [
+    "file upload api",
+    "multipart route",
+    "formdata receiver",
+    "next upload endpoint",
+    "save image api",
+    "post upload"
+  ],
+  "slots": [
+    "upload_dir"
+  ],
+  "code": "import { NextResponse } from 'next/server';\nimport { writeFile } from 'fs/promises';\nimport path from 'path';\n\nexport async function POST(req: Request) {\n  const form = await req.formData();\n  const file = form.get('file') as File | null;\n  if (!file) return NextResponse.json({ error: 'no file' }, { status: 400 });\n  const bytes = Buffer.from(await file.arrayBuffer());\n  const dest = path.join('{{upload_dir}}', file.name);\n  await writeFile(dest, bytes);\n  return NextResponse.json({ ok: true, path: dest });\n}",
+  "language": "ts",
+  "deps": [
+    "next"
+  ],
+  "summary_zh": "FormData 檔案上傳 API 寫到磁碟"
+}

@@ -1,0 +1,28 @@
+{
+  "id": "depth-llm-tools-027-message-token-overhead",
+  "category": "llm-tools/tokens/chat-overhead",
+  "intents_zh": [
+    "chat message token 加成",
+    "計算對話結構 overhead",
+    "ChatML token 計算",
+    "訊息分隔 token 估算",
+    "chat format token"
+  ],
+  "intents_en": [
+    "chat message token overhead",
+    "conversation structure tokens",
+    "ChatML token calc",
+    "message separator tokens",
+    "chat format tokens"
+  ],
+  "slots": [
+    "messages",
+    "enc"
+  ],
+  "code": "def chat_tokens({{messages}}, {{enc}}):\n    total = 0\n    for m in {{messages}}:\n        total += 4\n        total += len({{enc}}.encode(m[\"role\"]))\n        total += len({{enc}}.encode(m[\"content\"]))\n    return total + 2",
+  "language": "python",
+  "deps": [
+    "tiktoken"
+  ],
+  "summary_zh": "算 chat messages 含格式 overhead 的總 token 數"
+}

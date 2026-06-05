@@ -1,0 +1,29 @@
+{
+  "id": "depth-web-backend-029-nodemailer-template",
+  "category": "web-backend/email/nodemailer",
+  "intents_zh": [
+    "nodemailer 寄信",
+    "handlebars email 模板",
+    "SMTP 寄送",
+    "email-templates 套件",
+    "附件寄信"
+  ],
+  "intents_en": [
+    "nodemailer send",
+    "handlebars email template",
+    "smtp send",
+    "email-templates package",
+    "send with attachments"
+  ],
+  "slots": [
+    "smtp_host",
+    "from"
+  ],
+  "code": "import nodemailer from 'nodemailer';\nimport Handlebars from 'handlebars';\nconst transport = nodemailer.createTransport({ host: '{{smtp_host}}', port: 587, auth: { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS } });\nconst tpl = Handlebars.compile('<p>Hi {{name}}, your code: {{code}}</p>');\nawait transport.sendMail({ from: '{{from}}', to, subject: 'Verify', html: tpl({ name, code }) });",
+  "language": "js",
+  "deps": [
+    "nodemailer",
+    "handlebars"
+  ],
+  "summary_zh": "nodemailer + handlebars 模板寄信"
+}

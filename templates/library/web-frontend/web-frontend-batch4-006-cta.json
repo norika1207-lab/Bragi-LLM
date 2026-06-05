@@ -1,0 +1,29 @@
+{
+  "id": "web-frontend-batch4-006-cta",
+  "category": "web-frontend/nextjs/landing/cta",
+  "intents_zh": [
+    "落地頁底部 CTA",
+    "行動呼籲區塊",
+    "結尾的轉換區",
+    "產生 CTA banner",
+    "訂閱號召條",
+    "底部按鈕大區"
+  ],
+  "intents_en": [
+    "bottom cta section",
+    "call to action banner",
+    "conversion block",
+    "footer cta",
+    "newsletter cta",
+    "big action band"
+  ],
+  "slots": [
+    "cta_headline",
+    "cta_button_text",
+    "cta_button_href"
+  ],
+  "code": "export default function CTASection() {\n  return (\n    <section className=\"bg-indigo-600 py-16\">\n      <div className=\"mx-auto max-w-4xl px-6 text-center\">\n        <h2 className=\"text-3xl font-bold text-white\">{{cta_headline}}</h2>\n        <a href=\"{{cta_button_href}}\" className=\"mt-6 inline-block rounded-lg bg-white text-indigo-600 px-6 py-3 font-semibold hover:bg-gray-100\">\n          {{cta_button_text}}\n        </a>\n      </div>\n    </section>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "頁底深色 CTA 行動呼籲區"
+}

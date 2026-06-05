@@ -1,0 +1,27 @@
+{
+  "id": "web-backend-095-flask-session",
+  "category": "web-backend/flask/auth",
+  "intents_zh": [
+    "flask session 範例",
+    "flask login session",
+    "flask 存 session",
+    "secure flask session",
+    "flask cookie session"
+  ],
+  "intents_en": [
+    "flask session example",
+    "flask login session",
+    "store session flask",
+    "secure flask session",
+    "flask cookie session"
+  ],
+  "slots": [
+    "secret_env"
+  ],
+  "code": "from flask import Flask, session, request, jsonify\nimport os\n\napp = Flask(__name__)\napp.secret_key = os.environ['{{secret_env}}']\napp.config.update(SESSION_COOKIE_HTTPONLY=True, SESSION_COOKIE_SAMESITE='Lax')\n\n@app.post('/login')\ndef login():\n    session['user'] = (request.get_json() or {}).get('username')\n    return jsonify(ok=True)\n\n@app.get('/me')\ndef me():\n    return jsonify(user=session.get('user'))\n\n@app.post('/logout')\ndef logout():\n    session.clear()\n    return jsonify(ok=True)",
+  "language": "py",
+  "deps": [
+    "flask"
+  ],
+  "summary_zh": "Flask cookie session 登入"
+}

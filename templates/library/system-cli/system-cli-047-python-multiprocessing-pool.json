@@ -1,0 +1,22 @@
+{
+  "id": "system-cli-047-python-multiprocessing-pool",
+  "category": "system-cli/parallel/python",
+  "intents_zh": [
+    "python 多進程 pool",
+    "multiprocessing 平行",
+    "python parallel map"
+  ],
+  "intents_en": [
+    "python multiprocessing pool",
+    "parallel map python",
+    "python process pool"
+  ],
+  "slots": [
+    "worker_fn",
+    "input_var"
+  ],
+  "code": "from multiprocessing import Pool\nimport os\n\ndef {{worker_fn}}(x):\n    return (os.getpid(), x * x)\n\nif __name__ == '__main__':\n    {{input_var}} = list(range(20))\n    with Pool(processes=4) as pool:\n        for pid, r in pool.imap_unordered({{worker_fn}}, {{input_var}}):\n            print(pid, r)",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "multiprocessing Pool 平行"
+}

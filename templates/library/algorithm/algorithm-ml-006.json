@@ -1,0 +1,25 @@
+{
+  "id": "algorithm-ml-006",
+  "category": "algorithm/ml/gradient_descent",
+  "intents_zh": [
+    "梯度下降",
+    "gradient descent",
+    "手刻 GD",
+    "給我 SGD 範例"
+  ],
+  "intents_en": [
+    "gradient descent",
+    "SGD",
+    "manual gradient descent",
+    "train linear with GD"
+  ],
+  "slots": [
+    "fn_name"
+  ],
+  "code": "import numpy as np\n\ndef {{fn_name}}(X, y, lr=0.01, epochs=1000):\n    X = np.asarray(X, dtype=float)\n    y = np.asarray(y, dtype=float)\n    n, d = X.shape\n    w = np.zeros(d)\n    b = 0.0\n    for _ in range(epochs):\n        pred = X @ w + b\n        err = pred - y\n        w -= lr * (X.T @ err) / n\n        b -= lr * err.mean()\n    return w, b",
+  "language": "py",
+  "deps": [
+    "numpy"
+  ],
+  "summary_zh": "手刻批次梯度下降線性回歸"
+}

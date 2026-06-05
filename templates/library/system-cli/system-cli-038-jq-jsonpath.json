@@ -1,0 +1,24 @@
+{
+  "id": "system-cli-038-jq-jsonpath",
+  "category": "system-cli/data/jq",
+  "intents_zh": [
+    "jq 過濾 JSON",
+    "用 jq 取欄位",
+    "shell 處理 json"
+  ],
+  "intents_en": [
+    "jq filter example",
+    "extract field with jq",
+    "shell json query"
+  ],
+  "slots": [
+    "json_file",
+    "jq_path"
+  ],
+  "code": "#!/usr/bin/env bash\nset -euo pipefail\n\n# extract {{jq_path}} from {{json_file}}\njq -r '{{jq_path}}' \"{{json_file}}\"\n\n# count items\njq 'length' \"{{json_file}}\"\n\n# filter where status==active\njq '[.[] | select(.status == \"active\")]' \"{{json_file}}\"",
+  "language": "sh",
+  "deps": [
+    "jq"
+  ],
+  "summary_zh": "jq 抽欄/過濾/計數"
+}

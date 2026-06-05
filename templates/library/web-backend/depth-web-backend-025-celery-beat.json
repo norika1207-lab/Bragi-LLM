@@ -1,0 +1,25 @@
+{
+  "id": "depth-web-backend-025-celery-beat",
+  "category": "web-backend/scheduler/celery-beat",
+  "intents_zh": [
+    "Celery beat 定時",
+    "cron schedule",
+    "週期任務",
+    "Python 排程器",
+    "beat_schedule 設定"
+  ],
+  "intents_en": [
+    "celery beat schedule",
+    "cron tasks",
+    "periodic tasks",
+    "python scheduler",
+    "beat schedule config"
+  ],
+  "slots": [],
+  "code": "from celery.schedules import crontab\napp.conf.beat_schedule = {\n  'cleanup-nightly': {\n    'task': 'tasks.cleanup',\n    'schedule': crontab(hour=3, minute=0),\n  }\n}",
+  "language": "py",
+  "deps": [
+    "celery"
+  ],
+  "summary_zh": "Celery beat cron 排程"
+}

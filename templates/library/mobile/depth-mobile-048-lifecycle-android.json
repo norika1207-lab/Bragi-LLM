@@ -1,0 +1,25 @@
+{
+  "id": "depth-mobile-048-lifecycle-android",
+  "category": "mobile/lifecycle/android",
+  "intents_zh": [
+    "Android ProcessLifecycleOwner",
+    "app 前後景偵測",
+    "DefaultLifecycleObserver",
+    "onStart onStop",
+    "application lifecycle"
+  ],
+  "intents_en": [
+    "Android ProcessLifecycleOwner",
+    "app foreground background",
+    "DefaultLifecycleObserver",
+    "onStart onStop",
+    "application lifecycle"
+  ],
+  "slots": [],
+  "code": "class AppObserver : DefaultLifecycleObserver {\n    override fun onStart(owner: LifecycleOwner) { Log.d(\"APP\", \"foreground\") }\n    override fun onStop(owner: LifecycleOwner) { Log.d(\"APP\", \"background\") }\n}\nProcessLifecycleOwner.get().lifecycle.addObserver(AppObserver())",
+  "language": "kotlin",
+  "deps": [
+    "androidx.lifecycle:lifecycle-process"
+  ],
+  "summary_zh": "Android process lifecycle 觀察"
+}

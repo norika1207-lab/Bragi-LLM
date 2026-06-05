@@ -1,0 +1,33 @@
+{
+  "id": "llm-tools-078-async-anthropic",
+  "category": "llm-tools/anthropic/async",
+  "intents_zh": [
+    "async anthropic",
+    "AsyncAnthropic 範例",
+    "async claude 呼叫",
+    "非同步 claude",
+    "Anthropic async client",
+    "await anthropic",
+    "async claude wrapper",
+    "claude 並行"
+  ],
+  "intents_en": [
+    "async anthropic",
+    "asyncanthropic example",
+    "async claude call",
+    "async claude wrapper",
+    "anthropic async client",
+    "await anthropic",
+    "concurrent claude",
+    "async claude minimal"
+  ],
+  "slots": [
+    "model_name"
+  ],
+  "code": "import asyncio\nfrom anthropic import AsyncAnthropic\n\nclient = AsyncAnthropic()\n\nasync def ask(prompt: str) -> str:\n    msg = await client.messages.create(\n        model=\"{{model_name}}\",\n        max_tokens=512,\n        messages=[{\"role\": \"user\", \"content\": prompt}],\n    )\n    return msg.content[0].text\n\nasync def main():\n    r = await asyncio.gather(ask(\"hi\"), ask(\"bye\"))\n    print(r)\n\nasyncio.run(main())",
+  "language": "py",
+  "deps": [
+    "anthropic"
+  ],
+  "summary_zh": "AsyncAnthropic 並行呼叫"
+}

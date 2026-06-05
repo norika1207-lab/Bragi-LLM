@@ -1,0 +1,24 @@
+{
+  "id": "database-devops-114-vitest-snapshot",
+  "category": "database-devops/test/vitest",
+  "intents_zh": [
+    "vitest snapshot",
+    "toMatchSnapshot",
+    "snapshot 測試"
+  ],
+  "intents_en": [
+    "vitest snapshot",
+    "toMatchSnapshot",
+    "snapshot testing"
+  ],
+  "slots": [
+    "function_name",
+    "module_path"
+  ],
+  "code": "import { describe, it, expect } from 'vitest'\nimport { {{function_name}} } from '{{module_path}}'\n\ndescribe('{{function_name}} snapshot', () => {\n  it('matches snapshot', () => {\n    const result = {{function_name}}({ a: 1, b: 2 })\n    expect(result).toMatchSnapshot()\n  })\n\n  it('matches inline snapshot', () => {\n    expect({{function_name}}('x')).toMatchInlineSnapshot()\n  })\n})",
+  "language": "ts",
+  "deps": [
+    "vitest"
+  ],
+  "summary_zh": "vitest snapshot 測試範本"
+}

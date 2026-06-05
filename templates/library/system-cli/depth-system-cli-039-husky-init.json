@@ -1,0 +1,24 @@
+{
+  "id": "depth-system-cli-039-husky-init",
+  "category": "system-cli/git-hooks/husky",
+  "intents_zh": [
+    "husky 初始化",
+    "Node git hook",
+    "husky pre-commit lint-staged",
+    "husky 安裝步驟"
+  ],
+  "intents_en": [
+    "husky init",
+    "node git hook",
+    "husky pre-commit lint-staged",
+    "husky setup"
+  ],
+  "slots": [],
+  "code": "# install\nnpm install -D husky lint-staged\nnpx husky init\n\n# .husky/pre-commit\ncat > .husky/pre-commit <<'EOF'\n#!/usr/bin/env sh\n. \"$(dirname -- \"$0\")/_/husky.sh\"\nnpx lint-staged\nEOF\nchmod +x .husky/pre-commit\n\n# package.json snippet\n# \"lint-staged\": {\n#   \"*.{js,ts,tsx}\": [\"eslint --fix\", \"prettier --write\"],\n#   \"*.{json,md,yml}\": [\"prettier --write\"]\n# }",
+  "language": "bash",
+  "deps": [
+    "husky",
+    "lint-staged"
+  ],
+  "summary_zh": "husky + lint-staged 初始化片段"
+}

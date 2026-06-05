@@ -1,0 +1,28 @@
+{
+  "id": "depth-firmware-050-gps-nmea",
+  "category": "firmware/sensor/gps",
+  "intents_zh": [
+    "GPS NMEA 解析",
+    "TinyGPS++ 經緯度",
+    "NEO-6M",
+    "UART GPS",
+    "定位讀取"
+  ],
+  "intents_en": [
+    "gps nmea parse",
+    "tinygps lat lon",
+    "neo-6m",
+    "uart gps",
+    "gps location"
+  ],
+  "slots": [
+    "rx_pin",
+    "tx_pin"
+  ],
+  "code": "#include <TinyGPS++.h>\nHardwareSerial gpsSerial(1);\nTinyGPSPlus gps;\nvoid setup() {\n    Serial.begin(115200);\n    gpsSerial.begin(9600, SERIAL_8N1, {{rx_pin}}, {{tx_pin}});\n}\nvoid loop() {\n    while (gpsSerial.available()) gps.encode(gpsSerial.read());\n    if (gps.location.isUpdated())\n        Serial.printf(\"%.6f,%.6f\\n\", gps.location.lat(), gps.location.lng());\n}",
+  "language": "cpp",
+  "deps": [
+    "TinyGPSPlus"
+  ],
+  "summary_zh": "TinyGPS++ 從 UART 解析 NEO-6M 的經緯度"
+}

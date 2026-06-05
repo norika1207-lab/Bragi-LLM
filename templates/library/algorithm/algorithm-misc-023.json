@@ -1,0 +1,21 @@
+{
+  "id": "algorithm-misc-023",
+  "category": "algorithm/misc/linked_list_cycle",
+  "intents_zh": [
+    "鏈表環",
+    "detect cycle linked list",
+    "Floyd 龜兔"
+  ],
+  "intents_en": [
+    "linked list cycle",
+    "Floyd cycle detection",
+    "tortoise hare"
+  ],
+  "slots": [
+    "fn_name"
+  ],
+  "code": "def {{fn_name}}(head):\n    slow = fast = head\n    while fast and fast.next:\n        slow = slow.next\n        fast = fast.next.next\n        if slow is fast: return True\n    return False",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "Floyd 龜兔判鏈表環"
+}

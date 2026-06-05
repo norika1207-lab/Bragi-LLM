@@ -1,0 +1,28 @@
+{
+  "id": "web-backend-002-express-crud",
+  "category": "web-backend/express/rest",
+  "intents_zh": [
+    "寫一個 express CRUD route",
+    "Express REST CRUD 範例",
+    "幫我做個 resource 的增刪改查",
+    "express 寫 users 的 CRUD",
+    "給我 RESTful CRUD 樣板"
+  ],
+  "intents_en": [
+    "express CRUD endpoints",
+    "RESTful CRUD route in express",
+    "scaffold REST resource",
+    "CRUD routes for users in express",
+    "express resource controller"
+  ],
+  "slots": [
+    "resource",
+    "id_field"
+  ],
+  "code": "const express = require('express');\nconst router = express.Router();\nconst store = new Map();\n\nrouter.get('/{{resource}}', (req, res) => res.json([...store.values()]));\nrouter.get('/{{resource}}/:{{id_field}}', (req, res) => {\n  const item = store.get(req.params.{{id_field}});\n  if (!item) return res.status(404).json({ error: 'not found' });\n  res.json(item);\n});\nrouter.post('/{{resource}}', (req, res) => {\n  const id = String(Date.now());\n  const item = { {{id_field}}: id, ...req.body };\n  store.set(id, item);\n  res.status(201).json(item);\n});\nrouter.put('/{{resource}}/:{{id_field}}', (req, res) => {\n  if (!store.has(req.params.{{id_field}})) return res.status(404).end();\n  const updated = { ...store.get(req.params.{{id_field}}), ...req.body };\n  store.set(req.params.{{id_field}}, updated);\n  res.json(updated);\n});\nrouter.delete('/{{resource}}/:{{id_field}}', (req, res) => {\n  store.delete(req.params.{{id_field}});\n  res.status(204).end();\n});\n\nmodule.exports = router;",
+  "language": "js",
+  "deps": [
+    "express"
+  ],
+  "summary_zh": "Express in-memory CRUD router"
+}

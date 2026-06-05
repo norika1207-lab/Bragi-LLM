@@ -1,0 +1,29 @@
+{
+  "id": "mobile-123-rn-location",
+  "category": "mobile/rn/location",
+  "intents_zh": [
+    "RN 取得定位",
+    "React Native location",
+    "RN expo-location",
+    "RN GPS 座標",
+    "RN 當前位置",
+    "Expo location 範例",
+    "RN 經緯度"
+  ],
+  "intents_en": [
+    "rn current location",
+    "react native gps",
+    "expo-location example",
+    "get coordinates rn",
+    "rn user position",
+    "react native location",
+    "rn lat lng"
+  ],
+  "slots": [],
+  "code": "import * as Location from 'expo-location';\nexport async function getLoc(){\n  const p=await Location.requestForegroundPermissionsAsync();\n  if(!p.granted)return null;\n  const x=await Location.getCurrentPositionAsync({});\n  return{lat:x.coords.latitude,lng:x.coords.longitude};}",
+  "language": "ts",
+  "deps": [
+    "expo-location"
+  ],
+  "summary_zh": "Expo location 取得當前經緯度"
+}

@@ -1,0 +1,29 @@
+{
+  "id": "depth-firmware-038-ssd1306-oled",
+  "category": "firmware/display/oled",
+  "intents_zh": [
+    "SSD1306 OLED",
+    "顯示文字 OLED",
+    "I2C OLED 字串",
+    "ESP32 OLED",
+    "u8g2 顯示"
+  ],
+  "intents_en": [
+    "ssd1306 oled",
+    "oled show text",
+    "i2c oled string",
+    "esp32 oled",
+    "u8g2 display"
+  ],
+  "slots": [
+    "text"
+  ],
+  "code": "#include <Adafruit_SSD1306.h>\nAdafruit_SSD1306 d(128, 64, &Wire, -1);\nvoid setup() {\n    d.begin(SSD1306_SWITCHCAPVCC, 0x3C);\n    d.clearDisplay();\n    d.setTextSize(2);\n    d.setTextColor(SSD1306_WHITE);\n    d.setCursor(0, 0);\n    d.println(\"{{text}}\");\n    d.display();\n}",
+  "language": "cpp",
+  "deps": [
+    "Adafruit_SSD1306",
+    "Adafruit-GFX-Library",
+    "Wire"
+  ],
+  "summary_zh": "SSD1306 OLED 顯示文字"
+}

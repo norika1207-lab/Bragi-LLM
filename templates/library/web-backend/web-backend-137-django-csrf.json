@@ -1,0 +1,27 @@
+{
+  "id": "web-backend-137-django-csrf",
+  "category": "web-backend/django/security",
+  "intents_zh": [
+    "django csrf",
+    "django csrf middleware",
+    "DRF csrf exempt",
+    "django allow csrf",
+    "csrf cookie django"
+  ],
+  "intents_en": [
+    "django csrf protection",
+    "DRF csrf exempt",
+    "csrf cookie django",
+    "django csrf middleware",
+    "exempt csrf django"
+  ],
+  "slots": [
+    "trusted_origin"
+  ],
+  "code": "# settings.py snippet\nMIDDLEWARE = [\n    'django.middleware.csrf.CsrfViewMiddleware',\n    # ...\n]\n\nCSRF_TRUSTED_ORIGINS = ['{{trusted_origin}}']\nCSRF_COOKIE_HTTPONLY = False\nCSRF_COOKIE_SAMESITE = 'Lax'\n\n# view: use ensure_csrf_cookie to set cookie\nfrom django.views.decorators.csrf import ensure_csrf_cookie\nfrom django.http import JsonResponse\n\n@ensure_csrf_cookie\ndef csrf_endpoint(request):\n    return JsonResponse({'ok': True})",
+  "language": "py",
+  "deps": [
+    "django"
+  ],
+  "summary_zh": "Django CSRF cookie 設定"
+}

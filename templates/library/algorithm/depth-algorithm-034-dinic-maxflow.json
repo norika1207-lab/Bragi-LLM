@@ -1,0 +1,32 @@
+{
+  "id": "depth-algorithm-034-dinic-maxflow",
+  "category": "algorithm/flow/dinic",
+  "intents_zh": [
+    "Dinic 最大流",
+    "最大流算法",
+    "BFS 分層最大流",
+    "dinic 模板",
+    "網絡流 dinic",
+    "blocking flow",
+    "最大流"
+  ],
+  "intents_en": [
+    "Dinic max flow",
+    "maximum flow algorithm",
+    "BFS level graph flow",
+    "dinic template",
+    "network flow dinic",
+    "blocking flow algorithm",
+    "max flow"
+  ],
+  "slots": [
+    "n",
+    "edges",
+    "s",
+    "t"
+  ],
+  "code": "from collections import deque\n\nclass Dinic:\n    def __init__(self, n):\n        self.n = n; self.g = [[] for _ in range(n)]; self.E = []\n    def add(self, u, v, c):\n        self.g[u].append(len(self.E)); self.E.append([v, c])\n        self.g[v].append(len(self.E)); self.E.append([u, 0])\n    def bfs(self, s, t):\n        self.lv = [-1]*self.n; self.lv[s] = 0; q = deque([s])\n        while q:\n            u = q.popleft()\n            for i in self.g[u]:\n                v, c = self.E[i]\n                if c and self.lv[v] < 0:\n                    self.lv[v] = self.lv[u]+1; q.append(v)\n        return self.lv[t] >= 0\n    def dfs(self, u, t, f):\n        if u == t: return f\n        while self.it[u] < len(self.g[u]):\n            i = self.g[u][self.it[u]]; v, c = self.E[i]\n            if c and self.lv[v] == self.lv[u]+1:\n                d = self.dfs(v, t, min(f, c))\n                if d:\n                    self.E[i][1] -= d; self.E[i^1][1] += d; return d\n            self.it[u] += 1\n        return 0\n    def max_flow(self, s, t):\n        flow = 0\n        while self.bfs(s, t):\n            self.it = [0]*self.n\n            while True:\n                f = self.dfs(s, t, float('inf'))\n                if not f: break\n                flow += f\n        return flow",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "Dinic 算法求網絡最大流"
+}

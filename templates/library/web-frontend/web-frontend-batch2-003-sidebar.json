@@ -1,0 +1,27 @@
+{
+  "id": "web-frontend-batch2-003-sidebar",
+  "category": "web-frontend/react/layout/sidebar",
+  "intents_zh": [
+    "做側邊欄",
+    "左側導航",
+    "sidebar 元件",
+    "可收合側邊欄",
+    "固定 sidebar",
+    "app 側欄"
+  ],
+  "intents_en": [
+    "create sidebar",
+    "left navigation",
+    "sidebar component",
+    "collapsible sidebar",
+    "fixed sidebar",
+    "app side panel"
+  ],
+  "slots": [
+    "nav_items"
+  ],
+  "code": "import { useState } from 'react';\n\nexport function Sidebar() {\n  const [open, setOpen] = useState(true);\n  const items = {{nav_items}};\n  return (\n    <aside className={`flex h-screen flex-col border-r bg-white transition-all ${open ? 'w-56' : 'w-14'}`}>\n      <button onClick={() => setOpen(!open)} className=\"m-2 rounded p-2 hover:bg-gray-100\">{open ? '«' : '»'}</button>\n      <nav className=\"flex-1 space-y-1 px-2\">\n        {items.map((it) => (\n          <a key={it.href} href={it.href} className=\"flex items-center gap-3 rounded px-3 py-2 text-sm hover:bg-gray-100\">\n            <span>{it.icon}</span>\n            {open && <span>{it.label}</span>}\n          </a>\n        ))}\n      </nav>\n    </aside>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "可收合左側導航 sidebar"
+}

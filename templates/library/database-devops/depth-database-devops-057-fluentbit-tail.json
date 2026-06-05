@@ -1,0 +1,23 @@
+{
+  "id": "depth-database-devops-057-fluentbit-tail",
+  "category": "database-devops/observability/logs",
+  "intents_zh": [
+    "fluent-bit tail config",
+    "推 log 到 Loki",
+    "container log"
+  ],
+  "intents_en": [
+    "fluent-bit tail config",
+    "push logs to Loki",
+    "container log"
+  ],
+  "slots": [
+    "loki_host"
+  ],
+  "code": "[SERVICE]\n    Flush 1\n    Log_Level info\n[INPUT]\n    Name tail\n    Path /var/log/containers/*.log\n    Parser docker\n    Tag kube.*\n    Refresh_Interval 5\n[OUTPUT]\n    Name loki\n    Match *\n    Host {{loki_host}}\n    Port 3100\n    Labels job=fluentbit",
+  "language": "conf",
+  "deps": [
+    "fluent-bit"
+  ],
+  "summary_zh": "fluent-bit tail 容器 log 並推到 Loki"
+}

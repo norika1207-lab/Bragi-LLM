@@ -1,0 +1,34 @@
+{
+  "id": "llm-tools-063-deduplicate-chunks",
+  "category": "llm-tools/rag/dedupe",
+  "intents_zh": [
+    "去除重複 chunk",
+    "minhash 去重",
+    "embedding dedupe",
+    "chunk 去重",
+    "近似去重",
+    "RAG 文件去重",
+    "dedupe by similarity",
+    "清理重複片段"
+  ],
+  "intents_en": [
+    "deduplicate chunks",
+    "embedding dedup",
+    "near duplicate removal",
+    "rag dedupe",
+    "similarity dedupe",
+    "clean repeated chunks",
+    "chunk dedup",
+    "semantic dedup"
+  ],
+  "slots": [
+    "threshold"
+  ],
+  "code": "from sentence_transformers import SentenceTransformer\nimport numpy as np\n\nmodel = SentenceTransformer(\"all-MiniLM-L6-v2\")\n\ndef dedupe(chunks: list[str], thresh: float = {{threshold}}) -> list[str]:\n    if not chunks:\n        return []\n    vecs = model.encode(chunks, normalize_embeddings=True)\n    keep, kept = [], []\n    for i, v in enumerate(vecs):\n        if not kept or max((v @ np.array(kept).T).flatten()) < thresh:\n            kept.append(v); keep.append(chunks[i])\n    return keep",
+  "language": "py",
+  "deps": [
+    "sentence-transformers",
+    "numpy"
+  ],
+  "summary_zh": "以 embedding 相似度去除重複 chunk"
+}

@@ -1,0 +1,28 @@
+{
+  "id": "depth-web-frontend-052-jotai-storage",
+  "category": "web-frontend/state/jotai",
+  "intents_zh": [
+    "jotai 本地儲存 atom",
+    "atomWithStorage",
+    "persist localStorage",
+    "跨頁狀態",
+    "記住設定"
+  ],
+  "intents_en": [
+    "jotai atomWithStorage",
+    "persist atom localStorage",
+    "cross tab state",
+    "remember settings",
+    "jotai persistence"
+  ],
+  "slots": [
+    "key_name",
+    "initial"
+  ],
+  "code": "import { atomWithStorage } from 'jotai/utils';\nimport { useAtom } from 'jotai';\n\nexport const {{key_name}}Atom = atomWithStorage('{{key_name}}', {{initial}});\n\nexport function use{{key_name}}() {\n  return useAtom({{key_name}}Atom);\n}",
+  "language": "ts",
+  "deps": [
+    "jotai"
+  ],
+  "summary_zh": "jotai atomWithStorage 本地持久"
+}

@@ -1,0 +1,27 @@
+{
+  "id": "web-frontend-batch3-031-html-alert",
+  "category": "web-frontend/html/ui/alert",
+  "intents_zh": [
+    "HTML alert box",
+    "靜態警告框",
+    "CSS alert",
+    "HTML 訊息框",
+    "vanilla alert",
+    "靜態 banner"
+  ],
+  "intents_en": [
+    "html alert box",
+    "static alert",
+    "css alert banner",
+    "html message box",
+    "vanilla alert",
+    "info warning box"
+  ],
+  "slots": [
+    "alert_type"
+  ],
+  "code": "<div class=\"alert alert-{{alert_type}}\" role=\"alert\">\n  <strong>Heads up!</strong> This is an alert message.\n</div>\n<style>\n  .alert { padding: 1rem 1.25rem; border-radius: 6px; border: 1px solid transparent; margin: 1rem 0; }\n  .alert-info { background: #e0f2fe; border-color: #7dd3fc; color: #075985; }\n  .alert-success { background: #dcfce7; border-color: #86efac; color: #166534; }\n  .alert-warning { background: #fef3c7; border-color: #fcd34d; color: #92400e; }\n  .alert-error { background: #fee2e2; border-color: #fca5a5; color: #991b1b; }\n</style>",
+  "language": "html",
+  "deps": [],
+  "summary_zh": "HTML 四色 alert 訊息框"
+}

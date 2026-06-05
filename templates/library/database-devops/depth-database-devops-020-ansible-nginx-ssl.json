@@ -1,0 +1,24 @@
+{
+  "id": "depth-database-devops-020-ansible-nginx-ssl",
+  "category": "database-devops/ansible",
+  "intents_zh": [
+    "Ansible 裝 nginx + SSL",
+    "playbook 自動 certbot",
+    "ansible nginx letsencrypt"
+  ],
+  "intents_en": [
+    "Ansible install nginx with SSL",
+    "playbook certbot",
+    "ansible nginx letsencrypt"
+  ],
+  "slots": [
+    "domain",
+    "email"
+  ],
+  "code": "- hosts: web\n  become: true\n  vars:\n    domain: {{domain}}\n    email: {{email}}\n  tasks:\n    - name: install nginx and certbot\n      apt:\n        name: [nginx, certbot, python3-certbot-nginx]\n        update_cache: yes\n    - name: ensure nginx running\n      service: { name: nginx, state: started, enabled: yes }\n    - name: obtain LE cert\n      command: >\n        certbot --nginx -n --agree-tos --redirect\n        -d {{ domain }} -m {{ email }}\n      args:\n        creates: /etc/letsencrypt/live/{{ domain }}/fullchain.pem",
+  "language": "yaml",
+  "deps": [
+    "ansible"
+  ],
+  "summary_zh": "Ansible 裝 nginx 並用 certbot 簽 LE 憑證"
+}

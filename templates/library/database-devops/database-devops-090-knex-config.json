@@ -1,0 +1,22 @@
+{
+  "id": "database-devops-090-knex-config",
+  "category": "database-devops/orm/knex",
+  "intents_zh": [
+    "knexfile.js",
+    "knex 設定多環境",
+    "knex 連線設定"
+  ],
+  "intents_en": [
+    "knexfile.js",
+    "knex multi-env config",
+    "knex connection setup"
+  ],
+  "slots": [],
+  "code": "module.exports = {\n  development: {\n    client: 'pg',\n    connection: process.env.DATABASE_URL || 'postgres://localhost/app_dev',\n    pool: { min: 2, max: 10 },\n    migrations: { directory: './migrations', tableName: 'knex_migrations' },\n    seeds: { directory: './seeds' },\n  },\n  production: {\n    client: 'pg',\n    connection: process.env.DATABASE_URL,\n    pool: { min: 2, max: 20 },\n    migrations: { directory: './migrations' },\n    ssl: { rejectUnauthorized: false },\n  },\n}",
+  "language": "js",
+  "deps": [
+    "knex",
+    "pg"
+  ],
+  "summary_zh": "knexfile 多環境設定"
+}

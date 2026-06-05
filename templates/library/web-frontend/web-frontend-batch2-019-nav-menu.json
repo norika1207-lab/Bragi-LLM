@@ -1,0 +1,27 @@
+{
+  "id": "web-frontend-batch2-019-nav-menu",
+  "category": "web-frontend/react/layout/nav-menu",
+  "intents_zh": [
+    "navigation menu",
+    "下拉導航",
+    "主選單",
+    "頂部下拉選單",
+    "menu bar",
+    "下拉式導航"
+  ],
+  "intents_en": [
+    "navigation menu",
+    "dropdown nav",
+    "main menu",
+    "top dropdown",
+    "menu bar",
+    "header dropdown"
+  ],
+  "slots": [
+    "menu_items"
+  ],
+  "code": "import { useState } from 'react';\n\nexport function NavMenu() {\n  const [open, setOpen] = useState<string | null>(null);\n  const items = {{menu_items}};\n  return (\n    <nav className=\"flex gap-4 border-b bg-white px-6\">\n      {items.map((m) => (\n        <div key={m.label} className=\"relative\" onMouseLeave={() => setOpen(null)}>\n          <button onMouseEnter={() => setOpen(m.label)} className=\"py-3 text-sm hover:text-blue-600\">{m.label}</button>\n          {open === m.label && (\n            <div className=\"absolute left-0 top-full z-10 w-48 rounded border bg-white py-2 shadow-lg\">\n              {m.children.map((c) => (\n                <a key={c.href} href={c.href} className=\"block px-4 py-2 text-sm hover:bg-gray-100\">{c.label}</a>\n              ))}\n            </div>\n          )}\n        </div>\n      ))}\n    </nav>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "hover 展開下拉導航選單"
+}

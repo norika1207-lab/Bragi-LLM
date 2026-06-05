@@ -1,0 +1,32 @@
+{
+  "id": "depth-algorithm-037-fft-numpy",
+  "category": "algorithm/math/fft",
+  "intents_zh": [
+    "FFT 快速傅立葉",
+    "多項式乘法 FFT",
+    "卷積 FFT",
+    "numpy fft 多項式",
+    "fast fourier transform",
+    "fft 模板",
+    "大數乘法 fft"
+  ],
+  "intents_en": [
+    "FFT polynomial multiplication",
+    "fast Fourier transform",
+    "convolution FFT",
+    "numpy FFT polynomial",
+    "FFT template",
+    "big integer FFT",
+    "polynomial product FFT"
+  ],
+  "slots": [
+    "a",
+    "b"
+  ],
+  "code": "import numpy as np\n\ndef poly_mul_fft(a={{a}}, b={{b}}):\n    n = 1\n    while n < len(a) + len(b): n *= 2\n    A = np.fft.fft(a, n)\n    B = np.fft.fft(b, n)\n    C = np.fft.ifft(A * B).real\n    return np.round(C[:len(a)+len(b)-1]).astype(int).tolist()",
+  "language": "py",
+  "deps": [
+    "numpy"
+  ],
+  "summary_zh": "用 numpy FFT 計算多項式乘積"
+}

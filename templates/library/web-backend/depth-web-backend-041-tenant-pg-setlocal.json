@@ -1,0 +1,26 @@
+{
+  "id": "depth-web-backend-041-tenant-pg-setlocal",
+  "category": "web-backend/multi-tenancy/pg",
+  "intents_zh": [
+    "每個 request SET LOCAL tenant",
+    "pg 連線設 tenant",
+    "Knex transaction RLS",
+    "tenant connection wrapper",
+    "RLS app side"
+  ],
+  "intents_en": [
+    "set local tenant per request",
+    "pg set tenant per conn",
+    "knex transaction rls",
+    "tenant connection wrapper",
+    "rls app side"
+  ],
+  "slots": [],
+  "code": "export async function withTenant(tenantId, work) {\n  return db.transaction(async (trx) => {\n    await trx.raw(\"SELECT set_config('app.tenant_id', ?, true)\", [tenantId]);\n    return work(trx);\n  });\n}",
+  "language": "js",
+  "deps": [
+    "knex",
+    "pg"
+  ],
+  "summary_zh": "Knex transaction 設 RLS tenant"
+}

@@ -1,0 +1,28 @@
+{
+  "id": "depth-web-frontend-041-chartjs-doughnut",
+  "category": "web-frontend/charts/chartjs",
+  "intents_zh": [
+    "Chart.js 甜甜圈圖",
+    "react-chartjs-2 doughnut",
+    "佔比圖",
+    "環狀圖 react",
+    "chartjs 範例"
+  ],
+  "intents_en": [
+    "chart.js doughnut",
+    "react-chartjs-2 doughnut",
+    "ring chart",
+    "proportion chart",
+    "chartjs example"
+  ],
+  "slots": [
+    "component_name"
+  ],
+  "code": "'use client';\nimport { Doughnut } from 'react-chartjs-2';\nimport { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';\nChartJS.register(ArcElement, Tooltip, Legend);\n\nexport function {{component_name}}({ labels, values }: { labels: string[]; values: number[] }) {\n  return (\n    <Doughnut\n      data={{ labels, datasets: [{ data: values, backgroundColor: ['#0EA5E9','#22C55E','#F59E0B','#EF4444','#A855F7'] }] }}\n      options={{ plugins: { legend: { position: 'bottom' } } }}\n    />\n  );\n}",
+  "language": "tsx",
+  "deps": [
+    "chart.js",
+    "react-chartjs-2"
+  ],
+  "summary_zh": "Chart.js 甜甜圈佔比圖"
+}

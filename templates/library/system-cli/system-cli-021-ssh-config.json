@@ -1,0 +1,24 @@
+{
+  "id": "system-cli-021-ssh-config",
+  "category": "system-cli/ssh/config",
+  "intents_zh": [
+    "ssh config 別名",
+    "host alias 設定",
+    "ssh 跳板機設定"
+  ],
+  "intents_en": [
+    "ssh config alias",
+    "jump host config",
+    "ssh hostname shortcut"
+  ],
+  "slots": [
+    "alias_name",
+    "host_ip",
+    "user_name",
+    "jump_alias"
+  ],
+  "code": "# ~/.ssh/config\nHost {{alias_name}}\n  HostName {{host_ip}}\n  User {{user_name}}\n  IdentityFile ~/.ssh/id_ed25519\n  ServerAliveInterval 30\n  ProxyJump {{jump_alias}}",
+  "language": "conf",
+  "deps": [],
+  "summary_zh": "ssh config 含 jump host"
+}

@@ -1,0 +1,30 @@
+{
+  "id": "web-backend-109-express-stripe",
+  "category": "web-backend/express/payment",
+  "intents_zh": [
+    "express stripe checkout",
+    "建立 stripe session",
+    "付款 endpoint",
+    "stripe webhook + checkout",
+    "node stripe 範例"
+  ],
+  "intents_en": [
+    "express stripe checkout",
+    "stripe checkout session",
+    "payment endpoint",
+    "stripe webhook + checkout",
+    "node stripe example"
+  ],
+  "slots": [
+    "success_url",
+    "cancel_url",
+    "price_id"
+  ],
+  "code": "const express = require('express');\nconst Stripe = require('stripe');\nconst stripe = Stripe(process.env.STRIPE_SECRET_KEY);\nconst router = express.Router();\n\nrouter.post('/checkout', async (req, res) => {\n  const session = await stripe.checkout.sessions.create({\n    mode: 'payment',\n    line_items: [{ price: '{{price_id}}', quantity: 1 }],\n    success_url: '{{success_url}}',\n    cancel_url: '{{cancel_url}}'\n  });\n  res.json({ url: session.url });\n});\n\nmodule.exports = router;",
+  "language": "js",
+  "deps": [
+    "express",
+    "stripe"
+  ],
+  "summary_zh": "Express Stripe Checkout"
+}

@@ -1,0 +1,28 @@
+{
+  "id": "web-backend-081-prisma-schema",
+  "category": "web-backend/db/schema",
+  "intents_zh": [
+    "prisma schema 範例",
+    "model + relation prisma",
+    "prisma generator",
+    "建立 prisma model",
+    "prisma datasource"
+  ],
+  "intents_en": [
+    "prisma schema example",
+    "prisma model relation",
+    "prisma generator client",
+    "create prisma model",
+    "prisma datasource"
+  ],
+  "slots": [
+    "model_name"
+  ],
+  "code": "datasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\ngenerator client {\n  provider = \"prisma-client-js\"\n}\n\nmodel {{model_name}} {\n  id        String   @id @default(cuid())\n  name      String\n  email     String   @unique\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n}",
+  "language": "prisma",
+  "deps": [
+    "prisma",
+    "@prisma/client"
+  ],
+  "summary_zh": "Prisma schema + model"
+}

@@ -1,0 +1,27 @@
+{
+  "id": "firmware-038-esp32-pwm-ledc",
+  "category": "firmware/esp32/pwm",
+  "intents_zh": [
+    "ESP32 ledc PWM",
+    "硬體 PWM 控制",
+    "ESP32 PWM 範例",
+    "ledcWrite",
+    "LED 亮度漸變"
+  ],
+  "intents_en": [
+    "ESP32 LEDC PWM",
+    "hardware PWM control",
+    "ledcWrite example",
+    "PWM duty cycle",
+    "fade LED ESP32"
+  ],
+  "slots": [
+    "led_pin",
+    "channel",
+    "freq"
+  ],
+  "code": "const int LED = {{led_pin}};\nconst int CH = {{channel}};\n\nvoid setup() {\n  ledcSetup(CH, {{freq}}, 8);\n  ledcAttachPin(LED, CH);\n}\n\nvoid loop() {\n  for (int d = 0; d <= 255; d++) { ledcWrite(CH, d); delay(8); }\n  for (int d = 255; d >= 0; d--) { ledcWrite(CH, d); delay(8); }\n}",
+  "language": "ino",
+  "deps": [],
+  "summary_zh": "ESP32 LEDC 硬體 PWM 漸變"
+}

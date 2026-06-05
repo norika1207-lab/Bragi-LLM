@@ -1,0 +1,27 @@
+{
+  "id": "web-frontend-batch3-022-html-signup",
+  "category": "web-frontend/html/forms/signup",
+  "intents_zh": [
+    "純 HTML 註冊頁",
+    "靜態 sign up",
+    "原生註冊表單",
+    "vanilla signup",
+    "HTML 新會員",
+    "沒 framework 註冊"
+  ],
+  "intents_en": [
+    "plain html signup",
+    "vanilla signup form",
+    "static register page",
+    "html new user",
+    "no framework register",
+    "raw html signup"
+  ],
+  "slots": [
+    "form_action"
+  ],
+  "code": "<!DOCTYPE html>\n<html lang=\"en\">\n<head><meta charset=\"utf-8\"><title>Sign up</title>\n<style>\n  body { font-family: system-ui; display: grid; place-items: center; min-height: 100vh; }\n  form { display: flex; flex-direction: column; gap: .75rem; min-width: 320px; }\n  input, button { padding: .6rem; font-size: 1rem; }\n</style>\n</head>\n<body>\n  <form action=\"{{form_action}}\" method=\"POST\" onsubmit=\"return this.password.value === this.confirm.value\">\n    <h1>Create account</h1>\n    <input name=\"name\" placeholder=\"Name\" required>\n    <input name=\"email\" type=\"email\" placeholder=\"Email\" required>\n    <input name=\"password\" type=\"password\" placeholder=\"Password\" minlength=\"8\" required>\n    <input name=\"confirm\" type=\"password\" placeholder=\"Confirm password\" required>\n    <button>Create account</button>\n  </form>\n</body>\n</html>",
+  "language": "html",
+  "deps": [],
+  "summary_zh": "純 HTML 註冊頁含密碼匹配檢查"
+}

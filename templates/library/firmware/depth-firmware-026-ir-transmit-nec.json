@@ -1,0 +1,29 @@
+{
+  "id": "depth-firmware-026-ir-transmit-nec",
+  "category": "firmware/protocol/ir",
+  "intents_zh": [
+    "紅外線發射 NEC",
+    "IR 發送遙控碼",
+    "sendNEC 範例",
+    "IR transmitter",
+    "模擬遙控器"
+  ],
+  "intents_en": [
+    "ir transmit nec",
+    "send ir code",
+    "sendnec example",
+    "ir transmitter",
+    "emulate remote"
+  ],
+  "slots": [
+    "tx_pin",
+    "address",
+    "command"
+  ],
+  "code": "#include <IRremote.hpp>\nvoid setup() {\n    IrSender.begin({{tx_pin}});\n}\nvoid loop() {\n    IrSender.sendNEC({{address}}, {{command}}, 0);\n    delay(2000);\n}",
+  "language": "cpp",
+  "deps": [
+    "IRremote"
+  ],
+  "summary_zh": "用 IRremote 發送 NEC 協定遙控碼"
+}

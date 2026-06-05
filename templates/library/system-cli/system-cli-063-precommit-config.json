@@ -1,0 +1,19 @@
+{
+  "id": "system-cli-063-precommit-config",
+  "category": "system-cli/build/precommit",
+  "intents_zh": [
+    "pre-commit hook 設定",
+    "python lint format hook",
+    "pre-commit yaml"
+  ],
+  "intents_en": [
+    "pre-commit config",
+    "python lint hooks",
+    "pre-commit yaml template"
+  ],
+  "slots": [],
+  "code": "repos:\n  - repo: https://github.com/pre-commit/pre-commit-hooks\n    rev: v4.6.0\n    hooks:\n      - id: trailing-whitespace\n      - id: end-of-file-fixer\n      - id: check-yaml\n      - id: check-added-large-files\n  - repo: https://github.com/astral-sh/ruff-pre-commit\n    rev: v0.4.4\n    hooks:\n      - id: ruff\n        args: [--fix]\n      - id: ruff-format",
+  "language": "yaml",
+  "deps": [],
+  "summary_zh": "pre-commit 基礎 hooks"
+}

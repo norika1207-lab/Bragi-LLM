@@ -1,0 +1,27 @@
+{
+  "id": "depth-web-frontend-006-framer-list-stagger",
+  "category": "web-frontend/animation/framer-motion",
+  "intents_zh": [
+    "framer 列表錯位動畫",
+    "stagger children",
+    "清單依序出現",
+    "variants 列表",
+    "motion list"
+  ],
+  "intents_en": [
+    "framer motion stagger list",
+    "staggered children animation",
+    "list reveal",
+    "variants parent children",
+    "sequential mount"
+  ],
+  "slots": [
+    "item_name"
+  ],
+  "code": "import { motion } from 'framer-motion';\n\nconst parent = { animate: { transition: { staggerChildren: 0.06 } } };\nconst child = { initial: { opacity: 0, y: 6 }, animate: { opacity: 1, y: 0 } };\n\nexport function {{item_name}}List({ items }: { items: any[] }) {\n  return (\n    <motion.ul initial=\"initial\" animate=\"animate\" variants={parent}>\n      {items.map(it => (\n        <motion.li key={it.id} variants={child}>{it.label}</motion.li>\n      ))}\n    </motion.ul>\n  );\n}",
+  "language": "tsx",
+  "deps": [
+    "framer-motion"
+  ],
+  "summary_zh": "framer-motion 父子 variants 錯位出現"
+}

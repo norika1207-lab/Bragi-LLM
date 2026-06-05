@@ -1,0 +1,26 @@
+{
+  "id": "database-devops-017-sql-create-index",
+  "category": "database-devops/sql/ddl",
+  "intents_zh": [
+    "建索引",
+    "create index",
+    "加快查詢的 index",
+    "複合索引"
+  ],
+  "intents_en": [
+    "create index",
+    "add index for query",
+    "composite index",
+    "speed up query"
+  ],
+  "slots": [
+    "index_name",
+    "table",
+    "col1",
+    "col2"
+  ],
+  "code": "CREATE INDEX CONCURRENTLY IF NOT EXISTS {{index_name}}\nON {{table}} ({{col1}}, {{col2}});",
+  "language": "sql",
+  "deps": [],
+  "summary_zh": "建立複合索引(不鎖表)"
+}

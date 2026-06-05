@@ -1,0 +1,27 @@
+{
+  "id": "web-backend-079-hono-sse",
+  "category": "web-backend/hono/streaming",
+  "intents_zh": [
+    "hono SSE",
+    "hono stream response",
+    "Server-Sent Events hono",
+    "hono streamSSE",
+    "推送事件 hono"
+  ],
+  "intents_en": [
+    "hono sse",
+    "hono streamSSE",
+    "server-sent events hono",
+    "stream response hono",
+    "push updates hono"
+  ],
+  "slots": [
+    "interval_ms"
+  ],
+  "code": "import { Hono } from 'hono';\nimport { streamSSE } from 'hono/streaming';\n\nconst app = new Hono();\napp.get('/stream', (c) => {\n  return streamSSE(c, async (stream) => {\n    let i = 0;\n    while (true) {\n      await stream.writeSSE({ data: JSON.stringify({ i: i++, ts: Date.now() }) });\n      await stream.sleep({{interval_ms}});\n    }\n  });\n});\n\nexport default app;",
+  "language": "ts",
+  "deps": [
+    "hono"
+  ],
+  "summary_zh": "Hono SSE 串流"
+}

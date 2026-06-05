@@ -1,0 +1,27 @@
+{
+  "id": "depth-firmware-031-ble-advertise",
+  "category": "firmware/wireless/ble",
+  "intents_zh": [
+    "BLE 廣播",
+    "NimBLE advertise",
+    "裝置廣告",
+    "BLE beacon",
+    "ESP32 BLE adv"
+  ],
+  "intents_en": [
+    "ble advertise",
+    "nimble advertise",
+    "ble beacon",
+    "device advert",
+    "esp32 ble adv"
+  ],
+  "slots": [
+    "device_name"
+  ],
+  "code": "#include <NimBLEDevice.h>\nNimBLEDevice::init(\"{{device_name}}\");\nNimBLEAdvertising *adv = NimBLEDevice::getAdvertising();\nadv->setName(\"{{device_name}}\");\nadv->start();",
+  "language": "cpp",
+  "deps": [
+    "NimBLE-Arduino"
+  ],
+  "summary_zh": "NimBLE 啟動 BLE 廣播裝置名"
+}

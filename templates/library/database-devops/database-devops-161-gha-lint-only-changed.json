@@ -1,0 +1,19 @@
+{
+  "id": "database-devops-161-gha-lint-only-changed",
+  "category": "database-devops/cicd/github-actions",
+  "intents_zh": [
+    "GHA 只 lint 變更檔",
+    "eslint --changed",
+    "只跑變動的 lint"
+  ],
+  "intents_en": [
+    "github actions lint changed only",
+    "eslint changed files",
+    "incremental lint"
+  ],
+  "slots": [],
+  "code": "name: Lint\non: [pull_request]\n\njobs:\n  lint:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n        with: { fetch-depth: 0 }\n      - uses: actions/setup-node@v4\n        with: { node-version: '20', cache: 'npm' }\n      - run: npm ci\n      - name: Lint changed files\n        run: |\n          FILES=$(git diff --name-only --diff-filter=ACMR origin/${{ github.base_ref }}...HEAD -- '*.ts' '*.tsx' '*.js')\n          if [ -n \"$FILES\" ]; then npx eslint $FILES; fi",
+  "language": "yaml",
+  "deps": [],
+  "summary_zh": "GHA 只對變更檔跑 eslint"
+}

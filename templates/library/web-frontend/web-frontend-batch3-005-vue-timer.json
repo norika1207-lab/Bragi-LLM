@@ -1,0 +1,29 @@
+{
+  "id": "web-frontend-batch3-005-vue-timer",
+  "category": "web-frontend/vue/apps/timer",
+  "intents_zh": [
+    "Vue 倒數計時器",
+    "Vue countdown 元件",
+    "Vue setInterval timer",
+    "Vue 番茄鐘",
+    "Vue 計時",
+    "Vue 分秒計時器"
+  ],
+  "intents_en": [
+    "vue countdown timer",
+    "vue timer component",
+    "vue setinterval timer",
+    "vue pomodoro",
+    "vue minute second timer",
+    "vue stopwatch"
+  ],
+  "slots": [
+    "initial_seconds"
+  ],
+  "code": "<script setup>\nimport { ref, onUnmounted } from 'vue'\nconst left = ref({{initial_seconds}})\nlet id = null\nfunction start() {\n  if (id) return\n  id = setInterval(() => {\n    if (left.value > 0) left.value--\n    else { clearInterval(id); id = null }\n  }, 1000)\n}\nfunction pause() { clearInterval(id); id = null }\nfunction reset() { pause(); left.value = {{initial_seconds}} }\nonUnmounted(pause)\n</script>\n<template>\n  <div>\n    <h2>{{ Math.floor(left/60) }}:{{ String(left%60).padStart(2,'0') }}</h2>\n    <button @click=\"start\">Start</button>\n    <button @click=\"pause\">Pause</button>\n    <button @click=\"reset\">Reset</button>\n  </div>\n</template>",
+  "language": "vue",
+  "deps": [
+    "vue"
+  ],
+  "summary_zh": "Vue 倒數計時器含暫停重置"
+}

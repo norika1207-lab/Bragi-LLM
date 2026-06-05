@@ -1,0 +1,22 @@
+{
+  "id": "algorithm-math-001",
+  "category": "algorithm/math/gcd",
+  "intents_zh": [
+    "最大公因數",
+    "gcd",
+    "Euclidean",
+    "給我 gcd"
+  ],
+  "intents_en": [
+    "gcd",
+    "greatest common divisor",
+    "Euclidean algorithm"
+  ],
+  "slots": [
+    "fn_name"
+  ],
+  "code": "def {{fn_name}}(a, b):\n    while b:\n        a, b = b, a % b\n    return a",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "歐幾里得 gcd"
+}

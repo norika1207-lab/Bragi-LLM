@@ -1,0 +1,28 @@
+{
+  "id": "web-frontend-batch3-039-html-blog-card",
+  "category": "web-frontend/html/cards/blog",
+  "intents_zh": [
+    "部落格文章卡",
+    "blog card",
+    "文章預覽卡",
+    "新聞卡片",
+    "HTML article card",
+    "封面圖標題摘要"
+  ],
+  "intents_en": [
+    "blog post card",
+    "article preview card",
+    "news card",
+    "html article card",
+    "cover title summary",
+    "post card"
+  ],
+  "slots": [
+    "title",
+    "tag"
+  ],
+  "code": "<article class=\"blog-card\">\n  <img src=\"https://picsum.photos/400/220\" alt=\"\">\n  <div class=\"body\">\n    <span class=\"tag\">{{tag}}</span>\n    <h3>{{title}}</h3>\n    <p>A short excerpt from the article gives readers a taste of what is inside.</p>\n    <a href=\"#\">Read more &rarr;</a>\n  </div>\n</article>\n<style>\n  .blog-card { max-width: 360px; border-radius: 12px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,.1); font-family: system-ui; }\n  .blog-card img { width: 100%; height: 220px; object-fit: cover; display: block; }\n  .blog-card .body { padding: 1.25rem; }\n  .blog-card .tag { display: inline-block; background: #ddd6fe; color: #5b21b6; padding: .2rem .6rem; border-radius: 999px; font-size: .75rem; }\n  .blog-card h3 { margin: .5rem 0; }\n  .blog-card p { color: #6b7280; }\n  .blog-card a { color: #4f46e5; text-decoration: none; font-weight: 500; }\n</style>",
+  "language": "html",
+  "deps": [],
+  "summary_zh": "部落格文章預覽卡含標籤封面"
+}

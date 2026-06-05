@@ -1,0 +1,1945 @@
+{
+  "summary": {
+    "ts": "2026-06-06T01:24:38.937224",
+    "templates_loaded": 1112,
+    "templates_by_domain": {
+      "algorithm": 132,
+      "database-devops": 170,
+      "firmware": 100,
+      "llm-tools": 130,
+      "mobile": 130,
+      "system-cli": 130,
+      "web-backend": 140,
+      "web-frontend": 180
+    },
+    "scenarios_run": 48,
+    "domain_match_rate": 83.3,
+    "slot_fill_attempted": 44,
+    "slot_fill_success_rate": 100.0,
+    "per_domain_match": {
+      "web-frontend": {
+        "total": 7,
+        "match": 7,
+        "rate": 100.0
+      },
+      "web-backend": {
+        "total": 7,
+        "match": 6,
+        "rate": 85.7
+      },
+      "mobile": {
+        "total": 6,
+        "match": 5,
+        "rate": 83.3
+      },
+      "system-cli": {
+        "total": 6,
+        "match": 6,
+        "rate": 100.0
+      },
+      "firmware": {
+        "total": 5,
+        "match": 4,
+        "rate": 80.0
+      },
+      "llm-tools": {
+        "total": 5,
+        "match": 5,
+        "rate": 100.0
+      },
+      "algorithm": {
+        "total": 5,
+        "match": 5,
+        "rate": 100.0
+      },
+      "database-devops": {
+        "total": 7,
+        "match": 2,
+        "rate": 28.6
+      }
+    },
+    "retrieval_engine": "TF-IDF char_wb 2-4grams (sentence-transformers env conflict, swap back later)"
+  },
+  "results": [
+    {
+      "idx": 1,
+      "query_zh": "做個登入頁",
+      "query_en": "make a login page",
+      "expected_domain": "web-frontend",
+      "top_template_id": "web-frontend-batch4-009-login-page",
+      "top_template_summary": "App Router 登入頁面表單",
+      "top_template_domain": "web-frontend",
+      "top_score": 0.156,
+      "domain_match": true,
+      "top3": [
+        {
+          "id": "web-frontend-batch4-009-login-page",
+          "domain": "web-frontend",
+          "score": 0.156,
+          "summary": "App Router 登入頁面表單"
+        },
+        {
+          "id": "web-frontend-batch3-021-html-login",
+          "domain": "web-frontend",
+          "score": 0.107,
+          "summary": "純 HTML 登入頁含基本樣式"
+        },
+        {
+          "id": "mobile-001-rn-login",
+          "domain": "mobile",
+          "score": 0.1,
+          "summary": "React Native email/password 登入畫面含後端 POST"
+        }
+      ],
+      "fill_result": {
+        "ok": true,
+        "final_code": "export default function LoginPage() {\n  return (\n    <main className=\"min-h-screen flex items-center justify-center bg-gray-50\">\n      <form action=\"/login\" method=\"post\" className=\"w-full max-w-sm bg-white rounded-xl shadow p-8 space-y-4\">\n        <h1 className=\"text-2xl font-bold\">Sign in to My App</h1>\n        <input name=\"email\" type=\"email\" placeholder=\"Email\" className=\"w-full border rounded px-3 py-2\" required />\n        <input name=\"password\" type=\"password\" placeholder=\"Password\" className=\"w-full border rounded px-3 py-2\" required />\n        <button type=\"submit\" className=\"w-full bg-indigo-600 text-white py-2 rounded\">Sign in</button>\n      </form>\n    </main>\n  );\n}",
+        "slot_values": {
+          "app_name": "My App",
+          "signin_action": "/login"
+        },
+        "raw_reply_preview": "```json\n{\n  \"app_name\": \"My App\",\n  \"signin_action\": \"/login\"\n}\n```"
+      }
+    },
+    {
+      "idx": 2,
+      "query_zh": "React 註冊表單，含 email 驗證跟密碼強度",
+      "query_en": "React signup form with email validation and password strength",
+      "expected_domain": "web-frontend",
+      "top_template_id": "web-frontend-batch1-002-signup-form",
+      "top_template_summary": "React 註冊表單含密碼確認校驗",
+      "top_template_domain": "web-frontend",
+      "top_score": 0.445,
+      "domain_match": true,
+      "top3": [
+        {
+          "id": "web-frontend-batch1-002-signup-form",
+          "domain": "web-frontend",
+          "score": 0.445,
+          "summary": "React 註冊表單含密碼確認校驗"
+        },
+        {
+          "id": "web-backend-019-express-email",
+          "domain": "web-backend",
+          "score": 0.355,
+          "summary": "Nodemailer SMTP 寄信封裝"
+        },
+        {
+          "id": "web-frontend-batch1-001-login-form",
+          "domain": "web-frontend",
+          "score": 0.276,
+          "summary": "React email/password 登入表單 with loading 與錯誤態"
+        }
+      ],
+      "fill_result": {
+        "ok": true,
+        "final_code": "import { useState } from 'react';\n\nexport default function RegisterForm() {\n  const [form, setForm] = useState({ email: '', password: '', confirm: '' });\n  const [err, setErr] = useState('');\n\n  function update<K extends keyof typeof form>(k: K, v: string) {\n    setForm({ ...form, [k]: v });\n  }\n\n  async function onSubmit(e: React.FormEvent) {\n    e.preventDefault();\n    if (form.password !== form.confirm) {\n      setErr('Passwords do not match');\n      return;\n    }\n    await fetch('https://api.example.com/register', {\n      method: 'POST',\n      headers: { 'Content-Type': 'application/json' },\n      body: JSON.stringify({ email: form.email, password: form.password }),\n    });\n  }\n\n  return (\n    <form onSubmit={onSubmit}>\n      <input type=\"email\" value={form.email} onChange={(e) => update('email', e.target.value)} required />\n      <input type=\"password\" value={form.password} onChange={(e) => update('password', e.target.value)} required />\n      <input type=\"password\" value={form.co",
+        "slot_values": {
+          "component_name": "RegisterForm",
+          "submit_url": "https://api.example.com/register"
+        },
+        "raw_reply_preview": "```json\n{\n  \"component_name\": \"RegisterForm\",\n  \"submit_url\": \"https://api.example.com/register\"\n}\n```"
+      }
+    },
+    {
+      "idx": 3,
+      "query_zh": "用 Tailwind 寫一個 responsive navbar",
+      "query_en": "responsive navbar with Tailwind",
+      "expected_domain": "web-frontend",
+      "top_template_id": "web-frontend-batch4-008-navbar",
+      "top_template_summary": "sticky 半透明頂部導航列",
+      "top_template_domain": "web-frontend",
+      "top_score": 0.556,
+      "domain_match": true,
+      "top3": [
+        {
+          "id": "web-frontend-batch4-008-navbar",
+          "domain": "web-frontend",
+          "score": 0.556,
+          "summary": "sticky 半透明頂部導航列"
+        },
+        {
+          "id": "web-frontend-batch3-043-html-navbar",
+          "domain": "web-frontend",
+          "score": 0.543,
+          "summary": "響應式 navbar 含 CSS-only 漢堡選單"
+        },
+        {
+          "id": "web-frontend-batch2-014-responsive-grid",
+          "domain": "web-frontend",
+          "score": 0.271,
+          "summary": "1-4 欄響應式卡片網格"
+        }
+      ],
+      "fill_result": {
+        "ok": true,
+        "final_code": "export default function Navbar() {\n  return (\n    <nav className=\"sticky top-0 z-40 bg-white/80 backdrop-blur border-b border-gray-100\">\n      <div className=\"mx-auto max-w-6xl px-6 h-14 flex items-center justify-between\">\n        <span className=\"font-bold\">My Brand</span>\n        <ul className=\"flex gap-6 text-sm\">\n          <li><a href=\"#\">Home</a></li>\n          <li><a href=\"#\">About</a></li>\n          <li><a href=\"#\">Contact</a></li>\n        </ul>\n      </div>\n    </nav>\n  );\n}",
+        "slot_values": {
+          "brand_name": "My Brand",
+          "link_one": "Home",
+          "link_two": "About",
+          "link_three": "Contact"
+        },
+        "raw_reply_preview": "```json\n{\n  \"brand_name\": \"My Brand\",\n  \"link_one\": \"Home\",\n  \"link_two\": \"About\",\n  \"link_three\": \"Contact\"\n}\n```"
+      }
+    },
+    {
+      "idx": 4,
+      "query_zh": "Next.js app router 的 server component 範例",
+      "query_en": "Next.js app router server component example",
+      "expected_domain": "web-frontend",
+      "top_template_id": "web-frontend-batch4-013-api-hello",
+      "top_template_summary": "App Router GET API 回 JSON",
+      "top_template_domain": "web-frontend",
+      "top_score": 0.457,
+      "domain_match": true,
+      "top3": [
+        {
+          "id": "web-frontend-batch4-013-api-hello",
+          "domain": "web-frontend",
+          "score": 0.457,
+          "summary": "App Router GET API 回 JSON"
+        },
+        {
+          "id": "web-frontend-batch4-016-server-component-fetch",
+          "domain": "web-frontend",
+          "score": 0.415,
+          "summary": "Async server component fetch 加 ISR"
+        },
+        {
+          "id": "web-frontend-batch4-009-login-page",
+          "domain": "web-frontend",
+          "score": 0.363,
+          "summary": "App Router 登入頁面表單"
+        }
+      ],
+      "fill_result": {
+        "ok": true,
+        "final_code": "import { NextResponse } from 'next/server';\n\nexport async function GET() {\n  return NextResponse.json({ message: 'Hello, World!' });\n}",
+        "slot_values": {
+          "greeting": "Hello, World!"
+        },
+        "raw_reply_preview": "```json\n{\n  \"greeting\": \"Hello, World!\"\n}\n```"
+      }
+    },
+    {
+      "idx": 5,
+      "query_zh": "vue 3 composition API todo list",
+      "query_en": "vue 3 composition API todo list",
+      "expected_domain": "web-frontend",
+      "top_template_id": "web-frontend-batch3-003-vue-todo",
+      "top_template_summary": "Vue 待辦清單含 localStorage 持久化",
+      "top_template_domain": "web-frontend",
+      "top_score": 0.678,
+      "domain_match": true,
+      "top3": [
+        {
+          "id": "web-frontend-batch3-003-vue-todo",
+          "domain": "web-frontend",
+          "score": 0.678,
+          "summary": "Vue 待辦清單含 localStorage 持久化"
+        },
+        {
+          "id": "web-frontend-batch3-001-vue-login",
+          "domain": "web-frontend",
+          "score": 0.526,
+          "summary": "Vue 3 Composition API 登入表單，含 loading 狀態"
+        },
+        {
+          "id": "web-frontend-batch3-023-html-todo",
+          "domain": "web-frontend",
+          "score": 0.442,
+          "summary": "純 HTML + vanilla JS 待辦清單"
+        }
+      ],
+      "fill_result": {
+        "ok": true,
+        "final_code": "<script setup>\nimport { ref, watch, onMounted } from 'vue'\nconst items = ref([])\nconst draft = ref('')\nonMounted(() => {\n  const raw = localStorage.getItem('todo_list')\n  if (raw) items.value = JSON.parse(raw)\n})\nwatch(items, v => localStorage.setItem('todo_list', JSON.stringify(v)), { deep: true })\nfunction add() {\n  if (!draft.value.trim()) return\n  items.value.push({ id: Date.now(), text: draft.value, done: false })\n  draft.value = ''\n}\n</script>\n<template>\n  <div>\n    <input v-model=\"draft\" @keyup.enter=\"add\" placeholder=\"New task\" />\n    <ul>\n      <li v-for=\"t in items\" :key=\"t.id\">\n        <input type=\"checkbox\" v-model=\"t.done\" />\n        <span :class=\"{ done: t.done }\">{{ t.text }}</span>\n        <button @click=\"items = items.filter(x => x.id !== t.id)\">x</button>\n      </li>\n    </ul>\n  </div>\n</template>",
+        "slot_values": {
+          "storage_key": "todo_list"
+        },
+        "raw_reply_preview": "```json\n{\n  \"storage_key\": \"todo_list\"\n}\n```"
+      }
+    },
+    {
+      "idx": 6,
+      "query_zh": "做個 dark mode toggle",
+      "query_en": "dark mode toggle",
+      "expected_domain": "web-frontend",
+      "top_template_id": "web-frontend-batch4-038-dark-mode-toggle",
+      "top_template_summary": "切換 html.dark 類別的深色模式按鈕",
+      "top_template_domain": "web-frontend",
+      "top_score": 0.651,
+      "domain_match": true,
+      "top3": [
+        {
+          "id": "web-frontend-batch4-038-dark-mode-toggle",
+          "domain": "web-frontend",
+          "score": 0.651,
+          "summary": "切換 html.dark 類別的深色模式按鈕"
+        },
+        {
+          "id": "web-frontend-batch2-022-dark-mode-toggle",
+          "domain": "web-frontend",
+          "score": 0.604,
+          "summary": "localStorage 持久化的暗色模式切換"
+        },
+        {
+          "id": "web-frontend-batch1-039-toggle-switch",
+          "domain": "web-frontend",
+          "score": 0.378,
+          "summary": "iOS 風格 toggle switch"
+        }
+      ],
+      "fill_result": null
+    },
+    {
+      "idx": 7,
+      "query_zh": "infinite scroll list",
+      "query_en": "infinite scroll list",
+      "expected_domain": "web-frontend",
+      "top_template_id": "web-frontend-batch2-012-infinite-scroll",
+      "top_template_summary": "IntersectionObserver 無限滾動",
+      "top_template_domain": "web-frontend",
+      "top_score": 0.747,
+      "domain_match": true,
+      "top3": [
+        {
+          "id": "web-frontend-batch2-012-infinite-scroll",
+          "domain": "web-frontend",
+          "score": 0.747,
+          "summary": "IntersectionObserver 無限滾動"
+        },
+        {
+          "id": "web-frontend-batch2-013-virtualized-list",
+          "domain": "web-frontend",
+          "score": 0.228,
+          "summary": "react-window 虛擬化長列表"
+        },
+        {
+          "id": "web-frontend-batch2-027-back-to-top",
+          "domain": "web-frontend",
+          "score": 0.212,
+          "summary": "捲動超過閾值才出現的回頂按鈕"
+        }
+      ],
+      "fill_result": {
+        "ok": true,
+        "final_code": "import { useEffect, useRef, useState } from 'react';\n\nexport function InfiniteList() {\n  const [items, setItems] = useState<any[]>([]);\n  const [page, setPage] = useState(1);\n  const sentinel = useRef<HTMLDivElement>(null);\n\n  useEffect(() => {\n    const obs = new IntersectionObserver(async (entries) => {\n      if (entries[0].isIntersecting) {\n        const more = await fetchMoreData(page);\n        setItems((p) => [...p, ...more]);\n        setPage((p) => p + 1);\n      }\n    });\n    if (sentinel.current) obs.observe(sentinel.current);\n    return () => obs.disconnect();\n  }, [page]);\n\n  return (\n    <div>\n      {items.map((it, i) => <div key={i} className=\"border-b p-3\">{it.title}</div>)}\n      <div ref={sentinel} className=\"h-10\" />\n    </div>\n  );\n}",
+        "slot_values": {
+          "fetch_more_fn": "fetchMoreData"
+        },
+        "raw_reply_preview": "```json\n{\n  \"fetch_more_fn\": \"fetchMoreData\"\n}\n```"
+      }
+    },
+    {
+      "idx": 8,
+      "query_zh": "Express REST API CRUD，連 PostgreSQL",
+      "query_en": "Express REST API CRUD with PostgreSQL",
+      "expected_domain": "web-backend",
+      "top_template_id": "web-backend-002-express-crud",
+      "top_template_summary": "Express in-memory CRUD router",
+      "top_template_domain": "web-backend",
+      "top_score": 0.6,
+      "domain_match": true,
+      "top3": [
+        {
+          "id": "web-backend-002-express-crud",
+          "domain": "web-backend",
+          "score": 0.6,
+          "summary": "Express in-memory CRUD router"
+        },
+        {
+          "id": "web-backend-023-express-pg",
+          "domain": "web-backend",
+          "score": 0.48,
+          "summary": "node-postgres 連線池"
+        },
+        {
+          "id": "web-backend-100-express-static",
+          "domain": "web-backend",
+          "score": 0.429,
+          "summary": "Express 靜態檔案 host"
+        }
+      ],
+      "fill_result": {
+        "ok": true,
+        "final_code": "const express = require('express');\nconst router = express.Router();\nconst store = new Map();\n\nrouter.get('/users', (req, res) => res.json([...store.values()]));\nrouter.get('/users/:id', (req, res) => {\n  const item = store.get(req.params.id);\n  if (!item) return res.status(404).json({ error: 'not found' });\n  res.json(item);\n});\nrouter.post('/users', (req, res) => {\n  const id = String(Date.now());\n  const item = { id: id, ...req.body };\n  store.set(id, item);\n  res.status(201).json(item);\n});\nrouter.put('/users/:id', (req, res) => {\n  if (!store.has(req.params.id)) return res.status(404).end();\n  const updated = { ...store.get(req.params.id), ...req.body };\n  store.set(req.params.id, updated);\n  res.json(updated);\n});\nrouter.delete('/users/:id', (req, res) => {\n  store.delete(req.params.id);\n  res.status(204).end();\n});\n\nmodule.exports = router;",
+        "slot_values": {
+          "resource": "users",
+          "id_field": "id"
+        },
+        "raw_reply_preview": "```json\n{\n  \"resource\": \"users\",\n  \"id_field\": \"id\"\n}\n```"
+      }
+    },
+    {
+      "idx": 9,
+      "query_zh": "FastAPI JWT 登入 endpoint",
+      "query_en": "FastAPI JWT login endpoint",
+      "expected_domain": "web-backend",
+      "top_template_id": "web-backend-048-fastapi-jwt",
+      "top_template_summary": "FastAPI OAuth2 password JWT",
+      "top_template_domain": "web-backend",
+      "top_score": 0.624,
+      "domain_match": true,
+      "top3": [
+        {
+          "id": "web-backend-048-fastapi-jwt",
+          "domain": "web-backend",
+          "score": 0.624,
+          "summary": "FastAPI OAuth2 password JWT"
+        },
+        {
+          "id": "web-backend-060-fastapi-image",
+          "domain": "web-backend",
+          "score": 0.457,
+          "summary": "FastAPI Pillow 縮圖"
+        },
+        {
+          "id": "web-backend-051-fastapi-ws",
+          "domain": "web-backend",
+          "score": 0.456,
+          "summary": "FastAPI WebSocket 廣播聊天"
+        }
+      ],
+      "fill_result": {
+        "ok": true,
+        "final_code": "from fastapi import Depends, FastAPI, HTTPException\nfrom fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm\nfrom jose import jwt, JWTError\nfrom datetime import datetime, timedelta\nimport os\n\napp = FastAPI()\noauth2 = OAuth2PasswordBearer(tokenUrl='token')\nSECRET = os.environ['your_secret_key']\n\n@app.post('/token')\ndef login(form: OAuth2PasswordRequestForm = Depends()):\n    exp = datetime.utcnow() + timedelta(minutes=30)\n    token = jwt.encode({'sub': form.username, 'exp': exp}, SECRET, algorithm='HS256')\n    return {'access_token': token, 'token_type': 'bearer'}\n\ndef current_user(token: str = Depends(oauth2)):\n    try:\n        payload = jwt.decode(token, SECRET, algorithms=['HS256'])\n        return payload['sub']\n    except JWTError:\n        raise HTTPException(401, 'bad token')\n\n@app.get('/me')\ndef me(user: str = Depends(current_user)):\n    return {'user': user}",
+        "slot_values": {
+          "secret_env": "your_secret_key",
+          "token_ttl_min": 30
+        },
+        "raw_reply_preview": "```json\n{\n  \"secret_env\": \"your_secret_key\",\n  \"token_ttl_min\": 30\n}\n```"
+      }
+    },
+    {
+      "idx": 10,
+      "query_zh": "幫我寫一個 webhook receiver",
+      "query_en": "webhook receiver",
+      "expected_domain": "web-backend",
+      "top_template_id": "web-backend-016-express-webhook",
+      "top_template_summary": "Express HMAC 簽章 webhook 接收器",
+      "top_template_domain": "web-backend",
+      "top_score": 0.627,
+      "domain_match": true,
+      "top3": [
+        {
+          "id": "web-backend-016-express-webhook",
+          "domain": "web-backend",
+          "score": 0.627,
+          "summary": "Express HMAC 簽章 webhook 接收器"
+        },
+        {
+          "id": "web-frontend-batch4-044-api-webhook",
+          "domain": "web-frontend",
+          "score": 0.601,
+          "summary": "驗證 HMAC 簽章的 webhook 接收端點"
+        },
+        {
+          "id": "web-backend-041-flask-webhook",
+          "domain": "web-backend",
+          "score": 0.498,
+          "summary": "Flask HMAC webhook 接收"
+        }
+      ],
+      "fill_result": {
+        "ok": true,
+        "final_code": "const express = require('express');\nconst crypto = require('crypto');\nconst router = express.Router();\n\nrouter.post('/webhook', express.raw({ type: 'application/json' }), (req, res) => {\n  const sig = req.headers['x-signature'];\n  const expected = crypto.createHmac('sha256', process.env.your_webhook_secret)\n    .update(req.body).digest('hex');\n  if (sig !== expected) return res.status(401).end();\n  const event = JSON.parse(req.body.toString());\n  console.log('event:', event.type);\n  res.json({ received: true });\n});\n\nmodule.exports = router;",
+        "slot_values": {
+          "webhook_secret_env": "your_webhook_secret",
+          "event_path": "/webhook"
+        },
+        "raw_reply_preview": "```json\n{\n  \"webhook_secret_env\": \"your_webhook_secret\",\n  \"event_path\": \"/webhook\"\n}\n```"
+      }
+    },
+    {
+      "idx": 11,
+      "query_zh": "Django model + migration: blog post",
+      "query_en": "Django model and migration for blog post",
+      "expected_domain": "web-backend",
+      "top_template_id": "web-backend-066-django-model",
+      "top_template_summary": "Django Model 範例",
+      "top_template_domain": "web-backend",
+      "top_score": 0.601,
+      "domain_match": true,
+      "top3": [
+        {
+          "id": "web-backend-066-django-model",
+          "domain": "web-backend",
+          "score": 0.601,
+          "summary": "Django Model 範例"
+        },
+        {
+          "id": "web-backend-063-django-view",
+          "domain": "web-backend",
+          "score": 0.5,
+          "summary": "Django function view + url"
+        },
+        {
+          "id": "web-backend-069-django-celery",
+          "domain": "web-backend",
+          "score": 0.463,
+          "summary": "Django + Celery 任務設定"
+        }
+      ],
+      "fill_result": {
+        "ok": true,
+        "final_code": "from django.db import models\n\nclass BlogPost(models.Model):\n    name = models.CharField(max_length=120)\n    description = models.TextField(blank=True, default='')\n    created_at = models.DateTimeField(auto_now_add=True)\n    updated_at = models.DateTimeField(auto_now=True)\n\n    class Meta:\n        db_table = 'blog_posts'\n        ordering = ['-created_at']\n\n    def __str__(self):\n        return self.name",
+        "slot_values": {
+          "model_name": "BlogPost",
+          "table_name": "blog_posts"
+        },
+        "raw_reply_preview": "```json\n{\n  \"model_name\": \"BlogPost\",\n  \"table_name\": \"blog_posts\"\n}\n```"
+      }
+    },
+    {
+      "idx": 12,
+      "query_zh": "Go gin server with rate limit middleware",
+      "query_en": "Go gin server with rate limit middleware",
+      "expected_domain": "web-backend",
+      "top_template_id": "web-backend-067-django-middleware",
+      "top_template_summary": "Django 自訂 middleware",
+      "top_template_domain": "web-backend",
+      "top_score": 0.516,
+      "domain_match": true,
+      "top3": [
+        {
+          "id": "web-backend-067-django-middleware",
+          "domain": "web-backend",
+          "score": 0.516,
+          "summary": "Django 自訂 middleware"
+        },
+        {
+          "id": "web-backend-005-express-ratelimit",
+          "domain": "web-backend",
+          "score": 0.506,
+          "summary": "Express 限流 middleware"
+        },
+        {
+          "id": "web-frontend-batch4-028-middleware",
+          "domain": "web-frontend",
+          "score": 0.457,
+          "summary": "middleware 檢查 cookie 未登入則 redirect"
+        }
+      ],
+      "fill_result": {
+        "ok": true,
+        "final_code": "import time\n\nclass gin.middleware.ratelimit.RateLimiter:\n    def __init__(self, get_response):\n        self.get_response = get_response\n\n    def __call__(self, request):\n        start = time.time()\n        response = self.get_response(request)\n        elapsed_ms = int((time.time() - start) * 1000)\n        response['X-Response-Time-ms'] = str(elapsed_ms)\n        return response",
+        "slot_values": {
+          "middleware_name": "gin.middleware.ratelimit.RateLimiter"
+        },
+        "raw_reply_preview": "```json\n{\n  \"middleware_name\": \"gin.middleware.ratelimit.RateLimiter\"\n}\n```"
+      }
+    },
+    {
+      "idx": 13,
+      "query_zh": "Node.js file upload to S3",
+      "query_en": "Node.js file upload to S3",
+      "expected_domain": "web-backend",
+      "top_template_id": "web-frontend-batch1-024-file-upload-basic",
+      "top_template_summary": "基本檔案上傳 FormData POST",
+      "top_template_domain": "web-frontend",
+      "top_score": 0.434,
+      "domain_match": false,
+      "top3": [
+        {
+          "id": "web-frontend-batch1-024-file-upload-basic",
+          "domain": "web-frontend",
+          "score": 0.434,
+          "summary": "基本檔案上傳 FormData POST"
+        },
+        {
+          "id": "web-backend-110-express-s3-upload",
+          "domain": "web-backend",
+          "score": 0.429,
+          "summary": "Express S3 presigned upload URL"
+        },
+        {
+          "id": "web-backend-050-fastapi-upload",
+          "domain": "web-backend",
+          "score": 0.313,
+          "summary": "FastAPI UploadFile 上傳"
+        }
+      ],
+      "fill_result": {
+        "ok": true,
+        "final_code": "import { useState } from 'react';\n\nexport default function FileUpload() {\n  const [uploading, setUploading] = useState(false);\n\n  async function onChange(e: React.ChangeEvent<HTMLInputElement>) {\n    const f = e.target.files?.[0];\n    if (!f) return;\n    setUploading(true);\n    const fd = new FormData();\n    fd.append('file', f);\n    await fetch('https://s3.amazonaws.com/your-bucket-name', { method: 'POST', body: fd });\n    setUploading(false);\n  }\n\n  return (\n    <label>\n      <input type=\"file\" onChange={onChange} disabled={uploading} />\n      {uploading && <span> Uploading...</span>}\n    </label>\n  );\n}",
+        "slot_values": {
+          "component_name": "FileUpload",
+          "upload_url": "https://s3.amazonaws.com/your-bucket-name"
+        },
+        "raw_reply_preview": "```json\n{\n  \"component_name\": \"FileUpload\",\n  \"upload_url\": \"https://s3.amazonaws.com/your-bucket-name\"\n}\n```"
+      }
+    },
+    {
+      "idx": 14,
+      "query_zh": "GraphQL resolver 範例",
+      "query_en": "GraphQL resolver example",
+      "expected_domain": "web-backend",
+      "top_template_id": "web-backend-025-express-graphql",
+      "top_template_summary": "Apollo GraphQL resolver + middleware",
+      "top_template_domain": "web-backend",
+      "top_score": 0.818,
+      "domain_match": true,
+      "top3": [
+        {
+          "id": "web-backend-025-express-graphql",
+          "domain": "web-backend",
+          "score": 0.818,
+          "summary": "Apollo GraphQL resolver + middleware"
+        },
+        {
+          "id": "web-backend-127-express-graphql-auth",
+          "domain": "web-backend",
+          "score": 0.718,
+          "summary": "Apollo context 注入登入 user"
+        },
+        {
+          "id": "web-backend-121-flask-graphql-ariadne",
+          "domain": "web-backend",
+          "score": 0.605,
+          "summary": "Flask + Ariadne GraphQL"
+        }
+      ],
+      "fill_result": {
+        "ok": true,
+        "final_code": "const { ApolloServer } = require('@apollo/server');\nconst { expressMiddleware } = require('@apollo/server/express4');\n\nconst typeDefs = `#graphql\n  type User { id: ID!, name: String! }\n  type Query { items: [User!]! }\n  type Mutation { add(name: String!): User! }\n`;\n\nconst items = [];\nconst resolvers = {\n  Query: { items: () => items },\n  Mutation: {\n    add: (_, { name }) => {\n      const item = { id: String(items.length + 1), name };\n      items.push(item);\n      return item;\n    }\n  }\n};\n\nasync function makeMiddleware() {\n  const server = new ApolloServer({ typeDefs, resolvers });\n  await server.start();\n  return expressMiddleware(server);\n}\n\nmodule.exports = { makeMiddleware };",
+        "slot_values": {
+          "type_name": "User"
+        },
+        "raw_reply_preview": "```json\n{\n  \"type_name\": \"User\"\n}\n```"
+      }
+    },
+    {
+      "idx": 15,
+      "query_zh": "React Native 登入畫面",
+      "query_en": "React Native login screen",
+      "expected_domain": "mobile",
+      "top_template_id": "mobile-001-rn-login",
+      "top_template_summary": "React Native email/password 登入畫面含後端 POST",
+      "top_template_domain": "mobile",
+      "top_score": 0.511,
+      "domain_match": true,
+      "top3": [
+        {
+          "id": "mobile-001-rn-login",
+          "domain": "mobile",
+          "score": 0.511,
+          "summary": "React Native email/password 登入畫面含後端 POST"
+        },
+        {
+          "id": "mobile-027-rn-bridge",
+          "domain": "mobile",
+          "score": 0.372,
+          "summary": "RN iOS Swift native module 樣板"
+        },
+        {
+          "id": "web-frontend-batch1-001-login-form",
+          "domain": "web-frontend",
+          "score": 0.241,
+          "summary": "React email/password 登入表單 with loading 與錯誤態"
+        }
+      ],
+      "fill_result": {
+        "ok": true,
+        "final_code": "import React,{useState} from 'react';\nimport {View,TextInput,Button,Text,StyleSheet} from 'react-native';\nexport default function Login(){\n  const[e,setE]=useState('');const[p,setP]=useState('');const[m,setM]=useState('');\n  const submit=async()=>{\n    try{const r=await fetch('https://api.example.com/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:e,password:p})});\n    if(!r.ok)throw new Error('bad');setM('ok');}catch(x){setM('fail');}};\n  return(<View style={s.c}><TextInput style={s.i} placeholder='email' value={e} onChangeText={setE}/><TextInput style={s.i} placeholder='password' secureTextEntry value={p} onChangeText={setP}/><Button title='Login' onPress={submit}/><Text>{m}</Text></View>);}\nconst s=StyleSheet.create({c:{flex:1,justifyContent:'center',padding:24},i:{borderWidth:1,marginBottom:12,padding:8}});",
+        "slot_values": {
+          "api_url": "https://api.example.com"
+        },
+        "raw_reply_preview": "```json\n{\n  \"api_url\": \"https://api.example.com\"\n}\n```"
+      }
+    },
+    {
+      "idx": 16,
+      "query_zh": "SwiftUI list with pull to refresh",
+      "query_en": "SwiftUI list with pull to refresh",
+      "expected_domain": "mobile",
+      "top_template_id": "mobile-057-swiftui-pullrefresh",
+      "top_template_summary": "SwiftUI refreshable 下拉刷新 List",
+      "top_template_domain": "mobile",
+      "top_score": 0.804,
+      "domain_match": true,
+      "top3": [
+        {
+          "id": "mobile-057-swiftui-pullrefresh",
+          "domain": "mobile",
+          "score": 0.804,
+          "summary": "SwiftUI refreshable 下拉刷新 List"
+        },
+        {
+          "id": "mobile-003-rn-pullrefresh",
+          "domain": "mobile",
+          "score": 0.612,
+          "summary": "FlatList 下拉刷新從 API 重抓資料"
+        },
+        {
+          "id": "mobile-083-compose-pullrefresh",
+          "domain": "mobile",
+          "score": 0.544,
+          "summary": "Compose PullToRefreshBox 包 LazyColumn"
+        }
+      ],
+      "fill_result": {
+        "ok": true,
+        "final_code": "import SwiftUI\nstruct Item:Decodable,Identifiable{let id:Int;let title:String}\nstruct L:View{\n  @State var items:[Item]=[]\n  var body:some View{\n    List(items){Text($0.title)}.refreshable{await load()}.task{await load()}}\n  func load()async{\n    if let d=try?await URLSession.shared.data(from:URL(string:\"https://api.example.com/items\")!).0,\n       let arr=try?JSONDecoder().decode([Item].self,from:d){items=arr}}}",
+        "slot_values": {
+          "endpoint": "https://api.example.com/items"
+        },
+        "raw_reply_preview": "```json\n{\n  \"endpoint\": \"https://api.example.com/items\"\n}\n```"
+      }
+    },
+    {
+      "idx": 17,
+      "query_zh": "Android Jetpack Compose 底部導航",
+      "query_en": "Android Jetpack Compose bottom navigation",
+      "expected_domain": "mobile",
+      "top_template_id": "mobile-081-compose-login",
+      "top_template_summary": "Compose 登入表單呼叫 callback",
+      "top_template_domain": "mobile",
+      "top_score": 0.482,
+      "domain_match": true,
+      "top3": [
+        {
+          "id": "mobile-081-compose-login",
+          "domain": "mobile",
+          "score": 0.482,
+          "summary": "Compose 登入表單呼叫 callback"
+        },
+        {
+          "id": "mobile-122-compose-webview",
+          "domain": "mobile",
+          "score": 0.413,
+          "summary": "Compose AndroidView 嵌入 WebView"
+        },
+        {
+          "id": "mobile-082-compose-tabs",
+          "domain": "mobile",
+          "score": 0.409,
+          "summary": "Compose NavigationBar 三 tab"
+        }
+      ],
+      "fill_result": null
+    },
+    {
+      "idx": 18,
+      "query_zh": "Flutter HTTP request with error handling",
+      "query_en": "Flutter HTTP request with error handling",
+      "expected_domain": "mobile",
+      "top_template_id": "mobile-039-flutter-upload",
+      "top_template_summary": "Flutter multipart 上傳檔案",
+      "top_template_domain": "mobile",
+      "top_score": 0.412,
+      "domain_match": true,
+      "top3": [
+        {
+          "id": "mobile-039-flutter-upload",
+          "domain": "mobile",
+          "score": 0.412,
+          "summary": "Flutter multipart 上傳檔案"
+        },
+        {
+          "id": "mobile-035-flutter-deeplink",
+          "domain": "mobile",
+          "score": 0.392,
+          "summary": "Flutter app_links 監聽 deep link"
+        },
+        {
+          "id": "mobile-034-flutter-storage",
+          "domain": "mobile",
+          "score": 0.388,
+          "summary": "Flutter SharedPreferences 包裝"
+        }
+      ],
+      "fill_result": {
+        "ok": true,
+        "final_code": "import 'package:http/http.dart' as http;\nFuture<void> upload(String path)async{\n  final req=http.MultipartRequest('POST',Uri.parse('https://example.com/upload'));\n  req.files.add(await http.MultipartFile.fromPath('file',path));\n  final r=await req.send();\n  if(r.statusCode>=300)throw Exception('upload failed');}",
+        "slot_values": {
+          "upload_url": "https://example.com/upload"
+        },
+        "raw_reply_preview": "```json\n{\n  \"upload_url\": \"https://example.com/upload\"\n}\n```"
+      }
+    },
+    {
+      "idx": 19,
+      "query_zh": "iOS push notification setup",
+      "query_en": "iOS push notification setup",
+      "expected_domain": "mobile",
+      "top_template_id": "mobile-006-rn-push",
+      "top_template_summary": "Expo 取得推播 token 並設置通知 handler",
+      "top_template_domain": "mobile",
+      "top_score": 0.66,
+      "domain_match": true,
+      "top3": [
+        {
+          "id": "mobile-006-rn-push",
+          "domain": "mobile",
+          "score": 0.66,
+          "summary": "Expo 取得推播 token 並設置通知 handler"
+        },
+        {
+          "id": "mobile-060-swiftui-push",
+          "domain": "mobile",
+          "score": 0.548,
+          "summary": "iOS 推播權限請求與註冊"
+        },
+        {
+          "id": "mobile-086-compose-push",
+          "domain": "mobile",
+          "score": 0.472,
+          "summary": "Compose Android 13 推播權限請求"
+        }
+      ],
+      "fill_result": null
+    },
+    {
+      "idx": 20,
+      "query_zh": "做個簡單的計步 App 畫面",
+      "query_en": "simple step counter app screen",
+      "expected_domain": "mobile",
+      "top_template_id": "web-frontend-batch2-018-app-shell",
+      "top_template_summary": "頂部 header + icon 側欄的 app shell",
+      "top_template_domain": "web-frontend",
+      "top_score": 0.168,
+      "domain_match": false,
+      "top3": [
+        {
+          "id": "web-frontend-batch2-018-app-shell",
+          "domain": "web-frontend",
+          "score": 0.168,
+          "summary": "頂部 header + icon 側欄的 app shell"
+        },
+        {
+          "id": "web-frontend-batch4-013-api-hello",
+          "domain": "web-frontend",
+          "score": 0.137,
+          "summary": "App Router GET API 回 JSON"
+        },
+        {
+          "id": "web-frontend-batch2-036-empty-state",
+          "domain": "web-frontend",
+          "score": 0.129,
+          "summary": "通用空狀態畫面"
+        }
+      ],
+      "fill_result": {
+        "ok": true,
+        "final_code": "export function AppShell({ children }) {\n  return (\n    <div className=\"flex h-screen flex-col\">\n      <header className=\"h-12 border-b bg-white px-4 flex items-center\">App</header>\n      <div className=\"flex flex-1 overflow-hidden\">\n        <nav className=\"w-14 border-r bg-gray-900 text-white flex flex-col items-center py-4 gap-4\">\n          <div className=\"h-8 w-8 rounded bg-gray-700\" />\n          <div className=\"h-8 w-8 rounded bg-gray-700\" />\n        </nav>\n        <main className=\"flex-1 overflow-y-auto\">{children}</main>\n      </div>\n    </div>\n  );\n}",
+        "slot_values": {
+          "label": "Increment",
+          "action": "increment"
+        },
+        "raw_reply_preview": "```json\n{\n  \"children\": [\n    {\n      \"type\": \"Counter\",\n      \"initial_value\": 0,\n      \"increment_button\": {\n        \"label\": \"Increment\",\n        \"action\": \"increment\"\n      },\n      \"decrement_but"
+      }
+    },
+    {
+      "idx": 21,
+      "query_zh": "bash 批次重命名資料夾下 .jpg 檔",
+      "query_en": "bash batch rename .jpg files in folder",
+      "expected_domain": "system-cli",
+      "top_template_id": "system-cli-011-bash-strict-mode",
+      "top_template_summary": "bash strict mode + ERR trap",
+      "top_template_domain": "system-cli",
+      "top_score": 0.341,
+      "domain_match": true,
+      "top3": [
+        {
+          "id": "system-cli-011-bash-strict-mode",
+          "domain": "system-cli",
+          "score": 0.341,
+          "summary": "bash strict mode + ERR trap"
+        },
+        {
+          "id": "system-cli-010-bash-getopts",
+          "domain": "system-cli",
+          "score": 0.295,
+          "summary": "bash getopts 解析旗標"
+        },
+        {
+          "id": "system-cli-128-bash-array-loop",
+          "domain": "system-cli",
+          "score": 0.276,
+          "summary": "bash array for 迴圈"
+        }
+      ],
+      "fill_result": {
+        "ok": true,
+        "final_code": "#!/usr/bin/env bash\n# 批量重命名資料夾下 .jpg 檔案\nset -Eeuo pipefail\nIFS=$'\\n\\t'\n\ntrap 'echo \"error on line $LINENO\" >&2' ERR\n\nmain() {\n  echo \"running 批量重命名資料夾下 .jpg 檔案\"\n  # TODO\n}\n\nmain \"$@\"",
+        "slot_values": {
+          "script_purpose": "批量重命名資料夾下 .jpg 檔案"
+        },
+        "raw_reply_preview": "```json\n{\n  \"script_purpose\": \"批量重命名資料夾下 .jpg 檔案\"\n}\n```"
+      }
+    },
+    {
+      "idx": 22,
+      "query_zh": "Python CLI tool with argparse subcommands",
+      "query_en": "Python CLI tool with argparse subcommands",
+      "expected_domain": "system-cli",
+      "top_template_id": "system-cli-002-argparse-subcommands",
+      "top_template_summary": "argparse 子命令分派架構",
+      "top_template_domain": "system-cli",
+      "top_score": 0.786,
+      "domain_match": true,
+      "top3": [
+        {
+          "id": "system-cli-002-argparse-subcommands",
+          "domain": "system-cli",
+          "score": 0.786,
+          "summary": "argparse 子命令分派架構"
+        },
+        {
+          "id": "system-cli-001-argparse-basic",
+          "domain": "system-cli",
+          "score": 0.665,
+          "summary": "argparse 基本 CLI 骨架，含 input/output/verbose"
+        },
+        {
+          "id": "system-cli-006-commander-node",
+          "domain": "system-cli",
+          "score": 0.336,
+          "summary": "commander.js 單命令 CLI"
+        }
+      ],
+      "fill_result": {
+        "ok": true,
+        "final_code": "import argparse\n\ndef cmd_run_a(args):\n    print('running run_a', args.target)\n\ndef cmd_run_b(args):\n    print('running run_b', args.target)\n\ndef main():\n    p = argparse.ArgumentParser(prog='my_tool')\n    sub = p.add_subparsers(dest='cmd', required=True)\n    a = sub.add_parser('run_a'); a.add_argument('target'); a.set_defaults(func=cmd_run_a)\n    b = sub.add_parser('run_b'); b.add_argument('target'); b.set_defaults(func=cmd_run_b)\n    args = p.parse_args()\n    args.func(args)\n\nif __name__ == '__main__':\n    main()",
+        "slot_values": {
+          "tool_name": "my_tool",
+          "cmd_a": "run_a",
+          "cmd_b": "run_b"
+        },
+        "raw_reply_preview": "```json\n{\n  \"tool_name\": \"my_tool\",\n  \"cmd_a\": \"run_a\",\n  \"cmd_b\": \"run_b\"\n}\n```"
+      }
+    },
+    {
+      "idx": 23,
+      "query_zh": "監看資料夾，新檔案出現就跑 script",
+      "query_en": "watch folder, run script when new file appears",
+      "expected_domain": "system-cli",
+      "top_template_id": "system-cli-130-trap-timer-report",
+      "top_template_summary": "trap EXIT 印 script 耗時",
+      "top_template_domain": "system-cli",
+      "top_score": 0.23,
+      "domain_match": true,
+      "top3": [
+        {
+          "id": "system-cli-130-trap-timer-report",
+          "domain": "system-cli",
+          "score": 0.23,
+          "summary": "trap EXIT 印 script 耗時"
+        },
+        {
+          "id": "system-cli-058-pid-lockfile",
+          "domain": "system-cli",
+          "score": 0.224,
+          "summary": "flock 防止重複執行"
+        },
+        {
+          "id": "system-cli-073-docker-entrypoint",
+          "domain": "system-cli",
+          "score": 0.194,
+          "summary": "docker entrypoint 等 DB"
+        }
+      ],
+      "fill_result": {
+        "ok": true,
+        "final_code": "#!/usr/bin/env bash\nset -euo pipefail\nstart=$SECONDS\nfinish() {\n  rc=$?\n  echo \"== elapsed $((SECONDS-start))s rc=$rc ==\"\n}\ntrap finish EXIT\n\nwhile true; do if [ ! -f /path/to/newfile ]; then continue; fi; /path/to/your/script.sh; done",
+        "slot_values": {
+          "work_block": "while true; do if [ ! -f /path/to/newfile ]; then continue; fi; /path/to/your/script.sh; done"
+        },
+        "raw_reply_preview": "```json\n{\n  \"work_block\": \"while true; do if [ ! -f /path/to/newfile ]; then continue; fi; /path/to/your/script.sh; done\"\n}\n```"
+      }
+    },
+    {
+      "idx": 24,
+      "query_zh": "systemd service unit file",
+      "query_en": "systemd service unit file",
+      "expected_domain": "system-cli",
+      "top_template_id": "system-cli-013-systemd-service",
+      "top_template_summary": "systemd simple service unit",
+      "top_template_domain": "system-cli",
+      "top_score": 0.866,
+      "domain_match": true,
+      "top3": [
+        {
+          "id": "system-cli-013-systemd-service",
+          "domain": "system-cli",
+          "score": 0.866,
+          "summary": "systemd simple service unit"
+        },
+        {
+          "id": "system-cli-014-systemd-timer",
+          "domain": "system-cli",
+          "score": 0.538,
+          "summary": "systemd timer 定時觸發"
+        },
+        {
+          "id": "system-cli-122-systemd-env-file",
+          "domain": "system-cli",
+          "score": 0.532,
+          "summary": "systemd EnvironmentFile 載 env"
+        }
+      ],
+      "fill_result": {
+        "ok": true,
+        "final_code": "[Unit]\nDescription=my_service service\nAfter=network.target\n\n[Service]\nType=simple\nUser=myuser\nWorkingDirectory=/opt/my_service\nExecStart=/usr/bin/my_service\nRestart=on-failure\nRestartSec=5\nStandardOutput=append:/var/log/my_service.log\nStandardError=append:/var/log/my_service.err\n\n[Install]\nWantedBy=multi-user.target",
+        "slot_values": {
+          "service_name": "my_service",
+          "exec_path": "/usr/bin/my_service",
+          "user_name": "myuser"
+        },
+        "raw_reply_preview": "```json\n{\n  \"service_name\": \"my_service\",\n  \"exec_path\": \"/usr/bin/my_service\",\n  \"user_name\": \"myuser\"\n}\n```"
+      }
+    },
+    {
+      "idx": 25,
+      "query_zh": "cron job 每天 3am 跑備份",
+      "query_en": "cron job daily 3am backup",
+      "expected_domain": "system-cli",
+      "top_template_id": "system-cli-016-cron-entry",
+      "top_template_summary": "crontab 單行排程",
+      "top_template_domain": "system-cli",
+      "top_score": 0.499,
+      "domain_match": true,
+      "top3": [
+        {
+          "id": "system-cli-016-cron-entry",
+          "domain": "system-cli",
+          "score": 0.499,
+          "summary": "crontab 單行排程"
+        },
+        {
+          "id": "web-backend-020-express-cron",
+          "domain": "web-backend",
+          "score": 0.443,
+          "summary": "node-cron 定時任務"
+        },
+        {
+          "id": "database-devops-074-gha-cron",
+          "domain": "database-devops",
+          "score": 0.276,
+          "summary": "GHA 定時排程 workflow"
+        }
+      ],
+      "fill_result": {
+        "ok": true,
+        "final_code": "# m h dom mon dow command\n0 3 * * * rsync -avz /path/to/source /path/to/destination >> /var/log/cron-job.log 2>&1",
+        "slot_values": {
+          "schedule": "0 3 * * *",
+          "command": "rsync -avz /path/to/source /path/to/destination"
+        },
+        "raw_reply_preview": "```json\n{\n  \"schedule\": \"0 3 * * *\",\n  \"command\": \"rsync -avz /path/to/source /path/to/destination\"\n}\n```"
+      }
+    },
+    {
+      "idx": 26,
+      "query_zh": "rsync 增量備份到遠端機器",
+      "query_en": "rsync incremental backup to remote",
+      "expected_domain": "system-cli",
+      "top_template_id": "system-cli-017-rsync-backup",
+      "top_template_summary": "rsync 增量備份含排除",
+      "top_template_domain": "system-cli",
+      "top_score": 0.646,
+      "domain_match": true,
+      "top3": [
+        {
+          "id": "system-cli-017-rsync-backup",
+          "domain": "system-cli",
+          "score": 0.646,
+          "summary": "rsync 增量備份含排除"
+        },
+        {
+          "id": "system-cli-118-rsync-over-ssh",
+          "domain": "system-cli",
+          "score": 0.576,
+          "summary": "rsync 透過 ssh 遠端同步"
+        },
+        {
+          "id": "llm-tools-110-async-rag-pipeline",
+          "domain": "llm-tools",
+          "score": 0.213,
+          "summary": "非同步 RAG pipeline"
+        }
+      ],
+      "fill_result": {
+        "ok": true,
+        "final_code": "#!/usr/bin/env bash\nset -euo pipefail\nSRC=\"/path/to/source\"\nDST=\"user@remote_host:/path/to/destination\"\n\nrsync -avh --delete \\\n  --exclude '.DS_Store' \\\n  --exclude 'node_modules/' \\\n  --exclude '__pycache__/' \\\n  --exclude '*.tmp' \\\n  \"$SRC/\" \"$DST/\"\n\necho \"backup done: $(date -Iseconds)\"",
+        "slot_values": {
+          "src_path": "/path/to/source",
+          "dst_path": "user@remote_host:/path/to/destination"
+        },
+        "raw_reply_preview": "```json\n{\n  \"src_path\": \"/path/to/source\",\n  \"dst_path\": \"user@remote_host:/path/to/destination\"\n}\n```"
+      }
+    },
+    {
+      "idx": 27,
+      "query_zh": "ESP32 讀 DHT22 溫濕度送 MQTT",
+      "query_en": "ESP32 read DHT22 temp humidity send via MQTT",
+      "expected_domain": "firmware",
+      "top_template_id": "firmware-020-esp32-mqtt-subscribe",
+      "top_template_summary": "ESP32 訂閱 MQTT topic 並回呼處理",
+      "top_template_domain": "firmware",
+      "top_score": 0.512,
+      "domain_match": true,
+      "top3": [
+        {
+          "id": "firmware-020-esp32-mqtt-subscribe",
+          "domain": "firmware",
+          "score": 0.512,
+          "summary": "ESP32 訂閱 MQTT topic 並回呼處理"
+        },
+        {
+          "id": "firmware-009-arduino-dht-read",
+          "domain": "firmware",
+          "score": 0.484,
+          "summary": "DHT11/DHT22 溫溼度讀取"
+        },
+        {
+          "id": "firmware-019-esp32-mqtt-publish",
+          "domain": "firmware",
+          "score": 0.451,
+          "summary": "ESP32 透過 MQTT publish 訊息"
+        }
+      ],
+      "fill_result": {
+        "ok": true,
+        "final_code": "#include <WiFi.h>\n#include <PubSubClient.h>\nWiFiClient net;\nPubSubClient client(net);\n\nvoid onMsg(char* t, byte* p, unsigned int len) {\n  Serial.print(t); Serial.print(\": \");\n  for (unsigned i = 0; i < len; i++) Serial.print((char)p[i]);\n  Serial.println();\n}\n\nvoid setup() {\n  Serial.begin(115200);\n  WiFi.begin(\"your_wifi_ssid\", \"your_wifi_password\");\n  while (WiFi.status() != WL_CONNECTED) delay(300);\n  client.setServer(\"mqtt.eclipse.org\", 1883);\n  client.setCallback(onMsg);\n  while (!client.connect(\"esp32-sub\")) delay(500);\n  client.subscribe(\"esp32/dht22\");\n}\n\nvoid loop() { client.loop(); }",
+        "slot_values": {
+          "ssid": "your_wifi_ssid",
+          "password": "your_wifi_password",
+          "broker": "mqtt.eclipse.org",
+          "topic": "esp32/dht22"
+        },
+        "raw_reply_preview": "```json\n{\n  \"ssid\": \"your_wifi_ssid\",\n  \"password\": \"your_wifi_password\",\n  \"broker\": \"mqtt.eclipse.org\",\n  \"topic\": \"esp32/dht22\"\n}\n```"
+      }
+    },
+    {
+      "idx": 28,
+      "query_zh": "Arduino servo motor sweep",
+      "query_en": "Arduino servo motor sweep",
+      "expected_domain": "firmware",
+      "top_template_id": "firmware-006-arduino-servo",
+      "top_template_summary": "Arduino 控制伺服馬達來回擺動",
+      "top_template_domain": "firmware",
+      "top_score": 0.681,
+      "domain_match": true,
+      "top3": [
+        {
+          "id": "firmware-006-arduino-servo",
+          "domain": "firmware",
+          "score": 0.681,
+          "summary": "Arduino 控制伺服馬達來回擺動"
+        },
+        {
+          "id": "firmware-001-arduino-blink",
+          "domain": "firmware",
+          "score": 0.407,
+          "summary": "Arduino 基本 LED 閃爍範例"
+        },
+        {
+          "id": "firmware-053-rpi-pwm-servo",
+          "domain": "firmware",
+          "score": 0.407,
+          "summary": "Raspberry Pi gpiozero 控制 servo"
+        }
+      ],
+      "fill_result": {
+        "ok": true,
+        "final_code": "#include <Servo.h>\nServo myServo;\nconst int SERVO_PIN = 9;\n\nvoid setup() {\n  myServo.attach(SERVO_PIN);\n}\n\nvoid loop() {\n  for (int a = 0; a <= 180; a++) { myServo.write(a); delay(15); }\n  for (int a = 180; a >= 0; a--) { myServo.write(a); delay(15); }\n}",
+        "slot_values": {
+          "servo_pin": 9
+        },
+        "raw_reply_preview": "```json\n{\n  \"servo_pin\": 9\n}\n```"
+      }
+    },
+    {
+      "idx": 29,
+      "query_zh": "Raspberry Pi GPIO 按鈕 debounce",
+      "query_en": "Raspberry Pi GPIO button debounce",
+      "expected_domain": "firmware",
+      "top_template_id": "web-frontend-batch1-028-search-debounce",
+      "top_template_summary": "debounce 搜尋輸入框 300ms",
+      "top_template_domain": "web-frontend",
+      "top_score": 0.501,
+      "domain_match": false,
+      "top3": [
+        {
+          "id": "web-frontend-batch1-028-search-debounce",
+          "domain": "web-frontend",
+          "score": 0.501,
+          "summary": "debounce 搜尋輸入框 300ms"
+        },
+        {
+          "id": "firmware-046-rpi-gpio-blink",
+          "domain": "firmware",
+          "score": 0.453,
+          "summary": "樹莓派 RPi.GPIO 閃 LED"
+        },
+        {
+          "id": "firmware-003-arduino-button-debounce",
+          "domain": "firmware",
+          "score": 0.429,
+          "summary": "Arduino 按鈕防彈跳處理"
+        }
+      ],
+      "fill_result": {
+        "ok": true,
+        "final_code": "import { useEffect, useState } from 'react';\n\nexport default function RaspberryPiGPIOButtonDebounce() {\n  const [q, setQ] = useState('');\n  const [results, setResults] = useState<any[]>([]);\n\n  useEffect(() => {\n    if (!q) { setResults([]); return; }\n    const t = setTimeout(async () => {\n      const res = await fetch(`https://api.example.com/search?q=${encodeURIComponent(q)}`);\n      setResults(await res.json());\n    }, 300);\n    return () => clearTimeout(t);\n  }, [q]);\n\n  return (\n    <div>\n      <input value={q} onChange={(e) => setQ(e.target.value)} className=\"border rounded px-2 py-1 w-full\" />\n      <ul>{results.map((r, i) => <li key={i}>{r.title ?? r.name ?? JSON.stringify(r)}</li>)}</ul>\n    </div>\n  );\n}",
+        "slot_values": {
+          "component_name": "RaspberryPiGPIOButtonDebounce",
+          "search_url": "https://api.example.com/search"
+        },
+        "raw_reply_preview": "```json\n{\n  \"component_name\": \"RaspberryPiGPIOButtonDebounce\",\n  \"search_url\": \"https://api.example.com/search\"\n}\n```"
+      }
+    },
+    {
+      "idx": 30,
+      "query_zh": "STM32 UART DMA receive",
+      "query_en": "STM32 UART DMA receive",
+      "expected_domain": "firmware",
+      "top_template_id": "firmware-057-stm32-uart-print",
+      "top_template_summary": "STM32 UART 週期送字串",
+      "top_template_domain": "firmware",
+      "top_score": 0.646,
+      "domain_match": true,
+      "top3": [
+        {
+          "id": "firmware-057-stm32-uart-print",
+          "domain": "firmware",
+          "score": 0.646,
+          "summary": "STM32 UART 週期送字串"
+        },
+        {
+          "id": "firmware-062-stm32-spi-transfer",
+          "domain": "firmware",
+          "score": 0.472,
+          "summary": "STM32 SPI 單 byte 全雙工交換"
+        },
+        {
+          "id": "firmware-056-stm32-blink-hal",
+          "domain": "firmware",
+          "score": 0.416,
+          "summary": "STM32 HAL 庫 LED 閃爍"
+        }
+      ],
+      "fill_result": {
+        "ok": true,
+        "final_code": "#include \"main.h\"\n#include <string.h>\nextern UART_HandleTypeDef USART2;\n\nint main(void) {\n  HAL_Init();\n  SystemClock_Config();\n  MX_GPIO_Init();\n  MX_USART2_UART_Init();\n  const char* msg = \"Hello, World!\\r\\n\";\n  while (1) {\n    HAL_UART_Transmit(&USART2, (uint8_t*)msg, strlen(msg), HAL_MAX_DELAY);\n    HAL_Delay(1000);\n  }\n}",
+        "slot_values": {
+          "uart_handle": "USART2",
+          "message": "Hello, World!"
+        },
+        "raw_reply_preview": "```json\n{\n  \"uart_handle\": \"USART2\",\n  \"message\": \"Hello, World!\"\n}\n```"
+      }
+    },
+    {
+      "idx": 31,
+      "query_zh": "ESP-NOW 兩台 ESP32 互傳",
+      "query_en": "ESP-NOW between two ESP32",
+      "expected_domain": "firmware",
+      "top_template_id": "firmware-017-esp32-http-get",
+      "top_template_summary": "ESP32 HTTP GET 請求並印出回應",
+      "top_template_domain": "firmware",
+      "top_score": 0.482,
+      "domain_match": true,
+      "top3": [
+        {
+          "id": "firmware-017-esp32-http-get",
+          "domain": "firmware",
+          "score": 0.482,
+          "summary": "ESP32 HTTP GET 請求並印出回應"
+        },
+        {
+          "id": "firmware-021-esp32-webserver",
+          "domain": "firmware",
+          "score": 0.476,
+          "summary": "ESP32 內建 web server 提供 LED 控制端點"
+        },
+        {
+          "id": "firmware-080-esp32-spiffs-write",
+          "domain": "firmware",
+          "score": 0.432,
+          "summary": "ESP32 SPIFFS 寫入並讀回檔案"
+        }
+      ],
+      "fill_result": {
+        "ok": true,
+        "final_code": "#include <WiFi.h>\n#include <HTTPClient.h>\n\nvoid setup() {\n  Serial.begin(115200);\n  WiFi.begin(\"<ssid>\", \"<password>\");\n  while (WiFi.status() != WL_CONNECTED) delay(300);\n  HTTPClient http;\n  http.begin(\"<url>\");\n  int code = http.GET();\n  if (code > 0) Serial.println(http.getString());\n  http.end();\n}\n\nvoid loop() {}",
+        "slot_values": {
+          "ssid": "<ssid>",
+          "password": "<password>",
+          "url": "<url>"
+        },
+        "raw_reply_preview": "```json\n{\n  \"ssid\": \"ESP-NOW\",\n  \"password\": \"password\",\n  \"url\": \"http://{{ip}}:{{port}}\"\n}\n```"
+      }
+    },
+    {
+      "idx": 32,
+      "query_zh": "LangChain RAG over local PDFs",
+      "query_en": "LangChain RAG over local PDFs",
+      "expected_domain": "llm-tools",
+      "top_template_id": "llm-tools-035-langchain-rag",
+      "top_template_summary": "LangChain FAISS + retriever RAG 鏈",
+      "top_template_domain": "llm-tools",
+      "top_score": 0.684,
+      "domain_match": true,
+      "top3": [
+        {
+          "id": "llm-tools-035-langchain-rag",
+          "domain": "llm-tools",
+          "score": 0.684,
+          "summary": "LangChain FAISS + retriever RAG 鏈"
+        },
+        {
+          "id": "llm-tools-034-langchain-chain",
+          "domain": "llm-tools",
+          "score": 0.6,
+          "summary": "LangChain LCEL prompt+llm+parser 鏈"
+        },
+        {
+          "id": "llm-tools-086-langchain-tool",
+          "domain": "llm-tools",
+          "score": 0.503,
+          "summary": "LangChain @tool 註冊並綁 LLM"
+        }
+      ],
+      "fill_result": {
+        "ok": true,
+        "final_code": "from langchain_community.vectorstores import FAISS\nfrom langchain_openai import ChatOpenAI, OpenAIEmbeddings\nfrom langchain_core.prompts import ChatPromptTemplate\nfrom langchain_core.output_parsers import StrOutputParser\nfrom langchain_core.runnables import RunnablePassthrough\n\nemb = OpenAIEmbeddings()\nvs = FAISS.from_texts([\"earth is round\", \"sun is hot\"], emb)\nretriever = vs.as_retriever(search_kwargs={\"k\": 2})\nprompt = ChatPromptTemplate.from_template(\"Context: {ctx}\\nQ: {q}\")\nllm = ChatOpenAI(model=\"gpt-4\")\n\nchain = {\"ctx\": retriever, \"q\": RunnablePassthrough()} | prompt | llm | StrOutputParser()\nprint(chain.invoke(\"what shape is earth?\"))",
+        "slot_values": {
+          "model_name": "gpt-4"
+        },
+        "raw_reply_preview": "```json\n{\n  \"model_name\": \"gpt-4\"\n}\n```"
+      }
+    },
+    {
+      "idx": 33,
+      "query_zh": "用 OpenAI function calling 做個天氣 agent",
+      "query_en": "OpenAI function calling weather agent",
+      "expected_domain": "llm-tools",
+      "top_template_id": "llm-tools-020-function-calling",
+      "top_template_summary": "OpenAI function calling 工具呼叫範例",
+      "top_template_domain": "llm-tools",
+      "top_score": 0.691,
+      "domain_match": true,
+      "top3": [
+        {
+          "id": "llm-tools-020-function-calling",
+          "domain": "llm-tools",
+          "score": 0.691,
+          "summary": "OpenAI function calling 工具呼叫範例"
+        },
+        {
+          "id": "llm-tools-001-openai-client",
+          "domain": "llm-tools",
+          "score": 0.459,
+          "summary": "OpenAI chat completion 最小包裝"
+        },
+        {
+          "id": "llm-tools-120-typescript-openai",
+          "domain": "llm-tools",
+          "score": 0.402,
+          "summary": "TypeScript OpenAI SDK chat 包裝"
+        }
+      ],
+      "fill_result": {
+        "ok": true,
+        "final_code": "from openai import OpenAI\nimport json\n\nclient = OpenAI()\n\ntools = [{\n    \"type\": \"function\",\n    \"function\": {\n        \"name\": \"get_weather\",\n        \"description\": \"do something\",\n        \"parameters\": {\"type\": \"object\", \"properties\": {\"x\": {\"type\": \"string\"}}, \"required\": [\"x\"]},\n    },\n}]\n\ndef run(prompt: str):\n    r = client.chat.completions.create(\n        model=\"gpt-4\",\n        messages=[{\"role\": \"user\", \"content\": prompt}],\n        tools=tools,\n    )\n    msg = r.choices[0].message\n    if msg.tool_calls:\n        return json.loads(msg.tool_calls[0].function.arguments)\n    return msg.content\n\nif __name__ == \"__main__\":\n    print(run(\"call get_weather with x=hi\"))",
+        "slot_values": {
+          "model_name": "gpt-4",
+          "function_name": "get_weather"
+        },
+        "raw_reply_preview": "```json\n{\n    \"model_name\": \"gpt-4\",\n    \"function_name\": \"get_weather\"\n}\n```"
+      }
+    },
+    {
+      "idx": 34,
+      "query_zh": "sentence-transformers 算文件相似度",
+      "query_en": "sentence-transformers compute document similarity",
+      "expected_domain": "llm-tools",
+      "top_template_id": "llm-tools-010-sentence-embedding",
+      "top_template_summary": "sentence-transformers 句子嵌入",
+      "top_template_domain": "llm-tools",
+      "top_score": 0.591,
+      "domain_match": true,
+      "top3": [
+        {
+          "id": "llm-tools-010-sentence-embedding",
+          "domain": "llm-tools",
+          "score": 0.591,
+          "summary": "sentence-transformers 句子嵌入"
+        },
+        {
+          "id": "llm-tools-008-hf-transformers-load",
+          "domain": "llm-tools",
+          "score": 0.445,
+          "summary": "transformers 載入 causal LM 生成"
+        },
+        {
+          "id": "llm-tools-009-hf-pipeline",
+          "domain": "llm-tools",
+          "score": 0.184,
+          "summary": "transformers pipeline 快速推論"
+        }
+      ],
+      "fill_result": {
+        "ok": true,
+        "final_code": "from sentence_transformers import SentenceTransformer\nimport numpy as np\n\nmodel = SentenceTransformer(\"bert-base-uncased\")\n\ndef embed(texts: list[str]) -> np.ndarray:\n    return model.encode(texts, normalize_embeddings=True)\n\nif __name__ == \"__main__\":\n    v = embed([\"hello\", \"world\"])\n    print(v.shape)",
+        "slot_values": {
+          "model_id": "bert-base-uncased"
+        },
+        "raw_reply_preview": "```json\n{\n  \"model_id\": \"bert-base-uncased\"\n}\n```"
+      }
+    },
+    {
+      "idx": 35,
+      "query_zh": "llama.cpp Python 載 GGUF 推論",
+      "query_en": "llama.cpp Python load GGUF and run inference",
+      "expected_domain": "llm-tools",
+      "top_template_id": "llm-tools-005-llama-cpp-python",
+      "top_template_summary": "llama.cpp python 載入 GGUF 推論",
+      "top_template_domain": "llm-tools",
+      "top_score": 0.76,
+      "domain_match": true,
+      "top3": [
+        {
+          "id": "llm-tools-005-llama-cpp-python",
+          "domain": "llm-tools",
+          "score": 0.76,
+          "summary": "llama.cpp python 載入 GGUF 推論"
+        },
+        {
+          "id": "llm-tools-109-gguf-convert-cli",
+          "domain": "llm-tools",
+          "score": 0.518,
+          "summary": "HF 模型轉 GGUF 並量化"
+        },
+        {
+          "id": "llm-tools-030-gguf-loader",
+          "domain": "llm-tools",
+          "score": 0.475,
+          "summary": "GGUF 模型 metadata 與 tensor 檢視"
+        }
+      ],
+      "fill_result": {
+        "ok": true,
+        "final_code": "from llama_cpp import Llama\n\nllm = Llama(\n    model_path=\"path/to/your/model.gguf\",\n    n_ctx=2048,\n    n_gpu_layers=-1,\n)\n\ndef generate(prompt: str) -> str:\n    out = llm.create_chat_completion(\n        messages=[{\"role\": \"user\", \"content\": prompt}],\n    )\n    return out[\"choices\"][0][\"message\"][\"content\"]\n\nif __name__ == \"__main__\":\n    print(generate(\"hi\"))",
+        "slot_values": {
+          "gguf_path": "path/to/your/model.gguf",
+          "n_ctx": 2048
+        },
+        "raw_reply_preview": "```json\n{\n    \"gguf_path\": \"path/to/your/model.gguf\",\n    \"n_ctx\": 2048\n}\n```"
+      }
+    },
+    {
+      "idx": 36,
+      "query_zh": "streaming token output from Anthropic API",
+      "query_en": "streaming token output from Anthropic API",
+      "expected_domain": "llm-tools",
+      "top_template_id": "llm-tools-003-streaming-openai",
+      "top_template_summary": "OpenAI 串流逐 token 輸出",
+      "top_template_domain": "llm-tools",
+      "top_score": 0.494,
+      "domain_match": true,
+      "top3": [
+        {
+          "id": "llm-tools-003-streaming-openai",
+          "domain": "llm-tools",
+          "score": 0.494,
+          "summary": "OpenAI 串流逐 token 輸出"
+        },
+        {
+          "id": "llm-tools-042-anthropic-streaming",
+          "domain": "llm-tools",
+          "score": 0.432,
+          "summary": "Anthropic Claude 串流 text_stream"
+        },
+        {
+          "id": "llm-tools-121-typescript-stream",
+          "domain": "llm-tools",
+          "score": 0.397,
+          "summary": "Node.js OpenAI 串流逐 token 輸出"
+        }
+      ],
+      "fill_result": {
+        "ok": true,
+        "final_code": "from openai import OpenAI\n\nclient = OpenAI()\n\ndef stream_chat(prompt: str):\n    stream = client.chat.completions.create(\n        model=\"gpt-4\",\n        messages=[{\"role\": \"user\", \"content\": prompt}],\n        stream=True,\n    )\n    for chunk in stream:\n        delta = chunk.choices[0].delta.content\n        if delta:\n            print(delta, end=\"\", flush=True)\n    print()\n\nif __name__ == \"__main__\":\n    stream_chat(\"tell me a joke\")",
+        "slot_values": {
+          "model_name": "gpt-4"
+        },
+        "raw_reply_preview": "```json\n{\n  \"model_name\": \"gpt-4\"\n}\n```"
+      }
+    },
+    {
+      "idx": 37,
+      "query_zh": "binary search 寫法",
+      "query_en": "binary search implementation",
+      "expected_domain": "algorithm",
+      "top_template_id": "algorithm-search-001",
+      "top_template_summary": "經典二分搜，找不到回 -1",
+      "top_template_domain": "algorithm",
+      "top_score": 0.755,
+      "domain_match": true,
+      "top3": [
+        {
+          "id": "algorithm-search-001",
+          "domain": "algorithm",
+          "score": 0.755,
+          "summary": "經典二分搜，找不到回 -1"
+        },
+        {
+          "id": "web-frontend-batch1-041-search-with-results",
+          "domain": "web-frontend",
+          "score": 0.412,
+          "summary": "搜尋表單帶 loading 與結果列表"
+        },
+        {
+          "id": "web-frontend-batch4-035-search-input",
+          "domain": "web-frontend",
+          "score": 0.39,
+          "summary": "受控搜尋輸入框"
+        }
+      ],
+      "fill_result": {
+        "ok": true,
+        "final_code": "def binary_search(arr, target):\n    lo, hi = 0, len(arr) - 1\n    while lo <= hi:\n        mid = (lo + hi) // 2\n        if arr[mid] == target:\n            return mid\n        if arr[mid] < target:\n            lo = mid + 1\n        else:\n            hi = mid - 1\n    return -1",
+        "slot_values": {
+          "fn_name": "binary_search",
+          "arr_name": "arr",
+          "target_name": "target"
+        },
+        "raw_reply_preview": "```json\n{\n  \"fn_name\": \"binary_search\",\n  \"arr_name\": \"arr\",\n  \"target_name\": \"target\"\n}\n```"
+      }
+    },
+    {
+      "idx": 38,
+      "query_zh": "Dijkstra shortest path with heap",
+      "query_en": "Dijkstra shortest path with heap",
+      "expected_domain": "algorithm",
+      "top_template_id": "algorithm-graph-001",
+      "top_template_summary": "Dijkstra 最短路徑，heap 版",
+      "top_template_domain": "algorithm",
+      "top_score": 0.812,
+      "domain_match": true,
+      "top3": [
+        {
+          "id": "algorithm-graph-001",
+          "domain": "algorithm",
+          "score": 0.812,
+          "summary": "Dijkstra 最短路徑，heap 版"
+        },
+        {
+          "id": "algorithm-graph-016",
+          "domain": "algorithm",
+          "score": 0.756,
+          "summary": "Dijkstra 還原最短路徑"
+        },
+        {
+          "id": "algorithm-tree-004",
+          "domain": "algorithm",
+          "score": 0.315,
+          "summary": "手刻最小二元堆"
+        }
+      ],
+      "fill_result": {
+        "ok": true,
+        "final_code": "import heapq\n\ndef dijkstra_shortest_path_with_heap(graph, src):\n    dist = {n: float('inf') for n in graph}\n    dist[src] = 0\n    pq = [(0, src)]\n    while pq:\n        d, u = heapq.heappop(pq)\n        if d > dist[u]:\n            continue\n        for v, w in graph[u]:\n            nd = d + w\n            if nd < dist[v]:\n                dist[v] = nd\n                heapq.heappush(pq, (nd, v))\n    return dist",
+        "slot_values": {
+          "fn_name": "dijkstra_shortest_path_with_heap"
+        },
+        "raw_reply_preview": "```json\n{\n    \"fn_name\": \"dijkstra_shortest_path_with_heap\"\n}\n```"
+      }
+    },
+    {
+      "idx": 39,
+      "query_zh": "LRU cache O(1)",
+      "query_en": "LRU cache O(1)",
+      "expected_domain": "algorithm",
+      "top_template_id": "algorithm-misc-003",
+      "top_template_summary": "OrderedDict 實作 LRU cache",
+      "top_template_domain": "algorithm",
+      "top_score": 0.672,
+      "domain_match": true,
+      "top3": [
+        {
+          "id": "algorithm-misc-003",
+          "domain": "algorithm",
+          "score": 0.672,
+          "summary": "OrderedDict 實作 LRU cache"
+        },
+        {
+          "id": "llm-tools-106-cache-prompt-disk",
+          "domain": "llm-tools",
+          "score": 0.353,
+          "summary": "diskcache 持久化 LLM 回應"
+        },
+        {
+          "id": "algorithm-misc-026",
+          "domain": "algorithm",
+          "score": 0.35,
+          "summary": "輔助棧實作 O(1) getMin"
+        }
+      ],
+      "fill_result": {
+        "ok": true,
+        "final_code": "from collections import OrderedDict\n\nclass LRUCache:\n    def __init__(self, capacity):\n        self.cap = capacity\n        self.cache = OrderedDict()\n    def get(self, key):\n        if key not in self.cache: return -1\n        self.cache.move_to_end(key)\n        return self.cache[key]\n    def put(self, key, value):\n        if key in self.cache:\n            self.cache.move_to_end(key)\n        self.cache[key] = value\n        if len(self.cache) > self.cap:\n            self.cache.popitem(last=False)",
+        "slot_values": {
+          "class_name": "LRUCache"
+        },
+        "raw_reply_preview": "```json\n{\n    \"class_name\": \"LRUCache\"\n}\n```"
+      }
+    },
+    {
+      "idx": 40,
+      "query_zh": "用 DP 解 longest common subsequence",
+      "query_en": "DP longest common subsequence",
+      "expected_domain": "algorithm",
+      "top_template_id": "algorithm-dp-015",
+      "top_template_summary": "最長回文子序列長度",
+      "top_template_domain": "algorithm",
+      "top_score": 0.456,
+      "domain_match": true,
+      "top3": [
+        {
+          "id": "algorithm-dp-015",
+          "domain": "algorithm",
+          "score": 0.456,
+          "summary": "最長回文子序列長度"
+        },
+        {
+          "id": "algorithm-misc-030",
+          "domain": "algorithm",
+          "score": 0.344,
+          "summary": "O(n) 最長連續序列"
+        },
+        {
+          "id": "algorithm-string-007",
+          "domain": "algorithm",
+          "score": 0.339,
+          "summary": "DP 找最長回文子字串"
+        }
+      ],
+      "fill_result": {
+        "ok": true,
+        "final_code": "def longest_common_subsequence(s):\n    n = len(s)\n    dp = [[0]*n for _ in range(n)]\n    for i in range(n): dp[i][i] = 1\n    for L in range(2, n+1):\n        for i in range(n - L + 1):\n            j = i + L - 1\n            if s[i] == s[j]:\n                dp[i][j] = (dp[i+1][j-1] if L > 2 else 0) + 2\n            else:\n                dp[i][j] = max(dp[i+1][j], dp[i][j-1])\n    return dp[0][n-1]",
+        "slot_values": {
+          "fn_name": "longest_common_subsequence"
+        },
+        "raw_reply_preview": "```json\n{\n  \"fn_name\": \"longest_common_subsequence\"\n}\n```"
+      }
+    },
+    {
+      "idx": 41,
+      "query_zh": "quicksort with median of three",
+      "query_en": "quicksort with median of three",
+      "expected_domain": "algorithm",
+      "top_template_id": "algorithm-sort-001",
+      "top_template_summary": "原地快速排序，Lomuto 中點 pivot",
+      "top_template_domain": "algorithm",
+      "top_score": 0.608,
+      "domain_match": true,
+      "top3": [
+        {
+          "id": "algorithm-sort-001",
+          "domain": "algorithm",
+          "score": 0.608,
+          "summary": "原地快速排序，Lomuto 中點 pivot"
+        },
+        {
+          "id": "algorithm-misc-029",
+          "domain": "algorithm",
+          "score": 0.374,
+          "summary": "二分搜兩有序陣列中位數"
+        },
+        {
+          "id": "algorithm-misc-005",
+          "domain": "algorithm",
+          "score": 0.368,
+          "summary": "雙堆維護資料流中位數"
+        }
+      ],
+      "fill_result": {
+        "ok": true,
+        "final_code": "def quick_sort_median_of_three(arr, lo=0, hi=None):\n    if hi is None:\n        hi = len(arr) - 1\n    if lo >= hi:\n        return\n    pivot = arr[(lo + hi) // 2]\n    i, j = lo, hi\n    while i <= j:\n        while arr[i] < pivot:\n            i += 1\n        while arr[j] > pivot:\n            j -= 1\n        if i <= j:\n            arr[i], arr[j] = arr[j], arr[i]\n            i += 1\n            j -= 1\n    quick_sort_median_of_three(arr, lo, j)\n    quick_sort_median_of_three(arr, i, hi)\n    return arr",
+        "slot_values": {
+          "fn_name": "quick_sort_median_of_three",
+          "arr_name": "arr"
+        },
+        "raw_reply_preview": "```json\n{\n  \"fn_name\": \"quick_sort_median_of_three\",\n  \"arr_name\": \"arr\"\n}\n```"
+      }
+    },
+    {
+      "idx": 42,
+      "query_zh": "PostgreSQL index 設計 for 查近 30 天訂單",
+      "query_en": "PostgreSQL index for last 30 days orders query",
+      "expected_domain": "database-devops",
+      "top_template_id": "web-backend-023-express-pg",
+      "top_template_summary": "node-postgres 連線池",
+      "top_template_domain": "web-backend",
+      "top_score": 0.396,
+      "domain_match": false,
+      "top3": [
+        {
+          "id": "web-backend-023-express-pg",
+          "domain": "web-backend",
+          "score": 0.396,
+          "summary": "node-postgres 連線池"
+        },
+        {
+          "id": "database-devops-017-sql-create-index",
+          "domain": "database-devops",
+          "score": 0.394,
+          "summary": "建立複合索引(不鎖表)"
+        },
+        {
+          "id": "database-devops-146-sql-explain-index-hint",
+          "domain": "database-devops",
+          "score": 0.383,
+          "summary": "Postgres index 使用率與大小"
+        }
+      ],
+      "fill_result": {
+        "ok": true,
+        "final_code": "const { Pool } = require('pg');\n\nconst pool = new Pool({\n  connectionString: process.env.postgres://username:password@localhost:5432/mydatabase,\n  max: 10,\n  idleTimeoutMillis: 30000\n});\n\nasync function query(text, params) {\n  const start = Date.now();\n  const res = await pool.query(text, params);\n  console.log('query', { text, ms: Date.now() - start, rows: res.rowCount });\n  return res;\n}\n\nmodule.exports = { pool, query };",
+        "slot_values": {
+          "pg_url_env": "postgres://username:password@localhost:5432/mydatabase"
+        },
+        "raw_reply_preview": "```json\n{\n  \"pg_url_env\": \"postgres://username:password@localhost:5432/mydatabase\"\n}\n```"
+      }
+    },
+    {
+      "idx": 43,
+      "query_zh": "Docker compose: postgres + redis + app",
+      "query_en": "Docker compose postgres redis app",
+      "expected_domain": "database-devops",
+      "top_template_id": "web-backend-090-compose-stack",
+      "top_template_summary": "App + Postgres + Redis 開發 stack",
+      "top_template_domain": "web-backend",
+      "top_score": 0.743,
+      "domain_match": false,
+      "top3": [
+        {
+          "id": "web-backend-090-compose-stack",
+          "domain": "web-backend",
+          "score": 0.743,
+          "summary": "App + Postgres + Redis 開發 stack"
+        },
+        {
+          "id": "database-devops-039-compose-postgres-redis",
+          "domain": "database-devops",
+          "score": 0.713,
+          "summary": "compose pg + redis 雙服務"
+        },
+        {
+          "id": "database-devops-038-compose-postgres",
+          "domain": "database-devops",
+          "score": 0.693,
+          "summary": "docker-compose postgres 服務"
+        }
+      ],
+      "fill_result": {
+        "ok": true,
+        "final_code": "version: '3.9'\nservices:\n  app:\n    build: .\n    ports:\n      - '3000:3000'\n    environment:\n      DATABASE_URL: postgres://app:password123@db:5432/app\n      REDIS_URL: redis://redis:6379\n    depends_on: [db, redis]\n  db:\n    image: postgres:16-alpine\n    environment:\n      POSTGRES_USER: app\n      POSTGRES_PASSWORD: password123\n      POSTGRES_DB: app\n    volumes: ['pgdata:/var/lib/postgresql/data']\n  redis:\n    image: redis:7-alpine\nvolumes:\n  pgdata:",
+        "slot_values": {
+          "app_port": "3000",
+          "db_password": "password123"
+        },
+        "raw_reply_preview": "```json\n{\n  \"app_port\": \"3000\",\n  \"db_password\": \"password123\"\n}\n```"
+      }
+    },
+    {
+      "idx": 44,
+      "query_zh": "GitHub Actions Python CI: test + lint",
+      "query_en": "GitHub Actions Python CI test and lint",
+      "expected_domain": "database-devops",
+      "top_template_id": "database-devops-053-gha-python-test",
+      "top_template_summary": "GHA python matrix lint + test",
+      "top_template_domain": "database-devops",
+      "top_score": 0.716,
+      "domain_match": true,
+      "top3": [
+        {
+          "id": "database-devops-053-gha-python-test",
+          "domain": "database-devops",
+          "score": 0.716,
+          "summary": "GHA python matrix lint + test"
+        },
+        {
+          "id": "database-devops-052-gha-node-lint-test",
+          "domain": "database-devops",
+          "score": 0.633,
+          "summary": "GitHub Actions node lint + test workflow"
+        },
+        {
+          "id": "database-devops-161-gha-lint-only-changed",
+          "domain": "database-devops",
+          "score": 0.418,
+          "summary": "GHA 只對變更檔跑 eslint"
+        }
+      ],
+      "fill_result": null
+    },
+    {
+      "idx": 45,
+      "query_zh": "nginx reverse proxy with SSL",
+      "query_en": "nginx reverse proxy with SSL",
+      "expected_domain": "database-devops",
+      "top_template_id": "web-backend-091-nginx-reverse",
+      "top_template_summary": "Nginx 反向代理設定",
+      "top_template_domain": "web-backend",
+      "top_score": 0.761,
+      "domain_match": false,
+      "top3": [
+        {
+          "id": "web-backend-091-nginx-reverse",
+          "domain": "web-backend",
+          "score": 0.761,
+          "summary": "Nginx 反向代理設定"
+        },
+        {
+          "id": "database-devops-046-nginx-reverse-proxy",
+          "domain": "database-devops",
+          "score": 0.641,
+          "summary": "nginx 反向代理基本設定"
+        },
+        {
+          "id": "database-devops-047-nginx-ssl",
+          "domain": "database-devops",
+          "score": 0.465,
+          "summary": "nginx 443 SSL + 80 redirect"
+        }
+      ],
+      "fill_result": {
+        "ok": true,
+        "final_code": "upstream app_upstream {\n  server 127.0.0.1:443;\n  keepalive 16;\n}\n\nserver {\n  listen 80;\n  server_name example.com;\n\n  location / {\n    proxy_pass http://app_upstream;\n    proxy_http_version 1.1;\n    proxy_set_header Host $host;\n    proxy_set_header X-Real-IP $remote_addr;\n    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n    proxy_set_header Upgrade $http_upgrade;\n    proxy_set_header Connection \"upgrade\";\n  }\n}",
+        "slot_values": {
+          "server_name": "example.com",
+          "upstream_port": "443"
+        },
+        "raw_reply_preview": "```json\n{\n  \"server_name\": \"example.com\",\n  \"upstream_port\": \"443\"\n}\n```"
+      }
+    },
+    {
+      "idx": 46,
+      "query_zh": "MongoDB aggregation pipeline group by day",
+      "query_en": "MongoDB aggregation pipeline group by day",
+      "expected_domain": "database-devops",
+      "top_template_id": "database-devops-070-mongo-aggregation",
+      "top_template_summary": "mongo aggregation match+group+sort",
+      "top_template_domain": "database-devops",
+      "top_score": 0.706,
+      "domain_match": true,
+      "top3": [
+        {
+          "id": "database-devops-070-mongo-aggregation",
+          "domain": "database-devops",
+          "score": 0.706,
+          "summary": "mongo aggregation match+group+sort"
+        },
+        {
+          "id": "llm-tools-009-hf-pipeline",
+          "domain": "llm-tools",
+          "score": 0.435,
+          "summary": "transformers pipeline 快速推論"
+        },
+        {
+          "id": "database-devops-008-sql-group-by-having",
+          "domain": "database-devops",
+          "score": 0.411,
+          "summary": "GROUP BY 加 HAVING 過濾"
+        }
+      ],
+      "fill_result": {
+        "ok": true,
+        "final_code": "db.your_collection_name.aggregate([\n  { $match: { status: 'active' } },\n  { $group: {\n      _id: '$date',\n      total: { $sum: '$value' },\n      count: { $sum: 1 },\n  }},\n  { $sort: { total: -1 } },\n  { $limit: 20 },\n])",
+        "slot_values": {
+          "collection": "your_collection_name",
+          "group_field": "date",
+          "sum_field": "value"
+        },
+        "raw_reply_preview": "```json\n{\n  \"collection\": \"your_collection_name\",\n  \"group_field\": \"date\",\n  \"sum_field\": \"value\"\n}\n```"
+      }
+    },
+    {
+      "idx": 47,
+      "query_zh": "Kubernetes deployment + service yaml",
+      "query_en": "Kubernetes deployment and service yaml",
+      "expected_domain": "database-devops",
+      "top_template_id": "system-cli-105-yaml-merge",
+      "top_template_summary": "yaml 深度合併",
+      "top_template_domain": "system-cli",
+      "top_score": 0.456,
+      "domain_match": false,
+      "top3": [
+        {
+          "id": "system-cli-105-yaml-merge",
+          "domain": "system-cli",
+          "score": 0.456,
+          "summary": "yaml 深度合併"
+        },
+        {
+          "id": "system-cli-033-yaml-config-load",
+          "domain": "system-cli",
+          "score": 0.396,
+          "summary": "PyYAML 讀 config"
+        },
+        {
+          "id": "database-devops-165-gha-test-postgres",
+          "domain": "database-devops",
+          "score": 0.301,
+          "summary": "GHA 加 postgres service 跑整合測試"
+        }
+      ],
+      "fill_result": {
+        "ok": true,
+        "final_code": "import yaml\nfrom pathlib import Path\n\ndef deep_merge(a, b):\n    if isinstance(a, dict) and isinstance(b, dict):\n        out = dict(a)\n        for k, v in b.items():\n            out[k] = deep_merge(a.get(k), v) if k in a else v\n        return out\n    return b\n\nbase = yaml.safe_load(Path('path/to/base/deployment.yaml').read_text())\nover = yaml.safe_load(Path('path/to/override/deployment.yaml').read_text())\nmerged = deep_merge(base, over)\nPath('path/to/merged/deployment.yaml').write_text(yaml.safe_dump(merged, sort_keys=False))\nprint('merged -> path/to/merged/deployment.yaml')",
+        "slot_values": {
+          "base_yaml": "path/to/base/deployment.yaml",
+          "override_yaml": "path/to/override/deployment.yaml",
+          "out_yaml": "path/to/merged/deployment.yaml"
+        },
+        "raw_reply_preview": "```json\n{\n  \"base_yaml\": \"path/to/base/deployment.yaml\",\n  \"override_yaml\": \"path/to/override/deployment.yaml\",\n  \"out_yaml\": \"path/to/merged/deployment.yaml\"\n}\n```"
+      }
+    },
+    {
+      "idx": 48,
+      "query_zh": "Terraform 開一台 EC2",
+      "query_en": "Terraform provision an EC2 instance",
+      "expected_domain": "database-devops",
+      "top_template_id": "web-frontend-batch1-003-contact-form",
+      "top_template_summary": "聯絡我們表單含送出後感謝態",
+      "top_template_domain": "web-frontend",
+      "top_score": 0.221,
+      "domain_match": false,
+      "top3": [
+        {
+          "id": "web-frontend-batch1-003-contact-form",
+          "domain": "web-frontend",
+          "score": 0.221,
+          "summary": "聯絡我們表單含送出後感謝態"
+        },
+        {
+          "id": "web-frontend-batch1-004-multistep-form",
+          "domain": "web-frontend",
+          "score": 0.214,
+          "summary": "多步驟 wizard form 三步驟"
+        },
+        {
+          "id": "web-frontend-batch3-028-html-form",
+          "domain": "web-frontend",
+          "score": 0.208,
+          "summary": "HTML 聯絡表單含基本樣式"
+        }
+      ],
+      "fill_result": {
+        "ok": true,
+        "final_code": "import { useState } from 'react';\n\nexport default function EC2_Instance() {\n  const [data, setData] = useState({ name: '', email: '', message: '' });\n  const [sent, setSent] = useState(false);\n\n  async function onSubmit(e: React.FormEvent) {\n    e.preventDefault();\n    await fetch('https://api.example.com/ec2/create', {\n      method: 'POST',\n      headers: { 'Content-Type': 'application/json' },\n      body: JSON.stringify(data),\n    });\n    setSent(true);\n  }\n\n  if (sent) return <p>Thanks, we will get back to you.</p>;\n\n  return (\n    <form onSubmit={onSubmit}>\n      <input value={data.name} onChange={(e) => setData({ ...data, name: e.target.value })} placeholder=\"Name\" required />\n      <input type=\"email\" value={data.email} onChange={(e) => setData({ ...data, email: e.target.value })} placeholder=\"Email\" required />\n      <textarea value={data.message} onChange={(e) => setData({ ...data, message: e.target.value })} placeholder=\"Message\" required />\n      <button type=\"submit\">Send</b",
+        "slot_values": {
+          "component_name": "EC2_Instance",
+          "endpoint": "https://api.example.com/ec2/create"
+        },
+        "raw_reply_preview": "```json\n{\n  \"component_name\": \"EC2_Instance\",\n  \"endpoint\": \"https://api.example.com/ec2/create\"\n}\n```"
+      }
+    }
+  ]
+}

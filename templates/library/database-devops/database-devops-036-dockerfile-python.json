@@ -1,0 +1,23 @@
+{
+  "id": "database-devops-036-dockerfile-python",
+  "category": "database-devops/docker/dockerfile",
+  "intents_zh": [
+    "Python Dockerfile",
+    "python app 容器化",
+    "FastAPI Dockerfile"
+  ],
+  "intents_en": [
+    "python dockerfile",
+    "containerize python",
+    "fastapi dockerfile"
+  ],
+  "slots": [
+    "python_version",
+    "app_module",
+    "port"
+  ],
+  "code": "FROM python:{{python_version}}-slim AS base\nWORKDIR /app\nENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1\n\nCOPY requirements.txt .\nRUN pip install --no-cache-dir -r requirements.txt\n\nCOPY . .\nEXPOSE {{port}}\nCMD [\"uvicorn\", \"{{app_module}}:app\", \"--host\", \"0.0.0.0\", \"--port\", \"{{port}}\"]",
+  "language": "dockerfile",
+  "deps": [],
+  "summary_zh": "Python FastAPI Dockerfile"
+}

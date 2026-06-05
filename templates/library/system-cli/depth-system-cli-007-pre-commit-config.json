@@ -1,0 +1,27 @@
+{
+  "id": "depth-system-cli-007-pre-commit-config",
+  "category": "system-cli/git-hooks/pre-commit-framework",
+  "intents_zh": [
+    "pre-commit 設定檔",
+    "pre-commit yaml",
+    "Python lint hooks",
+    "ruff black 自動跑",
+    "pre-commit framework"
+  ],
+  "intents_en": [
+    "pre-commit config",
+    "pre-commit yaml",
+    "python lint hooks",
+    "ruff black autorun",
+    "pre-commit framework"
+  ],
+  "slots": [
+    "python_version"
+  ],
+  "code": "# .pre-commit-config.yaml\nrepos:\n  - repo: https://github.com/pre-commit/pre-commit-hooks\n    rev: v4.6.0\n    hooks:\n      - id: trailing-whitespace\n      - id: end-of-file-fixer\n      - id: check-yaml\n      - id: check-added-large-files\n        args: ['--maxkb=500']\n  - repo: https://github.com/astral-sh/ruff-pre-commit\n    rev: v0.5.0\n    hooks:\n      - id: ruff\n        args: [--fix]\n      - id: ruff-format\n  - repo: https://github.com/pre-commit/mirrors-mypy\n    rev: v1.10.0\n    hooks:\n      - id: mypy\n        language_version: python{{python_version}}",
+  "language": "yaml",
+  "deps": [
+    "pre-commit"
+  ],
+  "summary_zh": "pre-commit framework yaml 含 ruff mypy"
+}

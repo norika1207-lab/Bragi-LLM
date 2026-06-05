@@ -1,0 +1,27 @@
+{
+  "id": "web-frontend-batch1-008-button-group",
+  "category": "web-frontend/react/buttons/group",
+  "intents_zh": [
+    "按鈕群組",
+    "button group React",
+    "toggle 按鈕組",
+    "segmented control",
+    "選項 button bar",
+    "group buttons"
+  ],
+  "intents_en": [
+    "button group react",
+    "segmented control",
+    "toggle button group",
+    "option buttons",
+    "tab buttons",
+    "button bar"
+  ],
+  "slots": [
+    "component_name"
+  ],
+  "code": "import { useState } from 'react';\n\ntype Props = { options: string[]; onChange?: (v: string) => void };\n\nexport default function {{component_name}}({ options, onChange }: Props) {\n  const [active, setActive] = useState(options[0]);\n  return (\n    <div className=\"inline-flex rounded border\">\n      {options.map((o) => (\n        <button\n          key={o}\n          onClick={() => { setActive(o); onChange?.(o); }}\n          className={`px-3 py-1 ${active === o ? 'bg-blue-600 text-white' : 'bg-white'}`}\n        >\n          {o}\n        </button>\n      ))}\n    </div>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "segmented control 風格按鈕組"
+}

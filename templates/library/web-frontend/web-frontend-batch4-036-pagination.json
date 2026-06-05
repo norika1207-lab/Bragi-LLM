@@ -1,0 +1,29 @@
+{
+  "id": "web-frontend-batch4-036-pagination",
+  "category": "web-frontend/react/components/pagination",
+  "intents_zh": [
+    "分頁元件",
+    "上一頁下一頁",
+    "pagination tailwind",
+    "頁碼按鈕",
+    "page nav",
+    "分頁列"
+  ],
+  "intents_en": [
+    "pagination component",
+    "prev next pagination",
+    "page number nav",
+    "tailwind pagination",
+    "paging bar",
+    "pagination buttons"
+  ],
+  "slots": [
+    "total_pages"
+  ],
+  "code": "'use client';\nimport { useState } from 'react';\n\nexport default function Pagination() {\n  const total = {{total_pages}};\n  const [page, setPage] = useState(1);\n  return (\n    <div className=\"flex items-center gap-2\">\n      <button onClick={() => setPage(Math.max(1, page - 1))} className=\"px-3 py-1 border rounded\">Prev</button>\n      <span>Page {page} / {total}</span>\n      <button onClick={() => setPage(Math.min(total, page + 1))} className=\"px-3 py-1 border rounded\">Next</button>\n    </div>\n  );\n}",
+  "language": "tsx",
+  "deps": [
+    "react"
+  ],
+  "summary_zh": "上一頁下一頁分頁元件"
+}

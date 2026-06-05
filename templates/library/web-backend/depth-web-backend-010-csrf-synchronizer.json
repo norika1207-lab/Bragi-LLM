@@ -1,0 +1,26 @@
+{
+  "id": "depth-web-backend-010-csrf-synchronizer",
+  "category": "web-backend/security/csrf",
+  "intents_zh": [
+    "session 綁定 CSRF token",
+    "synchronizer token pattern",
+    "表單隱藏 token",
+    "Express session CSRF",
+    "傳統 CSRF"
+  ],
+  "intents_en": [
+    "session bound csrf token",
+    "synchronizer token pattern",
+    "form hidden token",
+    "express session csrf",
+    "classic csrf protection"
+  ],
+  "slots": [],
+  "code": "app.use((req, res, next) => {\n  if (!req.session.csrf) req.session.csrf = crypto.randomBytes(24).toString('hex');\n  res.locals.csrf = req.session.csrf;\n  next();\n});\napp.post('*', (req, res, next) => {\n  if (req.body._csrf !== req.session.csrf) return res.status(403).end('bad csrf');\n  next();\n});",
+  "language": "js",
+  "deps": [
+    "express",
+    "express-session"
+  ],
+  "summary_zh": "Synchronizer token 綁 session"
+}

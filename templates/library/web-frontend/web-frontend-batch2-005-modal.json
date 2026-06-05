@@ -1,0 +1,27 @@
+{
+  "id": "web-frontend-batch2-005-modal",
+  "category": "web-frontend/react/layout/modal",
+  "intents_zh": [
+    "做 modal",
+    "彈出視窗",
+    "modal 對話框",
+    "蓋版視窗",
+    "居中 modal",
+    "可關閉 modal"
+  ],
+  "intents_en": [
+    "build modal",
+    "popup window",
+    "modal dialog",
+    "overlay window",
+    "centered modal",
+    "closable modal"
+  ],
+  "slots": [
+    "title"
+  ],
+  "code": "import { useState } from 'react';\n\nexport function Modal({ children }) {\n  const [open, setOpen] = useState(false);\n  return (\n    <>\n      <button onClick={() => setOpen(true)} className=\"rounded bg-blue-600 px-4 py-2 text-white\">Open Modal</button>\n      {open && (\n        <div className=\"fixed inset-0 z-50 flex items-center justify-center bg-black/50\" onClick={() => setOpen(false)}>\n          <div className=\"w-full max-w-md rounded-lg bg-white p-6 shadow-xl\" onClick={(e) => e.stopPropagation()}>\n            <h2 className=\"mb-4 text-xl font-semibold\">{{title}}</h2>\n            {children}\n            <div className=\"mt-6 flex justify-end gap-2\">\n              <button onClick={() => setOpen(false)} className=\"rounded border px-4 py-2\">Cancel</button>\n              <button className=\"rounded bg-blue-600 px-4 py-2 text-white\">Confirm</button>\n            </div>\n          </div>\n        </div>\n      )}\n    </>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "居中蓋版 modal 含確認取消"
+}

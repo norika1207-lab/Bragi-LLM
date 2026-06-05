@@ -1,0 +1,39 @@
+{
+  "id": "patch-terraform-003-rds-postgres",
+  "category": "database-devops/terraform/aws-database",
+  "intents_zh": [
+    "terraform 開 RDS postgres",
+    "tf 起一個 aws postgres 資料庫",
+    "用 terraform 部署 RDS 跑 PG 15",
+    "幫我寫 RDS postgres module 含 subnet group",
+    "tf 起 postgres instance 連到指定 VPC",
+    "Terraform aws_db_instance postgres 範本",
+    "起 RDS Postgres 加密 + 自動備份"
+  ],
+  "intents_en": [
+    "terraform rds postgres instance",
+    "spin up aws postgres with tf",
+    "provision rds postgres 15 in terraform",
+    "rds module postgres with subnet group",
+    "terraform aws_db_instance postgres encrypted",
+    "create rds postgres with backups tf",
+    "tf postgres database in private subnet"
+  ],
+  "slots": [
+    "db_identifier",
+    "db_name",
+    "db_username",
+    "db_password",
+    "instance_class",
+    "allocated_storage",
+    "subnet_ids",
+    "vpc_security_group_ids"
+  ],
+  "code": "resource \"aws_db_subnet_group\" \"this\" {\n  name       = \"{{db_identifier}}-subnets\"\n  subnet_ids = {{subnet_ids}}\n}\n\nresource \"aws_db_instance\" \"this\" {\n  identifier              = \"{{db_identifier}}\"\n  engine                  = \"postgres\"\n  engine_version          = \"15.5\"\n  instance_class          = \"{{instance_class}}\"\n  allocated_storage       = {{allocated_storage}}\n  storage_encrypted       = true\n  db_name                 = \"{{db_name}}\"\n  username                = \"{{db_username}}\"\n  password                = \"{{db_password}}\"\n  db_subnet_group_name    = aws_db_subnet_group.this.name\n  vpc_security_group_ids  = {{vpc_security_group_ids}}\n  backup_retention_period = 7\n  skip_final_snapshot     = false\n  final_snapshot_identifier = \"{{db_identifier}}-final\"\n  deletion_protection     = true\n}",
+  "language": "hcl",
+  "deps": [
+    "terraform",
+    "hashicorp/aws"
+  ],
+  "summary_zh": "Terraform 部署加密 RDS Postgres 15 含子網群組與每日備份。"
+}

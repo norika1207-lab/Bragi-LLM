@@ -1,0 +1,28 @@
+{
+  "id": "web-backend-066-django-model",
+  "category": "web-backend/django/db",
+  "intents_zh": [
+    "django model 範例",
+    "ORM 建表",
+    "model 欄位",
+    "django Meta class",
+    "關聯 foreign key"
+  ],
+  "intents_en": [
+    "django model example",
+    "orm fields django",
+    "django Meta options",
+    "foreign key django",
+    "model schema django"
+  ],
+  "slots": [
+    "model_name",
+    "table_name"
+  ],
+  "code": "from django.db import models\n\nclass {{model_name}}(models.Model):\n    name = models.CharField(max_length=120)\n    description = models.TextField(blank=True, default='')\n    created_at = models.DateTimeField(auto_now_add=True)\n    updated_at = models.DateTimeField(auto_now=True)\n\n    class Meta:\n        db_table = '{{table_name}}'\n        ordering = ['-created_at']\n\n    def __str__(self):\n        return self.name",
+  "language": "py",
+  "deps": [
+    "django"
+  ],
+  "summary_zh": "Django Model 範例"
+}

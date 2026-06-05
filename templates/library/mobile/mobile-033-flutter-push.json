@@ -1,0 +1,30 @@
+{
+  "id": "mobile-033-flutter-push",
+  "category": "mobile/flutter/push",
+  "intents_zh": [
+    "Flutter 推播",
+    "flutter FCM 註冊",
+    "flutter firebase messaging",
+    "flutter 取 push token",
+    "推播設定 flutter",
+    "FCM token flutter",
+    "flutter notifications setup"
+  ],
+  "intents_en": [
+    "flutter push notification",
+    "flutter FCM register",
+    "firebase messaging flutter",
+    "get push token flutter",
+    "flutter notifications setup",
+    "fcm token flutter",
+    "flutter notifications init"
+  ],
+  "slots": [],
+  "code": "import 'package:firebase_core/firebase_core.dart';\nimport 'package:firebase_messaging/firebase_messaging.dart';\nFuture<String?> setupPush()async{\n  await Firebase.initializeApp();\n  final m=FirebaseMessaging.instance;\n  await m.requestPermission();\n  final t=await m.getToken();\n  FirebaseMessaging.onMessage.listen((msg){print('fg: ${msg.notification?.title}');});\n  return t;}",
+  "language": "dart",
+  "deps": [
+    "firebase_core",
+    "firebase_messaging"
+  ],
+  "summary_zh": "Flutter FCM 註冊取 token"
+}

@@ -1,0 +1,23 @@
+{
+  "id": "depth-database-devops-035-runbook-template",
+  "category": "database-devops/sre/runbook",
+  "intents_zh": [
+    "runbook 模板",
+    "oncall 處理手冊",
+    "alert response sop"
+  ],
+  "intents_en": [
+    "runbook template",
+    "oncall playbook",
+    "alert response SOP"
+  ],
+  "slots": [
+    "alert_name",
+    "service_name",
+    "dashboard_url"
+  ],
+  "code": "# Runbook: {{alert_name}}\n\n## Summary\nService: {{service_name}}\nDashboard: {{dashboard_url}}\n\n## Symptom\n- 觸發條件:\n- 用戶端可見現象:\n\n## Triage (前 5 分鐘)\n1. 看 dashboard 確認是否仍在燒\n2. 比對最近 deploy: `kubectl rollout history deploy/{{service_name}}`\n3. 看上游依賴狀態頁\n\n## Mitigation\n- 回滾: `kubectl rollout undo deploy/{{service_name}}`\n- 降流量: 把 ALB weight 切回 blue\n- 降級開關: feature flag {{service_name}}.degraded=true\n\n## Root cause checklist\n- [ ] log 異常\n- [ ] DB 慢查詢\n- [ ] 上游 5xx\n- [ ] 資源耗盡 (CPU/mem/fd)\n\n## Postmortem\nLink: ",
+  "language": "md",
+  "deps": [],
+  "summary_zh": "oncall runbook 範本,含 triage/mitigation/rca/postmortem"
+}

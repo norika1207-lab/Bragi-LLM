@@ -1,0 +1,26 @@
+{
+  "id": "web-backend-089-dockerfile-python",
+  "category": "web-backend/deploy",
+  "intents_zh": [
+    "python Dockerfile",
+    "fastapi 打 docker",
+    "uvicorn container",
+    "python multi-stage",
+    "dockerize fastapi"
+  ],
+  "intents_en": [
+    "python dockerfile",
+    "dockerize fastapi",
+    "uvicorn container",
+    "python multi-stage",
+    "dockerfile fastapi"
+  ],
+  "slots": [
+    "python_version",
+    "port"
+  ],
+  "code": "FROM python:{{python_version}}-slim AS builder\nWORKDIR /app\nCOPY requirements.txt .\nRUN pip install --user --no-cache-dir -r requirements.txt\n\nFROM python:{{python_version}}-slim\nWORKDIR /app\nCOPY --from=builder /root/.local /root/.local\nENV PATH=/root/.local/bin:$PATH\nCOPY . .\nEXPOSE {{port}}\nCMD [\"uvicorn\", \"main:app\", \"--host\", \"0.0.0.0\", \"--port\", \"{{port}}\"]",
+  "language": "dockerfile",
+  "deps": [],
+  "summary_zh": "Python FastAPI Dockerfile"
+}

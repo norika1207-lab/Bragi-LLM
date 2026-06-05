@@ -1,0 +1,21 @@
+{
+  "id": "algorithm-string-009",
+  "category": "algorithm/string/min_window",
+  "intents_zh": [
+    "最小覆蓋子串",
+    "minimum window substring",
+    "給我 min window"
+  ],
+  "intents_en": [
+    "minimum window substring",
+    "sliding window cover",
+    "min window"
+  ],
+  "slots": [
+    "fn_name"
+  ],
+  "code": "from collections import Counter\n\ndef {{fn_name}}(s, t):\n    need = Counter(t)\n    miss = len(t)\n    l = 0; res = (0, float('inf'))\n    for r, c in enumerate(s):\n        if need[c] > 0: miss -= 1\n        need[c] -= 1\n        if miss == 0:\n            while need[s[l]] < 0:\n                need[s[l]] += 1; l += 1\n            if r - l < res[1] - res[0]:\n                res = (l, r)\n            need[s[l]] += 1; miss += 1; l += 1\n    return '' if res[1] == float('inf') else s[res[0]:res[1]+1]",
+  "language": "py",
+  "deps": [],
+  "summary_zh": "滑動視窗最小覆蓋子串"
+}

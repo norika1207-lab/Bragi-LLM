@@ -1,0 +1,29 @@
+{
+  "id": "mobile-014-rn-audiorec",
+  "category": "mobile/rn/media",
+  "intents_zh": [
+    "RN 錄音",
+    "React Native 錄音元件",
+    "expo-av 錄音",
+    "RN audio recorder",
+    "錄音存檔 RN",
+    "RN 聲音錄製",
+    "錄音範例 RN"
+  ],
+  "intents_en": [
+    "rn audio recorder",
+    "react native record audio",
+    "expo av recording",
+    "record sound rn",
+    "mic recording rn",
+    "audio recorder rn",
+    "rn voice memo"
+  ],
+  "slots": [],
+  "code": "import {Audio} from 'expo-av';\nlet rec:Audio.Recording|null=null;\nexport async function start(){\n  await Audio.requestPermissionsAsync();\n  await Audio.setAudioModeAsync({allowsRecordingIOS:true,playsInSilentModeIOS:true});\n  rec=new Audio.Recording();\n  await rec.prepareToRecordAsync(Audio.RecordingOptionsPresets.HIGH_QUALITY);\n  await rec.startAsync();}\nexport async function stop():Promise<string|null>{if(!rec)return null;await rec.stopAndUnloadAsync();const u=rec.getURI();rec=null;return u;}",
+  "language": "ts",
+  "deps": [
+    "expo-av"
+  ],
+  "summary_zh": "Expo audio 開始/停止錄音回傳檔案 URI"
+}

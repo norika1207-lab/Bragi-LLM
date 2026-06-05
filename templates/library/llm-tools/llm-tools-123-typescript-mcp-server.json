@@ -1,0 +1,34 @@
+{
+  "id": "llm-tools-123-typescript-mcp-server",
+  "category": "llm-tools/mcp/ts-server",
+  "intents_zh": [
+    "MCP ts server",
+    "用 typescript 寫 mcp",
+    "node mcp sdk",
+    "ts mcp 骨架",
+    "mcp ts 範例",
+    "TS MCP scaffold",
+    "建 ts mcp server",
+    "minimal ts mcp"
+  ],
+  "intents_en": [
+    "mcp typescript server",
+    "ts mcp scaffold",
+    "node mcp sdk",
+    "ts mcp example",
+    "build ts mcp server",
+    "minimal ts mcp",
+    "mcp ts skeleton",
+    "typescript mcp"
+  ],
+  "slots": [
+    "server_name",
+    "tool_name"
+  ],
+  "code": "import { Server } from \"@modelcontextprotocol/sdk/server/index.js\";\nimport { StdioServerTransport } from \"@modelcontextprotocol/sdk/server/stdio.js\";\nimport { ListToolsRequestSchema, CallToolRequestSchema } from \"@modelcontextprotocol/sdk/types.js\";\n\nconst server = new Server({ name: \"{{server_name}}\", version: \"0.1.0\" }, { capabilities: { tools: {} } });\n\nserver.setRequestHandler(ListToolsRequestSchema, async () => ({\n  tools: [{ name: \"{{tool_name}}\", description: \"echo\", inputSchema: { type: \"object\", properties: { x: { type: \"string\" } } } }],\n}));\n\nserver.setRequestHandler(CallToolRequestSchema, async (req) => ({\n  content: [{ type: \"text\", text: `got: ${(req.params.arguments as any).x}` }],\n}));\n\nawait server.connect(new StdioServerTransport());",
+  "language": "ts",
+  "deps": [
+    "@modelcontextprotocol/sdk"
+  ],
+  "summary_zh": "TypeScript MCP server 骨架"
+}

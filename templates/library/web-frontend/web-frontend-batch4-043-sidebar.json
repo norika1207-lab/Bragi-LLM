@@ -1,0 +1,29 @@
+{
+  "id": "web-frontend-batch4-043-sidebar",
+  "category": "web-frontend/nextjs/dashboard/sidebar",
+  "intents_zh": [
+    "後台側邊欄",
+    "dashboard sidebar",
+    "左側選單",
+    "tailwind 側欄",
+    "admin nav",
+    "固定左欄"
+  ],
+  "intents_en": [
+    "dashboard sidebar",
+    "left nav menu",
+    "admin side nav",
+    "tailwind sidebar",
+    "fixed left column",
+    "app sidebar"
+  ],
+  "slots": [
+    "nav_item_one",
+    "nav_item_two",
+    "nav_item_three"
+  ],
+  "code": "export default function Sidebar() {\n  const items = ['{{nav_item_one}}', '{{nav_item_two}}', '{{nav_item_three}}'];\n  return (\n    <aside className=\"w-56 h-screen bg-gray-900 text-gray-200 p-4\">\n      <h2 className=\"text-lg font-bold mb-6\">Menu</h2>\n      <ul className=\"space-y-2\">\n        {items.map((it) => (\n          <li key={it}><a href=\"#\" className=\"block px-3 py-2 rounded hover:bg-gray-800\">{it}</a></li>\n        ))}\n      </ul>\n    </aside>\n  );\n}",
+  "language": "tsx",
+  "deps": [],
+  "summary_zh": "後台深色固定側邊欄"
+}

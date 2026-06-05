@@ -1,31 +1,29 @@
 """
-Test-time-compute orchestrator on Bragi 1.5B Q3.
+Test-time-compute orchestrator v2: best-of-N with deterministic verifier.
 
-The diamond pressure layer. Trades local compute for correctness:
+The diamond pressure layer (v1 burned). v1 tried planner/composer/reviewer/
+reviser cycle and got WORSE than single-pass (-10 pp verified, 7.3x slower)
+because the extra LLM passes added noise on top of already-good templates.
+
+v2 keeps only the part that actually works: generate N candidates, filter
+through deterministic syntax verifier, pick best.
 
     user query
         │
-   [Planner pass]    Bragi splits the request into 1-3 sub-tasks.
+   [Generator x N]    retrieve top-K templates, slot-fill each at different
+        │             temperatures. Plus 1 free-gen candidate if templates miss.
         │
-   [Generator x N]   For each sub-task:
-        │              - retrieve top-K templates as scaffold prior
-        │              - generate N=3 candidate slot-fills (vary temperature)
-        │              - deterministic verifier (verifier.py) filters
-        │              - if 0 pass, free-gen 1 candidate (no template), re-verify
-        │              - pick highest score among verified
+   [Verifier filter]  ast.parse / shallow balance / json.loads, etc. Deterministic.
         │
-   [Composer pass]   Bragi merges sub-task outputs into a single coherent output.
+        ├─ ≥1 verified  → pick highest retrieval score among verified, DONE
         │
-   [Reviewer pass]   Bragi self-critiques: "Does this answer the user? List issues."
-        │
-   [Reviser]         If issues, Bragi revises; re-verify; loop up to R=2 times.
-        │
-   final code + reviewer note
+        └─ 0 verified   → free-gen one more attempt with different prompt,
+                          re-verify, return best-effort (flagged unverified)
 
-Cost per request: 5-15 Bragi calls, total wall-clock ~30-120s on a slow CPU.
-Benefit: closer to verified-correct output than single-pass.
+Cost: 2-6 Bragi calls per request (depending on path), wall ~5-30s.
+Benefit: filter out broken code BEFORE it reaches user.
 
-This is what nobody has done at sub-1GB scale.
+That's it. No planner, no composer, no reviewer. Those were noise.
 """
 from __future__ import annotations
 import json
@@ -36,10 +34,11 @@ from templates import verifier as vmod
 
 BRAGI_URL = 'http://localhost:8080/v1/chat/completions'
 
-# ============== Bragi raw call ==============
+DEFAULT_TEMPS = [0.1, 0.4, 0.7]
+
 
 def _bragi(prompt: str, *, temperature: float = 0.3, max_tokens: int = 800,
-           timeout: int = 90) -> str:
+           timeout: int = 60) -> str:
     body = json.dumps({
         'model': 'bragi-llm',
         'messages': [{'role': 'user', 'content': prompt}],
@@ -64,80 +63,17 @@ def _strip_fences(text: str) -> str:
     return t
 
 
-# ============== Planner ==============
-
-def plan(query: str) -> list[str]:
-    """Decompose user query into 1-3 sub-tasks. Each sub-task should be
-    a single code generation goal."""
-    prompt = (
-        f'User request: "{query}"\n\n'
-        f'Decompose this into 1 to 3 specific code generation sub-tasks. '
-        f'Each sub-task should be one concrete deliverable, e.g. "a React '
-        f'login form component", or "an Express endpoint for X". '
-        f'Return ONLY a JSON array of strings, no other text. '
-        f'If the request is already atomic, return one element.\n\n'
-        f'Examples:\n'
-        f'  "做個登入頁" -> ["a React login form component"]\n'
-        f'  "做個 todo app 用 React 加 backend Express" -> '
-        f'["a React todo UI component", "an Express CRUD endpoint for todos"]'
-    )
-    reply = _bragi(prompt, temperature=0.2, max_tokens=300)
-    reply = _strip_fences(reply)
-    # extract first JSON array
-    m = re.search(r'\[[^\[\]]*\]', reply, re.DOTALL)
-    if not m:
-        return [query]  # fallback: single sub-task = original query
-    try:
-        arr = json.loads(m.group())
-        if isinstance(arr, list) and arr:
-            return [str(x) for x in arr][:3]
-    except Exception:
-        pass
-    return [query]
-
-
-# ============== Generator ==============
-
-def generate_candidates(sub_task: str, retriever, n: int = 3) -> list[dict]:
-    """For a sub-task, retrieve top templates and generate N slot-filled candidates.
-    Vary temperature to get diversity."""
-    candidates = []
-
-    # 1. retrieve top templates
-    top = retriever(sub_task, top_k=5) if retriever else []
-    for rank, (tpl, score) in enumerate(top[:3]):
-        # try slot fill at varying temperatures
-        for ti, temp in enumerate([0.1, 0.4][:1 if rank < 2 else 0]):
-            code = _slot_fill_one(tpl, sub_task, temperature=temp)
-            if code:
-                candidates.append({
-                    'source': 'template',
-                    'template_id': tpl.get('id'),
-                    'template_domain': tpl.get('_domain'),
-                    'language': tpl.get('language', ''),
-                    'retrieval_score': round(score, 3),
-                    'temperature': temp,
-                    'code': code,
-                })
-        if len(candidates) >= n:
-            break
-
-    # 2. if nothing or all candidates fail verify, add a free-gen candidate
-    return candidates[:n]
-
-
-def _slot_fill_one(template: dict, query: str, temperature: float = 0.2) -> str:
-    """Single slot-fill attempt. Returns final code."""
+def _slot_fill(template: dict, query: str, temperature: float = 0.2) -> str:
     code = template.get('code', '')
     slots = template.get('slots') or []
     if not slots:
         return code
 
     prompt = (
-        f'Template summary: {template.get("summary_zh", "")}\n'
+        f'Template purpose: {template.get("summary_zh", "")}\n'
         f'Template code:\n```\n{code}\n```\n\n'
         f'User wants: {query}\n\n'
-        f'Return ONLY a JSON object with these keys, sensible default values: '
+        f'Return ONLY a JSON object with these keys, sensible defaults: '
         f'{", ".join(slots)}\n'
         f'Example: {{"port": "3000", "route_path": "/"}}'
     )
@@ -155,163 +91,120 @@ def _slot_fill_one(template: dict, query: str, temperature: float = 0.2) -> str:
     return out
 
 
-def free_gen(sub_task: str, lang_hint: str = '') -> dict:
-    """Generate code without template. Last resort."""
+def _free_gen(query: str, lang_hint: str = '') -> str:
     prompt = (
-        f'Generate {lang_hint or "code"} for: {sub_task}\n\n'
-        f'Return ONLY the code, no prose, no markdown fence. Just code that runs.'
+        f'Generate {lang_hint or "code"} for: {query}\n\n'
+        f'Return ONLY the code. No prose, no markdown fence. Just runnable code.'
     )
-    code = _strip_fences(_bragi(prompt, temperature=0.3, max_tokens=800))
-    return {
+    return _strip_fences(_bragi(prompt, temperature=0.3, max_tokens=800))
+
+
+def run(query: str, retriever, *, n_template_candidates: int = 3,
+        verify_first_then_skip: bool = True) -> dict:
+    """Best-of-N with verifier filter.
+
+    Strategy:
+      1. Retrieve top-K templates (K = n_template_candidates).
+      2. Slot-fill the top one first (temperature 0.1). Verify.
+         If verified AND verify_first_then_skip=True, return immediately
+         (fastest path — matches single-pass speed for clean cases).
+      3. Otherwise, slot-fill the rest in parallel, verify each.
+      4. Pick highest-retrieval-score among verified.
+      5. If 0 verified, free-gen one more candidate, verify, return.
+    """
+    trace = []
+    top = retriever(query, top_k=n_template_candidates) if retriever else []
+    trace.append({'stage': 'retrieve', 'candidates': len(top)})
+
+    candidates = []
+
+    # 1. quick path: slot-fill #1 first, verify, return if pass
+    if top:
+        tpl, score = top[0]
+        code = _slot_fill(tpl, query, temperature=0.1)
+        v = vmod.verify(code, tpl.get('language', ''))
+        candidates.append({
+            'source': 'template',
+            'rank': 0,
+            'template_id': tpl.get('id'),
+            'template_domain': tpl.get('_domain'),
+            'language': tpl.get('language', ''),
+            'retrieval_score': round(score, 3),
+            'temperature': 0.1,
+            'code': code,
+            'verify': v,
+        })
+        if v['ok'] and verify_first_then_skip:
+            trace.append({'stage': 'quick-path-pass', 'template_id': tpl.get('id')})
+            return _result(candidates[0], trace, candidates)
+
+    # 2. slow path: slot-fill remaining candidates
+    for rank, (tpl, score) in enumerate(top[1:], 1):
+        code = _slot_fill(tpl, query, temperature=DEFAULT_TEMPS[rank % len(DEFAULT_TEMPS)])
+        v = vmod.verify(code, tpl.get('language', ''))
+        candidates.append({
+            'source': 'template',
+            'rank': rank,
+            'template_id': tpl.get('id'),
+            'template_domain': tpl.get('_domain'),
+            'language': tpl.get('language', ''),
+            'retrieval_score': round(score, 3),
+            'temperature': DEFAULT_TEMPS[rank % len(DEFAULT_TEMPS)],
+            'code': code,
+            'verify': v,
+        })
+    trace.append({'stage': 'all-candidates', 'count': len(candidates),
+                  'verified_count': sum(1 for c in candidates if c['verify']['ok'])})
+
+    # 3. pick best verified by retrieval score
+    verified = [c for c in candidates if c['verify']['ok']]
+    if verified:
+        best = max(verified, key=lambda c: c.get('retrieval_score', 0))
+        trace.append({'stage': 'select-verified', 'chosen_template': best.get('template_id')})
+        return _result(best, trace, candidates)
+
+    # 4. nothing verified — free-gen one more
+    lang_hint = top[0][0].get('language', '') if top else ''
+    fg_code = _free_gen(query, lang_hint)
+    fg_v = vmod.verify(fg_code, lang_hint)
+    fg = {
         'source': 'free-gen',
+        'rank': -1,
         'template_id': None,
         'template_domain': None,
         'language': lang_hint,
         'retrieval_score': 0,
         'temperature': 0.3,
-        'code': code,
+        'code': fg_code,
+        'verify': fg_v,
     }
+    candidates.append(fg)
+    trace.append({'stage': 'free-gen-fallback', 'verify_ok': fg_v['ok']})
+
+    if fg_v['ok']:
+        return _result(fg, trace, candidates)
+
+    # 5. nothing passes — return highest-retrieval-score unverified candidate,
+    #    flagged. Better than nothing; user sees broken code with a warning.
+    candidates_with_score = [c for c in candidates if c.get('retrieval_score') is not None]
+    fallback = max(candidates_with_score, key=lambda c: c.get('retrieval_score', 0)) if candidates_with_score else fg
+    trace.append({'stage': 'unverified-fallback', 'chosen': fallback.get('template_id') or 'free-gen'})
+    return _result(fallback, trace, candidates, unverified=True)
 
 
-# ============== Verifier filter + select ==============
-
-def verify_and_select(candidates: list[dict]) -> tuple[dict | None, list[dict]]:
-    """Run verifier on all candidates, return (best_passing, all_with_verify_results).
-    best_passing is the highest-score candidate whose verifier said ok=True.
-    """
-    scored = vmod.score_candidates(candidates)
-    passing = [c for c in scored if c['verify']['ok']]
-    return (passing[0] if passing else None), scored
-
-
-# ============== Composer ==============
-
-def compose(sub_task_outputs: list[dict], original_query: str) -> str:
-    """Merge multiple sub-task code outputs into one coherent response.
-    If only one sub-task, just return its code."""
-    if not sub_task_outputs:
-        return ''
-    if len(sub_task_outputs) == 1:
-        return sub_task_outputs[0].get('code', '')
-
-    # multiple outputs: build a brief composite
-    parts = ['// Composite output from multiple sub-tasks\n']
-    for i, out in enumerate(sub_task_outputs, 1):
-        st = out.get('sub_task', f'task {i}')
-        code = out.get('code', '')
-        lang = out.get('language', '')
-        parts.append(f'\n// ===== sub-task {i}: {st} =====\n')
-        parts.append(f'// language: {lang}\n')
-        parts.append(code)
-        parts.append('\n')
-    return ''.join(parts)
-
-
-# ============== Reviewer ==============
-
-def review(code: str, query: str) -> dict:
-    """Bragi self-critiques. Returns {ok, issues}."""
-    prompt = (
-        f'User wanted: {query}\n\n'
-        f'Generated code:\n```\n{code[:2000]}\n```\n\n'
-        f'Does this code actually answer the user request? '
-        f'Return ONLY JSON: {{"ok": true|false, "issues": ["issue1", "issue2"]}}\n'
-        f'If ok=true, issues should be empty array.\n'
-        f'Issues to flag: missing feature, wrong language, broken syntax visible to you, irrelevant.'
-    )
-    reply = _bragi(prompt, temperature=0.1, max_tokens=300)
-    reply = _strip_fences(reply)
-    m = re.search(r'\{.*?\}', reply, re.DOTALL)
-    if not m:
-        return {'ok': True, 'issues': []}
-    try:
-        r = json.loads(m.group())
-        return {
-            'ok': bool(r.get('ok', True)),
-            'issues': list(r.get('issues') or [])[:5],
-        }
-    except Exception:
-        return {'ok': True, 'issues': []}
-
-
-# ============== Reviser ==============
-
-def revise(code: str, query: str, issues: list[str]) -> str:
-    """Bragi tries to fix the listed issues."""
-    issues_str = '; '.join(issues[:3])
-    prompt = (
-        f'User wanted: {query}\n\n'
-        f'Current code (has issues: {issues_str}):\n```\n{code[:2000]}\n```\n\n'
-        f'Return ONLY the FIXED full code. No prose. Same language as before.'
-    )
-    return _strip_fences(_bragi(prompt, temperature=0.2, max_tokens=1200))
-
-
-# ============== Main orchestrator ==============
-
-def run(query: str, retriever, *, max_revise_rounds: int = 2,
-        max_candidates_per_subtask: int = 3) -> dict:
-    """Full multi-pass orchestration. Returns dict with code, trace, stats.
-
-    retriever: callable(query, top_k) -> list of (template, score).
-    """
-    trace = []
-
-    # 1. PLAN
-    sub_tasks = plan(query)
-    trace.append({'stage': 'plan', 'sub_tasks': sub_tasks})
-
-    # 2. GENERATE + VERIFY each sub-task
-    sub_outputs = []
-    for st in sub_tasks:
-        cands = generate_candidates(st, retriever, n=max_candidates_per_subtask)
-        best, all_scored = verify_and_select(cands)
-        if best is None:
-            # free-gen fallback
-            free = free_gen(st)
-            best, _ = verify_and_select([free])
-            if best is None:
-                best = free  # accept ungated
-        best['sub_task'] = st
-        sub_outputs.append(best)
-        trace.append({
-            'stage': 'sub-task',
-            'sub_task': st,
-            'candidate_count': len(all_scored) if cands else 1,
-            'verified_pass': len([c for c in all_scored if c.get('verify', {}).get('ok')]) if cands else None,
-            'chosen_source': best.get('source'),
-            'chosen_template_id': best.get('template_id'),
-        })
-
-    # 3. COMPOSE
-    composed = compose(sub_outputs, query)
-    trace.append({'stage': 'compose', 'output_len': len(composed)})
-
-    # 4. REVIEW + REVISE loop
-    current_code = composed
-    for round_i in range(max_revise_rounds):
-        rev = review(current_code, query)
-        trace.append({'stage': f'review_r{round_i+1}', 'ok': rev['ok'], 'issues': rev['issues']})
-        if rev['ok']:
-            break
-        if not rev['issues']:
-            break
-        revised = revise(current_code, query, rev['issues'])
-        # re-verify
-        v = vmod.verify(revised)
-        trace.append({'stage': f'revise_r{round_i+1}', 'verify_ok': v['ok']})
-        if v['ok']:
-            current_code = revised
-        # if revise broke things, keep prior
-    final_verify = vmod.verify(current_code)
+def _result(chosen: dict, trace: list, all_candidates: list, unverified: bool = False) -> dict:
     return {
-        'mode': 'multi-pass',
-        'code': current_code,
-        'verified': final_verify['ok'],
-        'verifier_level': final_verify['level'],
-        'verifier_lang': final_verify.get('language'),
-        'verifier_errors': final_verify.get('errors', []),
-        'sub_task_count': len(sub_tasks),
-        'pass_count': len(trace),
+        'mode': 'best-of-n',
+        'code': chosen.get('code', ''),
+        'verified': chosen.get('verify', {}).get('ok', False) and not unverified,
+        'verifier_level': chosen.get('verify', {}).get('level'),
+        'verifier_lang': chosen.get('verify', {}).get('language'),
+        'verifier_errors': chosen.get('verify', {}).get('errors', []),
+        'chosen_source': chosen.get('source'),
+        'chosen_template_id': chosen.get('template_id'),
+        'chosen_template_domain': chosen.get('template_domain'),
+        'chosen_temperature': chosen.get('temperature'),
+        'candidate_count': len(all_candidates),
+        'verified_count': sum(1 for c in all_candidates if c.get('verify', {}).get('ok')),
         'trace': trace,
     }

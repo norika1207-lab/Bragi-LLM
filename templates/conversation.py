@@ -194,7 +194,36 @@ def handle(query: str, session_id: str | None = None,
             }
         # if followup failed, fall through to retrieval
 
-    # 3. retrieve + slot fill
+    # 3. best-of-N orchestrator (test-time compute + deterministic verifier)
+    #    Diamond-validated +15pp verified vs single-pass at same speed.
+    #    Quick path: try top template first, return if verifier passes.
+    #    Slow path: try N=3 templates + free-gen fallback, pick best verified.
+    from templates import orchestrator as orch
+    orch_result = orch.run(query, retrieve, n_template_candidates=3)
+    if session_id:
+        sessionmod.record_turn(
+            session_id,
+            query=query,
+            template_id=orch_result.get('chosen_template_id'),
+            template_domain=orch_result.get('chosen_template_domain'),
+            slot_values=None,
+            final_code=orch_result['code'],
+            mode='best-of-n',
+        )
+    return {
+        'mode': 'best-of-n',
+        'template_id': orch_result.get('chosen_template_id'),
+        'template_domain': orch_result.get('chosen_template_domain'),
+        'score': None,
+        'code': orch_result['code'],
+        'verified': orch_result.get('verified'),
+        'verifier_level': orch_result.get('verifier_level'),
+        'candidate_count': orch_result.get('candidate_count'),
+        'verified_count': orch_result.get('verified_count'),
+        'engine': _engine,
+    }
+
+    # OLD single-pass path (kept for reference; disabled above by early return)
     candidates = retrieve(query, top_k=5)
     if not candidates:
         out = fallback_to_bragi(query, context_snippet)

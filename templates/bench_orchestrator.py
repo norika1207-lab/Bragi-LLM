@@ -66,11 +66,11 @@ def main():
         # multi-pass
         t0 = time.time()
         try:
-            mp = orch.run(q, retriever, max_revise_rounds=2, max_candidates_per_subtask=3)
+            mp = orch.run(q, retriever, n_template_candidates=3)
         except Exception as e:
             mp = {'error': str(e), 'code': '', 'verified': False, 'trace': []}
         mp_time = time.time() - t0
-        print(f'  multi-pass:  {mp_time:.0f}s, verify={mp.get("verified")}, sub_tasks={mp.get("sub_task_count", "?")}', flush=True)
+        print(f'  multi-pass:  {mp_time:.0f}s, verify={mp.get("verified")}, cands={mp.get("candidate_count", "?")}/{mp.get("verified_count", "?")}', flush=True)
 
         results.append({
             'idx': i + 1,
@@ -92,8 +92,10 @@ def main():
                 'verifier_level': mp.get('verifier_level'),
                 'verifier_errors': mp.get('verifier_errors', []),
                 'code_len': len(mp.get('code', '')),
-                'sub_task_count': mp.get('sub_task_count'),
-                'pass_count': mp.get('pass_count'),
+                'candidate_count': mp.get('candidate_count'),
+                'verified_count': mp.get('verified_count'),
+                'chosen_source': mp.get('chosen_source'),
+                'chosen_template_id': mp.get('chosen_template_id'),
                 'trace_summary': [t.get('stage') for t in mp.get('trace', [])],
             },
             'code_preview_single': (sp.get('code', '') or '')[:300],

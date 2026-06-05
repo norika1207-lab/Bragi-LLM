@@ -1,0 +1,672 @@
+{
+  "summary": {
+    "ts": "2026-06-06T03:07:39.251713",
+    "subset_size": 20,
+    "single_pass": {
+      "verified_pct": 80.0,
+      "avg_time_s": 2.8
+    },
+    "multi_pass": {
+      "verified_pct": 95.0,
+      "avg_time_s": 2.6
+    },
+    "verified_lift_pct_pts": 15.0,
+    "time_cost_multiplier": 0.9
+  },
+  "results": [
+    {
+      "idx": 1,
+      "query": "做個登入頁",
+      "expected_domain": "web-frontend",
+      "single_pass": {
+        "time_s": 2.1,
+        "verify_ok": true,
+        "verify_level": "shallow",
+        "verify_errors": [],
+        "code_len": 1140,
+        "template_id": "web-frontend-batch1-002-signup-form",
+        "template_domain": "web-frontend",
+        "mode": "template"
+      },
+      "multi_pass": {
+        "time_s": 2.1,
+        "verify_ok": true,
+        "verifier_level": "shallow",
+        "verifier_errors": [],
+        "code_len": 1140,
+        "candidate_count": 1,
+        "verified_count": 1,
+        "chosen_source": "template",
+        "chosen_template_id": "web-frontend-batch1-002-signup-form",
+        "trace_summary": [
+          "retrieve",
+          "quick-path-pass"
+        ]
+      },
+      "code_preview_single": "import { useState } from 'react';\n\nexport default function LoginForm() {\n  const [form, setForm] = useState({ email: '', password: '', confirm: '' });\n  const [err, setErr] = useState('');\n\n  function update<K extends keyof typeof form>(k: K, v: string) {\n    setForm({ ...form, [k]: v });\n  }\n\n  asy",
+      "code_preview_multi": "import { useState } from 'react';\n\nexport default function LoginForm() {\n  const [form, setForm] = useState({ email: '', password: '', confirm: '' });\n  const [err, setErr] = useState('');\n\n  function update<K extends keyof typeof form>(k: K, v: string) {\n    setForm({ ...form, [k]: v });\n  }\n\n  asy"
+    },
+    {
+      "idx": 2,
+      "query": "React 註冊表單，含 email 驗證跟密碼強度",
+      "expected_domain": "web-frontend",
+      "single_pass": {
+        "time_s": 1.3,
+        "verify_ok": true,
+        "verify_level": "shallow",
+        "verify_errors": [],
+        "code_len": 1106,
+        "template_id": "web-frontend-batch1-001-login-form",
+        "template_domain": "web-frontend",
+        "mode": "template"
+      },
+      "multi_pass": {
+        "time_s": 2.2,
+        "verify_ok": true,
+        "verifier_level": "shallow",
+        "verifier_errors": [],
+        "code_len": 1102,
+        "candidate_count": 1,
+        "verified_count": 1,
+        "chosen_source": "template",
+        "chosen_template_id": "web-frontend-batch1-001-login-form",
+        "trace_summary": [
+          "retrieve",
+          "quick-path-pass"
+        ]
+      },
+      "code_preview_single": "import { useState } from 'react';\n\nexport default function RegistrationForm() {\n  const [email, setEmail] = useState('');\n  const [password, setPassword] = useState('');\n  const [error, setError] = useState('');\n  const [loading, setLoading] = useState(false);\n\n  async function onSubmit(e: React.For",
+      "code_preview_multi": "import { useState } from 'react';\n\nexport default function RegisterForm() {\n  const [email, setEmail] = useState('');\n  const [password, setPassword] = useState('');\n  const [error, setError] = useState('');\n  const [loading, setLoading] = useState(false);\n\n  async function onSubmit(e: React.FormEve"
+    },
+    {
+      "idx": 3,
+      "query": "用 Tailwind 寫一個 responsive navbar",
+      "expected_domain": "web-frontend",
+      "single_pass": {
+        "time_s": 1.8,
+        "verify_ok": true,
+        "verify_level": "shallow",
+        "verify_errors": [],
+        "code_len": 487,
+        "template_id": "web-frontend-batch4-008-navbar",
+        "template_domain": "web-frontend",
+        "mode": "template"
+      },
+      "multi_pass": {
+        "time_s": 2.6,
+        "verify_ok": true,
+        "verifier_level": "shallow",
+        "verifier_errors": [],
+        "code_len": 487,
+        "candidate_count": 1,
+        "verified_count": 1,
+        "chosen_source": "template",
+        "chosen_template_id": "web-frontend-batch4-008-navbar",
+        "trace_summary": [
+          "retrieve",
+          "quick-path-pass"
+        ]
+      },
+      "code_preview_single": "export default function Navbar() {\n  return (\n    <nav className=\"sticky top-0 z-40 bg-white/80 backdrop-blur border-b border-gray-100\">\n      <div className=\"mx-auto max-w-6xl px-6 h-14 flex items-center justify-between\">\n        <span className=\"font-bold\">My Brand</span>\n        <ul className=\"fl",
+      "code_preview_multi": "export default function Navbar() {\n  return (\n    <nav className=\"sticky top-0 z-40 bg-white/80 backdrop-blur border-b border-gray-100\">\n      <div className=\"mx-auto max-w-6xl px-6 h-14 flex items-center justify-between\">\n        <span className=\"font-bold\">My Brand</span>\n        <ul className=\"fl"
+    },
+    {
+      "idx": 4,
+      "query": "Next.js app router 的 server component 範例",
+      "expected_domain": "web-frontend",
+      "single_pass": {
+        "time_s": 1.1,
+        "verify_ok": true,
+        "verify_level": "shallow",
+        "verify_errors": [],
+        "code_len": 134,
+        "template_id": "web-frontend-batch4-013-api-hello",
+        "template_domain": "web-frontend",
+        "mode": "template"
+      },
+      "multi_pass": {
+        "time_s": 1.1,
+        "verify_ok": true,
+        "verifier_level": "shallow",
+        "verifier_errors": [],
+        "code_len": 131,
+        "candidate_count": 1,
+        "verified_count": 1,
+        "chosen_source": "template",
+        "chosen_template_id": "web-frontend-batch4-013-api-hello",
+        "trace_summary": [
+          "retrieve",
+          "quick-path-pass"
+        ]
+      },
+      "code_preview_single": "import { NextResponse } from 'next/server';\n\nexport async function GET() {\n  return NextResponse.json({ message: 'Hello, World!' });\n}",
+      "code_preview_multi": "import { NextResponse } from 'next/server';\n\nexport async function GET() {\n  return NextResponse.json({ message: '<greeting>' });\n}"
+    },
+    {
+      "idx": 5,
+      "query": "vue 3 composition API todo list",
+      "expected_domain": "web-frontend",
+      "single_pass": {
+        "time_s": 0.9,
+        "verify_ok": true,
+        "verify_level": "syntax",
+        "verify_errors": [],
+        "code_len": 596,
+        "template_id": "database-devops-041-compose-full-stack",
+        "template_domain": "database-devops",
+        "mode": "template"
+      },
+      "multi_pass": {
+        "time_s": 1.8,
+        "verify_ok": true,
+        "verifier_level": "syntax",
+        "verifier_errors": [],
+        "code_len": 596,
+        "candidate_count": 1,
+        "verified_count": 1,
+        "chosen_source": "template",
+        "chosen_template_id": "database-devops-041-compose-full-stack",
+        "trace_summary": [
+          "retrieve",
+          "quick-path-pass"
+        ]
+      },
+      "code_preview_single": "services:\n  app:\n    build: .\n    ports: [\"3000:3000\"]\n    environment:\n      DATABASE_URL: postgres://app:app@postgres:5432/app\n      REDIS_URL: redis://redis:6379\n    depends_on:\n      postgres:\n        condition: service_healthy\n      redis:\n        condition: service_started\n\n  postgres:\n    ima",
+      "code_preview_multi": "services:\n  app:\n    build: .\n    ports: [\"3000:3000\"]\n    environment:\n      DATABASE_URL: postgres://app:app@postgres:5432/app\n      REDIS_URL: redis://redis:6379\n    depends_on:\n      postgres:\n        condition: service_healthy\n      redis:\n        condition: service_started\n\n  postgres:\n    ima"
+    },
+    {
+      "idx": 6,
+      "query": "做個 dark mode toggle",
+      "expected_domain": "web-frontend",
+      "single_pass": {
+        "time_s": 1.2,
+        "verify_ok": true,
+        "verify_level": "shallow",
+        "verify_errors": [],
+        "code_len": 680,
+        "template_id": "web-frontend-batch2-022-dark-mode-toggle",
+        "template_domain": "web-frontend",
+        "mode": "template"
+      },
+      "multi_pass": {
+        "time_s": 1.5,
+        "verify_ok": true,
+        "verifier_level": "shallow",
+        "verifier_errors": [],
+        "code_len": 680,
+        "candidate_count": 1,
+        "verified_count": 1,
+        "chosen_source": "template",
+        "chosen_template_id": "web-frontend-batch2-022-dark-mode-toggle",
+        "trace_summary": [
+          "retrieve",
+          "quick-path-pass"
+        ]
+      },
+      "code_preview_single": "import { useEffect, useState } from 'react';\n\nexport function DarkModeToggle() {\n  const [dark, setDark] = useState(false);\n  useEffect(() => {\n    const saved = localStorage.getItem('dark-mode') === 'dark';\n    setDark(saved);\n    document.documentElement.classList.toggle('dark', saved);\n  }, []);\n",
+      "code_preview_multi": "import { useEffect, useState } from 'react';\n\nexport function DarkModeToggle() {\n  const [dark, setDark] = useState(false);\n  useEffect(() => {\n    const saved = localStorage.getItem('dark-mode') === 'dark';\n    setDark(saved);\n    document.documentElement.classList.toggle('dark', saved);\n  }, []);\n"
+    },
+    {
+      "idx": 7,
+      "query": "infinite scroll list",
+      "expected_domain": "web-frontend",
+      "single_pass": {
+        "time_s": 5.1,
+        "verify_ok": true,
+        "verify_level": "shallow",
+        "verify_errors": [],
+        "code_len": 760,
+        "template_id": null,
+        "template_domain": null,
+        "mode": "followup"
+      },
+      "multi_pass": {
+        "time_s": 1.9,
+        "verify_ok": true,
+        "verifier_level": "shallow",
+        "verifier_errors": [],
+        "code_len": 761,
+        "candidate_count": 1,
+        "verified_count": 1,
+        "chosen_source": "template",
+        "chosen_template_id": "web-frontend-batch2-012-infinite-scroll",
+        "trace_summary": [
+          "retrieve",
+          "quick-path-pass"
+        ]
+      },
+      "code_preview_single": "import { useEffect, useRef, useState } from 'react';\n\nexport function InfiniteList() {\n  const [items, setItems] = useState<any[]>([]);\n  const [page, setPage] = useState(1);\n  const sentinel = useRef<HTMLDivElement>(null);\n\n  useEffect(() => {\n    const obs = new IntersectionObserver(async (entries",
+      "code_preview_multi": "import { useEffect, useRef, useState } from 'react';\n\nexport function InfiniteList() {\n  const [items, setItems] = useState<any[]>([]);\n  const [page, setPage] = useState(1);\n  const sentinel = useRef<HTMLDivElement>(null);\n\n  useEffect(() => {\n    const obs = new IntersectionObserver(async (entries"
+    },
+    {
+      "idx": 8,
+      "query": "Express REST API CRUD，連 PostgreSQL",
+      "expected_domain": "web-backend",
+      "single_pass": {
+        "time_s": 0.8,
+        "verify_ok": true,
+        "verify_level": "shallow",
+        "verify_errors": [],
+        "code_len": 859,
+        "template_id": "web-backend-002-express-crud",
+        "template_domain": "web-backend",
+        "mode": "template"
+      },
+      "multi_pass": {
+        "time_s": 1.8,
+        "verify_ok": true,
+        "verifier_level": "shallow",
+        "verifier_errors": [],
+        "code_len": 956,
+        "candidate_count": 1,
+        "verified_count": 1,
+        "chosen_source": "template",
+        "chosen_template_id": "web-backend-002-express-crud",
+        "trace_summary": [
+          "retrieve",
+          "quick-path-pass"
+        ]
+      },
+      "code_preview_single": "const express = require('express');\nconst router = express.Router();\nconst store = new Map();\n\nrouter.get('/items', (req, res) => res.json([...store.values()]));\nrouter.get('/items/:id', (req, res) => {\n  const item = store.get(req.params.id);\n  if (!item) return res.status(404).json({ error: 'not f",
+      "code_preview_multi": "const express = require('express');\nconst router = express.Router();\nconst store = new Map();\n\nrouter.get('/<resource>', (req, res) => res.json([...store.values()]));\nrouter.get('/<resource>/:<id_field>', (req, res) => {\n  const item = store.get(req.params.<id_field>);\n  if (!item) return res.status"
+    },
+    {
+      "idx": 9,
+      "query": "FastAPI JWT 登入 endpoint",
+      "expected_domain": "web-backend",
+      "single_pass": {
+        "time_s": 6.9,
+        "verify_ok": true,
+        "verify_level": "syntax",
+        "verify_errors": [],
+        "code_len": 896,
+        "template_id": null,
+        "template_domain": null,
+        "mode": "followup"
+      },
+      "multi_pass": {
+        "time_s": 4.9,
+        "verify_ok": true,
+        "verifier_level": "syntax",
+        "verifier_errors": [],
+        "code_len": 525,
+        "candidate_count": 3,
+        "verified_count": 2,
+        "chosen_source": "template",
+        "chosen_template_id": "web-backend-126-fastapi-shutdown",
+        "trace_summary": [
+          "retrieve",
+          "all-candidates",
+          "select-verified"
+        ]
+      },
+      "code_preview_single": "from fastapi import Depends, FastAPI, HTTPException\nfrom fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm\nfrom jose import jwt, JWTError\nfrom datetime import datetime, timedelta\nimport os\n\napp = FastAPI()\noauth2 = OAuth2PasswordBearer(tokenUrl='token')\nSECRET = os.environ['you",
+      "code_preview_multi": "from contextlib import asynccontextmanager\nfrom fastapi import FastAPI\nimport asyncpg\n\n@asynccontextmanager\nasync def lifespan(app: FastAPI):\n    app.state.pool = await asyncpg.create_pool(dsn='<db_url>', min_size=1, max_size=10)\n    yield\n    await app.state.pool.close()\n\napp = FastAPI(lifespan=lif"
+    },
+    {
+      "idx": 10,
+      "query": "幫我寫一個 webhook receiver",
+      "expected_domain": "web-backend",
+      "single_pass": {
+        "time_s": 1.1,
+        "verify_ok": true,
+        "verify_level": "shallow",
+        "verify_errors": [],
+        "code_len": 597,
+        "template_id": "firmware-042-esp8266-webserver",
+        "template_domain": "firmware",
+        "mode": "template"
+      },
+      "multi_pass": {
+        "time_s": 1.7,
+        "verify_ok": true,
+        "verifier_level": "shallow",
+        "verifier_errors": [],
+        "code_len": 597,
+        "candidate_count": 1,
+        "verified_count": 1,
+        "chosen_source": "template",
+        "chosen_template_id": "firmware-042-esp8266-webserver",
+        "trace_summary": [
+          "retrieve",
+          "quick-path-pass"
+        ]
+      },
+      "code_preview_single": "#include <ESP8266WiFi.h>\n#include <ESP8266WebServer.h>\nESP8266WebServer server(80);\nconst int LED = 2;\n\nvoid setup() {\n  pinMode(LED, OUTPUT);\n  WiFi.begin(\"your_wifi_ssid\", \"your_wifi_password\");\n  while (WiFi.status() != WL_CONNECTED) delay(300);\n  server.on(\"/\", []() { server.send(200, \"text/html",
+      "code_preview_multi": "#include <ESP8266WiFi.h>\n#include <ESP8266WebServer.h>\nESP8266WebServer server(80);\nconst int LED = 2;\n\nvoid setup() {\n  pinMode(LED, OUTPUT);\n  WiFi.begin(\"your_wifi_ssid\", \"your_wifi_password\");\n  while (WiFi.status() != WL_CONNECTED) delay(300);\n  server.on(\"/\", []() { server.send(200, \"text/html"
+    },
+    {
+      "idx": 11,
+      "query": "Django model + migration: blog post",
+      "expected_domain": "web-backend",
+      "single_pass": {
+        "time_s": 0.7,
+        "verify_ok": true,
+        "verify_level": "syntax",
+        "verify_errors": [],
+        "code_len": 405,
+        "template_id": "web-backend-066-django-model",
+        "template_domain": "web-backend",
+        "mode": "template"
+      },
+      "multi_pass": {
+        "time_s": 1.1,
+        "verify_ok": true,
+        "verifier_level": "syntax",
+        "verifier_errors": [],
+        "code_len": 405,
+        "candidate_count": 1,
+        "verified_count": 1,
+        "chosen_source": "template",
+        "chosen_template_id": "web-backend-066-django-model",
+        "trace_summary": [
+          "retrieve",
+          "quick-path-pass"
+        ]
+      },
+      "code_preview_single": "from django.db import models\n\nclass BlogPost(models.Model):\n    name = models.CharField(max_length=120)\n    description = models.TextField(blank=True, default='')\n    created_at = models.DateTimeField(auto_now_add=True)\n    updated_at = models.DateTimeField(auto_now=True)\n\n    class Meta:\n        db",
+      "code_preview_multi": "from django.db import models\n\nclass BlogPost(models.Model):\n    name = models.CharField(max_length=120)\n    description = models.TextField(blank=True, default='')\n    created_at = models.DateTimeField(auto_now_add=True)\n    updated_at = models.DateTimeField(auto_now=True)\n\n    class Meta:\n        db"
+    },
+    {
+      "idx": 12,
+      "query": "Go gin server with rate limit middleware",
+      "expected_domain": "web-backend",
+      "single_pass": {
+        "time_s": 4.4,
+        "verify_ok": false,
+        "verify_level": "syntax",
+        "verify_errors": [
+          "line 1: invalid syntax"
+        ],
+        "code_len": 472,
+        "template_id": null,
+        "template_domain": null,
+        "mode": "followup"
+      },
+      "multi_pass": {
+        "time_s": 1.2,
+        "verify_ok": true,
+        "verifier_level": "shallow",
+        "verifier_errors": [],
+        "code_len": 270,
+        "candidate_count": 1,
+        "verified_count": 1,
+        "chosen_source": "template",
+        "chosen_template_id": "web-backend-005-express-ratelimit",
+        "trace_summary": [
+          "retrieve",
+          "quick-path-pass"
+        ]
+      },
+      "code_preview_single": "package main\n\nimport (\n\t\"github.com/gin-gonic/gin\"\n\t\"github.com/gin-gonic/gin/middleware\"\n\t\"time\"\n)\n\nfunc main() {\n\tr := gin.Default()\n\n\tr.Use(middleware.RateLimiter(middleware.RateLimiterConfig{\n\t\tWindow:    time.Second,\n\t\tLimit:     100,\n\t\tStore:     nil,\n\t\tHandler: func(c *gin.Context, err error)",
+      "code_preview_multi": "const rateLimit = require('express-rate-limit');\n\nconst limiter = rateLimit({\n  windowMs: <window_ms>,\n  max: <max_requests>,\n  standardHeaders: true,\n  legacyHeaders: false,\n  message: { error: 'too many requests' }\n});\n\nmodule.exports = (app) => app.use('/', limiter);"
+    },
+    {
+      "idx": 13,
+      "query": "Node.js file upload to S3",
+      "expected_domain": "web-backend",
+      "single_pass": {
+        "time_s": 1.0,
+        "verify_ok": true,
+        "verify_level": "shallow",
+        "verify_errors": [],
+        "code_len": 898,
+        "template_id": "patch-s3-upload-008-browser-direct-put",
+        "template_domain": "web-backend",
+        "mode": "template"
+      },
+      "multi_pass": {
+        "time_s": 1.6,
+        "verify_ok": true,
+        "verifier_level": "shallow",
+        "verifier_errors": [],
+        "code_len": 878,
+        "candidate_count": 1,
+        "verified_count": 1,
+        "chosen_source": "template",
+        "chosen_template_id": "patch-s3-upload-008-browser-direct-put",
+        "trace_summary": [
+          "retrieve",
+          "quick-path-pass"
+        ]
+      },
+      "code_preview_single": "async function uploadFileToS3(file: File) {\n  const signRes = await fetch('https://your-s3-bucket.s3.amazonaws.com/sign', {\n    method: 'POST',\n    headers: { 'Content-Type': 'application/json' },\n    body: JSON.stringify({ filename: file.name, contentType: file.type }),\n  });\n  const { url, key, he",
+      "code_preview_multi": "async function uploadFileToS3(file: File) {\n  const signRes = await fetch('https://example.com/sign', {\n    method: 'POST',\n    headers: { 'Content-Type': 'application/json' },\n    body: JSON.stringify({ filename: file.name, contentType: file.type }),\n  });\n  const { url, key, headers } = await sign"
+    },
+    {
+      "idx": 14,
+      "query": "GraphQL resolver 範例",
+      "expected_domain": "web-backend",
+      "single_pass": {
+        "time_s": 5.1,
+        "verify_ok": true,
+        "verify_level": "shallow",
+        "verify_errors": [],
+        "code_len": 690,
+        "template_id": null,
+        "template_domain": null,
+        "mode": "followup"
+      },
+      "multi_pass": {
+        "time_s": 2.0,
+        "verify_ok": true,
+        "verifier_level": "shallow",
+        "verifier_errors": [],
+        "code_len": 711,
+        "candidate_count": 1,
+        "verified_count": 1,
+        "chosen_source": "template",
+        "chosen_template_id": "web-backend-025-express-graphql",
+        "trace_summary": [
+          "retrieve",
+          "quick-path-pass"
+        ]
+      },
+      "code_preview_single": "const { ApolloServer } = require('@apollo/server');\nconst { expressMiddleware } = require('@apollo/server/express4');\n\nconst typeDefs = `#graphql\n  type User { id: ID!, name: String! }\n  type Query { items: [User!]! }\n  type Mutation { add(name: String!): User! }\n`;\n\nconst items = [];\nconst resolver",
+      "code_preview_multi": "const { ApolloServer } = require('@apollo/server');\nconst { expressMiddleware } = require('@apollo/server/express4');\n\nconst typeDefs = `#graphql\n  type <type_name> { id: ID!, name: String! }\n  type Query { items: [<type_name>!]! }\n  type Mutation { add(name: String!): <type_name>! }\n`;\n\nconst items"
+    },
+    {
+      "idx": 15,
+      "query": "React Native 登入畫面",
+      "expected_domain": "mobile",
+      "single_pass": {
+        "time_s": 9.2,
+        "verify_ok": true,
+        "verify_level": "shallow",
+        "verify_errors": [],
+        "code_len": 1159,
+        "template_id": null,
+        "template_domain": null,
+        "mode": "followup"
+      },
+      "multi_pass": {
+        "time_s": 4.1,
+        "verify_ok": true,
+        "verifier_level": "shallow",
+        "verifier_errors": [],
+        "code_len": 865,
+        "candidate_count": 1,
+        "verified_count": 1,
+        "chosen_source": "template",
+        "chosen_template_id": "mobile-001-rn-login",
+        "trace_summary": [
+          "retrieve",
+          "quick-path-pass"
+        ]
+      },
+      "code_preview_single": "import React, { useState } from 'react';\nimport { View, TextInput, Button, Text, StyleSheet } from 'react-native';\n\nexport default function Login() {\n  const [e, setE] = useState('');\n  const [p, setP] = useState('');\n  const [m, setM] = useState('');\n\n  const submit = async () => {\n    try {\n      ",
+      "code_preview_multi": "import React,{useState} from 'react';\nimport {View,TextInput,Button,Text,StyleSheet} from 'react-native';\nexport default function Login(){\n  const[e,setE]=useState('');const[p,setP]=useState('');const[m,setM]=useState('');\n  const submit=async()=>{\n    try{const r=await fetch('http://localhost:3000/"
+    },
+    {
+      "idx": 16,
+      "query": "SwiftUI list with pull to refresh",
+      "expected_domain": "mobile",
+      "single_pass": {
+        "time_s": 4.8,
+        "verify_ok": false,
+        "verify_level": "syntax",
+        "verify_errors": [
+          "line 12: invalid decimal literal"
+        ],
+        "code_len": 580,
+        "template_id": null,
+        "template_domain": null,
+        "mode": "followup"
+      },
+      "multi_pass": {
+        "time_s": 7.9,
+        "verify_ok": false,
+        "verifier_level": "syntax",
+        "verifier_errors": [
+          "line 6: invalid decimal literal"
+        ],
+        "code_len": 415,
+        "candidate_count": 4,
+        "verified_count": 0,
+        "chosen_source": "template",
+        "chosen_template_id": "mobile-057-swiftui-pullrefresh",
+        "trace_summary": [
+          "retrieve",
+          "all-candidates",
+          "free-gen-fallback",
+          "unverified-fallback"
+        ]
+      },
+      "code_preview_single": "import SwiftUI\n\nstruct Item: Decodable, Identifiable {\n    let id: Int\n    let title: String\n}\n\nstruct L: View {\n    @State var items: [Item] = []\n    var body: some View {\n        List(items) {\n            Text($0.title)\n        }\n        .refreshable {\n            Task {\n                await load",
+      "code_preview_multi": "import SwiftUI\nstruct Item:Decodable,Identifiable{let id:Int;let title:String}\nstruct L:View{\n  @State var items:[Item]=[]\n  var body:some View{\n    List(items){Text($0.title)}.refreshable{await load()}.task{await load()}}\n  func load()async{\n    if let d=try?await URLSession.shared.data(from:URL(st"
+    },
+    {
+      "idx": 17,
+      "query": "Android Jetpack Compose 底部導航",
+      "expected_domain": "mobile",
+      "single_pass": {
+        "time_s": 1.7,
+        "verify_ok": false,
+        "verify_level": "syntax",
+        "verify_errors": [
+          "line 2: invalid syntax"
+        ],
+        "code_len": 610,
+        "template_id": "mobile-082-compose-tabs",
+        "template_domain": "mobile",
+        "mode": "template"
+      },
+      "multi_pass": {
+        "time_s": 5.0,
+        "verify_ok": true,
+        "verifier_level": "shallow",
+        "verifier_errors": [],
+        "code_len": 734,
+        "candidate_count": 3,
+        "verified_count": 1,
+        "chosen_source": "template",
+        "chosen_template_id": "web-frontend-batch2-007-sheet-bottom",
+        "trace_summary": [
+          "retrieve",
+          "all-candidates",
+          "select-verified"
+        ]
+      },
+      "code_preview_single": "import androidx.compose.material.icons.Icons\nimport androidx.compose.material.icons.filled.*\nimport androidx.compose.material3.*\nimport androidx.compose.runtime.*\n@Composable\nfun Root(){\n  var i by remember{mutableStateOf(0)}\n  val labels=listOf(\"Home\",\"Search\",\"Profile\")\n  val icons=listOf(Icons.De",
+      "code_preview_multi": "import { useState } from 'react';\n\nexport function BottomSheet({ children }) {\n  const [open, setOpen] = useState(false);\n  return (\n    <>\n      <button onClick={() => setOpen(true)} className=\"rounded bg-black px-4 py-2 text-white\">Open Sheet</button>\n      {open && (\n        <div className=\"fixed"
+    },
+    {
+      "idx": 18,
+      "query": "Flutter HTTP request with error handling",
+      "expected_domain": "mobile",
+      "single_pass": {
+        "time_s": 3.7,
+        "verify_ok": false,
+        "verify_level": "syntax",
+        "verify_errors": [
+          "line 1: invalid syntax"
+        ],
+        "code_len": 494,
+        "template_id": null,
+        "template_domain": null,
+        "mode": "followup"
+      },
+      "multi_pass": {
+        "time_s": 1.9,
+        "verify_ok": true,
+        "verifier_level": "shallow",
+        "verifier_errors": [],
+        "code_len": 522,
+        "candidate_count": 1,
+        "verified_count": 1,
+        "chosen_source": "template",
+        "chosen_template_id": "database-devops-140-vitest-msw",
+        "trace_summary": [
+          "retrieve",
+          "quick-path-pass"
+        ]
+      },
+      "code_preview_single": "import 'package:http/http.dart' as http;\nimport 'package:test/test.dart';\n\nvoid main() {\n  setUp(() async {\n    final client = http.Client();\n    await client.close();\n  });\n\n  test('fetches from mocked api', async () {\n    try {\n      final response = await client.get(Uri.parse('http://localhost:30",
+      "code_preview_multi": "import { setupServer } from 'msw/node'\nimport { http, HttpResponse } from 'msw'\nimport { beforeAll, afterEach, afterAll, expect, it } from 'vitest'\n\nconst server = setupServer(\n  http.get('http://localhost:3000', () => HttpResponse.json({ ok: true, items: [1, 2, 3] })),\n)\n\nbeforeAll(() => server.lis"
+    },
+    {
+      "idx": 19,
+      "query": "iOS push notification setup",
+      "expected_domain": "mobile",
+      "single_pass": {
+        "time_s": 1.1,
+        "verify_ok": true,
+        "verify_level": "shallow",
+        "verify_errors": [],
+        "code_len": 437,
+        "template_id": "depth-mobile-015-local-notif-ios",
+        "template_domain": "mobile",
+        "mode": "template"
+      },
+      "multi_pass": {
+        "time_s": 1.9,
+        "verify_ok": true,
+        "verifier_level": "shallow",
+        "verifier_errors": [],
+        "code_len": 438,
+        "candidate_count": 1,
+        "verified_count": 1,
+        "chosen_source": "template",
+        "chosen_template_id": "depth-mobile-015-local-notif-ios",
+        "trace_summary": [
+          "retrieve",
+          "quick-path-pass"
+        ]
+      },
+      "code_preview_single": "let content = UNMutableNotificationContent()\ncontent.title = \"Daily Reminder\"; content.body = \"Don't forget to check your tasks!\"; content.sound = .default\nvar date = DateComponents(); date.hour = 8; date.minute = 0\nlet trigger = UNCalendarNotificationTrigger(dateMatching: date, repeats: true)\nlet r",
+      "code_preview_multi": "let content = UNMutableNotificationContent()\ncontent.title = \"Daily Notification\"; content.body = \"Reminder: Check your schedule!\"; content.sound = .default\nvar date = DateComponents(); date.hour = 8; date.minute = 0\nlet trigger = UNCalendarNotificationTrigger(dateMatching: date, repeats: true)\nlet "
+    },
+    {
+      "idx": 20,
+      "query": "做個簡單的計步 App 畫面",
+      "expected_domain": "mobile",
+      "single_pass": {
+        "time_s": 1.2,
+        "verify_ok": true,
+        "verify_level": "shallow",
+        "verify_errors": [],
+        "code_len": 1010,
+        "template_id": "patch-mobile-pedometer-001-rn-step-counter",
+        "template_domain": "mobile",
+        "mode": "template"
+      },
+      "multi_pass": {
+        "time_s": 2.8,
+        "verify_ok": true,
+        "verifier_level": "shallow",
+        "verifier_errors": [],
+        "code_len": 1010,
+        "candidate_count": 1,
+        "verified_count": 1,
+        "chosen_source": "template",
+        "chosen_template_id": "patch-mobile-pedometer-001-rn-step-counter",
+        "trace_summary": [
+          "retrieve",
+          "quick-path-pass"
+        ]
+      },
+      "code_preview_single": "import React, { useEffect, useState } from 'react';\nimport { View, Text, StyleSheet } from 'react-native';\nimport { Pedometer } from 'expo-sensors';\n\nexport default function StepCounter() {\n  const [steps, setSteps] = useState(0);\n  const goal = 10000;\n\n  useEffect(() => {\n    const start = new Date",
+      "code_preview_multi": "import React, { useEffect, useState } from 'react';\nimport { View, Text, StyleSheet } from 'react-native';\nimport { Pedometer } from 'expo-sensors';\n\nexport default function StepCounter() {\n  const [steps, setSteps] = useState(0);\n  const goal = 10000;\n\n  useEffect(() => {\n    const start = new Date"
+    }
+  ]
+}

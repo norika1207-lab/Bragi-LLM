@@ -360,6 +360,23 @@ def run(query: str, retriever, *, n_template_candidates: int = 3,
         mul = bmod.penalty_for(query, tpl.get('id', ''))
         raw_with_penalty.append((tpl, score * mul))
     raw_top = sorted(raw_with_penalty, key=lambda x: -x[1])
+
+    # Layer 5 boost: for multi-intent queries, ensure each detected domain has
+    # at least 1 candidate even if ranking pushed it out.
+    intents = _detect_intent_domains(query)
+    if len(set(intents)) >= 2:
+        domains_in_top_n = {t.get('_domain') for t, _ in raw_top[:n_template_candidates]}
+        missing = [d for d in set(intents) if d not in domains_in_top_n]
+        for missing_dom in missing:
+            for tpl, score in raw_top[n_template_candidates:]:
+                if tpl.get('_domain') == missing_dom:
+                    # promote this one into the top-N
+                    raw_top.insert(n_template_candidates - 1, (tpl, score))
+                    raw_top.pop()  # remove last to keep size
+                    trace.append({'stage': 'compose-promote',
+                                  'domain': missing_dom,
+                                  'promoted_template': tpl.get('id')})
+                    break
     if expected_lang and lang_filter:
         # build pseudo-candidate dicts just for filtering
         wrapped = [{'language': t.get('language', ''), '__tpl': t, '__score': s} for t, s in raw_top]

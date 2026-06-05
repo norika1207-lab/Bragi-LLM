@@ -1,0 +1,30 @@
+# Models (use HuggingFace or rebuild via README)
+*.gguf
+*.dat
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+.pytest_cache/
+
+# Eval / build artifacts
+*.log
+*.jsonl
+calib_code.txt
+hf_cache/
+.cache/
+
+# Editors
+.vscode/
+.idea/
+*.swp
+.DS_Store
+
+# Secrets
+.env
+*.pem
+*.key

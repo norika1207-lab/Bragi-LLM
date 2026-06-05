@@ -41,7 +41,7 @@
   ORCID: \href{https://orcid.org/0009-0006-6816-9891}{0009-0006-6816-9891}.
   Code and reproducibility: \url{https://github.com/norika1207-lab/Bragi-LLM}.
   Integration layer: \url{https://github.com/norika1207-lab/Demeter-CodeBuilder}.
-  Correspondence: abbychen981008 at gmail.com.}%
+  Correspondence: norika at charenix.com.}%
 }
 
 \date{June 5, 2026}
@@ -51,7 +51,7 @@
 \maketitle
 
 \begin{abstract}
-We present Bragi-LLM, a sub-gigabyte (805 MB total) Python code-generation system that reaches 92\% pass rate on the MBPP test split under 100-problem sustained evaluation (single-shot, greedy decoding, no retry). This places the system within 2 absolute points of Qwen2.5-Coder-7B fp16 (94\%, 14 GB, 17$\times$ the footprint), and 27 absolute points above the same 1.5B-Q3 backbone evaluated standalone (65\%). The system combines (i) a 786 MB Q3\_K\_M quantised Qwen2.5-Coder-1.5B-Instruct backbone with imatrix calibration, (ii) a 15 KB hand-engineered symbolic engine library of 50 unit-tested helpers covering rare formulas (figurate numbers, geometric identities, sequence definitions, divisibility rules), and (iii) a 6 KB keyword-based intercept router that detects formula-class problems and routes them directly to the engine library, bypassing the LLM entirely. We arrived at this architecture through systematic diff analysis between the small system and a 7B reference. The dominant failure mode of the small backbone is rare-formula recall under quantisation noise, not reasoning capacity. Externalising this knowledge into a static library, then routing matched problems around the LLM, recovers the capability gap at near-zero deployment cost. The full stack runs on commodity CPU hardware (Mac mini, low-end laptops) with no API dependency and no recurring fees. All artefacts (weights, library, router, evaluation harness, reproducibility scripts) are released under the MIT License.
+I present Bragi-LLM, a sub-gigabyte (805 MB total) Python code-generation system that reaches 92\% pass rate on the MBPP test split under 100-problem sustained evaluation (single-shot, greedy decoding, no retry). This places the system within 2 absolute points of Qwen2.5-Coder-7B fp16 (94\%, 14 GB, 17$\times$ the footprint), and 27 absolute points above the same 1.5B-Q3 backbone evaluated standalone (65\%). The system combines (i) a 786 MB Q3\_K\_M quantised Qwen2.5-Coder-1.5B-Instruct backbone with imatrix calibration, (ii) a 15 KB hand-engineered symbolic engine library of 50 unit-tested helpers covering rare formulas (figurate numbers, geometric identities, sequence definitions, divisibility rules), and (iii) a 6 KB keyword-based intercept router that detects formula-class problems and routes them directly to the engine library, bypassing the LLM entirely. I arrived at this architecture through systematic diff analysis between the small system and a 7B reference. The dominant failure mode of the small backbone is rare-formula recall under quantisation noise, not reasoning capacity. Externalising this knowledge into a static library, then routing matched problems around the LLM, recovers the capability gap at near-zero deployment cost. The full stack runs on commodity CPU hardware (Mac mini, low-end laptops) with no API dependency and no recurring fees. All artefacts (weights, library, router, evaluation harness, reproducibility scripts) are released under the MIT License.
 \end{abstract}
 
 \section{Introduction}
@@ -67,7 +67,7 @@ This work demonstrates that the gap can be closed for the most common coding-hel
 \item A failure-mode taxonomy for small quantised code-generation systems on MBPP, showing that approximately 70\% of 1.5B-Q3 failures are formula-recall failures rather than reasoning failures (Section~\ref{sec:diag}).
 \item An intercept-proxy architecture combining a small LLM, a hand-engineered symbolic helper library, and a keyword router that bypasses the LLM for matched problem classes (Section~\ref{sec:arch}).
 \item A reproducible 805 MB system reaching 92\% MBPP single-shot pass rate, within 2 points of a 14 GB 7B reference at one-seventeenth the footprint and zero recurring inference cost (Section~\ref{sec:experiments}).
-\item Documentation of eleven prior approaches we tried and rejected before settling on this design (Section~\ref{sec:discussion}).
+\item Documentation of eleven prior approaches I tried and rejected before settling on this design (Section~\ref{sec:discussion}).
 \end{enumerate}
 
 The full system is released as open-source under the MIT License with weights, helper library, router source, and evaluation harness.
@@ -81,13 +81,13 @@ Phi-1~\cite{phi1} showed that data quality outweighs parameter count for coding 
 ReAct~\cite{react} introduced reasoning-plus-acting loops where the LLM decides when to call tools. Toolformer~\cite{toolformer} trained an LLM to insert API calls into its own outputs. OpenAI and Anthropic function-calling APIs implement similar tool-use mechanics in deployed systems. Bragi differs in two ways: routing happens before the LLM is invoked (via keyword regex on the prompt), not as an LLM decision; and the design targets footprints below 1 GB, where general tool-use protocols are too expensive in token budget.
 
 \paragraph{Algorithmic flows over LLMs.}
-AlphaCodium~\cite{alphacodium} showed that programmed flows (spec, tests, solve, reflect, refine) substantially improve large-system code generation on CodeContests (19\% to 44\% with GPT-4). The underlying insight, that external structure outperforms additional capacity, is the same as ours. We apply it at the opposite end of the parameter scale (1.5B Q3 versus GPT-4) under a strict deployment-cost constraint.
+AlphaCodium~\cite{alphacodium} showed that programmed flows (spec, tests, solve, reflect, refine) substantially improve large-system code generation on CodeContests (19\% to 44\% with GPT-4). The underlying insight, that external structure outperforms additional capacity, is the same as mine. I apply it at the opposite end of the parameter scale (1.5B Q3 versus GPT-4) under a strict deployment-cost constraint.
 
 \paragraph{Frugal LLM routing.}
-RouteLLM~\cite{routellm} trains routing networks to direct simple queries to weaker, cheaper backends. Our intercept router differs in granularity and intent: it routes by problem class (not by overall query difficulty), and routes to symbolic code (not to a smaller LLM), avoiding LLM cost entirely for matched problems.
+RouteLLM~\cite{routellm} trains routing networks to direct simple queries to weaker, cheaper backends. My intercept router differs in granularity and intent: it routes by problem class (not by overall query difficulty), and routes to symbolic code (not to a smaller LLM), avoiding LLM cost entirely for matched problems.
 
 \paragraph{Quantisation-aware deployment.}
-Q3\_K\_M and the GGUF format from the llama.cpp project~\cite{llamacpp} make 1.5B-class backbones fit in under 1 GB. Standalone, the quantisation tax reduces effective benchmark performance by approximately 5 to 10 absolute points relative to fp16. Our hybrid design recovers substantially more than the quantisation tax, allowing the small quantised backbone to operate at the effective accuracy of a much larger system on the routed subset.
+Q3\_K\_M and the GGUF format from the llama.cpp project~\cite{llamacpp} make 1.5B-class backbones fit in under 1 GB. Standalone, the quantisation tax reduces effective benchmark performance by approximately 5 to 10 absolute points relative to fp16. My hybrid design recovers substantially more than the quantisation tax, allowing the small quantised backbone to operate at the effective accuracy of a much larger system on the routed subset.
 
 \section{Method}
 \label{sec:method}
@@ -95,11 +95,11 @@ Q3\_K\_M and the GGUF format from the llama.cpp project~\cite{llamacpp} make 1.5
 \subsection{Failure-Mode Diagnostic}
 \label{sec:diag}
 
-We ran greedy decoding (temperature 0, $N=1$) with both the candidate small backbone (Qwen2.5-Coder-1.5B-Instruct, Q3\_K\_M, 786 MB) and a reference (Qwen2.5-Coder-7B-Instruct, fp16, 14 GB) on benchmark test problems 0 to 99. The diff set is
+I ran greedy decoding (temperature 0, $N=1$) with both the candidate small backbone (Qwen2.5-Coder-1.5B-Instruct, Q3\_K\_M, 786 MB) and a reference (Qwen2.5-Coder-7B-Instruct, fp16, 14 GB) on benchmark test problems 0 to 99. The diff set is
 \[
 \mathcal{D} = \{\, p \in \text{test}_{0\ldots99} \mid \text{7B passes}(p) \land \text{1.5B fails}(p)\,\},
 \]
-with $|\mathcal{D}| = 24$. We inspected the small backbone's generated code and stderr traceback for each diff problem and categorised:
+with $|\mathcal{D}| = 24$. I inspected the small backbone's generated code and stderr traceback for each diff problem and categorised:
 
 \begin{longtable}{p{4.5cm}rp{7.5cm}}
 \caption{Failure-mode breakdown of the 1.5B-Q3 backbone on the 24-problem diff set against 7B fp16.}\label{tab:failures}\\
@@ -118,7 +118,7 @@ Logic / algorithmic error & 3 & Misparsed ``one less than twice its reverse'' \\
 \bottomrule
 \end{longtable}
 
-The dominant category, rare formula mis-recall, accounts for nearly half of the diff set. Two minor categories (truncation, function-name) close by extending \texttt{max\_tokens} and forcing the function name from the visible test; these yield +1 to +3 single-shot points and we apply them as no-cost baseline improvements. The remaining categories require structural intervention.
+The dominant category, rare formula mis-recall, accounts for nearly half of the diff set. Two minor categories (truncation, function-name) close by extending \texttt{max\_tokens} and forcing the function name from the visible test; these yield +1 to +3 single-shot points and I apply them as no-cost baseline improvements. The remaining categories require structural intervention.
 
 As a concrete instance, the correct octagonal-number formula is
 \begin{equation}
@@ -132,7 +132,7 @@ while the small backbone produced $3n^2 - 2n$, which is algebraically equal but 
 \end{equation}
 not the digit-sum-mod-11 rule the small backbone consistently produced.
 
-We additionally ran an internal-state observation: under bf16 forward-pass (fp16 produced NaN on the Blackwell GB10 GPU we used), we measured per-layer hidden-state norm and per-layer attention entropy for matched OK and FAIL prompts. FAIL prompts had consistently higher hidden-state norms in layers 25 to 27 (the late layers before final LayerNorm). We read this as the small backbone exhibiting ``overconfident wrong recall'': it activates a strong representation for rare-formula keywords (octagonal, triangular prism, divisibility by 11) but the activation does not correspond to the correct formula. This is consistent with Table~\ref{tab:failures}.
+I additionally ran an internal-state observation: under bf16 forward-pass (fp16 produced NaN on the Blackwell GB10 GPU I used), I measured per-layer hidden-state norm and per-layer attention entropy for matched OK and FAIL prompts. FAIL prompts had consistently higher hidden-state norms in layers 25 to 27 (the late layers before final LayerNorm). I read this as the small backbone exhibiting ``overconfident wrong recall'': it activates a strong representation for rare-formula keywords (octagonal, triangular prism, divisibility by 11) but the activation does not correspond to the correct formula. This is consistent with Table~\ref{tab:failures}.
 
 \subsection{Intercept-Proxy Architecture}
 \label{sec:arch}
@@ -180,14 +180,14 @@ All artefacts are released at \url{https://github.com/norika1207-lab/Bragi-LLM} 
 
 The quantised GGUF file (786 MB) is hosted separately due to GitHub size limits; instructions cover both downloading the prebuilt file and rebuilding it from the public Qwen2.5-Coder-1.5B-Instruct checkpoint using llama.cpp's convert and quantize tools.
 
-Inference uses llama.cpp build b4c0549 with \texttt{-c 16384 --parallel 4}. CPU-only inference is supported via \texttt{-ngl 0}. We do not require any specific GPU.
+Inference uses llama.cpp build b4c0549 with \texttt{-c 16384 --parallel 4}. CPU-only inference is supported via \texttt{-ngl 0}. I do not require any specific GPU.
 
 \section{Experiments}
 \label{sec:experiments}
 
 \subsection{100-problem test-split evaluation}
 
-We evaluate on the MBPP ``sanitized'' test split, problems 0 to 99, under greedy decoding (temperature 0) with $N=1$ sample and $R=1$ round (single-shot, no retry). Verification uses the full \texttt{test\_list} of each problem. Results in Table~\ref{tab:results}.
+I evaluate on the MBPP ``sanitized'' test split, problems 0 to 99, under greedy decoding (temperature 0) with $N=1$ sample and $R=1$ round (single-shot, no retry). Verification uses the full \texttt{test\_list} of each problem. Results in Table~\ref{tab:results}.
 
 \begin{table}[h]
 \centering
@@ -211,7 +211,7 @@ Of 100 problems, the router matched 32 and produced a verifying wrap for 29 (rou
 P_{\text{total}} \;=\; \rho \cdot P_{\text{router}} \;+\; (1 - \rho) \cdot P_{\text{LLM}},
 \label{eq:decomp}
 \end{equation}
-with $\rho$ the router match rate. Substituting our measurements,
+with $\rho$ the router match rate. Substituting my measurements,
 \begin{equation}
 P_{\text{total}} \;=\; 0.32 \times 0.91 \;+\; 0.68 \times 0.93 \;=\; 0.92,
 \label{eq:numbers}
@@ -237,7 +237,7 @@ Recurring API cost: zero. The stack has no network dependency at inference time.
 
 \subsection{Why intercept beats distillation in this regime}
 
-We attempted multiple distillation routes before settling on the intercept design:
+I attempted multiple distillation routes before settling on the intercept design:
 
 \begin{table}[h]
 \centering
@@ -256,7 +256,7 @@ SFT 1.5B with 8000 Magicoder-Evol instructions & GPT-4 distilled & aborted (trai
 \end{tabular}
 \end{table}
 
-The pattern: SFT gains in fp16 weights are partially erased by Q3 quantisation, and gains from limited sample sizes (under 2000) do not generalise. The 107-sample hand-written run showed apparent +6 points on 50 problems but regressed to baseline on 100. We read these as a noise-floor effect dominating signal. A separate methodological lesson: 50-problem evaluation is noisy enough to produce misleading +6-point swings; 100-problem evaluations are the minimum for stable comparison.
+The pattern: SFT gains in fp16 weights are partially erased by Q3 quantisation, and gains from limited sample sizes (under 2000) do not generalise. The 107-sample hand-written run showed apparent +6 points on 50 problems but regressed to baseline on 100. I read these as a noise-floor effect dominating signal. A separate methodological lesson: 50-problem evaluation is noisy enough to produce misleading +6-point swings; 100-problem evaluations are the minimum for stable comparison.
 
 Symbolic externalisation sidesteps this entirely. The formula for octagonal number is stored in roughly 50 bytes of Python source, lossless and inspectable. Compared to the same formula stored as 3-bit quantised weights distributed across hundreds of thousands of parameters, the symbolic version is both cheaper and more reliable.
 
@@ -280,7 +280,7 @@ Coverage is defined manually by the implementer. The 50 helpers were chosen by i
 A regex-based router will not match a problem phrased with synonyms or in a different language. A future version should use sentence-embedding similarity for robustness, at the cost of a small additional backbone (a 25 MB sentence transformer) and an embedding pass per query.
 
 \paragraph{Router commits before LLM verification on routed problems.}
-If \texttt{engine\_lib} contains a bug for the routed helper, the router will produce wrong code that nonetheless passes the visible test (the visible test runs against the buggy helper). Verification against the full \texttt{test\_list} is recommended in deployment; our evaluation enforces this.
+If \texttt{engine\_lib} contains a bug for the routed helper, the router will produce wrong code that nonetheless passes the visible test (the visible test runs against the buggy helper). Verification against the full \texttt{test\_list} is recommended in deployment; my evaluation enforces this.
 
 \paragraph{The benchmark is not a representative coding workload.}
 MBPP problems are short, well-specified, and skew towards textbook tasks. Real-world coding tasks (debugging, multi-file refactoring, integration with existing codebases) are not measured here. The 92\% number should not be read as a claim about real coding-assistant performance.
@@ -291,9 +291,9 @@ For practitioners building on-device coding assistants under tight budgets, this
 
 \section{Conclusion}
 
-We close a previously undocumented gap: a sub-1GB code-generation system at 92\% pass rate on MBPP single-shot. The architectural insight is mechanical: rare factual knowledge is wastefully encoded in transformer weights at small parameter scales and degrades under quantisation. Externalising rare knowledge into a small symbolic library, and routing matched problems directly around the LLM, recovers the capability gap at near-zero deployment cost. The full stack runs on commodity CPU hardware with no API dependency.
+I close a previously undocumented gap: a sub-1GB code-generation system at 92\% pass rate on MBPP single-shot. The architectural insight is mechanical: rare factual knowledge is wastefully encoded in transformer weights at small parameter scales and degrades under quantisation. Externalising rare knowledge into a small symbolic library, and routing matched problems directly around the LLM, recovers the capability gap at near-zero deployment cost. The full stack runs on commodity CPU hardware with no API dependency.
 
-The methodological observation is broader: when a small quantised system underperforms, diagnose the failure modes before scaling the recipe. In our case, a one-afternoon failure analysis identified that 70\% of failures were a single addressable class. The intervention to address that class was a 100-line Python file. No SFT, no further pretraining, no scaling was required.
+The methodological observation is broader: when a small quantised system underperforms, diagnose the failure modes before scaling the recipe. In my case, a one-afternoon failure analysis identified that 70\% of failures were a single addressable class. The intervention to address that class was a 100-line Python file. No SFT, no further pretraining, no scaling was required.
 
 \section*{Acknowledgements}
 

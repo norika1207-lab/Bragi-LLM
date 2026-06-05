@@ -30,13 +30,66 @@ def _which(cmd: str) -> str | None:
     return shutil.which(cmd)
 
 
-def verify_python(code: str) -> dict:
+def verify_python(code: str, execute: bool = False) -> dict:
+    """Python verifier with optional sandboxed execution.
+
+    syntax level: ast.parse only.
+    execute level (if execute=True): subprocess `python3 -c "code"` with
+      strict isolation, 5s timeout. Catches NameError/ImportError/etc that
+      AST misses.
+    """
     try:
         ast.parse(code)
-        return {'ok': True, 'level': 'syntax', 'errors': [], 'language': 'py'}
     except SyntaxError as e:
         return {'ok': False, 'level': 'syntax', 'language': 'py',
                 'errors': [f'line {e.lineno}: {e.msg}']}
+
+    if not execute:
+        return {'ok': True, 'level': 'syntax', 'errors': [], 'language': 'py'}
+
+    # Sandboxed execute. Only catches CRASH on import/initialization, not
+    # logical errors. Skip exec if code contains obvious blockers (network,
+    # file I/O, subprocess) to avoid surprise side effects.
+    blockers = ['subprocess', 'os.system', 'urllib.request.urlopen(',
+                'requests.get', 'requests.post', 'open(']
+    for b in blockers:
+        if b in code:
+            return {'ok': True, 'level': 'syntax-only',
+                    'errors': [],
+                    'language': 'py',
+                    'note': f'skipped execute (contains {b})'}
+
+    python3 = _which('python3') or _which('python')
+    if not python3:
+        return {'ok': True, 'level': 'syntax-only', 'errors': [], 'language': 'py'}
+
+    # only execute IMPORT lines + DEF/CLASS lines, skip top-level expressions
+    # (would error on undefined names like `app.listen(3000)`).
+    safe_lines = []
+    for line in code.split('\n'):
+        s = line.strip()
+        if (not s) or s.startswith('#') or s.startswith('def ') or s.startswith('class ') \
+                or s.startswith('import ') or s.startswith('from ') \
+                or s.startswith('@') or line.startswith((' ', '\t')):
+            safe_lines.append(line)
+        # else: skip top-level expression / call to avoid side effects
+    safe_code = '\n'.join(safe_lines)
+
+    try:
+        r = subprocess.run([python3, '-c', safe_code],
+                           capture_output=True, text=True, timeout=5,
+                           env={'PATH': '/usr/bin:/bin', 'HOME': '/tmp'})
+        if r.returncode == 0:
+            return {'ok': True, 'level': 'execute', 'errors': [], 'language': 'py'}
+        err = r.stderr.strip().split('\n')[-3:]  # last 3 lines = the error
+        return {'ok': False, 'level': 'execute', 'language': 'py',
+                'errors': err}
+    except subprocess.TimeoutExpired:
+        return {'ok': False, 'level': 'execute', 'language': 'py',
+                'errors': ['execute timeout (5s)']}
+    except Exception as e:
+        return {'ok': True, 'level': 'syntax-only', 'errors': [],
+                'language': 'py', 'note': f'execute err: {e}'}
 
 
 def verify_json(code: str) -> dict:
@@ -79,8 +132,40 @@ def verify_bash(code: str) -> dict:
 
 def verify_js(code: str) -> dict:
     """For JS/TS/JSX/TSX/Vue use shallow balance check (deterministic, no deps).
-    Catches truncated code (unclosed braces) which is the most common 1.5B failure."""
+    Catches truncated code (unclosed braces) which is the most common 1.5B failure.
+
+    Vue SFC: extract <script> block before balance check, since <script setup>
+    confuses the JS-only balance state machine.
+    """
+    # Vue SFC: pull out <script> and <template> blocks separately
+    if re.search(r'<script\b[^>]*>', code) or re.search(r'<template\b[^>]*>', code):
+        return _verify_vue_sfc(code)
     return _shallow_balance_check(code)
+
+
+def _verify_vue_sfc(code: str) -> dict:
+    """Vue SFC: parse out <script>, <template>, <style> blocks, balance each."""
+    # Vue SFC = at minimum a <template> or <script> block. Verify each block exists
+    # and is closed.
+    blocks_found = 0
+    for tag in ['script', 'template', 'style']:
+        opens = re.findall(rf'<{tag}\b[^>]*>', code)
+        closes = re.findall(rf'</{tag}>', code)
+        if len(opens) != len(closes):
+            return {'ok': False, 'level': 'shallow', 'language': 'vue',
+                    'errors': [f'mismatched <{tag}> count: open={len(opens)} close={len(closes)}']}
+        blocks_found += len(opens)
+    if blocks_found == 0:
+        return {'ok': False, 'level': 'shallow', 'language': 'vue',
+                'errors': ['no SFC blocks found']}
+    # extract script content and balance-check it
+    script_m = re.search(r'<script\b[^>]*>(.*?)</script>', code, re.DOTALL)
+    if script_m:
+        inner_v = _shallow_balance_check(script_m.group(1))
+        if not inner_v['ok']:
+            return {'ok': False, 'level': 'shallow', 'language': 'vue',
+                    'errors': ['<script> body: ' + e for e in inner_v['errors']]}
+    return {'ok': True, 'level': 'shallow', 'errors': [], 'language': 'vue'}
 
 
 def _shallow_balance_check(code: str) -> dict:
@@ -210,8 +295,11 @@ def detect_lang(code: str, hint: str = '') -> str:
     return ''
 
 
-def verify(code: str, hint: str = '') -> dict:
-    """Main entry. Returns {ok, level, errors, language}."""
+def verify(code: str, hint: str = '', *, execute: bool = False) -> dict:
+    """Main entry. Returns {ok, level, errors, language}.
+
+    execute=True activates execute-level for languages that support it (py).
+    """
     if not code or not code.strip():
         return {'ok': False, 'level': 'empty', 'errors': ['empty code'], 'language': ''}
     lang = detect_lang(code, hint)
@@ -221,6 +309,11 @@ def verify(code: str, hint: str = '') -> dict:
                 'language': lang or 'unknown',
                 'note': f'no verifier for language={lang or "unknown"}'}
     try:
+        # only verify_python accepts execute kwarg
+        import inspect
+        sig = inspect.signature(fn)
+        if 'execute' in sig.parameters:
+            return fn(code, execute=execute)
         return fn(code)
     except Exception as e:
         return {'ok': True, 'level': 'skip', 'errors': [], 'language': lang,

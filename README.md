@@ -96,7 +96,7 @@ Option A: download the prebuilt (recommended)
 
 ```bash
 # from HuggingFace
-wget https://huggingface.co/norika1207-lab/Bragi-LLM-GGUF/resolve/main/c15v-q3km-imat.gguf
+wget https://huggingface.co/Norika1207/Bragi-LLM-GGUF/resolve/main/c15v-q3km-imat.gguf
 ```
 
 Option B: build it yourself (about 10 minutes on any GPU, 30 on CPU)

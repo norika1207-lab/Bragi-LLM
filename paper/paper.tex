@@ -6,6 +6,7 @@
 \usepackage{longtable}
 \usepackage{geometry}
 \usepackage{hyperref}
+\usepackage{xurl}
 \usepackage{listings}
 \usepackage{xcolor}
 \usepackage{setspace}
@@ -243,14 +244,14 @@ I attempted multiple distillation routes before settling on the intercept design
 \centering
 \caption{Distillation paths attempted before adopting the intercept design.}
 \label{tab:distill}
-\begin{tabular}{p{6cm}p{4cm}r}
+\begin{tabular}{p{5.5cm}p{3cm}p{5cm}}
 \toprule
 Approach & Source & Pass rate \\
 \midrule
 Vanilla baseline (Q3, 100-problem stable) & none & 65\% \\
 SFT 1.5B with 1580 self-distilled verified solutions & 1.5B teacher & 78\% \\
 SFT 1.5B with 470 7B-distilled verified solutions & 7B teacher & 78\% \\
-SFT 1.5B with 107 hand-written verified solutions & manual & 84\% (50-prob noisy) / 76\% (100-prob, regression) \\
+SFT 1.5B with 107 hand-written verified solutions & manual & 84\% (50-prob, noisy); 76\% (100-prob, regression) \\
 SFT 1.5B with 8000 Magicoder-Evol instructions & GPT-4 distilled & aborted (training too slow) \\
 \bottomrule
 \end{tabular}

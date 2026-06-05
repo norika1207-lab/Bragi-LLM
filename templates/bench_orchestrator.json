@@ -1,17 +1,17 @@
 {
   "summary": {
-    "ts": "2026-06-06T03:07:39.251713",
+    "ts": "2026-06-06T04:07:07.140644",
     "subset_size": 20,
     "single_pass": {
-      "verified_pct": 80.0,
-      "avg_time_s": 2.8
+      "verified_pct": 75.0,
+      "avg_time_s": 6.0
     },
     "multi_pass": {
-      "verified_pct": 95.0,
-      "avg_time_s": 2.6
+      "verified_pct": 90.0,
+      "avg_time_s": 4.0
     },
     "verified_lift_pct_pts": 15.0,
-    "time_cost_multiplier": 0.9
+    "time_cost_multiplier": 0.7
   },
   "results": [
     {
@@ -19,17 +19,17 @@
       "query": "做個登入頁",
       "expected_domain": "web-frontend",
       "single_pass": {
-        "time_s": 2.1,
+        "time_s": 3.5,
         "verify_ok": true,
         "verify_level": "shallow",
         "verify_errors": [],
         "code_len": 1140,
         "template_id": "web-frontend-batch1-002-signup-form",
         "template_domain": "web-frontend",
-        "mode": "template"
+        "mode": "best-of-n"
       },
       "multi_pass": {
-        "time_s": 2.1,
+        "time_s": 0.0,
         "verify_ok": true,
         "verifier_level": "shallow",
         "verifier_errors": [],
@@ -39,6 +39,7 @@
         "chosen_source": "template",
         "chosen_template_id": "web-frontend-batch1-002-signup-form",
         "trace_summary": [
+          "paraphrase",
           "retrieve",
           "quick-path-pass"
         ]
@@ -51,17 +52,17 @@
       "query": "React 註冊表單，含 email 驗證跟密碼強度",
       "expected_domain": "web-frontend",
       "single_pass": {
-        "time_s": 1.3,
+        "time_s": 3.1,
         "verify_ok": true,
         "verify_level": "shallow",
         "verify_errors": [],
-        "code_len": 1106,
+        "code_len": 1102,
         "template_id": "web-frontend-batch1-001-login-form",
         "template_domain": "web-frontend",
-        "mode": "template"
+        "mode": "best-of-n"
       },
       "multi_pass": {
-        "time_s": 2.2,
+        "time_s": 0.0,
         "verify_ok": true,
         "verifier_level": "shallow",
         "verifier_errors": [],
@@ -71,11 +72,14 @@
         "chosen_source": "template",
         "chosen_template_id": "web-frontend-batch1-001-login-form",
         "trace_summary": [
+          "lang-detect",
+          "paraphrase",
+          "lang-filter",
           "retrieve",
           "quick-path-pass"
         ]
       },
-      "code_preview_single": "import { useState } from 'react';\n\nexport default function RegistrationForm() {\n  const [email, setEmail] = useState('');\n  const [password, setPassword] = useState('');\n  const [error, setError] = useState('');\n  const [loading, setLoading] = useState(false);\n\n  async function onSubmit(e: React.For",
+      "code_preview_single": "import { useState } from 'react';\n\nexport default function RegisterForm() {\n  const [email, setEmail] = useState('');\n  const [password, setPassword] = useState('');\n  const [error, setError] = useState('');\n  const [loading, setLoading] = useState(false);\n\n  async function onSubmit(e: React.FormEve",
       "code_preview_multi": "import { useState } from 'react';\n\nexport default function RegisterForm() {\n  const [email, setEmail] = useState('');\n  const [password, setPassword] = useState('');\n  const [error, setError] = useState('');\n  const [loading, setLoading] = useState(false);\n\n  async function onSubmit(e: React.FormEve"
     },
     {
@@ -83,113 +87,128 @@
       "query": "用 Tailwind 寫一個 responsive navbar",
       "expected_domain": "web-frontend",
       "single_pass": {
-        "time_s": 1.8,
+        "time_s": 3.7,
         "verify_ok": true,
         "verify_level": "shallow",
         "verify_errors": [],
-        "code_len": 487,
-        "template_id": "web-frontend-batch4-008-navbar",
+        "code_len": 702,
+        "template_id": "web-frontend-batch4-037-table",
         "template_domain": "web-frontend",
-        "mode": "template"
+        "mode": "best-of-n"
       },
       "multi_pass": {
-        "time_s": 2.6,
+        "time_s": 0.0,
         "verify_ok": true,
         "verifier_level": "shallow",
         "verifier_errors": [],
-        "code_len": 487,
+        "code_len": 702,
         "candidate_count": 1,
         "verified_count": 1,
         "chosen_source": "template",
-        "chosen_template_id": "web-frontend-batch4-008-navbar",
+        "chosen_template_id": "web-frontend-batch4-037-table",
         "trace_summary": [
+          "paraphrase",
           "retrieve",
           "quick-path-pass"
         ]
       },
-      "code_preview_single": "export default function Navbar() {\n  return (\n    <nav className=\"sticky top-0 z-40 bg-white/80 backdrop-blur border-b border-gray-100\">\n      <div className=\"mx-auto max-w-6xl px-6 h-14 flex items-center justify-between\">\n        <span className=\"font-bold\">My Brand</span>\n        <ul className=\"fl",
-      "code_preview_multi": "export default function Navbar() {\n  return (\n    <nav className=\"sticky top-0 z-40 bg-white/80 backdrop-blur border-b border-gray-100\">\n      <div className=\"mx-auto max-w-6xl px-6 h-14 flex items-center justify-between\">\n        <span className=\"font-bold\">My Brand</span>\n        <ul className=\"fl"
+      "code_preview_single": "export default function DataTable({ rows }: { rows: { a: string; b: string; c: string }[] }) {\n  return (\n    <table className=\"min-w-full border\">\n      <thead className=\"bg-gray-50\">\n        <tr>\n          <th className=\"text-left px-4 py-2\">Title</th>\n          <th className=\"text-left px-4 py-2\"",
+      "code_preview_multi": "export default function DataTable({ rows }: { rows: { a: string; b: string; c: string }[] }) {\n  return (\n    <table className=\"min-w-full border\">\n      <thead className=\"bg-gray-50\">\n        <tr>\n          <th className=\"text-left px-4 py-2\">Title</th>\n          <th className=\"text-left px-4 py-2\""
     },
     {
       "idx": 4,
       "query": "Next.js app router 的 server component 範例",
       "expected_domain": "web-frontend",
       "single_pass": {
-        "time_s": 1.1,
+        "time_s": 3.6,
         "verify_ok": true,
         "verify_level": "shallow",
         "verify_errors": [],
-        "code_len": 134,
+        "code_len": 769,
         "template_id": "web-frontend-batch4-013-api-hello",
         "template_domain": "web-frontend",
-        "mode": "template"
+        "mode": "best-of-n"
       },
       "multi_pass": {
-        "time_s": 1.1,
+        "time_s": 0.0,
         "verify_ok": true,
         "verifier_level": "shallow",
         "verifier_errors": [],
-        "code_len": 131,
-        "candidate_count": 1,
-        "verified_count": 1,
-        "chosen_source": "template",
+        "code_len": 769,
+        "candidate_count": 2,
+        "verified_count": 2,
+        "chosen_source": "compose-2",
         "chosen_template_id": "web-frontend-batch4-013-api-hello",
         "trace_summary": [
+          "lang-detect",
+          "paraphrase",
+          "compose-promote",
+          "lang-filter",
           "retrieve",
-          "quick-path-pass"
+          "quick-path-skipped-for-compose",
+          "beam-early-stop",
+          "all-candidates",
+          "select-verified+compose"
         ]
       },
-      "code_preview_single": "import { NextResponse } from 'next/server';\n\nexport async function GET() {\n  return NextResponse.json({ message: 'Hello, World!' });\n}",
-      "code_preview_multi": "import { NextResponse } from 'next/server';\n\nexport async function GET() {\n  return NextResponse.json({ message: '<greeting>' });\n}"
+      "code_preview_single": "\n\n// ============================================================\n// FRONTEND / TS — from web-frontend-batch4-013-api-hello\n\n// ============================================================\n\nimport { NextResponse } from 'next/server';\n\nexport async function GET() {\n  return NextResponse.json({ messag",
+      "code_preview_multi": "\n\n// ============================================================\n// FRONTEND / TS — from web-frontend-batch4-013-api-hello\n\n// ============================================================\n\nimport { NextResponse } from 'next/server';\n\nexport async function GET() {\n  return NextResponse.json({ messag"
     },
     {
       "idx": 5,
       "query": "vue 3 composition API todo list",
       "expected_domain": "web-frontend",
       "single_pass": {
-        "time_s": 0.9,
+        "time_s": 3.5,
         "verify_ok": true,
-        "verify_level": "syntax",
+        "verify_level": "shallow",
         "verify_errors": [],
-        "code_len": 596,
-        "template_id": "database-devops-041-compose-full-stack",
-        "template_domain": "database-devops",
-        "mode": "template"
+        "code_len": 826,
+        "template_id": "web-frontend-batch3-003-vue-todo",
+        "template_domain": "web-frontend",
+        "mode": "best-of-n"
       },
       "multi_pass": {
-        "time_s": 1.8,
+        "time_s": 0.0,
         "verify_ok": true,
-        "verifier_level": "syntax",
+        "verifier_level": "shallow",
         "verifier_errors": [],
-        "code_len": 596,
-        "candidate_count": 1,
-        "verified_count": 1,
+        "code_len": 826,
+        "candidate_count": 2,
+        "verified_count": 2,
         "chosen_source": "template",
-        "chosen_template_id": "database-devops-041-compose-full-stack",
+        "chosen_template_id": "web-frontend-batch3-003-vue-todo",
         "trace_summary": [
+          "lang-detect",
+          "paraphrase",
+          "compose-promote",
+          "lang-filter",
           "retrieve",
-          "quick-path-pass"
+          "quick-path-skipped-for-compose",
+          "beam-early-stop",
+          "all-candidates",
+          "select-verified"
         ]
       },
-      "code_preview_single": "services:\n  app:\n    build: .\n    ports: [\"3000:3000\"]\n    environment:\n      DATABASE_URL: postgres://app:app@postgres:5432/app\n      REDIS_URL: redis://redis:6379\n    depends_on:\n      postgres:\n        condition: service_healthy\n      redis:\n        condition: service_started\n\n  postgres:\n    ima",
-      "code_preview_multi": "services:\n  app:\n    build: .\n    ports: [\"3000:3000\"]\n    environment:\n      DATABASE_URL: postgres://app:app@postgres:5432/app\n      REDIS_URL: redis://redis:6379\n    depends_on:\n      postgres:\n        condition: service_healthy\n      redis:\n        condition: service_started\n\n  postgres:\n    ima"
+      "code_preview_single": "<script setup>\nimport { ref, watch, onMounted } from 'vue'\nconst items = ref([])\nconst draft = ref('')\nonMounted(() => {\n  const raw = localStorage.getItem('todo_list')\n  if (raw) items.value = JSON.parse(raw)\n})\nwatch(items, v => localStorage.setItem('todo_list', JSON.stringify(v)), { deep: true })",
+      "code_preview_multi": "<script setup>\nimport { ref, watch, onMounted } from 'vue'\nconst items = ref([])\nconst draft = ref('')\nonMounted(() => {\n  const raw = localStorage.getItem('todo_list')\n  if (raw) items.value = JSON.parse(raw)\n})\nwatch(items, v => localStorage.setItem('todo_list', JSON.stringify(v)), { deep: true })"
     },
     {
       "idx": 6,
       "query": "做個 dark mode toggle",
       "expected_domain": "web-frontend",
       "single_pass": {
-        "time_s": 1.2,
+        "time_s": 1.7,
         "verify_ok": true,
         "verify_level": "shallow",
         "verify_errors": [],
         "code_len": 680,
         "template_id": "web-frontend-batch2-022-dark-mode-toggle",
         "template_domain": "web-frontend",
-        "mode": "template"
+        "mode": "best-of-n"
       },
       "multi_pass": {
-        "time_s": 1.5,
+        "time_s": 0.0,
         "verify_ok": true,
         "verifier_level": "shallow",
         "verifier_errors": [],
@@ -199,6 +218,7 @@
         "chosen_source": "template",
         "chosen_template_id": "web-frontend-batch2-022-dark-mode-toggle",
         "trace_summary": [
+          "paraphrase",
           "retrieve",
           "quick-path-pass"
         ]
@@ -211,7 +231,7 @@
       "query": "infinite scroll list",
       "expected_domain": "web-frontend",
       "single_pass": {
-        "time_s": 5.1,
+        "time_s": 4.7,
         "verify_ok": true,
         "verify_level": "shallow",
         "verify_errors": [],
@@ -221,7 +241,7 @@
         "mode": "followup"
       },
       "multi_pass": {
-        "time_s": 1.9,
+        "time_s": 1.4,
         "verify_ok": true,
         "verifier_level": "shallow",
         "verifier_errors": [],
@@ -231,6 +251,7 @@
         "chosen_source": "template",
         "chosen_template_id": "web-frontend-batch2-012-infinite-scroll",
         "trace_summary": [
+          "paraphrase",
           "retrieve",
           "quick-path-pass"
         ]
@@ -243,31 +264,37 @@
       "query": "Express REST API CRUD，連 PostgreSQL",
       "expected_domain": "web-backend",
       "single_pass": {
-        "time_s": 0.8,
+        "time_s": 3.8,
         "verify_ok": true,
         "verify_level": "shallow",
         "verify_errors": [],
-        "code_len": 859,
+        "code_len": 956,
         "template_id": "web-backend-002-express-crud",
         "template_domain": "web-backend",
-        "mode": "template"
+        "mode": "best-of-n"
       },
       "multi_pass": {
-        "time_s": 1.8,
+        "time_s": 0.0,
         "verify_ok": true,
         "verifier_level": "shallow",
         "verifier_errors": [],
         "code_len": 956,
-        "candidate_count": 1,
-        "verified_count": 1,
+        "candidate_count": 2,
+        "verified_count": 2,
         "chosen_source": "template",
         "chosen_template_id": "web-backend-002-express-crud",
         "trace_summary": [
+          "lang-detect",
+          "paraphrase",
+          "lang-filter",
           "retrieve",
-          "quick-path-pass"
+          "quick-path-skipped-for-compose",
+          "beam-early-stop",
+          "all-candidates",
+          "select-verified"
         ]
       },
-      "code_preview_single": "const express = require('express');\nconst router = express.Router();\nconst store = new Map();\n\nrouter.get('/items', (req, res) => res.json([...store.values()]));\nrouter.get('/items/:id', (req, res) => {\n  const item = store.get(req.params.id);\n  if (!item) return res.status(404).json({ error: 'not f",
+      "code_preview_single": "const express = require('express');\nconst router = express.Router();\nconst store = new Map();\n\nrouter.get('/<resource>', (req, res) => res.json([...store.values()]));\nrouter.get('/<resource>/:<id_field>', (req, res) => {\n  const item = store.get(req.params.<id_field>);\n  if (!item) return res.status",
       "code_preview_multi": "const express = require('express');\nconst router = express.Router();\nconst store = new Map();\n\nrouter.get('/<resource>', (req, res) => res.json([...store.values()]));\nrouter.get('/<resource>/:<id_field>', (req, res) => {\n  const item = store.get(req.params.<id_field>);\n  if (!item) return res.status"
     },
     {
@@ -275,7 +302,7 @@
       "query": "FastAPI JWT 登入 endpoint",
       "expected_domain": "web-backend",
       "single_pass": {
-        "time_s": 6.9,
+        "time_s": 8.8,
         "verify_ok": true,
         "verify_level": "syntax",
         "verify_errors": [],
@@ -285,72 +312,77 @@
         "mode": "followup"
       },
       "multi_pass": {
-        "time_s": 4.9,
+        "time_s": 4.1,
         "verify_ok": true,
         "verifier_level": "syntax",
         "verifier_errors": [],
-        "code_len": 525,
+        "code_len": 475,
         "candidate_count": 3,
         "verified_count": 2,
         "chosen_source": "template",
-        "chosen_template_id": "web-backend-126-fastapi-shutdown",
+        "chosen_template_id": "web-backend-051-fastapi-ws",
         "trace_summary": [
+          "lang-detect",
+          "paraphrase",
+          "lang-filter",
           "retrieve",
+          "beam-early-stop",
           "all-candidates",
           "select-verified"
         ]
       },
       "code_preview_single": "from fastapi import Depends, FastAPI, HTTPException\nfrom fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm\nfrom jose import jwt, JWTError\nfrom datetime import datetime, timedelta\nimport os\n\napp = FastAPI()\noauth2 = OAuth2PasswordBearer(tokenUrl='token')\nSECRET = os.environ['you",
-      "code_preview_multi": "from contextlib import asynccontextmanager\nfrom fastapi import FastAPI\nimport asyncpg\n\n@asynccontextmanager\nasync def lifespan(app: FastAPI):\n    app.state.pool = await asyncpg.create_pool(dsn='<db_url>', min_size=1, max_size=10)\n    yield\n    await app.state.pool.close()\n\napp = FastAPI(lifespan=lif"
+      "code_preview_multi": "from fastapi import FastAPI, WebSocket, WebSocketDisconnect\n\napp = FastAPI()\nclients: set[WebSocket] = set()\n\n@app.websocket('/ws')\nasync def ws_endpoint(ws: WebSocket):\n    await ws.accept()\n    clients.add(ws)\n    try:\n        while True:\n            msg = await ws.receive_text()\n            for c"
     },
     {
       "idx": 10,
       "query": "幫我寫一個 webhook receiver",
       "expected_domain": "web-backend",
       "single_pass": {
-        "time_s": 1.1,
+        "time_s": 3.6,
         "verify_ok": true,
-        "verify_level": "shallow",
+        "verify_level": "skip",
         "verify_errors": [],
-        "code_len": 597,
-        "template_id": "firmware-042-esp8266-webserver",
+        "code_len": 385,
+        "template_id": "firmware-035-esp32-websocket-server",
         "template_domain": "firmware",
-        "mode": "template"
+        "mode": "best-of-n"
       },
       "multi_pass": {
-        "time_s": 1.7,
+        "time_s": 0.0,
         "verify_ok": true,
-        "verifier_level": "shallow",
+        "verifier_level": "skip",
         "verifier_errors": [],
-        "code_len": 597,
+        "code_len": 385,
         "candidate_count": 1,
         "verified_count": 1,
         "chosen_source": "template",
-        "chosen_template_id": "firmware-042-esp8266-webserver",
+        "chosen_template_id": "firmware-035-esp32-websocket-server",
         "trace_summary": [
+          "paraphrase",
           "retrieve",
           "quick-path-pass"
         ]
       },
-      "code_preview_single": "#include <ESP8266WiFi.h>\n#include <ESP8266WebServer.h>\nESP8266WebServer server(80);\nconst int LED = 2;\n\nvoid setup() {\n  pinMode(LED, OUTPUT);\n  WiFi.begin(\"your_wifi_ssid\", \"your_wifi_password\");\n  while (WiFi.status() != WL_CONNECTED) delay(300);\n  server.on(\"/\", []() { server.send(200, \"text/html",
-      "code_preview_multi": "#include <ESP8266WiFi.h>\n#include <ESP8266WebServer.h>\nESP8266WebServer server(80);\nconst int LED = 2;\n\nvoid setup() {\n  pinMode(LED, OUTPUT);\n  WiFi.begin(\"your_wifi_ssid\", \"your_wifi_password\");\n  while (WiFi.status() != WL_CONNECTED) delay(300);\n  server.on(\"/\", []() { server.send(200, \"text/html"
+      "code_preview_single": "#include <WiFi.h>\n#include <WebSocketsServer.h>\nWebSocketsServer ws(8080);\n\nvoid onEvent(uint8_t num, WStype_t type, uint8_t* p, size_t len) {\n  if (type == WStype_TEXT) ws.sendTXT(num, p, len);\n}\n\nvoid setup() {\n  WiFi.begin(\"your_wifi_ssid\", \"your_wifi_password\");\n  while (WiFi.status() != WL_CONN",
+      "code_preview_multi": "#include <WiFi.h>\n#include <WebSocketsServer.h>\nWebSocketsServer ws(8080);\n\nvoid onEvent(uint8_t num, WStype_t type, uint8_t* p, size_t len) {\n  if (type == WStype_TEXT) ws.sendTXT(num, p, len);\n}\n\nvoid setup() {\n  WiFi.begin(\"your_wifi_ssid\", \"your_wifi_password\");\n  while (WiFi.status() != WL_CONN"
     },
     {
       "idx": 11,
       "query": "Django model + migration: blog post",
       "expected_domain": "web-backend",
       "single_pass": {
-        "time_s": 0.7,
+        "time_s": 2.1,
         "verify_ok": true,
         "verify_level": "syntax",
         "verify_errors": [],
         "code_len": 405,
         "template_id": "web-backend-066-django-model",
         "template_domain": "web-backend",
-        "mode": "template"
+        "mode": "best-of-n"
       },
       "multi_pass": {
-        "time_s": 1.1,
+        "time_s": 0.0,
         "verify_ok": true,
         "verifier_level": "syntax",
         "verifier_errors": [],
@@ -360,6 +392,9 @@
         "chosen_source": "template",
         "chosen_template_id": "web-backend-066-django-model",
         "trace_summary": [
+          "lang-detect",
+          "paraphrase",
+          "lang-filter",
           "retrieve",
           "quick-path-pass"
         ]
@@ -372,7 +407,7 @@
       "query": "Go gin server with rate limit middleware",
       "expected_domain": "web-backend",
       "single_pass": {
-        "time_s": 4.4,
+        "time_s": 5.3,
         "verify_ok": false,
         "verify_level": "syntax",
         "verify_errors": [
@@ -384,61 +419,68 @@
         "mode": "followup"
       },
       "multi_pass": {
-        "time_s": 1.2,
+        "time_s": 6.7,
         "verify_ok": true,
         "verifier_level": "shallow",
         "verifier_errors": [],
-        "code_len": 270,
-        "candidate_count": 1,
+        "code_len": 283,
+        "candidate_count": 3,
         "verified_count": 1,
         "chosen_source": "template",
         "chosen_template_id": "web-backend-005-express-ratelimit",
         "trace_summary": [
+          "paraphrase",
           "retrieve",
-          "quick-path-pass"
+          "all-candidates",
+          "select-verified"
         ]
       },
       "code_preview_single": "package main\n\nimport (\n\t\"github.com/gin-gonic/gin\"\n\t\"github.com/gin-gonic/gin/middleware\"\n\t\"time\"\n)\n\nfunc main() {\n\tr := gin.Default()\n\n\tr.Use(middleware.RateLimiter(middleware.RateLimiterConfig{\n\t\tWindow:    time.Second,\n\t\tLimit:     100,\n\t\tStore:     nil,\n\t\tHandler: func(c *gin.Context, err error)",
-      "code_preview_multi": "const rateLimit = require('express-rate-limit');\n\nconst limiter = rateLimit({\n  windowMs: <window_ms>,\n  max: <max_requests>,\n  standardHeaders: true,\n  legacyHeaders: false,\n  message: { error: 'too many requests' }\n});\n\nmodule.exports = (app) => app.use('/', limiter);"
+      "code_preview_multi": "const rateLimit = require('express-rate-limit');\n\nconst limiter = rateLimit({\n  windowMs: <window_ms>,\n  max: <max_requests>,\n  standardHeaders: true,\n  legacyHeaders: false,\n  message: { error: 'too many requests' }\n});\n\nmodule.exports = (app) => app.use('<route_prefix>', limiter);"
     },
     {
       "idx": 13,
       "query": "Node.js file upload to S3",
       "expected_domain": "web-backend",
       "single_pass": {
-        "time_s": 1.0,
-        "verify_ok": true,
-        "verify_level": "shallow",
-        "verify_errors": [],
-        "code_len": 898,
-        "template_id": "patch-s3-upload-008-browser-direct-put",
+        "time_s": 4.3,
+        "verify_ok": false,
+        "verify_level": "syntax",
+        "verify_errors": [
+          "line 1: invalid syntax"
+        ],
+        "code_len": 769,
+        "template_id": "patch-s3-upload-001-express-multer-s3v3",
         "template_domain": "web-backend",
-        "mode": "template"
+        "mode": "best-of-n"
       },
       "multi_pass": {
-        "time_s": 1.6,
+        "time_s": 0.0,
         "verify_ok": true,
         "verifier_level": "shallow",
         "verifier_errors": [],
-        "code_len": 878,
+        "code_len": 769,
         "candidate_count": 1,
         "verified_count": 1,
         "chosen_source": "template",
-        "chosen_template_id": "patch-s3-upload-008-browser-direct-put",
+        "chosen_template_id": "patch-s3-upload-001-express-multer-s3v3",
         "trace_summary": [
+          "lang-detect",
+          "paraphrase",
+          "lang-filter",
           "retrieve",
           "quick-path-pass"
         ]
       },
-      "code_preview_single": "async function uploadFileToS3(file: File) {\n  const signRes = await fetch('https://your-s3-bucket.s3.amazonaws.com/sign', {\n    method: 'POST',\n    headers: { 'Content-Type': 'application/json' },\n    body: JSON.stringify({ filename: file.name, contentType: file.type }),\n  });\n  const { url, key, he",
-      "code_preview_multi": "async function uploadFileToS3(file: File) {\n  const signRes = await fetch('https://example.com/sign', {\n    method: 'POST',\n    headers: { 'Content-Type': 'application/json' },\n    body: JSON.stringify({ filename: file.name, contentType: file.type }),\n  });\n  const { url, key, headers } = await sign"
+      "code_preview_single": "import express from 'express';\nimport multer from 'multer';\nimport { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';\nimport { randomUUID } from 'crypto';\n\nconst app = express();\nconst upload = multer({ storage: multer.memoryStorage(), limits: { fileSize: 20 * 1024 * 1024 } });\nconst s3 = new",
+      "code_preview_multi": "import express from 'express';\nimport multer from 'multer';\nimport { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';\nimport { randomUUID } from 'crypto';\n\nconst app = express();\nconst upload = multer({ storage: multer.memoryStorage(), limits: { fileSize: 20 * 1024 * 1024 } });\nconst s3 = new"
     },
     {
       "idx": 14,
       "query": "GraphQL resolver 範例",
       "expected_domain": "web-backend",
       "single_pass": {
-        "time_s": 5.1,
+        "time_s": 5.8,
         "verify_ok": true,
         "verify_level": "shallow",
         "verify_errors": [],
@@ -448,7 +490,7 @@
         "mode": "followup"
       },
       "multi_pass": {
-        "time_s": 2.0,
+        "time_s": 3.1,
         "verify_ok": true,
         "verifier_level": "shallow",
         "verifier_errors": [],
@@ -458,6 +500,7 @@
         "chosen_source": "template",
         "chosen_template_id": "web-backend-025-express-graphql",
         "trace_summary": [
+          "paraphrase",
           "retrieve",
           "quick-path-pass"
         ]
@@ -470,7 +513,7 @@
       "query": "React Native 登入畫面",
       "expected_domain": "mobile",
       "single_pass": {
-        "time_s": 9.2,
+        "time_s": 12.6,
         "verify_ok": true,
         "verify_level": "shallow",
         "verify_errors": [],
@@ -485,13 +528,20 @@
         "verifier_level": "shallow",
         "verifier_errors": [],
         "code_len": 865,
-        "candidate_count": 1,
-        "verified_count": 1,
+        "candidate_count": 2,
+        "verified_count": 2,
         "chosen_source": "template",
         "chosen_template_id": "mobile-001-rn-login",
         "trace_summary": [
+          "lang-detect",
+          "paraphrase",
+          "compose-promote",
+          "lang-filter",
           "retrieve",
-          "quick-path-pass"
+          "quick-path-skipped-for-compose",
+          "beam-early-stop",
+          "all-candidates",
+          "select-verified"
         ]
       },
       "code_preview_single": "import React, { useState } from 'react';\nimport { View, TextInput, Button, Text, StyleSheet } from 'react-native';\n\nexport default function Login() {\n  const [e, setE] = useState('');\n  const [p, setP] = useState('');\n  const [m, setM] = useState('');\n\n  const submit = async () => {\n    try {\n      ",
@@ -502,7 +552,7 @@
       "query": "SwiftUI list with pull to refresh",
       "expected_domain": "mobile",
       "single_pass": {
-        "time_s": 4.8,
+        "time_s": 6.0,
         "verify_ok": false,
         "verify_level": "syntax",
         "verify_errors": [
@@ -514,7 +564,7 @@
         "mode": "followup"
       },
       "multi_pass": {
-        "time_s": 7.9,
+        "time_s": 37.2,
         "verify_ok": false,
         "verifier_level": "syntax",
         "verifier_errors": [
@@ -526,9 +576,14 @@
         "chosen_source": "template",
         "chosen_template_id": "mobile-057-swiftui-pullrefresh",
         "trace_summary": [
+          "lang-detect",
+          "paraphrase",
+          "lang-filter",
           "retrieve",
           "all-candidates",
+          "self-correct",
           "free-gen-fallback",
+          "free-gen-self-correct",
           "unverified-fallback"
         ]
       },
@@ -540,7 +595,7 @@
       "query": "Android Jetpack Compose 底部導航",
       "expected_domain": "mobile",
       "single_pass": {
-        "time_s": 1.7,
+        "time_s": 34.2,
         "verify_ok": false,
         "verify_level": "syntax",
         "verify_errors": [
@@ -549,33 +604,41 @@
         "code_len": 610,
         "template_id": "mobile-082-compose-tabs",
         "template_domain": "mobile",
-        "mode": "template"
+        "mode": "best-of-n"
       },
       "multi_pass": {
-        "time_s": 5.0,
-        "verify_ok": true,
-        "verifier_level": "shallow",
-        "verifier_errors": [],
-        "code_len": 734,
-        "candidate_count": 3,
-        "verified_count": 1,
+        "time_s": 20.8,
+        "verify_ok": false,
+        "verifier_level": "syntax",
+        "verifier_errors": [
+          "line 2: invalid syntax"
+        ],
+        "code_len": 610,
+        "candidate_count": 4,
+        "verified_count": 0,
         "chosen_source": "template",
-        "chosen_template_id": "web-frontend-batch2-007-sheet-bottom",
+        "chosen_template_id": "mobile-082-compose-tabs",
         "trace_summary": [
+          "lang-detect",
+          "paraphrase",
+          "lang-filter",
           "retrieve",
           "all-candidates",
-          "select-verified"
+          "self-correct",
+          "free-gen-fallback",
+          "free-gen-self-correct",
+          "unverified-fallback"
         ]
       },
       "code_preview_single": "import androidx.compose.material.icons.Icons\nimport androidx.compose.material.icons.filled.*\nimport androidx.compose.material3.*\nimport androidx.compose.runtime.*\n@Composable\nfun Root(){\n  var i by remember{mutableStateOf(0)}\n  val labels=listOf(\"Home\",\"Search\",\"Profile\")\n  val icons=listOf(Icons.De",
-      "code_preview_multi": "import { useState } from 'react';\n\nexport function BottomSheet({ children }) {\n  const [open, setOpen] = useState(false);\n  return (\n    <>\n      <button onClick={() => setOpen(true)} className=\"rounded bg-black px-4 py-2 text-white\">Open Sheet</button>\n      {open && (\n        <div className=\"fixed"
+      "code_preview_multi": "import androidx.compose.material.icons.Icons\nimport androidx.compose.material.icons.filled.*\nimport androidx.compose.material3.*\nimport androidx.compose.runtime.*\n@Composable\nfun Root(){\n  var i by remember{mutableStateOf(0)}\n  val labels=listOf(\"Home\",\"Search\",\"Profile\")\n  val icons=listOf(Icons.De"
     },
     {
       "idx": 18,
       "query": "Flutter HTTP request with error handling",
       "expected_domain": "mobile",
       "single_pass": {
-        "time_s": 3.7,
+        "time_s": 4.1,
         "verify_ok": false,
         "verify_level": "syntax",
         "verify_errors": [
@@ -587,7 +650,7 @@
         "mode": "followup"
       },
       "multi_pass": {
-        "time_s": 1.9,
+        "time_s": 2.3,
         "verify_ok": true,
         "verifier_level": "shallow",
         "verifier_errors": [],
@@ -597,6 +660,9 @@
         "chosen_source": "template",
         "chosen_template_id": "database-devops-140-vitest-msw",
         "trace_summary": [
+          "lang-detect",
+          "paraphrase",
+          "lang-filter",
           "retrieve",
           "quick-path-pass"
         ]
@@ -609,49 +675,50 @@
       "query": "iOS push notification setup",
       "expected_domain": "mobile",
       "single_pass": {
-        "time_s": 1.1,
+        "time_s": 2.3,
         "verify_ok": true,
         "verify_level": "shallow",
         "verify_errors": [],
-        "code_len": 437,
+        "code_len": 434,
         "template_id": "depth-mobile-015-local-notif-ios",
         "template_domain": "mobile",
-        "mode": "template"
+        "mode": "best-of-n"
       },
       "multi_pass": {
-        "time_s": 1.9,
+        "time_s": 0.0,
         "verify_ok": true,
         "verifier_level": "shallow",
         "verifier_errors": [],
-        "code_len": 438,
+        "code_len": 434,
         "candidate_count": 1,
         "verified_count": 1,
         "chosen_source": "template",
         "chosen_template_id": "depth-mobile-015-local-notif-ios",
         "trace_summary": [
+          "paraphrase",
           "retrieve",
           "quick-path-pass"
         ]
       },
-      "code_preview_single": "let content = UNMutableNotificationContent()\ncontent.title = \"Daily Reminder\"; content.body = \"Don't forget to check your tasks!\"; content.sound = .default\nvar date = DateComponents(); date.hour = 8; date.minute = 0\nlet trigger = UNCalendarNotificationTrigger(dateMatching: date, repeats: true)\nlet r",
-      "code_preview_multi": "let content = UNMutableNotificationContent()\ncontent.title = \"Daily Notification\"; content.body = \"Reminder: Check your schedule!\"; content.sound = .default\nvar date = DateComponents(); date.hour = 8; date.minute = 0\nlet trigger = UNCalendarNotificationTrigger(dateMatching: date, repeats: true)\nlet "
+      "code_preview_single": "let content = UNMutableNotificationContent()\ncontent.title = \"Daily Notification\"; content.body = \"Check your notifications!\"; content.sound = .default\nvar date = DateComponents(); date.hour = 12; date.minute = 0\nlet trigger = UNCalendarNotificationTrigger(dateMatching: date, repeats: true)\nlet req ",
+      "code_preview_multi": "let content = UNMutableNotificationContent()\ncontent.title = \"Daily Notification\"; content.body = \"Check your notifications!\"; content.sound = .default\nvar date = DateComponents(); date.hour = 12; date.minute = 0\nlet trigger = UNCalendarNotificationTrigger(dateMatching: date, repeats: true)\nlet req "
     },
     {
       "idx": 20,
       "query": "做個簡單的計步 App 畫面",
       "expected_domain": "mobile",
       "single_pass": {
-        "time_s": 1.2,
+        "time_s": 2.4,
         "verify_ok": true,
         "verify_level": "shallow",
         "verify_errors": [],
         "code_len": 1010,
         "template_id": "patch-mobile-pedometer-001-rn-step-counter",
         "template_domain": "mobile",
-        "mode": "template"
+        "mode": "best-of-n"
       },
       "multi_pass": {
-        "time_s": 2.8,
+        "time_s": 0.0,
         "verify_ok": true,
         "verifier_level": "shallow",
         "verifier_errors": [],
@@ -661,6 +728,7 @@
         "chosen_source": "template",
         "chosen_template_id": "patch-mobile-pedometer-001-rn-step-counter",
         "trace_summary": [
+          "paraphrase",
           "retrieve",
           "quick-path-pass"
         ]

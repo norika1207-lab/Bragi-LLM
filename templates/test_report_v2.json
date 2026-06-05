@@ -1,0 +1,763 @@
+{
+  "summary": {
+    "ts": "2026-06-06T02:12:55.412895",
+    "engine": "st",
+    "template_count": 1642,
+    "templates_by_domain": {
+      "algorithm": 192,
+      "database-devops": 256,
+      "firmware": 168,
+      "llm-tools": 190,
+      "mobile": 198,
+      "system-cli": 190,
+      "web-backend": 208,
+      "web-frontend": 240
+    },
+    "single_turn": {
+      "n_total": 48,
+      "n_match": 41,
+      "rate": 85.4,
+      "duration_s": 550.4,
+      "per_domain": {
+        "web-frontend": {
+          "match": 6,
+          "total": 7,
+          "rate": 85.7
+        },
+        "web-backend": {
+          "match": 6,
+          "total": 7,
+          "rate": 85.7
+        },
+        "mobile": {
+          "match": 5,
+          "total": 6,
+          "rate": 83.3
+        },
+        "system-cli": {
+          "match": 5,
+          "total": 6,
+          "rate": 83.3
+        },
+        "firmware": {
+          "match": 5,
+          "total": 5,
+          "rate": 100.0
+        },
+        "llm-tools": {
+          "match": 4,
+          "total": 5,
+          "rate": 80.0
+        },
+        "algorithm": {
+          "match": 5,
+          "total": 5,
+          "rate": 100.0
+        },
+        "database-devops": {
+          "match": 5,
+          "total": 7,
+          "rate": 71.4
+        }
+      }
+    },
+    "multi_turn": {
+      "n_scenarios": 6,
+      "n_turns": 13,
+      "n_followup_mode": 1,
+      "duration_s": 890.1
+    }
+  },
+  "single_results": [
+    {
+      "idx": 1,
+      "query": "做個登入頁",
+      "expected_domain": "web-frontend",
+      "got_domain": "web-frontend",
+      "template_id": "web-frontend-batch1-002-signup-form",
+      "score": 0.518,
+      "mode": "template",
+      "domain_match": true,
+      "code_preview": "import { useState } from 'react';\n\nexport default function LoginForm() {\n  const [form, setForm] = useState({ email: '', password: '', confirm: '' });\n  const [err, setErr] = useState('');\n\n  function"
+    },
+    {
+      "idx": 2,
+      "query": "React 註冊表單，含 email 驗證跟密碼強度",
+      "expected_domain": "web-frontend",
+      "got_domain": "web-frontend",
+      "template_id": "web-frontend-batch1-001-login-form",
+      "score": 0.664,
+      "mode": "template",
+      "domain_match": true,
+      "code_preview": "import { useState } from 'react';\n\nexport default function RegisterForm() {\n  const [email, setEmail] = useState('');\n  const [password, setPassword] = useState('');\n  const [error, setError] = useSta"
+    },
+    {
+      "idx": 3,
+      "query": "用 Tailwind 寫一個 responsive navbar",
+      "expected_domain": "web-frontend",
+      "got_domain": "web-frontend",
+      "template_id": "web-frontend-batch4-008-navbar",
+      "score": 0.506,
+      "mode": "template",
+      "domain_match": true,
+      "code_preview": "export default function Navbar() {\n  return (\n    <nav className=\"sticky top-0 z-40 bg-white/80 backdrop-blur border-b border-gray-100\">\n      <div className=\"mx-auto max-w-6xl px-6 h-14 flex items-ce"
+    },
+    {
+      "idx": 4,
+      "query": "Next.js app router 的 server component 範例",
+      "expected_domain": "web-frontend",
+      "got_domain": "web-frontend",
+      "template_id": "web-frontend-batch4-013-api-hello",
+      "score": 0.648,
+      "mode": "template",
+      "domain_match": true,
+      "code_preview": "import { NextResponse } from 'next/server';\n\nexport async function GET() {\n  return NextResponse.json({ message: 'Hello, World!' });\n}"
+    },
+    {
+      "idx": 5,
+      "query": "vue 3 composition API todo list",
+      "expected_domain": "web-frontend",
+      "got_domain": "database-devops",
+      "template_id": "database-devops-041-compose-full-stack",
+      "score": 0.54,
+      "mode": "template",
+      "domain_match": false,
+      "code_preview": "services:\n  app:\n    build: .\n    ports: [\"3000:3000\"]\n    environment:\n      DATABASE_URL: postgres://app:app@postgres:5432/app\n      REDIS_URL: redis://redis:6379\n    depends_on:\n      postgres:\n   "
+    },
+    {
+      "idx": 6,
+      "query": "做個 dark mode toggle",
+      "expected_domain": "web-frontend",
+      "got_domain": "web-frontend",
+      "template_id": "web-frontend-batch2-022-dark-mode-toggle",
+      "score": 0.67,
+      "mode": "template",
+      "domain_match": true,
+      "code_preview": "import { useEffect, useState } from 'react';\n\nexport function DarkModeToggle() {\n  const [dark, setDark] = useState(false);\n  useEffect(() => {\n    const saved = localStorage.getItem('dark-mode') === "
+    },
+    {
+      "idx": 7,
+      "query": "infinite scroll list",
+      "expected_domain": "web-frontend",
+      "got_domain": "web-frontend",
+      "template_id": "web-frontend-batch2-012-infinite-scroll",
+      "score": 0.792,
+      "mode": "template",
+      "domain_match": true,
+      "code_preview": "import { useEffect, useRef, useState } from 'react';\n\nexport function InfiniteList() {\n  const [items, setItems] = useState<any[]>([]);\n  const [page, setPage] = useState(1);\n  const sentinel = useRef"
+    },
+    {
+      "idx": 8,
+      "query": "Express REST API CRUD，連 PostgreSQL",
+      "expected_domain": "web-backend",
+      "got_domain": "web-backend",
+      "template_id": "web-backend-002-express-crud",
+      "score": 0.649,
+      "mode": "template",
+      "domain_match": true,
+      "code_preview": "const express = require('express');\nconst router = express.Router();\nconst store = new Map();\n\nrouter.get('/items', (req, res) => res.json([...store.values()]));\nrouter.get('/items/:id', (req, res) =>"
+    },
+    {
+      "idx": 9,
+      "query": "FastAPI JWT 登入 endpoint",
+      "expected_domain": "web-backend",
+      "got_domain": "web-backend",
+      "template_id": "web-backend-048-fastapi-jwt",
+      "score": 0.571,
+      "mode": "template",
+      "domain_match": true,
+      "code_preview": "from fastapi import Depends, FastAPI, HTTPException\nfrom fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm\nfrom jose import jwt, JWTError\nfrom datetime import datetime, timedelta"
+    },
+    {
+      "idx": 10,
+      "query": "幫我寫一個 webhook receiver",
+      "expected_domain": "web-backend",
+      "got_domain": "firmware",
+      "template_id": "firmware-042-esp8266-webserver",
+      "score": 0.5,
+      "mode": "template",
+      "domain_match": false,
+      "code_preview": "#include <ESP8266WiFi.h>\n#include <ESP8266WebServer.h>\nESP8266WebServer server(80);\nconst int LED = 2;\n\nvoid setup() {\n  pinMode(LED, OUTPUT);\n  WiFi.begin(\"your_ssid\", \"your_password\");\n  while (WiFi"
+    },
+    {
+      "idx": 11,
+      "query": "Django model + migration: blog post",
+      "expected_domain": "web-backend",
+      "got_domain": "web-backend",
+      "template_id": "web-backend-066-django-model",
+      "score": 0.619,
+      "mode": "template",
+      "domain_match": true,
+      "code_preview": "from django.db import models\n\nclass BlogPost(models.Model):\n    name = models.CharField(max_length=120)\n    description = models.TextField(blank=True, default='')\n    created_at = models.DateTimeField"
+    },
+    {
+      "idx": 12,
+      "query": "Go gin server with rate limit middleware",
+      "expected_domain": "web-backend",
+      "got_domain": "web-backend",
+      "template_id": "web-backend-005-express-ratelimit",
+      "score": 0.452,
+      "mode": "template",
+      "domain_match": true,
+      "code_preview": "const rateLimit = require('express-rate-limit');\n\nconst limiter = rateLimit({\n  windowMs: 1000,\n  max: 100,\n  standardHeaders: true,\n  legacyHeaders: false,\n  message: { error: 'too many requests' }\n}"
+    },
+    {
+      "idx": 13,
+      "query": "Node.js file upload to S3",
+      "expected_domain": "web-backend",
+      "got_domain": "web-backend",
+      "template_id": "patch-s3-upload-008-browser-direct-put",
+      "score": 0.63,
+      "mode": "template",
+      "domain_match": true,
+      "code_preview": "async function uploadFileToS3(file: File) {\n  const signRes = await fetch('https://your-s3-bucket.s3.amazonaws.com/sign', {\n    method: 'POST',\n    headers: { 'Content-Type': 'application/json' },\n   "
+    },
+    {
+      "idx": 14,
+      "query": "GraphQL resolver 範例",
+      "expected_domain": "web-backend",
+      "got_domain": "web-backend",
+      "template_id": "web-backend-025-express-graphql",
+      "score": 0.692,
+      "mode": "template",
+      "domain_match": true,
+      "code_preview": "const { ApolloServer } = require('@apollo/server');\nconst { expressMiddleware } = require('@apollo/server/express4');\n\nconst typeDefs = `#graphql\n  type User { id: ID!, name: String! }\n  type Query { "
+    },
+    {
+      "idx": 15,
+      "query": "React Native 登入畫面",
+      "expected_domain": "mobile",
+      "got_domain": "mobile",
+      "template_id": "mobile-001-rn-login",
+      "score": 0.734,
+      "mode": "template",
+      "domain_match": true,
+      "code_preview": "import React,{useState} from 'react';\nimport {View,TextInput,Button,Text,StyleSheet} from 'react-native';\nexport default function Login(){\n  const[e,setE]=useState('');const[p,setP]=useState('');const"
+    },
+    {
+      "idx": 16,
+      "query": "SwiftUI list with pull to refresh",
+      "expected_domain": "mobile",
+      "got_domain": "mobile",
+      "template_id": "mobile-057-swiftui-pullrefresh",
+      "score": 0.778,
+      "mode": "template",
+      "domain_match": true,
+      "code_preview": "import SwiftUI\nstruct Item:Decodable,Identifiable{let id:Int;let title:String}\nstruct L:View{\n  @State var items:[Item]=[]\n  var body:some View{\n    List(items){Text($0.title)}.refreshable{await load("
+    },
+    {
+      "idx": 17,
+      "query": "Android Jetpack Compose 底部導航",
+      "expected_domain": "mobile",
+      "got_domain": "mobile",
+      "template_id": "mobile-082-compose-tabs",
+      "score": 0.591,
+      "mode": "template",
+      "domain_match": true,
+      "code_preview": "import androidx.compose.material.icons.Icons\nimport androidx.compose.material.icons.filled.*\nimport androidx.compose.material3.*\nimport androidx.compose.runtime.*\n@Composable\nfun Root(){\n  var i by re"
+    },
+    {
+      "idx": 18,
+      "query": "Flutter HTTP request with error handling",
+      "expected_domain": "mobile",
+      "got_domain": "database-devops",
+      "template_id": "database-devops-140-vitest-msw",
+      "score": 0.466,
+      "mode": "template",
+      "domain_match": false,
+      "code_preview": "import { setupServer } from 'msw/node'\nimport { http, HttpResponse } from 'msw'\nimport { beforeAll, afterEach, afterAll, expect, it } from 'vitest'\n\nconst server = setupServer(\n  http.get('http://loca"
+    },
+    {
+      "idx": 19,
+      "query": "iOS push notification setup",
+      "expected_domain": "mobile",
+      "got_domain": "mobile",
+      "template_id": "depth-mobile-015-local-notif-ios",
+      "score": 0.669,
+      "mode": "template",
+      "domain_match": true,
+      "code_preview": "let content = UNMutableNotificationContent()\ncontent.title = \"Daily Reminder\"; content.body = \"Don't forget to do something important!\"; content.sound = .default\nvar date = DateComponents(); date.hour"
+    },
+    {
+      "idx": 20,
+      "query": "做個簡單的計步 App 畫面",
+      "expected_domain": "mobile",
+      "got_domain": "mobile",
+      "template_id": "patch-mobile-pedometer-001-rn-step-counter",
+      "score": 0.531,
+      "mode": "template",
+      "domain_match": true,
+      "code_preview": "import React, { useEffect, useState } from 'react';\nimport { View, Text, StyleSheet } from 'react-native';\nimport { Pedometer } from 'expo-sensors';\n\nexport default function StepCounter() {\n  const [s"
+    },
+    {
+      "idx": 21,
+      "query": "bash 批次重命名資料夾下 .jpg 檔",
+      "expected_domain": "system-cli",
+      "got_domain": "system-cli",
+      "template_id": "system-cli-066-batch-rename",
+      "score": 0.538,
+      "mode": "template",
+      "domain_match": true,
+      "code_preview": "from pathlib import Path\n\ntarget = Path('.')\nfor p in sorted(target.iterdir()):\n    if not p.is_file(): continue\n    new = p.with_name('new__' + p.name)\n    if new.exists():\n        print('skip', new)"
+    },
+    {
+      "idx": 22,
+      "query": "Python CLI tool with argparse subcommands",
+      "expected_domain": "system-cli",
+      "got_domain": "system-cli",
+      "template_id": "system-cli-002-argparse-subcommands",
+      "score": 0.867,
+      "mode": "template",
+      "domain_match": true,
+      "code_preview": "import argparse\n\ndef cmd_run_a(args):\n    print('running run_a', args.target)\n\ndef cmd_run_b(args):\n    print('running run_b', args.target)\n\ndef main():\n    p = argparse.ArgumentParser(prog='my_tool')"
+    },
+    {
+      "idx": 23,
+      "query": "監看資料夾，新檔案出現就跑 script",
+      "expected_domain": "system-cli",
+      "got_domain": "system-cli",
+      "template_id": "system-cli-097-tee-pipe-log",
+      "score": 0.525,
+      "mode": "template",
+      "domain_match": true,
+      "code_preview": "#!/usr/bin/env bash\nset -euo pipefail\nexec > >(tee -a \"/var/log/my_script.log\") 2>&1\necho \"== run @ $(date -Iseconds) ==\"\npython my_script.py"
+    },
+    {
+      "idx": 24,
+      "query": "systemd service unit file",
+      "expected_domain": "system-cli",
+      "got_domain": "system-cli",
+      "template_id": "system-cli-013-systemd-service",
+      "score": 0.802,
+      "mode": "template",
+      "domain_match": true,
+      "code_preview": "[Unit]\nDescription=example_service service\nAfter=network.target\n\n[Service]\nType=simple\nUser=example_user\nWorkingDirectory=/opt/example_service\nExecStart=/usr/bin/example_service\nRestart=on-failure\nRes"
+    },
+    {
+      "idx": 25,
+      "query": "cron job 每天 3am 跑備份",
+      "expected_domain": "system-cli",
+      "got_domain": "web-backend",
+      "template_id": "web-backend-020-express-cron",
+      "score": 0.715,
+      "mode": "template",
+      "domain_match": false,
+      "code_preview": "const cron = require('node-cron');\n\ncron.schedule('0 3 * * *', async () => {\n  console.log('[backup] running at', new Date().toISOString());\n  try {\n    // job body here\n  } catch (e) {\n    console.er"
+    },
+    {
+      "idx": 26,
+      "query": "rsync 增量備份到遠端機器",
+      "expected_domain": "system-cli",
+      "got_domain": "system-cli",
+      "template_id": "depth-system-cli-055-rsync-backup-rotate",
+      "score": 0.659,
+      "mode": "template",
+      "domain_match": true,
+      "code_preview": "#!/usr/bin/env bash\nset -euo pipefail\n\nSRC=\"/path/to/source\"\nROOT=\"rsync://remote_host:/path/to/destination\"\nDATE=$(date +%Y-%m-%d)\nLATEST=\"$ROOT/latest\"\nTARGET=\"$ROOT/$DATE\"\n\nmkdir -p \"$ROOT\"\n\nrsync "
+    },
+    {
+      "idx": 27,
+      "query": "ESP32 讀 DHT22 溫濕度送 MQTT",
+      "expected_domain": "firmware",
+      "got_domain": "firmware",
+      "template_id": "firmware-009-arduino-dht-read",
+      "score": 0.64,
+      "mode": "template",
+      "domain_match": true,
+      "code_preview": "#include <DHT.h>\n#define DHTPIN <dht_pin>\n#define DHTTYPE <dht_type>\nDHT dht(DHTPIN, DHTTYPE);\n\nvoid setup() {\n  Serial.begin(115200);\n  dht.begin();\n}\n\nvoid loop() {\n  float h = dht.readHumidity();\n "
+    },
+    {
+      "idx": 28,
+      "query": "Arduino servo motor sweep",
+      "expected_domain": "firmware",
+      "got_domain": "firmware",
+      "template_id": "firmware-006-arduino-servo",
+      "score": 0.666,
+      "mode": "template",
+      "domain_match": true,
+      "code_preview": "#include <Servo.h>\nServo myServo;\nconst int SERVO_PIN = 9;\n\nvoid setup() {\n  myServo.attach(SERVO_PIN);\n}\n\nvoid loop() {\n  for (int a = 0; a <= 180; a++) { myServo.write(a); delay(15); }\n  for (int a "
+    },
+    {
+      "idx": 29,
+      "query": "Raspberry Pi GPIO 按鈕 debounce",
+      "expected_domain": "firmware",
+      "got_domain": "firmware",
+      "template_id": "firmware-047-rpi-button",
+      "score": 0.687,
+      "mode": "template",
+      "domain_match": true,
+      "code_preview": "import RPi.GPIO as GPIO\nimport time\n\nBTN = 23\nGPIO.setmode(GPIO.BCM)\nGPIO.setup(BTN, GPIO.IN, pull_up_down=GPIO.PUD_UP)\n\ndef cb(ch):\n    print('pressed', ch)\n\nGPIO.add_event_detect(BTN, GPIO.FALLING, "
+    },
+    {
+      "idx": 30,
+      "query": "STM32 UART DMA receive",
+      "expected_domain": "firmware",
+      "got_domain": "firmware",
+      "template_id": "firmware-057-stm32-uart-print",
+      "score": 0.548,
+      "mode": "template",
+      "domain_match": true,
+      "code_preview": "#include \"main.h\"\n#include <string.h>\nextern UART_HandleTypeDef USART2;\n\nint main(void) {\n  HAL_Init();\n  SystemClock_Config();\n  MX_GPIO_Init();\n  MX_USART2_UART_Init();\n  const char* msg = \"Hello, W"
+    },
+    {
+      "idx": 31,
+      "query": "ESP-NOW 兩台 ESP32 互傳",
+      "expected_domain": "firmware",
+      "got_domain": "firmware",
+      "template_id": "firmware-016-esp32-wifi-connect",
+      "score": 0.653,
+      "mode": "template",
+      "domain_match": true,
+      "code_preview": "#include <WiFi.h>\nconst char* SSID = \"ESP-NOW\";\nconst char* PASS = \"12345678\";\n\nvoid setup() {\n  Serial.begin(115200);\n  WiFi.mode(WIFI_STA);\n  WiFi.begin(SSID, PASS);\n  while (WiFi.status() != WL_CON"
+    },
+    {
+      "idx": 32,
+      "query": "LangChain RAG over local PDFs",
+      "expected_domain": "llm-tools",
+      "got_domain": "llm-tools",
+      "template_id": "llm-tools-071-pdf-rag-cli",
+      "score": 0.474,
+      "mode": "template",
+      "domain_match": true,
+      "code_preview": "from pypdf import PdfReader\nfrom sentence_transformers import SentenceTransformer\nfrom openai import OpenAI\nimport numpy as np\n\ntext = \" \".join(p.extract_text() or \"\" for p in PdfReader(\"path/to/your/"
+    },
+    {
+      "idx": 33,
+      "query": "用 OpenAI function calling 做個天氣 agent",
+      "expected_domain": "llm-tools",
+      "got_domain": "web-backend",
+      "template_id": "depth-web-backend-013-openapi-zod",
+      "score": 0.524,
+      "mode": "template",
+      "domain_match": false,
+      "code_preview": "import { OpenAPIRegistry, OpenApiGeneratorV3 } from '@asteasolutions/zod-to-openapi';\nimport { z } from 'zod';\nconst registry = new OpenAPIRegistry();\nconst User = registry.register('User', z.object({"
+    },
+    {
+      "idx": 34,
+      "query": "sentence-transformers 算文件相似度",
+      "expected_domain": "llm-tools",
+      "got_domain": "llm-tools",
+      "template_id": "llm-tools-010-sentence-embedding",
+      "score": 0.774,
+      "mode": "template",
+      "domain_match": true,
+      "code_preview": "from sentence_transformers import SentenceTransformer\nimport numpy as np\n\nmodel = SentenceTransformer(\"bert-base-uncased\")\n\ndef embed(texts: list[str]) -> np.ndarray:\n    return model.encode(texts, no"
+    },
+    {
+      "idx": 35,
+      "query": "llama.cpp Python 載 GGUF 推論",
+      "expected_domain": "llm-tools",
+      "got_domain": "llm-tools",
+      "template_id": "llm-tools-005-llama-cpp-python",
+      "score": 0.721,
+      "mode": "template",
+      "domain_match": true,
+      "code_preview": "from llama_cpp import Llama\n\nllm = Llama(\n    model_path=\"path/to/your/model.gguf\",\n    n_ctx=2048,\n    n_gpu_layers=-1,\n)\n\ndef generate(prompt: str) -> str:\n    out = llm.create_chat_completion(\n    "
+    },
+    {
+      "idx": 36,
+      "query": "streaming token output from Anthropic API",
+      "expected_domain": "llm-tools",
+      "got_domain": "llm-tools",
+      "template_id": "llm-tools-003-streaming-openai",
+      "score": 0.571,
+      "mode": "template",
+      "domain_match": true,
+      "code_preview": "from openai import OpenAI\n\nclient = OpenAI()\n\ndef stream_chat(prompt: str):\n    stream = client.chat.completions.create(\n        model=\"gpt-3.5-turbo\",\n        messages=[{\"role\": \"user\", \"content\": pr"
+    },
+    {
+      "idx": 37,
+      "query": "binary search 寫法",
+      "expected_domain": "algorithm",
+      "got_domain": "algorithm",
+      "template_id": "algorithm-search-001",
+      "score": 0.847,
+      "mode": "template",
+      "domain_match": true,
+      "code_preview": "def binary_search(sorted_array, target_value):\n    lo, hi = 0, len(sorted_array) - 1\n    while lo <= hi:\n        mid = (lo + hi) // 2\n        if sorted_array[mid] == target_value:\n            return m"
+    },
+    {
+      "idx": 38,
+      "query": "Dijkstra shortest path with heap",
+      "expected_domain": "algorithm",
+      "got_domain": "algorithm",
+      "template_id": "algorithm-graph-001",
+      "score": 0.785,
+      "mode": "template",
+      "domain_match": true,
+      "code_preview": "import heapq\n\ndef dijkstra_shortest_path(graph, src):\n    dist = {n: float('inf') for n in graph}\n    dist[src] = 0\n    pq = [(0, src)]\n    while pq:\n        d, u = heapq.heappop(pq)\n        if d > di"
+    },
+    {
+      "idx": 39,
+      "query": "LRU cache O(1)",
+      "expected_domain": "algorithm",
+      "got_domain": "algorithm",
+      "template_id": "algorithm-misc-003",
+      "score": 0.712,
+      "mode": "template",
+      "domain_match": true,
+      "code_preview": "from collections import OrderedDict\n\nclass LRUCache:\n    def __init__(self, capacity):\n        self.cap = capacity\n        self.cache = OrderedDict()\n    def get(self, key):\n        if key not in self"
+    },
+    {
+      "idx": 40,
+      "query": "用 DP 解 longest common subsequence",
+      "expected_domain": "algorithm",
+      "got_domain": "algorithm",
+      "template_id": "algorithm-dp-015",
+      "score": 0.834,
+      "mode": "template",
+      "domain_match": true,
+      "code_preview": "def longest_common_subsequence(s):\n    n = len(s)\n    dp = [[0]*n for _ in range(n)]\n    for i in range(n): dp[i][i] = 1\n    for L in range(2, n+1):\n        for i in range(n - L + 1):\n            j = "
+    },
+    {
+      "idx": 41,
+      "query": "quicksort with median of three",
+      "expected_domain": "algorithm",
+      "got_domain": "algorithm",
+      "template_id": "algorithm-misc-005",
+      "score": 0.508,
+      "mode": "template",
+      "domain_match": true,
+      "code_preview": "import heapq\n\nclass MedianHeap:\n    def __init__(self):\n        self.lo = []\n        self.hi = []\n    def add(self, x):\n        heapq.heappush(self.lo, -x)\n        heapq.heappush(self.hi, -heapq.heapp"
+    },
+    {
+      "idx": 42,
+      "query": "PostgreSQL index 設計 for 查近 30 天訂單",
+      "expected_domain": "database-devops",
+      "got_domain": "database-devops",
+      "template_id": "patch-sql-index-001-btree-date-range",
+      "score": 0.554,
+      "mode": "template",
+      "domain_match": true,
+      "code_preview": "-- B-tree index for date-range queries with tenant scoping\n-- Use leading equality column then range column for best selectivity\nCREATE INDEX CONCURRENTLY IF NOT EXISTS orders_order_date_tenant\n  ON o"
+    },
+    {
+      "idx": 43,
+      "query": "Docker compose: postgres + redis + app",
+      "expected_domain": "database-devops",
+      "got_domain": "web-backend",
+      "template_id": "web-backend-090-compose-stack",
+      "score": 0.756,
+      "mode": "template",
+      "domain_match": false,
+      "code_preview": "version: '3.9'\nservices:\n  app:\n    build: .\n    ports:\n      - '3000:3000'\n    environment:\n      DATABASE_URL: postgres://app:example_password@db:5432/app\n      REDIS_URL: redis://redis:6379\n    dep"
+    },
+    {
+      "idx": 44,
+      "query": "GitHub Actions Python CI: test + lint",
+      "expected_domain": "database-devops",
+      "got_domain": "database-devops",
+      "template_id": "database-devops-052-gha-node-lint-test",
+      "score": 0.712,
+      "mode": "template",
+      "domain_match": true,
+      "code_preview": "name: CI\non:\n  push:\n    branches: [main]\n  pull_request:\n\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-node@v4\n        with:\n     "
+    },
+    {
+      "idx": 45,
+      "query": "nginx reverse proxy with SSL",
+      "expected_domain": "database-devops",
+      "got_domain": "web-backend",
+      "template_id": "web-backend-091-nginx-reverse",
+      "score": 0.839,
+      "mode": "template",
+      "domain_match": false,
+      "code_preview": "upstream app_upstream {\n  server 127.0.0.1:443;\n  keepalive 16;\n}\n\nserver {\n  listen 80;\n  server_name example.com;\n\n  location / {\n    proxy_pass http://app_upstream;\n    proxy_http_version 1.1;\n    "
+    },
+    {
+      "idx": 46,
+      "query": "MongoDB aggregation pipeline group by day",
+      "expected_domain": "database-devops",
+      "got_domain": "database-devops",
+      "template_id": "database-devops-070-mongo-aggregation",
+      "score": 0.705,
+      "mode": "template",
+      "domain_match": true,
+      "code_preview": "db.logs.aggregate([\n  { $match: { status: 'active' } },\n  { $group: {\n      _id: '$timestamp',\n      total: { $sum: '$count' },\n      count: { $sum: 1 },\n  }},\n  { $sort: { total: -1 } },\n  { $limit: "
+    },
+    {
+      "idx": 47,
+      "query": "Kubernetes deployment + service yaml",
+      "expected_domain": "database-devops",
+      "got_domain": "database-devops",
+      "template_id": "patch-k8s-001-deployment-service",
+      "score": 0.694,
+      "mode": "template",
+      "domain_match": true,
+      "code_preview": "apiVersion: apps/v1\nkind: Deployment\nmetadata:\n  name: my-app\n  namespace: default\nspec:\n  replicas: 3\n  selector:\n    matchLabels:\n      app: my-app\n  template:\n    metadata:\n      labels:\n        ap"
+    },
+    {
+      "idx": 48,
+      "query": "Terraform 開一台 EC2",
+      "expected_domain": "database-devops",
+      "got_domain": "database-devops",
+      "template_id": "patch-terraform-001-ec2-with-sg",
+      "score": 0.669,
+      "mode": "template",
+      "domain_match": true,
+      "code_preview": "[SLOT_FILL_ERROR: timed out]\n\nresource \"aws_security_group\" \"{{sg_name}}\" {\n  name        = \"{{sg_name}}\"\n  description = \"Allow SSH and HTTP\"\n  vpc_id      = \"{{vpc_id}}\"\n\n  ingress {\n    from_port  "
+    }
+  ],
+  "multi_results": [
+    {
+      "name": "tailwind-login-then-extras",
+      "turns": [
+        {
+          "turn": 1,
+          "query": "做個 Tailwind login 頁面要記住帳號",
+          "expected": "web-frontend",
+          "mode": "template",
+          "template_id": "depth-database-devops-029-promtail-yml",
+          "template_domain": "database-devops",
+          "score": 0.513,
+          "code_preview": "[SLOT_FILL_ERROR: timed out]\n\nserver:\n  http_listen_port: 9080\n\npositions:\n  filename: /tmp/positions.yaml\n\nclients:\n  - url: {{loki_url}}/loki/api/v1/push\n\nscrape_configs:\n  - job_name: varlogs\n    static_configs:\n      - targets: [localhost]\n        labels:\n          job: varlogs\n          host: $"
+        },
+        {
+          "turn": 2,
+          "query": "加 dark mode",
+          "expected": "followup",
+          "mode": "template",
+          "template_id": "mobile-097-compose-darkmode",
+          "template_domain": "mobile",
+          "score": 0.551,
+          "code_preview": "import androidx.compose.foundation.isSystemInDarkTheme\nimport androidx.compose.material3.*\nimport androidx.compose.runtime.Composable\n@Composable\nfun AppTheme(content:@Composable()->Unit){\n  val dark=isSystemInDarkTheme()\n  val scheme=if(dark)darkColorScheme()else lightColorScheme()\n  MaterialTheme("
+        },
+        {
+          "turn": 3,
+          "query": "加 try catch",
+          "expected": "followup",
+          "mode": "followup",
+          "template_id": null,
+          "template_domain": null,
+          "score": null,
+          "code_preview": "import androidx.compose.foundation.isSystemInDarkTheme\nimport androidx.compose.material3.*\nimport androidx.compose.runtime.Composable\n@Composable\nfun AppTheme(content:@Composable()->Unit){\n  val dark=isSystemInDarkTheme()\n  val scheme=if(dark)darkColorScheme()else lightColorScheme()\n  MaterialTheme("
+        }
+      ]
+    },
+    {
+      "name": "react-signup-then-types",
+      "turns": [
+        {
+          "turn": 1,
+          "query": "React 註冊表單,含 email 跟密碼確認",
+          "expected": "web-frontend",
+          "mode": "template",
+          "template_id": "web-frontend-batch1-001-login-form",
+          "template_domain": "web-frontend",
+          "score": 0.728,
+          "code_preview": "import { useState } from 'react';\n\nexport default function RegisterForm() {\n  const [email, setEmail] = useState('');\n  const [password, setPassword] = useState('');\n  const [error, setError] = useState('');\n  const [loading, setLoading] = useState(false);\n\n  async function onSubmit(e: React.FormEve"
+        },
+        {
+          "turn": 2,
+          "query": "改成 TypeScript",
+          "expected": "followup",
+          "mode": "template",
+          "template_id": "system-cli-005-typer-basic",
+          "template_domain": "system-cli",
+          "score": 0.46,
+          "code_preview": "import typer\n\napp = typer.Typer(help='typer-app')\n\n@app.command()\ndef echo(name: str, count: int = 1, upper: bool = False):\n    msg = name.upper() if upper else name\n    for _ in range(count):\n        typer.echo(msg)\n\nif __name__ == '__main__':\n    app()"
+        }
+      ]
+    },
+    {
+      "name": "express-api-then-rate",
+      "turns": [
+        {
+          "turn": 1,
+          "query": "Express REST API CRUD 給 user 資料",
+          "expected": "web-backend",
+          "mode": "template",
+          "template_id": "web-backend-002-express-crud",
+          "template_domain": "web-backend",
+          "score": 0.724,
+          "code_preview": "const express = require('express');\nconst router = express.Router();\nconst store = new Map();\n\nrouter.get('/users', (req, res) => res.json([...store.values()]));\nrouter.get('/users/:id', (req, res) => {\n  const item = store.get(req.params.id);\n  if (!item) return res.status(404).json({ error: 'not f"
+        },
+        {
+          "turn": 2,
+          "query": "加 rate limiting",
+          "expected": "followup",
+          "mode": "template",
+          "template_id": "depth-llm-tools-045-rate-limit-backoff",
+          "template_domain": "llm-tools",
+          "score": 0.528,
+          "code_preview": "from tenacity import retry, wait_exponential, stop_after_attempt, retry_if_exception_type\nimport openai\n\n@retry(\n    wait=wait_exponential(multiplier=1, min=2, max=60),\n    stop=stop_after_attempt(6),\n    retry=retry_if_exception_type(openai.RateLimitError),\n)\ndef safe_call(*args, **kwargs):\n    ret"
+        }
+      ]
+    },
+    {
+      "name": "esp32-then-mqtt",
+      "turns": [
+        {
+          "turn": 1,
+          "query": "ESP32 連 WiFi",
+          "expected": "firmware",
+          "mode": "template",
+          "template_id": "firmware-016-esp32-wifi-connect",
+          "template_domain": "firmware",
+          "score": 0.812,
+          "code_preview": "#include <WiFi.h>\nconst char* SSID = \"your_wifi_ssid\";\nconst char* PASS = \"your_wifi_password\";\n\nvoid setup() {\n  Serial.begin(115200);\n  WiFi.mode(WIFI_STA);\n  WiFi.begin(SSID, PASS);\n  while (WiFi.status() != WL_CONNECTED) { delay(500); Serial.print('.'); }\n  Serial.println();\n  Serial.print(\"IP=\""
+        },
+        {
+          "turn": 2,
+          "query": "加 MQTT publish",
+          "expected": "followup",
+          "mode": "template",
+          "template_id": "firmware-019-esp32-mqtt-publish",
+          "template_domain": "firmware",
+          "score": 0.672,
+          "code_preview": "#include <WiFi.h>\n#include <PubSubClient.h>\nWiFiClient net;\nPubSubClient client(net);\n\nvoid setup() {\n  Serial.begin(115200);\n  WiFi.begin(\"your_wifi_ssid\", \"your_wifi_password\");\n  while (WiFi.status() != WL_CONNECTED) delay(300);\n  client.setServer(\"mqtt.eclipse.org\", 1883);\n  while (!client.conne"
+        }
+      ]
+    },
+    {
+      "name": "todo-vue-then-dark",
+      "turns": [
+        {
+          "turn": 1,
+          "query": "Vue 3 composition API todo list",
+          "expected": "web-frontend",
+          "mode": "template",
+          "template_id": "web-frontend-batch3-003-vue-todo",
+          "template_domain": "web-frontend",
+          "score": 0.629,
+          "code_preview": "<script setup>\nimport { ref, watch, onMounted } from 'vue'\nconst items = ref([])\nconst draft = ref('')\nonMounted(() => {\n  const raw = localStorage.getItem('todo_list')\n  if (raw) items.value = JSON.parse(raw)\n})\nwatch(items, v => localStorage.setItem('todo_list', JSON.stringify(v)), { deep: true })"
+        },
+        {
+          "turn": 2,
+          "query": "加 dark mode",
+          "expected": "followup",
+          "mode": "template",
+          "template_id": "mobile-097-compose-darkmode",
+          "template_domain": "mobile",
+          "score": 0.551,
+          "code_preview": "import androidx.compose.foundation.isSystemInDarkTheme\nimport androidx.compose.material3.*\nimport androidx.compose.runtime.Composable\n@Composable\nfun AppTheme(content:@Composable()->Unit){\n  val dark=isSystemInDarkTheme()\n  val scheme=if(dark)darkColorScheme()else lightColorScheme()\n  MaterialTheme("
+        }
+      ]
+    },
+    {
+      "name": "algorithm-quicksort-then-comments",
+      "turns": [
+        {
+          "turn": 1,
+          "query": "Python quicksort",
+          "expected": "algorithm",
+          "mode": "template",
+          "template_id": "algorithm-sort-001",
+          "template_domain": "algorithm",
+          "score": 0.714,
+          "code_preview": "def quick_sort(arr, lo=0, hi=None):\n    if hi is None:\n        hi = len(arr) - 1\n    if lo >= hi:\n        return\n    pivot = arr[(lo + hi) // 2]\n    i, j = lo, hi\n    while i <= j:\n        while arr[i] < pivot:\n            i += 1\n        while arr[j] > pivot:\n            j -= 1\n        if i <= j:\n  "
+        },
+        {
+          "turn": 2,
+          "query": "加註解 + type annotation",
+          "expected": "followup",
+          "mode": "template",
+          "template_id": "web-backend-130-express-typeorm",
+          "template_domain": "web-backend",
+          "score": 0.56,
+          "code_preview": "import 'reflect-metadata';\nimport { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn } from 'typeorm';\n\n@Entity()\nexport class User {\n  @PrimaryGeneratedColumn('uuid')\n  id!: string;\n\n  @Column({ length: 120 })\n  name!: string;\n\n  @Column({ unique: true })\n  email!: string;\n\n  @CreateDateCol"
+        }
+      ]
+    }
+  ]
+}

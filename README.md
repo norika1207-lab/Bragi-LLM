@@ -1,17 +1,20 @@
 # Bragi-LLM
 
-> A 805 MB local Python coding assistant. 92% MBPP single-shot. 2 points behind Qwen2.5-Coder-7B (14 GB, 17× larger). Zero API cost.
+> A 805 MB local Python coding assistant. 92% MBPP on this repo's own 100-problem test slice (65-68% on novel problems; see caveat below). Zero API cost.
 
 Named after Bragi, Norse god of poetry and wisdom, a small voice that speaks well.
 
 <p align="center">
   <a href="https://doi.org/10.5281/zenodo.20557449"><img src="https://img.shields.io/badge/DOI-10.5281%2Fzenodo.20557449-blue"></a>
   <img src="https://img.shields.io/badge/license-MIT-4dffb0">
-  <img src="https://img.shields.io/badge/MBPP-92%25-brightgreen">
+  <img src="https://img.shields.io/badge/MBPP%20(this%20test%20set)-92%25-brightgreen">
+  <img src="https://img.shields.io/badge/MBPP%20(novel%20problems)-~65--68%25-yellow">
   <img src="https://img.shields.io/badge/size-805%20MB-7fb2ff">
   <img src="https://img.shields.io/badge/recurring%20cost-0-ffcf4d">
   <img src="https://img.shields.io/badge/needs-CPU%20only-cfe0ff">
 </p>
+
+> **Read the 92% badge correctly.** It is the pass rate on this repo's own 100-problem MBPP test slice, not a general coding-ability score. Roughly 24 of those percentage points come from a 59-function symbolic lookup library, most of which were written by looking at what this exact benchmark slice needed. Run against the full 427-problem sanitized MBPP set, the same lookup library's hit rate drops to 8.9% (38/427) versus 32% (32/100) on the benchmarked slice. For a question this repo has never seen before, expect a result closer to the 65-68% baseline, not 92%. Full mechanism and honest breakdown: [How much of engine_lib is actually verified](#how-much-of-engine_lib-is-actually-verified).
 
 ## The triptych
 
@@ -34,10 +37,17 @@ Component                        Size      MBPP test 100 (single-shot, greedy)
 ------------------------------   -------   -----------------------------------
 Vanilla 1.5B Q3_K_M (baseline)   786 MB    65%
 + knowledge_pack prompt          805 MB    68%
-+ intercept router + engine_lib  805 MB    92%   <-- this repo
++ intercept router + engine_lib  805 MB    92%   <-- this repo, on this test set
 
 Reference Qwen2.5-Coder-7B fp16  14 GB     94%
 ```
+
+The 92% row is not a general coding-ability number: it is what this repo scores specifically
+on the 100 problems benchmarked here, roughly a third of which the router answers by lookup
+rather than generation. On MBPP problems outside that 100-item slice the same router only
+fires 8.9% of the time (38/427, measured against the full sanitized set); on a genuinely
+novel question, expect the 65-68% baseline rows, not 92%. Full breakdown in
+[How much of engine_lib is actually verified](#how-much-of-engine_lib-is-actually-verified).
 
 The whole system runs on a Mac mini, a Raspberry Pi 5, or any laptop with 2 GB free RAM. No internet. No subscription.
 
@@ -204,6 +214,33 @@ def your_helper(n):
 ```
 
 The included engine_lib covers about 50 MBPP-style helpers (figurate numbers, geometry, sequences, common string/list operations). For domain-specific applications (SQL synthesis, web scraping, embedded firmware), you would write your own engine_lib aligned to that domain.
+
+### How much of engine_lib is actually verified
+
+Note on reproducibility: the two internal tools that measure this (a unit test suite and a
+contract-scan script that checks each helper against the full MBPP set) are used in
+development but are not part of this public repo's file tree yet. The numbers below are
+reported from those tools' output, not independently re-runnable from a fresh clone of this
+repo today.
+
+The library was originally described as unit-tested with no test file present; the real
+verification was indirect (helpers were written to satisfy specific MBPP problems).
+Measuring that indirect coverage against all 427 sanitized MBPP problems: 38 questions get
+routed to an engine_lib helper, all 38 currently pass. On just the 100-problem slice used
+for the headline benchmark above, the same router fires on 32 questions (32%) — a 3.6x
+higher hit rate than across the full set (8.9%). That gap is the clearest evidence that this
+library's apparent strength is concentrated on the specific problems it was built to answer,
+not representative of an arbitrary MBPP-difficulty problem you haven't already benchmarked
+against.
+
+Several helpers implement a *benchmark-specific* definition rather than the ordinary
+mathematical one. Each of those carries a note in its docstring saying so — read it before
+reusing a helper outside this benchmark.
+
+Practical takeaway: on a coding question this repo has never been tuned against, expect
+something close to the 65-68% baseline rows above, not 92%. The 92% number is honest about
+what it measures — performance on this repo's own test set — and should not be read as a
+general capability score.
 
 ---
 
